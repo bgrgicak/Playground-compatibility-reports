@@ -2,61 +2,791 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [06-May-2025 07:49:05 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Image_Cube_Widg...')
-#2 /wordpress/wp-content/plugins/dynamicwp-image-cube/dynamicwp-image-cube.php(111): register_widget('Image_Cube_Widg...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): init_image_cube('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+Error: [07-May-2025 14:54:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gdcarnet_table_pilote_comptes ADD flag_type_ecriture mediumint(9) UNSIGNED NOT NULL DEFAULT 0 AFTER debit</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gdcarnet_table_pilote_comptes</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gdcarnet_table_pilote_comptes</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gdcarnet_table_pilote_comptes</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gdcarnet_table_pilote_comptes</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_gdcarnet_table_pilote_comptes, flag_type_ecriture, 11, 0, NO, mediumint, , , 7, 0, , , , mediumint(9) unsigned, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gdcarnet_table_pilote_comptes</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_gdcarnet_table_pilote_comptes</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_gdcarnet_table_pilote_comptes</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_gdcarnet_table_pilote_comptes_681b742ecfc38` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `pilote` INTEGER NOT NULL,
+  `auteur` INTEGER NOT NULL,
+  `motif` TEXT COLLATE NOCASE NOT NULL,
+  `credit` REAL NOT NULL,
+  `debit` REAL NOT NULL,
+  `flag_type_ecriture` INTEGER,
+  `id_vol` INTEGER,
+  `id_frais` INTEGER,
+  `date` TEXT COLLATE NOCASE NOT NULL,
+  `flag_type_ecriture` INTEGER NOT NULL DEFAULT '0'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: flag_type_ecriture
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(264): wpdb->get_results('ALTER TABLE wp_...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#9 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_gdcarnet_table_pilote_comptes ADD flag_type_ecriture mediumint(9) UNSIGNED NOT NULL DEFAULT 0 AFTER debit made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gdcarnet_table_pilote ADD mensualite mediumint(9) UNSIGNED NOT NULL DEFAULT 0 AFTER niveau_admin</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gdcarnet_table_pilote</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gdcarnet_table_pilote</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gdcarnet_table_pilote</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gdcarnet_table_pilote</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_gdcarnet_table_pilote, mensualite, 14, 0, NO, mediumint, , , 7, 0, , , , mediumint(9) unsigned, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gdcarnet_table_pilote</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_gdcarnet_table_pilote</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_gdcarnet_table_pilote</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_gdcarnet_table_pilote_681b742ed6d80` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `actif` INTEGER NOT NULL DEFAULT 'TRUE',
+  `user_login` TEXT COLLATE NOCASE,
+  `nom_pilote` TEXT COLLATE NOCASE NOT NULL,
+  `brevet` TEXT COLLATE NOCASE NOT NULL,
+  `lache` INTEGER NOT NULL,
+  `date_lache` TEXT COLLATE NOCASE NOT NULL,
+  `emport` INTEGER NOT NULL,
+  `date_emport` TEXT COLLATE NOCASE NOT NULL,
+  `niveau_admin` INTEGER,
+  `mensualite` INTEGER,
+  `jour_mensualite` TEXT COLLATE NOCASE NOT NULL DEFAULT '5',
+  `remarques` TEXT COLLATE NOCASE,
+  `mensualite` INTEGER NOT NULL DEFAULT '0'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: mensualite
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(272): wpdb->get_results('ALTER TABLE wp_...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#9 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_gdcarnet_table_pilote ADD mensualite mediumint(9) UNSIGNED NOT NULL DEFAULT 0 AFTER niveau_admin made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gdcarnet_table_pilote ADD jour_mensualite ENUM('1','5','10','15','20','25') NOT NULL DEFAULT '5' AFTER mensualite</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gdcarnet_table_pilote</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gdcarnet_table_pilote</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gdcarnet_table_pilote</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gdcarnet_table_pilote</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_gdcarnet_table_pilote, jour_mensualite, 14, 5, NO, enum, 2, 8, , , , utf8mb4, utf8mb4_general_ci, enum('1','5','10','15','20','25'), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gdcarnet_table_pilote</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_gdcarnet_table_pilote</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_gdcarnet_table_pilote</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_gdcarnet_table_pilote_681b742edb7b8` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `actif` INTEGER NOT NULL DEFAULT 'TRUE',
+  `user_login` TEXT COLLATE NOCASE,
+  `nom_pilote` TEXT COLLATE NOCASE NOT NULL,
+  `brevet` TEXT COLLATE NOCASE NOT NULL,
+  `lache` INTEGER NOT NULL,
+  `date_lache` TEXT COLLATE NOCASE NOT NULL,
+  `emport` INTEGER NOT NULL,
+  `date_emport` TEXT COLLATE NOCASE NOT NULL,
+  `niveau_admin` INTEGER,
+  `mensualite` INTEGER,
+  `jour_mensualite` TEXT COLLATE NOCASE NOT NULL DEFAULT '5',
+  `remarques` TEXT COLLATE NOCASE,
+  `jour_mensualite` TEXT COLLATE NOCASE NOT NULL DEFAULT '5'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: jour_mensualite
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(280): wpdb->get_results('ALTER TABLE wp_...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#9 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_gdcarnet_table_pilote ADD jour_mensualite ENUM('1','5','10','15','20','25') NOT NULL DEFAULT '5' AFTER mensualite made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gdcarnet_table_ulm ADD horametre_derniere_revision int(11) NOT NULL DEFAULT '0' AFTER tarif_heure, ADD heures_entre_revision int(11) NOT NULL DEFAULT '0' AFTER tarif_heure</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gdcarnet_table_ulm</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gdcarnet_table_ulm</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gdcarnet_table_ulm</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gdcarnet_table_ulm</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_gdcarnet_table_ulm, horametre_derniere_revision, 9, 0, NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gdcarnet_table_ulm</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_gdcarnet_table_ulm, heures_entre_revision, 10, 0, NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gdcarnet_table_ulm</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_gdcarnet_table_ulm</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_gdcarnet_table_ulm</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_gdcarnet_table_ulm_681b742ee2ce8` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `immatriculation` TEXT COLLATE NOCASE NOT NULL,
+  `modele` TEXT COLLATE NOCASE NOT NULL,
+  `actif` INTEGER NOT NULL DEFAULT 'TRUE',
+  `tarif_heure` INTEGER NOT NULL DEFAULT '0',
+  `heures_entre_revision` INTEGER NOT NULL DEFAULT '0',
+  `horametre_derniere_revision` INTEGER NOT NULL DEFAULT '0',
+  `remarques` TEXT COLLATE NOCASE,
+  `horametre_derniere_revision` INTEGER NOT NULL DEFAULT '0',
+  `heures_entre_revision` INTEGER NOT NULL DEFAULT '0'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: horametre_derniere_revision
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(288): wpdb->get_results('ALTER TABLE wp_...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#9 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_gdcarnet_table_ulm ADD horametre_derniere_revision int(11) NOT NULL DEFAULT '0' AFTER tarif_heure, ADD heures_entre_revision int(11) NOT NULL DEFAULT '0' AFTER tarif_heure made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Mensualité"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_gdcarnet_table_motifs_comptes` SET `motif` = 'Mensualité' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(326): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(292): gdcarnet_pre_fill_motifs_comptes()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#10 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#11 {main}</pre>
+ for query INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Mensualité" made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, gdcarnet_pre_fill_motifs_comptes, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Crédit d'heures"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_gdcarnet_table_motifs_comptes` SET `motif` = 'Crédit d''heures' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(326): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(292): gdcarnet_pre_fill_motifs_comptes()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#10 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#11 {main}</pre>
+ for query INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Crédit d'heures" made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, gdcarnet_pre_fill_motifs_comptes, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Remboursement de frais"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_gdcarnet_table_motifs_comptes` SET `motif` = 'Remboursement de frais' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(326): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(292): gdcarnet_pre_fill_motifs_comptes()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#10 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#11 {main}</pre>
+ for query INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Remboursement de frais" made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, gdcarnet_pre_fill_motifs_comptes, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:48 UTC] PHP Warning:  Undefined property: stdClass::$resu in /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php on line 262
+[07-May-2025 14:54:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gdcarnet_table_pilote_comptes ADD flag_type_ecriture mediumint(9) UNSIGNED NOT NULL DEFAULT 0 AFTER debit</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gdcarnet_table_pilote_comptes, FLAG_TYPE_ECRITURE, mediumint(9) UNSIGNED</li>
+<li>Executing: ALTER TABLE wp_gdcarnet_table_pilote_comptes ADD flag_type_ecriture  integer NOT NULL DEFAULT 0   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: flag_type_ecriture.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(264): wpdb->get_results('ALTER TABLE wp_...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-May-2025 07:49:13 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Image_Cube_Widg...')
-#2 /wordpress/wp-content/plugins/dynamicwp-image-cube/dynamicwp-image-cube.php(111): register_widget('Image_Cube_Widg...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): init_image_cube('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#7 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_gdcarnet_table_pilote_comptes ADD flag_type_ecriture mediumint(9) UNSIGNED NOT NULL DEFAULT 0 AFTER debit made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:48 UTC] PHP Warning:  Undefined property: stdClass::$resu in /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php on line 270
+[07-May-2025 14:54:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gdcarnet_table_pilote ADD mensualite mediumint(9) UNSIGNED NOT NULL DEFAULT 0 AFTER niveau_admin</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gdcarnet_table_pilote, MENSUALITE, mediumint(9) UNSIGNED</li>
+<li>Executing: ALTER TABLE wp_gdcarnet_table_pilote ADD mensualite  integer NOT NULL DEFAULT 0   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: mensualite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(272): wpdb->get_results('ALTER TABLE wp_...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-May-2025 07:49:23 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Image_Cube_Widg...')
-#2 /wordpress/wp-content/plugins/dynamicwp-image-cube/dynamicwp-image-cube.php(111): register_widget('Image_Cube_Widg...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): init_image_cube('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#7 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_gdcarnet_table_pilote ADD mensualite mediumint(9) UNSIGNED NOT NULL DEFAULT 0 AFTER niveau_admin made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:48 UTC] PHP Warning:  Undefined property: stdClass::$resu in /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php on line 278
+[07-May-2025 14:54:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gdcarnet_table_pilote ADD jour_mensualite ENUM('1','5','10','15','20','25') NOT NULL DEFAULT '5' AFTER mensualite</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gdcarnet_table_pilote, JOUR_MENSUALITE, enum('1','5','10','15','20','25')</li>
+<li>Executing: ALTER TABLE wp_gdcarnet_table_pilote ADD jour_mensualite text NOT NULL DEFAULT '5'   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: jour_mensualite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(280): wpdb->get_results('ALTER TABLE wp_...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-May-2025 07:50:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/category-feature/class-lib/CF_WidgetClass.php:508
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#7 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_gdcarnet_table_pilote ADD jour_mensualite ENUM('1','5','10','15','20','25') NOT NULL DEFAULT '5' AFTER mensualite made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:48 UTC] PHP Warning:  Undefined property: stdClass::$resu in /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php on line 286
+[07-May-2025 14:54:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gdcarnet_table_ulm ADD horametre_derniere_revision int(11) NOT NULL DEFAULT '0' AFTER tarif_heure, ADD heures_entre_revision int(11) NOT NULL DEFAULT '0' AFTER tarif_heure</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gdcarnet_table_ulm, HORAMETRE_DERNIERE_REVISION, int(11)</li>
+<li>Executing: ALTER TABLE wp_gdcarnet_table_ulm ADD horametre_derniere_revision integer NOT NULL DEFAULT '0'   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: horametre_derniere_revision.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(288): wpdb->get_results('ALTER TABLE wp_...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#7 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_gdcarnet_table_ulm ADD horametre_derniere_revision int(11) NOT NULL DEFAULT '0' AFTER tarif_heure, ADD heures_entre_revision int(11) NOT NULL DEFAULT '0' AFTER tarif_heure made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Mensualité"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif=&quot;Mensualité&quot; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(326): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(292): gdcarnet_pre_fill_motifs_comptes()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#8 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#9 {main}</pre>
+ for query INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Mensualité" made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, gdcarnet_pre_fill_motifs_comptes, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Crédit d'heures"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif=&quot;Crédit d'heures&quot; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(326): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(292): gdcarnet_pre_fill_motifs_comptes()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#8 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#9 {main}</pre>
+ for query INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Crédit d'heures" made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, gdcarnet_pre_fill_motifs_comptes, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Remboursement de frais"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif=&quot;Remboursement de frais&quot; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(326): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(292): gdcarnet_pre_fill_motifs_comptes()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#8 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#9 {main}</pre>
+ for query INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Remboursement de frais" made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, gdcarnet_pre_fill_motifs_comptes, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:57 UTC] PHP Warning:  Undefined property: stdClass::$resu in /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php on line 262
+[07-May-2025 14:54:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gdcarnet_table_pilote_comptes ADD flag_type_ecriture mediumint(9) UNSIGNED NOT NULL DEFAULT 0 AFTER debit</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gdcarnet_table_pilote_comptes, FLAG_TYPE_ECRITURE, mediumint(9) UNSIGNED</li>
+<li>Executing: ALTER TABLE wp_gdcarnet_table_pilote_comptes ADD flag_type_ecriture  integer NOT NULL DEFAULT 0   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: flag_type_ecriture.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(264): wpdb->get_results('ALTER TABLE wp_...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#7 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_gdcarnet_table_pilote_comptes ADD flag_type_ecriture mediumint(9) UNSIGNED NOT NULL DEFAULT 0 AFTER debit made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:57 UTC] PHP Warning:  Undefined property: stdClass::$resu in /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php on line 270
+[07-May-2025 14:54:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gdcarnet_table_pilote ADD mensualite mediumint(9) UNSIGNED NOT NULL DEFAULT 0 AFTER niveau_admin</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gdcarnet_table_pilote, MENSUALITE, mediumint(9) UNSIGNED</li>
+<li>Executing: ALTER TABLE wp_gdcarnet_table_pilote ADD mensualite  integer NOT NULL DEFAULT 0   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: mensualite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(272): wpdb->get_results('ALTER TABLE wp_...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#7 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_gdcarnet_table_pilote ADD mensualite mediumint(9) UNSIGNED NOT NULL DEFAULT 0 AFTER niveau_admin made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:57 UTC] PHP Warning:  Undefined property: stdClass::$resu in /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php on line 278
+[07-May-2025 14:54:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gdcarnet_table_pilote ADD jour_mensualite ENUM('1','5','10','15','20','25') NOT NULL DEFAULT '5' AFTER mensualite</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gdcarnet_table_pilote, JOUR_MENSUALITE, enum('1','5','10','15','20','25')</li>
+<li>Executing: ALTER TABLE wp_gdcarnet_table_pilote ADD jour_mensualite text NOT NULL DEFAULT '5'   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: jour_mensualite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(280): wpdb->get_results('ALTER TABLE wp_...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#7 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_gdcarnet_table_pilote ADD jour_mensualite ENUM('1','5','10','15','20','25') NOT NULL DEFAULT '5' AFTER mensualite made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:57 UTC] PHP Warning:  Undefined property: stdClass::$resu in /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php on line 286
+[07-May-2025 14:54:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gdcarnet_table_ulm ADD horametre_derniere_revision int(11) NOT NULL DEFAULT '0' AFTER tarif_heure, ADD heures_entre_revision int(11) NOT NULL DEFAULT '0' AFTER tarif_heure</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gdcarnet_table_ulm, HORAMETRE_DERNIERE_REVISION, int(11)</li>
+<li>Executing: ALTER TABLE wp_gdcarnet_table_ulm ADD horametre_derniere_revision integer NOT NULL DEFAULT '0'   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: horametre_derniere_revision.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(288): wpdb->get_results('ALTER TABLE wp_...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#7 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_gdcarnet_table_ulm ADD horametre_derniere_revision int(11) NOT NULL DEFAULT '0' AFTER tarif_heure, ADD heures_entre_revision int(11) NOT NULL DEFAULT '0' AFTER tarif_heure made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Mensualité"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif=&quot;Mensualité&quot; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(326): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(292): gdcarnet_pre_fill_motifs_comptes()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#8 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#9 {main}</pre>
+ for query INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Mensualité" made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, gdcarnet_pre_fill_motifs_comptes, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Crédit d'heures"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif=&quot;Crédit d'heures&quot; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(326): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(292): gdcarnet_pre_fill_motifs_comptes()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#8 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#9 {main}</pre>
+ for query INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Crédit d'heures" made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, gdcarnet_pre_fill_motifs_comptes, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:54:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Remboursement de frais"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif=&quot;Remboursement de frais&quot; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(326): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/carnet-de-vols/CarnetDeVols.php(292): gdcarnet_pre_fill_motifs_comptes()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): gdcarnet_create_table(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_carnet...', false)
+#8 /internal/eval.php(20): activate_plugin('carnet-de-vols/...')
+#9 {main}</pre>
+ for query INSERT INTO wp_gdcarnet_table_motifs_comptes SET motif="Remboursement de frais" made by activate_plugin, do_action('activate_carnet-de-vols/CarnetDeVols.php'), WP_Hook->do_action, WP_Hook->apply_filters, gdcarnet_create_table, gdcarnet_pre_fill_motifs_comptes, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:55:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/category-feature/class-lib/CF_WidgetClass.php:508
 Stack trace:
 #0 /wordpress/wp-content/plugins/category-feature/category-feature.php(50): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -64,7 +794,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('category-featur...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/category-feature/class-lib/CF_WidgetClass.php on line 508
-[06-May-2025 07:50:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/category-feature/class-lib/CF_WidgetClass.php:508
+[07-May-2025 14:55:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/category-feature/class-lib/CF_WidgetClass.php:508
 Stack trace:
 #0 /wordpress/wp-content/plugins/category-feature/category-feature.php(50): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -72,7 +802,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('category-featur...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/category-feature/class-lib/CF_WidgetClass.php on line 508
-[06-May-2025 07:50:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/category-feature/class-lib/CF_WidgetClass.php:508
+[07-May-2025 14:55:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/category-feature/class-lib/CF_WidgetClass.php:508
 Stack trace:
 #0 /wordpress/wp-content/plugins/category-feature/category-feature.php(50): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -80,425 +810,690 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('category-featur...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/category-feature/class-lib/CF_WidgetClass.php on line 508
-[06-May-2025 07:51:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT cml_language FROM wp_ceceppa_ml WHERE cml_default = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `cml_language` FROM `wp_ceceppa_ml` WHERE `cml_default` = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT cml_lang...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT cml_lang...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT cml_lang...')
-#4 /wordpress/wp-content/plugins/ceceppa-multilingua/settings.php(11): wpdb->get_var('SELECT cml_lang...')
-#5 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(136): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#8 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#9 {main}</pre>
- for query SELECT cml_language FROM wp_ceceppa_ml WHERE cml_default = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ceceppa-multilingua/ceceppaml.php'), require_once('/plugins/ceceppa-multilingua/settings.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 07:51:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT id FROM wp_ceceppa_ml WHERE cml_default = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `id` FROM `wp_ceceppa_ml` WHERE `cml_default` = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT id FROM ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT id FROM ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT id FROM ...')
-#4 /wordpress/wp-content/plugins/ceceppa-multilingua/settings.php(12): wpdb->get_var('SELECT id FROM ...')
-#5 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(136): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#8 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#9 {main}</pre>
- for query SELECT id FROM wp_ceceppa_ml WHERE cml_default = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ceceppa-multilingua/ceceppaml.php'), require_once('/plugins/ceceppa-multilingua/settings.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 07:51:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT MIN(id) FROM wp_ceceppa_ml</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT MIN ( `id` ) FROM `wp_ceceppa_ml` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT MIN(id) ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT MIN(id) ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT MIN(id) ...')
-#4 /wordpress/wp-content/plugins/ceceppa-multilingua/settings.php(13): wpdb->get_var('SELECT MIN(id) ...')
-#5 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(136): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#8 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#9 {main}</pre>
- for query SELECT MIN(id) FROM wp_ceceppa_ml made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ceceppa-multilingua/ceceppaml.php'), require_once('/plugins/ceceppa-multilingua/settings.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 07:51:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT cml_language_slug FROM wp_ceceppa_ml WHERE cml_default = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `cml_language_slug` FROM `wp_ceceppa_ml` WHERE `cml_default` = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT cml_lang...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT cml_lang...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT cml_lang...')
-#4 /wordpress/wp-content/plugins/ceceppa-multilingua/settings.php(16): wpdb->get_var('SELECT cml_lang...')
-#5 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(136): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#8 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#9 {main}</pre>
- for query SELECT cml_language_slug FROM wp_ceceppa_ml WHERE cml_default = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ceceppa-multilingua/ceceppaml.php'), require_once('/plugins/ceceppa-multilingua/settings.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 07:51:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT cml_locale FROM wp_ceceppa_ml WHERE cml_default = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `cml_locale` FROM `wp_ceceppa_ml` WHERE `cml_default` = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT cml_loca...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT cml_loca...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT cml_loca...')
-#4 /wordpress/wp-content/plugins/ceceppa-multilingua/settings.php(17): wpdb->get_var('SELECT cml_loca...')
-#5 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(136): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#8 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#9 {main}</pre>
- for query SELECT cml_locale FROM wp_ceceppa_ml WHERE cml_default = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ceceppa-multilingua/ceceppaml.php'), require_once('/plugins/ceceppa-multilingua/settings.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 07:51:26 UTC] PHP Deprecated:  Required parameter $style follows optional parameter $lang in /wordpress/wp-content/plugins/ceceppa-multilingua/includes/functions.php on line 74
-[06-May-2025 07:51:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ceceppa-multilingua/includes/widgets.php:413
+[07-May-2025 14:55:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/catholicjukebox-radio-lists/cjbw.php:116
 Stack trace:
-#0 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(155): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#3 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/ceceppa-multilingua/includes/widgets.php on line 413
-[06-May-2025 07:51:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT cml_language FROM wp_ceceppa_ml WHERE cml_default = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT cml_language FROM wp_ceceppa_ml WHERE cml_default = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT cml_lang...')
-#2 /wordpress/wp-content/plugins/ceceppa-multilingua/settings.php(11): wpdb->get_var('SELECT cml_lang...')
-#3 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(136): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#6 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#7 {main}</pre>
- for query SELECT cml_language FROM wp_ceceppa_ml WHERE cml_default = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ceceppa-multilingua/ceceppaml.php'), require_once('/plugins/ceceppa-multilingua/settings.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 07:51:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT id FROM wp_ceceppa_ml WHERE cml_default = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT id FROM wp_ceceppa_ml WHERE cml_default = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT id FROM ...')
-#2 /wordpress/wp-content/plugins/ceceppa-multilingua/settings.php(12): wpdb->get_var('SELECT id FROM ...')
-#3 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(136): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#6 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#7 {main}</pre>
- for query SELECT id FROM wp_ceceppa_ml WHERE cml_default = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ceceppa-multilingua/ceceppaml.php'), require_once('/plugins/ceceppa-multilingua/settings.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 07:51:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT MIN(id) FROM wp_ceceppa_ml</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT MIN(id) FROM wp_ceceppa_ml | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT MIN(id) ...')
-#2 /wordpress/wp-content/plugins/ceceppa-multilingua/settings.php(13): wpdb->get_var('SELECT MIN(id) ...')
-#3 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(136): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#6 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#7 {main}</pre>
- for query SELECT MIN(id) FROM wp_ceceppa_ml made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ceceppa-multilingua/ceceppaml.php'), require_once('/plugins/ceceppa-multilingua/settings.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 07:51:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT cml_language_slug FROM wp_ceceppa_ml WHERE cml_default = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT cml_language_slug FROM wp_ceceppa_ml WHERE cml_default = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT cml_lang...')
-#2 /wordpress/wp-content/plugins/ceceppa-multilingua/settings.php(16): wpdb->get_var('SELECT cml_lang...')
-#3 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(136): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#6 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#7 {main}</pre>
- for query SELECT cml_language_slug FROM wp_ceceppa_ml WHERE cml_default = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ceceppa-multilingua/ceceppaml.php'), require_once('/plugins/ceceppa-multilingua/settings.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 07:51:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT cml_locale FROM wp_ceceppa_ml WHERE cml_default = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT cml_locale FROM wp_ceceppa_ml WHERE cml_default = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT cml_loca...')
-#2 /wordpress/wp-content/plugins/ceceppa-multilingua/settings.php(17): wpdb->get_var('SELECT cml_loca...')
-#3 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(136): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#6 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#7 {main}</pre>
- for query SELECT cml_locale FROM wp_ceceppa_ml WHERE cml_default = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ceceppa-multilingua/ceceppaml.php'), require_once('/plugins/ceceppa-multilingua/settings.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 07:51:36 UTC] PHP Deprecated:  Required parameter $style follows optional parameter $lang in /wordpress/wp-content/plugins/ceceppa-multilingua/includes/functions.php on line 74
-[06-May-2025 07:51:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ceceppa-multilingua/includes/widgets.php:413
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('catholicjukebox...')
+#2 /internal/eval.php(20): activate_plugin('catholicjukebox...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/catholicjukebox-radio-lists/cjbw.php on line 116
+[07-May-2025 14:55:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/catholicjukebox-radio-lists/cjbw.php:116
 Stack trace:
-#0 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(155): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#3 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/ceceppa-multilingua/includes/widgets.php on line 413
-[06-May-2025 07:51:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT cml_language FROM wp_ceceppa_ml WHERE cml_default = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT cml_language FROM wp_ceceppa_ml WHERE cml_default = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT cml_lang...')
-#2 /wordpress/wp-content/plugins/ceceppa-multilingua/settings.php(11): wpdb->get_var('SELECT cml_lang...')
-#3 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(136): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#6 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#7 {main}</pre>
- for query SELECT cml_language FROM wp_ceceppa_ml WHERE cml_default = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ceceppa-multilingua/ceceppaml.php'), require_once('/plugins/ceceppa-multilingua/settings.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 07:51:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT id FROM wp_ceceppa_ml WHERE cml_default = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT id FROM wp_ceceppa_ml WHERE cml_default = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT id FROM ...')
-#2 /wordpress/wp-content/plugins/ceceppa-multilingua/settings.php(12): wpdb->get_var('SELECT id FROM ...')
-#3 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(136): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#6 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#7 {main}</pre>
- for query SELECT id FROM wp_ceceppa_ml WHERE cml_default = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ceceppa-multilingua/ceceppaml.php'), require_once('/plugins/ceceppa-multilingua/settings.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 07:51:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT MIN(id) FROM wp_ceceppa_ml</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT MIN(id) FROM wp_ceceppa_ml | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT MIN(id) ...')
-#2 /wordpress/wp-content/plugins/ceceppa-multilingua/settings.php(13): wpdb->get_var('SELECT MIN(id) ...')
-#3 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(136): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#6 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#7 {main}</pre>
- for query SELECT MIN(id) FROM wp_ceceppa_ml made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ceceppa-multilingua/ceceppaml.php'), require_once('/plugins/ceceppa-multilingua/settings.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 07:51:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT cml_language_slug FROM wp_ceceppa_ml WHERE cml_default = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT cml_language_slug FROM wp_ceceppa_ml WHERE cml_default = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT cml_lang...')
-#2 /wordpress/wp-content/plugins/ceceppa-multilingua/settings.php(16): wpdb->get_var('SELECT cml_lang...')
-#3 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(136): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#6 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#7 {main}</pre>
- for query SELECT cml_language_slug FROM wp_ceceppa_ml WHERE cml_default = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ceceppa-multilingua/ceceppaml.php'), require_once('/plugins/ceceppa-multilingua/settings.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 07:51:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT cml_locale FROM wp_ceceppa_ml WHERE cml_default = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT cml_locale FROM wp_ceceppa_ml WHERE cml_default = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT cml_loca...')
-#2 /wordpress/wp-content/plugins/ceceppa-multilingua/settings.php(17): wpdb->get_var('SELECT cml_loca...')
-#3 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(136): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#6 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#7 {main}</pre>
- for query SELECT cml_locale FROM wp_ceceppa_ml WHERE cml_default = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ceceppa-multilingua/ceceppaml.php'), require_once('/plugins/ceceppa-multilingua/settings.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 07:51:46 UTC] PHP Deprecated:  Required parameter $style follows optional parameter $lang in /wordpress/wp-content/plugins/ceceppa-multilingua/includes/functions.php on line 74
-[06-May-2025 07:51:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ceceppa-multilingua/includes/widgets.php:413
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('catholicjukebox...')
+#2 /internal/eval.php(20): activate_plugin('catholicjukebox...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/catholicjukebox-radio-lists/cjbw.php on line 116
+[07-May-2025 14:55:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/catholicjukebox-radio-lists/cjbw.php:116
 Stack trace:
-#0 /wordpress/wp-content/plugins/ceceppa-multilingua/ceceppaml.php(155): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ceceppa-multili...')
-#3 /internal/eval.php(20): activate_plugin('ceceppa-multili...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/ceceppa-multilingua/includes/widgets.php on line 413
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"commentdance"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/commentdance could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
-      ... 2 lines matching cause stack trace ...
-      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-    [cause]: Error: Plugin /wordpress/wp-content/plugins/commentdance could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
-        at wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
-        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
-        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
-        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12)
-  }
-}
-
-Node.js v23.11.0
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('catholicjukebox...')
+#2 /internal/eval.php(20): activate_plugin('catholicjukebox...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/catholicjukebox-radio-lists/cjbw.php on line 116
+[07-May-2025 14:55:57 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ce-scroll-to-top</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 14:56:06 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ce-scroll-to-top</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 14:56:15 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ce-scroll-to-top</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 14:56:51 UTC] PHP Fatal error:  Uncaught TypeError: natsort(): Argument #1 ($array) must be of type array, null given in /wordpress/wp-content/plugins/ch-simple-post-language/ch-post-lang.php:50
+Stack trace:
+#0 /wordpress/wp-content/plugins/ch-simple-post-language/ch-post-lang.php(50): natsort(NULL)
+#1 /wordpress/wp-content/plugins/ch-simple-post-language/ch-post-lang.php(191): ChPostLang->__construct()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ch-simple-post-...')
+#4 /internal/eval.php(20): activate_plugin('ch-simple-post-...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/ch-simple-post-language/ch-post-lang.php on line 50
+[07-May-2025 14:56:59 UTC] PHP Fatal error:  Uncaught TypeError: natsort(): Argument #1 ($array) must be of type array, null given in /wordpress/wp-content/plugins/ch-simple-post-language/ch-post-lang.php:50
+Stack trace:
+#0 /wordpress/wp-content/plugins/ch-simple-post-language/ch-post-lang.php(50): natsort(NULL)
+#1 /wordpress/wp-content/plugins/ch-simple-post-language/ch-post-lang.php(191): ChPostLang->__construct()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ch-simple-post-...')
+#4 /internal/eval.php(20): activate_plugin('ch-simple-post-...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/ch-simple-post-language/ch-post-lang.php on line 50
+[07-May-2025 14:57:06 UTC] PHP Fatal error:  Uncaught TypeError: natsort(): Argument #1 ($array) must be of type array, null given in /wordpress/wp-content/plugins/ch-simple-post-language/ch-post-lang.php:50
+Stack trace:
+#0 /wordpress/wp-content/plugins/ch-simple-post-language/ch-post-lang.php(50): natsort(NULL)
+#1 /wordpress/wp-content/plugins/ch-simple-post-language/ch-post-lang.php(191): ChPostLang->__construct()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ch-simple-post-...')
+#4 /internal/eval.php(20): activate_plugin('ch-simple-post-...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/ch-simple-post-language/ch-post-lang.php on line 50
+[07-May-2025 14:57:17 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>css</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 14:57:17 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 14:57:17 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>css</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 14:57:17 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 14:57:25 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>css</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 14:57:25 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 14:57:25 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>css</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 14:57:25 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 14:57:34 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>css</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 14:57:34 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 14:57:34 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>css</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 14:57:34 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 14:57:42 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/drgen-social/drgen-social.php on line 220
+[07-May-2025 14:57:51 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/drgen-social/drgen-social.php on line 220
+[07-May-2025 14:57:59 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/drgen-social/drgen-social.php on line 220
+[07-May-2025 14:59:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_cs_posts (
+					  postid mediumint(9) NOT NULL AUTO_INCREMENT, 
+					  defaultpage VARCHAR(100) NOT NULL,
+					  prefix  VARCHAR(50) NOT NULL,
+					  parameter VARCHAR(25) NOT NULL,
+					  header_title VARCHAR(66) NOT NULL DEFAULT '',
+					  header_desc VARCHAR(200) NOT NULL DEFAULT '',
+					  header_desc_char_limit SMALLINT NOT NULL DEFAULT 200,
+					  available TINYINT NOT NULL DEFAULT 0,
+					  PRIMARY  KEY  (postid, parameter)
+					);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_tables` (`table_schema`, `table_name`, `table_type`, `engine`, `row_format`, `table_collation`) VALUES (?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cs_posts, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cs_posts, postid, 1, , NO, mediumint, , , 7, 0, , , , mediumint(9), , auto_increment, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cs_posts, defaultpage, 2, , NO, varchar, 100, 400, , , , utf8mb4, utf8mb4_general_ci, varchar(100), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cs_posts, prefix, 3, , NO, varchar, 50, 200, , , , utf8mb4, utf8mb4_general_ci, varchar(50), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cs_posts, parameter, 4, , NO, varchar, 25, 100, , , , utf8mb4, utf8mb4_general_ci, varchar(25), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cs_posts, header_title, 5, , NO, varchar, 66, 264, , , , utf8mb4, utf8mb4_general_ci, varchar(66), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cs_posts, header_desc, 6, , NO, varchar, 200, 800, , , , utf8mb4, utf8mb4_general_ci, varchar(200), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cs_posts, header_desc_char_limit, 7, 200, NO, smallint, , , 5, 0, , , , smallint, , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cs_posts, available, 8, 0, NO, tinyint, , , 3, 0, , , , tinyint, , , select,insert,update,references, , , </li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?,?)
+				 | parameters: database_name_here, wp_cs_posts, postid, parameter</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cs_posts, 0, database_name_here, PRIMARY, 1, postid, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cs_posts, 0, database_name_here, PRIMARY, 2, parameter, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_cs_posts, database_name_here, wp_cs_posts</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_cs_posts</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_cs_posts</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_cs_posts</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Cannot combine AUTOINCREMENT and multiple primary keys in SQLite
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3290): WP_SQLite_Driver->new_driver_exception('Cannot combine ...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1257): WP_SQLite_Driver->get_sqlite_create_table_statement(false, 'wp_cs_posts')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(835): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
+#6 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(168): WP_SQLite_DB->query('CREATE TABLE wp...')
+#7 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(37): CS_config->cs_install()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#12 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#13 {main}</pre>
+ for query CREATE TABLE wp_cs_posts (
+					  postid mediumint(9) NOT NULL AUTO_INCREMENT, 
+					  defaultpage VARCHAR(100) NOT NULL,
+					  prefix  VARCHAR(50) NOT NULL,
+					  parameter VARCHAR(25) NOT NULL,
+					  header_title VARCHAR(66) NOT NULL DEFAULT '',
+					  header_desc VARCHAR(200) NOT NULL DEFAULT '',
+					  header_desc_char_limit SMALLINT NOT NULL DEFAULT 200,
+					  available TINYINT NOT NULL DEFAULT 0,
+					  PRIMARY  KEY  (postid, parameter)
+					); made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, CS_config->cs_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT wp_posts.ID FROM wp_posts, wp_cs_posts WHERE wp_posts.ID = wp_cs_posts.postid AND wp_cs_posts.prefix = 'listings'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `wp_posts`.`ID` FROM `wp_posts` , `wp_cs_posts` WHERE `wp_posts`.`ID` = `wp_cs_posts`.`postid` AND `wp_cs_posts`.`prefix` = 'listings' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_cs_posts
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT wp_posts...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT wp_posts...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT wp_posts...')
+#4 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_functions.php(45): wpdb->get_var('SELECT wp_posts...')
+#5 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(73): cs_add_plugin_pages('Listings', 'listings')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#10 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#11 {main}</pre>
+ for query SELECT wp_posts.ID FROM wp_posts, wp_cs_posts WHERE wp_posts.ID = wp_cs_posts.postid AND wp_cs_posts.prefix = 'listings' made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, cs_add_plugin_pages, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT postid FROM wp_cs_posts GROUP BY postid</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `postid` FROM `wp_cs_posts` GROUP BY `postid` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_cs_posts
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT postid F...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT postid F...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT postid F...')
+#4 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_listings_plugin.php(162): wpdb->get_results('SELECT postid F...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cs_add_rewrite_rules(Array)
+#6 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters(Array, Array)
+#7 /wordpress/wp-includes/class-wp-rewrite.php(1476): apply_filters('rewrite_rules_a...', Array)
+#8 /wordpress/wp-includes/class-wp-rewrite.php(1513): WP_Rewrite->rewrite_rules()
+#9 /wordpress/wp-includes/class-wp-rewrite.php(1888): WP_Rewrite->refresh_rewrite_rules()
+#10 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_listings_plugin.php(438): WP_Rewrite->flush_rules()
+#11 /wordpress/wp-includes/class-wp-hook.php(326): cs_save_post(4)
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/post.php(5110): do_action('save_post', 4, Object(WP_Post), false)
+#15 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_functions.php(49): wp_insert_post(Array)
+#16 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(73): cs_add_plugin_pages('Listings', 'listings')
+#17 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#18 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#19 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#20 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#21 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#22 {main}</pre>
+ for query SELECT postid FROM wp_cs_posts GROUP BY postid made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, cs_add_plugin_pages, wp_insert_post, do_action('save_post'), WP_Hook->do_action, WP_Hook->apply_filters, cs_save_post, WP_Rewrite->flush_rules, WP_Rewrite->refresh_rewrite_rules, WP_Rewrite->rewrite_rules, apply_filters('rewrite_rules_array'), WP_Hook->apply_filters, cs_add_rewrite_rules, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID, post_title, post_name, post_parent FROM wp_posts WHERE ID IN ()</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT ID, post...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT ID, post...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT ID, post...')
+#4 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_listings_plugin.php(163): wpdb->get_results('SELECT ID, post...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cs_add_rewrite_rules(Array)
+#6 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters(Array, Array)
+#7 /wordpress/wp-includes/class-wp-rewrite.php(1476): apply_filters('rewrite_rules_a...', Array)
+#8 /wordpress/wp-includes/class-wp-rewrite.php(1513): WP_Rewrite->rewrite_rules()
+#9 /wordpress/wp-includes/class-wp-rewrite.php(1888): WP_Rewrite->refresh_rewrite_rules()
+#10 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_listings_plugin.php(438): WP_Rewrite->flush_rules()
+#11 /wordpress/wp-includes/class-wp-hook.php(326): cs_save_post(4)
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/post.php(5110): do_action('save_post', 4, Object(WP_Post), false)
+#15 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_functions.php(49): wp_insert_post(Array)
+#16 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(73): cs_add_plugin_pages('Listings', 'listings')
+#17 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#18 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#19 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#20 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#21 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#22 {main}</pre>
+ for query SELECT ID, post_title, post_name, post_parent FROM wp_posts WHERE ID IN () made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, cs_add_plugin_pages, wp_insert_post, do_action('save_post'), WP_Hook->do_action, WP_Hook->apply_filters, cs_save_post, WP_Rewrite->flush_rules, WP_Rewrite->refresh_rewrite_rules, WP_Rewrite->rewrite_rules, apply_filters('rewrite_rules_array'), WP_Hook->apply_filters, cs_add_rewrite_rules, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT postid FROM wp_cs_posts WHERE postid = '4'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `postid` FROM `wp_cs_posts` WHERE `postid` = '4' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_cs_posts
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT postid F...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT postid F...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT postid F...')
+#4 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_functions.php(113): wpdb->get_var('SELECT postid F...')
+#5 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(89): cs_add_cs_post(4, 'featured_listin...', 'listings', 'mlsnum', '%a | ', '%d', 200)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#10 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#11 {main}</pre>
+ for query SELECT postid FROM wp_cs_posts WHERE postid = '4' made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, cs_add_cs_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_cs_posts` (`postid`, `defaultpage`, `prefix`, `parameter`, `header_title`, `header_desc`, `header_desc_char_limit`, `available`) VALUES (4, 'featured_listings.html', 'listings', 'mlsnum', '%a | ', '%d', 200, 0)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cs_posts</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_cs_posts</li>
+<li>Executing: INSERT INTO `wp_cs_posts` () SELECT  FROM (VALUES ( 4 , 'featured_listings.html' , 'listings' , 'mlsnum' , '%a | ' , '%d' , 200 , 0 )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_cs_posts', Array, Array, 'INSERT')
+#5 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_functions.php(117): wpdb->insert('wp_cs_posts', Array, Array)
+#6 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(89): cs_add_cs_post(4, 'featured_listin...', 'listings', 'mlsnum', '%a | ', '%d', 200)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#11 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_cs_posts` (`postid`, `defaultpage`, `prefix`, `parameter`, `header_title`, `header_desc`, `header_desc_char_limit`, `available`) VALUES (4, 'featured_listings.html', 'listings', 'mlsnum', '%a | ', '%d', 200, 0) made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, cs_add_cs_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_cs_posts WHERE prefix = "listings"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_cs_posts` WHERE `prefix` = 'listings' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_cs_posts
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_functions.php(258): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(92): cs_restore_cs_post_state('listings')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#10 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_cs_posts WHERE prefix = "listings" made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, cs_restore_cs_post_state, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT wp_posts.ID FROM wp_posts, wp_cs_posts WHERE wp_posts.ID = wp_cs_posts.postid AND wp_cs_posts.prefix = 'communities'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `wp_posts`.`ID` FROM `wp_posts` , `wp_cs_posts` WHERE `wp_posts`.`ID` = `wp_cs_posts`.`postid` AND `wp_cs_posts`.`prefix` = 'communities' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_cs_posts
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT wp_posts...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT wp_posts...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT wp_posts...')
+#4 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_functions.php(45): wpdb->get_var('SELECT wp_posts...')
+#5 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(73): cs_add_plugin_pages('Communities', 'communities')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#10 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#11 {main}</pre>
+ for query SELECT wp_posts.ID FROM wp_posts, wp_cs_posts WHERE wp_posts.ID = wp_cs_posts.postid AND wp_cs_posts.prefix = 'communities' made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, cs_add_plugin_pages, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT postid FROM wp_cs_posts GROUP BY postid</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `postid` FROM `wp_cs_posts` GROUP BY `postid` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_cs_posts
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT postid F...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT postid F...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT postid F...')
+#4 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_listings_plugin.php(162): wpdb->get_results('SELECT postid F...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cs_add_rewrite_rules(Array)
+#6 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters(Array, Array)
+#7 /wordpress/wp-includes/class-wp-rewrite.php(1476): apply_filters('rewrite_rules_a...', Array)
+#8 /wordpress/wp-includes/class-wp-rewrite.php(1513): WP_Rewrite->rewrite_rules()
+#9 /wordpress/wp-includes/class-wp-rewrite.php(1888): WP_Rewrite->refresh_rewrite_rules()
+#10 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_listings_plugin.php(438): WP_Rewrite->flush_rules()
+#11 /wordpress/wp-includes/class-wp-hook.php(326): cs_save_post(5)
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/post.php(5110): do_action('save_post', 5, Object(WP_Post), false)
+#15 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_functions.php(49): wp_insert_post(Array)
+#16 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(73): cs_add_plugin_pages('Communities', 'communities')
+#17 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#18 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#19 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#20 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#21 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#22 {main}</pre>
+ for query SELECT postid FROM wp_cs_posts GROUP BY postid made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, cs_add_plugin_pages, wp_insert_post, do_action('save_post'), WP_Hook->do_action, WP_Hook->apply_filters, cs_save_post, WP_Rewrite->flush_rules, WP_Rewrite->refresh_rewrite_rules, WP_Rewrite->rewrite_rules, apply_filters('rewrite_rules_array'), WP_Hook->apply_filters, cs_add_rewrite_rules, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID, post_title, post_name, post_parent FROM wp_posts WHERE ID IN ()</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT ID, post...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT ID, post...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT ID, post...')
+#4 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_listings_plugin.php(163): wpdb->get_results('SELECT ID, post...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cs_add_rewrite_rules(Array)
+#6 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters(Array, Array)
+#7 /wordpress/wp-includes/class-wp-rewrite.php(1476): apply_filters('rewrite_rules_a...', Array)
+#8 /wordpress/wp-includes/class-wp-rewrite.php(1513): WP_Rewrite->rewrite_rules()
+#9 /wordpress/wp-includes/class-wp-rewrite.php(1888): WP_Rewrite->refresh_rewrite_rules()
+#10 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_listings_plugin.php(438): WP_Rewrite->flush_rules()
+#11 /wordpress/wp-includes/class-wp-hook.php(326): cs_save_post(5)
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/post.php(5110): do_action('save_post', 5, Object(WP_Post), false)
+#15 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_functions.php(49): wp_insert_post(Array)
+#16 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(73): cs_add_plugin_pages('Communities', 'communities')
+#17 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#18 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#19 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#20 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#21 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#22 {main}</pre>
+ for query SELECT ID, post_title, post_name, post_parent FROM wp_posts WHERE ID IN () made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, cs_add_plugin_pages, wp_insert_post, do_action('save_post'), WP_Hook->do_action, WP_Hook->apply_filters, cs_save_post, WP_Rewrite->flush_rules, WP_Rewrite->refresh_rewrite_rules, WP_Rewrite->rewrite_rules, apply_filters('rewrite_rules_array'), WP_Hook->apply_filters, cs_add_rewrite_rules, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT postid FROM wp_cs_posts WHERE postid = '5'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `postid` FROM `wp_cs_posts` WHERE `postid` = '5' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_cs_posts
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT postid F...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT postid F...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT postid F...')
+#4 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_functions.php(113): wpdb->get_var('SELECT postid F...')
+#5 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(89): cs_add_cs_post(5, 'community.html', 'communities', 'community', '%c | %n |', 'Search results ...', 200)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#10 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#11 {main}</pre>
+ for query SELECT postid FROM wp_cs_posts WHERE postid = '5' made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, cs_add_cs_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_cs_posts` (`postid`, `defaultpage`, `prefix`, `parameter`, `header_title`, `header_desc`, `header_desc_char_limit`, `available`) VALUES (5, 'community.html', 'communities', 'community', '%c | %n |', 'Search results for %n', 200, 0)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cs_posts</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_cs_posts</li>
+<li>Executing: INSERT INTO `wp_cs_posts` () SELECT  FROM (VALUES ( 5 , 'community.html' , 'communities' , 'community' , '%c | %n |' , 'Search results for %n' , 200 , 0 )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_cs_posts', Array, Array, 'INSERT')
+#5 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_functions.php(117): wpdb->insert('wp_cs_posts', Array, Array)
+#6 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(89): cs_add_cs_post(5, 'community.html', 'communities', 'community', '%c | %n |', 'Search results ...', 200)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#11 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_cs_posts` (`postid`, `defaultpage`, `prefix`, `parameter`, `header_title`, `header_desc`, `header_desc_char_limit`, `available`) VALUES (5, 'community.html', 'communities', 'community', '%c | %n |', 'Search results for %n', 200, 0) made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, cs_add_cs_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_cs_posts WHERE prefix = "communities"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_cs_posts` WHERE `prefix` = 'communities' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_cs_posts
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_functions.php(258): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(92): cs_restore_cs_post_state('communities')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#10 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_cs_posts WHERE prefix = "communities" made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, cs_restore_cs_post_state, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT wp_posts.ID FROM wp_posts, wp_cs_posts WHERE wp_posts.ID = wp_cs_posts.postid AND wp_cs_posts.prefix = 'idx'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `wp_posts`.`ID` FROM `wp_posts` , `wp_cs_posts` WHERE `wp_posts`.`ID` = `wp_cs_posts`.`postid` AND `wp_cs_posts`.`prefix` = 'idx' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_cs_posts
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT wp_posts...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT wp_posts...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT wp_posts...')
+#4 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_functions.php(45): wpdb->get_var('SELECT wp_posts...')
+#5 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(73): cs_add_plugin_pages('MLS&reg; Search', 'idx')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#10 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#11 {main}</pre>
+ for query SELECT wp_posts.ID FROM wp_posts, wp_cs_posts WHERE wp_posts.ID = wp_cs_posts.postid AND wp_cs_posts.prefix = 'idx' made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, cs_add_plugin_pages, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT postid FROM wp_cs_posts GROUP BY postid</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `postid` FROM `wp_cs_posts` GROUP BY `postid` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_cs_posts
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT postid F...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT postid F...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT postid F...')
+#4 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_listings_plugin.php(162): wpdb->get_results('SELECT postid F...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cs_add_rewrite_rules(Array)
+#6 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters(Array, Array)
+#7 /wordpress/wp-includes/class-wp-rewrite.php(1476): apply_filters('rewrite_rules_a...', Array)
+#8 /wordpress/wp-includes/class-wp-rewrite.php(1513): WP_Rewrite->rewrite_rules()
+#9 /wordpress/wp-includes/class-wp-rewrite.php(1888): WP_Rewrite->refresh_rewrite_rules()
+#10 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_listings_plugin.php(438): WP_Rewrite->flush_rules()
+#11 /wordpress/wp-includes/class-wp-hook.php(326): cs_save_post(6)
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/post.php(5110): do_action('save_post', 6, Object(WP_Post), false)
+#15 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_functions.php(49): wp_insert_post(Array)
+#16 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(73): cs_add_plugin_pages('MLS&reg; Search', 'idx')
+#17 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#18 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#19 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#20 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#21 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#22 {main}</pre>
+ for query SELECT postid FROM wp_cs_posts GROUP BY postid made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, cs_add_plugin_pages, wp_insert_post, do_action('save_post'), WP_Hook->do_action, WP_Hook->apply_filters, cs_save_post, WP_Rewrite->flush_rules, WP_Rewrite->refresh_rewrite_rules, WP_Rewrite->rewrite_rules, apply_filters('rewrite_rules_array'), WP_Hook->apply_filters, cs_add_rewrite_rules, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID, post_title, post_name, post_parent FROM wp_posts WHERE ID IN ()</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT ID, post...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT ID, post...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT ID, post...')
+#4 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_listings_plugin.php(163): wpdb->get_results('SELECT ID, post...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cs_add_rewrite_rules(Array)
+#6 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters(Array, Array)
+#7 /wordpress/wp-includes/class-wp-rewrite.php(1476): apply_filters('rewrite_rules_a...', Array)
+#8 /wordpress/wp-includes/class-wp-rewrite.php(1513): WP_Rewrite->rewrite_rules()
+#9 /wordpress/wp-includes/class-wp-rewrite.php(1888): WP_Rewrite->refresh_rewrite_rules()
+#10 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_listings_plugin.php(438): WP_Rewrite->flush_rules()
+#11 /wordpress/wp-includes/class-wp-hook.php(326): cs_save_post(6)
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/post.php(5110): do_action('save_post', 6, Object(WP_Post), false)
+#15 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/cs_functions.php(49): wp_insert_post(Array)
+#16 /wordpress/wp-content/plugins/clicksold-wordpress-plugin/CS_config.php(73): cs_add_plugin_pages('MLS&reg; Search', 'idx')
+#17 /wordpress/wp-includes/class-wp-hook.php(324): CS_config->cs_activate(false)
+#18 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#19 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#20 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clicks...', false)
+#21 /internal/eval.php(20): activate_plugin('clicksold-wordp...')
+#22 {main}</pre>
+ for query SELECT ID, post_title, post_name, post_parent FROM wp_posts WHERE ID IN () made by activate_plugin, do_action('activate_clicksold-wordpress-plugin/cs_listings_plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, CS_config->cs_activate, cs_add_plugin_pages, wp_insert_post, do_action('save_post'), WP_Hook->do_action, WP_Hook->apply_filters, cs_save_post, WP_Rewrite->flush_rules, WP_Rewrite->refresh_rewrite_rules, WP_Rewrite->rewrite_rules, apply_filters('rewrite_rules_array'), WP_Hook->apply_filters, cs_add_rewrite_rules, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 14:59:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT postid FROM wp_cs_posts WHERE postid = '6'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `postid` FROM `wp_cs_posts` WHERE `postid` = '6' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE
