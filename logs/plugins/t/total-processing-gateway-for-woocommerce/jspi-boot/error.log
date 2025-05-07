@@ -2,295 +2,265 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [06-May-2025 11:26:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [07-May-2025 12:54:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_tcf_custom_fields (
-      id int(9) NOT NULL AUTO_INCREMENT,
-      PRIMARY KEY  (id),
-      json_configs json NOT NULL,
-      created_at datetime NOT NULL DEFAULT current_timestamp(),
-      updated_at datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-    ) DEFAULT CHARACTER SET utf8mb4;</p>
+<p>SELECT name, value FROM wp_toolshot_player</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `name` , `value` FROM `wp_toolshot_player` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
+SQLSTATE[HY000]: General error: 1 no such table: wp_toolshot_player
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT name, va...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT name, va...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT name, va...')
+#4 /wordpress/wp-content/plugins/toolshot-player/func/func_class.php(74): wpdb->get_results('SELECT name, va...')
+#5 /wordpress/wp-content/plugins/toolshot-player/toolshot-player.php(18): toolshot_class_table_select('wp_toolshot_pla...', Array)
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('toolshot-player...')
+#8 /internal/eval.php(20): activate_plugin('toolshot-player...')
+#9 {main}</pre>
+ for query SELECT name, value FROM wp_toolshot_player made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/toolshot-player/toolshot-player.php'), toolshot_class_table_select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 12:54:48 UTC] PHP Warning:  Undefined variable $url_toolshot_player in /wordpress/wp-content/plugins/toolshot-player/toolshot-player.php on line 91
+[07-May-2025 12:54:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT name, value FROM wp_toolshot_player</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT name, value FROM wp_toolshot_player | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_toolshot_player.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(2623): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/toolazy-custom-fields/migration/TCF-CustomFields.table.php(28): maybe_create_table('wp_tcf_custom_f...', 'CREATE TABLE wp...')
-#3 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(87): TCF_CustomFields_Table->createTable()
-#4 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(59): ToolazyCf->initialize()
-#5 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(360): ToolazyCf->__construct()
-#6 /wordpress/wp-includes/class-wp-hook.php(322): toolazy()
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(727): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query CREATE TABLE wp_tcf_custom_fields (
-      id int(9) NOT NULL AUTO_INCREMENT,
-      PRIMARY KEY  (id),
-      json_configs json NOT NULL,
-      created_at datetime NOT NULL DEFAULT current_timestamp(),
-      updated_at datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-    ) DEFAULT CHARACTER SET utf8mb4; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, toolazy, ToolazyCf->__construct, ToolazyCf->initialize, TCF_CustomFields_Table->createTable, maybe_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 11:26:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT name, va...')
+#2 /wordpress/wp-content/plugins/toolshot-player/func/func_class.php(74): wpdb->get_results('SELECT name, va...')
+#3 /wordpress/wp-content/plugins/toolshot-player/toolshot-player.php(18): toolshot_class_table_select('wp_toolshot_pla...', Array)
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('toolshot-player...')
+#6 /internal/eval.php(20): activate_plugin('toolshot-player...')
+#7 {main}</pre>
+ for query SELECT name, value FROM wp_toolshot_player made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/toolshot-player/toolshot-player.php'), toolshot_class_table_select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 12:54:57 UTC] PHP Warning:  Undefined variable $url_toolshot_player in /wordpress/wp-content/plugins/toolshot-player/toolshot-player.php on line 91
+[07-May-2025 12:55:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_tcf_custom_fields ORDER BY id DESC;</p>
+<p>SELECT name, value FROM wp_toolshot_player</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_tcf_custom_fields ORDER BY id DESC; | (no parameters)</li>
+<li>Executing: SELECT name, value FROM wp_toolshot_player | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_tcf_custom_fields.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_toolshot_player.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/toolazy-custom-fields/migration/TCF-CustomFields.table.php(34): wpdb->get_results('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(88): TCF_CustomFields_Table->getAll()
-#4 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(59): ToolazyCf->initialize()
-#5 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(360): ToolazyCf->__construct()
-#6 /wordpress/wp-includes/class-wp-hook.php(322): toolazy()
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(727): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query SELECT * FROM wp_tcf_custom_fields ORDER BY id DESC; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, toolazy, ToolazyCf->__construct, ToolazyCf->initialize, TCF_CustomFields_Table->getAll, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 11:27:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT name, va...')
+#2 /wordpress/wp-content/plugins/toolshot-player/func/func_class.php(74): wpdb->get_results('SELECT name, va...')
+#3 /wordpress/wp-content/plugins/toolshot-player/toolshot-player.php(18): toolshot_class_table_select('wp_toolshot_pla...', Array)
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('toolshot-player...')
+#6 /internal/eval.php(20): activate_plugin('toolshot-player...')
+#7 {main}</pre>
+ for query SELECT name, value FROM wp_toolshot_player made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/toolshot-player/toolshot-player.php'), toolshot_class_table_select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 12:55:06 UTC] PHP Warning:  Undefined variable $url_toolshot_player in /wordpress/wp-content/plugins/toolshot-player/toolshot-player.php on line 91
+[07-May-2025 12:55:43 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 12:55:43 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 12:55:52 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 12:55:52 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 12:56:00 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 12:56:00 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 12:56:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_tcf_custom_fields (
-      id int(9) NOT NULL AUTO_INCREMENT,
-      PRIMARY KEY  (id),
-      json_configs json NOT NULL,
-      created_at datetime NOT NULL DEFAULT current_timestamp(),
-      updated_at datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-    ) DEFAULT CHARACTER SET utf8mb4;</p>
+<p>SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != '' ORDER BY attribute_name ASC;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_woocommerce_attribute_taxonomies` WHERE `attribute_name` != '' ORDER BY `attribute_name` ASC | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(2623): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/toolazy-custom-fields/migration/TCF-CustomFields.table.php(28): maybe_create_table('wp_tcf_custom_f...', 'CREATE TABLE wp...')
-#3 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(87): TCF_CustomFields_Table->createTable()
-#4 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(59): ToolazyCf->initialize()
-#5 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(360): ToolazyCf->__construct()
-#6 /wordpress/wp-includes/class-wp-hook.php(322): toolazy()
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(727): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query CREATE TABLE wp_tcf_custom_fields (
-      id int(9) NOT NULL AUTO_INCREMENT,
-      PRIMARY KEY  (id),
-      json_configs json NOT NULL,
-      created_at datetime NOT NULL DEFAULT current_timestamp(),
-      updated_at datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-    ) DEFAULT CHARACTER SET utf8mb4; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, toolazy, ToolazyCf->__construct, ToolazyCf->initialize, TCF_CustomFields_Table->createTable, maybe_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 11:27:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_tcf_custom_fields ORDER BY id DESC;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_tcf_custom_fields ORDER BY id DESC; | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_tcf_custom_fields.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/toolazy-custom-fields/migration/TCF-CustomFields.table.php(34): wpdb->get_results('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(88): TCF_CustomFields_Table->getAll()
-#4 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(59): ToolazyCf->initialize()
-#5 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(360): ToolazyCf->__construct()
-#6 /wordpress/wp-includes/class-wp-hook.php(322): toolazy()
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(727): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query SELECT * FROM wp_tcf_custom_fields ORDER BY id DESC; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, toolazy, ToolazyCf->__construct, ToolazyCf->initialize, TCF_CustomFields_Table->getAll, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 11:28:10 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:28:12 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:28:21 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:28:22 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:28:31 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:28:32 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:28:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_tdrd_redirection</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_tdrd_redirection` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_tdrd_redirection
+SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
 #3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/trash-duplicate-and-301-redirect/redirect_client.php(55): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): tdrd_redirect_me('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-content/plugins/toret-manager/includes/functions/class-toret-manager-helper-modules.php(299): wpdb->get_results('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/toret-manager/includes/functions/class-toret-manager-helper-modules.php(284): Toret_Manager_Helper_Modules::get_woocommerce_product_attributes()
+#6 /wordpress/wp-content/plugins/toret-manager/includes/class-toret-manager.php(227): Toret_Manager_Helper_Modules::get_available_types_by_module('term', true, true)
+#7 /wordpress/wp-content/plugins/toret-manager/includes/class-toret-manager.php(46): Toret_Manager->define_admin_hooks()
+#8 /wordpress/wp-content/plugins/toret-manager/toret-manager.php(126): Toret_Manager->__construct('toret-manager', '1.2.5')
+#9 /wordpress/wp-content/plugins/toret-manager/toret-manager.php(130): trman_run()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('toret-manager/t...')
+#12 /internal/eval.php(20): activate_plugin('toret-manager/t...')
+#13 {main}</pre>
+ for query SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != '' ORDER BY attribute_name ASC; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/toret-manager/toret-manager.php'), trman_run, Toret_Manager->__construct, Toret_Manager->define_admin_hooks, Toret_Manager_Helper_Modules::get_available_types_by_module, Toret_Manager_Helper_Modules::get_woocommerce_product_attributes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 12:56:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != '' ORDER BY attribute_name ASC;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_woocommerce_attribute_taxonomies` WHERE `attribute_name` != '' ORDER BY `attribute_name` ASC | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/toret-manager/includes/functions/class-toret-manager-helper-modules.php(299): wpdb->get_results('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/toret-manager/includes/functions/class-toret-manager-helper-modules.php(284): Toret_Manager_Helper_Modules::get_woocommerce_product_attributes()
+#6 /wordpress/wp-content/plugins/toret-manager/includes/class-toret-manager.php(227): Toret_Manager_Helper_Modules::get_available_types_by_module('term', true, true)
+#7 /wordpress/wp-content/plugins/toret-manager/includes/class-toret-manager.php(46): Toret_Manager->define_admin_hooks()
+#8 /wordpress/wp-content/plugins/toret-manager/toret-manager.php(126): Toret_Manager->__construct('toret-manager', '1.2.5')
+#9 /wordpress/wp-content/plugins/toret-manager/toret-manager.php(130): trman_run()
+#10 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != '' ORDER BY attribute_name ASC; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/toret-manager/toret-manager.php'), trman_run, Toret_Manager->__construct, Toret_Manager->define_admin_hooks, Toret_Manager_Helper_Modules::get_available_types_by_module, Toret_Manager_Helper_Modules::get_woocommerce_product_attributes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 12:56:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != '' ORDER BY attribute_name ASC;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != :param0  ORDER BY attribute_name ASC; | parameters: </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/toret-manager/includes/functions/class-toret-manager-helper-modules.php(299): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/toret-manager/includes/functions/class-toret-manager-helper-modules.php(284): Toret_Manager_Helper_Modules::get_woocommerce_product_attributes()
+#4 /wordpress/wp-content/plugins/toret-manager/includes/class-toret-manager.php(227): Toret_Manager_Helper_Modules::get_available_types_by_module('term', true, true)
+#5 /wordpress/wp-content/plugins/toret-manager/includes/class-toret-manager.php(46): Toret_Manager->define_admin_hooks()
+#6 /wordpress/wp-content/plugins/toret-manager/toret-manager.php(126): Toret_Manager->__construct('toret-manager', '1.2.5')
+#7 /wordpress/wp-content/plugins/toret-manager/toret-manager.php(130): trman_run()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('toret-manager/t...')
+#10 /internal/eval.php(20): activate_plugin('toret-manager/t...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != '' ORDER BY attribute_name ASC; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/toret-manager/toret-manager.php'), trman_run, Toret_Manager->__construct, Toret_Manager->define_admin_hooks, Toret_Manager_Helper_Modules::get_available_types_by_module, Toret_Manager_Helper_Modules::get_woocommerce_product_attributes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 12:56:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != '' ORDER BY attribute_name ASC;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != :param0  ORDER BY attribute_name ASC; | parameters: </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/toret-manager/includes/functions/class-toret-manager-helper-modules.php(299): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/toret-manager/includes/functions/class-toret-manager-helper-modules.php(284): Toret_Manager_Helper_Modules::get_woocommerce_product_attributes()
+#4 /wordpress/wp-content/plugins/toret-manager/includes/class-toret-manager.php(227): Toret_Manager_Helper_Modules::get_available_types_by_module('term', true, true)
+#5 /wordpress/wp-content/plugins/toret-manager/includes/class-toret-manager.php(46): Toret_Manager->define_admin_hooks()
+#6 /wordpress/wp-content/plugins/toret-manager/toret-manager.php(126): Toret_Manager->__construct('toret-manager', '1.2.5')
+#7 /wordpress/wp-content/plugins/toret-manager/toret-manager.php(130): trman_run()
+#8 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
 #9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
 #10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #12 {main}</pre>
- for query SELECT * FROM wp_tdrd_redirection made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, tdrd_redirect_me, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 11:28:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != '' ORDER BY attribute_name ASC; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/toret-manager/toret-manager.php'), trman_run, Toret_Manager->__construct, Toret_Manager->define_admin_hooks, Toret_Manager_Helper_Modules::get_available_types_by_module, Toret_Manager_Helper_Modules::get_woocommerce_product_attributes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 12:56:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_tdrd_redirection</p>
+<p>SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != '' ORDER BY attribute_name ASC;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_tdrd_redirection | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != :param0  ORDER BY attribute_name ASC; | parameters: </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_tdrd_redirection.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
 #1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/trash-duplicate-and-301-redirect/redirect_client.php(55): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): tdrd_redirect_me('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(727): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query SELECT * FROM wp_tdrd_redirection made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, tdrd_redirect_me, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 11:29:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#2 /wordpress/wp-content/plugins/toret-manager/includes/functions/class-toret-manager-helper-modules.php(299): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/toret-manager/includes/functions/class-toret-manager-helper-modules.php(284): Toret_Manager_Helper_Modules::get_woocommerce_product_attributes()
+#4 /wordpress/wp-content/plugins/toret-manager/includes/class-toret-manager.php(227): Toret_Manager_Helper_Modules::get_available_types_by_module('term', true, true)
+#5 /wordpress/wp-content/plugins/toret-manager/includes/class-toret-manager.php(46): Toret_Manager->define_admin_hooks()
+#6 /wordpress/wp-content/plugins/toret-manager/toret-manager.php(126): Toret_Manager->__construct('toret-manager', '1.2.5')
+#7 /wordpress/wp-content/plugins/toret-manager/toret-manager.php(130): trman_run()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('toret-manager/t...')
+#10 /internal/eval.php(20): activate_plugin('toret-manager/t...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != '' ORDER BY attribute_name ASC; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/toret-manager/toret-manager.php'), trman_run, Toret_Manager->__construct, Toret_Manager->define_admin_hooks, Toret_Manager_Helper_Modules::get_available_types_by_module, Toret_Manager_Helper_Modules::get_woocommerce_product_attributes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 12:56:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_tdrd_redirection</p>
+<p>SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != '' ORDER BY attribute_name ASC;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_tdrd_redirection | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != :param0  ORDER BY attribute_name ASC; | parameters: </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_tdrd_redirection.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
 #1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/trash-duplicate-and-301-redirect/redirect_client.php(55): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): tdrd_redirect_me('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(727): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query SELECT * FROM wp_tdrd_redirection made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, tdrd_redirect_me, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 11:29:41 UTC] PHP Fatal error:  'continue' not in the 'loop' or 'switch' context in /wordpress/wp-content/plugins/true-google404/trueGS.php on line 55
-[06-May-2025 11:29:50 UTC] PHP Fatal error:  'continue' not in the 'loop' or 'switch' context in /wordpress/wp-content/plugins/true-google404/trueGS.php on line 55
-[06-May-2025 11:29:58 UTC] PHP Fatal error:  'continue' not in the 'loop' or 'switch' context in /wordpress/wp-content/plugins/true-google404/trueGS.php on line 55
-[06-May-2025 11:31:03 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Top100MusicPlay...')
-#2 /wordpress/wp-content/plugins/top100-music-player/top100_music_player.php(53): register_widget('Top100MusicPlay...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Top100MusicPlayer('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-May-2025 11:31:13 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Top100MusicPlay...')
-#2 /wordpress/wp-content/plugins/top100-music-player/top100_music_player.php(53): register_widget('Top100MusicPlay...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Top100MusicPlayer('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-May-2025 11:31:23 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Top100MusicPlay...')
-#2 /wordpress/wp-content/plugins/top100-music-player/top100_music_player.php(53): register_widget('Top100MusicPlay...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Top100MusicPlayer('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-May-2025 11:32:03 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/total-processing-gateway-for-woocommerce/totalprocessing-gateway.php:58
+#2 /wordpress/wp-content/plugins/toret-manager/includes/functions/class-toret-manager-helper-modules.php(299): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/toret-manager/includes/functions/class-toret-manager-helper-modules.php(284): Toret_Manager_Helper_Modules::get_woocommerce_product_attributes()
+#4 /wordpress/wp-content/plugins/toret-manager/includes/class-toret-manager.php(227): Toret_Manager_Helper_Modules::get_available_types_by_module('term', true, true)
+#5 /wordpress/wp-content/plugins/toret-manager/includes/class-toret-manager.php(46): Toret_Manager->define_admin_hooks()
+#6 /wordpress/wp-content/plugins/toret-manager/toret-manager.php(126): Toret_Manager->__construct('toret-manager', '1.2.5')
+#7 /wordpress/wp-content/plugins/toret-manager/toret-manager.php(130): trman_run()
+#8 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name != '' ORDER BY attribute_name ASC; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/toret-manager/toret-manager.php'), trman_run, Toret_Manager->__construct, Toret_Manager->define_admin_hooks, Toret_Manager_Helper_Modules::get_available_types_by_module, Toret_Manager_Helper_Modules::get_woocommerce_product_attributes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 12:57:08 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/total-processing-gateway-for-woocommerce/totalprocessing-gateway.php:58
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): totalproc_init_gateway_class('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
@@ -301,7 +271,7 @@ Stack trace:
 #6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #7 {main}
   thrown in /wordpress/wp-content/plugins/total-processing-gateway-for-woocommerce/totalprocessing-gateway.php on line 58
-[06-May-2025 11:32:12 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/total-processing-gateway-for-woocommerce/totalprocessing-gateway.php:58
+[07-May-2025 12:57:16 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/total-processing-gateway-for-woocommerce/totalprocessing-gateway.php:58
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): totalproc_init_gateway_class('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
@@ -312,7 +282,7 @@ Stack trace:
 #6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #7 {main}
   thrown in /wordpress/wp-content/plugins/total-processing-gateway-for-woocommerce/totalprocessing-gateway.php on line 58
-[06-May-2025 11:32:21 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/total-processing-gateway-for-woocommerce/totalprocessing-gateway.php:58
+[07-May-2025 12:57:25 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/total-processing-gateway-for-woocommerce/totalprocessing-gateway.php:58
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): totalproc_init_gateway_class('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
