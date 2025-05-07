@@ -2,154 +2,69 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [05-May-2025 14:55:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_smart_smtp_mail_logs ADD COLUMN `primary_id` BIGINT(20) DEFAULT NULL</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_smart_smtp_mail_logs</li>
-<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_smart_smtp_mail_logs</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_smart_smtp_mail_logs</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_smart_smtp_mail_logs</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_smart_smtp_mail_logs, primary_id, 20, , YES, bigint, , , 19, 0, , , , bigint(20), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_smart_smtp_mail_logs</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_smart_smtp_mail_logs</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_smart_smtp_mail_logs</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_smart_smtp_mail_logs_6818d15aa1220` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `site_id` INTEGER,
-  `to` TEXT COLLATE NOCASE NOT NULL,
-  `from` TEXT COLLATE NOCASE NOT NULL,
-  `subject` TEXT COLLATE NOCASE,
-  `body` TEXT COLLATE NOCASE,
-  `header` TEXT COLLATE NOCASE,
-  `attachments` TEXT COLLATE NOCASE,
-  `status` TEXT COLLATE NOCASE,
-  `response` TEXT COLLATE NOCASE,
-  `extra` TEXT COLLATE NOCASE,
-  `retries` INTEGER,
-  `resent_count` INTEGER,
-  `source` TEXT COLLATE NOCASE,
-  `primary_id` INTEGER,
-  `ip_address` TEXT COLLATE NOCASE,
-  `error_message` TEXT COLLATE NOCASE,
-  `created_at` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `primary_id` INTEGER
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: primary_id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/smart-smtp/includes/Migration/MailLogsMigration.php(117): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/smart-smtp/includes/Migration/MailLogsMigration.php(29): SmartSMTP\Migration\MailLogsMigration->alter_table()
-#5 /wordpress/wp-content/plugins/smart-smtp/includes/Traits/Singleton.php(29): SmartSMTP\Migration\MailLogsMigration->__construct()
-#6 /wordpress/wp-content/plugins/smart-smtp/includes/SmartSMTP.php(110): SmartSMTP\Migration\Migration::init()
-#7 /wordpress/wp-content/plugins/smart-smtp/includes/SmartSMTP.php(43): SmartSMTP\SmartSMTP->includes()
-#8 /wordpress/wp-content/plugins/smart-smtp/includes/Traits/Singleton.php(29): SmartSMTP\SmartSMTP->__construct()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): SmartSMTP\SmartSMTP::init('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query ALTER TABLE wp_smart_smtp_mail_logs ADD COLUMN `primary_id` BIGINT(20) DEFAULT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, SmartSMTP\SmartSMTP::init, SmartSMTP\SmartSMTP->__construct, SmartSMTP\SmartSMTP->includes, SmartSMTP\Migration\Migration::init, SmartSMTP\Migration\MailLogsMigration->__construct, SmartSMTP\Migration\MailLogsMigration->alter_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 14:55:59 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/snoobi-for-wordpress/classes/OAuth.php on line 104
-[05-May-2025 14:56:09 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/snoobi-for-wordpress/classes/OAuth.php on line 104
-[05-May-2025 14:56:20 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/snoobi-for-wordpress/classes/OAuth.php on line 104
-[05-May-2025 14:57:43 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:57:43 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:57:43 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:57:44 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:57:44 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:57:44 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:57:53 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:57:53 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:57:54 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:57:55 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:57:55 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:57:55 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:58:04 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:58:04 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:58:04 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:58:06 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:58:06 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:58:06 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:58:17 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/soundy-background-music/soundy.php on line 1592
-[05-May-2025 14:58:19 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/soundy-background-music/soundy.php on line 1592
-[05-May-2025 14:58:28 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/soundy-background-music/soundy.php on line 1592
-[05-May-2025 14:58:31 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/soundy-background-music/soundy.php on line 1592
-[05-May-2025 14:58:40 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/soundy-background-music/soundy.php on line 1592
-[05-May-2025 14:58:42 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/soundy-background-music/soundy.php on line 1592
-[05-May-2025 14:58:51 UTC] PHP Notice:  ob_end_flush(): Failed to delete and flush buffer. No buffer to delete or flush in /wordpress/wp-content/plugins/ssl-fixit/ssl-fixit.php on line 50
-[05-May-2025 14:58:53 UTC] PHP Notice:  ob_end_flush(): Failed to delete and flush buffer. No buffer to delete or flush in /wordpress/wp-content/plugins/ssl-fixit/ssl-fixit.php on line 50
-[05-May-2025 14:59:01 UTC] PHP Notice:  ob_end_flush(): Failed to delete and flush buffer. No buffer to delete or flush in /wordpress/wp-content/plugins/ssl-fixit/ssl-fixit.php on line 50
-[05-May-2025 14:59:03 UTC] PHP Notice:  ob_end_flush(): Failed to delete and flush buffer. No buffer to delete or flush in /wordpress/wp-content/plugins/ssl-fixit/ssl-fixit.php on line 50
-[05-May-2025 14:59:12 UTC] PHP Notice:  ob_end_flush(): Failed to delete and flush buffer. No buffer to delete or flush in /wordpress/wp-content/plugins/ssl-fixit/ssl-fixit.php on line 50
-[05-May-2025 14:59:13 UTC] PHP Notice:  ob_end_flush(): Failed to delete and flush buffer. No buffer to delete or flush in /wordpress/wp-content/plugins/ssl-fixit/ssl-fixit.php on line 50
-[05-May-2025 14:59:24 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:59:35 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 14:59:45 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:00:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/socialplus/socialplus-widget.php:44
+Error: [07-May-2025 06:36:56 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/send24/class/class.send24.php on line 24
+[07-May-2025 06:37:05 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/send24/class/class.send24.php on line 24
+[07-May-2025 06:37:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/send24/class/class.send24.php on line 24
+[07-May-2025 06:38:54 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/show-wordpress-blog-vital-stats/vitals-pr-functions.php on line 55
+[07-May-2025 06:39:02 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/show-wordpress-blog-vital-stats/vitals-pr-functions.php on line 55
+[07-May-2025 06:39:09 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/show-wordpress-blog-vital-stats/vitals-pr-functions.php on line 55
+[07-May-2025 06:39:38 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:39:38 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:39:39 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:39:39 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>similarity</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:39:39 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:39:47 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:39:47 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:39:48 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:39:48 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>similarity</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:39:48 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:39:55 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:39:55 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:39:56 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:39:56 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>similarity</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:39:56 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:40:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/sms-spruche/sms-sprueche.php:304
 Stack trace:
-#0 /wordpress/wp-content/plugins/socialplus/socialplus.php(46): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('socialplus/soci...')
-#3 /internal/eval.php(20): activate_plugin('socialplus/soci...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/socialplus/socialplus-widget.php on line 44
-[05-May-2025 15:00:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/socialplus/socialplus-widget.php:44
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sms-spruche/sms...')
+#2 /internal/eval.php(20): activate_plugin('sms-spruche/sms...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/sms-spruche/sms-sprueche.php on line 304
+[07-May-2025 06:40:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/sms-spruche/sms-sprueche.php:304
 Stack trace:
-#0 /wordpress/wp-content/plugins/socialplus/socialplus.php(46): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('socialplus/soci...')
-#3 /internal/eval.php(20): activate_plugin('socialplus/soci...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/socialplus/socialplus-widget.php on line 44
-[05-May-2025 15:00:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/socialplus/socialplus-widget.php:44
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sms-spruche/sms...')
+#2 /internal/eval.php(20): activate_plugin('sms-spruche/sms...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/sms-spruche/sms-sprueche.php on line 304
+[07-May-2025 06:40:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/sms-spruche/sms-sprueche.php:304
 Stack trace:
-#0 /wordpress/wp-content/plugins/socialplus/socialplus.php(46): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('socialplus/soci...')
-#3 /internal/eval.php(20): activate_plugin('socialplus/soci...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/socialplus/socialplus-widget.php on line 44
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sms-spruche/sms...')
+#2 /internal/eval.php(20): activate_plugin('sms-spruche/sms...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/sms-spruche/sms-sprueche.php on line 304
+[07-May-2025 06:40:57 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/snoobi-for-wordpress/classes/OAuth.php on line 104
+[07-May-2025 06:41:06 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/snoobi-for-wordpress/classes/OAuth.php on line 104
+[07-May-2025 06:41:16 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/snoobi-for-wordpress/classes/OAuth.php on line 104
+[07-May-2025 06:42:28 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:28 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:28 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:29 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:29 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:29 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:37 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:37 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:37 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:38 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:38 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:38 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:46 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:46 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:46 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:47 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:47 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 06:42:47 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
