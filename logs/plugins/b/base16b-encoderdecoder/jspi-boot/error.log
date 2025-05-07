@@ -2,112 +2,114 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [06-May-2025 11:46:57 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:46:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [07-May-2025 20:50:59 UTC] PHP Deprecated:  WP_SQLite_Information_Schema_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-exception.php on line 37
+[07-May-2025 20:51:01 UTC] PHP Deprecated:  WP_SQLite_Information_Schema_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-exception.php on line 37
+[07-May-2025 20:51:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_sg_config</p>
+<p>SELECT * FROM wp_burst_goals WHERE status = 'active' AND server_side = 1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_sg_config` | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_burst_goals` WHERE `status` = &#039;active&#039; AND `server_side` = 1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_sg_config
+SQLSTATE[HY000]: General error: 1 no such table: wp_burst_goals
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
 #3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/backup-guard/com/core/database/SGDatabaseAdapterWordpress.php(16): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/backup-guard/com/core/SGConfig.php(51): SGDatabaseAdapterWordpress->query('SELECT * FROM w...')
-#6 /wordpress/wp-content/plugins/backup-guard/com/core/SGBoot.php(19): SGConfig::getAll()
-#7 /wordpress/wp-content/plugins/backup-guard/com/boot.php(6): SGBoot::init()
-#8 /wordpress/wp-content/plugins/backup-guard/public/boot.php(2): require_once('/wordpress/wp-c...')
-#9 /wordpress/wp-content/plugins/backup-guard/backup-guard.php(19): require_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('backup-guard/ba...')
-#12 /internal/eval.php(20): activate_plugin('backup-guard/ba...')
+#4 /wordpress/wp-content/plugins/burst-statistics/tracking/tracking.php(570): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/burst-statistics/goals/class-goals-tracker.php(12): burst_get_active_goals('AND server_side...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): burst_goals_tracker->add_dynamic_hooks('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(727): do_action('init')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #13 {main}</pre>
- for query SELECT * FROM wp_sg_config made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/backup-guard/backup-guard.php'), require_once('/plugins/backup-guard/public/boot.php'), require_once('/plugins/backup-guard/com/boot.php'), SGBoot::init, SGConfig::getAll, SGDatabaseAdapterWordpress->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 11:46:57 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:47:05 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:47:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT * FROM wp_burst_goals WHERE status = 'active' AND server_side = 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, burst_goals_tracker->add_dynamic_hooks, burst_get_active_goals, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 20:51:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_sg_config</p>
+<p>SELECT * FROM wp_burst_goals WHERE status = 'active' AND server_side = 1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_sg_config | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_burst_goals WHERE status = :param0  AND server_side = 1 | parameters: active</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sg_config.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_burst_goals.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
 #1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/backup-guard/com/core/database/SGDatabaseAdapterWordpress.php(16): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/backup-guard/com/core/SGConfig.php(51): SGDatabaseAdapterWordpress->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/backup-guard/com/core/SGBoot.php(19): SGConfig::getAll()
-#5 /wordpress/wp-content/plugins/backup-guard/com/boot.php(6): SGBoot::init()
-#6 /wordpress/wp-content/plugins/backup-guard/public/boot.php(2): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/backup-guard/backup-guard.php(19): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('backup-guard/ba...')
-#10 /internal/eval.php(20): activate_plugin('backup-guard/ba...')
+#2 /wordpress/wp-content/plugins/burst-statistics/tracking/tracking.php(570): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/burst-statistics/goals/class-goals-tracker.php(12): burst_get_active_goals('AND server_side...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): burst_goals_tracker->add_dynamic_hooks('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #11 {main}</pre>
- for query SELECT * FROM wp_sg_config made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/backup-guard/backup-guard.php'), require_once('/plugins/backup-guard/public/boot.php'), require_once('/plugins/backup-guard/com/boot.php'), SGBoot::init, SGConfig::getAll, SGDatabaseAdapterWordpress->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 11:47:06 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:47:15 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:47:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT * FROM wp_burst_goals WHERE status = 'active' AND server_side = 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, burst_goals_tracker->add_dynamic_hooks, burst_get_active_goals, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 20:51:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_sg_config</p>
+<p>SELECT * FROM wp_burst_goals WHERE status = 'active' AND server_side = 1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_sg_config | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_burst_goals WHERE status = :param0  AND server_side = 1 | parameters: active</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sg_config.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_burst_goals.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
 #1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/backup-guard/com/core/database/SGDatabaseAdapterWordpress.php(16): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/backup-guard/com/core/SGConfig.php(51): SGDatabaseAdapterWordpress->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/backup-guard/com/core/SGBoot.php(19): SGConfig::getAll()
-#5 /wordpress/wp-content/plugins/backup-guard/com/boot.php(6): SGBoot::init()
-#6 /wordpress/wp-content/plugins/backup-guard/public/boot.php(2): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/backup-guard/backup-guard.php(19): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('backup-guard/ba...')
-#10 /internal/eval.php(20): activate_plugin('backup-guard/ba...')
+#2 /wordpress/wp-content/plugins/burst-statistics/tracking/tracking.php(570): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/burst-statistics/goals/class-goals-tracker.php(12): burst_get_active_goals('AND server_side...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): burst_goals_tracker->add_dynamic_hooks('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #11 {main}</pre>
- for query SELECT * FROM wp_sg_config made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/backup-guard/backup-guard.php'), require_once('/plugins/backup-guard/public/boot.php'), require_once('/plugins/backup-guard/com/boot.php'), SGBoot::init, SGConfig::getAll, SGDatabaseAdapterWordpress->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 11:47:16 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:47:51 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:47:51 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:47:51 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 64
-[06-May-2025 11:47:51 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 65
-[06-May-2025 11:47:51 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 66
-[06-May-2025 11:47:51 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 67
-[06-May-2025 11:47:51 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 68
-[06-May-2025 11:47:51 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 70
-[06-May-2025 11:47:51 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 71
-[06-May-2025 11:47:51 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 72
-[06-May-2025 11:47:51 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 73
-[06-May-2025 11:47:51 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 74
-[06-May-2025 11:47:51 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 75
-[06-May-2025 11:47:52 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wp_b16b_title" in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php:92
+ for query SELECT * FROM wp_burst_goals WHERE status = 'active' AND server_side = 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, burst_goals_tracker->add_dynamic_hooks, burst_get_active_goals, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 20:51:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/b2-seo/i/__f.php on line 495
+[07-May-2025 20:51:59 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/b2-seo/i/__f.php on line 495
+[07-May-2025 20:52:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/b2-seo/i/__f.php on line 495
+[07-May-2025 20:52:07 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/b2-seo/i/__f.php on line 495
+[07-May-2025 20:52:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/b2-seo/i/__f.php on line 495
+[07-May-2025 20:52:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/b2-seo/i/__f.php on line 495
+[07-May-2025 20:54:11 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 20:54:11 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 20:54:11 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 64
+[07-May-2025 20:54:11 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 65
+[07-May-2025 20:54:11 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 66
+[07-May-2025 20:54:11 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 67
+[07-May-2025 20:54:11 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 68
+[07-May-2025 20:54:11 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 70
+[07-May-2025 20:54:11 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 71
+[07-May-2025 20:54:11 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 72
+[07-May-2025 20:54:11 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 73
+[07-May-2025 20:54:11 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 74
+[07-May-2025 20:54:11 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 75
+[07-May-2025 20:54:11 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wp_b16b_title" in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php:92
 Stack trace:
 #0 /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php(55): wp_b16b_init()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -115,20 +117,20 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('base16b-encoder...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 92
-[06-May-2025 11:48:00 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:48:00 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:48:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 64
-[06-May-2025 11:48:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 65
-[06-May-2025 11:48:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 66
-[06-May-2025 11:48:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 67
-[06-May-2025 11:48:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 68
-[06-May-2025 11:48:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 70
-[06-May-2025 11:48:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 71
-[06-May-2025 11:48:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 72
-[06-May-2025 11:48:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 73
-[06-May-2025 11:48:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 74
-[06-May-2025 11:48:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 75
-[06-May-2025 11:48:00 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wp_b16b_title" in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php:92
+[07-May-2025 20:54:19 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 20:54:19 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 20:54:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 64
+[07-May-2025 20:54:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 65
+[07-May-2025 20:54:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 66
+[07-May-2025 20:54:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 67
+[07-May-2025 20:54:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 68
+[07-May-2025 20:54:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 70
+[07-May-2025 20:54:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 71
+[07-May-2025 20:54:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 72
+[07-May-2025 20:54:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 73
+[07-May-2025 20:54:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 74
+[07-May-2025 20:54:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 75
+[07-May-2025 20:54:20 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wp_b16b_title" in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php:92
 Stack trace:
 #0 /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php(55): wp_b16b_init()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -136,20 +138,20 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('base16b-encoder...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 92
-[06-May-2025 11:48:08 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:48:08 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 11:48:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 64
-[06-May-2025 11:48:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 65
-[06-May-2025 11:48:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 66
-[06-May-2025 11:48:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 67
-[06-May-2025 11:48:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 68
-[06-May-2025 11:48:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 70
-[06-May-2025 11:48:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 71
-[06-May-2025 11:48:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 72
-[06-May-2025 11:48:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 73
-[06-May-2025 11:48:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 74
-[06-May-2025 11:48:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 75
-[06-May-2025 11:48:08 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wp_b16b_title" in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php:92
+[07-May-2025 20:54:27 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 20:54:27 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 20:54:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 64
+[07-May-2025 20:54:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 65
+[07-May-2025 20:54:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 66
+[07-May-2025 20:54:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 67
+[07-May-2025 20:54:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 68
+[07-May-2025 20:54:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 70
+[07-May-2025 20:54:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 71
+[07-May-2025 20:54:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 72
+[07-May-2025 20:54:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 73
+[07-May-2025 20:54:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 74
+[07-May-2025 20:54:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 75
+[07-May-2025 20:54:27 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wp_b16b_title" in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php:92
 Stack trace:
 #0 /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php(55): wp_b16b_init()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
