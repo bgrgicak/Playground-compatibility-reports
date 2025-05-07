@@ -2,162 +2,101 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [06-May-2025 03:17:16 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Flag_Counter_Wi...')
-#2 /wordpress/wp-content/plugins/flag-counter-widget/flag-counter-widget.php(26): register_widget('Flag_Counter_Wi...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): loadFcw('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+Error: [07-May-2025 15:56:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT instance_id FROM wp_woocommerce_shipping_zone_methods WHERE method_id = 'flagship_shipping_method'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `instance_id` FROM `wp_woocommerce_shipping_zone_methods` WHERE `method_id` = 'flagship_shipping_method' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_shipping_zone_methods
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT instance...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT instance...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT instance...')
+#4 /wordpress/wp-content/plugins/flagship-woocommerce-shipping/src/Injection/I.php(354): wpdb->get_results('SELECT instance...')
+#5 /wordpress/wp-content/plugins/flagship-woocommerce-shipping/src/Injection/I.php(336): FS\Injection\I::getValidInstanceIds('flagship_shippi...')
+#6 /wordpress/wp-content/plugins/flagship-woocommerce-shipping/src/Components/Migration/AbstractDataMigration.php(30): FS\Injection\I::get_all_instance_option_keys()
+#7 /wordpress/wp-content/plugins/flagship-woocommerce-shipping/src/Components/Migration/DataMigrationRunner.php(16): FS\Components\Migration\AbstractDataMigration->migrate()
+#8 /wordpress/wp-content/plugins/flagship-woocommerce-shipping/src/Injection/I.php(328): FS\Components\Migration\DataMigrationRunner->run()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): FS\Injection\I::fls_plugin_activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_flagsh...', false)
+#13 /internal/eval.php(20): activate_plugin('flagship-woocom...')
+#14 {main}</pre>
+ for query SELECT instance_id FROM wp_woocommerce_shipping_zone_methods WHERE method_id = 'flagship_shipping_method' made by activate_plugin, do_action('activate_flagship-woocommerce-shipping/flagship-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, FS\Injection\I::fls_plugin_activate, FS\Components\Migration\DataMigrationRunner->run, FS\Components\Migration\AbstractDataMigration->migrate, FS\Injection\I::get_all_instance_option_keys, FS\Injection\I::getValidInstanceIds, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 15:56:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT instance_id FROM wp_woocommerce_shipping_zone_methods WHERE method_id = 'flagship_shipping_method'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT instance_id FROM wp_woocommerce_shipping_zone_methods WHERE method_id = :param0  | parameters: flagship_shipping_method</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_shipping_zone_methods.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT instance...')
+#2 /wordpress/wp-content/plugins/flagship-woocommerce-shipping/src/Injection/I.php(354): wpdb->get_results('SELECT instance...')
+#3 /wordpress/wp-content/plugins/flagship-woocommerce-shipping/src/Injection/I.php(336): FS\Injection\I::getValidInstanceIds('flagship_shippi...')
+#4 /wordpress/wp-content/plugins/flagship-woocommerce-shipping/src/Components/Migration/AbstractDataMigration.php(30): FS\Injection\I::get_all_instance_option_keys()
+#5 /wordpress/wp-content/plugins/flagship-woocommerce-shipping/src/Components/Migration/DataMigrationRunner.php(16): FS\Components\Migration\AbstractDataMigration->migrate()
+#6 /wordpress/wp-content/plugins/flagship-woocommerce-shipping/src/Injection/I.php(328): FS\Components\Migration\DataMigrationRunner->run()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): FS\Injection\I::fls_plugin_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-May-2025 03:17:25 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Flag_Counter_Wi...')
-#2 /wordpress/wp-content/plugins/flag-counter-widget/flag-counter-widget.php(26): register_widget('Flag_Counter_Wi...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): loadFcw('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_flagsh...', false)
+#11 /internal/eval.php(20): activate_plugin('flagship-woocom...')
+#12 {main}</pre>
+ for query SELECT instance_id FROM wp_woocommerce_shipping_zone_methods WHERE method_id = 'flagship_shipping_method' made by activate_plugin, do_action('activate_flagship-woocommerce-shipping/flagship-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, FS\Injection\I::fls_plugin_activate, FS\Components\Migration\DataMigrationRunner->run, FS\Components\Migration\AbstractDataMigration->migrate, FS\Injection\I::get_all_instance_option_keys, FS\Injection\I::getValidInstanceIds, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 15:57:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT instance_id FROM wp_woocommerce_shipping_zone_methods WHERE method_id = 'flagship_shipping_method'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT instance_id FROM wp_woocommerce_shipping_zone_methods WHERE method_id = :param0  | parameters: flagship_shipping_method</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_shipping_zone_methods.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT instance...')
+#2 /wordpress/wp-content/plugins/flagship-woocommerce-shipping/src/Injection/I.php(354): wpdb->get_results('SELECT instance...')
+#3 /wordpress/wp-content/plugins/flagship-woocommerce-shipping/src/Injection/I.php(336): FS\Injection\I::getValidInstanceIds('flagship_shippi...')
+#4 /wordpress/wp-content/plugins/flagship-woocommerce-shipping/src/Components/Migration/AbstractDataMigration.php(30): FS\Injection\I::get_all_instance_option_keys()
+#5 /wordpress/wp-content/plugins/flagship-woocommerce-shipping/src/Components/Migration/DataMigrationRunner.php(16): FS\Components\Migration\AbstractDataMigration->migrate()
+#6 /wordpress/wp-content/plugins/flagship-woocommerce-shipping/src/Injection/I.php(328): FS\Components\Migration\DataMigrationRunner->run()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): FS\Injection\I::fls_plugin_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-May-2025 03:17:33 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Flag_Counter_Wi...')
-#2 /wordpress/wp-content/plugins/flag-counter-widget/flag-counter-widget.php(26): register_widget('Flag_Counter_Wi...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): loadFcw('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-May-2025 03:19:57 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 23
-[06-May-2025 03:19:57 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 32
-[06-May-2025 03:19:57 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 33
-[06-May-2025 03:19:57 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 34
-[06-May-2025 03:19:57 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 47
-[06-May-2025 03:19:57 UTC] PHP Fatal error:  Uncaught Error: Non-static method Wdfb_Installer::check() cannot be called statically in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php:137
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('facebook-plugin...')
-#2 /internal/eval.php(20): activate_plugin('facebook-plugin...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 137
-[06-May-2025 03:20:04 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 23
-[06-May-2025 03:20:04 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 32
-[06-May-2025 03:20:04 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 33
-[06-May-2025 03:20:04 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 34
-[06-May-2025 03:20:04 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 47
-[06-May-2025 03:20:04 UTC] PHP Fatal error:  Uncaught Error: Non-static method Wdfb_Installer::check() cannot be called statically in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php:137
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('facebook-plugin...')
-#2 /internal/eval.php(20): activate_plugin('facebook-plugin...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 137
-[06-May-2025 03:20:12 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 23
-[06-May-2025 03:20:12 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 32
-[06-May-2025 03:20:12 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 33
-[06-May-2025 03:20:12 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 34
-[06-May-2025 03:20:12 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 47
-[06-May-2025 03:20:12 UTC] PHP Fatal error:  Uncaught Error: Non-static method Wdfb_Installer::check() cannot be called statically in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php:137
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('facebook-plugin...')
-#2 /internal/eval.php(20): activate_plugin('facebook-plugin...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/facebook-plugin/wpmu-dev-facebook.php on line 137
-[06-May-2025 03:20:22 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 03:20:22 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 03:20:30 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 03:20:30 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 03:20:38 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 03:20:38 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 03:21:44 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 03:21:45 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('featuremeWidget')
-#2 /wordpress/wp-content/plugins/feature-me/classes/featuremeSetup.php(68): register_widget('featuremeWidget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): fmSetup->register('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-May-2025 03:21:54 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 03:21:54 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('featuremeWidget')
-#2 /wordpress/wp-content/plugins/feature-me/classes/featuremeSetup.php(68): register_widget('featuremeWidget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): fmSetup->register('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-May-2025 03:22:02 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 03:22:02 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('featuremeWidget')
-#2 /wordpress/wp-content/plugins/feature-me/classes/featuremeSetup.php(68): register_widget('featuremeWidget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): fmSetup->register('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-May-2025 03:23:02 UTC] PHP Fatal error:  Declaration of myCountDownWidget::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/flash-countdown-plugin/fcdp.php on line 126
-[06-May-2025 03:23:10 UTC] PHP Fatal error:  Declaration of myCountDownWidget::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/flash-countdown-plugin/fcdp.php on line 126
-[06-May-2025 03:23:17 UTC] PHP Fatal error:  Declaration of myCountDownWidget::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/flash-countdown-plugin/fcdp.php on line 126
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_flagsh...', false)
+#11 /internal/eval.php(20): activate_plugin('flagship-woocom...')
+#12 {main}</pre>
+ for query SELECT instance_id FROM wp_woocommerce_shipping_zone_methods WHERE method_id = 'flagship_shipping_method' made by activate_plugin, do_action('activate_flagship-woocommerce-shipping/flagship-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, FS\Injection\I::fls_plugin_activate, FS\Components\Migration\DataMigrationRunner->run, FS\Components\Migration\AbstractDataMigration->migrate, FS\Injection\I::get_all_instance_option_keys, FS\Injection\I::getValidInstanceIds, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 15:57:41 UTC] PHP Warning:  file_get_contents(/wordpress/wp-content/plugins/woocommerce/woocommerce.php): failed to open stream: No such file or directory in /wordpress/wp-includes/functions.php on line 6900
+[07-May-2025 15:57:50 UTC] PHP Warning:  file_get_contents(/wordpress/wp-content/plugins/woocommerce/woocommerce.php): failed to open stream: No such file or directory in /wordpress/wp-includes/functions.php on line 6900
+[07-May-2025 15:57:59 UTC] PHP Warning:  file_get_contents(/wordpress/wp-content/plugins/woocommerce/woocommerce.php): failed to open stream: No such file or directory in /wordpress/wp-includes/functions.php on line 6900
+[07-May-2025 16:01:42 UTC] PHP Fatal error:  Declaration of myCountDownWidget::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/flash-countdown-plugin/fcdp.php on line 126
+[07-May-2025 16:01:50 UTC] PHP Fatal error:  Declaration of myCountDownWidget::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/flash-countdown-plugin/fcdp.php on line 126
+[07-May-2025 16:01:57 UTC] PHP Fatal error:  Declaration of myCountDownWidget::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/flash-countdown-plugin/fcdp.php on line 126
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
