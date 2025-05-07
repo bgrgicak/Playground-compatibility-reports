@@ -1,11 +1,51 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/wordpress/index.js:1
-import{joinPaths as a,phpVar as l}from"@php-wasm/util";import{createMemoizedFetch as _,unzipFile as d}from"@wp-playground/common";import{PHPRequestHandler as g,withPHPIniValues as f,PHP as h,setPhpIniEntries as w,writeFiles as m,proxyFileSystem as b,rotatePHPRuntime as y}from"@php-wasm/universal";import{logger as $}from"@php-wasm/logger";async function q(e){async function n(i,s){const o=new h(await e.createPhpRuntime());return e.sapiName&&o.setSapiName(e.sapiName),i&&(o.requestHandler=i),e.phpIniEntries&&w(o,e.phpIniEntries),s?(await T(o),await m(o,"/",e.createFiles||{}),await L(o,a(new URL(e.siteUrl).pathname,"phpinfo.php"))):b(await i.getPrimaryPhp(),o,["/tmp",i.documentRoot,"/internal/shared"]),e.spawnHandler&&await o.setSpawnHandler(e.spawnHandler(i.processManager)),y({php:o,cwd:i.documentRoot,recreateRuntime:e.createPhpRuntime,maxRequests:400}),o}const r=new g({phpFactory:async({isPrimary:i})=>n(r,i),documentRoot:e.documentRoot||"/wordpress",absoluteUrl:e.siteUrl,rewriteRules:S,getFileNotFoundAction:e.getFileNotFoundAction??E,cookieStore:e.cookieStore}),t=await r.getPrimaryPhp();if(e.hooks?.beforeWordPressFiles&&await e.hooks.beforeWordPressFiles(t),e.wordPressZip&&await v(t,await e.wordPressZip),e.constants)for(const i in e.constants)t.defineConstant(i,e.constants[i]);if(t.defineConstant("WP_HOME",e.siteUrl),t.defineConstant("WP_SITEURL",e.siteUrl),e.hooks?.beforeDatabaseSetup&&await e.hooks.beforeDatabaseSetup(t),e.sqliteIntegrationPluginZip&&await I(t,await e.sqliteIntegrationPluginZip),await c(t)||await P(t),!await c(t))throw new Error("WordPress installation has failed.");return r}async function c(e){return(await e.run({code:`<?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: WordPress installation has failed.
-    at q (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/wordpress/index.js:1:1562)
-    at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:194:42)
+Error: [07-May-2025 03:36:57 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/tapcliq/tapcliq.php:215
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): on_tapcliq_plugin_activation(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tapcli...', false)
+#4 /internal/eval.php(20): activate_plugin('tapcliq/tapcliq...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/tapcliq/tapcliq.php on line 215
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
     at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #5 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"tapcliq"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      ... 2 lines matching cause stack trace ...
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
+        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
+        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
 
 Node.js v23.11.0
