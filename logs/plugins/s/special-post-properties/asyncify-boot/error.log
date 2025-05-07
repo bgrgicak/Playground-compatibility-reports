@@ -2,7 +2,309 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [06-May-2025 06:56:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Create_Function() in /wordpress/wp-content/plugins/special-post-properties/widget_featured_posts/widget.php:32
+Error: [07-May-2025 20:52:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP FUNCTION IF EXISTS `fnStripTags` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "FUNCTION": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DROP FUNCTION I...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DROP FUNCTION I...')
+#3 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#8 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#9 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 20:52:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createFunction"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(844): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE FUNCTION...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE FUNCTION...')
+#4 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#9 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#10 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 20:52:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 20:52:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 20:52:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 20:52:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 20:52:36 UTC] PHP Deprecated:  WP_SQLite_Information_Schema_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-exception.php on line 37
+[07-May-2025 20:52:37 UTC] PHP Deprecated:  WP_SQLite_Information_Schema_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-exception.php on line 37
+[07-May-2025 20:53:12 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('select_menu')
+#2 /wordpress/wp-content/plugins/select-menu/select_menu.php(14): register_widget('select_menu')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): select_menuna('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[07-May-2025 20:53:20 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('select_menu')
+#2 /wordpress/wp-content/plugins/select-menu/select_menu.php(14): register_widget('select_menu')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): select_menuna('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[07-May-2025 20:53:29 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('select_menu')
+#2 /wordpress/wp-content/plugins/select-menu/select_menu.php(14): register_widget('select_menu')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): select_menuna('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[07-May-2025 20:54:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Create_Function() in /wordpress/wp-content/plugins/special-post-properties/widget_featured_posts/widget.php:32
 Stack trace:
 #0 /wordpress/wp-content/plugins/special-post-properties/wp-plugin-special-post-properties.php(32): include_once()
 #1 /wordpress/wp-content/plugins/special-post-properties/wp-plugin-special-post-properties.php(225): wp_plugin_special_post_properties->__construct()
@@ -11,7 +313,7 @@ Stack trace:
 #4 /internal/eval.php(20): activate_plugin('special-post-pr...')
 #5 {main}
   thrown in /wordpress/wp-content/plugins/special-post-properties/widget_featured_posts/widget.php on line 32
-[06-May-2025 06:57:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Create_Function() in /wordpress/wp-content/plugins/special-post-properties/widget_featured_posts/widget.php:32
+[07-May-2025 20:54:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Create_Function() in /wordpress/wp-content/plugins/special-post-properties/widget_featured_posts/widget.php:32
 Stack trace:
 #0 /wordpress/wp-content/plugins/special-post-properties/wp-plugin-special-post-properties.php(32): include_once()
 #1 /wordpress/wp-content/plugins/special-post-properties/wp-plugin-special-post-properties.php(225): wp_plugin_special_post_properties->__construct()
