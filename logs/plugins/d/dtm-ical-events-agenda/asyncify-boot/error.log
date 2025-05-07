@@ -2,139 +2,19 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [05-May-2025 23:53:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DELETE FROM wp_device_detector_statistics WHERE (timestamp < NOW() - INTERVAL 720 HOUR);</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: DELETE FROM `wp_device_detector_statistics` WHERE ( `timestamp` &lt; CURRENT_TIMESTAMP - INTERVAL 720 HOUR ) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "720": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELETE FROM wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELETE FROM wp_...')
-#3 /wordpress/wp-content/plugins/device-detector/includes/system/class-database.php(191): WP_SQLite_DB->query('DELETE FROM wp_...')
-#4 /wordpress/wp-content/plugins/device-detector/includes/features/class-schema.php(272): PODeviceDetector\System\Database->purge('wp_device_detec...', 'timestamp', 720)
-#5 /wordpress/wp-content/plugins/device-detector/includes/features/class-schema.php(71): PODeviceDetector\Plugin\Feature\Schema::purge()
-#6 /wordpress/wp-includes/class-wp-hook.php(322): PODeviceDetector\Plugin\Feature\Schema::write()
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-includes/load.php(1304): do_action('shutdown')
-#10 [internal function]: shutdown_action_hook()
-#11 {main}</pre>
- for query DELETE FROM wp_device_detector_statistics WHERE (timestamp < NOW() - INTERVAL 720 HOUR); made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, PODeviceDetector\Plugin\Feature\Schema::write, PODeviceDetector\Plugin\Feature\Schema::purge, PODeviceDetector\System\Database->purge, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 23:53:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_device_detector_statistics` (`timestamp`,`site`,`channel`,`class`,`device`,`client`,`client_id`,`name`,`client_version`) VALUES ('2025-05-05','1','wfront','other','other','other','UN','UNK','UNK') ON DUPLICATE KEY UPDATE `hit`=hit + 1;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_table_info(:table_name) as l WHERE l.pk &gt; 0; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_list(&quot;wp_device_detector_statistics&quot;) as l; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_info(&quot;wp_device_detector_statistics__u_stat&quot;) as l; | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_device_detector_statistics` (`timestamp`,`site`,`channel`,`class`,`device`,`client`,`client_id`,`name`,`client_version`) VALUES (:param0 ,:param1 ,:param2 ,:param3 ,:param4 ,:param5 ,:param6 ,:param7 ,:param8 ) ON   CONFLICT (&quot;timestamp&quot;, &quot;site&quot;, &quot;channel&quot;, &quot;class&quot;, &quot;device&quot;, &quot;client&quot;, &quot;name&quot;, &quot;client_version&quot;) DO UPDATE SET  `hit`=hit + 1; | parameters: 2025-05-05, 1, wfront, other, other, other, UN, UNK, UNK</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/device-detector/includes/features/class-schema.php(173): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-content/plugins/device-detector/includes/features/class-schema.php(69): PODeviceDetector\Plugin\Feature\Schema::write_current_to_database()
-#3 /wordpress/wp-includes/class-wp-hook.php(322): PODeviceDetector\Plugin\Feature\Schema::write()
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/load.php(1304): do_action('shutdown')
-#7 [internal function]: shutdown_action_hook()
-#8 {main}</pre>
- for query INSERT INTO `wp_device_detector_statistics` (`timestamp`,`site`,`channel`,`class`,`device`,`client`,`client_id`,`name`,`client_version`) VALUES ('2025-05-05','1','wfront','other','other','other','UN','UNK','UNK') ON DUPLICATE KEY UPDATE `hit`=hit + 1; made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, PODeviceDetector\Plugin\Feature\Schema::write, PODeviceDetector\Plugin\Feature\Schema::write_current_to_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 23:54:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_device_detector_statistics` (`timestamp`,`site`,`channel`,`class`,`device`,`client`,`client_id`,`name`,`client_version`) VALUES ('2025-05-05','1','wfront','other','other','other','UN','UNK','UNK') ON DUPLICATE KEY UPDATE `hit`=hit + 1;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_table_info(:table_name) as l WHERE l.pk &gt; 0; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_list(&quot;wp_device_detector_statistics&quot;) as l; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_info(&quot;wp_device_detector_statistics__u_stat&quot;) as l; | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_device_detector_statistics` (`timestamp`,`site`,`channel`,`class`,`device`,`client`,`client_id`,`name`,`client_version`) VALUES (:param0 ,:param1 ,:param2 ,:param3 ,:param4 ,:param5 ,:param6 ,:param7 ,:param8 ) ON   CONFLICT (&quot;timestamp&quot;, &quot;site&quot;, &quot;channel&quot;, &quot;class&quot;, &quot;device&quot;, &quot;client&quot;, &quot;name&quot;, &quot;client_version&quot;) DO UPDATE SET  `hit`=hit + 1; | parameters: 2025-05-05, 1, wfront, other, other, other, UN, UNK, UNK</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/device-detector/includes/features/class-schema.php(173): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-content/plugins/device-detector/includes/features/class-schema.php(69): PODeviceDetector\Plugin\Feature\Schema::write_current_to_database()
-#3 /wordpress/wp-includes/class-wp-hook.php(322): PODeviceDetector\Plugin\Feature\Schema::write()
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/load.php(1304): do_action('shutdown')
-#7 [internal function]: shutdown_action_hook()
-#8 {main}</pre>
- for query INSERT INTO `wp_device_detector_statistics` (`timestamp`,`site`,`channel`,`class`,`device`,`client`,`client_id`,`name`,`client_version`) VALUES ('2025-05-05','1','wfront','other','other','other','UN','UNK','UNK') ON DUPLICATE KEY UPDATE `hit`=hit + 1; made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, PODeviceDetector\Plugin\Feature\Schema::write, PODeviceDetector\Plugin\Feature\Schema::write_current_to_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 23:54:19 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 23:54:19 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 23:54:28 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 23:54:28 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 23:54:37 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 23:54:37 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 23:55:41 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 23:55:42 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 23:55:50 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 23:55:51 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 23:55:59 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 23:55:59 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 23:57:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/disable-wp-core-updates-advance/disable-wp-core-updates-advance.php:39
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): disable_wp_core_update_loaded('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/disable-wp-core-updates-advance/disable-wp-core-updates-advance.php on line 39
-[05-May-2025 23:57:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/disable-wp-core-updates-advance/disable-wp-core-updates-advance.php:39
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): disable_wp_core_update_loaded('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/disable-wp-core-updates-advance/disable-wp-core-updates-advance.php on line 39
-[05-May-2025 23:57:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/disable-wp-core-updates-advance/disable-wp-core-updates-advance.php:39
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): disable_wp_core_update_loaded('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/disable-wp-core-updates-advance/disable-wp-core-updates-advance.php on line 39
-[05-May-2025 23:58:28 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>dive-sites-manager</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 23:58:38 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>dive-sites-manager</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 23:58:47 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>dive-sites-manager</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 23:58:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_insert_category() in /wordpress/wp-content/plugins/dtm-ical-events-agenda/dtm-fullcalendar.php:53
+Error: [07-May-2025 08:45:12 UTC] PHP Deprecated:  Required parameter $display_your_zenodo_community_options follows optional parameter $page in /wordpress/wp-content/plugins/display-your-zenodo-community/public/class-display-your-zenodo-community-public.php on line 230
+[07-May-2025 08:45:12 UTC] PHP Deprecated:  Required parameter $shortcode_specific_keyword follows optional parameter $page in /wordpress/wp-content/plugins/display-your-zenodo-community/public/class-display-your-zenodo-community-public.php on line 230
+[07-May-2025 08:45:13 UTC] PHP Deprecated:  Required parameter $display_your_zenodo_community_options follows optional parameter $page in /wordpress/wp-content/plugins/display-your-zenodo-community/public/class-display-your-zenodo-community-public.php on line 230
+[07-May-2025 08:45:13 UTC] PHP Deprecated:  Required parameter $shortcode_specific_keyword follows optional parameter $page in /wordpress/wp-content/plugins/display-your-zenodo-community/public/class-display-your-zenodo-community-public.php on line 230
+[07-May-2025 08:45:21 UTC] PHP Deprecated:  Required parameter $display_your_zenodo_community_options follows optional parameter $page in /wordpress/wp-content/plugins/display-your-zenodo-community/public/class-display-your-zenodo-community-public.php on line 230
+[07-May-2025 08:45:21 UTC] PHP Deprecated:  Required parameter $shortcode_specific_keyword follows optional parameter $page in /wordpress/wp-content/plugins/display-your-zenodo-community/public/class-display-your-zenodo-community-public.php on line 230
+[07-May-2025 08:45:22 UTC] PHP Deprecated:  Required parameter $display_your_zenodo_community_options follows optional parameter $page in /wordpress/wp-content/plugins/display-your-zenodo-community/public/class-display-your-zenodo-community-public.php on line 230
+[07-May-2025 08:45:22 UTC] PHP Deprecated:  Required parameter $shortcode_specific_keyword follows optional parameter $page in /wordpress/wp-content/plugins/display-your-zenodo-community/public/class-display-your-zenodo-community-public.php on line 230
+[07-May-2025 08:45:31 UTC] PHP Deprecated:  Required parameter $display_your_zenodo_community_options follows optional parameter $page in /wordpress/wp-content/plugins/display-your-zenodo-community/public/class-display-your-zenodo-community-public.php on line 230
+[07-May-2025 08:45:31 UTC] PHP Deprecated:  Required parameter $shortcode_specific_keyword follows optional parameter $page in /wordpress/wp-content/plugins/display-your-zenodo-community/public/class-display-your-zenodo-community-public.php on line 230
+[07-May-2025 08:45:32 UTC] PHP Deprecated:  Required parameter $display_your_zenodo_community_options follows optional parameter $page in /wordpress/wp-content/plugins/display-your-zenodo-community/public/class-display-your-zenodo-community-public.php on line 230
+[07-May-2025 08:45:32 UTC] PHP Deprecated:  Required parameter $shortcode_specific_keyword follows optional parameter $page in /wordpress/wp-content/plugins/display-your-zenodo-community/public/class-display-your-zenodo-community-public.php on line 230
+[07-May-2025 08:46:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_insert_category() in /wordpress/wp-content/plugins/dtm-ical-events-agenda/dtm-fullcalendar.php:53
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): dtm_cal_activate(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
@@ -143,7 +23,7 @@ Stack trace:
 #4 /internal/eval.php(20): activate_plugin('dtm-ical-events...')
 #5 {main}
   thrown in /wordpress/wp-content/plugins/dtm-ical-events-agenda/dtm-fullcalendar.php on line 53
-[05-May-2025 23:59:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_insert_category() in /wordpress/wp-content/plugins/dtm-ical-events-agenda/dtm-fullcalendar.php:53
+[07-May-2025 08:46:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_insert_category() in /wordpress/wp-content/plugins/dtm-ical-events-agenda/dtm-fullcalendar.php:53
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): dtm_cal_activate(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
