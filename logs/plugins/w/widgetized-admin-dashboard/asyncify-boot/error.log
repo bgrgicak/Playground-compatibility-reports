@@ -2,773 +2,452 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [07-May-2025 07:49:16 UTC] PHP Warning:  Undefined variable $js_file_key in /wordpress/wp-content/plugins/wp-floating-menu-framework/wp-floating-menu-framework.php on line 29
-[07-May-2025 07:49:17 UTC] PHP Warning:  Undefined variable $js_file_key in /wordpress/wp-content/plugins/wp-floating-menu-framework/wp-floating-menu-framework.php on line 29
-[07-May-2025 07:49:24 UTC] PHP Warning:  Undefined variable $js_file_key in /wordpress/wp-content/plugins/wp-floating-menu-framework/wp-floating-menu-framework.php on line 29
-[07-May-2025 07:49:25 UTC] PHP Warning:  Undefined variable $js_file_key in /wordpress/wp-content/plugins/wp-floating-menu-framework/wp-floating-menu-framework.php on line 29
-[07-May-2025 07:49:33 UTC] PHP Warning:  Undefined variable $js_file_key in /wordpress/wp-content/plugins/wp-floating-menu-framework/wp-floating-menu-framework.php on line 29
-[07-May-2025 07:49:33 UTC] PHP Warning:  Undefined variable $js_file_key in /wordpress/wp-content/plugins/wp-floating-menu-framework/wp-floating-menu-framework.php on line 29
-[07-May-2025 07:50:09 UTC] PHP Deprecated:  Required parameter $user follows optional parameter $taskStatus in /wordpress/wp-content/plugins/wp-hourly/core/public.php on line 265
-[07-May-2025 07:50:10 UTC] PHP Deprecated:  usort(): Returning bool from comparison function is deprecated, return an integer less than, equal to, or greater than zero in /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php on line 53
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [08-May-2025 22:49:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p> 
-            CREATE OR REPLACE VIEW wp_unpaid_hours AS
-            SELECT
-                timeRecord.id recordId,
-                unpaid.meta_key metakey,
-                unpaid.meta_value metavalue,
-                task.id taskId,
-                task.post_title task,
-                hours.meta_value hours,
-                project.id projectId,
-                project.post_title project,
-                client.id clientId,
-                client.user_nicename customer,
-                IF (timeRecordDate.meta_value, timeRecordDate.meta_value, UNIX_TIMESTAMP(timeRecord.post_date)) `date`
-            FROM wp_posts timeRecord
-            INNER JOIN wp_postmeta unpaid ON (unpaid.post_id = timeRecord.id AND unpaid.meta_key = 'is_paid' and unpaid.meta_value = 0)
-            INNER JOIN wp_postmeta hours ON (hours.post_id = timeRecord.id AND hours.meta_key = 'tr_hours' AND hours.meta_value > 0)
-            INNER JOIN wp_postmeta timeRecordClient ON (timeRecordClient.post_id = timeRecord.id AND timeRecordClient.meta_key = 'time_record_client')
-            INNER JOIN wp_users client ON (client.id = timeRecordClient.meta_value)
-            LEFT JOIN wp_postmeta timeRecordTask ON (timeRecordTask.post_id = timeRecord.id AND timeRecordTask.meta_key = 'time_record_task')
-            LEFT JOIN wp_posts task ON (task.id = timeRecordTask.meta_value)
-            LEFT JOIN wp_postmeta taskProject ON (taskProject.post_id = task.id AND taskProject.meta_key = 'task_project')
-            LEFT JOIN wp_posts project ON (project.id = taskProject.meta_value)
-            LEFT JOIN wp_postmeta timeRecordDate ON (timeRecordDate.post_id = timeRecord.id AND timeRecordDate.meta_key = 'tr_timestamp')
-            WHERE
-                timeRecord.post_type = 'time_record'
-        </p>
+<p>ALTER TABLE wp_wps_core ADD UNIQUE speeder (context, item, obj_id) USING BTREE;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wps_core, wp_wps_core__speeder, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_wps_core__speeder&quot; ON &quot;wp_wps_core&quot; ( `context`, `item`, `obj_id`) USING BTREE; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createView"
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "USING": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(844): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query(' \n            C...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query(' \n            C...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_0_0Migration.php(38): WP_SQLite_DB->query(' \n            C...')
-#5 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_0_0Migration->run()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#10 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
-#11 {main}</pre>
- for query  
-            CREATE OR REPLACE VIEW wp_unpaid_hours AS
-            SELECT
-                timeRecord.id recordId,
-                unpaid.meta_key metakey,
-                unpaid.meta_value metavalue,
-                task.id taskId,
-                task.post_title task,
-                hours.meta_value hours,
-                project.id projectId,
-                project.post_title project,
-                client.id clientId,
-                client.user_nicename customer,
-                IF (timeRecordDate.meta_value, timeRecordDate.meta_value, UNIX_TIMESTAMP(timeRecord.post_date)) `date`
-            FROM wp_posts timeRecord
-            INNER JOIN wp_postmeta unpaid ON (unpaid.post_id = timeRecord.id AND unpaid.meta_key = 'is_paid' and unpaid.meta_value = 0)
-            INNER JOIN wp_postmeta hours ON (hours.post_id = timeRecord.id AND hours.meta_key = 'tr_hours' AND hours.meta_value > 0)
-            INNER JOIN wp_postmeta timeRecordClient ON (timeRecordClient.post_id = timeRecord.id AND timeRecordClient.meta_key = 'time_record_client')
-            INNER JOIN wp_users client ON (client.id = timeRecordClient.meta_value)
-            LEFT JOIN wp_postmeta timeRecordTask ON (timeRecordTask.post_id = timeRecord.id AND timeRecordTask.meta_key = 'time_record_task')
-            LEFT JOIN wp_posts task ON (task.id = timeRecordTask.meta_value)
-            LEFT JOIN wp_postmeta taskProject ON (taskProject.post_id = task.id AND taskProject.meta_key = 'task_project')
-            LEFT JOIN wp_posts project ON (project.id = taskProject.meta_value)
-            LEFT JOIN wp_postmeta timeRecordDate ON (timeRecordDate.post_id = timeRecord.id AND timeRecordDate.meta_key = 'tr_timestamp')
-            WHERE
-                timeRecord.post_type = 'time_record'
-         made by activate_plugin, do_action('activate_wp-hourly/wp-hourly.php'), WP_Hook->do_action, WP_Hook->apply_filters, wphMigrateIfNeeded, V1_0_0Migration->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 07:50:10 UTC] PHP Warning:  Undefined array key "tasks`.`status_id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3105
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3106
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3107
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3108
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(78): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(41): WPS\core\Options->maybe_create_options_table()
+#3 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/wps_wrapper.php(86): WPS\core\Options->__construct('wps', 'wp_wps_core')
+#4 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(84): WPS\core\wps_wrapper->setup()
+#5 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(108): wps('wps', Array, Array)
+#6 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(142): wps_init()
+#7 /wordpress/wp-content/plugins/wp-optimizer/inc/wps_and_constants.php(37): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/wp-optimizer/wp-optimizer.php(23): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-optimizer/wp...')
+#11 /internal/eval.php(20): activate_plugin('wp-optimizer/wp...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_wps_core ADD UNIQUE speeder (context, item, obj_id) USING BTREE; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-optimizer/wp-optimizer.php'), require_once('/plugins/wp-optimizer/inc/wps_and_constants.php'), require_once('/plugins/wp-optimizer/vendors/wps-framework/loader.php'), wps_init, wps, WPS\core\wps_wrapper->setup, WPS\core\Options->__construct, WPS\core\Options->maybe_create_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 22:49:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            UPDATE wp_wph_tasks tasks
-            SET tasks.status_id = CASE 
-                WHEN tasks.status_id = 3 OR tasks.status_id = 4 THEN 3
-                ELSE 2
-            END
-        </p>
+<p>ALTER TABLE wp_wps_core ADD UNIQUE speeder_container (container, item, obj_id) USING BTREE;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wph_tasks` `tasks</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_wph_tasks` `tasks</li>
-<li>Executing: UPDATE `wp_wph_tasks` `tasks` SET `tasks`.`status_id` = CASE WHEN `tasks`.`status_id` = 3 OR `tasks`.`status_id` = 4 THEN 3 ELSE 2 END | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wps_core, wp_wps_core__speeder_container, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_wps_core__speeder_container&quot; ON &quot;wp_wps_core&quot; ( `container`, `item`, `obj_id`) USING BTREE; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "`tasks`": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "USING": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n            UP...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n            UP...')
-#3 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_2_0Migration.php(31): WP_SQLite_DB->query('\n            UP...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_2_0Migration->run()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
-#10 {main}</pre>
- for query 
-            UPDATE wp_wph_tasks tasks
-            SET tasks.status_id = CASE 
-                WHEN tasks.status_id = 3 OR tasks.status_id = 4 THEN 3
-                ELSE 2
-            END
-         made by activate_plugin, do_action('activate_wp-hourly/wp-hourly.php'), WP_Hook->do_action, WP_Hook->apply_filters, wphMigrateIfNeeded, V1_2_0Migration->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 07:50:10 UTC] PHP Warning:  Undefined array key "tasks`.`wp_post_id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3105
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3106
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3107
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3108
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(79): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(41): WPS\core\Options->maybe_create_options_table()
+#3 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/wps_wrapper.php(86): WPS\core\Options->__construct('wps', 'wp_wps_core')
+#4 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(84): WPS\core\wps_wrapper->setup()
+#5 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(108): wps('wps', Array, Array)
+#6 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(142): wps_init()
+#7 /wordpress/wp-content/plugins/wp-optimizer/inc/wps_and_constants.php(37): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/wp-optimizer/wp-optimizer.php(23): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-optimizer/wp...')
+#11 /internal/eval.php(20): activate_plugin('wp-optimizer/wp...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_wps_core ADD UNIQUE speeder_container (container, item, obj_id) USING BTREE; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-optimizer/wp-optimizer.php'), require_once('/plugins/wp-optimizer/inc/wps_and_constants.php'), require_once('/plugins/wp-optimizer/vendors/wps-framework/loader.php'), wps_init, wps, WPS\core\wps_wrapper->setup, WPS\core\Options->__construct, WPS\core\Options->maybe_create_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 22:49:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            UPDATE wp_wph_tasks tasks
-            INNER JOIN wp_postmeta pm ON (pm.meta_value = tasks.id AND pm.meta_key = 'backupId')
-            SET tasks.wp_post_id = pm.post_id
-        </p>
+<p>ALTER TABLE wp_wps_core ADD UNIQUE speeder (context, item, obj_id) USING BTREE;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wph_tasks` `tasks` INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`meta_value` = `tasks`.`id` AND `pm`.`meta_key` = 'backupId' </li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_wph_tasks` `tasks` INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`meta_value` = `tasks`.`id` AND `pm`.`meta_key` = 'backupId' </li>
-<li>Executing: UPDATE `wp_wph_tasks` `tasks` INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`meta_value` = `tasks`.`id` AND `pm`.`meta_key` = 'backupId' ) SET `tasks`.`wp_post_id` = `pm`.`post_id` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wps_core, wp_wps_core__speeder, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_wps_core__speeder&quot; ON &quot;wp_wps_core&quot; ( `context`, `item`, `obj_id`) USING BTREE; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "`tasks`": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "USING": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n            UP...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n            UP...')
-#3 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_2_0Migration.php(50): WP_SQLite_DB->query('\n            UP...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_2_0Migration->run()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
-#10 {main}</pre>
- for query 
-            UPDATE wp_wph_tasks tasks
-            INNER JOIN wp_postmeta pm ON (pm.meta_value = tasks.id AND pm.meta_key = 'backupId')
-            SET tasks.wp_post_id = pm.post_id
-         made by activate_plugin, do_action('activate_wp-hourly/wp-hourly.php'), WP_Hook->do_action, WP_Hook->apply_filters, wphMigrateIfNeeded, V1_2_0Migration->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 07:50:10 UTC] PHP Warning:  Undefined array key "tasks`.`hourlyRate" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3105
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3106
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3107
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3108
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/upgrades/1.0.0.php(27): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/UtilEnv.php(35): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/functions/wps-modules.php(39): WPS\core\UtilEnv::handle_upgrade('0.0.0', '1.0.1', '/wordpress/wp-c...')
+#4 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/functions/wps-modules.php(53): wps_run_upgrade('wps', '1.0.1', '/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(121): wps_maybe_upgrade('wps', '1.0.1', '/wordpress/wp-c...')
+#6 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(142): wps_init()
+#7 /wordpress/wp-content/plugins/wp-optimizer/inc/wps_and_constants.php(37): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/wp-optimizer/wp-optimizer.php(23): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-optimizer/wp...')
+#11 /internal/eval.php(20): activate_plugin('wp-optimizer/wp...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_wps_core ADD UNIQUE speeder (context, item, obj_id) USING BTREE; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-optimizer/wp-optimizer.php'), require_once('/plugins/wp-optimizer/inc/wps_and_constants.php'), require_once('/plugins/wp-optimizer/vendors/wps-framework/loader.php'), wps_init, wps_maybe_upgrade, wps_run_upgrade, WPS\core\UtilEnv::handle_upgrade, require_once('/plugins/wp-optimizer/vendors/wps-framework/upgrades/1.0.0.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 22:49:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            UPDATE wp_wph_tasks tasks
-            INNER JOIN wp_postmeta product ON (product.post_id = tasks.wp_post_id AND product.meta_key = 'hourly_rate_product')
-            INNER JOIN wp_postmeta pm ON (pm.post_id = product.post_id AND pm.meta_key = '_regular_price')
-            SET tasks.hourlyRate = pm.meta_value
-        </p>
+<p>ALTER TABLE wp_wps_core ADD UNIQUE speeder_container (container, item, obj_id) USING BTREE;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wph_tasks` `tasks` INNER JOIN `wp_postmeta` `product` ON ( `product`.`post_id` = `tasks`.`wp_post_id` AND `product`.`meta_key` = 'hourly_rate_product' ) INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`post_id` = `product`.`post_id` AND `pm`.`meta_key` = '_regular_price' </li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_wph_tasks` `tasks` INNER JOIN `wp_postmeta` `product` ON ( `product`.`post_id` = `tasks`.`wp_post_id` AND `product`.`meta_key` = 'hourly_rate_product' ) INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`post_id` = `product`.`post_id` AND `pm`.`meta_key` = '_regular_price' </li>
-<li>Executing: UPDATE `wp_wph_tasks` `tasks` INNER JOIN `wp_postmeta` `product` ON ( `product`.`post_id` = `tasks`.`wp_post_id` AND `product`.`meta_key` = 'hourly_rate_product' ) INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`post_id` = `product`.`post_id` AND `pm`.`meta_key` = '_regular_price' ) SET `tasks`.`hourlyRate` = `pm`.`meta_value` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wps_core, wp_wps_core__speeder_container, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_wps_core__speeder_container&quot; ON &quot;wp_wps_core&quot; ( `container`, `item`, `obj_id`) USING BTREE; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "`tasks`": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "USING": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n            UP...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n            UP...')
-#3 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_2_0Migration.php(58): WP_SQLite_DB->query('\n            UP...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_2_0Migration->run()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
-#10 {main}</pre>
- for query 
-            UPDATE wp_wph_tasks tasks
-            INNER JOIN wp_postmeta product ON (product.post_id = tasks.wp_post_id AND product.meta_key = 'hourly_rate_product')
-            INNER JOIN wp_postmeta pm ON (pm.post_id = product.post_id AND pm.meta_key = '_regular_price')
-            SET tasks.hourlyRate = pm.meta_value
-         made by activate_plugin, do_action('activate_wp-hourly/wp-hourly.php'), WP_Hook->do_action, WP_Hook->apply_filters, wphMigrateIfNeeded, V1_2_0Migration->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 07:50:10 UTC] PHP Warning:  Undefined array key "projects`.`status" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3105
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3106
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3107
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3108
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/upgrades/1.0.0.php(29): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/UtilEnv.php(35): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/functions/wps-modules.php(39): WPS\core\UtilEnv::handle_upgrade('0.0.0', '1.0.1', '/wordpress/wp-c...')
+#4 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/functions/wps-modules.php(53): wps_run_upgrade('wps', '1.0.1', '/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(121): wps_maybe_upgrade('wps', '1.0.1', '/wordpress/wp-c...')
+#6 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(142): wps_init()
+#7 /wordpress/wp-content/plugins/wp-optimizer/inc/wps_and_constants.php(37): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/wp-optimizer/wp-optimizer.php(23): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-optimizer/wp...')
+#11 /internal/eval.php(20): activate_plugin('wp-optimizer/wp...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_wps_core ADD UNIQUE speeder_container (container, item, obj_id) USING BTREE; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-optimizer/wp-optimizer.php'), require_once('/plugins/wp-optimizer/inc/wps_and_constants.php'), require_once('/plugins/wp-optimizer/vendors/wps-framework/loader.php'), wps_init, wps_maybe_upgrade, wps_run_upgrade, WPS\core\UtilEnv::handle_upgrade, require_once('/plugins/wp-optimizer/vendors/wps-framework/upgrades/1.0.0.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 22:49:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            UPDATE wp_wph_projects projects
-            SET projects.status = CASE 
-                WHEN projects.status_id = 3 OR projects.status_id = 4 THEN 'archived'
-                ELSE 'active'
-            END
-        </p>
+<p>ALTER TABLE wp_wpopt ADD UNIQUE speeder (context, item, obj_id) USING BTREE;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wph_projects` `projects</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_wph_projects` `projects</li>
-<li>Executing: UPDATE `wp_wph_projects` `projects` SET `projects`.`status` = CASE WHEN `projects`.`status_id` = 3 OR `projects`.`status_id` = 4 THEN 'archived' ELSE 'active' END | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wpopt, wp_wpopt__speeder, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_wpopt__speeder&quot; ON &quot;wp_wpopt&quot; ( `context`, `item`, `obj_id`) USING BTREE; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "`projects`": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "USING": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n            UP...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n            UP...')
-#3 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_2_0Migration.php(81): WP_SQLite_DB->query('\n            UP...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_2_0Migration->run()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(78): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(41): WPS\core\Options->maybe_create_options_table()
+#3 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/wps_wrapper.php(86): WPS\core\Options->__construct('wpopt', 'wp_wpopt')
+#4 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(84): WPS\core\wps_wrapper->setup()
+#5 /wordpress/wp-content/plugins/wp-optimizer/inc/wps_and_constants.php(41): wps('wpopt', Array, Array)
+#6 /wordpress/wp-content/plugins/wp-optimizer/wp-optimizer.php(23): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-optimizer/wp...')
+#9 /internal/eval.php(20): activate_plugin('wp-optimizer/wp...')
 #10 {main}</pre>
- for query 
-            UPDATE wp_wph_projects projects
-            SET projects.status = CASE 
-                WHEN projects.status_id = 3 OR projects.status_id = 4 THEN 'archived'
-                ELSE 'active'
-            END
-         made by activate_plugin, do_action('activate_wp-hourly/wp-hourly.php'), WP_Hook->do_action, WP_Hook->apply_filters, wphMigrateIfNeeded, V1_2_0Migration->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 07:50:10 UTC] PHP Warning:  Undefined array key "projects`.`wp_post_id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3105
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3106
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3107
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3108
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_wpopt ADD UNIQUE speeder (context, item, obj_id) USING BTREE; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-optimizer/wp-optimizer.php'), require_once('/plugins/wp-optimizer/inc/wps_and_constants.php'), wps, WPS\core\wps_wrapper->setup, WPS\core\Options->__construct, WPS\core\Options->maybe_create_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 22:49:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            UPDATE wp_wph_projects projects
-            INNER JOIN wp_postmeta pm ON (pm.meta_value = projects.id AND pm.meta_key = 'backupId')
-            SET projects.wp_post_id = pm.post_id
-        </p>
+<p>ALTER TABLE wp_wpopt ADD UNIQUE speeder_container (container, item, obj_id) USING BTREE;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wph_projects` `projects` INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`meta_value` = `projects`.`id` AND `pm`.`meta_key` = 'backupId' </li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_wph_projects` `projects` INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`meta_value` = `projects`.`id` AND `pm`.`meta_key` = 'backupId' </li>
-<li>Executing: UPDATE `wp_wph_projects` `projects` INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`meta_value` = `projects`.`id` AND `pm`.`meta_key` = 'backupId' ) SET `projects`.`wp_post_id` = `pm`.`post_id` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wpopt, wp_wpopt__speeder_container, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_wpopt__speeder_container&quot; ON &quot;wp_wpopt&quot; ( `container`, `item`, `obj_id`) USING BTREE; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "`projects`": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "USING": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n            UP...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n            UP...')
-#3 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_2_0Migration.php(90): WP_SQLite_DB->query('\n            UP...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_2_0Migration->run()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(79): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(41): WPS\core\Options->maybe_create_options_table()
+#3 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/wps_wrapper.php(86): WPS\core\Options->__construct('wpopt', 'wp_wpopt')
+#4 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(84): WPS\core\wps_wrapper->setup()
+#5 /wordpress/wp-content/plugins/wp-optimizer/inc/wps_and_constants.php(41): wps('wpopt', Array, Array)
+#6 /wordpress/wp-content/plugins/wp-optimizer/wp-optimizer.php(23): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-optimizer/wp...')
+#9 /internal/eval.php(20): activate_plugin('wp-optimizer/wp...')
 #10 {main}</pre>
- for query 
-            UPDATE wp_wph_projects projects
-            INNER JOIN wp_postmeta pm ON (pm.meta_value = projects.id AND pm.meta_key = 'backupId')
-            SET projects.wp_post_id = pm.post_id
-         made by activate_plugin, do_action('activate_wp-hourly/wp-hourly.php'), WP_Hook->do_action, WP_Hook->apply_filters, wphMigrateIfNeeded, V1_2_0Migration->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 07:50:10 UTC] PHP Warning:  Undefined array key "projects`.`hourlyRate" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3105
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3106
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3107
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3108
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_wpopt ADD UNIQUE speeder_container (container, item, obj_id) USING BTREE; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-optimizer/wp-optimizer.php'), require_once('/plugins/wp-optimizer/inc/wps_and_constants.php'), wps, WPS\core\wps_wrapper->setup, WPS\core\Options->__construct, WPS\core\Options->maybe_create_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 22:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            UPDATE wp_wph_projects projects
-            INNER JOIN wp_postmeta product ON (product.post_id = projects.wp_post_id AND product.meta_key = 'hourly_rate_product')
-            INNER JOIN wp_postmeta pm ON (pm.post_id = product.post_id AND pm.meta_key = '_regular_price')
-            SET projects.hourlyRate = pm.meta_value
-        </p>
+<p>ALTER TABLE wp_wps_core ADD UNIQUE speeder (context, item, obj_id) USING BTREE;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wph_projects` `projects` INNER JOIN `wp_postmeta` `product` ON ( `product`.`post_id` = `projects`.`wp_post_id` AND `product`.`meta_key` = 'hourly_rate_product' ) INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`post_id` = `product`.`post_id` AND `pm`.`meta_key` = '_regular_price' </li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_wph_projects` `projects` INNER JOIN `wp_postmeta` `product` ON ( `product`.`post_id` = `projects`.`wp_post_id` AND `product`.`meta_key` = 'hourly_rate_product' ) INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`post_id` = `product`.`post_id` AND `pm`.`meta_key` = '_regular_price' </li>
-<li>Executing: UPDATE `wp_wph_projects` `projects` INNER JOIN `wp_postmeta` `product` ON ( `product`.`post_id` = `projects`.`wp_post_id` AND `product`.`meta_key` = 'hourly_rate_product' ) INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`post_id` = `product`.`post_id` AND `pm`.`meta_key` = '_regular_price' ) SET `projects`.`hourlyRate` = `pm`.`meta_value` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wps_core, wp_wps_core__speeder, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_wps_core__speeder&quot; ON &quot;wp_wps_core&quot; ( `context`, `item`, `obj_id`) USING BTREE; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "`projects`": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "USING": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n            UP...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n            UP...')
-#3 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_2_0Migration.php(98): WP_SQLite_DB->query('\n            UP...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_2_0Migration->run()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
-#10 {main}</pre>
- for query 
-            UPDATE wp_wph_projects projects
-            INNER JOIN wp_postmeta product ON (product.post_id = projects.wp_post_id AND product.meta_key = 'hourly_rate_product')
-            INNER JOIN wp_postmeta pm ON (pm.post_id = product.post_id AND pm.meta_key = '_regular_price')
-            SET projects.hourlyRate = pm.meta_value
-         made by activate_plugin, do_action('activate_wp-hourly/wp-hourly.php'), WP_Hook->do_action, WP_Hook->apply_filters, wphMigrateIfNeeded, V1_2_0Migration->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 07:50:10 UTC] PHP Warning:  Undefined array key "timeRecords`.`wp_post_id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3105
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3106
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3107
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3108
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(78): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(41): WPS\core\Options->maybe_create_options_table()
+#3 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/wps_wrapper.php(86): WPS\core\Options->__construct('wps', 'wp_wps_core')
+#4 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(84): WPS\core\wps_wrapper->setup()
+#5 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(108): wps('wps', Array, Array)
+#6 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(142): wps_init()
+#7 /wordpress/wp-content/plugins/wp-optimizer/inc/wps_and_constants.php(37): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/wp-optimizer/wp-optimizer.php(23): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-optimizer/wp...')
+#11 /internal/eval.php(20): activate_plugin('wp-optimizer/wp...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_wps_core ADD UNIQUE speeder (context, item, obj_id) USING BTREE; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-optimizer/wp-optimizer.php'), require_once('/plugins/wp-optimizer/inc/wps_and_constants.php'), require_once('/plugins/wp-optimizer/vendors/wps-framework/loader.php'), wps_init, wps, WPS\core\wps_wrapper->setup, WPS\core\Options->__construct, WPS\core\Options->maybe_create_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 22:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            UPDATE wp_wph_time_records timeRecords
-            INNER JOIN wp_postmeta pm ON (pm.meta_value = timeRecords.id AND pm.meta_key = 'backupId')
-            SET timeRecords.wp_post_id = pm.post_id
-        </p>
+<p>ALTER TABLE wp_wps_core ADD UNIQUE speeder_container (container, item, obj_id) USING BTREE;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wph_time_records` `timeRecords` INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`meta_value` = `timeRecords`.`id` AND `pm`.`meta_key` = 'backupId' </li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_wph_time_records` `timeRecords` INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`meta_value` = `timeRecords`.`id` AND `pm`.`meta_key` = 'backupId' </li>
-<li>Executing: UPDATE `wp_wph_time_records` `timeRecords` INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`meta_value` = `timeRecords`.`id` AND `pm`.`meta_key` = 'backupId' ) SET `timeRecords`.`wp_post_id` = `pm`.`post_id` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wps_core, wp_wps_core__speeder_container, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_wps_core__speeder_container&quot; ON &quot;wp_wps_core&quot; ( `container`, `item`, `obj_id`) USING BTREE; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "`timeRecords`": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "USING": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n            UP...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n            UP...')
-#3 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_2_0Migration.php(115): WP_SQLite_DB->query('\n            UP...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_2_0Migration->run()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
-#10 {main}</pre>
- for query 
-            UPDATE wp_wph_time_records timeRecords
-            INNER JOIN wp_postmeta pm ON (pm.meta_value = timeRecords.id AND pm.meta_key = 'backupId')
-            SET timeRecords.wp_post_id = pm.post_id
-         made by activate_plugin, do_action('activate_wp-hourly/wp-hourly.php'), WP_Hook->do_action, WP_Hook->apply_filters, wphMigrateIfNeeded, V1_2_0Migration->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 07:50:10 UTC] PHP Warning:  Undefined array key "tr_type" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3105
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3106
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3107
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3108
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(79): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(41): WPS\core\Options->maybe_create_options_table()
+#3 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/wps_wrapper.php(86): WPS\core\Options->__construct('wps', 'wp_wps_core')
+#4 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(84): WPS\core\wps_wrapper->setup()
+#5 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(108): wps('wps', Array, Array)
+#6 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(142): wps_init()
+#7 /wordpress/wp-content/plugins/wp-optimizer/inc/wps_and_constants.php(37): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/wp-optimizer/wp-optimizer.php(23): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-optimizer/wp...')
+#11 /internal/eval.php(20): activate_plugin('wp-optimizer/wp...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_wps_core ADD UNIQUE speeder_container (container, item, obj_id) USING BTREE; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-optimizer/wp-optimizer.php'), require_once('/plugins/wp-optimizer/inc/wps_and_constants.php'), require_once('/plugins/wp-optimizer/vendors/wps-framework/loader.php'), wps_init, wps, WPS\core\wps_wrapper->setup, WPS\core\Options->__construct, WPS\core\Options->maybe_create_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 22:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            UPDATE wp_wph_time_records tr
-            SET tr_type = IF(tr.screenshot IS NOT NULL OR (tr.screenshot IS NULL AND tr.hours > 0.1), 'tracker', 'manual')
-        </p>
+<p>ALTER TABLE wp_wps_core ADD UNIQUE speeder (context, item, obj_id) USING BTREE;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wph_time_records` `tr</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_wph_time_records` `tr</li>
-<li>Executing: UPDATE `wp_wph_time_records` `tr` SET `tr_type` = IF ( `tr`.`screenshot` IS NOT NULL OR ( `tr`.`screenshot` IS NULL AND `tr`.`hours` &gt; 0.1 ) , 'tracker' , 'manual' ) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wps_core, wp_wps_core__speeder, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_wps_core__speeder&quot; ON &quot;wp_wps_core&quot; ( `context`, `item`, `obj_id`) USING BTREE; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "`tr`": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "USING": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n            UP...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n            UP...')
-#3 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_2_0Migration.php(122): WP_SQLite_DB->query('\n            UP...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_2_0Migration->run()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
-#10 {main}</pre>
- for query 
-            UPDATE wp_wph_time_records tr
-            SET tr_type = IF(tr.screenshot IS NOT NULL OR (tr.screenshot IS NULL AND tr.hours > 0.1), 'tracker', 'manual')
-         made by activate_plugin, do_action('activate_wp-hourly/wp-hourly.php'), WP_Hook->do_action, WP_Hook->apply_filters, wphMigrateIfNeeded, V1_2_0Migration->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 07:50:10 UTC] PHP Warning:  Undefined array key "tr`.`is_paid_out" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3105
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3106
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3107
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3108
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/upgrades/1.0.0.php(27): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/UtilEnv.php(35): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/functions/wps-modules.php(39): WPS\core\UtilEnv::handle_upgrade('0.0.0', '1.0.1', '/wordpress/wp-c...')
+#4 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/functions/wps-modules.php(53): wps_run_upgrade('wps', '1.0.1', '/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(121): wps_maybe_upgrade('wps', '1.0.1', '/wordpress/wp-c...')
+#6 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(142): wps_init()
+#7 /wordpress/wp-content/plugins/wp-optimizer/inc/wps_and_constants.php(37): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/wp-optimizer/wp-optimizer.php(23): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-optimizer/wp...')
+#11 /internal/eval.php(20): activate_plugin('wp-optimizer/wp...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_wps_core ADD UNIQUE speeder (context, item, obj_id) USING BTREE; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-optimizer/wp-optimizer.php'), require_once('/plugins/wp-optimizer/inc/wps_and_constants.php'), require_once('/plugins/wp-optimizer/vendors/wps-framework/loader.php'), wps_init, wps_maybe_upgrade, wps_run_upgrade, WPS\core\UtilEnv::handle_upgrade, require_once('/plugins/wp-optimizer/vendors/wps-framework/upgrades/1.0.0.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 22:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            UPDATE wp_wph_time_records tr
-            INNER JOIN wp_postmeta po ON (po.post_id = tr.wp_post_id AND po.meta_key = 'is_paid_out')
-            SET tr.is_paid_out = IF(po.meta_value, po.meta_value, 0)
-        </p>
+<p>ALTER TABLE wp_wps_core ADD UNIQUE speeder_container (container, item, obj_id) USING BTREE;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wph_time_records` `tr` INNER JOIN `wp_postmeta` `po` ON ( `po`.`post_id` = `tr`.`wp_post_id` AND `po`.`meta_key` = 'is_paid_out' </li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_wph_time_records` `tr` INNER JOIN `wp_postmeta` `po` ON ( `po`.`post_id` = `tr`.`wp_post_id` AND `po`.`meta_key` = 'is_paid_out' </li>
-<li>Executing: UPDATE `wp_wph_time_records` `tr` INNER JOIN `wp_postmeta` `po` ON ( `po`.`post_id` = `tr`.`wp_post_id` AND `po`.`meta_key` = 'is_paid_out' ) SET `tr`.`is_paid_out` = IF ( `po`.`meta_value` , `po`.`meta_value` , 0 ) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wps_core, wp_wps_core__speeder_container, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_wps_core__speeder_container&quot; ON &quot;wp_wps_core&quot; ( `container`, `item`, `obj_id`) USING BTREE; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "`tr`": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "USING": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n            UP...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n            UP...')
-#3 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_2_0Migration.php(129): WP_SQLite_DB->query('\n            UP...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_2_0Migration->run()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
-#10 {main}</pre>
- for query 
-            UPDATE wp_wph_time_records tr
-            INNER JOIN wp_postmeta po ON (po.post_id = tr.wp_post_id AND po.meta_key = 'is_paid_out')
-            SET tr.is_paid_out = IF(po.meta_value, po.meta_value, 0)
-         made by activate_plugin, do_action('activate_wp-hourly/wp-hourly.php'), WP_Hook->do_action, WP_Hook->apply_filters, wphMigrateIfNeeded, V1_2_0Migration->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 07:50:10 UTC] PHP Warning:  Undefined array key "utr`.`productId" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3105
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3106
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3107
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3108
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/upgrades/1.0.0.php(29): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/UtilEnv.php(35): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/functions/wps-modules.php(39): WPS\core\UtilEnv::handle_upgrade('0.0.0', '1.0.1', '/wordpress/wp-c...')
+#4 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/functions/wps-modules.php(53): wps_run_upgrade('wps', '1.0.1', '/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(121): wps_maybe_upgrade('wps', '1.0.1', '/wordpress/wp-c...')
+#6 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(142): wps_init()
+#7 /wordpress/wp-content/plugins/wp-optimizer/inc/wps_and_constants.php(37): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/wp-optimizer/wp-optimizer.php(23): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-optimizer/wp...')
+#11 /internal/eval.php(20): activate_plugin('wp-optimizer/wp...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_wps_core ADD UNIQUE speeder_container (container, item, obj_id) USING BTREE; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-optimizer/wp-optimizer.php'), require_once('/plugins/wp-optimizer/inc/wps_and_constants.php'), require_once('/plugins/wp-optimizer/vendors/wps-framework/loader.php'), wps_init, wps_maybe_upgrade, wps_run_upgrade, WPS\core\UtilEnv::handle_upgrade, require_once('/plugins/wp-optimizer/vendors/wps-framework/upgrades/1.0.0.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 22:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-                UPDATE wp_wph_unpaid_time_records utr
-                INNER JOIN wp_usermeta clientProduct ON (utr.clientId = clientProduct.user_id AND clientProduct.meta_key = 'customer_woo_prod_id')
-                LEFT JOIN wp_postmeta taskProduct ON (utr.taskId = taskProduct.post_id AND taskProduct.meta_key = 'hourly_rate_product')
-                LEFT JOIN wp_postmeta projectProduct ON (utr.projectId = projectProduct.post_id AND projectProduct.meta_key = 'hourly_rate_product')
-                LEFT JOIN wp_options options ON (options.option_name = 'wph_global_prod_id')
-                SET
-                    utr.productId = CASE
-                        WHEN taskProduct.meta_id AND taskProduct.meta_value != '' THEN taskProduct.meta_value
-                        WHEN projectProduct.meta_id AND projectProduct.meta_value != '' THEN projectProduct.meta_value
-                        WHEN clientProduct.umeta_id AND clientProduct.meta_value != '' THEN clientProduct.meta_value
-                        WHEN options.option_id AND options.option_value != '' THEN options.option_value
-                        ELSE NULL
-                    END
-                WHERE utr.productId IS NULL
-            </p>
+<p>ALTER TABLE wp_wpopt ADD UNIQUE speeder (context, item, obj_id) USING BTREE;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wph_unpaid_time_records` `utr` INNER JOIN `wp_usermeta` `clientProduct` ON ( `utr`.`clientId` = `clientProduct`.`user_id` AND `clientProduct`.`meta_key` = 'customer_woo_prod_id' ) LEFT JOIN `wp_postmeta` `taskProduct` ON ( `utr`.`taskId` = `taskProduct`.`post_id` AND `taskProduct`.`meta_key` = 'hourly_rate_product' ) LEFT JOIN `wp_postmeta` `projectProduct` ON ( `utr`.`projectId` = `projectProduct`.`post_id` AND `projectProduct`.`meta_key` = 'hourly_rate_product' ) LEFT JOIN `wp_options` `options` ON ( `options`.`option_name` = 'wph_global_prod_id' </li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_wph_unpaid_time_records` `utr` INNER JOIN `wp_usermeta` `clientProduct` ON ( `utr`.`clientId` = `clientProduct`.`user_id` AND `clientProduct`.`meta_key` = 'customer_woo_prod_id' ) LEFT JOIN `wp_postmeta` `taskProduct` ON ( `utr`.`taskId` = `taskProduct`.`post_id` AND `taskProduct`.`meta_key` = 'hourly_rate_product' ) LEFT JOIN `wp_postmeta` `projectProduct` ON ( `utr`.`projectId` = `projectProduct`.`post_id` AND `projectProduct`.`meta_key` = 'hourly_rate_product' ) LEFT JOIN `wp_options` `options` ON ( `options`.`option_name` = 'wph_global_prod_id' </li>
-<li>Executing: UPDATE `wp_wph_unpaid_time_records` `utr` INNER JOIN `wp_usermeta` `clientProduct` ON ( `utr`.`clientId` = `clientProduct`.`user_id` AND `clientProduct`.`meta_key` = 'customer_woo_prod_id' ) LEFT JOIN `wp_postmeta` `taskProduct` ON ( `utr`.`taskId` = `taskProduct`.`post_id` AND `taskProduct`.`meta_key` = 'hourly_rate_product' ) LEFT JOIN `wp_postmeta` `projectProduct` ON ( `utr`.`projectId` = `projectProduct`.`post_id` AND `projectProduct`.`meta_key` = 'hourly_rate_product' ) LEFT JOIN `wp_options` `options` ON ( `options`.`option_name` = 'wph_global_prod_id' ) SET `utr`.`productId` = CASE WHEN `taskProduct`.`meta_id` AND `taskProduct`.`meta_value` != '' THEN `taskProduct`.`meta_value` WHEN `projectProduct`.`meta_id` AND `projectProduct`.`meta_value` != '' THEN `projectProduct`.`meta_value` WHEN `clientProduct`.`umeta_id` AND `clientProduct`.`meta_value` != '' THEN `clientProduct`.`meta_value` WHEN `options`.`option_id` AND `options`.`option_value` != '' THEN `options`.`option_value` ELSE NULL END WHERE `utr`.`productId` IS NULL | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wpopt, wp_wpopt__speeder, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_wpopt__speeder&quot; ON &quot;wp_wpopt&quot; ( `context`, `item`, `obj_id`) USING BTREE; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "`utr`": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "USING": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_2_0Migration.php(202): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_2_0Migration->run()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(78): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(41): WPS\core\Options->maybe_create_options_table()
+#3 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/wps_wrapper.php(86): WPS\core\Options->__construct('wpopt', 'wp_wpopt')
+#4 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(84): WPS\core\wps_wrapper->setup()
+#5 /wordpress/wp-content/plugins/wp-optimizer/inc/wps_and_constants.php(41): wps('wpopt', Array, Array)
+#6 /wordpress/wp-content/plugins/wp-optimizer/wp-optimizer.php(23): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-optimizer/wp...')
+#9 /internal/eval.php(20): activate_plugin('wp-optimizer/wp...')
 #10 {main}</pre>
- for query 
-                UPDATE wp_wph_unpaid_time_records utr
-                INNER JOIN wp_usermeta clientProduct ON (utr.clientId = clientProduct.user_id AND clientProduct.meta_key = 'customer_woo_prod_id')
-                LEFT JOIN wp_postmeta taskProduct ON (utr.taskId = taskProduct.post_id AND taskProduct.meta_key = 'hourly_rate_product')
-                LEFT JOIN wp_postmeta projectProduct ON (utr.projectId = projectProduct.post_id AND projectProduct.meta_key = 'hourly_rate_product')
-                LEFT JOIN wp_options options ON (options.option_name = 'wph_global_prod_id')
-                SET
-                    utr.productId = CASE
-                        WHEN taskProduct.meta_id AND taskProduct.meta_value != '' THEN taskProduct.meta_value
-                        WHEN projectProduct.meta_id AND projectProduct.meta_value != '' THEN projectProduct.meta_value
-                        WHEN clientProduct.umeta_id AND clientProduct.meta_value != '' THEN clientProduct.meta_value
-                        WHEN options.option_id AND options.option_value != '' THEN options.option_value
-                        ELSE NULL
-                    END
-                WHERE utr.productId IS NULL
-             made by activate_plugin, do_action('activate_wp-hourly/wp-hourly.php'), WP_Hook->do_action, WP_Hook->apply_filters, wphMigrateIfNeeded, V1_2_0Migration->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 07:50:10 UTC] PHP Warning:  Undefined array key "timeRecords`.`hourlyRate" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3105
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3106
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3107
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3108
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_wpopt ADD UNIQUE speeder (context, item, obj_id) USING BTREE; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-optimizer/wp-optimizer.php'), require_once('/plugins/wp-optimizer/inc/wps_and_constants.php'), wps, WPS\core\wps_wrapper->setup, WPS\core\Options->__construct, WPS\core\Options->maybe_create_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 22:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-                UPDATE wp_wph_unpaid_time_records timeRecords
-                INNER JOIN wp_postmeta product ON (product.post_id = timeRecords.productId AND product.meta_key = 'hourly_rate_product')
-                INNER JOIN wp_postmeta pm ON (pm.post_id = product.post_id AND pm.meta_key = '_regular_price')
-                SET timeRecords.hourlyRate = pm.meta_value
-            </p>
+<p>ALTER TABLE wp_wpopt ADD UNIQUE speeder_container (container, item, obj_id) USING BTREE;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wph_unpaid_time_records` `timeRecords` INNER JOIN `wp_postmeta` `product` ON ( `product`.`post_id` = `timeRecords`.`productId` AND `product`.`meta_key` = 'hourly_rate_product' ) INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`post_id` = `product`.`post_id` AND `pm`.`meta_key` = '_regular_price' </li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_wph_unpaid_time_records` `timeRecords` INNER JOIN `wp_postmeta` `product` ON ( `product`.`post_id` = `timeRecords`.`productId` AND `product`.`meta_key` = 'hourly_rate_product' ) INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`post_id` = `product`.`post_id` AND `pm`.`meta_key` = '_regular_price' </li>
-<li>Executing: UPDATE `wp_wph_unpaid_time_records` `timeRecords` INNER JOIN `wp_postmeta` `product` ON ( `product`.`post_id` = `timeRecords`.`productId` AND `product`.`meta_key` = 'hourly_rate_product' ) INNER JOIN `wp_postmeta` `pm` ON ( `pm`.`post_id` = `product`.`post_id` AND `pm`.`meta_key` = '_regular_price' ) SET `timeRecords`.`hourlyRate` = `pm`.`meta_value` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wpopt, wp_wpopt__speeder_container, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_wpopt__speeder_container&quot; ON &quot;wp_wpopt&quot; ( `container`, `item`, `obj_id`) USING BTREE; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "`timeRecords`": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "USING": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_2_0Migration.php(210): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_2_0Migration->run()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(79): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/Options.class.php(41): WPS\core\Options->maybe_create_options_table()
+#3 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/wps_wrapper.php(86): WPS\core\Options->__construct('wpopt', 'wp_wpopt')
+#4 /wordpress/wp-content/plugins/wp-optimizer/vendors/wps-framework/loader.php(84): WPS\core\wps_wrapper->setup()
+#5 /wordpress/wp-content/plugins/wp-optimizer/inc/wps_and_constants.php(41): wps('wpopt', Array, Array)
+#6 /wordpress/wp-content/plugins/wp-optimizer/wp-optimizer.php(23): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-optimizer/wp...')
+#9 /internal/eval.php(20): activate_plugin('wp-optimizer/wp...')
 #10 {main}</pre>
- for query 
-                UPDATE wp_wph_unpaid_time_records timeRecords
-                INNER JOIN wp_postmeta product ON (product.post_id = timeRecords.productId AND product.meta_key = 'hourly_rate_product')
-                INNER JOIN wp_postmeta pm ON (pm.post_id = product.post_id AND pm.meta_key = '_regular_price')
-                SET timeRecords.hourlyRate = pm.meta_value
-             made by activate_plugin, do_action('activate_wp-hourly/wp-hourly.php'), WP_Hook->do_action, WP_Hook->apply_filters, wphMigrateIfNeeded, V1_2_0Migration->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 07:50:10 UTC] PHP Warning:  Undefined array key "utr`.`recordId" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3105
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3106
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3107
-[07-May-2025 07:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3108
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                UPDATE wp_wph_unpaid_time_records utr
-                INNER JOIN wp_wph_time_records tr ON (tr.wp_post_id = utr.recordId)
-                SET utr.recordId = tr.id
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wph_unpaid_time_records` `utr` INNER JOIN `wp_wph_time_records` `tr` ON ( `tr`.`wp_post_id` = `utr`.`recordId` </li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_wph_unpaid_time_records` `utr` INNER JOIN `wp_wph_time_records` `tr` ON ( `tr`.`wp_post_id` = `utr`.`recordId` </li>
-<li>Executing: UPDATE `wp_wph_unpaid_time_records` `utr` INNER JOIN `wp_wph_time_records` `tr` ON ( `tr`.`wp_post_id` = `utr`.`recordId` ) SET `utr`.`recordId` = `tr`.`id` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "`utr`": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_2_0Migration.php(266): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_2_0Migration->run()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
-#10 {main}</pre>
- for query 
-                UPDATE wp_wph_unpaid_time_records utr
-                INNER JOIN wp_wph_time_records tr ON (tr.wp_post_id = utr.recordId)
-                SET utr.recordId = tr.id
-             made by activate_plugin, do_action('activate_wp-hourly/wp-hourly.php'), WP_Hook->do_action, WP_Hook->apply_filters, wphMigrateIfNeeded, V1_2_0Migration->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_wph_projects
-                DROP INDEX `wp_post_id`
-                DROP `wp_post_id`
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_2_0Migration.php(274): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_2_0Migration->run()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
-#10 {main}</pre>
- for query 
-                ALTER TABLE wp_wph_projects
-                DROP INDEX `wp_post_id`
-                DROP `wp_post_id`
-             made by activate_plugin, do_action('activate_wp-hourly/wp-hourly.php'), WP_Hook->do_action, WP_Hook->apply_filters, wphMigrateIfNeeded, V1_2_0Migration->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_wph_tasks
-                DROP INDEX `wp_post_id`
-                DROP `wp_post_id`
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_2_0Migration.php(280): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_2_0Migration->run()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
-#10 {main}</pre>
- for query 
-                ALTER TABLE wp_wph_tasks
-                DROP INDEX `wp_post_id`
-                DROP `wp_post_id`
-             made by activate_plugin, do_action('activate_wp-hourly/wp-hourly.php'), WP_Hook->do_action, WP_Hook->apply_filters, wphMigrateIfNeeded, V1_2_0Migration->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 07:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_wph_time_records
-                DROP INDEX `wp_post_id`
-                DROP `wp_post_id`
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-content/plugins/wp-hourly/migrations/V1_2_0Migration.php(286): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/wp-hourly/migrations/migration-runner.php(24): V1_2_0Migration->run()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wphMigrateIfNeeded(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-hou...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-hourly/wp-ho...')
-#10 {main}</pre>
- for query 
-                ALTER TABLE wp_wph_time_records
-                DROP INDEX `wp_post_id`
-                DROP `wp_post_id`
-             made by activate_plugin, do
+ for query ALTER TABLE wp_wpopt ADD UNIQUE speeder_container (container, item, obj_id) USING BTREE; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-optimizer/wp-optimizer.php'), require_once('/plugins/wp-optimizer/inc/wps_and_constants.php'), wps, WPS\core\wps_wrapper->setup, WPS\core\Options->__construct, WPS\core\Options->maybe_create_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 22:51:24 UTC] PHP Deprecated:  Required parameter $req_method follows optional parameter $data in /wordpress/wp-content/plugins/wpshop/core/external/eo-framework/modules/wpeo-model/class/data.class.php on line 68
+[08-May-2025 22:51:25 UTC] PHP Deprecated:  Required parameter $req_method follows optional parameter $data in /wordpress/wp-content/plugins/wpshop/core/external/eo-framework/modules/wpeo-model/class/data.class.php on line 68
+[08-May-2025 22:51:38 UTC] PHP Deprecated:  Required parameter $req_method follows optional parameter $data in /wordpress/wp-content/plugins/wpshop/core/external/eo-framework/modules/wpeo-model/class/data.class.php on line 68
+[08-May-2025 22:51:39 UTC] PHP Deprecated:  Required parameter $req_method follows optional parameter $data in /wordpress/wp-content/plugins/wpshop/core/external/eo-framework/modules/wpeo-model/class/data.class.php on line 68
+[08-May-2025 22:51:53 UTC] PHP Deprecated:  Required parameter $req_method follows optional parameter $data in /wordpress/wp-content/plugins/wpshop/core/external/eo-framework/modules/wpeo-model/class/data.class.php on line 68
+[08-May-2025 22:51:55 UTC] PHP Deprecated:  Required parameter $req_method follows optional parameter $data in /wordpress/wp-content/plugins/wpshop/core/external/eo-framework/modules/wpeo-model/class/data.class.php on line 68
+[08-May-2025 22:53:02 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wb-portfolio</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[08-May-2025 22:53:10 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wb-portfolio</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[08-May-2025 22:53:17 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wb-portfolio</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[08-May-2025 22:53:52 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wd_widgets_head" in /wordpress/wp-content/plugins/widgetized-admin-dashboard/widgetizeddashboard.php:454
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('widgetized-admi...')
+#2 /internal/eval.php(20): activate_plugin('widgetized-admi...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/widgetized-admin-dashboard/widgetizeddashboard.php on line 454
+[08-May-2025 22:54:00 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wd_widgets_head" in /wordpress/wp-content/plugins/widgetized-admin-dashboard/widgetizeddashboard.php:454
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('widgetized-admi...')
+#2 /internal/eval.php(20): activate_plugin('widgetized-admi...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/widgetized-admin-dashboard/widgetizeddashboard.php on line 454
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"widgetized-admin-dashboard"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      ... 2 lines matching cause stack trace ...
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
+        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
+        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
 Node.js v23.11.0
