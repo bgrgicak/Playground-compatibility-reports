@@ -2,36 +2,12 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [07-May-2025 02:27:48 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Pwt_Widget')
-#2 /wordpress/wp-content/plugins/pay-with-a-tweet/inc/widget.php(32): register_widget('Pwt_Widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): pwt_widgets_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[07-May-2025 02:27:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [08-May-2025 16:34:31 UTC] PHP Deprecated:  Required parameter $license follows optional parameter $transactionNumber in /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/vendor/labs64/netlicensingclient-php/service/LicenseService.php on line 47
+[08-May-2025 16:34:31 UTC] PHP Deprecated:  Required parameter $license follows optional parameter $transactionNumber in /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/vendor/labs64/netlicensingclient-php/service/LicenseService.php on line 165
+[08-May-2025 16:34:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_pwt_button (
-        id int(10) NOT NULL AUTO_INCREMENT,
-        time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-        name VARCHAR(255) DEFAULT '' NOT NULL,
-        message VARCHAR(255) DEFAULT '' NOT NULL,
-        download VARCHAR(255) DEFAULT '' NOT NULL,
-        image VARCHAR(255) DEFAULT '' NOT NULL,
-        PRIMARY KEY id (id)
-    )</p>
+<p>CREATE UNIQUE INDEX pluginpass_pl_number ON wp_pluginpass_plugins (product_number)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -39,38 +15,39 @@ Stack trace:
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/pay-with-a-tweet/inc/install.php(62): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): pwt_install(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pay-wi...', false)
-#7 /internal/eval.php(20): activate_plugin('pay-with-a-twee...')
-#8 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_pwt_button (
-        id int(10) NOT NULL AUTO_INCREMENT,
-        time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-        name VARCHAR(255) DEFAULT '' NOT NULL,
-        message VARCHAR(255) DEFAULT '' NOT NULL,
-        download VARCHAR(255) DEFAULT '' NOT NULL,
-        image VARCHAR(255) DEFAULT '' NOT NULL,
-        PRIMARY KEY id (id)
-    ) made by activate_plugin, do_action('activate_pay-with-a-tweet/pay-with-a-tweet.php'), WP_Hook->do_action, WP_Hook->apply_filters, pwt_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 02:27:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(848): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE UNIQUE I...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE UNIQUE I...')
+#4 /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/inc/core/class-activator.php(72): WP_SQLite_DB->query('CREATE UNIQUE I...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): PluginPass\Inc\Core\Activator::activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_plugin...', false)
+#9 /internal/eval.php(20): activate_plugin('pluginpass-pro-...')
+#10 {main}</pre>
+ for query CREATE UNIQUE INDEX pluginpass_pl_number ON wp_pluginpass_plugins (product_number) made by activate_plugin, do_action('activate_pluginpass-pro-plugintheme-licensing/pluginpass.php'), WP_Hook->do_action, WP_Hook->apply_filters, PluginPass\Inc\Core\Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 16:34:33 UTC] PHP Deprecated:  Required parameter $license follows optional parameter $transactionNumber in /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/vendor/labs64/netlicensingclient-php/service/LicenseService.php on line 47
+[08-May-2025 16:34:33 UTC] PHP Deprecated:  Required parameter $license follows optional parameter $transactionNumber in /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/vendor/labs64/netlicensingclient-php/service/LicenseService.php on line 165
+[08-May-2025 16:34:40 UTC] PHP Deprecated:  Required parameter $license follows optional parameter $transactionNumber in /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/vendor/labs64/netlicensingclient-php/service/LicenseService.php on line 47
+[08-May-2025 16:34:40 UTC] PHP Deprecated:  Required parameter $license follows optional parameter $transactionNumber in /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/vendor/labs64/netlicensingclient-php/service/LicenseService.php on line 165
+[08-May-2025 16:34:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_pwt_button_stats (
-        id int(10) NOT NULL AUTO_INCREMENT,
-        bid int(10) NOT NULL,
-        time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-        name VARCHAR(255) DEFAULT '' NOT NULL,
-        PRIMARY KEY id (id),
-        KEY bid (bid)
-    )</p>
+<p>CREATE TABLE wp_pluginpass_plugins (
+			ID bigint(20) NOT NULL AUTO_INCREMENT,
+			plugin_folder varchar(255) NOT NULL,
+			product_number varchar(255) NOT NULL,
+			api_key varchar(255) NOT NULL,
+			consented_at timestamp NULL DEFAULT NULL,
+			validated_at timestamp NULL DEFAULT NULL,
+			expires_ttl_at timestamp NULL DEFAULT NULL,
+			validation_result json DEFAULT NULL,
+			PRIMARY KEY (ID)
+		) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -78,56 +55,33 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/pay-with-a-tweet/inc/install.php(63): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): pwt_install(false)
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/inc/core/class-activator.php(58): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): PluginPass\Inc\Core\Activator::activate(false)
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pay-wi...', false)
-#7 /internal/eval.php(20): activate_plugin('pay-with-a-twee...')
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_plugin...', false)
+#7 /internal/eval.php(20): activate_plugin('pluginpass-pro-...')
 #8 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_pwt_button_stats (
-        id int(10) NOT NULL AUTO_INCREMENT,
-        bid int(10) NOT NULL,
-        time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-        name VARCHAR(255) DEFAULT '' NOT NULL,
-        PRIMARY KEY id (id),
-        KEY bid (bid)
-    ) made by activate_plugin, do_action('activate_pay-with-a-tweet/pay-with-a-tweet.php'), WP_Hook->do_action, WP_Hook->apply_filters, pwt_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 02:27:56 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Pwt_Widget')
-#2 /wordpress/wp-content/plugins/pay-with-a-tweet/inc/widget.php(32): register_widget('Pwt_Widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): pwt_widgets_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[07-May-2025 02:28:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE wp_pluginpass_plugins (
+			ID bigint(20) NOT NULL AUTO_INCREMENT,
+			plugin_folder varchar(255) NOT NULL,
+			product_number varchar(255) NOT NULL,
+			api_key varchar(255) NOT NULL,
+			consented_at timestamp NULL DEFAULT NULL,
+			validated_at timestamp NULL DEFAULT NULL,
+			expires_ttl_at timestamp NULL DEFAULT NULL,
+			validation_result json DEFAULT NULL,
+			PRIMARY KEY (ID)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_pluginpass-pro-plugintheme-licensing/pluginpass.php'), WP_Hook->do_action, WP_Hook->apply_filters, PluginPass\Inc\Core\Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 16:34:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_pwt_button (
-        id int(10) NOT NULL AUTO_INCREMENT,
-        time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-        name VARCHAR(255) DEFAULT '' NOT NULL,
-        message VARCHAR(255) DEFAULT '' NOT NULL,
-        download VARCHAR(255) DEFAULT '' NOT NULL,
-        image VARCHAR(255) DEFAULT '' NOT NULL,
-        PRIMARY KEY id (id)
-    )</p>
+<p>CREATE UNIQUE INDEX pluginpass_pl_number ON wp_pluginpass_plugins (product_number)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -135,38 +89,36 @@ Stack trace:
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: UNIQUE INDEX.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/pay-with-a-tweet/inc/install.php(62): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): pwt_install(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pay-wi...', false)
-#7 /internal/eval.php(20): activate_plugin('pay-with-a-twee...')
-#8 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_pwt_button (
-        id int(10) NOT NULL AUTO_INCREMENT,
-        time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-        name VARCHAR(255) DEFAULT '' NOT NULL,
-        message VARCHAR(255) DEFAULT '' NOT NULL,
-        download VARCHAR(255) DEFAULT '' NOT NULL,
-        image VARCHAR(255) DEFAULT '' NOT NULL,
-        PRIMARY KEY id (id)
-    ) made by activate_plugin, do_action('activate_pay-with-a-tweet/pay-with-a-tweet.php'), WP_Hook->do_action, WP_Hook->apply_filters, pwt_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 02:28:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/inc/core/class-activator.php(72): WP_SQLite_DB->query('CREATE UNIQUE I...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): PluginPass\Inc\Core\Activator::activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_plugin...', false)
+#6 /internal/eval.php(20): activate_plugin('pluginpass-pro-...')
+#7 {main}</pre>
+ for query CREATE UNIQUE INDEX pluginpass_pl_number ON wp_pluginpass_plugins (product_number) made by activate_plugin, do_action('activate_pluginpass-pro-plugintheme-licensing/pluginpass.php'), WP_Hook->do_action, WP_Hook->apply_filters, PluginPass\Inc\Core\Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 16:34:41 UTC] PHP Deprecated:  Required parameter $license follows optional parameter $transactionNumber in /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/vendor/labs64/netlicensingclient-php/service/LicenseService.php on line 47
+[08-May-2025 16:34:41 UTC] PHP Deprecated:  Required parameter $license follows optional parameter $transactionNumber in /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/vendor/labs64/netlicensingclient-php/service/LicenseService.php on line 165
+[08-May-2025 16:34:50 UTC] PHP Deprecated:  Required parameter $license follows optional parameter $transactionNumber in /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/vendor/labs64/netlicensingclient-php/service/LicenseService.php on line 47
+[08-May-2025 16:34:50 UTC] PHP Deprecated:  Required parameter $license follows optional parameter $transactionNumber in /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/vendor/labs64/netlicensingclient-php/service/LicenseService.php on line 165
+[08-May-2025 16:34:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_pwt_button_stats (
-        id int(10) NOT NULL AUTO_INCREMENT,
-        bid int(10) NOT NULL,
-        time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-        name VARCHAR(255) DEFAULT '' NOT NULL,
-        PRIMARY KEY id (id),
-        KEY bid (bid)
-    )</p>
+<p>CREATE TABLE wp_pluginpass_plugins (
+			ID bigint(20) NOT NULL AUTO_INCREMENT,
+			plugin_folder varchar(255) NOT NULL,
+			product_number varchar(255) NOT NULL,
+			api_key varchar(255) NOT NULL,
+			consented_at timestamp NULL DEFAULT NULL,
+			validated_at timestamp NULL DEFAULT NULL,
+			expires_ttl_at timestamp NULL DEFAULT NULL,
+			validation_result json DEFAULT NULL,
+			PRIMARY KEY (ID)
+		) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -174,103 +126,501 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/pay-with-a-tweet/inc/install.php(63): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): pwt_install(false)
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/inc/core/class-activator.php(58): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): PluginPass\Inc\Core\Activator::activate(false)
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pay-wi...', false)
-#7 /internal/eval.php(20): activate_plugin('pay-with-a-twee...')
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_plugin...', false)
+#7 /internal/eval.php(20): activate_plugin('pluginpass-pro-...')
 #8 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_pwt_button_stats (
-        id int(10) NOT NULL AUTO_INCREMENT,
-        bid int(10) NOT NULL,
-        time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-        name VARCHAR(255) DEFAULT '' NOT NULL,
-        PRIMARY KEY id (id),
-        KEY bid (bid)
-    ) made by activate_plugin, do_action('activate_pay-with-a-tweet/pay-with-a-tweet.php'), WP_Hook->do_action, WP_Hook->apply_filters, pwt_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 02:28:05 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+ for query CREATE TABLE wp_pluginpass_plugins (
+			ID bigint(20) NOT NULL AUTO_INCREMENT,
+			plugin_folder varchar(255) NOT NULL,
+			product_number varchar(255) NOT NULL,
+			api_key varchar(255) NOT NULL,
+			consented_at timestamp NULL DEFAULT NULL,
+			validated_at timestamp NULL DEFAULT NULL,
+			expires_ttl_at timestamp NULL DEFAULT NULL,
+			validation_result json DEFAULT NULL,
+			PRIMARY KEY (ID)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_pluginpass-pro-plugintheme-licensing/pluginpass.php'), WP_Hook->do_action, WP_Hook->apply_filters, PluginPass\Inc\Core\Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 16:34:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE UNIQUE INDEX pluginpass_pl_number ON wp_pluginpass_plugins (product_number)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: UNIQUE INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/inc/core/class-activator.php(72): WP_SQLite_DB->query('CREATE UNIQUE I...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): PluginPass\Inc\Core\Activator::activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_plugin...', false)
+#6 /internal/eval.php(20): activate_plugin('pluginpass-pro-...')
+#7 {main}</pre>
+ for query CREATE UNIQUE INDEX pluginpass_pl_number ON wp_pluginpass_plugins (product_number) made by activate_plugin, do_action('activate_pluginpass-pro-plugintheme-licensing/pluginpass.php'), WP_Hook->do_action, WP_Hook->apply_filters, PluginPass\Inc\Core\Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 16:34:51 UTC] PHP Deprecated:  Required parameter $license follows optional parameter $transactionNumber in /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/vendor/labs64/netlicensingclient-php/service/LicenseService.php on line 47
+[08-May-2025 16:34:51 UTC] PHP Deprecated:  Required parameter $license follows optional parameter $transactionNumber in /wordpress/wp-content/plugins/pluginpass-pro-plugintheme-licensing/vendor/labs64/netlicensingclient-php/service/LicenseService.php on line 165
+[08-May-2025 16:37:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pro3x-easy-slides/pro3x-easy-slides.php:114
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Pwt_Widget')
-#2 /wordpress/wp-content/plugins/pay-with-a-tweet/inc/widget.php(32): register_widget('Pwt_Widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): pwt_widgets_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[07-May-2025 02:28:41 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>stripe_frontend</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 02:28:41 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method pra_paypal::init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pro3x-easy-slid...')
+#2 /internal/eval.php(20): activate_plugin('pro3x-easy-slid...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/pro3x-easy-slides/pro3x-easy-slides.php on line 114
+[08-May-2025 16:37:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pro3x-easy-slides/pro3x-easy-slides.php:114
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-settings.php(727): do_action('init')
-#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#6 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pro3x-easy-slid...')
+#2 /internal/eval.php(20): activate_plugin('pro3x-easy-slid...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/pro3x-easy-slides/pro3x-easy-slides.php on line 114
+[08-May-2025 16:37:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pro3x-easy-slides/pro3x-easy-slides.php:114
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pro3x-easy-slid...')
+#2 /internal/eval.php(20): activate_plugin('pro3x-easy-slid...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/pro3x-easy-slides/pro3x-easy-slides.php on line 114
+[08-May-2025 16:38:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/profile-pic/profile-pic.php on line 24
+[08-May-2025 16:38:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/profile-pic/profile-pic.php on line 28
+[08-May-2025 16:38:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_editable_user_ids() in /wordpress/wp-content/plugins/profile-pic/profile-pic.php:319
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): profilepic_internal_init(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_profil...', false)
+#4 /internal/eval.php(20): activate_plugin('profile-pic/pro...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/profile-pic/profile-pic.php on line 319
+[08-May-2025 16:39:04 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/profile-pic/profile-pic.php on line 24
+[08-May-2025 16:39:04 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/profile-pic/profile-pic.php on line 28
+[08-May-2025 16:39:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_editable_user_ids() in /wordpress/wp-content/plugins/profile-pic/profile-pic.php:319
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): profilepic_internal_init(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_profil...', false)
+#4 /internal/eval.php(20): activate_plugin('profile-pic/pro...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/profile-pic/profile-pic.php on line 319
+[08-May-2025 16:39:12 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/profile-pic/profile-pic.php on line 24
+[08-May-2025 16:39:12 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/profile-pic/profile-pic.php on line 28
+[08-May-2025 16:39:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_editable_user_ids() in /wordpress/wp-content/plugins/profile-pic/profile-pic.php:319
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): profilepic_internal_init(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_profil...', false)
+#4 /internal/eval.php(20): activate_plugin('profile-pic/pro...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/profile-pic/profile-pic.php on line 319
+[08-May-2025 16:41:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(85): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#14 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#15 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 16:41:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(104): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#15 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#16 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 16:41:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(189): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(160): PGI\Module\PGModule\Services\Handlers\SetupHandler->fire('install', '4.10.2')
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(106): PGI\Module\PGModule\Services\Handlers\SetupHandler->install()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#14 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#17 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#18 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->install, PGI\Module\PGModule\Services\Handlers\SetupHandler->fire, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 16:41:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#2 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(85): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#12 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#13 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 16:41:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#2 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(104): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#13 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#14 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 16:41:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#2 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(189): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(160): PGI\Module\PGModule\Services\Handlers\SetupHandler->fire('install', '4.10.2')
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(106): PGI\Module\PGModule\Services\Handlers\SetupHandler->install()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#15 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#16 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->install, PGI\Module\PGModule\Services\Handlers\SetupHandler->fire, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 16:41:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_paygreen_transaction_locks`
+    ADD UNIQUE (`pid`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_paygreen_transaction_locks, wp_paygreen_transaction_locks__(, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_paygreen_transaction_locks__(&quot; ON &quot;wp_paygreen_transaction_locks&quot; () | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGDatabase/Services/Handlers/DatabaseHandler.php(155): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGDatabase/Services/Handlers/DatabaseHandler.php(78): PGI\Module\PGDatabase\Services\Handlers\DatabaseHandler->execute('ALTER TABLE `wp...', Array)
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGDatabase/Services/Listeners/GenericDatabaseRunnerListener.php(63): PGI\Module\PGDatabase\Services\Handlers\DatabaseHandler->runScript('PGPayment:lock/...')
+#5 [internal function]: PGI\Module\PGDatabase\Services\Listeners\GenericDatabaseRunnerListener->listen(Object(PGI\Module\PGModule\Components\Events\Module))
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Broadcaster.php(206): call_user_func(Array, Object(PGI\Module\PGModule\Components\Events\Module))
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Broadcaster.php(161): PGI\Module\PGModule\Services\Broadcaster->callListener(Object(PGI\Module\PGModule\Components\Events\Module), Array)
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(196): PGI\Module\PGModule\Services\Broadcaster->fire(Object(PGI\Module\PGModule\Components\Events\Module))
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(160): PGI\Module\PGModule\Services\Handlers\SetupHandler->fire('install', '4.10.2')
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(106): PGI\Module\PGModule\Services\Handlers\SetupHandler->install()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#14 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#17 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#18 {main}</pre>
+ for query ALTER TABLE `wp_paygreen_transaction_locks`
+    ADD UNIQUE (`pid`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->install, PGI\Module\PGModule\Services\Handlers\SetupHandler->fire, PGI\Module\PGModule\Services\Broadcaster->fire, PGI\Module\PGModule\Services\Broadcaster->callListener, call_user_func, PGI\Module\PGDatabase\Services\Listeners\GenericDatabaseRunnerListener->listen, PGI\Module\PGDatabase\Services\Handlers\DatabaseHandler->runScript, PGI\Module\PGDatabase\Services\Handlers\DatabaseHandler->execute, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 16:41:20 UTC] Error during Paygreen module execution (/wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php#98) : An error occurred during execute sql statement : <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_paygreen_transaction_locks`
+    ADD UNIQUE (`pid`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_paygreen_transaction_locks, wp_paygreen_transaction_locks__(, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_paygreen_transaction_locks__(&quot; ON &quot;wp_paygreen_transaction_locks&quot; () | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGDatabase/Services/Handlers/DatabaseHandler.php(155): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGDatabase/Services/Handlers/DatabaseHandler.php(78): PGI\Module\PGDatabase\Services\Handlers\DatabaseHandler->execute('ALTER TABLE `wp...', Array)
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGDatabase/Services/Listeners/GenericDatabaseRunnerListener.php(63): PGI\Module\PGDatabase\Services\Handlers\DatabaseHandler->runScript('PGPayment:lock/...')
+#5 [internal function]: PGI\Module\PGDatabase\Services\Listeners\GenericDatabaseRunnerListener->listen(Object(PGI\Module\PGModule\Components\Events\Module))
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Broadcaster.php(206): call_user_func(Array, Object(PGI\Module\PGModule\Components\Events\Module))
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Broadcaster.php(161): PGI\Module\PGModule\Services\Broadcaster->callListener(Object(PGI\Module\PGModule\Components\Events\Module), Array)
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(196): PGI\Module\PGModule\Services\Broadcaster->fire(Object(PGI\Module\PGModule\Components\Events\Module))
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(160): PGI\Module\PGModule\Services\Handlers\SetupHandler->fire('install', '4.10.2')
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(106): PGI\Module\PGModule\Services\Handlers\SetupHandler->install()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#14 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#17 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#18 {main}</pre>
 
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-  [cause]: Error: Error when executing the blueprint step #5 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"paypal-frontend-registration"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
-      ... 2 lines matching cause stack trace ...
-      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
-        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
-        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
-        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
-        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-      response: PHPResponse {
-        httpStatusCode: 500,
-        headers: {
-          'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'content-type': [ 'text/html; charset=UTF-8' ],
-          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
-          'cache-control': [ 'no-cache, must-revalidate, max-age=0, no-store, private' ]
-        },
-        bytes: Uint8Array(2653) [
-           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
-          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
-          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
-           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
-           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
-           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
-          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
-           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
-           99, 104,  97, 114,
-          ... 2553 more items
-        ],
-        exitCode: 255,
-        errors: ''
-      },
-      source: 'request'
-    }
-  }
-}
-
-Node.js v23.11.0
+[08-May-2025 16:41:20 UTC] PHP Fatal error:  Uncaught Exception: An error occurred during execute sql statement : <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_paygreen_transaction_locks`
+    ADD UNIQUE (`pid`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_paygreen_transaction_locks, wp_paygreen_transaction_locks__(, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_paygreen_transaction_locks__(&quot; ON &quot;wp_paygreen_transaction_locks&quot; () | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGDatabase/Services/Handlers/DatabaseHandler.php(155): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGDatabase/Services/Handlers/DatabaseHandler.php(78): PGI\Module\PGDatabase\Services\Handlers\DatabaseHandler->execute('ALTER TABLE `wp...', Array)
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGDatabase/Services/Listeners/GenericDatabaseRunnerListener.php(63): PGI\Module\PGDatabase\Services\Handlers\DatabaseHandler->runScript('PGPayment:lock/...')
+#5 [internal function]: PGI\Module\PGDatabase\Services\Listeners\GenericDatabaseRunnerListener->listen(Object(PGI\Module\PGModule\Components\Events\Module))
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Broadcaster.php(206): call_user_func(Array, Object(PGI\Module\PGModule\Components\Events\Module))
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Broadcaster.php(161): PGI\Module\PGModule\Services\Broadcaster->callListener(Object(PGI\Module\PGModule\Components\Events\Module), Array)
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(196): PGI\Module\PGModule\Services\Broadcaster->fire(Object(PGI\Module\PGModule\Components\Events\Module))
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(160): PGI\Module\PGModule\Services\Handlers\SetupHandler->fire('install', '4.10.2')
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(106): PGI\Module\PGModule\Services\Handlers\SetupHandler->install()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#14 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#17 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#18 {main}</pre>
+ in /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php:98
+Stack trace:
+#0 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(43): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->verifyErrors()
+#1 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGDatabase/Services/Handlers/DatabaseHandler.php(155): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGDatabase/Services/Handlers/DatabaseHandler.php(78): PGI\Module\PGDatabase\Services\Handlers\DatabaseHandler->execute('ALTER TABLE `wp...', Array)
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGDatabase/Services/Listeners/GenericDatabaseRunnerListener.php(63): PGI\Module\PGDatabase\Services\Handlers\DatabaseHandler->runScript('PGPayment:lock/...')
+#4 [internal function]: PGI\Module\PGDatabase\Services\Listeners\GenericDatabaseRunnerListener->listen(Object(PGI\Module\PGModule\Components\Events\Module))
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Broadcaster.php(206): call_user_func(Array, Object(PGI\Module\PGModule\Components\Events\Module))
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Broadcaster.php(161): PGI\Module\PGModule\Services\Broadcaster->callListener(Object(PGI\Module\PGModule\Components\Events\Module), Array)
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(196): PGI\Module\PGModule\Services\Broadcaster->fire(Object(PGI\Module\PGModule\Components\Events\Module))
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(160): PGI\Module\PGModule\Services\Handlers\SetupHandler->fire('install', '4.10.2')
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(106): PGI\Module\PGModule\Services\Handlers\SetupHandler->install()
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#16 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#17 {main}
+  thrown in /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php on line 98
+[08-May-2025 16:41:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#2 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(85): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#12 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#13 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 16:41:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#2 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(104): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#13 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#14 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woo
