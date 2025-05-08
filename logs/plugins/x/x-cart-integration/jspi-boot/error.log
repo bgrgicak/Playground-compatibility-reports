@@ -2,23 +2,34 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [07-May-2025 17:27:09 UTC] api/v1/widget/reg/wordpress
-[07-May-2025 17:27:18 UTC] api/v1/widget/reg/wordpress
-[07-May-2025 17:27:28 UTC] api/v1/widget/reg/wordpress
-[07-May-2025 17:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [08-May-2025 18:57:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_vtables (
-            id int(10) NOT NULL AUTO_INCREMENT,
-            title text NULL DEFAULT NULL,
-            settings json NULL DEFAULT NULL,
-            file_size text NULL DEFAULT NULL,
-            external_source text NULL DEFAULT NULL,
-            created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-            source longtext NULL DEFAULT NULL,
-            PRIMARY KEY (id)
-            ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>INSERT INTO 'prognoza' VALUES (1, 'NemaAPI')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO 'pr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO 'pr...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('INSERT INTO 'pr...')
+#4 /wordpress/wp-content/plugins/vremenska-prognoza/index.php(25): dbDelta(Array)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): VremenskaPrognoza_Aktivacija(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vremen...', false)
+#9 /internal/eval.php(20): activate_plugin('vremenska-progn...')
+#10 {main}</pre>
+ for query INSERT INTO 'prognoza' VALUES (1, 'NemaAPI') made by activate_plugin, do_action('activate_vremenska-prognoza/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, VremenskaPrognoza_Aktivacija, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 18:57:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE `prognoza` ( `id` int(11) NOT NULL auto_increment,  `api_kljuc` varchar(500) NOT NULL,  PRIMARY KEY `id` (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -26,37 +37,48 @@ Error: [07-May-2025 17:27:09 UTC] api/v1/widget/reg/wordpress
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(74): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(62): vTables\Classes\Activator->vtables_run_sql('CREATE TABLE wp...', 'wp_vtables')
-#4 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(40): vTables\Classes\Activator->vtables_create_main_table()
-#5 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(32): vTables\Classes\Activator->vtables_migrate()
-#6 /wordpress/wp-content/plugins/vtables/vtables.php(183): vTables\Classes\Activator->vtables_migrate_databases(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): vTables->{closure}(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vtable...', false)
-#11 /internal/eval.php(20): activate_plugin('vtables/vtables...')
-#12 {main}</pre>
- for query CREATE TABLE wp_vtables (
-            id int(10) NOT NULL AUTO_INCREMENT,
-            title text NULL DEFAULT NULL,
-            settings json NULL DEFAULT NULL,
-            file_size text NULL DEFAULT NULL,
-            external_source text NULL DEFAULT NULL,
-            created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-            source longtext NULL DEFAULT NULL,
-            PRIMARY KEY (id)
-            ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_vtables/vtables.php'), WP_Hook->do_action, WP_Hook->apply_filters, vTables->{closure}, vTables\Classes\Activator->vtables_migrate_databases, vTables\Classes\Activator->vtables_migrate, vTables\Classes\Activator->vtables_create_main_table, vTables\Classes\Activator->vtables_run_sql, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 17:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE `p...')
+#2 /wordpress/wp-content/plugins/vremenska-prognoza/index.php(25): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): VremenskaPrognoza_Aktivacija(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vremen...', false)
+#7 /internal/eval.php(20): activate_plugin('vremenska-progn...')
+#8 {main}</pre>
+ for query CREATE TABLE `prognoza` ( `id` int(11) NOT NULL auto_increment,  `api_kljuc` varchar(500) NOT NULL,  PRIMARY KEY `id` (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 made by activate_plugin, do_action('activate_vremenska-prognoza/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, VremenskaPrognoza_Aktivacija, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 18:57:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>DESC wp_vtables</p>
+<p>INSERT INTO 'prognoza' VALUES (1, 'NemaAPI')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO 'prognoza' VALUES (1, :param0 ) | parameters: NemaAPI</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: prognoza.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('INSERT INTO 'pr...')
+#2 /wordpress/wp-content/plugins/vremenska-prognoza/index.php(25): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): VremenskaPrognoza_Aktivacija(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vremen...', false)
+#7 /internal/eval.php(20): activate_plugin('vremenska-progn...')
+#8 {main}</pre>
+ for query INSERT INTO 'prognoza' VALUES (1, 'NemaAPI') made by activate_plugin, do_action('activate_vremenska-prognoza/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, VremenskaPrognoza_Aktivacija, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 18:57:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE `prognoza` ( `id` int(11) NOT NULL auto_increment,  `api_kljuc` varchar(500) NOT NULL,  PRIMARY KEY `id` (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -64,398 +86,84 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_vtables')
-#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_vtables', 0)
-#3 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(89): maybe_add_column('wp_vtables', 'table_type', 'ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(63): vTables\Classes\Activator->vtables_add_new_column('wp_vtables', 'table_type', 'TEXT')
-#5 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(40): vTables\Classes\Activator->vtables_create_main_table()
-#6 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(32): vTables\Classes\Activator->vtables_migrate()
-#7 /wordpress/wp-content/plugins/vtables/vtables.php(183): vTables\Classes\Activator->vtables_migrate_databases(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(324): vTables->{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vtable...', false)
-#12 /internal/eval.php(20): activate_plugin('vtables/vtables...')
-#13 {main}</pre>
- for query DESC wp_vtables made by activate_plugin, do_action('activate_vtables/vtables.php'), WP_Hook->do_action, WP_Hook->apply_filters, vTables->{closure}, vTables\Classes\Activator->vtables_migrate_databases, vTables\Classes\Activator->vtables_migrate, vTables\Classes\Activator->vtables_create_main_table, vTables\Classes\Activator->vtables_add_new_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 17:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE `p...')
+#2 /wordpress/wp-content/plugins/vremenska-prognoza/index.php(25): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): VremenskaPrognoza_Aktivacija(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vremen...', false)
+#7 /internal/eval.php(20): activate_plugin('vremenska-progn...')
+#8 {main}</pre>
+ for query CREATE TABLE `prognoza` ( `id` int(11) NOT NULL auto_increment,  `api_kljuc` varchar(500) NOT NULL,  PRIMARY KEY `id` (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 made by activate_plugin, do_action('activate_vremenska-prognoza/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, VremenskaPrognoza_Aktivacija, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 18:57:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_vtables ADD table_type TEXT NULL DEFAULT NULL;</p>
+<p>INSERT INTO 'prognoza' VALUES (1, 'NemaAPI')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_vtables, TABLE_TYPE, text</li>
-<li>Executing: ALTER TABLE wp_vtables ADD table_type text NULL DEFAULT NULL; | (no parameters)</li>
+<li>Executing: INSERT INTO 'prognoza' VALUES (1, :param0 ) | parameters: NemaAPI</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vtables.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: prognoza.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(89): maybe_add_column('wp_vtables', 'table_type', 'ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(63): vTables\Classes\Activator->vtables_add_new_column('wp_vtables', 'table_type', 'TEXT')
-#4 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(40): vTables\Classes\Activator->vtables_create_main_table()
-#5 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(32): vTables\Classes\Activator->vtables_migrate()
-#6 /wordpress/wp-content/plugins/vtables/vtables.php(183): vTables\Classes\Activator->vtables_migrate_databases(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): vTables->{closure}(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vtable...', false)
-#11 /internal/eval.php(20): activate_plugin('vtables/vtables...')
-#12 {main}</pre>
- for query ALTER TABLE wp_vtables ADD table_type TEXT NULL DEFAULT NULL; made by activate_plugin, do_action('activate_vtables/vtables.php'), WP_Hook->do_action, WP_Hook->apply_filters, vTables->{closure}, vTables\Classes\Activator->vtables_migrate_databases, vTables\Classes\Activator->vtables_migrate, vTables\Classes\Activator->vtables_create_main_table, vTables\Classes\Activator->vtables_add_new_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 17:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DESC wp_vtables</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_vtables')
-#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_vtables', 0)
-#3 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(89): maybe_add_column('wp_vtables', 'table_type', 'ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(63): vTables\Classes\Activator->vtables_add_new_column('wp_vtables', 'table_type', 'TEXT')
-#5 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(40): vTables\Classes\Activator->vtables_create_main_table()
-#6 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(32): vTables\Classes\Activator->vtables_migrate()
-#7 /wordpress/wp-content/plugins/vtables/vtables.php(183): vTables\Classes\Activator->vtables_migrate_databases(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(324): vTables->{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vtable...', false)
-#12 /internal/eval.php(20): activate_plugin('vtables/vtables...')
-#13 {main}</pre>
- for query DESC wp_vtables made by activate_plugin, do_action('activate_vtables/vtables.php'), WP_Hook->do_action, WP_Hook->apply_filters, vTables->{closure}, vTables\Classes\Activator->vtables_migrate_databases, vTables\Classes\Activator->vtables_migrate, vTables\Classes\Activator->vtables_create_main_table, vTables\Classes\Activator->vtables_add_new_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 17:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DESC wp_vtables</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_vtables')
-#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_vtables', 0)
-#3 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(89): maybe_add_column('wp_vtables', 'woocommerce_cat...', 'ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(64): vTables\Classes\Activator->vtables_add_new_column('wp_vtables', 'woocommerce_cat...', 'JSON')
-#5 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(40): vTables\Classes\Activator->vtables_create_main_table()
-#6 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(32): vTables\Classes\Activator->vtables_migrate()
-#7 /wordpress/wp-content/plugins/vtables/vtables.php(183): vTables\Classes\Activator->vtables_migrate_databases(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(324): vTables->{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vtable...', false)
-#12 /internal/eval.php(20): activate_plugin('vtables/vtables...')
-#13 {main}</pre>
- for query DESC wp_vtables made by activate_plugin, do_action('activate_vtables/vtables.php'), WP_Hook->do_action, WP_Hook->apply_filters, vTables->{closure}, vTables\Classes\Activator->vtables_migrate_databases, vTables\Classes\Activator->vtables_migrate, vTables\Classes\Activator->vtables_create_main_table, vTables\Classes\Activator->vtables_add_new_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 17:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_vtables ADD woocommerce_categories JSON;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(89): maybe_add_column('wp_vtables', 'woocommerce_cat...', 'ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(64): vTables\Classes\Activator->vtables_add_new_column('wp_vtables', 'woocommerce_cat...', 'JSON')
-#4 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(40): vTables\Classes\Activator->vtables_create_main_table()
-#5 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(32): vTables\Classes\Activator->vtables_migrate()
-#6 /wordpress/wp-content/plugins/vtables/vtables.php(183): vTables\Classes\Activator->vtables_migrate_databases(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): vTables->{closure}(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vtable...', false)
-#11 /internal/eval.php(20): activate_plugin('vtables/vtables...')
-#12 {main}</pre>
- for query ALTER TABLE wp_vtables ADD woocommerce_categories JSON; made by activate_plugin, do_action('activate_vtables/vtables.php'), WP_Hook->do_action, WP_Hook->apply_filters, vTables->{closure}, vTables\Classes\Activator->vtables_migrate_databases, vTables\Classes\Activator->vtables_migrate, vTables\Classes\Activator->vtables_create_main_table, vTables\Classes\Activator->vtables_add_new_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 17:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DESC wp_vtables</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_vtables')
-#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_vtables', 0)
-#3 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(89): maybe_add_column('wp_vtables', 'woocommerce_cat...', 'ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(64): vTables\Classes\Activator->vtables_add_new_column('wp_vtables', 'woocommerce_cat...', 'JSON')
-#5 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(40): vTables\Classes\Activator->vtables_create_main_table()
-#6 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(32): vTables\Classes\Activator->vtables_migrate()
-#7 /wordpress/wp-content/plugins/vtables/vtables.php(183): vTables\Classes\Activator->vtables_migrate_databases(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(324): vTables->{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vtable...', false)
-#12 /internal/eval.php(20): activate_plugin('vtables/vtables...')
-#13 {main}</pre>
- for query DESC wp_vtables made by activate_plugin, do_action('activate_vtables/vtables.php'), WP_Hook->do_action, WP_Hook->apply_filters, vTables->{closure}, vTables\Classes\Activator->vtables_migrate_databases, vTables\Classes\Activator->vtables_migrate, vTables\Classes\Activator->vtables_create_main_table, vTables\Classes\Activator->vtables_add_new_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 17:30:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_vtables (
-            id int(10) NOT NULL AUTO_INCREMENT,
-            title text NULL DEFAULT NULL,
-            settings json NULL DEFAULT NULL,
-            file_size text NULL DEFAULT NULL,
-            external_source text NULL DEFAULT NULL,
-            created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-            source longtext NULL DEFAULT NULL,
-            PRIMARY KEY (id)
-            ) DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(74): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(62): vTables\Classes\Activator->vtables_run_sql('CREATE TABLE wp...', 'wp_vtables')
-#4 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(40): vTables\Classes\Activator->vtables_create_main_table()
-#5 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(32): vTables\Classes\Activator->vtables_migrate()
-#6 /wordpress/wp-content/plugins/vtables/vtables.php(183): vTables\Classes\Activator->vtables_migrate_databases(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): vTables->{closure}(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vtable...', false)
-#11 /internal/eval.php(20): activate_plugin('vtables/vtables...')
-#12 {main}</pre>
- for query CREATE TABLE wp_vtables (
-            id int(10) NOT NULL AUTO_INCREMENT,
-            title text NULL DEFAULT NULL,
-            settings json NULL DEFAULT NULL,
-            file_size text NULL DEFAULT NULL,
-            external_source text NULL DEFAULT NULL,
-            created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-            source longtext NULL DEFAULT NULL,
-            PRIMARY KEY (id)
-            ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_vtables/vtables.php'), WP_Hook->do_action, WP_Hook->apply_filters, vTables->{closure}, vTables\Classes\Activator->vtables_migrate_databases, vTables\Classes\Activator->vtables_migrate, vTables\Classes\Activator->vtables_create_main_table, vTables\Classes\Activator->vtables_run_sql, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 17:30:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DESC wp_vtables</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_vtables')
-#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_vtables', 0)
-#3 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(89): maybe_add_column('wp_vtables', 'table_type', 'ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(63): vTables\Classes\Activator->vtables_add_new_column('wp_vtables', 'table_type', 'TEXT')
-#5 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(40): vTables\Classes\Activator->vtables_create_main_table()
-#6 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(32): vTables\Classes\Activator->vtables_migrate()
-#7 /wordpress/wp-content/plugins/vtables/vtables.php(183): vTables\Classes\Activator->vtables_migrate_databases(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(324): vTables->{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vtable...', false)
-#12 /internal/eval.php(20): activate_plugin('vtables/vtables...')
-#13 {main}</pre>
- for query DESC wp_vtables made by activate_plugin, do_action('activate_vtables/vtables.php'), WP_Hook->do_action, WP_Hook->apply_filters, vTables->{closure}, vTables\Classes\Activator->vtables_migrate_databases, vTables\Classes\Activator->vtables_migrate, vTables\Classes\Activator->vtables_create_main_table, vTables\Classes\Activator->vtables_add_new_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 17:30:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_vtables ADD table_type TEXT NULL DEFAULT NULL;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_vtables, TABLE_TYPE, text</li>
-<li>Executing: ALTER TABLE wp_vtables ADD table_type text NULL DEFAULT NULL; | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vtables.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(89): maybe_add_column('wp_vtables', 'table_type', 'ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(63): vTables\Classes\Activator->vtables_add_new_column('wp_vtables', 'table_type', 'TEXT')
-#4 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(40): vTables\Classes\Activator->vtables_create_main_table()
-#5 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(32): vTables\Classes\Activator->vtables_migrate()
-#6 /wordpress/wp-content/plugins/vtables/vtables.php(183): vTables\Classes\Activator->vtables_migrate_databases(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): vTables->{closure}(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vtable...', false)
-#11 /internal/eval.php(20): activate_plugin('vtables/vtables...')
-#12 {main}</pre>
- for query ALTER TABLE wp_vtables ADD table_type TEXT NULL DEFAULT NULL; made by activate_plugin, do_action('activate_vtables/vtables.php'), WP_Hook->do_action, WP_Hook->apply_filters, vTables->{closure}, vTables\Classes\Activator->vtables_migrate_databases, vTables\Classes\Activator->vtables_migrate, vTables\Classes\Activator->vtables_create_main_table, vTables\Classes\Activator->vtables_add_new_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 17:30:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DESC wp_vtables</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_vtables')
-#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_vtables', 0)
-#3 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(89): maybe_add_column('wp_vtables', 'table_type', 'ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(63): vTables\Classes\Activator->vtables_add_new_column('wp_vtables', 'table_type', 'TEXT')
-#5 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(40): vTables\Classes\Activator->vtables_create_main_table()
-#6 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(32): vTables\Classes\Activator->vtables_migrate()
-#7 /wordpress/wp-content/plugins/vtables/vtables.php(183): vTables\Classes\Activator->vtables_migrate_databases(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(324): vTables->{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vtable...', false)
-#12 /internal/eval.php(20): activate_plugin('vtables/vtables...')
-#13 {main}</pre>
- for query DESC wp_vtables made by activate_plugin, do_action('activate_vtables/vtables.php'), WP_Hook->do_action, WP_Hook->apply_filters, vTables->{closure}, vTables\Classes\Activator->vtables_migrate_databases, vTables\Classes\Activator->vtables_migrate, vTables\Classes\Activator->vtables_create_main_table, vTables\Classes\Activator->vtables_add_new_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 17:30:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DESC wp_vtables</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_vtables')
-#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_vtables', 0)
-#3 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(89): maybe_add_column('wp_vtables', 'woocommerce_cat...', 'ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(64): vTables\Classes\Activator->vtables_add_new_column('wp_vtables', 'woocommerce_cat...', 'JSON')
-#5 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(40): vTables\Classes\Activator->vtables_create_main_table()
-#6 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(32): vTables\Classes\Activator->vtables_migrate()
-#7 /wordpress/wp-content/plugins/vtables/vtables.php(183): vTables\Classes\Activator->vtables_migrate_databases(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(324): vTables->{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vtable...', false)
-#12 /internal/eval.php(20): activate_plugin('vtables/vtables...')
-#13 {main}</pre>
- for query DESC wp_vtables made by activate_plugin, do_action('activate_vtables/vtables.php'), WP_Hook->do_action, WP_Hook->apply_filters, vTables->{closure}, vTables\Classes\Activator->vtables_migrate_databases, vTables\Classes\Activator->vtables_migrate, vTables\Classes\Activator->vtables_create_main_table, vTables\Classes\Activator->vtables_add_new_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 17:30:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_vtables ADD woocommerce_categories JSON;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(89): maybe_add_column('wp_vtables', 'woocommerce_cat...', 'ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(64): vTables\Classes\Activator->vtables_add_new_column('wp_vtables', 'woocommerce_cat...', 'JSON')
-#4 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(40): vTables\Classes\Activator->vtables_create_main_table()
-#5 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(32): vTables\Classes\Activator->vtables_migrate()
-#6 /wordpress/wp-content/plugins/vtables/vtables.php(183): vTables\Classes\Activator->vtables_migrate_databases(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): vTables->{closure}(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vtable...', false)
-#11 /internal/eval.php(20): activate_plugin('vtables/vtables...')
-#12 {main}</pre>
- for query ALTER TABLE wp_vtables ADD woocommerce_categories JSON; made by activate_plugin, do_action('activate_vtables/vtables.php'), WP_Hook->do_action, WP_Hook->apply_filters, vTables->{closure}, vTables\Classes\Activator->vtables_migrate_databases, vTables\Classes\Activator->vtables_migrate, vTables\Classes\Activator->vtables_create_main_table, vTables\Classes\Activator->vtables_add_new_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 17:30:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DESC wp_vtables</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_vtables')
-#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_vtables', 0)
-#3 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(89): maybe_add_column('wp_vtables', 'woocommerce_cat...', 'ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(64): vTables\Classes\Activator->vtables_add_new_column('wp_vtables', 'woocommerce_cat...', 'JSON')
-#5 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(40): vTables\Classes\Activator->vtables_create_main_table()
-#6 /wordpress/wp-content/plugins/vtables/includes/Classes/Activator.php(32): vTables\Classes\Activator->vtables_migrate()
-#7 /wordpress/wp-content/plugins/vtables/vtables.php(183): vTables\Classes\Activator->vtables_migrate_databases(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(324): vTables->{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vtable...', false)
-#12 /internal/eval.php(20): activate_plugin('vtables/vtables...')
-#13 {main}</pre>
- for query DESC wp_vtables made by activate_plugin, do_action('activate_vtables/vtables.php'), WP_Hook->do_action, WP_Hook->apply_filters, vTables->{closure}, vTables\Classes\Activator->vtables_migrate_databases, vTables\Classes\Activator->vtables_migrate, vTables\Classes\Activator->vtables_create_main_table, vTables\Classes\Activator->vtables_add_new_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 17:32:15 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('INSERT INTO 'pr...')
+#2 /wordpress/wp-content/plugins/vremenska-prognoza/index.php(25): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): VremenskaPrognoza_Aktivacija(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vremen...', false)
+#7 /internal/eval.php(20): activate_plugin('vremenska-progn...')
+#8 {main}</pre>
+ for query INSERT INTO 'prognoza' VALUES (1, 'NemaAPI') made by activate_plugin, do_action('activate_vremenska-prognoza/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, VremenskaPrognoza_Aktivacija, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 18:58:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function each() in /wordpress/wp-content/plugins/vulnero/library/Zend/Cache/Backend.php:66
+Stack trace:
+#0 /wordpress/wp-content/plugins/vulnero/library/Zend/Cache/Backend/File.php(119): Zend_Cache_Backend->__construct(Array)
+#1 /wordpress/wp-content/plugins/vulnero/library/Zend/Cache.php(153): Zend_Cache_Backend_File->__construct(Array)
+#2 /wordpress/wp-content/plugins/vulnero/library/Zend/Cache.php(94): Zend_Cache::_makeBackend('File', Array, false, false)
+#3 /wordpress/wp-content/plugins/vulnero/library/Vulnero/Application.php(63): Zend_Cache::factory('File', 'File', Array, Array)
+#4 /wordpress/wp-content/plugins/vulnero/library/Zend/Application.php(85): Vulnero_Application->_loadConfig('/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/vulnero/wordpress-plugin.php(96): Zend_Application->__construct('development', '/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vulnero/wordpre...')
+#8 /internal/eval.php(20): activate_plugin('vulnero/wordpre...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/vulnero/library/Zend/Cache/Backend.php on line 66
+[08-May-2025 18:59:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function each() in /wordpress/wp-content/plugins/vulnero/library/Zend/Cache/Backend.php:66
+Stack trace:
+#0 /wordpress/wp-content/plugins/vulnero/library/Zend/Cache/Backend/File.php(119): Zend_Cache_Backend->__construct(Array)
+#1 /wordpress/wp-content/plugins/vulnero/library/Zend/Cache.php(153): Zend_Cache_Backend_File->__construct(Array)
+#2 /wordpress/wp-content/plugins/vulnero/library/Zend/Cache.php(94): Zend_Cache::_makeBackend('File', Array, false, false)
+#3 /wordpress/wp-content/plugins/vulnero/library/Vulnero/Application.php(63): Zend_Cache::factory('File', 'File', Array, Array)
+#4 /wordpress/wp-content/plugins/vulnero/library/Zend/Application.php(85): Vulnero_Application->_loadConfig('/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/vulnero/wordpress-plugin.php(96): Zend_Application->__construct('development', '/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vulnero/wordpre...')
+#8 /internal/eval.php(20): activate_plugin('vulnero/wordpre...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/vulnero/library/Zend/Cache/Backend.php on line 66
+[08-May-2025 18:59:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function each() in /wordpress/wp-content/plugins/vulnero/library/Zend/Cache/Backend.php:66
+Stack trace:
+#0 /wordpress/wp-content/plugins/vulnero/library/Zend/Cache/Backend/File.php(119): Zend_Cache_Backend->__construct(Array)
+#1 /wordpress/wp-content/plugins/vulnero/library/Zend/Cache.php(153): Zend_Cache_Backend_File->__construct(Array)
+#2 /wordpress/wp-content/plugins/vulnero/library/Zend/Cache.php(94): Zend_Cache::_makeBackend('File', Array, false, false)
+#3 /wordpress/wp-content/plugins/vulnero/library/Vulnero/Application.php(63): Zend_Cache::factory('File', 'File', Array, Array)
+#4 /wordpress/wp-content/plugins/vulnero/library/Zend/Application.php(85): Vulnero_Application->_loadConfig('/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/vulnero/wordpress-plugin.php(96): Zend_Application->__construct('development', '/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vulnero/wordpre...')
+#8 /internal/eval.php(20): activate_plugin('vulnero/wordpre...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/vulnero/library/Zend/Cache/Backend.php on line 66
+[08-May-2025 19:00:05 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('XcartCategories...')
@@ -473,7 +181,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[07-May-2025 17:32:25 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[08-May-2025 19:00:15 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('XcartCategories...')
@@ -491,7 +199,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[07-May-2025 17:32:34 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[08-May-2025 19:00:24 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('XcartCategories...')
