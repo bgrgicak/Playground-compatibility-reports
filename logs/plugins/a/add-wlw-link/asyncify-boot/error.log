@@ -2,60 +2,266 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [07-May-2025 09:34:43 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Error: [08-May-2025 18:58:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW columns from wp_plaid_int_accounts where field="plaid_account_balance" </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_plaid_int_accounts</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_plaid_int_accounts</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `field` = 'plaid_account_balance' ORDER BY ordinal_position | parameters: database_name_here, wp_plaid_int_accounts</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/ach-invoice-app/classes/plaid.class.php(778): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/ach-invoice-app/classes/plaid.class.php(163): PlaidIntPlugin->update_table()
+#6 /wordpress/wp-content/plugins/ach-invoice-app/classes/plaid.class.php(24): PlaidIntPlugin->ini_module()
+#7 /wordpress/wp-content/plugins/ach-invoice-app/index.php(50): PlaidIntPlugin->__construct()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ach-invoice-app...')
+#10 /internal/eval.php(20): activate_plugin('ach-invoice-app...')
+#11 {main}</pre>
+ for query SHOW columns from wp_plaid_int_accounts where field="plaid_account_balance"  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ach-invoice-app/index.php'), PlaidIntPlugin->__construct, PlaidIntPlugin->ini_module, PlaidIntPlugin->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 18:58:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>Alter table  wp_plaid_int_accounts add column plaid_account_balance decimal(11,2) NOT NULL ; </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_plaid_int_accounts</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_plaid_int_accounts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_plaid_int_accounts</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_plaid_int_accounts</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_plaid_int_accounts, plaid_account_balance, 16, , NO, decimal, , , 11, 2, , , , decimal(11,2), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_plaid_int_accounts</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_plaid_int_accounts</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_plaid_int_accounts</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_plaid_int_accounts_681cfef02a7b0` (
+  `account_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `account_user_id` INTEGER NOT NULL,
+  `plaid_item_id` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_access_token` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_public_token` TEXT COLLATE NOCASE NOT NULL,
+  `institution_id` TEXT COLLATE NOCASE NOT NULL,
+  `institution_name` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_number` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_id` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_routing` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_wire_routing` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_name` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_type` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_balance` REAL NOT NULL,
+  `plaid_account_creation_date` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_balance` REAL NOT NULL
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: plaid_account_balance
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('Alter table  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('Alter table  wp...')
+#3 /wordpress/wp-content/plugins/ach-invoice-app/classes/plaid.class.php(782): WP_SQLite_DB->query('Alter table  wp...')
+#4 /wordpress/wp-content/plugins/ach-invoice-app/classes/plaid.class.php(163): PlaidIntPlugin->update_table()
+#5 /wordpress/wp-content/plugins/ach-invoice-app/classes/plaid.class.php(24): PlaidIntPlugin->ini_module()
+#6 /wordpress/wp-content/plugins/ach-invoice-app/index.php(50): PlaidIntPlugin->__construct()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ach-invoice-app...')
+#9 /internal/eval.php(20): activate_plugin('ach-invoice-app...')
+#10 {main}</pre>
+ for query Alter table  wp_plaid_int_accounts add column plaid_account_balance decimal(11,2) NOT NULL ;  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ach-invoice-app/index.php'), PlaidIntPlugin->__construct, PlaidIntPlugin->ini_module, PlaidIntPlugin->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 18:58:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW columns from wp_plaid_int_accounts where field="plaid_account_balance" </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_plaid_int_accounts</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_plaid_int_accounts</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `field` = 'plaid_account_balance' ORDER BY ordinal_position | parameters: database_name_here, wp_plaid_int_accounts</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/ach-invoice-app/classes/plaid.class.php(778): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/ach-invoice-app/classes/plaid.class.php(163): PlaidIntPlugin->update_table()
+#6 /wordpress/wp-content/plugins/ach-invoice-app/classes/plaid.class.php(24): PlaidIntPlugin->ini_module()
+#7 /wordpress/wp-content/plugins/ach-invoice-app/index.php(50): PlaidIntPlugin->__construct()
+#8 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query SHOW columns from wp_plaid_int_accounts where field="plaid_account_balance"  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/ach-invoice-app/index.php'), PlaidIntPlugin->__construct, PlaidIntPlugin->ini_module, PlaidIntPlugin->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 18:58:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>Alter table  wp_plaid_int_accounts add column plaid_account_balance decimal(11,2) NOT NULL ; </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_plaid_int_accounts</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_plaid_int_accounts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_plaid_int_accounts</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_plaid_int_accounts</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_plaid_int_accounts, plaid_account_balance, 16, , NO, decimal, , , 11, 2, , , , decimal(11,2), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_plaid_int_accounts</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_plaid_int_accounts</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_plaid_int_accounts</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_plaid_int_accounts_681cfef162250` (
+  `account_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `account_user_id` INTEGER NOT NULL,
+  `plaid_item_id` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_access_token` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_public_token` TEXT COLLATE NOCASE NOT NULL,
+  `institution_id` TEXT COLLATE NOCASE NOT NULL,
+  `institution_name` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_number` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_id` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_routing` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_wire_routing` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_name` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_type` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_balance` REAL NOT NULL,
+  `plaid_account_creation_date` TEXT COLLATE NOCASE NOT NULL,
+  `plaid_account_balance` REAL NOT NULL
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: plaid_account_balance
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('Alter table  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('Alter table  wp...')
+#3 /wordpress/wp-content/plugins/ach-invoice-app/classes/plaid.class.php(782): WP_SQLite_DB->query('Alter table  wp...')
+#4 /wordpress/wp-content/plugins/ach-invoice-app/classes/plaid.class.php(163): PlaidIntPlugin->update_table()
+#5 /wordpress/wp-content/plugins/ach-invoice-app/classes/plaid.class.php(24): PlaidIntPlugin->ini_module()
+#6 /wordpress/wp-content/plugins/ach-invoice-app/index.php(50): PlaidIntPlugin->__construct()
+#7 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query Alter table  wp_plaid_int_accounts add column plaid_account_balance decimal(11,2) NOT NULL ;  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/ach-invoice-app/index.php'), PlaidIntPlugin->__construct, PlaidIntPlugin->ini_module, PlaidIntPlugin->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-May-2025 18:59:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ad-manager-wd/views/wd_ads_widgets.php:114
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('c_ws_widget__ad...')
-#2 /wordpress/wp-content/plugins/ad-squares-widget/includes/classes/widget.inc.php(26): register_widget('c_ws_widget__ad...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): c_ws_widget__ad_squares_widget::register('')
+#0 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(116): include_once()
+#1 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(18): wd_ads::includes()
+#2 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(147): wd_ads->__construct()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wd_ads::get_instance('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[07-May-2025 09:34:52 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-content/plugins/ad-manager-wd/views/wd_ads_widgets.php on line 114
+[08-May-2025 18:59:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ad-manager-wd/views/wd_ads_widgets.php:114
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('c_ws_widget__ad...')
-#2 /wordpress/wp-content/plugins/ad-squares-widget/includes/classes/widget.inc.php(26): register_widget('c_ws_widget__ad...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): c_ws_widget__ad_squares_widget::register('')
+#0 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(116): include_once()
+#1 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(18): wd_ads::includes()
+#2 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(147): wd_ads->__construct()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wd_ads::get_instance('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[07-May-2025 09:35:00 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-content/plugins/ad-manager-wd/views/wd_ads_widgets.php on line 114
+[08-May-2025 18:59:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ad-manager-wd/views/wd_ads_widgets.php:114
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('c_ws_widget__ad...')
-#2 /wordpress/wp-content/plugins/ad-squares-widget/includes/classes/widget.inc.php(26): register_widget('c_ws_widget__ad...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): c_ws_widget__ad_squares_widget::register('')
+#0 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(116): include_once()
+#1 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(18): wd_ads::includes()
+#2 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(147): wd_ads->__construct()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wd_ads::get_instance('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-content/plugins/ad-manager-wd/views/wd_ads_widgets.php on line 114
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
