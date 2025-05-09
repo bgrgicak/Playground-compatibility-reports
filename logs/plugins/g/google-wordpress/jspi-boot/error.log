@@ -2,139 +2,242 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [07-May-2025 10:53:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-May-2025 01:54:05 UTC] PHP Fatal error:  Redefinition of parameter $nothing in /wordpress/wp-content/plugins/gotcha-gesture-based-captcha/admin/layout/setting.php on line 131
+[09-May-2025 01:54:13 UTC] PHP Fatal error:  Redefinition of parameter $nothing in /wordpress/wp-content/plugins/gotcha-gesture-based-captcha/admin/layout/setting.php on line 131
+[09-May-2025 01:54:22 UTC] PHP Fatal error:  Redefinition of parameter $nothing in /wordpress/wp-content/plugins/gotcha-gesture-based-captcha/admin/layout/setting.php on line 131
+[09-May-2025 01:55:52 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6121
+[09-May-2025 01:55:52 UTC] PHP Warning:  Undefined variable $fblico_curr_user in /wordpress/wp-content/plugins/facebook-like-count/facebook_like_count.php on line 91
+[09-May-2025 01:55:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_currentuserinfo() in /wordpress/wp-content/plugins/facebook-like-count/facebook_like_count.php:29
+Stack trace:
+#0 /wordpress/wp-settings.php(545): include_once()
+#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/facebook-like-count/facebook_like_count.php on line 29
+[09-May-2025 01:56:01 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6121
+[09-May-2025 01:56:01 UTC] PHP Warning:  Undefined variable $fblico_curr_user in /wordpress/wp-content/plugins/facebook-like-count/facebook_like_count.php on line 91
+[09-May-2025 01:56:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_currentuserinfo() in /wordpress/wp-content/plugins/facebook-like-count/facebook_like_count.php:29
+Stack trace:
+#0 /wordpress/wp-settings.php(545): include_once()
+#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/facebook-like-count/facebook_like_count.php on line 29
+[09-May-2025 01:56:09 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6121
+[09-May-2025 01:56:09 UTC] PHP Warning:  Undefined variable $fblico_curr_user in /wordpress/wp-content/plugins/facebook-like-count/facebook_like_count.php on line 91
+[09-May-2025 01:56:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_currentuserinfo() in /wordpress/wp-content/plugins/facebook-like-count/facebook_like_count.php:29
+Stack trace:
+#0 /wordpress/wp-settings.php(545): include_once()
+#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/facebook-like-count/facebook_like_count.php on line 29
+[09-May-2025 01:56:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_.'gm_videos' (
-  					id int(11) NOT NULL AUTO_INCREMENT,
-  				 	date_added datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-  					title VARCHAR(255) NOT NULL,
-  					videoId int(11) NOT NULL,
-  					thumbnail VARCHAR(55) DEFAULT '' NOT NULL,
-  					filename VARCHAR(255) DEFAULT '' NOT NULL,
-  					length VARCHAR(255) DEFAULT '' NOT NULL,
-  					description TEXT DEFAULT '' NOT NULL,
-  					image VARCHAR(255) DEFAULT '' NOT NULL,
-  					UNIQUE KEY id (id)
-  				)</p>
+<p>CREATE TRIGGER wp_mw_faktury_faktura_id BEFORE INSERT ON wp_mw_faktury
+                 FOR EACH ROW begin
+                    declare v_id int unsigned default 0;
+
+                    select coalesce(max(id_cislo),0)
+                        into v_id
+                        from wp_mw_faktury
+                        where typ = new.typ
+                                and id_rok = new.id_rok;
+
+                    set new.id_cislo = v_id + 1;
+                end;</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#4 /wordpress/wp-content/plugins/gracemedia-media-player/gracemedia-media-player.php(124): dbDelta(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WP_GraceMedia_Videos::activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_gracem...', false)
-#9 /internal/eval.php(20): activate_plugin('gracemedia-medi...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(848): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TRIGGER ...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TRIGGER ...')
+#4 /wordpress/wp-content/plugins/fakturace/dbStructUpdate.php(52): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#5 /wordpress/wp-content/plugins/fakturace/dbStructUpdate.php(66): mw_fakt_update_db_table_structure()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): mw_fakt_update_db_check('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query CREATE TRIGGER wp_mw_faktury_faktura_id BEFORE INSERT ON wp_mw_faktury
+                 FOR EACH ROW begin
+                    declare v_id int unsigned default 0;
+
+                    select coalesce(max(id_cislo),0)
+                        into v_id
+                        from wp_mw_faktury
+                        where typ = new.typ
+                                and id_rok = new.id_rok;
+
+                    set new.id_cislo = v_id + 1;
+                end; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, mw_fakt_update_db_check, mw_fakt_update_db_table_structure, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 01:56:44 UTC] PHP Fatal error:  Cannot use 'Object' as class name as it is reserved in /wordpress/wp-content/plugins/fakturace/includes/vendor/nette/utils/src/Utils/Object.php on line 54
+[09-May-2025 01:56:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP TRIGGER IF EXISTS wp_mw_faktury_faktura_id</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: TRIGGER.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/fakturace/dbStructUpdate.php(45): WP_SQLite_DB->query('DROP TRIGGER IF...')
+#2 /wordpress/wp-content/plugins/fakturace/dbStructUpdate.php(66): mw_fakt_update_db_table_structure()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): mw_fakt_update_db_check('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #10 {main}</pre>
- for query CREATE TABLE wp_.'gm_videos' (
-  					id int(11) NOT NULL AUTO_INCREMENT,
-  				 	date_added datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-  					title VARCHAR(255) NOT NULL,
-  					videoId int(11) NOT NULL,
-  					thumbnail VARCHAR(55) DEFAULT '' NOT NULL,
-  					filename VARCHAR(255) DEFAULT '' NOT NULL,
-  					length VARCHAR(255) DEFAULT '' NOT NULL,
-  					description TEXT DEFAULT '' NOT NULL,
-  					image VARCHAR(255) DEFAULT '' NOT NULL,
-  					UNIQUE KEY id (id)
-  				) made by activate_plugin, do_action('activate_gracemedia-media-player/gracemedia-media-player.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_GraceMedia_Videos::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 10:53:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query DROP TRIGGER IF EXISTS wp_mw_faktury_faktura_id made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, mw_fakt_update_db_check, mw_fakt_update_db_table_structure, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 01:56:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>DROP TABLE wp_.'gm_videos'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DROP TABLE wp_....')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DROP TABLE wp_....')
-#3 /wordpress/wp-content/plugins/gracemedia-media-player/gracemedia-media-player.php(105): WP_SQLite_DB->query('DROP TABLE wp_....')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): WP_GraceMedia_Videos::deactivate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_gracem...', false)
-#8 /internal/eval.php(20): activate_plugin('gracemedia-medi...')
-#9 {main}</pre>
- for query DROP TABLE wp_.'gm_videos' made by activate_plugin, do_action('activate_gracemedia-media-player/gracemedia-media-player.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_GraceMedia_Videos::deactivate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 10:53:51 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>gracemedia_style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 10:53:51 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 10:53:51 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>fancybox_style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 10:53:51 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>gm_videojs</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 10:53:51 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>gm_swfobject</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 10:54:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DROP TABLE wp_.'gm_videos'</p>
+<p>CREATE TRIGGER wp_mw_faktury_faktura_id BEFORE INSERT ON wp_mw_faktury
+                 FOR EACH ROW begin
+                    declare v_id int unsigned default 0;
+
+                    select coalesce(max(id_cislo),0)
+                        into v_id
+                        from wp_mw_faktury
+                        where typ = new.typ
+                                and id_rok = new.id_rok;
+
+                    set new.id_cislo = v_id + 1;
+                end;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: DROP TABLE wp_.'gm_videos' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_.gm_videos.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: TRIGGER.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/gracemedia-media-player/gracemedia-media-player.php(105): WP_SQLite_DB->query('DROP TABLE wp_....')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): WP_GraceMedia_Videos::deactivate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_gracem...', false)
-#6 /internal/eval.php(20): activate_plugin('gracemedia-medi...')
-#7 {main}</pre>
- for query DROP TABLE wp_.'gm_videos' made by activate_plugin, do_action('activate_gracemedia-media-player/gracemedia-media-player.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_GraceMedia_Videos::deactivate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 10:54:01 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>gracemedia_style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 10:54:01 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 10:54:01 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>fancybox_style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 10:54:01 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>gm_videojs</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 10:54:01 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>gm_swfobject</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 10:54:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/fakturace/dbStructUpdate.php(52): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#2 /wordpress/wp-content/plugins/fakturace/dbStructUpdate.php(66): mw_fakt_update_db_table_structure()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): mw_fakt_update_db_check('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query CREATE TRIGGER wp_mw_faktury_faktura_id BEFORE INSERT ON wp_mw_faktury
+                 FOR EACH ROW begin
+                    declare v_id int unsigned default 0;
+
+                    select coalesce(max(id_cislo),0)
+                        into v_id
+                        from wp_mw_faktury
+                        where typ = new.typ
+                                and id_rok = new.id_rok;
+
+                    set new.id_cislo = v_id + 1;
+                end; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, mw_fakt_update_db_check, mw_fakt_update_db_table_structure, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 01:56:55 UTC] PHP Fatal error:  Cannot use 'Object' as class name as it is reserved in /wordpress/wp-content/plugins/fakturace/includes/vendor/nette/utils/src/Utils/Object.php on line 54
+[09-May-2025 01:57:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>DROP TABLE wp_.'gm_videos'</p>
+<p>DROP TRIGGER IF EXISTS wp_mw_faktury_faktura_id</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: DROP TABLE wp_.'gm_videos' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_.gm_videos.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: TRIGGER.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/gracemedia-media-player/gracemedia-media-player.php(105): WP_SQLite_DB->query('DROP TABLE wp_....')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): WP_GraceMedia_Videos::deactivate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_gracem...', false)
-#6 /internal/eval.php(20): activate_plugin('gracemedia-medi...')
-#7 {main}</pre>
- for query DROP TABLE wp_.'gm_videos' made by activate_plugin, do_action('activate_gracemedia-media-player/gracemedia-media-player.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_GraceMedia_Videos::deactivate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-May-2025 10:54:10 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>gracemedia_style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 10:54:10 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 10:54:10 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>fancybox_style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 10:54:10 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>gm_videojs</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 10:54:10 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>gm_swfobject</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 10:55:10 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#1 /wordpress/wp-content/plugins/fakturace/dbStructUpdate.php(45): WP_SQLite_DB->query('DROP TRIGGER IF...')
+#2 /wordpress/wp-content/plugins/fakturace/dbStructUpdate.php(66): mw_fakt_update_db_table_structure()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): mw_fakt_update_db_check('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query DROP TRIGGER IF EXISTS wp_mw_faktury_faktura_id made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, mw_fakt_update_db_check, mw_fakt_update_db_table_structure, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 01:57:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TRIGGER wp_mw_faktury_faktura_id BEFORE INSERT ON wp_mw_faktury
+                 FOR EACH ROW begin
+                    declare v_id int unsigned default 0;
+
+                    select coalesce(max(id_cislo),0)
+                        into v_id
+                        from wp_mw_faktury
+                        where typ = new.typ
+                                and id_rok = new.id_rok;
+
+                    set new.id_cislo = v_id + 1;
+                end;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: TRIGGER.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/fakturace/dbStructUpdate.php(52): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#2 /wordpress/wp-content/plugins/fakturace/dbStructUpdate.php(66): mw_fakt_update_db_table_structure()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): mw_fakt_update_db_check('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query CREATE TRIGGER wp_mw_faktury_faktura_id BEFORE INSERT ON wp_mw_faktury
+                 FOR EACH ROW begin
+                    declare v_id int unsigned default 0;
+
+                    select coalesce(max(id_cislo),0)
+                        into v_id
+                        from wp_mw_faktury
+                        where typ = new.typ
+                                and id_rok = new.id_rok;
+
+                    set new.id_cislo = v_id + 1;
+                end; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, mw_fakt_update_db_check, mw_fakt_update_db_table_structure, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 01:57:08 UTC] PHP Fatal error:  Cannot use 'Object' as class name as it is reserved in /wordpress/wp-content/plugins/fakturace/includes/vendor/nette/utils/src/Utils/Object.php on line 54
+[09-May-2025 01:57:45 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Google_WordPres...')
@@ -152,7 +255,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[07-May-2025 10:55:19 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[09-May-2025 01:57:54 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Google_WordPres...')
@@ -170,7 +273,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[07-May-2025 10:55:27 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[09-May-2025 01:58:02 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Google_WordPres...')
