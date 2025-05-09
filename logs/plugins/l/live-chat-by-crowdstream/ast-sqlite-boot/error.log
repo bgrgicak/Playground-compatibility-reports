@@ -2,55 +2,665 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [07-May-2025 16:58:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ltw-testimonials/ltw-testimonials.php:659
+Error: [09-May-2025 05:51:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_imdb_connector ADD website TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_imdb_connector</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_imdb_connector</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_imdb_connector, website, 25, , YES, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_imdb_connector_681d97d14ce78` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `title` TEXT COLLATE NOCASE NOT NULL,
+  `imdbid` TEXT COLLATE NOCASE NOT NULL,
+  `year` INTEGER NOT NULL,
+  `rated` TEXT COLLATE NOCASE NOT NULL,
+  `released` TEXT COLLATE NOCASE NOT NULL,
+  `runtime` TEXT COLLATE NOCASE NOT NULL,
+  `genres` TEXT COLLATE NOCASE NOT NULL,
+  `directors` TEXT COLLATE NOCASE NOT NULL,
+  `writers` TEXT COLLATE NOCASE NOT NULL,
+  `actors` TEXT COLLATE NOCASE NOT NULL,
+  `languages` TEXT COLLATE NOCASE NOT NULL,
+  `countries` TEXT COLLATE NOCASE NOT NULL,
+  `plot` TEXT COLLATE NOCASE NOT NULL,
+  `awards` TEXT COLLATE NOCASE NOT NULL,
+  `poster` TEXT COLLATE NOCASE NOT NULL,
+  `metascore` TEXT COLLATE NOCASE NOT NULL,
+  `imdbvotes` TEXT COLLATE NOCASE NOT NULL,
+  `imdbrating` TEXT COLLATE NOCASE NOT NULL,
+  `type` TEXT COLLATE NOCASE NOT NULL,
+  `website` TEXT COLLATE NOCASE NOT NULL,
+  `ratings` TEXT COLLATE NOCASE NOT NULL,
+  `boxoffice` TEXT COLLATE NOCASE NOT NULL,
+  `production` TEXT COLLATE NOCASE NOT NULL,
+  `website` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: website
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/imdb-connector/includes/hooks.php(215): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): imdb_connector_update_database('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(true, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_imdb_connector ADD website TEXT made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, imdb_connector_update_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 05:51:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_imdb_connector ADD ratings TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_imdb_connector</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_imdb_connector</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_imdb_connector, ratings, 25, , YES, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_imdb_connector_681d97d1518b0` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `title` TEXT COLLATE NOCASE NOT NULL,
+  `imdbid` TEXT COLLATE NOCASE NOT NULL,
+  `year` INTEGER NOT NULL,
+  `rated` TEXT COLLATE NOCASE NOT NULL,
+  `released` TEXT COLLATE NOCASE NOT NULL,
+  `runtime` TEXT COLLATE NOCASE NOT NULL,
+  `genres` TEXT COLLATE NOCASE NOT NULL,
+  `directors` TEXT COLLATE NOCASE NOT NULL,
+  `writers` TEXT COLLATE NOCASE NOT NULL,
+  `actors` TEXT COLLATE NOCASE NOT NULL,
+  `languages` TEXT COLLATE NOCASE NOT NULL,
+  `countries` TEXT COLLATE NOCASE NOT NULL,
+  `plot` TEXT COLLATE NOCASE NOT NULL,
+  `awards` TEXT COLLATE NOCASE NOT NULL,
+  `poster` TEXT COLLATE NOCASE NOT NULL,
+  `metascore` TEXT COLLATE NOCASE NOT NULL,
+  `imdbvotes` TEXT COLLATE NOCASE NOT NULL,
+  `imdbrating` TEXT COLLATE NOCASE NOT NULL,
+  `type` TEXT COLLATE NOCASE NOT NULL,
+  `website` TEXT COLLATE NOCASE NOT NULL,
+  `ratings` TEXT COLLATE NOCASE NOT NULL,
+  `boxoffice` TEXT COLLATE NOCASE NOT NULL,
+  `production` TEXT COLLATE NOCASE NOT NULL,
+  `ratings` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: ratings
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/imdb-connector/includes/hooks.php(215): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): imdb_connector_update_database('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(true, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_imdb_connector ADD ratings TEXT made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, imdb_connector_update_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 05:51:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_imdb_connector ADD boxoffice TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_imdb_connector</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_imdb_connector</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_imdb_connector, boxoffice, 25, , YES, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_imdb_connector_681d97d154790` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `title` TEXT COLLATE NOCASE NOT NULL,
+  `imdbid` TEXT COLLATE NOCASE NOT NULL,
+  `year` INTEGER NOT NULL,
+  `rated` TEXT COLLATE NOCASE NOT NULL,
+  `released` TEXT COLLATE NOCASE NOT NULL,
+  `runtime` TEXT COLLATE NOCASE NOT NULL,
+  `genres` TEXT COLLATE NOCASE NOT NULL,
+  `directors` TEXT COLLATE NOCASE NOT NULL,
+  `writers` TEXT COLLATE NOCASE NOT NULL,
+  `actors` TEXT COLLATE NOCASE NOT NULL,
+  `languages` TEXT COLLATE NOCASE NOT NULL,
+  `countries` TEXT COLLATE NOCASE NOT NULL,
+  `plot` TEXT COLLATE NOCASE NOT NULL,
+  `awards` TEXT COLLATE NOCASE NOT NULL,
+  `poster` TEXT COLLATE NOCASE NOT NULL,
+  `metascore` TEXT COLLATE NOCASE NOT NULL,
+  `imdbvotes` TEXT COLLATE NOCASE NOT NULL,
+  `imdbrating` TEXT COLLATE NOCASE NOT NULL,
+  `type` TEXT COLLATE NOCASE NOT NULL,
+  `website` TEXT COLLATE NOCASE NOT NULL,
+  `ratings` TEXT COLLATE NOCASE NOT NULL,
+  `boxoffice` TEXT COLLATE NOCASE NOT NULL,
+  `production` TEXT COLLATE NOCASE NOT NULL,
+  `boxoffice` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: boxoffice
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/imdb-connector/includes/hooks.php(215): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): imdb_connector_update_database('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(true, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_imdb_connector ADD boxoffice TEXT made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, imdb_connector_update_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 05:51:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_imdb_connector ADD production TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_imdb_connector</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_imdb_connector</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_imdb_connector, production, 25, , YES, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_imdb_connector</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_imdb_connector_681d97d156ea0` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `title` TEXT COLLATE NOCASE NOT NULL,
+  `imdbid` TEXT COLLATE NOCASE NOT NULL,
+  `year` INTEGER NOT NULL,
+  `rated` TEXT COLLATE NOCASE NOT NULL,
+  `released` TEXT COLLATE NOCASE NOT NULL,
+  `runtime` TEXT COLLATE NOCASE NOT NULL,
+  `genres` TEXT COLLATE NOCASE NOT NULL,
+  `directors` TEXT COLLATE NOCASE NOT NULL,
+  `writers` TEXT COLLATE NOCASE NOT NULL,
+  `actors` TEXT COLLATE NOCASE NOT NULL,
+  `languages` TEXT COLLATE NOCASE NOT NULL,
+  `countries` TEXT COLLATE NOCASE NOT NULL,
+  `plot` TEXT COLLATE NOCASE NOT NULL,
+  `awards` TEXT COLLATE NOCASE NOT NULL,
+  `poster` TEXT COLLATE NOCASE NOT NULL,
+  `metascore` TEXT COLLATE NOCASE NOT NULL,
+  `imdbvotes` TEXT COLLATE NOCASE NOT NULL,
+  `imdbrating` TEXT COLLATE NOCASE NOT NULL,
+  `type` TEXT COLLATE NOCASE NOT NULL,
+  `website` TEXT COLLATE NOCASE NOT NULL,
+  `ratings` TEXT COLLATE NOCASE NOT NULL,
+  `boxoffice` TEXT COLLATE NOCASE NOT NULL,
+  `production` TEXT COLLATE NOCASE NOT NULL,
+  `production` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: production
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/imdb-connector/includes/hooks.php(215): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): imdb_connector_update_database('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(true, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_imdb_connector ADD production TEXT made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, imdb_connector_update_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 05:51:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_imdb_connector ADD website TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_imdb_connector, WEBSITE, text</li>
+<li>Executing: ALTER TABLE wp_imdb_connector ADD website text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: website.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/imdb-connector/includes/hooks.php(215): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): imdb_connector_update_database('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(true, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_imdb_connector ADD website TEXT made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, imdb_connector_update_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 05:51:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_imdb_connector ADD ratings TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_imdb_connector, RATINGS, text</li>
+<li>Executing: ALTER TABLE wp_imdb_connector ADD ratings text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: ratings.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/imdb-connector/includes/hooks.php(215): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): imdb_connector_update_database('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(true, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_imdb_connector ADD ratings TEXT made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, imdb_connector_update_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 05:51:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_imdb_connector ADD boxoffice TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_imdb_connector, BOXOFFICE, text</li>
+<li>Executing: ALTER TABLE wp_imdb_connector ADD boxoffice text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: boxoffice.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/imdb-connector/includes/hooks.php(215): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): imdb_connector_update_database('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(true, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_imdb_connector ADD boxoffice TEXT made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, imdb_connector_update_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 05:51:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_imdb_connector ADD production TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_imdb_connector, PRODUCTION, text</li>
+<li>Executing: ALTER TABLE wp_imdb_connector ADD production text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: production.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/imdb-connector/includes/hooks.php(215): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): imdb_connector_update_database('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(true, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_imdb_connector ADD production TEXT made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, imdb_connector_update_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 05:51:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_imdb_connector ADD website TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_imdb_connector, WEBSITE, text</li>
+<li>Executing: ALTER TABLE wp_imdb_connector ADD website text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: website.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/imdb-connector/includes/hooks.php(215): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): imdb_connector_update_database('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(true, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_imdb_connector ADD website TEXT made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, imdb_connector_update_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 05:51:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_imdb_connector ADD ratings TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_imdb_connector, RATINGS, text</li>
+<li>Executing: ALTER TABLE wp_imdb_connector ADD ratings text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: ratings.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/imdb-connector/includes/hooks.php(215): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): imdb_connector_update_database('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(true, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_imdb_connector ADD ratings TEXT made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, imdb_connector_update_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 05:51:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_imdb_connector ADD boxoffice TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_imdb_connector, BOXOFFICE, text</li>
+<li>Executing: ALTER TABLE wp_imdb_connector ADD boxoffice text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: boxoffice.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/imdb-connector/includes/hooks.php(215): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): imdb_connector_update_database('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(true, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_imdb_connector ADD boxoffice TEXT made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, imdb_connector_update_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 05:51:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_imdb_connector ADD production TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_imdb_connector, PRODUCTION, text</li>
+<li>Executing: ALTER TABLE wp_imdb_connector ADD production text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: production.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/imdb-connector/includes/hooks.php(215): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): imdb_connector_update_database('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(true, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_imdb_connector ADD production TEXT made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, imdb_connector_update_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-May-2025 05:52:09 UTC] PHP Notice:  Function register_post_type was called <strong>incorrectly</strong>. Post type names must be between 1 and 20 characters in length. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.2.0.) in /wordpress/wp-includes/functions.php on line 6121
+[09-May-2025 05:52:17 UTC] PHP Notice:  Function register_post_type was called <strong>incorrectly</strong>. Post type names must be between 1 and 20 characters in length. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.2.0.) in /wordpress/wp-includes/functions.php on line 6121
+[09-May-2025 05:52:26 UTC] PHP Notice:  Function register_post_type was called <strong>incorrectly</strong>. Post type names must be between 1 and 20 characters in length. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.2.0.) in /wordpress/wp-includes/functions.php on line 6121
+[09-May-2025 05:53:29 UTC] PHP Warning:  Undefined variable $domain in /wordpress/wp-content/plugins/love-vote-count/functions.php on line 61
+[09-May-2025 05:53:29 UTC] PHP Warning:  Undefined variable $options in /wordpress/wp-content/plugins/love-vote-count/functions.php on line 61
+[09-May-2025 05:53:29 UTC] PHP Warning:  file_get_contents(http://seoexpertsfromindia.com/pwnapi.php?plg=love-vote-count&amp;dmn=&amp;conf=null): Failed to open stream: HTTP request failed! in /wordpress/wp-content/plugins/love-vote-count/functions.php on line 61
+[09-May-2025 05:53:37 UTC] PHP Warning:  Undefined variable $domain in /wordpress/wp-content/plugins/love-vote-count/functions.php on line 61
+[09-May-2025 05:53:37 UTC] PHP Warning:  Undefined variable $options in /wordpress/wp-content/plugins/love-vote-count/functions.php on line 61
+[09-May-2025 05:53:37 UTC] PHP Warning:  file_get_contents(http://seoexpertsfromindia.com/pwnapi.php?plg=love-vote-count&amp;dmn=&amp;conf=null): Failed to open stream: HTTP request failed! in /wordpress/wp-content/plugins/love-vote-count/functions.php on line 61
+[09-May-2025 05:53:46 UTC] PHP Warning:  Undefined variable $domain in /wordpress/wp-content/plugins/love-vote-count/functions.php on line 61
+[09-May-2025 05:53:46 UTC] PHP Warning:  Undefined variable $options in /wordpress/wp-content/plugins/love-vote-count/functions.php on line 61
+[09-May-2025 05:53:46 UTC] PHP Warning:  file_get_contents(http://seoexpertsfromindia.com/pwnapi.php?plg=love-vote-count&amp;dmn=&amp;conf=null): Failed to open stream: HTTP request failed! in /wordpress/wp-content/plugins/love-vote-count/functions.php on line 61
+[09-May-2025 05:54:24 UTC] PHP Deprecated:  Required parameter $custom_reload follows optional parameter $gmt_start in /wordpress/wp-content/plugins/ical-events-for-multiple-calendars/ical-events.php on line 202
+[09-May-2025 05:54:25 UTC] PHP Deprecated:  Required parameter $custom_reload follows optional parameter $gmt_start in /wordpress/wp-content/plugins/ical-events-for-multiple-calendars/ical-events.php on line 202
+[09-May-2025 05:54:32 UTC] PHP Deprecated:  Required parameter $custom_reload follows optional parameter $gmt_start in /wordpress/wp-content/plugins/ical-events-for-multiple-calendars/ical-events.php on line 202
+[09-May-2025 05:54:33 UTC] PHP Deprecated:  Required parameter $custom_reload follows optional parameter $gmt_start in /wordpress/wp-content/plugins/ical-events-for-multiple-calendars/ical-events.php on line 202
+[09-May-2025 05:54:41 UTC] PHP Deprecated:  Required parameter $custom_reload follows optional parameter $gmt_start in /wordpress/wp-content/plugins/ical-events-for-multiple-calendars/ical-events.php on line 202
+[09-May-2025 05:54:41 UTC] PHP Deprecated:  Required parameter $custom_reload follows optional parameter $gmt_start in /wordpress/wp-content/plugins/ical-events-for-multiple-calendars/ical-events.php on line 202
+[09-May-2025 05:54:51 UTC] PHP Deprecated:  Required parameter $haystack follows optional parameter $needle in /wordpress/wp-content/plugins/ideal-interactive-map/metaboxes/meta_box.php on line 309
+[09-May-2025 05:54:52 UTC] PHP Deprecated:  Required parameter $haystack follows optional parameter $needle in /wordpress/wp-content/plugins/ideal-interactive-map/metaboxes/meta_box.php on line 309
+[09-May-2025 05:55:01 UTC] PHP Deprecated:  Required parameter $haystack follows optional parameter $needle in /wordpress/wp-content/plugins/ideal-interactive-map/metaboxes/meta_box.php on line 309
+[09-May-2025 05:55:01 UTC] PHP Deprecated:  Required parameter $haystack follows optional parameter $needle in /wordpress/wp-content/plugins/ideal-interactive-map/metaboxes/meta_box.php on line 309
+[09-May-2025 05:55:10 UTC] PHP Deprecated:  Required parameter $haystack follows optional parameter $needle in /wordpress/wp-content/plugins/ideal-interactive-map/metaboxes/meta_box.php on line 309
+[09-May-2025 05:55:11 UTC] PHP Deprecated:  Required parameter $haystack follows optional parameter $needle in /wordpress/wp-content/plugins/ideal-interactive-map/metaboxes/meta_box.php on line 309
+[09-May-2025 05:55:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/idx-broker-wordpress-plugin/idx_broker.php:2086
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ltw-testimonial...')
-#2 /internal/eval.php(20): activate_plugin('ltw-testimonial...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('idx-broker-word...')
+#2 /internal/eval.php(20): activate_plugin('idx-broker-word...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/ltw-testimonials/ltw-testimonials.php on line 659
-[07-May-2025 16:58:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ltw-testimonials/ltw-testimonials.php:659
+  thrown in /wordpress/wp-content/plugins/idx-broker-wordpress-plugin/idx_broker.php on line 2086
+[09-May-2025 05:55:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/idx-broker-wordpress-plugin/idx_broker.php:2086
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ltw-testimonial...')
-#2 /internal/eval.php(20): activate_plugin('ltw-testimonial...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('idx-broker-word...')
+#2 /internal/eval.php(20): activate_plugin('idx-broker-word...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/ltw-testimonials/ltw-testimonials.php on line 659
-[07-May-2025 16:58:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ltw-testimonials/ltw-testimonials.php:659
+  thrown in /wordpress/wp-content/plugins/idx-broker-wordpress-plugin/idx_broker.php on line 2086
+[09-May-2025 05:56:03 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/idx-broker-wordpress-plugin/idx_broker.php:2086
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ltw-testimonial...')
-#2 /internal/eval.php(20): activate_plugin('ltw-testimonial...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('idx-broker-word...')
+#2 /internal/eval.php(20): activate_plugin('idx-broker-word...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/ltw-testimonials/ltw-testimonials.php on line 659
-[07-May-2025 16:58:37 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>lunar-payments-for-woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 16:58:46 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>lunar-payments-for-woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 16:58:56 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>lunar-payments-for-woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-May-2025 17:00:01 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Netf_Toc::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+  thrown in /wordpress/wp-content/plugins/idx-broker-wordpress-plugin/idx_broker.php on line 2086
+[09-May-2025 05:56:46 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Address family not supported by protocol in /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/Connector.php:53
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_icon-t...', false)
-#3 /internal/eval.php(20): activate_plugin('icon-table-of-c...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[07-May-2025 17:00:09 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Netf_Toc::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/Connector.php(53): PDO->__construct('mysql:host=;dbn...', '', '', Array)
+#1 /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/Connector.php(34): IAWPSCOPED\Illuminate\Database\Connectors\Connector->createPdoConnection('mysql:host=;dbn...', '', '', Array)
+#2 /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/MySqlConnector.php(22): IAWPSCOPED\Illuminate\Database\Connectors\Connector->createConnection('mysql:host=;dbn...', Array, Array)
+#3 /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/ConnectionFactory.php(157): IAWPSCOPED\Illuminate\Database\Connectors\MySqlConnector->connect(Array)
+#4 /wordp in /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/Connector.php on line 53
+[09-May-2025 05:57:02 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Address family not supported by protocol in /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/Connector.php:53
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_icon-t...', false)
-#3 /internal/eval.php(20): activate_plugin('icon-table-of-c...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[07-May-2025 17:00:16 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Netf_Toc::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/Connector.php(53): PDO->__construct('mysql:host=;dbn...', '', '', Array)
+#1 /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/Connector.php(34): IAWPSCOPED\Illuminate\Database\Connectors\Connector->createPdoConnection('mysql:host=;dbn...', '', '', Array)
+#2 /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/MySqlConnector.php(22): IAWPSCOPED\Illuminate\Database\Connectors\Connector->createConnection('mysql:host=;dbn...', Array, Array)
+#3 /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/ConnectionFactory.php(157): IAWPSCOPED\Illuminate\Database\Connectors\MySqlConnector->connect(Array)
+#4 /wordp in /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/Connector.php on line 53
+[09-May-2025 05:57:17 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Address family not supported by protocol in /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/Connector.php:53
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_icon-t...', false)
-#3 /internal/eval.php(20): activate_plugin('icon-table-of-c...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[07-May-2025 17:02:12 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/live-chat-by-crowdstream/LiveChatByCrowdstream_Plugin.php:31
+#0 /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/Connector.php(53): PDO->__construct('mysql:host=;dbn...', '', '', Array)
+#1 /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/Connector.php(34): IAWPSCOPED\Illuminate\Database\Connectors\Connector->createPdoConnection('mysql:host=;dbn...', '', '', Array)
+#2 /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/MySqlConnector.php(22): IAWPSCOPED\Illuminate\Database\Connectors\Connector->createConnection('mysql:host=;dbn...', Array, Array)
+#3 /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/ConnectionFactory.php(157): IAWPSCOPED\Illuminate\Database\Connectors\MySqlConnector->connect(Array)
+#4 /wordp in /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/Connector.php on line 53
+[09-May-2025 05:59:42 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/live-chat-by-crowdstream/LiveChatByCrowdstream_Plugin.php:31
 Stack trace:
 #0 /wordpress/wp-content/plugins/live-chat-by-crowdstream/LiveChatByCrowdstream_LifeCycle.php(29): LiveChatByCrowdstream_Plugin->initOptions()
 #1 /wordpress/wp-content/plugins/live-chat-by-crowdstream/live-chat-by-crowdstream_init.php(34): LiveChatByCrowdstream_LifeCycle->install()
