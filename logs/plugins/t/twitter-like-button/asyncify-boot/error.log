@@ -2,85 +2,206 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [09-May-2025 09:29:04 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/thumbgen/thumbGen.php on line 256
-[09-May-2025 09:29:13 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/thumbgen/thumbGen.php on line 256
-[09-May-2025 09:29:22 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/thumbgen/thumbGen.php on line 256
-[09-May-2025 09:30:24 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:30:24 UTC] PHP Warning:  Undefined array key "QUERY_STRING" in /wordpress/wp-content/plugins/tierra-billboard-manager/tierra-billboard-manager.php on line 92
-[09-May-2025 09:30:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-May-2025 09:48:37 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>tinycoffee</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 09:48:46 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>tinycoffee</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 09:48:54 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>tinycoffee</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 09:52:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_ti_billboard_manager set title='___DEFAULT___'</p>
+<p>CREATE INDEX user_id ON statistics (user_id);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_ti_billboard_manager` set `title` = '___DEFAULT___' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "set": syntax error
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
-#3 /wordpress/wp-content/plugins/tierra-billboard-manager/tierra-billboard-manager.php(211): WP_SQLite_DB->query('INSERT INTO wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): _ti_bbm_install(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(848): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX us...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX us...')
+#4 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(444): WP_SQLite_DB->query('CREATE INDEX us...')
+#5 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#6 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#11 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#12 {main}</pre>
+ for query CREATE INDEX user_id ON statistics (user_id); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX user_group_units ON statistics (user_id, total_units);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(848): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX us...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX us...')
+#4 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(447): WP_SQLite_DB->query('CREATE INDEX us...')
+#5 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#6 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#11 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#12 {main}</pre>
+ for query CREATE INDEX user_group_units ON statistics (user_id, total_units); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX total_units ON statistics (total_units);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(848): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX to...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX to...')
+#4 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(450): WP_SQLite_DB->query('CREATE INDEX to...')
+#5 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#6 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#11 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#12 {main}</pre>
+ for query CREATE INDEX total_units ON statistics (total_units); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX last_stat_date ON statistics (last_stat);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(848): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX la...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX la...')
+#4 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(453): WP_SQLite_DB->query('CREATE INDEX la...')
+#5 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#6 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#11 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#12 {main}</pre>
+ for query CREATE INDEX last_stat_date ON statistics (last_stat); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX last_stat_total_units ON statistics (total_units, last_stat);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(848): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX la...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX la...')
+#4 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(456): WP_SQLite_DB->query('CREATE INDEX la...')
+#5 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#6 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#11 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#12 {main}</pre>
+ for query CREATE INDEX last_stat_total_units ON statistics (total_units, last_stat); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX user_date_units ON statistics (user_id, last_stat, total_units);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(848): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX us...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX us...')
+#4 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(459): WP_SQLite_DB->query('CREATE INDEX us...')
+#5 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#6 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#11 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#12 {main}</pre>
+ for query CREATE INDEX user_date_units ON statistics (user_id, last_stat, total_units); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE statistics DEFAULT CHARACTER SET=utf8mb4;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: DEFAULT CHARACTER SET.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(441): WP_SQLite_DB->query('ALTER TABLE sta...')
+#2 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#3 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
 #5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tierra...', false)
-#8 /internal/eval.php(20): activate_plugin('tierra-billboar...')
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#8 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
 #9 {main}</pre>
- for query INSERT INTO wp_ti_billboard_manager set title='___DEFAULT___' made by activate_plugin, do_action('activate_tierra-billboard-manager/tierra-billboard-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, _ti_bbm_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 09:30:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_currentuserinfo() in /wordpress/wp-content/plugins/tierra-billboard-manager/tierra-billboard-manager.php:52
-Stack trace:
-#0 /wordpress/wp-settings.php(545): include_once()
-#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/tierra-billboard-manager/tierra-billboard-manager.php on line 52
-[09-May-2025 09:30:33 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:30:33 UTC] PHP Warning:  Undefined array key "QUERY_STRING" in /wordpress/wp-content/plugins/tierra-billboard-manager/tierra-billboard-manager.php on line 92
-[09-May-2025 09:30:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE statistics DEFAULT CHARACTER SET=utf8mb4; made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_ti_billboard_manager (
-						`id` int(11) NOT NULL AUTO_INCREMENT,
-						`title` varchar(64) DEFAULT 'Tierra Billboard Manager Playlist',
-						`description` varchar(255) DEFAULT NULL,
-						`image` varchar(255) DEFAULT NULL,
-						`random` int(1) DEFAULT NULL,
-						`autoPlay` int(1) DEFAULT '1',
-						`license` text,
-						`tracks` text,
-						`modification_date` datetime DEFAULT NULL,
-						`creation_date` datetime DEFAULT NULL,
-						`last_play_date` datetime DEFAULT NULL,
-						`views` int(11) DEFAULT NULL,
-						`backgroundColor` varchar(8) DEFAULT 'ffffff',
-						`navBarColor` varchar(8) DEFAULT '000000',
-						`glowColor` varchar(8) DEFAULT '9999ff',
-						`showTitles` int(1) DEFAULT '1',
-						`showRollovers` int(1) DEFAULT '1',
-						`repeating` int(1) DEFAULT '1',
-						`useOverlay` int(1) DEFAULT '0',
-						`keepTitles` int(1) DEFAULT '0',
-						`delay` int(11) DEFAULT '8',
-						`titleBGColor` varchar(8) DEFAULT '000000',
-						`titleFGColor` varchar(8) DEFAULT 'FFFFFF',
-						`themeURL` varchar(255) DEFAULT  'http://127.0.0.1:9406/wp-content/plugins/tierra-billboard-manager/skin/',
-						`showThumbnail` int(1) DEFAULT '1',
-						`titlesOnRollover` int(1) DEFAULT '1',
-						`justifyTitle` varchar(8) DEFAULT 'left',
-						`width` int(11) DEFAULT '440',
-						`height` int(11) DEFAULT '280',
-						`initialVolume` int(6) DEFAULT '1',
-						
-					PRIMARY KEY `id` (`id`),
-					UNIQUE KEY `title` (`title`)
-			)</p>
+<p>CREATE INDEX user_id ON statistics (user_id);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -88,125 +209,24 @@ Stack trace:
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/tierra-billboard-manager/tierra-billboard-manager.php(209): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): _ti_bbm_install(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tierra...', false)
-#7 /internal/eval.php(20): activate_plugin('tierra-billboar...')
-#8 {main}</pre>
- for query CREATE TABLE wp_ti_billboard_manager (
-						`id` int(11) NOT NULL AUTO_INCREMENT,
-						`title` varchar(64) DEFAULT 'Tierra Billboard Manager Playlist',
-						`description` varchar(255) DEFAULT NULL,
-						`image` varchar(255) DEFAULT NULL,
-						`random` int(1) DEFAULT NULL,
-						`autoPlay` int(1) DEFAULT '1',
-						`license` text,
-						`tracks` text,
-						`modification_date` datetime DEFAULT NULL,
-						`creation_date` datetime DEFAULT NULL,
-						`last_play_date` datetime DEFAULT NULL,
-						`views` int(11) DEFAULT NULL,
-						`backgroundColor` varchar(8) DEFAULT 'ffffff',
-						`navBarColor` varchar(8) DEFAULT '000000',
-						`glowColor` varchar(8) DEFAULT '9999ff',
-						`showTitles` int(1) DEFAULT '1',
-						`showRollovers` int(1) DEFAULT '1',
-						`repeating` int(1) DEFAULT '1',
-						`useOverlay` int(1) DEFAULT '0',
-						`keepTitles` int(1) DEFAULT '0',
-						`delay` int(11) DEFAULT '8',
-						`titleBGColor` varchar(8) DEFAULT '000000',
-						`titleFGColor` varchar(8) DEFAULT 'FFFFFF',
-						`themeURL` varchar(255) DEFAULT  'http://127.0.0.1:9406/wp-content/plugins/tierra-billboard-manager/skin/',
-						`showThumbnail` int(1) DEFAULT '1',
-						`titlesOnRollover` int(1) DEFAULT '1',
-						`justifyTitle` varchar(8) DEFAULT 'left',
-						`width` int(11) DEFAULT '440',
-						`height` int(11) DEFAULT '280',
-						`initialVolume` int(6) DEFAULT '1',
-						
-					PRIMARY KEY `id` (`id`),
-					UNIQUE KEY `title` (`title`)
-			) made by activate_plugin, do_action('activate_tierra-billboard-manager/tierra-billboard-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, _ti_bbm_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 09:30:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(444): WP_SQLite_DB->query('CREATE INDEX us...')
+#2 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#3 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#8 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#9 {main}</pre>
+ for query CREATE INDEX user_id ON statistics (user_id); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_ti_billboard_manager set title='___DEFAULT___'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ti_billboard_manager set title=:param0  | parameters: ___DEFAULT___</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "set": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/tierra-billboard-manager/tierra-billboard-manager.php(211): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): _ti_bbm_install(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tierra...', false)
-#6 /internal/eval.php(20): activate_plugin('tierra-billboar...')
-#7 {main}</pre>
- for query INSERT INTO wp_ti_billboard_manager set title='___DEFAULT___' made by activate_plugin, do_action('activate_tierra-billboard-manager/tierra-billboard-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, _ti_bbm_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 09:30:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_currentuserinfo() in /wordpress/wp-content/plugins/tierra-billboard-manager/tierra-billboard-manager.php:52
-Stack trace:
-#0 /wordpress/wp-settings.php(545): include_once()
-#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/tierra-billboard-manager/tierra-billboard-manager.php on line 52
-[09-May-2025 09:30:42 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:30:42 UTC] PHP Warning:  Undefined array key "QUERY_STRING" in /wordpress/wp-content/plugins/tierra-billboard-manager/tierra-billboard-manager.php on line 92
-[09-May-2025 09:30:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_ti_billboard_manager (
-						`id` int(11) NOT NULL AUTO_INCREMENT,
-						`title` varchar(64) DEFAULT 'Tierra Billboard Manager Playlist',
-						`description` varchar(255) DEFAULT NULL,
-						`image` varchar(255) DEFAULT NULL,
-						`random` int(1) DEFAULT NULL,
-						`autoPlay` int(1) DEFAULT '1',
-						`license` text,
-						`tracks` text,
-						`modification_date` datetime DEFAULT NULL,
-						`creation_date` datetime DEFAULT NULL,
-						`last_play_date` datetime DEFAULT NULL,
-						`views` int(11) DEFAULT NULL,
-						`backgroundColor` varchar(8) DEFAULT 'ffffff',
-						`navBarColor` varchar(8) DEFAULT '000000',
-						`glowColor` varchar(8) DEFAULT '9999ff',
-						`showTitles` int(1) DEFAULT '1',
-						`showRollovers` int(1) DEFAULT '1',
-						`repeating` int(1) DEFAULT '1',
-						`useOverlay` int(1) DEFAULT '0',
-						`keepTitles` int(1) DEFAULT '0',
-						`delay` int(11) DEFAULT '8',
-						`titleBGColor` varchar(8) DEFAULT '000000',
-						`titleFGColor` varchar(8) DEFAULT 'FFFFFF',
-						`themeURL` varchar(255) DEFAULT  'http://127.0.0.1:9406/wp-content/plugins/tierra-billboard-manager/skin/',
-						`showThumbnail` int(1) DEFAULT '1',
-						`titlesOnRollover` int(1) DEFAULT '1',
-						`justifyTitle` varchar(8) DEFAULT 'left',
-						`width` int(11) DEFAULT '440',
-						`height` int(11) DEFAULT '280',
-						`initialVolume` int(6) DEFAULT '1',
-						
-					PRIMARY KEY `id` (`id`),
-					UNIQUE KEY `title` (`title`)
-			)</p>
+<p>CREATE INDEX user_group_units ON statistics (user_id, total_units);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -214,127 +234,295 @@ Stack trace:
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/tierra-billboard-manager/tierra-billboard-manager.php(209): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): _ti_bbm_install(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tierra...', false)
-#7 /internal/eval.php(20): activate_plugin('tierra-billboar...')
-#8 {main}</pre>
- for query CREATE TABLE wp_ti_billboard_manager (
-						`id` int(11) NOT NULL AUTO_INCREMENT,
-						`title` varchar(64) DEFAULT 'Tierra Billboard Manager Playlist',
-						`description` varchar(255) DEFAULT NULL,
-						`image` varchar(255) DEFAULT NULL,
-						`random` int(1) DEFAULT NULL,
-						`autoPlay` int(1) DEFAULT '1',
-						`license` text,
-						`tracks` text,
-						`modification_date` datetime DEFAULT NULL,
-						`creation_date` datetime DEFAULT NULL,
-						`last_play_date` datetime DEFAULT NULL,
-						`views` int(11) DEFAULT NULL,
-						`backgroundColor` varchar(8) DEFAULT 'ffffff',
-						`navBarColor` varchar(8) DEFAULT '000000',
-						`glowColor` varchar(8) DEFAULT '9999ff',
-						`showTitles` int(1) DEFAULT '1',
-						`showRollovers` int(1) DEFAULT '1',
-						`repeating` int(1) DEFAULT '1',
-						`useOverlay` int(1) DEFAULT '0',
-						`keepTitles` int(1) DEFAULT '0',
-						`delay` int(11) DEFAULT '8',
-						`titleBGColor` varchar(8) DEFAULT '000000',
-						`titleFGColor` varchar(8) DEFAULT 'FFFFFF',
-						`themeURL` varchar(255) DEFAULT  'http://127.0.0.1:9406/wp-content/plugins/tierra-billboard-manager/skin/',
-						`showThumbnail` int(1) DEFAULT '1',
-						`titlesOnRollover` int(1) DEFAULT '1',
-						`justifyTitle` varchar(8) DEFAULT 'left',
-						`width` int(11) DEFAULT '440',
-						`height` int(11) DEFAULT '280',
-						`initialVolume` int(6) DEFAULT '1',
-						
-					PRIMARY KEY `id` (`id`),
-					UNIQUE KEY `title` (`title`)
-			) made by activate_plugin, do_action('activate_tierra-billboard-manager/tierra-billboard-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, _ti_bbm_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 09:30:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(447): WP_SQLite_DB->query('CREATE INDEX us...')
+#2 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#3 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#8 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#9 {main}</pre>
+ for query CREATE INDEX user_group_units ON statistics (user_id, total_units); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_ti_billboard_manager set title='___DEFAULT___'</p>
+<p>CREATE INDEX total_units ON statistics (total_units);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ti_billboard_manager set title=:param0  | parameters: ___DEFAULT___</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "set": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/tierra-billboard-manager/tierra-billboard-manager.php(211): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): _ti_bbm_install(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tierra...', false)
-#6 /internal/eval.php(20): activate_plugin('tierra-billboar...')
-#7 {main}</pre>
- for query INSERT INTO wp_ti_billboard_manager set title='___DEFAULT___' made by activate_plugin, do_action('activate_tierra-billboard-manager/tierra-billboard-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, _ti_bbm_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 09:30:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_currentuserinfo() in /wordpress/wp-content/plugins/tierra-billboard-manager/tierra-billboard-manager.php:52
-Stack trace:
-#0 /wordpress/wp-settings.php(545): include_once()
-#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/tierra-billboard-manager/tierra-billboard-manager.php on line 52
-[09-May-2025 09:30:53 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:30:53 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:31:01 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:31:01 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:31:10 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:31:10 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:35:23 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>tc-portfolio</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:35:32 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>tc-portfolio</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:35:40 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>tc-portfolio</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:36:15 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:36:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tip-of-the-day/includes/totd-widgets.php:76
-Stack trace:
-#0 /wordpress/wp-content/plugins/tip-of-the-day/loader.php(36): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tip-of-the-day/...')
-#3 /internal/eval.php(20): activate_plugin('tip-of-the-day/...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/tip-of-the-day/includes/totd-widgets.php on line 76
-[09-May-2025 09:36:23 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:36:23 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tip-of-the-day/includes/totd-widgets.php:76
-Stack trace:
-#0 /wordpress/wp-content/plugins/tip-of-the-day/loader.php(36): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tip-of-the-day/...')
-#3 /internal/eval.php(20): activate_plugin('tip-of-the-day/...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/tip-of-the-day/includes/totd-widgets.php on line 76
-[09-May-2025 09:36:31 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:36:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tip-of-the-day/includes/totd-widgets.php:76
-Stack trace:
-#0 /wordpress/wp-content/plugins/tip-of-the-day/loader.php(36): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tip-of-the-day/...')
-#3 /internal/eval.php(20): activate_plugin('tip-of-the-day/...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/tip-of-the-day/includes/totd-widgets.php on line 76
-[09-May-2025 09:36:40 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:36:48 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:36:57 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:37:07 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:37:15 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 09:37:24 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+#1 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(450): WP_SQLite_DB->query('CREATE INDEX to...')
+#2 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#3 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#8 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#9 {main}</pre>
+ for query CREATE INDEX total_units ON statistics (total_units); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX last_stat_date ON statistics (last_stat);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(453): WP_SQLite_DB->query('CREATE INDEX la...')
+#2 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#3 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#8 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#9 {main}</pre>
+ for query CREATE INDEX last_stat_date ON statistics (last_stat); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX last_stat_total_units ON statistics (total_units, last_stat);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(456): WP_SQLite_DB->query('CREATE INDEX la...')
+#2 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#3 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#8 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#9 {main}</pre>
+ for query CREATE INDEX last_stat_total_units ON statistics (total_units, last_stat); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX user_date_units ON statistics (user_id, last_stat, total_units);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(459): WP_SQLite_DB->query('CREATE INDEX us...')
+#2 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#3 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#8 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#9 {main}</pre>
+ for query CREATE INDEX user_date_units ON statistics (user_id, last_stat, total_units); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE statistics DEFAULT CHARACTER SET=utf8mb4;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: DEFAULT CHARACTER SET.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(441): WP_SQLite_DB->query('ALTER TABLE sta...')
+#2 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#3 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#8 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#9 {main}</pre>
+ for query ALTER TABLE statistics DEFAULT CHARACTER SET=utf8mb4; made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX user_id ON statistics (user_id);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(444): WP_SQLite_DB->query('CREATE INDEX us...')
+#2 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#3 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#8 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#9 {main}</pre>
+ for query CREATE INDEX user_id ON statistics (user_id); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX user_group_units ON statistics (user_id, total_units);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(447): WP_SQLite_DB->query('CREATE INDEX us...')
+#2 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#3 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#8 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#9 {main}</pre>
+ for query CREATE INDEX user_group_units ON statistics (user_id, total_units); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX total_units ON statistics (total_units);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(450): WP_SQLite_DB->query('CREATE INDEX to...')
+#2 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#3 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#8 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#9 {main}</pre>
+ for query CREATE INDEX total_units ON statistics (total_units); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX last_stat_date ON statistics (last_stat);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(453): WP_SQLite_DB->query('CREATE INDEX la...')
+#2 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#3 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#8 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#9 {main}</pre>
+ for query CREATE INDEX last_stat_date ON statistics (last_stat); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX last_stat_total_units ON statistics (total_units, last_stat);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(456): WP_SQLite_DB->query('CREATE INDEX la...')
+#2 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#3 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#8 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#9 {main}</pre>
+ for query CREATE INDEX last_stat_total_units ON statistics (total_units, last_stat); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 09:52:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX user_date_units ON statistics (user_id, last_stat, total_units);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(459): WP_SQLite_DB->query('CREATE INDEX us...')
+#2 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(256): TipsterTAP\Frontend\TipsterTap->db_update()
+#3 /wordpress/wp-content/plugins/tipster-tap/public/class-tipster-tap.php(165): TipsterTAP\Frontend\TipsterTap::single_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): TipsterTAP\Frontend\TipsterTap::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tipste...', false)
+#8 /internal/eval.php(20): activate_plugin('tipster-tap/tip...')
+#9 {main}</pre>
+ for query CREATE INDEX user_date_units ON statistics (user_id, last_stat, total_units); made by activate_plugin, do_action('activate_tipster-tap/tipster-tap.php'), WP_Hook->do_action, WP_Hook->apply_filters, TipsterTAP\Frontend\TipsterTap::activate, TipsterTAP\Frontend\TipsterTap::single_activate, TipsterTAP\Frontend\TipsterTap->db_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
