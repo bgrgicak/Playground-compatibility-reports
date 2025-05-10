@@ -2,185 +2,145 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [09-May-2025 05:50:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_backupbank_settings ADD COLUMN `retention` int DEFAULT 5 NOT NULL AFTER enabled</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_backupbank_settings</li>
-<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_backupbank_settings</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_backupbank_settings</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_backupbank_settings</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_backupbank_settings, retention, 1, 5, NO, int, , , 10, 0, , , , int, , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_backupbank_settings</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Table 'wp_backupbank_settings' doesn't exist
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3123): WP_SQLite_Driver->new_driver_exception('Table 'wp_backu...', '42S02')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2800): WP_SQLite_Driver->get_sqlite_create_table_statement(false, 'wp_backupbank_s...', '_wp_sqlite_tmp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1335): WP_SQLite_Driver->recreate_table_from_information_schema(false, 'wp_backupbank_s...', Array)
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(857): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#7 /wordpress/wp-content/plugins/backupbank-no-hassel-automated-backups/includes/db_upgrade.php(13): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#8 /wordpress/wp-content/plugins/backupbank-no-hassel-automated-backups/backupbank.php(25): require_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('backupbank-no-h...')
-#11 /internal/eval.php(20): activate_plugin('backupbank-no-h...')
-#12 {main}</pre>
- for query ALTER TABLE wp_backupbank_settings ADD COLUMN `retention` int DEFAULT 5 NOT NULL AFTER enabled made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/backupbank-no-hassel-automated-backups/backupbank.php'), require_once('/plugins/backupbank-no-hassel-automated-backups/includes/db_upgrade.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 05:50:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_backupbank_settings</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_backupbank_settings` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_backupbank_settings
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/backupbank-no-hassel-automated-backups/backupbank.php(145): wpdb->get_results('SELECT * FROM w...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('backupbank-no-h...')
-#7 /internal/eval.php(20): activate_plugin('backupbank-no-h...')
-#8 {main}</pre>
- for query SELECT * FROM wp_backupbank_settings made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/backupbank-no-hassel-automated-backups/backupbank.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 05:51:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_backupbank_settings ADD COLUMN `retention` int DEFAULT 5 NOT NULL AFTER enabled</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_backupbank_settings, retention, int</li>
-<li>Executing: ALTER TABLE wp_backupbank_settings ADD COLUMN `retention` integer DEFAULT 5 NOT NULL   | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_backupbank_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/backupbank-no-hassel-automated-backups/includes/db_upgrade.php(13): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/backupbank-no-hassel-automated-backups/backupbank.php(25): require_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('backupbank-no-h...')
-#5 /internal/eval.php(20): activate_plugin('backupbank-no-h...')
-#6 {main}</pre>
- for query ALTER TABLE wp_backupbank_settings ADD COLUMN `retention` int DEFAULT 5 NOT NULL AFTER enabled made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/backupbank-no-hassel-automated-backups/backupbank.php'), require_once('/plugins/backupbank-no-hassel-automated-backups/includes/db_upgrade.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 05:51:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_backupbank_settings</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_backupbank_settings | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_backupbank_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/backupbank-no-hassel-automated-backups/backupbank.php(145): wpdb->get_results('SELECT * FROM w...')
-#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('backupbank-no-h...')
-#5 /internal/eval.php(20): activate_plugin('backupbank-no-h...')
-#6 {main}</pre>
- for query SELECT * FROM wp_backupbank_settings made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/backupbank-no-hassel-automated-backups/backupbank.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 05:51:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_backupbank_settings ADD COLUMN `retention` int DEFAULT 5 NOT NULL AFTER enabled</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_backupbank_settings, retention, int</li>
-<li>Executing: ALTER TABLE wp_backupbank_settings ADD COLUMN `retention` integer DEFAULT 5 NOT NULL   | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_backupbank_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/backupbank-no-hassel-automated-backups/includes/db_upgrade.php(13): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/backupbank-no-hassel-automated-backups/backupbank.php(25): require_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('backupbank-no-h...')
-#5 /internal/eval.php(20): activate_plugin('backupbank-no-h...')
-#6 {main}</pre>
- for query ALTER TABLE wp_backupbank_settings ADD COLUMN `retention` int DEFAULT 5 NOT NULL AFTER enabled made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/backupbank-no-hassel-automated-backups/backupbank.php'), require_once('/plugins/backupbank-no-hassel-automated-backups/includes/db_upgrade.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 05:51:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_backupbank_settings</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_backupbank_settings | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_backupbank_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/backupbank-no-hassel-automated-backups/backupbank.php(145): wpdb->get_results('SELECT * FROM w...')
-#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('backupbank-no-h...')
-#5 /internal/eval.php(20): activate_plugin('backupbank-no-h...')
-#6 {main}</pre>
- for query SELECT * FROM wp_backupbank_settings made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/backupbank-no-hassel-automated-backups/backupbank.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 05:54:41 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 05:54:42 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 05:54:50 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 05:54:51 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 05:54:59 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 05:55:00 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 05:55:09 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+Error: [10-May-2025 14:25:38 UTC] PHP Warning:  Undefined array key "broo_show_user_assignment_modal" in /wordpress/wp-content/plugins/badgearoo/includes/actions.php on line 88
+[10-May-2025 14:25:38 UTC] PHP Deprecated:  Required parameter $template_vars follows optional parameter $name in /wordpress/wp-content/plugins/badgearoo/includes/template-functions.php on line 29
+[10-May-2025 14:25:38 UTC] PHP Deprecated:  Required parameter $template_vars follows optional parameter $load in /wordpress/wp-content/plugins/badgearoo/includes/template-functions.php on line 63
+[10-May-2025 14:25:38 UTC] PHP Deprecated:  Required parameter $created_dt follows optional parameter $badges in /wordpress/wp-content/plugins/badgearoo/includes/class-condition.php on line 22
+[10-May-2025 14:25:39 UTC] PHP Warning:  Undefined array key "broo_show_user_assignment_modal" in /wordpress/wp-content/plugins/badgearoo/includes/actions.php on line 88
+[10-May-2025 14:25:39 UTC] PHP Deprecated:  Required parameter $template_vars follows optional parameter $name in /wordpress/wp-content/plugins/badgearoo/includes/template-functions.php on line 29
+[10-May-2025 14:25:39 UTC] PHP Deprecated:  Required parameter $template_vars follows optional parameter $load in /wordpress/wp-content/plugins/badgearoo/includes/template-functions.php on line 63
+[10-May-2025 14:25:39 UTC] PHP Deprecated:  Required parameter $created_dt follows optional parameter $badges in /wordpress/wp-content/plugins/badgearoo/includes/class-condition.php on line 22
+[10-May-2025 14:25:39 UTC] PHP Warning:  Undefined array key "broo_bp_assignment_summary_placement" in /wordpress/wp-content/plugins/badgearoo/includes/integrations/buddypress.php on line 792
+[10-May-2025 14:25:39 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>badgearoo</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 14:25:47 UTC] PHP Warning:  Undefined array key "broo_show_user_assignment_modal" in /wordpress/wp-content/plugins/badgearoo/includes/actions.php on line 88
+[10-May-2025 14:25:47 UTC] PHP Deprecated:  Required parameter $template_vars follows optional parameter $name in /wordpress/wp-content/plugins/badgearoo/includes/template-functions.php on line 29
+[10-May-2025 14:25:47 UTC] PHP Deprecated:  Required parameter $template_vars follows optional parameter $load in /wordpress/wp-content/plugins/badgearoo/includes/template-functions.php on line 63
+[10-May-2025 14:25:47 UTC] PHP Deprecated:  Required parameter $created_dt follows optional parameter $badges in /wordpress/wp-content/plugins/badgearoo/includes/class-condition.php on line 22
+[10-May-2025 14:25:48 UTC] PHP Warning:  Undefined array key "broo_show_user_assignment_modal" in /wordpress/wp-content/plugins/badgearoo/includes/actions.php on line 88
+[10-May-2025 14:25:48 UTC] PHP Deprecated:  Required parameter $template_vars follows optional parameter $name in /wordpress/wp-content/plugins/badgearoo/includes/template-functions.php on line 29
+[10-May-2025 14:25:48 UTC] PHP Deprecated:  Required parameter $template_vars follows optional parameter $load in /wordpress/wp-content/plugins/badgearoo/includes/template-functions.php on line 63
+[10-May-2025 14:25:48 UTC] PHP Deprecated:  Required parameter $created_dt follows optional parameter $badges in /wordpress/wp-content/plugins/badgearoo/includes/class-condition.php on line 22
+[10-May-2025 14:25:48 UTC] PHP Warning:  Undefined array key "broo_bp_assignment_summary_placement" in /wordpress/wp-content/plugins/badgearoo/includes/integrations/buddypress.php on line 792
+[10-May-2025 14:25:49 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>badgearoo</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 14:25:56 UTC] PHP Warning:  Undefined array key "broo_show_user_assignment_modal" in /wordpress/wp-content/plugins/badgearoo/includes/actions.php on line 88
+[10-May-2025 14:25:56 UTC] PHP Deprecated:  Required parameter $template_vars follows optional parameter $name in /wordpress/wp-content/plugins/badgearoo/includes/template-functions.php on line 29
+[10-May-2025 14:25:56 UTC] PHP Deprecated:  Required parameter $template_vars follows optional parameter $load in /wordpress/wp-content/plugins/badgearoo/includes/template-functions.php on line 63
+[10-May-2025 14:25:56 UTC] PHP Deprecated:  Required parameter $created_dt follows optional parameter $badges in /wordpress/wp-content/plugins/badgearoo/includes/class-condition.php on line 22
+[10-May-2025 14:25:57 UTC] PHP Warning:  Undefined array key "broo_show_user_assignment_modal" in /wordpress/wp-content/plugins/badgearoo/includes/actions.php on line 88
+[10-May-2025 14:25:57 UTC] PHP Deprecated:  Required parameter $template_vars follows optional parameter $name in /wordpress/wp-content/plugins/badgearoo/includes/template-functions.php on line 29
+[10-May-2025 14:25:57 UTC] PHP Deprecated:  Required parameter $template_vars follows optional parameter $load in /wordpress/wp-content/plugins/badgearoo/includes/template-functions.php on line 63
+[10-May-2025 14:25:57 UTC] PHP Deprecated:  Required parameter $created_dt follows optional parameter $badges in /wordpress/wp-content/plugins/badgearoo/includes/class-condition.php on line 22
+[10-May-2025 14:25:57 UTC] PHP Warning:  Undefined array key "broo_bp_assignment_summary_placement" in /wordpress/wp-content/plugins/badgearoo/includes/integrations/buddypress.php on line 792
+[10-May-2025 14:25:57 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>badgearoo</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 14:26:27 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>pvm</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 14:26:27 UTC] PHP Deprecated:  Required parameter $sites follows optional parameter $user in /wordpress/wp-content/plugins/bbpress-post-via-mail/library/pvm/Connector/WordPress.php on line 828
+[10-May-2025 14:26:36 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>pvm</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 14:26:36 UTC] PHP Deprecated:  Required parameter $sites follows optional parameter $user in /wordpress/wp-content/plugins/bbpress-post-via-mail/library/pvm/Connector/WordPress.php on line 828
+[10-May-2025 14:26:44 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>pvm</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 14:26:44 UTC] PHP Deprecated:  Required parameter $sites follows optional parameter $user in /wordpress/wp-content/plugins/bbpress-post-via-mail/library/pvm/Connector/WordPress.php on line 828
+[10-May-2025 14:28:40 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 14:28:40 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BP_GROUP_LIVECHAT_DB_VERSION" in /wordpress/wp-content/plugins/bp-group-livechat/loader.php:47
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): bp_group_livechat_activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bp-gro...', false)
+#4 /internal/eval.php(20): activate_plugin('bp-group-livech...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/bp-group-livechat/loader.php on line 47
+[10-May-2025 14:28:47 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 14:28:48 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BP_GROUP_LIVECHAT_DB_VERSION" in /wordpress/wp-content/plugins/bp-group-livechat/loader.php:47
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): bp_group_livechat_activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bp-gro...', false)
+#4 /internal/eval.php(20): activate_plugin('bp-group-livech...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/bp-group-livechat/loader.php on line 47
+[10-May-2025 14:28:54 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 14:28:55 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BP_GROUP_LIVECHAT_DB_VERSION" in /wordpress/wp-content/plugins/bp-group-livechat/loader.php:47
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): bp_group_livechat_activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bp-gro...', false)
+#4 /internal/eval.php(20): activate_plugin('bp-group-livech...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/bp-group-livechat/loader.php on line 47
+[10-May-2025 14:29:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function bp_get_theme_package_id() in /wordpress/wp-content/plugins/bp-profile-home-widgets/includes/bpphw-functions.php:889
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): bpphw_activate_legacy_widget_areas('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/bp-profile-home-widgets/includes/bpphw-functions.php on line 889
+[10-May-2025 14:29:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function bp_get_theme_package_id() in /wordpress/wp-content/plugins/bp-profile-home-widgets/includes/bpphw-functions.php:889
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): bpphw_activate_legacy_widget_areas('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/bp-profile-home-widgets/includes/bpphw-functions.php on line 889
+[10-May-2025 14:29:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function bp_get_theme_package_id() in /wordpress/wp-content/plugins/bp-profile-home-widgets/includes/bpphw-functions.php:889
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): bpphw_activate_legacy_widget_areas('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/bp-profile-home-widgets/includes/bpphw-functions.php on line 889
+[10-May-2025 14:29:59 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BP_VERSION" in /wordpress/wp-content/plugins/buddypress-notifications-manager/loader.php:117
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('buddypress-noti...')
+#2 /internal/eval.php(20): activate_plugin('buddypress-noti...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/buddypress-notifications-manager/loader.php on line 117
+[10-May-2025 14:30:06 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BP_VERSION" in /wordpress/wp-content/plugins/buddypress-notifications-manager/loader.php:117
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('buddypress-noti...')
+#2 /internal/eval.php(20): activate_plugin('buddypress-noti...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/buddypress-notifications-manager/loader.php on line 117
+[10-May-2025 14:30:14 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BP_VERSION" in /wordpress/wp-content/plugins/buddypress-notifications-manager/loader.php:117
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('buddypress-noti...')
+#2 /internal/eval.php(20): activate_plugin('buddypress-noti...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/buddypress-notifications-manager/loader.php on line 117
+[10-May-2025 14:30:23 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 14:30:24 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 14:30:32 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 14:30:33 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 14:30:41 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 14:30:42 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 14:30:51 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
