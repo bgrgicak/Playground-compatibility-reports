@@ -2,43 +2,117 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [09-May-2025 06:59:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-May-2025 20:47:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SHOW TABLES LIKE wp_wpcm_menu_props</p>
+<p>DELETE FROM `wp_events` WHERE `thetime` <= 1746823669 AND `archive` = 'no'</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DELETE FROM `wp_events` WHERE `thetime` &lt;= 1746823669 AND `archive` = 'no' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 no such table: wp_events
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW TABLES LIK...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW TABLES LIK...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SHOW TABLES LIK...')
-#4 /wordpress/wp-content/plugins/wp-easy-bubble-menu/wp_bubble_menu.php(21): wpdb->get_var('SHOW TABLES LIK...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wpcm_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-eas...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-easy-bubble-...')
-#10 {main}</pre>
- for query SHOW TABLES LIKE wp_wpcm_menu_props made by activate_plugin, do_action('activate_wp-easy-bubble-menu/wp_bubble_menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpcm_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 07:01:19 UTC] PHP Notice:  Undefined index: DOCUMENT_ROOT in /wordpress/wp-content/plugins/wp-ignitor/src/wpIgnitor.php on line 159
-[09-May-2025 07:01:19 UTC] PHP Notice:  Undefined index: DOCUMENT_ROOT in /wordpress/wp-content/plugins/wp-ignitor/src/wpIgnitor.php on line 160
-[09-May-2025 07:01:20 UTC] PHP Notice:  Undefined index: DOCUMENT_ROOT in /wordpress/wp-content/plugins/wp-ignitor/src/wpIgnitor.php on line 159
-[09-May-2025 07:01:20 UTC] PHP Notice:  Undefined index: DOCUMENT_ROOT in /wordpress/wp-content/plugins/wp-ignitor/src/wpIgnitor.php on line 160
-[09-May-2025 07:01:28 UTC] PHP Notice:  Undefined index: DOCUMENT_ROOT in /wordpress/wp-content/plugins/wp-ignitor/src/wpIgnitor.php on line 159
-[09-May-2025 07:01:28 UTC] PHP Notice:  Undefined index: DOCUMENT_ROOT in /wordpress/wp-content/plugins/wp-ignitor/src/wpIgnitor.php on line 160
-[09-May-2025 07:01:29 UTC] PHP Notice:  Undefined index: DOCUMENT_ROOT in /wordpress/wp-content/plugins/wp-ignitor/src/wpIgnitor.php on line 159
-[09-May-2025 07:01:29 UTC] PHP Notice:  Undefined index: DOCUMENT_ROOT in /wordpress/wp-content/plugins/wp-ignitor/src/wpIgnitor.php on line 160
-[09-May-2025 07:01:37 UTC] PHP Notice:  Undefined index: DOCUMENT_ROOT in /wordpress/wp-content/plugins/wp-ignitor/src/wpIgnitor.php on line 159
-[09-May-2025 07:01:37 UTC] PHP Notice:  Undefined index: DOCUMENT_ROOT in /wordpress/wp-content/plugins/wp-ignitor/src/wpIgnitor.php on line 160
-[09-May-2025 07:01:38 UTC] PHP Notice:  Undefined index: DOCUMENT_ROOT in /wordpress/wp-content/plugins/wp-ignitor/src/wpIgnitor.php on line 159
-[09-May-2025 07:01:38 UTC] PHP Notice:  Undefined index: DOCUMENT_ROOT in /wordpress/wp-content/plugins/wp-ignitor/src/wpIgnitor.php on line 160
-[09-May-2025 07:02:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELETE FROM `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELETE FROM `wp...')
+#3 /wordpress/wp-content/plugins/wp-events/wp-events-functions.php(456): WP_SQLite_DB->query('DELETE FROM `wp...')
+#4 /wordpress/wp-content/plugins/wp-events/wp-events.php(23): events_clear_old()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-events/wp-ev...')
+#7 /internal/eval.php(20): activate_plugin('wp-events/wp-ev...')
+#8 {main}</pre>
+ for query DELETE FROM `wp_events` WHERE `thetime` <= 1746823669 AND `archive` = 'no' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-events/wp-events.php'), events_clear_old, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 20:47:49 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/wp-events/wp-events-setup.php on line 35
+[10-May-2025 20:47:49 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/wp-events/wp-events-setup.php on line 43
+[10-May-2025 20:47:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DELETE FROM `wp_events` WHERE `thetime` <= 1746823678 AND `archive` = 'no'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DELETE FROM `wp_events` WHERE `thetime` &lt;= 1746823678 AND `archive` = :param0  | parameters: no</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_events.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-events/wp-events-functions.php(456): WP_SQLite_DB->query('DELETE FROM `wp...')
+#2 /wordpress/wp-content/plugins/wp-events/wp-events.php(23): events_clear_old()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-events/wp-ev...')
+#5 /internal/eval.php(20): activate_plugin('wp-events/wp-ev...')
+#6 {main}</pre>
+ for query DELETE FROM `wp_events` WHERE `thetime` <= 1746823678 AND `archive` = 'no' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-events/wp-events.php'), events_clear_old, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 20:47:58 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/wp-events/wp-events-setup.php on line 35
+[10-May-2025 20:47:58 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/wp-events/wp-events-setup.php on line 43
+[10-May-2025 20:48:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DELETE FROM `wp_events` WHERE `thetime` <= 1746823688 AND `archive` = 'no'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DELETE FROM `wp_events` WHERE `thetime` &lt;= 1746823688 AND `archive` = :param0  | parameters: no</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_events.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-events/wp-events-functions.php(456): WP_SQLite_DB->query('DELETE FROM `wp...')
+#2 /wordpress/wp-content/plugins/wp-events/wp-events.php(23): events_clear_old()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-events/wp-ev...')
+#5 /internal/eval.php(20): activate_plugin('wp-events/wp-ev...')
+#6 {main}</pre>
+ for query DELETE FROM `wp_events` WHERE `thetime` <= 1746823688 AND `archive` = 'no' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-events/wp-events.php'), events_clear_old, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 20:48:08 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/wp-events/wp-events-setup.php on line 35
+[10-May-2025 20:48:08 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/wp-events/wp-events-setup.php on line 43
+[10-May-2025 20:48:44 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php on line 23
+[10-May-2025 20:48:44 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php on line 33
+[10-May-2025 20:48:44 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php on line 34
+[10-May-2025 20:48:44 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php on line 35
+[10-May-2025 20:48:44 UTC] PHP Fatal error:  Uncaught Error: Non-static method wpgpo_Installer::check() cannot be called statically in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php:51
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-google-plus-...')
+#2 /internal/eval.php(20): activate_plugin('wp-google-plus-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php on line 51
+[10-May-2025 20:48:53 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php on line 23
+[10-May-2025 20:48:53 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php on line 33
+[10-May-2025 20:48:53 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php on line 34
+[10-May-2025 20:48:53 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php on line 35
+[10-May-2025 20:48:53 UTC] PHP Fatal error:  Uncaught Error: Non-static method wpgpo_Installer::check() cannot be called statically in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php:51
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-google-plus-...')
+#2 /internal/eval.php(20): activate_plugin('wp-google-plus-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php on line 51
+[10-May-2025 20:49:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php on line 23
+[10-May-2025 20:49:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php on line 33
+[10-May-2025 20:49:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php on line 34
+[10-May-2025 20:49:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php on line 35
+[10-May-2025 20:49:01 UTC] PHP Fatal error:  Uncaught Error: Non-static method wpgpo_Installer::check() cannot be called statically in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php:51
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-google-plus-...')
+#2 /internal/eval.php(20): activate_plugin('wp-google-plus-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-google-plus-one/plusone.php on line 51
+[10-May-2025 20:50:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SHOW COLUMNS FROM `wp_wpsc_purchase_logs`</p>
@@ -69,7 +143,7 @@ Table 'database_name_here.wp_wpsc_purchase_logs' doesn't exist
 #12 /internal/eval.php(20): activate_plugin('wpsc-dta-export...')
 #13 {main}</pre>
  for query SHOW COLUMNS FROM `wp_wpsc_purchase_logs` made by activate_plugin, do_action('activate_wpsc-dta-export/wpsc-dta-export.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSC_DTA_Export->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 07:02:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[10-May-2025 20:50:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>ALTER TABLE `wp_wpsc_purchase_logs` ADD `dta_export` TINYINT NOT NULL</p>
@@ -117,7 +191,7 @@ Table 'wp_wpsc_purchase_logs' doesn't exist
 #12 /internal/eval.php(20): activate_plugin('wpsc-dta-export...')
 #13 {main}</pre>
  for query ALTER TABLE `wp_wpsc_purchase_logs` ADD `dta_export` TINYINT NOT NULL made by activate_plugin, do_action('activate_wpsc-dta-export/wpsc-dta-export.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSC_DTA_Export->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 07:02:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[10-May-2025 20:50:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>ALTER TABLE `wp_wpsc_purchase_logs` ADD `dta_export` TINYINT NOT NULL</p>
@@ -145,7 +219,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #6 /internal/eval.php(20): activate_plugin('wpsc-dta-export...')
 #7 {main}</pre>
  for query ALTER TABLE `wp_wpsc_purchase_logs` ADD `dta_export` TINYINT NOT NULL made by activate_plugin, do_action('activate_wpsc-dta-export/wpsc-dta-export.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSC_DTA_Export->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 07:02:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[10-May-2025 20:50:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>ALTER TABLE `wp_wpsc_purchase_logs` ADD `dta_export` TINYINT NOT NULL</p>
@@ -173,7 +247,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #6 /internal/eval.php(20): activate_plugin('wpsc-dta-export...')
 #7 {main}</pre>
  for query ALTER TABLE `wp_wpsc_purchase_logs` ADD `dta_export` TINYINT NOT NULL made by activate_plugin, do_action('activate_wpsc-dta-export/wpsc-dta-export.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSC_DTA_Export->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 07:05:43 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[10-May-2025 20:52:08 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WordPress_Loop')
