@@ -2,87 +2,126 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [09-May-2025 04:02:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-May-2025 17:45:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>DELETE FROM wp_sessions_statistics WHERE (timestamp < NOW() - INTERVAL 720 HOUR);</p>
+<p>SELECT DATABASE();</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: DELETE FROM `wp_sessions_statistics` WHERE ( `timestamp` &lt; CURRENT_TIMESTAMP - INTERVAL 720 HOUR ) | (no parameters)</li>
+<li>Executing: SELECT DATABASE ( ) | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "720": syntax error
+SQLSTATE[HY000]: General error: 1 no such function: DATABASE
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELETE FROM wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELETE FROM wp_...')
-#3 /wordpress/wp-content/plugins/sessions/includes/system/class-database.php(191): WP_SQLite_DB->query('DELETE FROM wp_...')
-#4 /wordpress/wp-content/plugins/sessions/includes/features/class-schema.php(202): POSessions\System\Database->purge('wp_sessions_sta...', 'timestamp', 720)
-#5 /wordpress/wp-content/plugins/sessions/includes/features/class-schema.php(70): POSessions\Plugin\Feature\Schema::purge()
-#6 /wordpress/wp-includes/class-wp-hook.php(322): POSessions\Plugin\Feature\Schema::write()
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-includes/load.php(1304): do_action('shutdown')
-#10 [internal function]: shutdown_action_hook()
-#11 {main}</pre>
- for query DELETE FROM wp_sessions_statistics WHERE (timestamp < NOW() - INTERVAL 720 HOUR); made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, POSessions\Plugin\Feature\Schema::write, POSessions\Plugin\Feature\Schema::purge, POSessions\System\Database->purge, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 04:02:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT DATABASE...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT DATABASE...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT DATABASE...')
+#4 /wordpress/wp-content/plugins/sil-dictionary-webonary/include/infrastructure.php(401): wpdb->get_var('SELECT DATABASE...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): install_sil_dictionary_infrastructure('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query SELECT DATABASE(); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, install_sil_dictionary_infrastructure, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 17:45:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/sil-dictionary-webonary/include/infrastructure.php:407
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): install_sil_dictionary_infrastructure('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/sil-dictionary-webonary/include/infrastructure.php on line 407
+[10-May-2025 17:46:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>DELETE FROM wp_sessions_statistics WHERE (timestamp < NOW() - INTERVAL 720 HOUR);</p>
+<p>SELECT DATABASE();</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: DELETE FROM `wp_sessions_statistics` WHERE ( `timestamp` &lt; CURRENT_TIMESTAMP - INTERVAL 720 HOUR ) | (no parameters)</li>
+<li>Executing: SELECT DATABASE(); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "720": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: DATABASE.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELETE FROM wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELETE FROM wp_...')
-#3 /wordpress/wp-content/plugins/sessions/includes/system/class-database.php(191): WP_SQLite_DB->query('DELETE FROM wp_...')
-#4 /wordpress/wp-content/plugins/sessions/includes/features/class-schema.php(202): POSessions\System\Database->purge('wp_sessions_sta...', 'timestamp', 720)
-#5 /wordpress/wp-content/plugins/sessions/includes/features/class-schema.php(70): POSessions\Plugin\Feature\Schema::purge()
-#6 /wordpress/wp-includes/class-wp-hook.php(322): POSessions\Plugin\Feature\Schema::write()
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-includes/load.php(1304): do_action('shutdown')
-#10 [internal function]: shutdown_action_hook()
-#11 {main}</pre>
- for query DELETE FROM wp_sessions_statistics WHERE (timestamp < NOW() - INTERVAL 720 HOUR); made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, POSessions\Plugin\Feature\Schema::write, POSessions\Plugin\Feature\Schema::purge, POSessions\System\Database->purge, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 04:03:26 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "siteurl" in /wordpress/wp-content/plugins/share-and-get-it/shareandgetit-plugin.php:31
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT DATABASE...')
+#2 /wordpress/wp-content/plugins/sil-dictionary-webonary/include/infrastructure.php(401): wpdb->get_var('SELECT DATABASE...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): install_sil_dictionary_infrastructure('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(727): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query SELECT DATABASE(); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, install_sil_dictionary_infrastructure, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 17:46:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/sil-dictionary-webonary/include/infrastructure.php:407
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('share-and-get-i...')
-#2 /internal/eval.php(20): activate_plugin('share-and-get-i...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/share-and-get-it/shareandgetit-plugin.php on line 31
-[09-May-2025 04:03:35 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "siteurl" in /wordpress/wp-content/plugins/share-and-get-it/shareandgetit-plugin.php:31
+#0 /wordpress/wp-includes/class-wp-hook.php(324): install_sil_dictionary_infrastructure('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/sil-dictionary-webonary/include/infrastructure.php on line 407
+[10-May-2025 17:46:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT DATABASE();</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT DATABASE(); | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: DATABASE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT DATABASE...')
+#2 /wordpress/wp-content/plugins/sil-dictionary-webonary/include/infrastructure.php(401): wpdb->get_var('SELECT DATABASE...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): install_sil_dictionary_infrastructure('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(727): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query SELECT DATABASE(); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, install_sil_dictionary_infrastructure, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 17:46:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/sil-dictionary-webonary/include/infrastructure.php:407
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('share-and-get-i...')
-#2 /internal/eval.php(20): activate_plugin('share-and-get-i...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/share-and-get-it/shareandgetit-plugin.php on line 31
-[09-May-2025 04:03:43 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "siteurl" in /wordpress/wp-content/plugins/share-and-get-it/shareandgetit-plugin.php:31
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('share-and-get-i...')
-#2 /internal/eval.php(20): activate_plugin('share-and-get-i...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/share-and-get-it/shareandgetit-plugin.php on line 31
-[09-May-2025 04:04:17 UTC] PHP Parse error:  syntax error, unexpected token "==", expecting "(" in /wordpress/wp-content/plugins/slide-contact-form-and-a-lead-manager/functions.php on line 200
-[09-May-2025 04:04:25 UTC] PHP Parse error:  syntax error, unexpected token "==", expecting "(" in /wordpress/wp-content/plugins/slide-contact-form-and-a-lead-manager/functions.php on line 200
-[09-May-2025 04:04:33 UTC] PHP Parse error:  syntax error, unexpected token "==", expecting "(" in /wordpress/wp-content/plugins/slide-contact-form-and-a-lead-manager/functions.php on line 200
-[09-May-2025 04:04:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/smart-posts-widget/smart-posts.php:421
+#0 /wordpress/wp-includes/class-wp-hook.php(324): install_sil_dictionary_infrastructure('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/sil-dictionary-webonary/include/infrastructure.php on line 407
+[10-May-2025 17:46:21 UTC] PHP Parse error:  syntax error, unexpected token "==", expecting "(" in /wordpress/wp-content/plugins/slide-contact-form-and-a-lead-manager/functions.php on line 200
+[10-May-2025 17:46:29 UTC] PHP Parse error:  syntax error, unexpected token "==", expecting "(" in /wordpress/wp-content/plugins/slide-contact-form-and-a-lead-manager/functions.php on line 200
+[10-May-2025 17:46:37 UTC] PHP Parse error:  syntax error, unexpected token "==", expecting "(" in /wordpress/wp-content/plugins/slide-contact-form-and-a-lead-manager/functions.php on line 200
+[10-May-2025 17:46:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/smart-posts-widget/smart-posts.php:421
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('smart-posts-wid...')
