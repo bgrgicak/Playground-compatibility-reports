@@ -2,143 +2,553 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [09-May-2025 07:46:40 UTC] PHP Deprecated:  Function is_term is <strong>deprecated</strong> since version 3.0.0! Use term_exists() instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 07:46:50 UTC] PHP Deprecated:  Function is_term is <strong>deprecated</strong> since version 3.0.0! Use term_exists() instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 07:47:02 UTC] PHP Deprecated:  Function is_term is <strong>deprecated</strong> since version 3.0.0! Use term_exists() instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 07:47:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-May-2025 16:32:37 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 16:32:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-			SHOW COLUMNS FROM wp_terms WHERE Field = 'term_order'
-		</p>
+<p>SELECT * FROM wp_sg_config</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_terms</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `Field` = 'term_order' ORDER BY ordinal_position | parameters: database_name_here, wp_terms</li>
+<li>Executing: SELECT * FROM `wp_sg_config` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Field
+SQLSTATE[HY000]: General error: 1 no such table: wp_sg_config
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\r\n\t\t\tSHOW COLUM...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\r\n\t\t\tSHOW COLUM...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('\r\n\t\t\tSHOW COLUM...')
-#4 /wordpress/wp-content/plugins/bulk-term-editor/bulk-term-editor.php(43): wpdb->get_results('\r\n\t\t\tSHOW COLUM...')
-#5 /wordpress/wp-content/plugins/bulk-term-editor/bulk-term-editor.php(337): Bulk_Term_Editor->__construct()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('bulk-term-edito...')
-#8 /internal/eval.php(20): activate_plugin('bulk-term-edito...')
-#9 {main}</pre>
- for query 
-			SHOW COLUMNS FROM wp_terms WHERE Field = 'term_order'
-		 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/bulk-term-editor/bulk-term-editor.php'), Bulk_Term_Editor->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 07:47:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/backup-guard/com/core/database/SGDatabaseAdapterWordpress.php(16): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/backup-guard/com/core/SGConfig.php(51): SGDatabaseAdapterWordpress->query('SELECT * FROM w...')
+#6 /wordpress/wp-content/plugins/backup-guard/com/core/SGBoot.php(19): SGConfig::getAll()
+#7 /wordpress/wp-content/plugins/backup-guard/com/boot.php(6): SGBoot::init()
+#8 /wordpress/wp-content/plugins/backup-guard/public/boot.php(2): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/backup-guard/backup-guard.php(19): require_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('backup-guard/ba...')
+#12 /internal/eval.php(20): activate_plugin('backup-guard/ba...')
+#13 {main}</pre>
+ for query SELECT * FROM wp_sg_config made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/backup-guard/backup-guard.php'), require_once('/plugins/backup-guard/public/boot.php'), require_once('/plugins/backup-guard/com/boot.php'), SGBoot::init, SGConfig::getAll, SGDatabaseAdapterWordpress->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 16:32:38 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 16:32:45 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 16:32:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-			SHOW COLUMNS FROM wp_terms WHERE Field = 'term_order'
-		</p>
+<p>SELECT * FROM wp_sg_config</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_terms</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `Field` = 'term_order' ORDER BY ordinal_position | parameters: database_name_here, wp_terms</li>
+<li>Executing: SELECT * FROM wp_sg_config | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Field
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sg_config.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/backup-guard/com/core/database/SGDatabaseAdapterWordpress.php(16): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/backup-guard/com/core/SGConfig.php(51): SGDatabaseAdapterWordpress->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/backup-guard/com/core/SGBoot.php(19): SGConfig::getAll()
+#5 /wordpress/wp-content/plugins/backup-guard/com/boot.php(6): SGBoot::init()
+#6 /wordpress/wp-content/plugins/backup-guard/public/boot.php(2): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/backup-guard/backup-guard.php(19): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('backup-guard/ba...')
+#10 /internal/eval.php(20): activate_plugin('backup-guard/ba...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_sg_config made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/backup-guard/backup-guard.php'), require_once('/plugins/backup-guard/public/boot.php'), require_once('/plugins/backup-guard/com/boot.php'), SGBoot::init, SGConfig::getAll, SGDatabaseAdapterWordpress->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 16:32:46 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 16:32:54 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 16:32:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_sg_config</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_sg_config | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sg_config.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/backup-guard/com/core/database/SGDatabaseAdapterWordpress.php(16): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/backup-guard/com/core/SGConfig.php(51): SGDatabaseAdapterWordpress->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/backup-guard/com/core/SGBoot.php(19): SGConfig::getAll()
+#5 /wordpress/wp-content/plugins/backup-guard/com/boot.php(6): SGBoot::init()
+#6 /wordpress/wp-content/plugins/backup-guard/public/boot.php(2): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/backup-guard/backup-guard.php(19): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('backup-guard/ba...')
+#10 /internal/eval.php(20): activate_plugin('backup-guard/ba...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_sg_config made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/backup-guard/backup-guard.php'), require_once('/plugins/backup-guard/public/boot.php'), require_once('/plugins/backup-guard/com/boot.php'), SGBoot::init, SGConfig::getAll, SGDatabaseAdapterWordpress->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 16:32:55 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 16:33:28 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 16:33:28 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 16:33:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 64
+[10-May-2025 16:33:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 65
+[10-May-2025 16:33:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 66
+[10-May-2025 16:33:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 67
+[10-May-2025 16:33:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 68
+[10-May-2025 16:33:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 70
+[10-May-2025 16:33:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 71
+[10-May-2025 16:33:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 72
+[10-May-2025 16:33:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 73
+[10-May-2025 16:33:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 74
+[10-May-2025 16:33:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 75
+[10-May-2025 16:33:28 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wp_b16b_title" in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php:92
+Stack trace:
+#0 /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php(55): wp_b16b_init()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('base16b-encoder...')
+#3 /internal/eval.php(20): activate_plugin('base16b-encoder...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 92
+[10-May-2025 16:33:36 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 16:33:36 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 16:33:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 64
+[10-May-2025 16:33:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 65
+[10-May-2025 16:33:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 66
+[10-May-2025 16:33:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 67
+[10-May-2025 16:33:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 68
+[10-May-2025 16:33:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 70
+[10-May-2025 16:33:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 71
+[10-May-2025 16:33:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 72
+[10-May-2025 16:33:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 73
+[10-May-2025 16:33:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 74
+[10-May-2025 16:33:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 75
+[10-May-2025 16:33:36 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wp_b16b_title" in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php:92
+Stack trace:
+#0 /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php(55): wp_b16b_init()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('base16b-encoder...')
+#3 /internal/eval.php(20): activate_plugin('base16b-encoder...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 92
+[10-May-2025 16:33:43 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 16:33:43 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 16:33:43 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 64
+[10-May-2025 16:33:43 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 65
+[10-May-2025 16:33:43 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 66
+[10-May-2025 16:33:43 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 67
+[10-May-2025 16:33:43 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 68
+[10-May-2025 16:33:43 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 70
+[10-May-2025 16:33:43 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 71
+[10-May-2025 16:33:43 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 72
+[10-May-2025 16:33:43 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 73
+[10-May-2025 16:33:43 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 74
+[10-May-2025 16:33:43 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 75
+[10-May-2025 16:33:43 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wp_b16b_title" in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php:92
+Stack trace:
+#0 /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php(55): wp_b16b_init()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('base16b-encoder...')
+#3 /internal/eval.php(20): activate_plugin('base16b-encoder...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/base16b-encoderdecoder/base16b.php on line 92
+[10-May-2025 16:36:11 UTC] PHP Warning:  Attempt to read property "num_rows" on int in /wordpress/wp-content/plugins/bravo-translate/activation.php on line 23
+[10-May-2025 16:36:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE `database_name_here`.`wp_bravo_translate` ( `ID` INT NOT NULL AUTO_INCREMENT , `searchFor` TEXT NOT NULL , `replaceBy` TEXT NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_tables` (`table_schema`, `table_name`, `table_type`, `engine`, `row_format`, `table_collation`, `table_comment`) VALUES (?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, database_name_here.wp_bravo_translate, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, database_name_here.wp_bravo_translate, ID, 1, , NO, int, , , 10, 0, , , , int, , auto_increment, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, database_name_here.wp_bravo_translate, searchFor, 2, , NO, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, database_name_here.wp_bravo_translate, replaceBy, 3, , NO, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, database_name_here.wp_bravo_translate, ID</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, database_name_here.wp_bravo_translate, 0, database_name_here, PRIMARY, 1, ID, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, database_name_here.wp_bravo_translate, database_name_here, database_name_here.wp_bravo_translate</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_bravo_translate</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'wp_bravo_translate' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3123): WP_SQLite_Driver->new_driver_exception('Table 'wp_bravo...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1261): WP_SQLite_Driver->get_sqlite_create_table_statement(false, 'wp_bravo_transl...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(839): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE `d...')
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE `d...')
+#6 /wordpress/wp-content/plugins/bravo-translate/activation.php(14): WP_SQLite_DB->query('CREATE TABLE `d...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): BRAVOTRAN__activation(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bravo-...', false)
+#11 /internal/eval.php(20): activate_plugin('bravo-translate...')
+#12 {main}</pre>
+ for query CREATE TABLE `database_name_here`.`wp_bravo_translate` ( `ID` INT NOT NULL AUTO_INCREMENT , `searchFor` TEXT NOT NULL , `replaceBy` TEXT NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB; made by activate_plugin, do_action('activate_bravo-translate/bravo-translate.php'), WP_Hook->do_action, WP_Hook->apply_filters, BRAVOTRAN__activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 16:36:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM `wp_bravo_translate`  ORDER BY CHAR_LENGTH(`searchFor`) DESC</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_bravo_translate` ORDER BY LENGTH(`searchFor`) DESC | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_bravo_translate
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\r\n\t\t\tSHOW COLUM...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\r\n\t\t\tSHOW COLUM...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('\r\n\t\t\tSHOW COLUM...')
-#4 /wordpress/wp-content/plugins/bulk-term-editor/bulk-term-editor.php(43): wpdb->get_results('\r\n\t\t\tSHOW COLUM...')
-#5 /wordpress/wp-content/plugins/bulk-term-editor/bulk-term-editor.php(337): Bulk_Term_Editor->__construct()
-#6 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM `...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM `...')
+#4 /wordpress/wp-content/plugins/bravo-translate/functions.php(10): wpdb->get_results('SELECT * FROM `...')
+#5 [internal function]: BRAVOTRAN_Translate('', 11)
+#6 /internal/eval.php(34): ob_end_clean()
+#7 {main}</pre>
+ for query SELECT * FROM `wp_bravo_translate`  ORDER BY CHAR_LENGTH(`searchFor`) DESC made by ob_end_clean, BRAVOTRAN_Translate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 16:36:12 UTC] PHP Warning:  Undefined variable $prefix in /wordpress/wp-content/plugins/bravo-translate/functions.php on line 29
+[10-May-2025 16:36:20 UTC] PHP Warning:  Attempt to read property "num_rows" on int in /wordpress/wp-content/plugins/bravo-translate/activation.php on line 23
+[10-May-2025 16:36:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM `wp_bravo_translate`  ORDER BY CHAR_LENGTH(`searchFor`) DESC</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_bravo_translate`  ORDER BY LENGTH(`searchFor`) DESC | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bravo_translate.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM `...')
+#2 /wordpress/wp-content/plugins/bravo-translate/functions.php(10): wpdb->get_results('SELECT * FROM `...')
+#3 [internal function]: BRAVOTRAN_Translate('', 11)
+#4 /internal/eval.php(34): ob_end_clean()
+#5 {main}</pre>
+ for query SELECT * FROM `wp_bravo_translate`  ORDER BY CHAR_LENGTH(`searchFor`) DESC made by ob_end_clean, BRAVOTRAN_Translate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 16:36:20 UTC] PHP Warning:  Undefined variable $prefix in /wordpress/wp-content/plugins/bravo-translate/functions.php on line 29
+[10-May-2025 16:36:28 UTC] PHP Warning:  Attempt to read property "num_rows" on int in /wordpress/wp-content/plugins/bravo-translate/activation.php on line 23
+[10-May-2025 16:36:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM `wp_bravo_translate`  ORDER BY CHAR_LENGTH(`searchFor`) DESC</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_bravo_translate`  ORDER BY LENGTH(`searchFor`) DESC | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bravo_translate.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM `...')
+#2 /wordpress/wp-content/plugins/bravo-translate/functions.php(10): wpdb->get_results('SELECT * FROM `...')
+#3 [internal function]: BRAVOTRAN_Translate('', 11)
+#4 /internal/eval.php(34): ob_end_clean()
+#5 {main}</pre>
+ for query SELECT * FROM `wp_bravo_translate`  ORDER BY CHAR_LENGTH(`searchFor`) DESC made by ob_end_clean, BRAVOTRAN_Translate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 16:36:29 UTC] PHP Warning:  Undefined variable $prefix in /wordpress/wp-content/plugins/bravo-translate/functions.php on line 29
+[10-May-2025 16:37:54 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/burnzone-commenting/conversait.php on line 145
+[10-May-2025 16:38:02 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/burnzone-commenting/conversait.php on line 145
+[10-May-2025 16:38:11 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/burnzone-commenting/conversait.php on line 145
+[10-May-2025 16:38:21 UTC] PHP Warning:  require_once(/wordpress//wp-content/plugins/woocommerce/includes/wc-cart-functions.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/buybot-notifications/core/order.class.php on line 11
+[10-May-2025 16:38:21 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress//wp-content/plugins/woocommerce/includes/wc-cart-functions.php' (include_path='.:') in /wordpress/wp-content/plugins/buybot-notifications/core/order.class.php:11
+Stack trace:
+#0 /wordpress/wp-content/plugins/buybot-notifications/buybotnotifications.php(313): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('buybot-notifica...')
+#3 /internal/eval.php(20): activate_plugin('buybot-notifica...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/buybot-notifications/core/order.class.php on line 11
+[10-May-2025 16:38:28 UTC] PHP Warning:  require_once(/wordpress//wp-content/plugins/woocommerce/includes/wc-cart-functions.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/buybot-notifications/core/order.class.php on line 11
+[10-May-2025 16:38:28 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress//wp-content/plugins/woocommerce/includes/wc-cart-functions.php' (include_path='.:') in /wordpress/wp-content/plugins/buybot-notifications/core/order.class.php:11
+Stack trace:
+#0 /wordpress/wp-content/plugins/buybot-notifications/buybotnotifications.php(313): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('buybot-notifica...')
+#3 /internal/eval.php(20): activate_plugin('buybot-notifica...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/buybot-notifications/core/order.class.php on line 11
+[10-May-2025 16:38:35 UTC] PHP Warning:  require_once(/wordpress//wp-content/plugins/woocommerce/includes/wc-cart-functions.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/buybot-notifications/core/order.class.php on line 11
+[10-May-2025 16:38:35 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress//wp-content/plugins/woocommerce/includes/wc-cart-functions.php' (include_path='.:') in /wordpress/wp-content/plugins/buybot-notifications/core/order.class.php:11
+Stack trace:
+#0 /wordpress/wp-content/plugins/buybot-notifications/buybotnotifications.php(313): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('buybot-notifica...')
+#3 /internal/eval.php(20): activate_plugin('buybot-notifica...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/buybot-notifications/core/order.class.php on line 11
+[10-May-2025 16:39:12 UTC] PHP Deprecated:  Required parameter $method_name follows optional parameter $transient_key in /wordpress/wp-content/plugins/bizyhood/Bizyhood/Core.php on line 796
+[10-May-2025 16:39:12 UTC] PHP Deprecated:  Required parameter $attrs follows optional parameter $transient_key in /wordpress/wp-content/plugins/bizyhood/Bizyhood/Core.php on line 796
+[10-May-2025 16:39:12 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 16:39:14 UTC] PHP Deprecated:  Required parameter $method_name follows optional parameter $transient_key in /wordpress/wp-content/plugins/bizyhood/Bizyhood/Core.php on line 796
+[10-May-2025 16:39:14 UTC] PHP Deprecated:  Required parameter $attrs follows optional parameter $transient_key in /wordpress/wp-content/plugins/bizyhood/Bizyhood/Core.php on line 796
+[10-May-2025 16:39:23 UTC] PHP Deprecated:  Required parameter $method_name follows optional parameter $transient_key in /wordpress/wp-content/plugins/bizyhood/Bizyhood/Core.php on line 796
+[10-May-2025 16:39:23 UTC] PHP Deprecated:  Required parameter $attrs follows optional parameter $transient_key in /wordpress/wp-content/plugins/bizyhood/Bizyhood/Core.php on line 796
+[10-May-2025 16:39:23 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 16:39:24 UTC] PHP Deprecated:  Required parameter $method_name follows optional parameter $transient_key in /wordpress/wp-content/plugins/bizyhood/Bizyhood/Core.php on line 796
+[10-May-2025 16:39:24 UTC] PHP Deprecated:  Required parameter $attrs follows optional parameter $transient_key in /wordpress/wp-content/plugins/bizyhood/Bizyhood/Core.php on line 796
+[10-May-2025 16:39:32 UTC] PHP Deprecated:  Required parameter $method_name follows optional parameter $transient_key in /wordpress/wp-content/plugins/bizyhood/Bizyhood/Core.php on line 796
+[10-May-2025 16:39:32 UTC] PHP Deprecated:  Required parameter $attrs follows optional parameter $transient_key in /wordpress/wp-content/plugins/bizyhood/Bizyhood/Core.php on line 796
+[10-May-2025 16:39:32 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[10-May-2025 16:39:34 UTC] PHP Deprecated:  Required parameter $method_name follows optional parameter $transient_key in /wordpress/wp-content/plugins/bizyhood/Bizyhood/Core.php on line 796
+[10-May-2025 16:39:34 UTC] PHP Deprecated:  Required parameter $attrs follows optional parameter $transient_key in /wordpress/wp-content/plugins/bizyhood/Bizyhood/Core.php on line 796
+[10-May-2025 16:39:43 UTC] PHP Deprecated:  Required parameter $oldconsignmentNumber follows optional parameter $shipCountry in /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php on line 5021
+[10-May-2025 16:39:43 UTC] PHP Deprecated:  Required parameter $consignmentcost follows optional parameter $shipCountry in /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php on line 5021
+[10-May-2025 16:39:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>select count(*) as count from wp_linksynceparcel_consignment</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: select count ( * ) as `count` from `wp_linksynceparcel_consignment` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_linksynceparcel_consignment
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select count(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select count(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('select count(*)...')
+#4 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelValidator.php(343): wpdb->get_row('select count(*)...')
+#5 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelValidator.php(301): LinksynceparcelValidator::consignmentLessThan50()
+#6 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksyncUserHelper.php(8): LinksynceparcelValidator::validateConsignmentLimit()
+#7 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksyncUserHelper.php(201): LinksyncUserHelper->__construct()
+#8 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/blazeonlineeparcel.php(141): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('blaze-online-ep...')
+#11 /internal/eval.php(20): activate_plugin('blaze-online-ep...')
+#12 {main}</pre>
+ for query select count(*) as count from wp_linksynceparcel_consignment made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/blaze-online-eparcel-for-woocommerce/blazeonlineeparcel.php'), include_once('/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksyncUserHelper.php'), LinksyncUserHelper->__construct, LinksynceparcelValidator::validateConsignmentLimit, LinksynceparcelValidator::consignmentLessThan50, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 16:39:43 UTC] PHP Warning:  Attempt to read property "count" on null in /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelValidator.php on line 344
+[10-May-2025 16:39:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_linksynceparcel_international_fields ADD insurance_value varchar(255) CHARACTER SET utf8 NOT NULL AFTER `modify_date`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_linksynceparcel_international_fields</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_linksynceparcel_international_fields</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_linksynceparcel_international_fields</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_linksynceparcel_international_fields</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_linksynceparcel_international_fields, insurance_value, 1, , NO, varchar, 255, 765, , , , utf8, utf8_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_linksynceparcel_international_fields</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'wp_linksynceparcel_international_fields' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3123): WP_SQLite_Driver->new_driver_exception('Table 'wp_links...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2800): WP_SQLite_Driver->get_sqlite_create_table_statement(false, 'wp_linksyncepar...', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1335): WP_SQLite_Driver->recreate_table_from_information_schema(false, 'wp_linksyncepar...', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(857): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#7 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php(219): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#8 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php(94): LinksynceparcelHelper::upgradeTables()
+#9 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/blazeonlineeparcel.php(350): LinksynceparcelHelper::createTables()
+#10 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/blazeonlineeparcel.php(327): linksynceparcel->on_activation(false)
+#11 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/blazeonlineeparcel.php(395): linksynceparcel->network_propagate('on_activation', false)
+#12 /wordpress/wp-includes/class-wp-hook.php(324): linksynceparcel->activate_eparcel(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_blaze-...', false)
+#16 /internal/eval.php(20): activate_plugin('blaze-online-ep...')
+#17 {main}</pre>
+ for query ALTER TABLE wp_linksynceparcel_international_fields ADD insurance_value varchar(255) CHARACTER SET utf8 NOT NULL AFTER `modify_date` made by activate_plugin, do_action('activate_blaze-online-eparcel-for-woocommerce/blazeonlineeparcel.php'), WP_Hook->do_action, WP_Hook->apply_filters, linksynceparcel->activate_eparcel, linksynceparcel->network_propagate, linksynceparcel->on_activation, LinksynceparcelHelper::createTables, LinksynceparcelHelper::upgradeTables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 16:39:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_linksynceparcel_international_fields ADD insurance tinyint(1) NOT NULL DEFAULT '0' AFTER `modify_date`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_linksynceparcel_international_fields</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_linksynceparcel_international_fields</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_linksynceparcel_international_fields</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_linksynceparcel_international_fields</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_linksynceparcel_international_fields, insurance, 1, 0, NO, tinyint, , , 3, 0, , , , tinyint(1), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_linksynceparcel_international_fields</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'wp_linksynceparcel_international_fields' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3123): WP_SQLite_Driver->new_driver_exception('Table 'wp_links...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2800): WP_SQLite_Driver->get_sqlite_create_table_statement(false, 'wp_linksyncepar...', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1335): WP_SQLite_Driver->recreate_table_from_information_schema(false, 'wp_linksyncepar...', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(857): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#7 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php(227): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#8 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php(94): LinksynceparcelHelper::upgradeTables()
+#9 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/blazeonlineeparcel.php(350): LinksynceparcelHelper::createTables()
+#10 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/blazeonlineeparcel.php(327): linksynceparcel->on_activation(false)
+#11 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/blazeonlineeparcel.php(395): linksynceparcel->network_propagate('on_activation', false)
+#12 /wordpress/wp-includes/class-wp-hook.php(324): linksynceparcel->activate_eparcel(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_blaze-...', false)
+#16 /internal/eval.php(20): activate_plugin('blaze-online-ep...')
+#17 {main}</pre>
+ for query ALTER TABLE wp_linksynceparcel_international_fields ADD insurance tinyint(1) NOT NULL DEFAULT '0' AFTER `modify_date` made by activate_plugin, do_action('activate_blaze-online-eparcel-for-woocommerce/blazeonlineeparcel.php'), WP_Hook->do_action, WP_Hook->apply_filters, linksynceparcel->activate_eparcel, linksynceparcel->network_propagate, linksynceparcel->on_activation, LinksynceparcelHelper::createTables, LinksynceparcelHelper::upgradeTables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 16:39:46 UTC] PHP Deprecated:  Required parameter $oldconsignmentNumber follows optional parameter $shipCountry in /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php on line 5021
+[10-May-2025 16:39:46 UTC] PHP Deprecated:  Required parameter $consignmentcost follows optional parameter $shipCountry in /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php on line 5021
+[10-May-2025 16:39:54 UTC] PHP Deprecated:  Required parameter $oldconsignmentNumber follows optional parameter $shipCountry in /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php on line 5021
+[10-May-2025 16:39:54 UTC] PHP Deprecated:  Required parameter $consignmentcost follows optional parameter $shipCountry in /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php on line 5021
+[10-May-2025 16:39:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>select count(*) as count from wp_linksynceparcel_consignment</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: select count(*) as count from wp_linksynceparcel_consignment | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_linksynceparcel_consignment.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('select count(*)...')
+#2 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelValidator.php(343): wpdb->get_row('select count(*)...')
+#3 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelValidator.php(301): LinksynceparcelValidator::consignmentLessThan50()
+#4 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksyncUserHelper.php(8): LinksynceparcelValidator::validateConsignmentLimit()
+#5 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksyncUserHelper.php(201): LinksyncUserHelper->__construct()
+#6 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/blazeonlineeparcel.php(141): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('blaze-online-ep...')
+#9 /internal/eval.php(20): activate_plugin('blaze-online-ep...')
 #10 {main}</pre>
- for query 
-			SHOW COLUMNS FROM wp_terms WHERE Field = 'term_order'
-		 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/bulk-term-editor/bulk-term-editor.php'), Bulk_Term_Editor->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-May-2025 07:49:04 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/burnzone-commenting/conversait.php on line 145
-[09-May-2025 07:49:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/burnzone-commenting/conversait.php on line 145
-[09-May-2025 07:49:23 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/burnzone-commenting/conversait.php on line 145
-[09-May-2025 07:50:00 UTC] PHP Deprecated:  Required parameter $cookies follows optional parameter $timeout in /wordpress/wp-content/plugins/bank-parsian-edd-gateway/lib/nusoap.php on line 2608
-[09-May-2025 07:50:01 UTC] PHP Deprecated:  Required parameter $cookies follows optional parameter $timeout in /wordpress/wp-content/plugins/bank-parsian-edd-gateway/lib/nusoap.php on line 2608
-[09-May-2025 07:50:09 UTC] PHP Deprecated:  Required parameter $cookies follows optional parameter $timeout in /wordpress/wp-content/plugins/bank-parsian-edd-gateway/lib/nusoap.php on line 2608
-[09-May-2025 07:50:10 UTC] PHP Deprecated:  Required parameter $cookies follows optional parameter $timeout in /wordpress/wp-content/plugins/bank-parsian-edd-gateway/lib/nusoap.php on line 2608
-[09-May-2025 07:50:18 UTC] PHP Deprecated:  Required parameter $cookies follows optional parameter $timeout in /wordpress/wp-content/plugins/bank-parsian-edd-gateway/lib/nusoap.php on line 2608
-[09-May-2025 07:50:19 UTC] PHP Deprecated:  Required parameter $cookies follows optional parameter $timeout in /wordpress/wp-content/plugins/bank-parsian-edd-gateway/lib/nusoap.php on line 2608
-[09-May-2025 07:52:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/bibstweezfollowbutton/bibstweezfollowbutton.php:247
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('bibstweezfollow...')
-#2 /internal/eval.php(20): activate_plugin('bibstweezfollow...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/bibstweezfollowbutton/bibstweezfollowbutton.php on line 247
-[09-May-2025 07:53:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/bibstweezfollowbutton/bibstweezfollowbutton.php:247
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('bibstweezfollow...')
-#2 /internal/eval.php(20): activate_plugin('bibstweezfollow...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/bibstweezfollowbutton/bibstweezfollowbutton.php on line 247
-[09-May-2025 07:53:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/bibstweezfollowbutton/bibstweezfollowbutton.php:247
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('bibstweezfollow...')
-#2 /internal/eval.php(20): activate_plugin('bibstweezfollow...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/bibstweezfollowbutton/bibstweezfollowbutton.php on line 247
-[09-May-2025 07:53:22 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 07:53:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function post_exists() in /wordpress/wp-content/plugins/bip-pages/bip-pages-activation.php:5
-Stack trace:
-#0 /wordpress/wp-content/plugins/bip-pages/bip-pages-activation.php(39): BipPages\create_page('BIP usage manua...', '<!-- wp:paragra...')
-#1 /wordpress/wp-content/plugins/bip-pages/bip-pages-activation.php(61): BipPages\create_functional_page('BIP usage manua...', '<!-- wp:paragra...')
-#2 /wordpress/wp-content/plugins/bip-pages/bip-pages.php(55): BipPages\create_instructions_page()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): BipPages\activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bip-pa...', false)
-#7 /internal/eval.php(20): activate_plugin('bip-pages/bip-p...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/bip-pages/bip-pages-activation.php on line 5
-[09-May-2025 07:53:30 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 07:53:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function post_exists() in /wordpress/wp-content/plugins/bip-pages/bip-pages-activation.php:5
-Stack trace:
-#0 /wordpress/wp-content/plugins/bip-pages/bip-pages-activation.php(39): BipPages\create_page('BIP usage manua...', '<!-- wp:paragra...')
-#1 /wordpress/wp-content/plugins/bip-pages/bip-pages-activation.php(61): BipPages\create_functional_page('BIP usage manua...', '<!-- wp:paragra...')
-#2 /wordpress/wp-content/plugins/bip-pages/bip-pages.php(55): BipPages\create_instructions_page()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): BipPages\activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bip-pa...', false)
-#7 /internal/eval.php(20): activate_plugin('bip-pages/bip-p...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/bip-pages/bip-pages-activation.php on line 5
-[09-May-2025 07:53:39 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-May-2025 07:53:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function post_exists() in /wordpress/wp-content/plugins/bip-pages/bip-pages-activation.php:5
-Stack trace:
-#0 /wordpress/wp-content/plugins/bip-pages/bip-pages-activation.php(39): BipPages\create_page('BIP usage manua...', '<!-- wp:paragra...')
-#1 /wordpress/wp-content/plugins/bip-pages/bip-pages-activation.php(61): BipPages\create_functional_page('BIP usage manua...', '<!-- wp:paragra...')
-#2 /wordpress/wp-content/plugins/bip-pages/bip-pages.php(55): BipPages\create_instructions_page()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): BipPages\activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bip-pa...', false)
-#7 /internal/eval.php(20): activate_plugin('bip-pages/bip-p...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/bip-pages/bip-pages-activation.php on line 5
+ for query select count(*) as count from wp_linksynceparcel_consignment made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/blaze-online-eparcel-for-woocommerce/blazeonlineeparcel.php'), include_once('/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksyncUserHelper.php'), LinksyncUserHelper->__construct, LinksynceparcelValidator::validateConsignmentLimit, LinksynceparcelValidator::consignmentLessThan50, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 16:39:54 UTC] PHP Warning:  Attempt to read property "count" on null in /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelValidator.php on line 344
+[10-May-2025 16:39:57 UTC] PHP Deprecated:  Required parameter $oldconsignmentNumber follows optional parameter $shipCountry in /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php on line 5021
+[10-May-2025 16:39:57 UTC] PHP Deprecated:  Required parameter $consignmentcost follows optional parameter $shipCountry in /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php on line 5021
+[10-May-2025 16:40:04 UTC] PHP Deprecated:  Required parameter $oldconsignmentNumber follows optional parameter $shipCountry in /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php on line 5021
+[10-May-2025 16:40:04 UTC] PHP Deprecated:  Required parameter $consignmentcost follows optional parameter $shipCountry in /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php on line 5021
+[10-May-2025 16:40:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>select count(*) as count from wp_linksynceparcel_consignment</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: select count(*) as count from wp_linksynceparcel_consignment | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_linksynceparcel_consignment.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('select count(*)...')
+#2 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelValidator.php(343): wpdb->get_row('select count(*)...')
+#3 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelValidator.php(301): LinksynceparcelValidator::consignmentLessThan50()
+#4 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksyncUserHelper.php(8): LinksynceparcelValidator::validateConsignmentLimit()
+#5 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksyncUserHelper.php(201): LinksyncUserHelper->__construct()
+#6 /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/blazeonlineeparcel.php(141): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('blaze-online-ep...')
+#9 /internal/eval.php(20): activate_plugin('blaze-online-ep...')
+#10 {main}</pre>
+ for query select count(*) as count from wp_linksynceparcel_consignment made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/blaze-online-eparcel-for-woocommerce/blazeonlineeparcel.php'), include_once('/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksyncUserHelper.php'), LinksyncUserHelper->__construct, LinksynceparcelValidator::validateConsignmentLimit, LinksynceparcelValidator::consignmentLessThan50, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-May-2025 16:40:04 UTC] PHP Warning:  Attempt to read property "count" on null in /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelValidator.php on line 344
+[10-May-2025 16:40:07 UTC] PHP Deprecated:  Required parameter $oldconsignmentNumber follows optional parameter $shipCountry in /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php on line 5021
+[10-May-2025 16:40:07 UTC] PHP Deprecated:  Required parameter $consignmentcost follows optional parameter $shipCountry in /wordpress/wp-content/plugins/blaze-online-eparcel-for-woocommerce/helpers/LinksynceparcelHelper.php on line 5021
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
@@ -185,25 +595,4 @@ Stack trace:
     				This means the server that hosts your file does not allow requests from other sites
     				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
     				cross-origin file downloads. Learn more about CORS at
-    				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
-    
-    				If your file is on GitHub, load it from "raw.githubusercontent.com".
-    				Here's how to do that:
-    
-    				1. Start with the original GitHub URL of the file. For example:
-    				https://github.com/username/repository/blob/branch/filename.
-    				2. Replace "github.com" with "raw.githubusercontent.com".
-    				3. Remove the "/blob/" part of the URL.
-    
-    				The resulting URL should look like this:
-    				https://raw.githubusercontent.com/username/repository/branch/filename
-    
-    				Error:
-    				Error: Could not download "https://downloads.wordpress.org/plugin/block-referral-spam.latest-stable.zip"
-        at Ct.resolve (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1472:13)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async _.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/util/index.js:45:14)
-  }
-}
-
-Node.js v23.11.0
+    				https://developer.mozilla.org/en-US/doc
