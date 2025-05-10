@@ -1,8 +1,10 @@
 {
-  "preferredVersions": {
-    "php": "8.0",
-    "wp": "latest"
+  "features": {
+    "networking": true
   },
+  "phpExtensionBundles": [
+    "kitchen-sink"
+  ],
   "steps": [
     {
       "step": "defineWpConfigConsts",
@@ -12,8 +14,27 @@
       }
     },
     {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
       "step": "installPlugin",
       "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "cryptocurrency-widget-block"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php require_once 'wordpress/wp-load.php';\n$page_args = array(\n'post_type'    => 'page',\n'post_status'  => 'publish',\n'post_title'   => 'Cryptocurrency Widget Block',\n'post_content' => '<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Ticker style</h2>\n<!-- /wp:heading -->\n<!-- wp:cryptocurrency-widget-block/cryptocurrency-widget {\"widgettype\":\"ticker\",\"limit\":\"10\"} /-->\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">List style</h2>\n<!-- /wp:heading -->\n<!-- wp:cryptocurrency-widget-block/cryptocurrency-widget {\"limit\":\"10\"} /-->\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">label style</h2>\n<!-- /wp:heading -->\n<!-- wp:cryptocurrency-widget-block/cryptocurrency-widget {\"widgettype\":\"label\",\"limit\":\"5\"} /-->\n<!-- wp:paragraph -->\n<p></p>\n<!-- /wp:paragraph -->',\n);\n$page_id = wp_insert_post( $page_args );update_option( 'page_on_front', $page_id );update_option( 'show_on_front', 'page' );"
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
         "resource": "wordpress.org/plugins",
         "slug": "cryptocurrency-widget-block"
       },
