@@ -2,14 +2,377 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [10-May-2025 05:47:52 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>plugins-lang-switch</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[10-May-2025 05:48:02 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>plugins-lang-switch</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[10-May-2025 05:48:10 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>plugins-lang-switch</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[10-May-2025 05:48:20 UTC] PHP Warning:  Undefined property: WP_SQLite_DB::$pmpro_membership_levels in /wordpress/wp-includes/class-wpdb.php on line 789
-[10-May-2025 05:48:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [11-May-2025 19:48:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM  ORDER BY id</p>
+<p>CREATE TABLE IF NOT EXISTS wp_formello_submissions (
+			`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+			`form_id` INT UNSIGNED NOT NULL,
+			`data` JSON NOT NULL,
+			`is_new` BOOLEAN DEFAULT true,
+			`starred` BOOLEAN DEFAULT false,
+			`user_agent` TEXT NULL,
+			`ip_address` VARCHAR(255) NULL,
+			`referer_url` VARCHAR(255) NULL,
+			`submitted_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`log` TEXT NULL
+			) ENGINE=InnoDB CHARACTER SET=utf8mb4;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/formello/includes/Activator.php(89): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/formello/formello.php(37): Formello\Activator::activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): formello_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_formel...', false)
+#7 /internal/eval.php(20): activate_plugin('formello/formel...')
+#8 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_formello_submissions (
+			`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+			`form_id` INT UNSIGNED NOT NULL,
+			`data` JSON NOT NULL,
+			`is_new` BOOLEAN DEFAULT true,
+			`starred` BOOLEAN DEFAULT false,
+			`user_agent` TEXT NULL,
+			`ip_address` VARCHAR(255) NULL,
+			`referer_url` VARCHAR(255) NULL,
+			`submitted_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`log` TEXT NULL
+			) ENGINE=InnoDB CHARACTER SET=utf8mb4; made by activate_plugin, do_action('activate_formello/formello.php'), WP_Hook->do_action, WP_Hook->apply_filters, formello_activate, Formello\Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-May-2025 19:48:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_formello_submissions_meta (
+			`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+			`form_id` INT UNSIGNED NOT NULL,
+			`submission_id` INT UNSIGNED NOT NULL,
+			`field_name` VARCHAR(255) NOT NULL,
+			`field_value` TEXT NULL,
+			FOREIGN KEY (submission_id) REFERENCES wp_formello_submissions(id) ON DELETE CASCADE
+			) ENGINE=InnoDB CHARACTER SET=utf8mb4;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, id, int UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, form_id, int UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, submission_id, int UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, field_name, varchar(255)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, field_value, text</li>
+<li>Executing: CREATE TABLE IF NOT EXISTS &quot;wp_formello_submissions_meta&quot; (
+&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;form_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;submission_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;field_name&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;field_value&quot; text COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: CREATE  INDEX IF NOT EXISTS &quot;wp_formello_submissions_meta__&quot; ON &quot;wp_formello_submissions_meta&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, wp_formello_submissions_meta__, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/formello/includes/Activator.php(101): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/formello/formello.php(37): Formello\Activator::activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): formello_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_formel...', false)
+#7 /internal/eval.php(20): activate_plugin('formello/formel...')
+#8 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_formello_submissions_meta (
+			`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+			`form_id` INT UNSIGNED NOT NULL,
+			`submission_id` INT UNSIGNED NOT NULL,
+			`field_name` VARCHAR(255) NOT NULL,
+			`field_value` TEXT NULL,
+			FOREIGN KEY (submission_id) REFERENCES wp_formello_submissions(id) ON DELETE CASCADE
+			) ENGINE=InnoDB CHARACTER SET=utf8mb4; made by activate_plugin, do_action('activate_formello/formello.php'), WP_Hook->do_action, WP_Hook->apply_filters, formello_activate, Formello\Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-May-2025 19:48:46 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:48:49 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:48:50 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:49:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_formello_submissions (
+			`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+			`form_id` INT UNSIGNED NOT NULL,
+			`data` JSON NOT NULL,
+			`is_new` BOOLEAN DEFAULT true,
+			`starred` BOOLEAN DEFAULT false,
+			`user_agent` TEXT NULL,
+			`ip_address` VARCHAR(255) NULL,
+			`referer_url` VARCHAR(255) NULL,
+			`submitted_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`log` TEXT NULL
+			) ENGINE=InnoDB CHARACTER SET=utf8mb4;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/formello/includes/Activator.php(89): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/formello/formello.php(37): Formello\Activator::activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): formello_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_formel...', false)
+#7 /internal/eval.php(20): activate_plugin('formello/formel...')
+#8 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_formello_submissions (
+			`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+			`form_id` INT UNSIGNED NOT NULL,
+			`data` JSON NOT NULL,
+			`is_new` BOOLEAN DEFAULT true,
+			`starred` BOOLEAN DEFAULT false,
+			`user_agent` TEXT NULL,
+			`ip_address` VARCHAR(255) NULL,
+			`referer_url` VARCHAR(255) NULL,
+			`submitted_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`log` TEXT NULL
+			) ENGINE=InnoDB CHARACTER SET=utf8mb4; made by activate_plugin, do_action('activate_formello/formello.php'), WP_Hook->do_action, WP_Hook->apply_filters, formello_activate, Formello\Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-May-2025 19:49:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_formello_submissions_meta (
+			`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+			`form_id` INT UNSIGNED NOT NULL,
+			`submission_id` INT UNSIGNED NOT NULL,
+			`field_name` VARCHAR(255) NOT NULL,
+			`field_value` TEXT NULL,
+			FOREIGN KEY (submission_id) REFERENCES wp_formello_submissions(id) ON DELETE CASCADE
+			) ENGINE=InnoDB CHARACTER SET=utf8mb4;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, id, int UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, form_id, int UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, submission_id, int UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, field_name, varchar(255)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, field_value, text</li>
+<li>Executing: CREATE TABLE IF NOT EXISTS &quot;wp_formello_submissions_meta&quot; (
+&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;form_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;submission_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;field_name&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;field_value&quot; text COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: CREATE  INDEX IF NOT EXISTS &quot;wp_formello_submissions_meta__&quot; ON &quot;wp_formello_submissions_meta&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, wp_formello_submissions_meta__, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/formello/includes/Activator.php(101): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/formello/formello.php(37): Formello\Activator::activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): formello_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_formel...', false)
+#7 /internal/eval.php(20): activate_plugin('formello/formel...')
+#8 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_formello_submissions_meta (
+			`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+			`form_id` INT UNSIGNED NOT NULL,
+			`submission_id` INT UNSIGNED NOT NULL,
+			`field_name` VARCHAR(255) NOT NULL,
+			`field_value` TEXT NULL,
+			FOREIGN KEY (submission_id) REFERENCES wp_formello_submissions(id) ON DELETE CASCADE
+			) ENGINE=InnoDB CHARACTER SET=utf8mb4; made by activate_plugin, do_action('activate_formello/formello.php'), WP_Hook->do_action, WP_Hook->apply_filters, formello_activate, Formello\Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-May-2025 19:49:21 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:49:23 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:49:25 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:49:27 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:49:29 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:49:31 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:49:32 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:49:35 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:49:37 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:49:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_formello_submissions (
+			`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+			`form_id` INT UNSIGNED NOT NULL,
+			`data` JSON NOT NULL,
+			`is_new` BOOLEAN DEFAULT true,
+			`starred` BOOLEAN DEFAULT false,
+			`user_agent` TEXT NULL,
+			`ip_address` VARCHAR(255) NULL,
+			`referer_url` VARCHAR(255) NULL,
+			`submitted_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`log` TEXT NULL
+			) ENGINE=InnoDB CHARACTER SET=utf8mb4;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/formello/includes/Activator.php(89): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/formello/formello.php(37): Formello\Activator::activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): formello_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_formel...', false)
+#7 /internal/eval.php(20): activate_plugin('formello/formel...')
+#8 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_formello_submissions (
+			`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+			`form_id` INT UNSIGNED NOT NULL,
+			`data` JSON NOT NULL,
+			`is_new` BOOLEAN DEFAULT true,
+			`starred` BOOLEAN DEFAULT false,
+			`user_agent` TEXT NULL,
+			`ip_address` VARCHAR(255) NULL,
+			`referer_url` VARCHAR(255) NULL,
+			`submitted_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`log` TEXT NULL
+			) ENGINE=InnoDB CHARACTER SET=utf8mb4; made by activate_plugin, do_action('activate_formello/formello.php'), WP_Hook->do_action, WP_Hook->apply_filters, formello_activate, Formello\Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-May-2025 19:49:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_formello_submissions_meta (
+			`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+			`form_id` INT UNSIGNED NOT NULL,
+			`submission_id` INT UNSIGNED NOT NULL,
+			`field_name` VARCHAR(255) NOT NULL,
+			`field_value` TEXT NULL,
+			FOREIGN KEY (submission_id) REFERENCES wp_formello_submissions(id) ON DELETE CASCADE
+			) ENGINE=InnoDB CHARACTER SET=utf8mb4;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, id, int UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, form_id, int UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, submission_id, int UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, field_name, varchar(255)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, field_value, text</li>
+<li>Executing: CREATE TABLE IF NOT EXISTS &quot;wp_formello_submissions_meta&quot; (
+&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;form_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;submission_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;field_name&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;field_value&quot; text COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: CREATE  INDEX IF NOT EXISTS &quot;wp_formello_submissions_meta__&quot; ON &quot;wp_formello_submissions_meta&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_formello_submissions_meta, wp_formello_submissions_meta__, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/formello/includes/Activator.php(101): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/formello/formello.php(37): Formello\Activator::activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): formello_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_formel...', false)
+#7 /internal/eval.php(20): activate_plugin('formello/formel...')
+#8 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_formello_submissions_meta (
+			`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+			`form_id` INT UNSIGNED NOT NULL,
+			`submission_id` INT UNSIGNED NOT NULL,
+			`field_name` VARCHAR(255) NOT NULL,
+			`field_value` TEXT NULL,
+			FOREIGN KEY (submission_id) REFERENCES wp_formello_submissions(id) ON DELETE CASCADE
+			) ENGINE=InnoDB CHARACTER SET=utf8mb4; made by activate_plugin, do_action('activate_formello/formello.php'), WP_Hook->do_action, WP_Hook->apply_filters, formello_activate, Formello\Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-May-2025 19:49:57 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:50:00 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:50:02 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:50:04 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:50:05 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:50:07 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:50:09 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:50:11 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:50:13 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>formello</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:50:23 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:50:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLES LIKE wp_pacp_post_table</p>
 <p>Queries made or created this session were:</p>
 <ol>
 </ol>
@@ -19,102 +382,50 @@ Failed to parse the MySQL query.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM  ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM  ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM  ...')
-#4 /wordpress/wp-content/plugins/pmpro-infusionsoft/pmpro-infusionsoft.php(331): wpdb->get_results('SELECT * FROM  ...')
-#5 /wordpress/wp-content/plugins/pmpro-infusionsoft/pmpro-infusionsoft.php(28): pmprois_getPMProLevels()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): pmprois_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(727): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query SELECT * FROM  ORDER BY id made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, pmprois_init, pmprois_getPMProLevels, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-May-2025 05:48:29 UTC] PHP Warning:  Undefined property: WP_SQLite_DB::$pmpro_membership_levels in /wordpress/wp-includes/class-wpdb.php on line 789
-[10-May-2025 05:48:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW TABLES LIK...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW TABLES LIK...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SHOW TABLES LIK...')
+#4 /wordpress/wp-content/plugins/portfolio-and-custom-posts/model/table.php(41): wpdb->get_var('SHOW TABLES LIK...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): pacp_create_post_table('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(705): do_action('after_setup_the...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query SHOW TABLES LIKE wp_pacp_post_table made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('after_setup_theme'), WP_Hook->do_action, WP_Hook->apply_filters, pacp_create_post_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-May-2025 19:50:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM  ORDER BY id</p>
+<p>SHOW TABLES LIKE wp_pacp_post_setting</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM  ORDER BY id | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error.
+Failed to parse the MySQL query.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM  ...')
-#2 /wordpress/wp-content/plugins/pmpro-infusionsoft/pmpro-infusionsoft.php(331): wpdb->get_results('SELECT * FROM  ...')
-#3 /wordpress/wp-content/plugins/pmpro-infusionsoft/pmpro-infusionsoft.php(28): pmprois_getPMProLevels()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): pmprois_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query SELECT * FROM  ORDER BY id made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, pmprois_init, pmprois_getPMProLevels, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-May-2025 05:48:38 UTC] PHP Warning:  Undefined property: WP_SQLite_DB::$pmpro_membership_levels in /wordpress/wp-includes/class-wpdb.php on line 789
-[10-May-2025 05:48:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM  ORDER BY id</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM  ORDER BY id | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM  ...')
-#2 /wordpress/wp-content/plugins/pmpro-infusionsoft/pmpro-infusionsoft.php(331): wpdb->get_results('SELECT * FROM  ...')
-#3 /wordpress/wp-content/plugins/pmpro-infusionsoft/pmpro-infusionsoft.php(28): pmprois_getPMProLevels()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): pmprois_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query SELECT * FROM  ORDER BY id made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, pmprois_init, pmprois_getPMProLevels, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-May-2025 05:49:41 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "pcauthor_activate_post_co_authors" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_post-c...', false)
-#3 /internal/eval.php(20): activate_plugin('post-co-authors...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[10-May-2025 05:49:48 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "pcauthor_activate_post_co_authors" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_post-c...', false)
-#3 /internal/eval.php(20): activate_plugin('post-co-authors...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[10-May-2025 05:49:56 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "pcauthor_activate_post_co_authors" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_post-c...', false)
-#3 /internal/eval.php(20): activate_plugin('post-co-authors...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW TABLES LIK...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW TABLES LIK...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SHOW TABLES LIK...')
+#4 /wordpress/wp-content/plugins/portfolio-and-custom-posts/model/table.php(68): wpdb->get_var('SHOW TABLES LIK...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): pacp_create_post_table('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(705): do_action('after_setup_the...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query SHOW TABLES LIKE wp_pacp_post_setting made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('after_setup_theme'), WP_Hook->do_action, WP_Hook->apply_filters, pacp_create_post_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-May-2025 19:50:32 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:50:40 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-May-2025 19:50:49 UTC] PHP Warning:  Undefined property: Portfolio_to_Projects_Converter::$_token in /wordpress/wp-content/plugins/portfolio-to-projects-converter/portfolio-to-projects-converter.php on line 171
+[11-May-2025 19:50:58 UTC] PHP Warning:  Undefined property: Portfolio_to_Projects_Converter::$_token in /wordpress/wp-content/plugins/portfolio-to-projects-converter/portfolio-to-projects-converter.php on line 171
+[11-May-2025 19:51:06 UTC] PHP Warning:  Undefined property: Portfolio_to_Projects_Converter::$_token in /wordpress/wp-content/plugins/portfolio-to-projects-converter/portfolio-to-projects-converter.php on line 171
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
