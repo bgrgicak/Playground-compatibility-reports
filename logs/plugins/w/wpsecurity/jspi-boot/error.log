@@ -2,204 +2,113 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [10-May-2025 16:56:23 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>weblibrarian</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[10-May-2025 16:56:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [12-May-2025 08:57:29 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 08:57:29 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 08:57:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_weblib_outitems (
-  transaction serial,
-  barcode varchar(16) not null check (barcode <> ''),
-  title varchar(128) not null check (title <> ''),
-  source varchar(16) not null check (source <> ''),
-  type varchar(16) not null check (type <> ''),
-  patronid int not null,
-  dateout date not null check (dateout <> ''),
-  datedue date not null check (datedue <> ''),
-  PRIMARY KEY  (transaction)
-  )</p>
+<p>SELECT * FROM wprw_wizard</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wprw_wizard` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: serial.
+SQLSTATE[HY000]: General error: 1 no such table: wprw_wizard
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/weblibrarian/includes/database_code.php(106): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/weblibrarian/WebLibrarian.php(133): WEBLIB_make_tables()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): WebLibrarian->install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_weblib...', false)
-#8 /internal/eval.php(20): activate_plugin('weblibrarian/We...')
-#9 {main}</pre>
- for query CREATE TABLE wp_weblib_outitems (
-  transaction serial,
-  barcode varchar(16) not null check (barcode <> ''),
-  title varchar(128) not null check (title <> ''),
-  source varchar(16) not null check (source <> ''),
-  type varchar(16) not null check (type <> ''),
-  patronid int not null,
-  dateout date not null check (dateout <> ''),
-  datedue date not null check (datedue <> ''),
-  PRIMARY KEY  (transaction)
-  ) made by activate_plugin, do_action('activate_weblibrarian/WebLibrarian.php'), WP_Hook->do_action, WP_Hook->apply_filters, WebLibrarian->install, WEBLIB_make_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-May-2025 16:56:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/woo-product-recommendation-wizard/public/class-woo-wizard-public-shortcode-creator.php(15): wpdb->get_results('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/woo-product-recommendation-wizard/includes/class-woo-product-recommendation-wizard.php(126): require_once('/wordpress/wp-c...')
+#6 /wordpress/wp-content/plugins/woo-product-recommendation-wizard/includes/class-woo-product-recommendation-wizard.php(79): Woo_Product_Recommendation_Wizard->load_dependencies()
+#7 /wordpress/wp-content/plugins/woo-product-recommendation-wizard/woo-product-recommendation-wizard.php(87): Woo_Product_Recommendation_Wizard->__construct()
+#8 /wordpress/wp-content/plugins/woo-product-recommendation-wizard/woo-product-recommendation-wizard.php(91): run_woo_product_recommendation_wizard()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-product-rec...')
+#11 /internal/eval.php(20): activate_plugin('woo-product-rec...')
+#12 {main}</pre>
+ for query SELECT * FROM wprw_wizard made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woo-product-recommendation-wizard/woo-product-recommendation-wizard.php'), run_woo_product_recommendation_wizard, Woo_Product_Recommendation_Wizard->__construct, Woo_Product_Recommendation_Wizard->load_dependencies, require_once('/plugins/woo-product-recommendation-wizard/public/class-woo-wizard-public-shortcode-creator.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-May-2025 08:57:38 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 08:57:38 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 08:57:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_weblib_holditems (
-  transaction serial,
-  barcode varchar(16) not null check (barcode <> ''),
-  title varchar(128) not null check (title <> ''),
-  source varchar(16) not null check (source <> ''),
-  type varchar(16) not null check (type <> ''),
-  patronid int not null,
-  dateheld date not null check (dateheld <> ''),
-  dateexpire date not null check (dateexpire <> ''),
-  PRIMARY KEY  (transaction) 
-  )</p>
+<p>SELECT * FROM wprw_wizard</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wprw_wizard | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: serial.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wprw_wizard.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/weblibrarian/includes/database_code.php(126): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/weblibrarian/WebLibrarian.php(133): WEBLIB_make_tables()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): WebLibrarian->install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_weblib...', false)
-#8 /internal/eval.php(20): activate_plugin('weblibrarian/We...')
-#9 {main}</pre>
- for query CREATE TABLE wp_weblib_holditems (
-  transaction serial,
-  barcode varchar(16) not null check (barcode <> ''),
-  title varchar(128) not null check (title <> ''),
-  source varchar(16) not null check (source <> ''),
-  type varchar(16) not null check (type <> ''),
-  patronid int not null,
-  dateheld date not null check (dateheld <> ''),
-  dateexpire date not null check (dateexpire <> ''),
-  PRIMARY KEY  (transaction) 
-  ) made by activate_plugin, do_action('activate_weblibrarian/WebLibrarian.php'), WP_Hook->do_action, WP_Hook->apply_filters, WebLibrarian->install, WEBLIB_make_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-May-2025 16:56:32 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>weblibrarian</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[10-May-2025 16:56:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/woo-product-recommendation-wizard/public/class-woo-wizard-public-shortcode-creator.php(15): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/woo-product-recommendation-wizard/includes/class-woo-product-recommendation-wizard.php(126): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-content/plugins/woo-product-recommendation-wizard/includes/class-woo-product-recommendation-wizard.php(79): Woo_Product_Recommendation_Wizard->load_dependencies()
+#5 /wordpress/wp-content/plugins/woo-product-recommendation-wizard/woo-product-recommendation-wizard.php(87): Woo_Product_Recommendation_Wizard->__construct()
+#6 /wordpress/wp-content/plugins/woo-product-recommendation-wizard/woo-product-recommendation-wizard.php(91): run_woo_product_recommendation_wizard()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-product-rec...')
+#9 /internal/eval.php(20): activate_plugin('woo-product-rec...')
+#10 {main}</pre>
+ for query SELECT * FROM wprw_wizard made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woo-product-recommendation-wizard/woo-product-recommendation-wizard.php'), run_woo_product_recommendation_wizard, Woo_Product_Recommendation_Wizard->__construct, Woo_Product_Recommendation_Wizard->load_dependencies, require_once('/plugins/woo-product-recommendation-wizard/public/class-woo-wizard-public-shortcode-creator.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-May-2025 08:57:47 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 08:57:47 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 08:57:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_weblib_outitems (
-  transaction serial,
-  barcode varchar(16) not null check (barcode <> ''),
-  title varchar(128) not null check (title <> ''),
-  source varchar(16) not null check (source <> ''),
-  type varchar(16) not null check (type <> ''),
-  patronid int not null,
-  dateout date not null check (dateout <> ''),
-  datedue date not null check (datedue <> ''),
-  PRIMARY KEY  (transaction)
-  )</p>
+<p>SELECT * FROM wprw_wizard</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wprw_wizard | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: serial.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wprw_wizard.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/weblibrarian/includes/database_code.php(106): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/weblibrarian/WebLibrarian.php(133): WEBLIB_make_tables()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): WebLibrarian->install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_weblib...', false)
-#8 /internal/eval.php(20): activate_plugin('weblibrarian/We...')
-#9 {main}</pre>
- for query CREATE TABLE wp_weblib_outitems (
-  transaction serial,
-  barcode varchar(16) not null check (barcode <> ''),
-  title varchar(128) not null check (title <> ''),
-  source varchar(16) not null check (source <> ''),
-  type varchar(16) not null check (type <> ''),
-  patronid int not null,
-  dateout date not null check (dateout <> ''),
-  datedue date not null check (datedue <> ''),
-  PRIMARY KEY  (transaction)
-  ) made by activate_plugin, do_action('activate_weblibrarian/WebLibrarian.php'), WP_Hook->do_action, WP_Hook->apply_filters, WebLibrarian->install, WEBLIB_make_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-May-2025 16:56:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_weblib_holditems (
-  transaction serial,
-  barcode varchar(16) not null check (barcode <> ''),
-  title varchar(128) not null check (title <> ''),
-  source varchar(16) not null check (source <> ''),
-  type varchar(16) not null check (type <> ''),
-  patronid int not null,
-  dateheld date not null check (dateheld <> ''),
-  dateexpire date not null check (dateexpire <> ''),
-  PRIMARY KEY  (transaction) 
-  )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: serial.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/weblibrarian/includes/database_code.php(126): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/weblibrarian/WebLibrarian.php(133): WEBLIB_make_tables()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): WebLibrarian->install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_weblib...', false)
-#8 /internal/eval.php(20): activate_plugin('weblibrarian/We...')
-#9 {main}</pre>
- for query CREATE TABLE wp_weblib_holditems (
-  transaction serial,
-  barcode varchar(16) not null check (barcode <> ''),
-  title varchar(128) not null check (title <> ''),
-  source varchar(16) not null check (source <> ''),
-  type varchar(16) not null check (type <> ''),
-  patronid int not null,
-  dateheld date not null check (dateheld <> ''),
-  dateexpire date not null check (dateexpire <> ''),
-  PRIMARY KEY  (transaction) 
-  ) made by activate_plugin, do_action('activate_weblibrarian/WebLibrarian.php'), WP_Hook->do_action, WP_Hook->apply_filters, WebLibrarian->install, WEBLIB_make_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-May-2025 16:56:41 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>weblibrarian</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[10-May-2025 17:01:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wpsecurity/wpsecurity.php:59
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/woo-product-recommendation-wizard/public/class-woo-wizard-public-shortcode-creator.php(15): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/woo-product-recommendation-wizard/includes/class-woo-product-recommendation-wizard.php(126): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-content/plugins/woo-product-recommendation-wizard/includes/class-woo-product-recommendation-wizard.php(79): Woo_Product_Recommendation_Wizard->load_dependencies()
+#5 /wordpress/wp-content/plugins/woo-product-recommendation-wizard/woo-product-recommendation-wizard.php(87): Woo_Product_Recommendation_Wizard->__construct()
+#6 /wordpress/wp-content/plugins/woo-product-recommendation-wizard/woo-product-recommendation-wizard.php(91): run_woo_product_recommendation_wizard()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-product-rec...')
+#9 /internal/eval.php(20): activate_plugin('woo-product-rec...')
+#10 {main}</pre>
+ for query SELECT * FROM wprw_wizard made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woo-product-recommendation-wizard/woo-product-recommendation-wizard.php'), run_woo_product_recommendation_wizard, Woo_Product_Recommendation_Wizard->__construct, Woo_Product_Recommendation_Wizard->load_dependencies, require_once('/plugins/woo-product-recommendation-wizard/public/class-woo-wizard-public-shortcode-creator.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-May-2025 09:00:09 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 09:00:48 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 09:01:28 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 09:03:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wpsecurity/wpsecurity.php:59
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpsecurity/wpse...')
 #2 /internal/eval.php(20): activate_plugin('wpsecurity/wpse...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/wpsecurity/wpsecurity.php on line 59
-[10-May-2025 17:01:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wpsecurity/wpsecurity.php:59
+[12-May-2025 09:03:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wpsecurity/wpsecurity.php:59
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpsecurity/wpse...')
 #2 /internal/eval.php(20): activate_plugin('wpsecurity/wpse...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/wpsecurity/wpsecurity.php on line 59
-[10-May-2025 17:01:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wpsecurity/wpsecurity.php:59
+[12-May-2025 09:03:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wpsecurity/wpsecurity.php:59
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpsecurity/wpse...')
