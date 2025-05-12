@@ -2,37 +2,159 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [11-May-2025 02:00:48 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>unique-hover-slider-plus</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[11-May-2025 02:01:15 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>unique-hover-slider-plus</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[11-May-2025 02:01:44 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>unique-hover-slider-plus</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[11-May-2025 02:03:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/youtube-subscriber/youtube-subscriber.php:11
+Error: [12-May-2025 03:25:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_tayori` (`mail`, `button_title`, `button_color`, `button_position_pc`, `button_position_sp`, `button_icon_type`, `button_font_color`, `button_icon_transparent_type`, `created_at`, `updated_at`) VALUES ('admin@localhost.com', 'お問い合わせ', '#43bfa0', '1', '1', '1', '#ffffff', '1', '2025-05-12 03:25:16', '2025-05-12 03:25:16')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_tayori</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_tayori</li>
+<li>Executing: INSERT INTO `wp_tayori` (`id`, `mail`, `button_title`, `button_type`, `pop_button_type`, `button_color`, `button_position_pc`, `button_position_sp`, `button_icon_type`, `button_font_color`, `form_type_sp`, `form_type_pc`, `button_icon_transparent_type`, `delete_flag`, `created_at`, `updated_at`) SELECT NULL, `column1`, `column2`, '1', '1', `column3`, `column4`, `column5`, `column6`, `column7`, '1', '1', `column8`, 'false', `column9`, `column10` FROM (VALUES ( 'admin@localhost.com' , 'お問い合わせ' , '#43bfa0' , '1' , '1' , '1' , '#ffffff' , '1' , '2025-05-12 03:25:16' , '2025-05-12 03:25:16' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[23000]: Integrity constraint violation: 19 cannot store TEXT value in INTEGER column wp_tayori.delete_flag
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_tayori', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/tayori/includes/tayori.php(55): wpdb->insert('wp_tayori', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Tayori::activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tayori...', false)
+#10 /internal/eval.php(20): activate_plugin('tayori/tayori.p...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_tayori` (`mail`, `button_title`, `button_color`, `button_position_pc`, `button_position_sp`, `button_icon_type`, `button_font_color`, `button_icon_transparent_type`, `created_at`, `updated_at`) VALUES ('admin@localhost.com', 'お問い合わせ', '#43bfa0', '1', '1', '1', '#ffffff', '1', '2025-05-12 03:25:16', '2025-05-12 03:25:16') made by activate_plugin, do_action('activate_tayori/tayori.php'), WP_Hook->do_action, WP_Hook->apply_filters, Tayori::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-May-2025 03:25:16 UTC] PHP Warning:  Undefined variable $tayori_db_version in /wordpress/wp-content/plugins/tayori/includes/tayori.php on line 59
+[12-May-2025 03:25:17 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>button-js</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 03:25:17 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>tayori-setting-js</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 03:25:26 UTC] PHP Warning:  Undefined variable $tayori_db_version in /wordpress/wp-content/plugins/tayori/includes/tayori.php on line 59
+[12-May-2025 03:25:28 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>button-js</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 03:25:28 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>tayori-setting-js</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 03:25:37 UTC] PHP Warning:  Undefined variable $tayori_db_version in /wordpress/wp-content/plugins/tayori/includes/tayori.php on line 59
+[12-May-2025 03:25:38 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>button-js</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 03:25:38 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>tayori-setting-js</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 03:25:48 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>tcp-cart-total-rounding</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 03:25:58 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>tcp-cart-total-rounding</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 03:26:07 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>tcp-cart-total-rounding</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 03:26:46 UTC] PHP Deprecated:  Function get_usermeta is <strong>deprecated</strong> since version 3.0.0! Use get_user_meta() instead. in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 03:26:55 UTC] PHP Deprecated:  Function get_usermeta is <strong>deprecated</strong> since version 3.0.0! Use get_user_meta() instead. in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 03:27:05 UTC] PHP Deprecated:  Function get_usermeta is <strong>deprecated</strong> since version 3.0.0! Use get_user_meta() instead. in /wordpress/wp-includes/functions.php on line 6121
+[12-May-2025 03:28:11 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/umbigothis/umbigothis.php on line 25
+[12-May-2025 03:28:11 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/umbigothis/umbigothis.php on line 25
+[12-May-2025 03:28:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM </p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM ')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM ')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM ')
+#4 /wordpress/wp-content/plugins/umbigothis/umbigothis.php(54): wpdb->get_results('SELECT * FROM ')
+#5 /wordpress/wp-content/plugins/umbigothis/umbigothis.php(28): umb_get()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('umbigothis/umbi...')
+#8 /internal/eval.php(20): activate_plugin('umbigothis/umbi...')
+#9 {main}</pre>
+ for query SELECT * FROM  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/umbigothis/umbigothis.php'), umb_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-May-2025 03:28:20 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/umbigothis/umbigothis.php on line 25
+[12-May-2025 03:28:20 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/umbigothis/umbigothis.php on line 25
+[12-May-2025 03:28:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM  | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 incomplete input.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM ')
+#2 /wordpress/wp-content/plugins/umbigothis/umbigothis.php(54): wpdb->get_results('SELECT * FROM ')
+#3 /wordpress/wp-content/plugins/umbigothis/umbigothis.php(28): umb_get()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('umbigothis/umbi...')
+#6 /internal/eval.php(20): activate_plugin('umbigothis/umbi...')
+#7 {main}</pre>
+ for query SELECT * FROM  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/umbigothis/umbigothis.php'), umb_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-May-2025 03:28:29 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/umbigothis/umbigothis.php on line 25
+[12-May-2025 03:28:29 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/umbigothis/umbigothis.php on line 25
+[12-May-2025 03:28:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM  | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 incomplete input.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM ')
+#2 /wordpress/wp-content/plugins/umbigothis/umbigothis.php(54): wpdb->get_results('SELECT * FROM ')
+#3 /wordpress/wp-content/plugins/umbigothis/umbigothis.php(28): umb_get()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('umbigothis/umbi...')
+#6 /internal/eval.php(20): activate_plugin('umbigothis/umbi...')
+#7 {main}</pre>
+ for query SELECT * FROM  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/umbigothis/umbigothis.php'), umb_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-May-2025 03:29:38 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Youtube_videos::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('youtube-subscri...')
-#2 /internal/eval.php(20): activate_plugin('youtube-subscri...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/youtube-subscriber/youtube-subscriber.php on line 11
-[11-May-2025 02:03:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/youtube-subscriber/youtube-subscriber.php:11
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_youtub...', false)
+#3 /internal/eval.php(20): activate_plugin('youtube-videos-...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[12-May-2025 03:29:47 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Youtube_videos::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('youtube-subscri...')
-#2 /internal/eval.php(20): activate_plugin('youtube-subscri...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/youtube-subscriber/youtube-subscriber.php on line 11
-[11-May-2025 02:03:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/youtube-subscriber/youtube-subscriber.php:11
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_youtub...', false)
+#3 /internal/eval.php(20): activate_plugin('youtube-videos-...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[12-May-2025 03:29:55 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Youtube_videos::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('youtube-subscri...')
-#2 /internal/eval.php(20): activate_plugin('youtube-subscri...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/youtube-subscriber/youtube-subscriber.php on line 11
-[11-May-2025 02:04:25 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ')' in /wordpress/wp-content/plugins/tambar/tambar.php on line 68
-[11-May-2025 02:04:33 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ')' in /wordpress/wp-content/plugins/tambar/tambar.php on line 68
-[11-May-2025 02:04:40 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ')' in /wordpress/wp-content/plugins/tambar/tambar.php on line 68
-[11-May-2025 02:05:50 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>clktusg_txt_dm</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[11-May-2025 02:05:59 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>clktusg_txt_dm</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[11-May-2025 02:06:08 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>clktusg_txt_dm</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[11-May-2025 02:08:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_youtub...', false)
+#3 /internal/eval.php(20): activate_plugin('youtube-videos-...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[12-May-2025 03:31:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>INSERT IGNORE INTO wp_yugiohcardref_card_names (card_name) VALUES('"A" Cell Incubator'),
@@ -2002,527 +2124,4 @@ Stack trace:
 ('Kotodama'),
 ('Koumori Dragon'),
 ('Kozaky'),
-('Kozaky''s Self-Destruct Button'),
-('Krebons'),
-('Kryuel'),
-('Kumootoko'),
-('Kunai with Chain'),
-('Kunoichi'),
-('Kurama'),
-('Kuraz the Light Monarch'),
-('Kuriboh'),
-('Kuribon'),
-('Kuwagata'),
-('Kwagar Hercules'),
-('Kycoo the Ghost Destroyer'),
-('La Jinn the Mystical Genie of the Lamp'),
-('Labyrinth of Nightmare'),
-('Labyrinth Tank'),
-('Labyrinth Wall'),
-('Lady Assailant of Flames'),
-('Lady Ninja Yae'),
-('Lady of Faith'),
-('Lady Panther'),
-('Larvae Moth'),
-('Larvas'),
-('Laser Cannon Armor'),
-('Last Day of Witch'),
-('Last Resort'),
-('Last Turn'),
-('Last Will'),
-('Launcher Spider'),
-('Lava Battleguard'),
-('Lava Dragon'),
-('Lava Golem'),
-('Layard the Liberator'),
-('Leeching the Light'),
-('Left Arm of the Forbidden One'),
-('Left Leg of the Forbidden One'),
-('Legacy Hunter'),
-('Legacy of Yata-Garasu'),
-('Legendary Black Belt'),
-('Legendary Ebon Steed'),
-('Legendary Flame Lord'),
-('Legendary Jujitsu Master'),
-('Legendary Sword'),
-('Leghul'),
-('Lekunga'),
-('Leogun'),
-('Lesser Dragon'),
-('Lesser Fiend'),
-('Level Conversion Lab'),
-('Level Down!?'),
-('Level Eater'),
-('Level Limit - Area B'),
-('Level Limit Area A'),
-('Level Modulation'),
-('Level Retuner'),
-('Level Tuning'),
-('Level Up!'),
-('Level Warrior'),
-('Levia-Dragon - Daedalus'),
-('Leviadragon - Daedulus'),
-('Liar Wire'),
-('Lich Lord, King of the Underworld'),
-('Life Absorbing Machine'),
-('Life Equalizer'),
-('Lifeforce Harmonizer'),
-('Light and Darkness Dragon'),
-('Light Barrier'),
-('Light Effigy'),
-('Light End Dragon'),
-('Light Laser'),
-('Light of Intervention'),
-('Light of Judgment'),
-('Light of Redemption'),
-('Light Spiral'),
-('Light-Imprisoning Mirror'),
-('Lighten the Load'),
-('Lightforce Sword'),
-('Lightning Blade'),
-('Lightning Conger'),
-('Lightning Punisher'),
-('Lightning Vortex'),
-('Lightsworn Barrier'),
-('Lightsworn Sabre'),
-('Lightwave Tuning'),
-('Limit Impulse'),
-('Limit Reverse'),
-('Limiter Overload'),
-('Limiter Removal'),
-('Lineage of Destruction'),
-('Linear Accelerator Cannon'),
-('Liquid Beast'),
-('Little Chimera'),
-('Little-Winguard'),
-('Lizard Soldier'),
-('Lone Wolf'),
-('Lonefire Blossom'),
-('Lord British Space Fighter'),
-('Lord of D.'),
-('Lord of the Lamp'),
-('Lord Poison'),
-('Lost Guardian'),
-('Lucky Chance'),
-('Lucky Cloud'),
-('Lucky Iron Axe'),
-('Lucky Pied Piper'),
-('Lumina, Lightsworn Summoner'),
-('Luminous Soldier'),
-('Luminous Spark'),
-('Luster Dragon'),
-('Luster Dragon #2'),
-('Lycanthrope'),
-('Lyla, Lightsworn Sorceress'),
-('Lyna the Light Charmer'),
-('M-Warrior #1'),
-('M-Warrior #2'),
-('Machina Armored Unit'),
-('Machina Defender'),
-('Machina Force'),
-('Machina Fortress'),
-('Machina Gearframe'),
-('Machina Peacekeeper'),
-('Machina Sniper'),
-('Machina Soldier'),
-('Machine Assembly Line'),
-('Machine Conversion Factory'),
-('Machine Duplication'),
-('Machine King'),
-('Machine King - B.C. 3000'),
-('Machine King Prototype'),
-('Machine Lord Ar'),
-('Macro Cosmos'),
-('Mad Archfiend'),
-('Mad Dog of Darkness'),
-('Mad Lobster'),
-('Mad Reloader'),
-('Mad Sword Beast'),
-('Mage Power'),
-('Magic Cylinder'),
-('Magic Drain'),
-('Magic Formula'),
-('Magic Hole Golem'),
-('Magic Jammer'),
-('Magic Planter'),
-('Magic Reflector'),
-('Magic Triangle of the Ice Barrier'),
-('Magical Android'),
-('Magical Arm Shield'),
-('Magical Blast'),
-('Magical Citadel of Endymion'),
-('Magical Dimension'),
-('Magical Exemplar'),
-('Magical Explosion'),
-('Magical Ghost'),
-('Magical Hats'),
-('Magical Labyrinth'),
-('Magical Mallet'),
-('Magical Marionette'),
-('Magical Merchant'),
-('Magical Plant Mandragola'),
-('Magical Reflect Slime'),
-('Magical Scientist'),
-('Magical Stone Excavation'),
-('Magical Thorn'),
-('Magicat'),
-('Magician of Black Chaos'),
-('Magician of Faith'),
-('Magician''s Circle'),
-('Magician''s Unite'),
-('Magician''s Valkyria'),
-('Magicians Unite'),
-('Magidog'),
-('Magna Drago'),
-('Magna-Slash Dragon'),
-('MagnaSlash Dragon'),
-('Magnet Circle LV2'),
-('Magnetic Mosquito'),
-('Maha Vailo'),
-('Maharaghi'),
-('Maiden of Macabre'),
-('Maiden of the Aqua'),
-('Maiden of the Moonlight'),
-('Majestic Dragon'),
-('Majestic Mech - Goryu'),
-('Majestic Mech - Ohka'),
-('Majestic Mech - Senku'),
-('Majestic Red Dragon'),
-('Majestic Star Dragon'),
-('Maji-Gire Panda'),
-('Major Riot'),
-('Maju Garzett'),
-('Makiu, the Magical Mist'),
-('Makyura the Destructor'),
-('Malefic Blue-Eyes White Dragon'),
-('Malevolent Catastrophe'),
-('Malevolent Mech Goku En'),
-('Malevolent Nuzzler'),
-('Malfunction'),
-('Malice Ascendant'),
-('Malice Dispersion'),
-('Malice Doll of Demise'),
-('Mammoth Graveyard'),
-('Man Beast of Ares'),
-('Man Eater'),
-('Man-Eater Bug'),
-('Man-Eating Treasure Chest'),
-('Man-Thro'' Tro'''),
-('Manga Ryu-Ran'),
-('Maniacal Servant'),
-('Manju of the Ten Thousand Hands'),
-('Manticore of Darkness'),
-('Marauding Captain'),
-('Marie the Fallen One'),
-('Marionette Mite'),
-('Mark of the Rose'),
-('Marrionette Mite'),
-('Marshmallon'),
-('Marshmallon Glasses'),
-('Maryokutai'),
-('Masaki the Legendary Swordsman'),
-('Mask of Brutality'),
-('Mask of Darkness'),
-('Mask of Dispel'),
-('Mask of Restrict'),
-('Mask of the Accursed'),
-('Mask of Weakness'),
-('Masked Beast Des Gardius'),
-('Masked Chopper'),
-('Masked Dragon'),
-('Masked Sorcerer'),
-('Mass Driver'),
-('Mass Hypnosis'),
-('Master & Expert'),
-('Master Gig'),
-('Master Kyonshee'),
-('Master Monk'),
-('Master of Oz'),
-('Master of OZ'),
-('Mataza the Zapper'),
-('Mausoleum of the Emperor'),
-('Max Warrior'),
-('Maximum Six'),
-('Mazera DeVille'),
-('Mecha Bunny'),
-('Mecha-Dog Marron'),
-('Mechanical Hound'),
-('Mechanical Snail'),
-('Mechanicalchaser'),
-('Meda Bat'),
-('Medium Piece Golem'),
-('Medusa Worm'),
-('Mefist the Infernal General'),
-('Mega Thunderball'),
-('Mega Ton Magical Cannon'),
-('Megamorph'),
-('Megarock Dragon'),
-('Megasonic Eye'),
-('Mei-kou, Master of Barriers'),
-('MeiKou, Master of Barriers'),
-('Melchid the Four-Face Beast'),
-('Meltiel Sage of the Sky'),
-('Meltiel, Sage of the Sky'),
-('Memory Crush King'),
-('Memory Crusher'),
-('Mermaid Archer'),
-('Mermaid Knight'),
-('Mesmeric Control'),
-('Messenger of Peace'),
-('Metabo-Shark'),
-('Metal Armored Bug'),
-('Metal Detector'),
-('Metal Dragon'),
-('Metal Fish'),
-('Metal Guardian'),
-('Metal Reflect Slime'),
-('Metal Shooter'),
-('Metallizing Parasite - Lunatite'),
-('Metalmorph'),
-('Metalsilver Armor'),
-('Metalzoa'),
-('Metamorphosis'),
-('Metaphysical Regeneration'),
-('Meteor Dragon'),
-('Meteor Flare'),
-('Meteor of Destruction'),
-('Meteorain'),
-('Mezuki'),
-('Michizure'),
-('Micro Ray'),
-('Mid Shield Gardna'),
-('Mighty Guard'),
-('Mikazukinoyaiba'),
-('Millenium Scorpion'),
-('Millennium Golem'),
-('Millennium Scorpion'),
-('Millennium Shield'),
-('Milus Radiant'),
-('Minar'),
-('Mind Control'),
-('Mind Crush'),
-('Mind Haxorz'),
-('Mind Master'),
-('Mind on Air'),
-('Mind Over Matter'),
-('Mind Protector'),
-('Mind Trust'),
-('Mind Wipe'),
-('Mine Golem'),
-('Minefield Eruption'),
-('Minefieldriller'),
-('Miniaturize'),
-('Minoan Centaur'),
-('Minor Goblin Official'),
-('Miracle Dig'),
-('Miracle Fertilizer'),
-('Miracle Flipper'),
-('Miracle Fusion'),
-('Miracle Jurassic Egg'),
-('Miracle Kids'),
-('Miracle Locus'),
-('Miracle Restoring'),
-('Miraculous Descent'),
-('Miraculous Rebirth'),
-('Mirage Dragon'),
-('Mirage Knight'),
-('Mirage of Nightmare'),
-('Mirage Tube'),
-('Mirror Force'),
-('Mirror Gate'),
-('Mirror of Oaths'),
-('Mirror of Yata'),
-('Mirror Wall'),
-('Misairuzame'),
-('Misfortune'),
-('Mispolymerization'),
-('Mist Archfiend'),
-('Mist Body'),
-('Mist Valley Shaman'),
-('Mist Valley Soldier'),
-('Mist Valley Thunderbird'),
-('Mist Wurm'),
-('Moai Interceptor Cannon'),
-('Moai Interceptor Cannons'),
-('Mobius the Frost Monarch'),
-('Moisture Creature'),
-('Moja'),
-('Mokey Mokey'),
-('Mokey Mokey King'),
-('Mokey Mokey Smackdown'),
-('Molten Behemoth'),
-('Molten Destruction'),
-('Molten Zombie'),
-('Molting Escape'),
-('Monk Fighter'),
-('Monster Egg'),
-('Monster Gate'),
-('Monster Reborn'),
-('Monster Recovery'),
-('Monster Reincarnation'),
-('Montage Dragon'),
-('Moon Dragon Quilla'),
-('Moon Envoy'),
-('Morale Boost'),
-('Moray of Greed'),
-('Morinphen'),
-('Mormolith'),
-('Morphing Jar'),
-('Morphing Jar #2'),
-('Morphtransition'),
-('Morphtronic Accelerator'),
-('Morphtronic Bind'),
-('Morphtronic Boarden'),
-('Morphtronic Boomboxen'),
-('Morphtronic Cameran'),
-('Morphtronic Celfon'),
-('Morphtronic Clocken'),
-('Morphtronic Cord'),
-('Morphtronic Datatron'),
-('Morphtronic Engine'),
-('Morphtronic Forcefield'),
-('Morphtronic Magnen'),
-('Morphtronic Magnen Bar'),
-('Morphtronic Map'),
-('Morphtronic Mix-up'),
-('Morphtronic Monitron'),
-('Morphtronic Radion'),
-('Morphtronic Remoten'),
-('Morphtronic Repair Unit'),
-('Morphtronic Rusty Engine'),
-('Morphtronic Scopen'),
-('Morphtronic Slingen'),
-('Morphtronic Vacuumen'),
-('Morphtronic Videon'),
-('Morphtronics, Scramble!'),
-('Mosaic Manticore'),
-('Mother Grizzly'),
-('Mother Spider'),
-('Mountain'),
-('Mr. Volcano'),
-('Mucus Yolk'),
-('Mudora'),
-('Muka Muka'),
-('Multiple Piece Golem'),
-('Multiplication of Ants'),
-('Multiply'),
-('Mushroom Man'),
-('Mushroom Man #2'),
-('Musician King'),
-('Mustering of the Dark Scorpions'),
-('My Body as a Shield'),
-('Mysterious Guard'),
-('Mysterious Puppeteer'),
-('Mysterious Triangle'),
-('Mystic Box'),
-('Mystic Clown'),
-('Mystic Horseman'),
-('Mystic Lamp'),
-('Mystic Plasma Zone'),
-('Mystic Probe'),
-('Mystic Swordsman LV2'),
-('Mystic Swordsman LV4'),
-('Mystic Swordsman LV6'),
-('Mystic Tomato'),
-('Mystical Cards of Light'),
-('Mystical Elf'),
-('Mystical Knight of Jackal'),
-('Mystical Moon'),
-('Mystical Sheep #1'),
-('Mystical Sheep #2'),
-('Mystical Shine Ball'),
-('Mystical Space Typhoon'),
-('Mystical Wind Typhoon'),
-('Mystik Wok'),
-('Mythical Beast Cerberus'),
-('Nanobreaker'),
-('Narrow Pass'),
-('Natural Disaster'),
-('Natural Tune'),
-('Nature''s Reflection'),
-('Necklace of Command'),
-('Necro Gardna'),
-('Necroface'),
-('Necrolancer the Timelord'),
-('Necrovalley'),
-('Needle Burrower'),
-('Needle Ceiling'),
-('Needle Wall'),
-('Needle Worm'),
-('Needlebug Nest'),
-('Nega-Ton Corepanel'),
-('Negate Attack'),
-('Neko Mane King'),
-('Nekogal #1'),
-('Nekogal #2'),
-('Nemuriko'),
-('Neo Aqua Madoor'),
-('Neo Bug'),
-('Neo Space'),
-('Neo Space Pathfinder'),
-('Neo the Magic Swordsman'),
-('Neo-Parshath, The Sky Paladin'),
-('Neo-Spacian Air Hummingbird'),
-('Neo-Spacian Aqua Dolphin'),
-('Neo-Spacian Dark Panther'),
-('Neo-Spacian Flare Scarab'),
-('Neo-Spacian Glow Moss'),
-('Neo-Spacian Grand Mole'),
-('Neo-Spacian Marine Dolphin'),
-('Neo-Spacian Twinkle Moss'),
-('NeoSpacian Air Hummingbird'),
-('NeoSpacian Glow Moss'),
-('NeoSpacian Grand Mole'),
-('Neos Force'),
-('Neos Wiseman'),
-('Nettles'),
-('Newdoria'),
-('NEX'),
-('Next to be Lost'),
-('Night Assailant'),
-('Night Wing Sorceress'),
-('Night''s End Sorcerer'),
-('Nightmare Archfiends'),
-('Nightmare Horse'),
-('Nightmare Penguin'),
-('Nightmare Wheel'),
-('Nightmare''s Steelcage'),
-('Nimble Momonga'),
-('Nimble Musasabi'),
-('Nimble Sunfish'),
-('Nin-Ken Dog'),
-('Ninja Grandmaster Sasuke'),
-('Ninjitsu Art of Decoy'),
-('Ninjitsu Art of Transformation'),
-('Nitro Synchron'),
-('Nitro Unit'),
-('Nitro Warrior'),
-('Niwatori'),
-('No Entry!'),
-('Nobleman of Crossout'),
-('Nobleman of Extermination'),
-('Nobleman-Eater Bug'),
-('Noisy Gnat'),
-('Non Aggression Area'),
-('Non-Fusion Area'),
-('Non-Spellcasting Area'),
-('NonSpellcasting Area'),
-('Nova Summoner'),
-('Novox''s Prayer'),
-('Nubian Guard'),
-('Null and Void'),
-('Numinous Healer'),
-('Nurse Reficule the Fallen One'),
-('Nutrient Z'),
-('Nuvia the Wicked'),
-('O - Oversoul'),
-('Obelisk the Tormentor'),
-('Obnoxious Celtic Guard'),
-('Obnoxious Celtic Guardian'),
-('Obsidian Dragon'),
-('Ocean Dragon Lord - Neo Daedalus'),
-('Ocean''s Keeper'),
-('Octoberser'),
-('Ocubeam'),
-('Offering to the Immortals'),
-('Offering to the Snake
+('Kozaky''s Self-Destru
