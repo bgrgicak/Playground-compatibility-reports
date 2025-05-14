@@ -2,78 +2,171 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [12-May-2025 19:46:37 UTC] PHP Deprecated:  WP_SQLite_Information_Schema_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-exception.php on line 37
-[12-May-2025 19:46:38 UTC] PHP Deprecated:  WP_SQLite_Information_Schema_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-exception.php on line 37
-[12-May-2025 19:49:34 UTC] PHP Warning:  require(/wordpress/wp-content/plugins/safan-enable-svg/includes/class-safan-enable-svg.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/safan-enable-svg/enable-svg.php on line 60
-[12-May-2025 19:49:34 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/safan-enable-svg/includes/class-safan-enable-svg.php' (include_path='.:') in /wordpress/wp-content/plugins/safan-enable-svg/enable-svg.php:60
+Error: [14-May-2025 11:47:12 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('safan-enable-sv...')
-#2 /internal/eval.php(20): activate_plugin('safan-enable-sv...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/safan-enable-svg/enable-svg.php on line 60
-[12-May-2025 19:49:43 UTC] PHP Warning:  require(/wordpress/wp-content/plugins/safan-enable-svg/includes/class-safan-enable-svg.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/safan-enable-svg/enable-svg.php on line 60
-[12-May-2025 19:49:43 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/safan-enable-svg/includes/class-safan-enable-svg.php' (include_path='.:') in /wordpress/wp-content/plugins/safan-enable-svg/enable-svg.php:60
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('st_daily_tip_wi...')
+#2 /wordpress/wp-content/plugins/st-daily-tip/st-daily-tip-widget.php(14): register_widget('st_daily_tip_wi...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): st_daily_tip_load_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[14-May-2025 11:47:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_dailytipdata (
+			id mediumint(9) NOT NULL AUTO_INCREMENT,
+			added_date date DEFAULT '0000-00-00' NOT NULL,
+			tip_title text,
+			tip_text text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+			group_name varchar(20) NOT NULL,
+			Display_yearly text NOT NULL,
+			display_date date DEFAULT '0000-00-00' ,
+			shown_date date DEFAULT '0000-00-00' ,
+			display_day int(2),
+			PRIMARY KEY id (id)
+		) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/st-daily-tip/st-daily-tip.php(291): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): st_daily_tip_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_st-dai...', false)
+#7 /internal/eval.php(20): activate_plugin('st-daily-tip/st...')
+#8 {main}</pre>
+ for query CREATE TABLE wp_dailytipdata (
+			id mediumint(9) NOT NULL AUTO_INCREMENT,
+			added_date date DEFAULT '0000-00-00' NOT NULL,
+			tip_title text,
+			tip_text text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+			group_name varchar(20) NOT NULL,
+			Display_yearly text NOT NULL,
+			display_date date DEFAULT '0000-00-00' ,
+			shown_date date DEFAULT '0000-00-00' ,
+			display_day int(2),
+			PRIMARY KEY id (id)
+		) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci made by activate_plugin, do_action('activate_st-daily-tip/st-daily-tip.php'), WP_Hook->do_action, WP_Hook->apply_filters, st_daily_tip_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-May-2025 11:47:22 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('safan-enable-sv...')
-#2 /internal/eval.php(20): activate_plugin('safan-enable-sv...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/safan-enable-svg/enable-svg.php on line 60
-[12-May-2025 19:49:50 UTC] PHP Warning:  require(/wordpress/wp-content/plugins/safan-enable-svg/includes/class-safan-enable-svg.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/safan-enable-svg/enable-svg.php on line 60
-[12-May-2025 19:49:50 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/safan-enable-svg/includes/class-safan-enable-svg.php' (include_path='.:') in /wordpress/wp-content/plugins/safan-enable-svg/enable-svg.php:60
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('st_daily_tip_wi...')
+#2 /wordpress/wp-content/plugins/st-daily-tip/st-daily-tip-widget.php(14): register_widget('st_daily_tip_wi...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): st_daily_tip_load_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[14-May-2025 11:47:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_dailytipdata (
+			id mediumint(9) NOT NULL AUTO_INCREMENT,
+			added_date date DEFAULT '0000-00-00' NOT NULL,
+			tip_title text,
+			tip_text text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+			group_name varchar(20) NOT NULL,
+			Display_yearly text NOT NULL,
+			display_date date DEFAULT '0000-00-00' ,
+			shown_date date DEFAULT '0000-00-00' ,
+			display_day int(2),
+			PRIMARY KEY id (id)
+		) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/st-daily-tip/st-daily-tip.php(291): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): st_daily_tip_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_st-dai...', false)
+#7 /internal/eval.php(20): activate_plugin('st-daily-tip/st...')
+#8 {main}</pre>
+ for query CREATE TABLE wp_dailytipdata (
+			id mediumint(9) NOT NULL AUTO_INCREMENT,
+			added_date date DEFAULT '0000-00-00' NOT NULL,
+			tip_title text,
+			tip_text text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+			group_name varchar(20) NOT NULL,
+			Display_yearly text NOT NULL,
+			display_date date DEFAULT '0000-00-00' ,
+			shown_date date DEFAULT '0000-00-00' ,
+			display_day int(2),
+			PRIMARY KEY id (id)
+		) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci made by activate_plugin, do_action('activate_st-daily-tip/st-daily-tip.php'), WP_Hook->do_action, WP_Hook->apply_filters, st_daily_tip_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-May-2025 11:47:31 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('safan-enable-sv...')
-#2 /internal/eval.php(20): activate_plugin('safan-enable-sv...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/safan-enable-svg/enable-svg.php on line 60
-[12-May-2025 19:50:00 UTC] PHP Deprecated:  Required parameter $attr follows optional parameter $content in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 121
-[12-May-2025 19:50:00 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 33
-[12-May-2025 19:50:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 37
-[12-May-2025 19:50:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 40
-[12-May-2025 19:50:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 43
-[12-May-2025 19:50:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 46
-[12-May-2025 19:50:01 UTC] PHP Deprecated:  Required parameter $attr follows optional parameter $content in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 121
-[12-May-2025 19:50:01 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 33
-[12-May-2025 19:50:01 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 37
-[12-May-2025 19:50:01 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 40
-[12-May-2025 19:50:01 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 43
-[12-May-2025 19:50:01 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 46
-[12-May-2025 19:50:08 UTC] PHP Deprecated:  Required parameter $attr follows optional parameter $content in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 121
-[12-May-2025 19:50:08 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 33
-[12-May-2025 19:50:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 37
-[12-May-2025 19:50:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 40
-[12-May-2025 19:50:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 43
-[12-May-2025 19:50:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 46
-[12-May-2025 19:50:09 UTC] PHP Deprecated:  Required parameter $attr follows optional parameter $content in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 121
-[12-May-2025 19:50:09 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 33
-[12-May-2025 19:50:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 37
-[12-May-2025 19:50:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 40
-[12-May-2025 19:50:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 43
-[12-May-2025 19:50:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 46
-[12-May-2025 19:50:17 UTC] PHP Deprecated:  Required parameter $attr follows optional parameter $content in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 121
-[12-May-2025 19:50:17 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 33
-[12-May-2025 19:50:17 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 37
-[12-May-2025 19:50:17 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 40
-[12-May-2025 19:50:17 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 43
-[12-May-2025 19:50:17 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 46
-[12-May-2025 19:50:18 UTC] PHP Deprecated:  Required parameter $attr follows optional parameter $content in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 121
-[12-May-2025 19:50:18 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 33
-[12-May-2025 19:50:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 37
-[12-May-2025 19:50:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 40
-[12-May-2025 19:50:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 43
-[12-May-2025 19:50:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 46
-[12-May-2025 19:50:56 UTC] PHP Warning:  Undefined array key "SkysaApps" in /wordpress/wp-content/plugins/skysa-polls-app/skysa-required/index.php on line 56
-[12-May-2025 19:50:56 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "skysa_app_polls_fvar_created" in /wordpress/wp-content/plugins/skysa-polls-app/index.php:125
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('st_daily_tip_wi...')
+#2 /wordpress/wp-content/plugins/st-daily-tip/st-daily-tip-widget.php(14): register_widget('st_daily_tip_wi...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): st_daily_tip_load_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[14-May-2025 11:49:32 UTC] PHP Deprecated:  Function add_custom_background is <strong>deprecated</strong> since version 3.4.0! Use add_theme_support( 'custom-background', $args ) instead. in /wordpress/wp-includes/functions.php on line 6121
+[14-May-2025 11:49:41 UTC] PHP Deprecated:  Function add_custom_background is <strong>deprecated</strong> since version 3.4.0! Use add_theme_support( 'custom-background', $args ) instead. in /wordpress/wp-includes/functions.php on line 6121
+[14-May-2025 11:49:50 UTC] PHP Deprecated:  Function add_custom_background is <strong>deprecated</strong> since version 3.4.0! Use add_theme_support( 'custom-background', $args ) instead. in /wordpress/wp-includes/functions.php on line 6121
+[14-May-2025 11:50:53 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/render-my-pages/render-my-pages.php on line 37
+[14-May-2025 11:51:01 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/render-my-pages/render-my-pages.php on line 37
+[14-May-2025 11:51:08 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/render-my-pages/render-my-pages.php on line 37
+[14-May-2025 11:53:25 UTC] PHP Fatal error:  Declaration of simplevote_class::pluginInfoRight($info) must be compatible with basic_plugin_class::pluginInfoRight($info, $added = false) in /wordpress/wp-content/plugins/simplevote/simplevote-plugin.php on line 177
+[14-May-2025 11:53:34 UTC] PHP Fatal error:  Declaration of simplevote_class::pluginInfoRight($info) must be compatible with basic_plugin_class::pluginInfoRight($info, $added = false) in /wordpress/wp-content/plugins/simplevote/simplevote-plugin.php on line 177
+[14-May-2025 11:53:42 UTC] PHP Fatal error:  Declaration of simplevote_class::pluginInfoRight($info) must be compatible with basic_plugin_class::pluginInfoRight($info, $added = false) in /wordpress/wp-content/plugins/simplevote/simplevote-plugin.php on line 177
+[14-May-2025 11:54:11 UTC] PHP Warning:  Undefined array key "SkysaApps" in /wordpress/wp-content/plugins/skysa-polls-app/skysa-required/index.php on line 56
+[14-May-2025 11:54:11 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "skysa_app_polls_fvar_created" in /wordpress/wp-content/plugins/skysa-polls-app/index.php:125
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('skysa-polls-app...')
 #2 /internal/eval.php(20): activate_plugin('skysa-polls-app...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/skysa-polls-app/index.php on line 125
-[12-May-2025 19:51:05 UTC] PHP Warning:  Undefined array key "SkysaApps" in /wordpress/wp-content/plugins/skysa-polls-app/skysa-required/index.php on line 56
-[12-May-2025 19:51:05 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "skysa_app_polls_fvar_created" in /wordpress/wp-content/plugins/skysa-polls-app/index.php:125
+[14-May-2025 11:54:19 UTC] PHP Warning:  Undefined array key "SkysaApps" in /wordpress/wp-content/plugins/skysa-polls-app/skysa-required/index.php on line 56
+[14-May-2025 11:54:19 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "skysa_app_polls_fvar_created" in /wordpress/wp-content/plugins/skysa-polls-app/index.php:125
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('skysa-polls-app...')
