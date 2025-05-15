@@ -892,12 +892,6 @@
 | self-check-in | Attempt to read property "base_prefix" on null in /wordpress/wp-content/plugins/self-check-in/activation.php on line 7 | [View logs](/logs/plugins/s/self-check-in/error.json) |
 | self-check-in | Undefined variable $wpdb in /wordpress/wp-content/plugins/self-check-in/activation.php on line 9 | [View logs](/logs/plugins/s/self-check-in/error.json) |
 | self-check-in | Uncaught Error: Call to a member function get_var() on null in /wordpress/wp-content/plugins/self-check-in/activation.php:9 | [View logs](/logs/plugins/s/self-check-in/error.json) |
-| summits-alert | Uncaught Error: Class "GF_Field" not found in /wordpress/wp-content/plugins/simple-range-slider-for-gravityforms/simple-range-slider.php:57 | [View logs](/logs/plugins/s/summits-alert/error.json) |
-| summits-alert | Uncaught Error: Class "GF_Field" not found in /wordpress/wp-content/plugins/simple-range-slider-for-gravityforms/simple-range-slider.php:57 | [View logs](/logs/plugins/s/summits-alert/error.json) |
-| summits-alert | Uncaught Error: Class "GF_Field" not found in /wordpress/wp-content/plugins/simple-range-slider-for-gravityforms/simple-range-slider.php:57 | [View logs](/logs/plugins/s/summits-alert/error.json) |
-| summits-alert | Uncaught Error: Class "Jigoshop\Integration" not found in /wordpress/wp-content/plugins/sisow-jigoshop-ecommerce/src/Jigoshop/Extension/SisowGateway/Gateways.php:11 | [View logs](/logs/plugins/s/summits-alert/error.json) |
-| summits-alert | Uncaught Error: Class "Jigoshop\Integration" not found in /wordpress/wp-content/plugins/sisow-jigoshop-ecommerce/src/Jigoshop/Extension/SisowGateway/Gateways.php:11 | [View logs](/logs/plugins/s/summits-alert/error.json) |
-| summits-alert | Uncaught Error: Class "Jigoshop\Integration" not found in /wordpress/wp-content/plugins/sisow-jigoshop-ecommerce/src/Jigoshop/Extension/SisowGateway/Gateways.php:11 | [View logs](/logs/plugins/s/summits-alert/error.json) |
 | survey-maker-lite | Uncaught Error: Undefined constant "soldpress_deactivate" in /wordpress/wp-content/plugins/soldpress/soldpress.php:26 | [View logs](/logs/plugins/s/survey-maker-lite/error.json) |
 | survey-maker-lite | Uncaught Error: Undefined constant "soldpress_deactivate" in /wordpress/wp-content/plugins/soldpress/soldpress.php:26 | [View logs](/logs/plugins/s/survey-maker-lite/error.json) |
 | survey-maker-lite | Uncaught Error: Undefined constant "soldpress_deactivate" in /wordpress/wp-content/plugins/soldpress/soldpress.php:26 | [View logs](/logs/plugins/s/survey-maker-lite/error.json) |
