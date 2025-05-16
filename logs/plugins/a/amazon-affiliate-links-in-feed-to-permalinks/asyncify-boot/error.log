@@ -2,17 +2,20 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [15-May-2025 09:49:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [16-May-2025 22:25:43 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/automatic-ban-ip/core/utils.class.php on line 102
+[16-May-2025 22:25:51 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/automatic-ban-ip/core/utils.class.php on line 102
+[16-May-2025 22:26:00 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/automatic-ban-ip/core/utils.class.php on line 102
+[16-May-2025 22:26:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_apct_testimonial_detail (
-          id int NOT NULL AUTO_INCREMENT,
-          author_name varchar(255),
-          author_details longtext,
-          date varchar(255),
-          testimonial_status varchar(255) NOT NULL,
-          PRIMARY KEY id (id)
-        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>LOAD DATA LOCAL INFILE '/wordpress/wp-content/plugins/aviation-weather-briefing/upperdb.csv'
+	IGNORE INTO TABLE wp_upper_winds 
+	FIELDS TERMINATED BY ',' 
+	ENCLOSED BY '"' 
+	ESCAPED BY '"'
+	LINES TERMINATED BY '
+'
+	</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -20,38 +23,41 @@ Error: [15-May-2025 09:49:03 UTC] WordPress database error <div style="clear:bot
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+MySQL query not supported. Cause: statement type: "loadStatement"
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/ap-custom-testimonial/inc/backend/activate.php(47): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/ap-custom-testimonial/ap-custom-testimonial.php(114): include('/wordpress/wp-c...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): APCT_free->apct_plugin_activation(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ap-cus...', false)
-#8 /internal/eval.php(20): activate_plugin('ap-custom-testi...')
-#9 {main}</pre>
- for query CREATE TABLE wp_apct_testimonial_detail (
-          id int NOT NULL AUTO_INCREMENT,
-          author_name varchar(255),
-          author_details longtext,
-          date varchar(255),
-          testimonial_status varchar(255) NOT NULL,
-          PRIMARY KEY id (id)
-        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_ap-custom-testimonial/ap-custom-testimonial.php'), WP_Hook->do_action, WP_Hook->apply_filters, APCT_free->apct_plugin_activation, include('/plugins/ap-custom-testimonial/inc/backend/activate.php'), dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-May-2025 09:49:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(916): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('LOAD DATA LOCAL...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('LOAD DATA LOCAL...')
+#4 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(50): WP_SQLite_DB->query('LOAD DATA LOCAL...')
+#5 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(65): load_table()
+#6 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(267): upper_table()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): create_tables(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_aviati...', false)
+#11 /internal/eval.php(20): activate_plugin('aviation-weathe...')
+#12 {main}</pre>
+ for query LOAD DATA LOCAL INFILE '/wordpress/wp-content/plugins/aviation-weather-briefing/upperdb.csv'
+	IGNORE INTO TABLE wp_upper_winds 
+	FIELDS TERMINATED BY ',' 
+	ENCLOSED BY '"' 
+	ESCAPED BY '"'
+	LINES TERMINATED BY '
+'
+	 made by activate_plugin, do_action('activate_aviation-weather-briefing/aviation-weather-brieifing.php'), WP_Hook->do_action, WP_Hook->apply_filters, create_tables, upper_table, load_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-May-2025 22:26:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_apct_testimonial_detail (
-          id int NOT NULL AUTO_INCREMENT,
-          author_name varchar(255),
-          author_details longtext,
-          date varchar(255),
-          testimonial_status varchar(255) NOT NULL,
-          PRIMARY KEY id (id)
-        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>LOAD DATA LOCAL INFILE '/wordpress/wp-content/plugins/aviation-weather-briefing/s_wx.csv'
+	IGNORE INTO TABLE wp_swx 
+	FIELDS TERMINATED BY ',' 
+	ENCLOSED BY '"' 
+	ESCAPED BY '"'
+	LINES TERMINATED BY '
+'
+	</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -59,64 +65,238 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+MySQL query not supported. Cause: statement type: "loadStatement"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(916): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('LOAD DATA LOCAL...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('LOAD DATA LOCAL...')
+#4 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(248): WP_SQLite_DB->query('LOAD DATA LOCAL...')
+#5 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(263): load_sigwx()
+#6 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(268): sigwx_table()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): create_tables(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_aviati...', false)
+#11 /internal/eval.php(20): activate_plugin('aviation-weathe...')
+#12 {main}</pre>
+ for query LOAD DATA LOCAL INFILE '/wordpress/wp-content/plugins/aviation-weather-briefing/s_wx.csv'
+	IGNORE INTO TABLE wp_swx 
+	FIELDS TERMINATED BY ',' 
+	ENCLOSED BY '"' 
+	ESCAPED BY '"'
+	LINES TERMINATED BY '
+'
+	 made by activate_plugin, do_action('activate_aviation-weather-briefing/aviation-weather-brieifing.php'), WP_Hook->do_action, WP_Hook->apply_filters, create_tables, sigwx_table, load_sigwx, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-May-2025 22:26:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>LOAD DATA LOCAL INFILE '/wordpress/wp-content/plugins/aviation-weather-briefing/upperdb.csv'
+	IGNORE INTO TABLE wp_upper_winds 
+	FIELDS TERMINATED BY ',' 
+	ENCLOSED BY '"' 
+	ESCAPED BY '"'
+	LINES TERMINATED BY '
+'
+	</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: LOAD DATA.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/ap-custom-testimonial/inc/backend/activate.php(47): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/ap-custom-testimonial/ap-custom-testimonial.php(114): include('/wordpress/wp-c...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): APCT_free->apct_plugin_activation(false)
+#1 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(50): WP_SQLite_DB->query('LOAD DATA LOCAL...')
+#2 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(65): load_table()
+#3 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(267): upper_table()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): create_tables(false)
 #5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ap-cus...', false)
-#8 /internal/eval.php(20): activate_plugin('ap-custom-testi...')
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_aviati...', false)
+#8 /internal/eval.php(20): activate_plugin('aviation-weathe...')
 #9 {main}</pre>
- for query CREATE TABLE wp_apct_testimonial_detail (
-          id int NOT NULL AUTO_INCREMENT,
-          author_name varchar(255),
-          author_details longtext,
-          date varchar(255),
-          testimonial_status varchar(255) NOT NULL,
-          PRIMARY KEY id (id)
-        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_ap-custom-testimonial/ap-custom-testimonial.php'), WP_Hook->do_action, WP_Hook->apply_filters, APCT_free->apct_plugin_activation, include('/plugins/ap-custom-testimonial/inc/backend/activate.php'), dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-May-2025 09:49:22 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "APHSH_SHDATA" in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-front.php:27
+ for query LOAD DATA LOCAL INFILE '/wordpress/wp-content/plugins/aviation-weather-briefing/upperdb.csv'
+	IGNORE INTO TABLE wp_upper_winds 
+	FIELDS TERMINATED BY ',' 
+	ENCLOSED BY '"' 
+	ESCAPED BY '"'
+	LINES TERMINATED BY '
+'
+	 made by activate_plugin, do_action('activate_aviation-weather-briefing/aviation-weather-brieifing.php'), WP_Hook->do_action, WP_Hook->apply_filters, create_tables, upper_table, load_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-May-2025 22:26:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>LOAD DATA LOCAL INFILE '/wordpress/wp-content/plugins/aviation-weather-briefing/s_wx.csv'
+	IGNORE INTO TABLE wp_swx 
+	FIELDS TERMINATED BY ',' 
+	ENCLOSED BY '"' 
+	ESCAPED BY '"'
+	LINES TERMINATED BY '
+'
+	</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: LOAD DATA.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(248): WP_SQLite_DB->query('LOAD DATA LOCAL...')
+#2 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(263): load_sigwx()
+#3 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(268): sigwx_table()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): create_tables(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_aviati...', false)
+#8 /internal/eval.php(20): activate_plugin('aviation-weathe...')
+#9 {main}</pre>
+ for query LOAD DATA LOCAL INFILE '/wordpress/wp-content/plugins/aviation-weather-briefing/s_wx.csv'
+	IGNORE INTO TABLE wp_swx 
+	FIELDS TERMINATED BY ',' 
+	ENCLOSED BY '"' 
+	ESCAPED BY '"'
+	LINES TERMINATED BY '
+'
+	 made by activate_plugin, do_action('activate_aviation-weather-briefing/aviation-weather-brieifing.php'), WP_Hook->do_action, WP_Hook->apply_filters, create_tables, sigwx_table, load_sigwx, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-May-2025 22:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>LOAD DATA LOCAL INFILE '/wordpress/wp-content/plugins/aviation-weather-briefing/upperdb.csv'
+	IGNORE INTO TABLE wp_upper_winds 
+	FIELDS TERMINATED BY ',' 
+	ENCLOSED BY '"' 
+	ESCAPED BY '"'
+	LINES TERMINATED BY '
+'
+	</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: LOAD DATA.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(50): WP_SQLite_DB->query('LOAD DATA LOCAL...')
+#2 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(65): load_table()
+#3 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(267): upper_table()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): create_tables(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_aviati...', false)
+#8 /internal/eval.php(20): activate_plugin('aviation-weathe...')
+#9 {main}</pre>
+ for query LOAD DATA LOCAL INFILE '/wordpress/wp-content/plugins/aviation-weather-briefing/upperdb.csv'
+	IGNORE INTO TABLE wp_upper_winds 
+	FIELDS TERMINATED BY ',' 
+	ENCLOSED BY '"' 
+	ESCAPED BY '"'
+	LINES TERMINATED BY '
+'
+	 made by activate_plugin, do_action('activate_aviation-weather-briefing/aviation-weather-brieifing.php'), WP_Hook->do_action, WP_Hook->apply_filters, create_tables, upper_table, load_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-May-2025 22:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>LOAD DATA LOCAL INFILE '/wordpress/wp-content/plugins/aviation-weather-briefing/s_wx.csv'
+	IGNORE INTO TABLE wp_swx 
+	FIELDS TERMINATED BY ',' 
+	ENCLOSED BY '"' 
+	ESCAPED BY '"'
+	LINES TERMINATED BY '
+'
+	</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: LOAD DATA.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(248): WP_SQLite_DB->query('LOAD DATA LOCAL...')
+#2 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(263): load_sigwx()
+#3 /wordpress/wp-content/plugins/aviation-weather-briefing/functions_wx.php(268): sigwx_table()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): create_tables(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_aviati...', false)
+#8 /internal/eval.php(20): activate_plugin('aviation-weathe...')
+#9 {main}</pre>
+ for query LOAD DATA LOCAL INFILE '/wordpress/wp-content/plugins/aviation-weather-briefing/s_wx.csv'
+	IGNORE INTO TABLE wp_swx 
+	FIELDS TERMINATED BY ',' 
+	ENCLOSED BY '"' 
+	ESCAPED BY '"'
+	LINES TERMINATED BY '
+'
+	 made by activate_plugin, do_action('activate_aviation-weather-briefing/aviation-weather-brieifing.php'), WP_Hook->do_action, WP_Hook->apply_filters, create_tables, sigwx_table, load_sigwx, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-May-2025 22:27:27 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[16-May-2025 22:28:09 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[16-May-2025 22:28:52 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[16-May-2025 22:29:08 UTC] PHP Deprecated:  Required parameter $read_more_text follows optional parameter $limit in /wordpress/wp-content/plugins/adl-post-slider/includes/aps-shortcode.php on line 28
+[16-May-2025 22:29:09 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>adl-post-slider</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[16-May-2025 22:29:09 UTC] PHP Deprecated:  Required parameter $read_more_text follows optional parameter $limit in /wordpress/wp-content/plugins/adl-post-slider/includes/aps-shortcode.php on line 28
+[16-May-2025 22:29:16 UTC] PHP Deprecated:  Required parameter $read_more_text follows optional parameter $limit in /wordpress/wp-content/plugins/adl-post-slider/includes/aps-shortcode.php on line 28
+[16-May-2025 22:29:17 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>adl-post-slider</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[16-May-2025 22:29:17 UTC] PHP Deprecated:  Required parameter $read_more_text follows optional parameter $limit in /wordpress/wp-content/plugins/adl-post-slider/includes/aps-shortcode.php on line 28
+[16-May-2025 22:29:25 UTC] PHP Deprecated:  Required parameter $read_more_text follows optional parameter $limit in /wordpress/wp-content/plugins/adl-post-slider/includes/aps-shortcode.php on line 28
+[16-May-2025 22:29:26 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>adl-post-slider</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[16-May-2025 22:29:26 UTC] PHP Deprecated:  Required parameter $read_more_text follows optional parameter $limit in /wordpress/wp-content/plugins/adl-post-slider/includes/aps-shortcode.php on line 28
+[16-May-2025 22:30:51 UTC] PHP Warning:  Use of undefined constant STDERR - assumed 'STDERR' (this will throw an Error in a future version of PHP) in /wordpress/wp-content/plugins/ai-generated-post/vendor/composer/platform_check.php on line 17
+[16-May-2025 22:30:51 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, string given in /wordpress/wp-content/plugins/ai-generated-post/vendor/composer/platform_check.php on line 17
+[16-May-2025 22:30:51 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.4.0". You are running 7.3.33. in /wordpress/wp-content/plugins/ai-generated-post/vendor/composer/platform_check.php on line 24
+[16-May-2025 22:31:00 UTC] PHP Warning:  Use of undefined constant STDERR - assumed 'STDERR' (this will throw an Error in a future version of PHP) in /wordpress/wp-content/plugins/ai-generated-post/vendor/composer/platform_check.php on line 17
+[16-May-2025 22:31:00 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, string given in /wordpress/wp-content/plugins/ai-generated-post/vendor/composer/platform_check.php on line 17
+[16-May-2025 22:31:00 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.4.0". You are running 7.3.33. in /wordpress/wp-content/plugins/ai-generated-post/vendor/composer/platform_check.php on line 24
+[16-May-2025 22:31:09 UTC] PHP Warning:  Use of undefined constant STDERR - assumed 'STDERR' (this will throw an Error in a future version of PHP) in /wordpress/wp-content/plugins/ai-generated-post/vendor/composer/platform_check.php on line 17
+[16-May-2025 22:31:09 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, string given in /wordpress/wp-content/plugins/ai-generated-post/vendor/composer/platform_check.php on line 17
+[16-May-2025 22:31:09 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.4.0". You are running 7.3.33. in /wordpress/wp-content/plugins/ai-generated-post/vendor/composer/platform_check.php on line 24
+[16-May-2025 22:31:50 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 15
+[16-May-2025 22:31:50 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 17
+[16-May-2025 22:31:50 UTC] PHP Fatal error:  Uncaught RuntimeException: <strong>ERROR:</strong> This is <em>not</em> a plugin, and it should not be activated as one.<br /><br />Instead, <code>/wordpress/wp-content/plugins/apcu/object-cache.php</code> must be moved to <code>/wordpress/wp-content/object-cache.php</code> in /wordpress/wp-content/plugins/apcu/object-cache.php:13
 Stack trace:
-#0 /wordpress/wp-content/plugins/aph-syntax-highlighter/aph-syntax-highlighter.php(24): Aphsh_Front->__construct()
-#1 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#3 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#4 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-front.php on line 27
-[15-May-2025 09:49:31 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "APHSH_SHDATA" in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-front.php:27
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('apcu/object-cac...')
+#2 /internal/eval.php(20): activate_plugin('apcu/object-cac...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/apcu/object-cache.php on line 13
+[16-May-2025 22:31:58 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 15
+[16-May-2025 22:31:58 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 17
+[16-May-2025 22:31:58 UTC] PHP Fatal error:  Uncaught RuntimeException: <strong>ERROR:</strong> This is <em>not</em> a plugin, and it should not be activated as one.<br /><br />Instead, <code>/wordpress/wp-content/plugins/apcu/object-cache.php</code> must be moved to <code>/wordpress/wp-content/object-cache.php</code> in /wordpress/wp-content/plugins/apcu/object-cache.php:13
 Stack trace:
-#0 /wordpress/wp-content/plugins/aph-syntax-highlighter/aph-syntax-highlighter.php(24): Aphsh_Front->__construct()
-#1 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#3 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#4 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-front.php on line 27
-[15-May-2025 09:49:40 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "APHSH_SHDATA" in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-front.php:27
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('apcu/object-cac...')
+#2 /internal/eval.php(20): activate_plugin('apcu/object-cac...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/apcu/object-cache.php on line 13
+[16-May-2025 22:32:05 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 15
+[16-May-2025 22:32:05 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 17
+[16-May-2025 22:32:05 UTC] PHP Fatal error:  Uncaught RuntimeException: <strong>ERROR:</strong> This is <em>not</em> a plugin, and it should not be activated as one.<br /><br />Instead, <code>/wordpress/wp-content/plugins/apcu/object-cache.php</code> must be moved to <code>/wordpress/wp-content/object-cache.php</code> in /wordpress/wp-content/plugins/apcu/object-cache.php:13
 Stack trace:
-#0 /wordpress/wp-content/plugins/aph-syntax-highlighter/aph-syntax-highlighter.php(24): Aphsh_Front->__construct()
-#1 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#3 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#4 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-front.php on line 27
-[15-May-2025 09:52:26 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>admin-bar-menu-packer</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 09:52:35 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>admin-bar-menu-packer</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 09:52:43 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>admin-bar-menu-packer</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 09:54:42 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ajaxed-comments</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 09:54:50 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ajaxed-comments</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 09:54:59 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ajaxed-comments</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 09:55:07 UTC] PHP Deprecated:  Required parameter $data follows optional parameter $filter_prefix in /wordpress/wp-content/plugins/alipay/includes/fnc.core.php on line 686
-[15-May-2025 09:55:07 UTC] PHP Deprecated:  Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 09:55:07 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/alipay/includes/cls.db.php on line 28
-[15-May-2025 09:55:09 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/alipay/includes/cls.widgets.php:249
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('apcu/object-cac...')
+#2 /internal/eval.php(20): activate_plugin('apcu/object-cac...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/apcu/object-cache.php on line 13
+[16-May-2025 22:33:00 UTC] PHP Deprecated:  Required parameter $data follows optional parameter $filter_prefix in /wordpress/wp-content/plugins/alipay/includes/fnc.core.php on line 686
+[16-May-2025 22:33:00 UTC] PHP Deprecated:  Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-May-2025 22:33:00 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/alipay/includes/cls.db.php on line 28
+[16-May-2025 22:33:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/alipay/includes/cls.widgets.php:249
 Stack trace:
 #0 /wordpress/wp-content/plugins/alipay/alipay.php(33): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -124,9 +304,9 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('alipay/alipay.p...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/alipay/includes/cls.widgets.php on line 249
-[15-May-2025 09:55:17 UTC] PHP Deprecated:  Required parameter $data follows optional parameter $filter_prefix in /wordpress/wp-content/plugins/alipay/includes/fnc.core.php on line 686
-[15-May-2025 09:55:17 UTC] PHP Deprecated:  Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 09:55:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[16-May-2025 22:33:10 UTC] PHP Deprecated:  Required parameter $data follows optional parameter $filter_prefix in /wordpress/wp-content/plugins/alipay/includes/fnc.core.php on line 686
+[16-May-2025 22:33:10 UTC] PHP Deprecated:  Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-May-2025 22:33:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SHOW FIELDS FROM wp_ws_alipay_products;</p>
@@ -149,7 +329,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #6 /internal/eval.php(20): activate_plugin('alipay/alipay.p...')
 #7 {main}</pre>
  for query SHOW FIELDS FROM wp_ws_alipay_products; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/alipay/alipay.php'), require_once('/plugins/alipay/includes/cfg.config.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-May-2025 09:55:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[16-May-2025 22:33:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SHOW FIELDS FROM wp_ws_alipay_orders;</p>
@@ -172,7 +352,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #6 /internal/eval.php(20): activate_plugin('alipay/alipay.p...')
 #7 {main}</pre>
  for query SHOW FIELDS FROM wp_ws_alipay_orders; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/alipay/alipay.php'), require_once('/plugins/alipay/includes/cfg.config.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-May-2025 09:55:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[16-May-2025 22:33:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SHOW FIELDS FROM wp_ws_alipay_templates;</p>
@@ -195,7 +375,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #6 /internal/eval.php(20): activate_plugin('alipay/alipay.p...')
 #7 {main}</pre>
  for query SHOW FIELDS FROM wp_ws_alipay_templates; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/alipay/alipay.php'), require_once('/plugins/alipay/includes/cfg.config.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-May-2025 09:55:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/alipay/includes/cls.widgets.php:249
+[16-May-2025 22:33:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/alipay/includes/cls.widgets.php:249
 Stack trace:
 #0 /wordpress/wp-content/plugins/alipay/alipay.php(33): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -203,9 +383,9 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('alipay/alipay.p...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/alipay/includes/cls.widgets.php on line 249
-[15-May-2025 09:55:30 UTC] PHP Deprecated:  Required parameter $data follows optional parameter $filter_prefix in /wordpress/wp-content/plugins/alipay/includes/fnc.core.php on line 686
-[15-May-2025 09:55:30 UTC] PHP Deprecated:  Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 09:55:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[16-May-2025 22:33:22 UTC] PHP Deprecated:  Required parameter $data follows optional parameter $filter_prefix in /wordpress/wp-content/plugins/alipay/includes/fnc.core.php on line 686
+[16-May-2025 22:33:22 UTC] PHP Deprecated:  Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-May-2025 22:33:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SHOW FIELDS FROM wp_ws_alipay_products;</p>
@@ -228,7 +408,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #6 /internal/eval.php(20): activate_plugin('alipay/alipay.p...')
 #7 {main}</pre>
  for query SHOW FIELDS FROM wp_ws_alipay_products; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/alipay/alipay.php'), require_once('/plugins/alipay/includes/cfg.config.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-May-2025 09:55:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[16-May-2025 22:33:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SHOW FIELDS FROM wp_ws_alipay_orders;</p>
@@ -251,7 +431,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #6 /internal/eval.php(20): activate_plugin('alipay/alipay.p...')
 #7 {main}</pre>
  for query SHOW FIELDS FROM wp_ws_alipay_orders; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/alipay/alipay.php'), require_once('/plugins/alipay/includes/cfg.config.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-May-2025 09:55:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[16-May-2025 22:33:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SHOW FIELDS FROM wp_ws_alipay_templates;</p>
@@ -274,7 +454,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #6 /internal/eval.php(20): activate_plugin('alipay/alipay.p...')
 #7 {main}</pre>
  for query SHOW FIELDS FROM wp_ws_alipay_templates; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/alipay/alipay.php'), require_once('/plugins/alipay/includes/cfg.config.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-May-2025 09:55:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/alipay/includes/cls.widgets.php:249
+[16-May-2025 22:33:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/alipay/includes/cls.widgets.php:249
 Stack trace:
 #0 /wordpress/wp-content/plugins/alipay/alipay.php(33): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -282,57 +462,6 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('alipay/alipay.p...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/alipay/includes/cls.widgets.php on line 249
-[15-May-2025 09:56:38 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/appexperts//freemius/start.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php on line 30
-[15-May-2025 09:56:38 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/appexperts//freemius/start.php' (include_path='.:') in /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php:30
-Stack trace:
-#0 /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php(64): App_Expert_Freemius_Init->app_expert_fs()
-#1 /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php(23): App_Expert_Freemius_Init->register_freemius()
-#2 /wordpress/wp-content/plugins/appexperts/includes/init/abstracts/app-expert-integration.php(13): App_Expert_Freemius_Init->_include_hooks()
-#3 /wordpress/wp-content/plugins/appexperts/includes/init/abstracts/app-expert-integration.php(4): App_Expert_Integration->includes()
-#4 /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php(78): App_Expert_Integration->__construct()
-#5 /wordpress/wp-content/plugins/appexperts/includes/init/app-expert-init.php(25): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/appexperts/includes/init/app-expert-init.php(6): App_Expert_Init->includes()
-#7 /wordpress/wp-content/plugins/appexperts/includes/init/app-expert-init.php(31): App_Expert_Init->__construct()
-#8 /wordpress/wp-content/plugins/appexperts/app-expert.php(118): require_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('appexperts/app-...')
-#11 /internal/eval.php(20): activate_plugin('appexperts/app-...')
-#12 {main}
-  thrown in /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php on line 30
-[15-May-2025 09:56:47 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/appexperts//freemius/start.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php on line 30
-[15-May-2025 09:56:47 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/appexperts//freemius/start.php' (include_path='.:') in /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php:30
-Stack trace:
-#0 /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php(64): App_Expert_Freemius_Init->app_expert_fs()
-#1 /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php(23): App_Expert_Freemius_Init->register_freemius()
-#2 /wordpress/wp-content/plugins/appexperts/includes/init/abstracts/app-expert-integration.php(13): App_Expert_Freemius_Init->_include_hooks()
-#3 /wordpress/wp-content/plugins/appexperts/includes/init/abstracts/app-expert-integration.php(4): App_Expert_Integration->includes()
-#4 /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php(78): App_Expert_Integration->__construct()
-#5 /wordpress/wp-content/plugins/appexperts/includes/init/app-expert-init.php(25): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/appexperts/includes/init/app-expert-init.php(6): App_Expert_Init->includes()
-#7 /wordpress/wp-content/plugins/appexperts/includes/init/app-expert-init.php(31): App_Expert_Init->__construct()
-#8 /wordpress/wp-content/plugins/appexperts/app-expert.php(118): require_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('appexperts/app-...')
-#11 /internal/eval.php(20): activate_plugin('appexperts/app-...')
-#12 {main}
-  thrown in /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php on line 30
-[15-May-2025 09:56:56 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/appexperts//freemius/start.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php on line 30
-[15-May-2025 09:56:56 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/appexperts//freemius/start.php' (include_path='.:') in /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php:30
-Stack trace:
-#0 /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php(64): App_Expert_Freemius_Init->app_expert_fs()
-#1 /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php(23): App_Expert_Freemius_Init->register_freemius()
-#2 /wordpress/wp-content/plugins/appexperts/includes/init/abstracts/app-expert-integration.php(13): App_Expert_Freemius_Init->_include_hooks()
-#3 /wordpress/wp-content/plugins/appexperts/includes/init/abstracts/app-expert-integration.php(4): App_Expert_Integration->includes()
-#4 /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php(78): App_Expert_Integration->__construct()
-#5 /wordpress/wp-content/plugins/appexperts/includes/init/app-expert-init.php(25): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/appexperts/includes/init/app-expert-init.php(6): App_Expert_Init->includes()
-#7 /wordpress/wp-content/plugins/appexperts/includes/init/app-expert-init.php(31): App_Expert_Init->__construct()
-#8 /wordpress/wp-content/plugins/appexperts/app-expert.php(118): require_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('appexperts/app-...')
-#11 /internal/eval.php(20): activate_plugin('appexperts/app-...')
-#12 {main}
-  thrown in /wordpress/wp-content/plugins/appexperts/includes/integrations/freemius/app-expert-freemius-init.php on line 30
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
