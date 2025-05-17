@@ -2,379 +2,123 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [17-May-2025 17:46:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `wp_posts`.`ID` , `wp_posts`.`post_title` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock' LIMIT 1 ) as `_stock` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock_status' LIMIT 1 ) as `_stock_status` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_regular_price' LIMIT 1 ) as `_regular_price` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_sale_price' LIMIT 1 ) as `_sale_price` , ( SELECT GROUP_CONCAT ( `CONCAT_WS` ( ':' , `t`.`term_id` , `t`.`name` ) ) FROM `wp_term_relationships` `tr` INNER JOIN `wp_term_taxonomy` `tt` ON `tr`.`term_taxonomy_id` = `tt`.`term_taxonomy_id` INNER JOIN `wp_terms` `t` ON `t`.`term_id` = `tt`.`term_id` WHERE `tr`.`object_id` = `wp_posts`.`ID` AND `tt`.`taxonomy` = 'product_type' LIMIT 1 ) as `product_type` From `wp_posts` WHERE `wp_posts`.`post_type` IN ( 'product' , 'product_variation' ) AND `wp_posts`.`post_status` IN ( 'publish' ) GROUP BY `wp_posts`.`ID` ORDER BY `wp_posts`.`post_date` ASC LIMIT 100 OFFSET 0 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: CONCAT_WS
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT wp_posts...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT wp_posts...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT wp_posts...')
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(310): wpdb->get_results('SELECT wp_posts...')
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(342): StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data(NULL, 0, 0, Array, true)
-#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(727): do_action('init')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced, StockSyncWithGoogleSheetForWooCommerce\Product->sync_all, StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products, StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data, StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-May-2025 17:46:59 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php:344
+Error: [17-May-2025 17:48:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recent-post-views/recent-post-views.php:258
 Stack trace:
-#0 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(344): count('<div style="cle...')
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}
-  thrown in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php on line 344
-[17-May-2025 17:47:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_ssgsw_products MODIFY COLUMN product_id INT NOT NULL</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(112): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
-#8 /internal/eval.php(20): activate_plugin('stock-sync-with...')
-#9 {main}</pre>
- for query ALTER TABLE wp_ssgsw_products MODIFY COLUMN product_id INT NOT NULL made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-May-2025 17:47:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_ssgsw_products ADD UNIQUE KEY (product_id);</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_ssgsw_products, wp_ssgsw_products__(, UNIQUE</li>
-<li>Executing: CREATE UNIQUE INDEX &quot;wp_ssgsw_products__(&quot; ON &quot;wp_ssgsw_products&quot; (); | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(119): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
-#8 /internal/eval.php(20): activate_plugin('stock-sync-with...')
-#9 {main}</pre>
- for query ALTER TABLE wp_ssgsw_products ADD UNIQUE KEY (product_id); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-May-2025 17:47:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param0  LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param1  LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param2  LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param3  LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(:param4  , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = :param5  LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN (:param6 ,:param7 ) AND wp_posts.post_status IN (:param8 ) GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 | parameters: _stock, _stock_status, _regular_price, _sale_price, :, product_type, product, product_variation, publish</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: CONCAT_WS.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT wp_posts...')
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(310): wpdb->get_results('SELECT wp_posts...')
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(342): StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data(NULL, 0, 0, Array, true)
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced, StockSyncWithGoogleSheetForWooCommerce\Product->sync_all, StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products, StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data, StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-May-2025 17:47:09 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php:344
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recent-post-vie...')
+#2 /internal/eval.php(20): activate_plugin('recent-post-vie...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/recent-post-views/recent-post-views.php on line 258
+[17-May-2025 17:48:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recent-post-views/recent-post-views.php:258
 Stack trace:
-#0 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(344): count('<div style="cle...')
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}
-  thrown in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php on line 344
-[17-May-2025 17:47:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_ssgsw_products MODIFY COLUMN product_id INT NOT NULL</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(112): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
-#8 /internal/eval.php(20): activate_plugin('stock-sync-with...')
-#9 {main}</pre>
- for query ALTER TABLE wp_ssgsw_products MODIFY COLUMN product_id INT NOT NULL made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-May-2025 17:47:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_ssgsw_products ADD UNIQUE KEY (product_id);</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_ssgsw_products, wp_ssgsw_products__(, UNIQUE</li>
-<li>Executing: CREATE UNIQUE INDEX &quot;wp_ssgsw_products__(&quot; ON &quot;wp_ssgsw_products&quot; (); | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(119): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
-#8 /internal/eval.php(20): activate_plugin('stock-sync-with...')
-#9 {main}</pre>
- for query ALTER TABLE wp_ssgsw_products ADD UNIQUE KEY (product_id); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-May-2025 17:47:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param0  LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param1  LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param2  LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param3  LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(:param4  , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = :param5  LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN (:param6 ,:param7 ) AND wp_posts.post_status IN (:param8 ) GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 | parameters: _stock, _stock_status, _regular_price, _sale_price, :, product_type, product, product_variation, publish</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: CONCAT_WS.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT wp_posts...')
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(310): wpdb->get_results('SELECT wp_posts...')
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(342): StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data(NULL, 0, 0, Array, true)
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced, StockSyncWithGoogleSheetForWooCommerce\Product->sync_all, StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products, StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data, StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-May-2025 17:47:20 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php:344
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recent-post-vie...')
+#2 /internal/eval.php(20): activate_plugin('recent-post-vie...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/recent-post-views/recent-post-views.php on line 258
+[17-May-2025 17:48:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recent-post-views/recent-post-views.php:258
 Stack trace:
-#0 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(344): count('<div style="cle...')
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}
-  thrown in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php on line 344
-[17-May-2025 17:49:14 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "recent_update_news" in /wordpress/wp-content/plugins/recent-news-updates/recent_update_news.php:70
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recent-post-vie...')
+#2 /internal/eval.php(20): activate_plugin('recent-post-vie...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/recent-post-views/recent-post-views.php on line 258
+[17-May-2025 17:48:53 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break" in /wordpress/wp-content/plugins/remote-dashboard-notifications/includes/class-rdn-admin.php on line 333
+[17-May-2025 17:49:01 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break" in /wordpress/wp-content/plugins/remote-dashboard-notifications/includes/class-rdn-admin.php on line 333
+[17-May-2025 17:49:10 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break" in /wordpress/wp-content/plugins/remote-dashboard-notifications/includes/class-rdn-admin.php on line 333
+[17-May-2025 17:49:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/repostme-social-icon-links/repostme-social-icons.php:299
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): raj_add_news_category('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(727): do_action('init')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/recent-news-updates/recent_update_news.php on line 70
-[17-May-2025 17:49:23 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "recent_update_news" in /wordpress/wp-content/plugins/recent-news-updates/recent_update_news.php:70
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('repostme-social...')
+#2 /internal/eval.php(20): activate_plugin('repostme-social...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/repostme-social-icon-links/repostme-social-icons.php on line 299
+[17-May-2025 17:49:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/repostme-social-icon-links/repostme-social-icons.php:299
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): raj_add_news_category('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(727): do_action('init')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/recent-news-updates/recent_update_news.php on line 70
-[17-May-2025 17:49:32 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "recent_update_news" in /wordpress/wp-content/plugins/recent-news-updates/recent_update_news.php:70
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('repostme-social...')
+#2 /internal/eval.php(20): activate_plugin('repostme-social...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/repostme-social-icon-links/repostme-social-icons.php on line 299
+[17-May-2025 17:49:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/repostme-social-icon-links/repostme-social-icons.php:299
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): raj_add_news_category('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(727): do_action('init')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/recent-news-updates/recent_update_news.php on line 70
-[17-May-2025 17:50:07 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:50:07 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/repost/repost.php on line 31
-[17-May-2025 17:50:07 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/repost/repost.php on line 31
-[17-May-2025 17:50:07 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/repost/repost.php on line 32
-[17-May-2025 17:50:07 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/repost/repost.php on line 32
-[17-May-2025 17:50:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/repost/repost.php:41
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('repostme-social...')
+#2 /internal/eval.php(20): activate_plugin('repostme-social...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/repostme-social-icon-links/repostme-social-icons.php on line 299
+[17-May-2025 17:50:03 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "RALO_REDIRECT_METAKEY" in /wordpress/wp-content/plugins/ralo-post-redirect/ralo-post-redirect.php:33
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): repost_tables(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_repost...', false)
-#4 /internal/eval.php(20): activate_plugin('repost/repost.p...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/repost/repost.php on line 41
-[17-May-2025 17:50:14 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:50:14 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/repost/repost.php on line 31
-[17-May-2025 17:50:14 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/repost/repost.php on line 31
-[17-May-2025 17:50:14 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/repost/repost.php on line 32
-[17-May-2025 17:50:14 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/repost/repost.php on line 32
-[17-May-2025 17:50:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/repost/repost.php:41
+#0 /wordpress/wp-content/plugins/ralo-post-redirect/ralo-post-redirect.php(143): RaloPostRedirect::setupPlugin()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ralo-post-redir...')
+#3 /internal/eval.php(20): activate_plugin('ralo-post-redir...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/ralo-post-redirect/ralo-post-redirect.php on line 33
+[17-May-2025 17:50:10 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "RALO_REDIRECT_METAKEY" in /wordpress/wp-content/plugins/ralo-post-redirect/ralo-post-redirect.php:33
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): repost_tables(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_repost...', false)
-#4 /internal/eval.php(20): activate_plugin('repost/repost.p...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/repost/repost.php on line 41
-[17-May-2025 17:50:22 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:50:22 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/repost/repost.php on line 31
-[17-May-2025 17:50:22 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/repost/repost.php on line 31
-[17-May-2025 17:50:22 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/repost/repost.php on line 32
-[17-May-2025 17:50:22 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/repost/repost.php on line 32
-[17-May-2025 17:50:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/repost/repost.php:41
+#0 /wordpress/wp-content/plugins/ralo-post-redirect/ralo-post-redirect.php(143): RaloPostRedirect::setupPlugin()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ralo-post-redir...')
+#3 /internal/eval.php(20): activate_plugin('ralo-post-redir...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/ralo-post-redirect/ralo-post-redirect.php on line 33
+[17-May-2025 17:50:18 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "RALO_REDIRECT_METAKEY" in /wordpress/wp-content/plugins/ralo-post-redirect/ralo-post-redirect.php:33
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): repost_tables(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_repost...', false)
-#4 /internal/eval.php(20): activate_plugin('repost/repost.p...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/repost/repost.php on line 41
-[17-May-2025 17:51:03 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
-[17-May-2025 17:51:03 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
-[17-May-2025 17:51:03 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
-[17-May-2025 17:51:03 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
-[17-May-2025 17:51:04 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
-[17-May-2025 17:51:04 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
-[17-May-2025 17:51:04 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
-[17-May-2025 17:51:04 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
-[17-May-2025 17:51:04 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:04 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:04 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:04 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:04 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:04 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:04 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:04 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:12 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
-[17-May-2025 17:51:12 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
-[17-May-2025 17:51:12 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
-[17-May-2025 17:51:12 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
-[17-May-2025 17:51:13 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
-[17-May-2025 17:51:13 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
-[17-May-2025 17:51:13 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
-[17-May-2025 17:51:13 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
-[17-May-2025 17:51:13 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:13 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:13 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:13 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:13 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:13 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:13 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:13 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:20 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
-[17-May-2025 17:51:20 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
-[17-May-2025 17:51:20 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
-[17-May-2025 17:51:20 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
-[17-May-2025 17:51:21 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
-[17-May-2025 17:51:21 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
-[17-May-2025 17:51:21 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
-[17-May-2025 17:51:21 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
-[17-May-2025 17:51:21 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:21 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:21 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:21 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:21 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:21 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:21 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[17-May-2025 17:51:21 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+#0 /wordpress/wp-content/plugins/ralo-post-redirect/ralo-post-redirect.php(143): RaloPostRedirect::setupPlugin()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ralo-post-redir...')
+#3 /internal/eval.php(20): activate_plugin('ralo-post-redir...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/ralo-post-redirect/ralo-post-redirect.php on line 33
+[17-May-2025 17:50:26 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
+[17-May-2025 17:50:26 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
+[17-May-2025 17:50:26 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
+[17-May-2025 17:50:26 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
+[17-May-2025 17:50:27 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
+[17-May-2025 17:50:27 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
+[17-May-2025 17:50:27 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
+[17-May-2025 17:50:27 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
+[17-May-2025 17:50:27 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:27 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:27 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:27 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:27 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:27 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:27 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:27 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:35 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
+[17-May-2025 17:50:35 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
+[17-May-2025 17:50:35 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
+[17-May-2025 17:50:35 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
+[17-May-2025 17:50:37 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
+[17-May-2025 17:50:37 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
+[17-May-2025 17:50:37 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
+[17-May-2025 17:50:37 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
+[17-May-2025 17:50:37 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:37 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:37 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:37 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:37 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:37 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:37 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:37 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:45 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
+[17-May-2025 17:50:45 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
+[17-May-2025 17:50:45 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
+[17-May-2025 17:50:45 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
+[17-May-2025 17:50:46 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
+[17-May-2025 17:50:46 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1235
+[17-May-2025 17:50:46 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
+[17-May-2025 17:50:46 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/recent-search-terms/searchterms-tagging2.php on line 1305
+[17-May-2025 17:50:46 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:46 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:46 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:46 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:46 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:46 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:46 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 17:50:46 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
