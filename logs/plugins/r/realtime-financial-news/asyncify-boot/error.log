@@ -1,116 +1,159 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/wordpress/index.js:1
-import{joinPaths as a,phpVar as l}from"@php-wasm/util";import{createMemoizedFetch as _,unzipFile as d}from"@wp-playground/common";import{PHPRequestHandler as g,withPHPIniValues as f,PHP as h,setPhpIniEntries as w,writeFiles as m,proxyFileSystem as b,rotatePHPRuntime as y}from"@php-wasm/universal";import{logger as $}from"@php-wasm/logger";async function q(e){async function n(i,s){const o=new h(await e.createPhpRuntime());return e.sapiName&&o.setSapiName(e.sapiName),i&&(o.requestHandler=i),e.phpIniEntries&&w(o,e.phpIniEntries),s?(await T(o),await m(o,"/",e.createFiles||{}),await L(o,a(new URL(e.siteUrl).pathname,"phpinfo.php"))):b(await i.getPrimaryPhp(),o,["/tmp",i.documentRoot,"/internal/shared"]),e.spawnHandler&&await o.setSpawnHandler(e.spawnHandler(i.processManager)),y({php:o,cwd:i.documentRoot,recreateRuntime:e.createPhpRuntime,maxRequests:400}),o}const r=new g({phpFactory:async({isPrimary:i})=>n(r,i),documentRoot:e.documentRoot||"/wordpress",absoluteUrl:e.siteUrl,rewriteRules:S,getFileNotFoundAction:e.getFileNotFoundAction??E,cookieStore:e.cookieStore}),t=await r.getPrimaryPhp();if(e.hooks?.beforeWordPressFiles&&await e.hooks.beforeWordPressFiles(t),e.wordPressZip&&await v(t,await e.wordPressZip),e.constants)for(const i in e.constants)t.defineConstant(i,e.constants[i]);if(t.defineConstant("WP_HOME",e.siteUrl),t.defineConstant("WP_SITEURL",e.siteUrl),e.hooks?.beforeDatabaseSetup&&await e.hooks.beforeDatabaseSetup(t),e.sqliteIntegrationPluginZip&&await I(t,await e.sqliteIntegrationPluginZip),await c(t)||await P(t),!await c(t))throw new Error("WordPress installation has failed.");return r}async function c(e){return(await e.run({code:`<?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: [15-May-2025 19:26:10 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/smsplug/smsplug.php on line 22
-[15-May-2025 19:26:11 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/smsplug/smsplug.php on line 22
-[15-May-2025 19:26:11 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>prototype</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 19:26:11 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 19:26:11 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 19:26:18 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/smsplug/smsplug.php on line 22
-[15-May-2025 19:26:19 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/smsplug/smsplug.php on line 22
-[15-May-2025 19:26:19 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>prototype</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 19:26:19 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 19:26:19 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 19:26:26 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/smsplug/smsplug.php on line 22
-[15-May-2025 19:26:27 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/smsplug/smsplug.php on line 22
-[15-May-2025 19:26:27 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>prototype</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 19:26:27 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 19:26:27 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[15-May-2025 19:26:36 UTC] PHP Parse error:  syntax error, unexpected token "&", expecting ")" in /wordpress/wp-content/plugins/smw-import/smwimport.php on line 392
-[15-May-2025 19:26:44 UTC] PHP Parse error:  syntax error, unexpected token "&", expecting ")" in /wordpress/wp-content/plugins/smw-import/smwimport.php on line 392
-[15-May-2025 19:26:52 UTC] PHP Parse error:  syntax error, unexpected token "&", expecting ")" in /wordpress/wp-content/plugins/smw-import/smwimport.php on line 392
-[15-May-2025 19:27:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-engage/init.php:226
+Error: [17-May-2025 14:50:32 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/query-multiple-taxonomies/scb/Forms.php on line 33
+[17-May-2025 14:50:32 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/query-multiple-taxonomies/scb/Cron.php on line 22
+[17-May-2025 14:50:32 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $depth in /wordpress/wp-content/plugins/query-multiple-taxonomies/walkers.php on line 88
+[17-May-2025 14:50:32 UTC] PHP Deprecated:  Required parameter $output follows optional parameter $depth in /wordpress/wp-content/plugins/query-multiple-taxonomies/walkers.php on line 88
+[17-May-2025 14:50:32 UTC] PHP Fatal error:  Declaration of Taxonomy_Drill_Down_Widget::init($file) must be compatible with scbWidget::init($class, $file = '', $base = '') in /wordpress/wp-content/plugins/query-multiple-taxonomies/widget.php on line 11
+[17-May-2025 14:50:40 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/query-multiple-taxonomies/scb/Forms.php on line 33
+[17-May-2025 14:50:40 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/query-multiple-taxonomies/scb/Cron.php on line 22
+[17-May-2025 14:50:40 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $depth in /wordpress/wp-content/plugins/query-multiple-taxonomies/walkers.php on line 88
+[17-May-2025 14:50:40 UTC] PHP Deprecated:  Required parameter $output follows optional parameter $depth in /wordpress/wp-content/plugins/query-multiple-taxonomies/walkers.php on line 88
+[17-May-2025 14:50:40 UTC] PHP Fatal error:  Declaration of Taxonomy_Drill_Down_Widget::init($file) must be compatible with scbWidget::init($class, $file = '', $base = '') in /wordpress/wp-content/plugins/query-multiple-taxonomies/widget.php on line 11
+[17-May-2025 14:50:47 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/query-multiple-taxonomies/scb/Forms.php on line 33
+[17-May-2025 14:50:47 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/query-multiple-taxonomies/scb/Cron.php on line 22
+[17-May-2025 14:50:47 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $depth in /wordpress/wp-content/plugins/query-multiple-taxonomies/walkers.php on line 88
+[17-May-2025 14:50:47 UTC] PHP Deprecated:  Required parameter $output follows optional parameter $depth in /wordpress/wp-content/plugins/query-multiple-taxonomies/walkers.php on line 88
+[17-May-2025 14:50:47 UTC] PHP Fatal error:  Declaration of Taxonomy_Drill_Down_Widget::init($file) must be compatible with scbWidget::init($class, $file = '', $base = '') in /wordpress/wp-content/plugins/query-multiple-taxonomies/widget.php on line 11
+[17-May-2025 14:51:16 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 14:51:17 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 14:51:25 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 14:51:26 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 14:51:34 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 14:51:35 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 14:51:43 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 33
+[17-May-2025 14:51:43 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 33
+[17-May-2025 14:51:43 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 34
+[17-May-2025 14:51:43 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 34
+[17-May-2025 14:51:43 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 36
+[17-May-2025 14:51:43 UTC] PHP Fatal error:  Uncaught Error: Call to a member function show_errors() on null in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php:36
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-engage/i...')
-#2 /internal/eval.php(20): activate_plugin('social-engage/i...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('question-answer...')
+#2 /internal/eval.php(20): activate_plugin('question-answer...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/social-engage/init.php on line 226
-[15-May-2025 19:27:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-engage/init.php:226
+  thrown in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 36
+[17-May-2025 14:51:50 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 33
+[17-May-2025 14:51:50 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 33
+[17-May-2025 14:51:50 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 34
+[17-May-2025 14:51:50 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 34
+[17-May-2025 14:51:50 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 36
+[17-May-2025 14:51:50 UTC] PHP Fatal error:  Uncaught Error: Call to a member function show_errors() on null in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php:36
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-engage/i...')
-#2 /internal/eval.php(20): activate_plugin('social-engage/i...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('question-answer...')
+#2 /internal/eval.php(20): activate_plugin('question-answer...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/social-engage/init.php on line 226
-[15-May-2025 19:28:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-engage/init.php:226
+  thrown in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 36
+[17-May-2025 14:51:58 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 33
+[17-May-2025 14:51:58 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 33
+[17-May-2025 14:51:58 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 34
+[17-May-2025 14:51:58 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 34
+[17-May-2025 14:51:58 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 36
+[17-May-2025 14:51:58 UTC] PHP Fatal error:  Uncaught Error: Call to a member function show_errors() on null in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php:36
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-engage/i...')
-#2 /internal/eval.php(20): activate_plugin('social-engage/i...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('question-answer...')
+#2 /internal/eval.php(20): activate_plugin('question-answer...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/social-engage/init.php on line 226
-[15-May-2025 19:28:48 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/social/classes/controllers/socialAppController.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/social-networking-e-commerce-1/social.php on line 51
-[15-May-2025 19:28:48 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/social/classes/controllers/socialAppController.php' (include_path='.:') in /wordpress/wp-content/plugins/social-networking-e-commerce-1/social.php:51
+  thrown in /wordpress/wp-content/plugins/question-answer-plugin/question_answer.php on line 36
+[17-May-2025 14:52:52 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/quick-adsense-cn/quick-adsense.php on line 109
+[17-May-2025 14:52:52 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ads_widget_register" in /wordpress/wp-content/plugins/quick-adsense-cn/quick-adsense.php:459
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-networki...')
-#2 /internal/eval.php(20): activate_plugin('social-networki...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('quick-adsense-c...')
+#2 /internal/eval.php(20): activate_plugin('quick-adsense-c...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/social-networking-e-commerce-1/social.php on line 51
-[15-May-2025 19:28:57 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/social/classes/controllers/socialAppController.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/social-networking-e-commerce-1/social.php on line 51
-[15-May-2025 19:28:58 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/social/classes/controllers/socialAppController.php' (include_path='.:') in /wordpress/wp-content/plugins/social-networking-e-commerce-1/social.php:51
+  thrown in /wordpress/wp-content/plugins/quick-adsense-cn/quick-adsense.php on line 459
+[17-May-2025 14:53:00 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/quick-adsense-cn/quick-adsense.php on line 109
+[17-May-2025 14:53:00 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ads_widget_register" in /wordpress/wp-content/plugins/quick-adsense-cn/quick-adsense.php:459
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-networki...')
-#2 /internal/eval.php(20): activate_plugin('social-networki...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('quick-adsense-c...')
+#2 /internal/eval.php(20): activate_plugin('quick-adsense-c...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/social-networking-e-commerce-1/social.php on line 51
-[15-May-2025 19:29:07 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/social/classes/controllers/socialAppController.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/social-networking-e-commerce-1/social.php on line 51
-[15-May-2025 19:29:07 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/social/classes/controllers/socialAppController.php' (include_path='.:') in /wordpress/wp-content/plugins/social-networking-e-commerce-1/social.php:51
+  thrown in /wordpress/wp-content/plugins/quick-adsense-cn/quick-adsense.php on line 459
+[17-May-2025 14:53:08 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/quick-adsense-cn/quick-adsense.php on line 109
+[17-May-2025 14:53:08 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ads_widget_register" in /wordpress/wp-content/plugins/quick-adsense-cn/quick-adsense.php:459
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-networki...')
-#2 /internal/eval.php(20): activate_plugin('social-networki...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('quick-adsense-c...')
+#2 /internal/eval.php(20): activate_plugin('quick-adsense-c...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/social-networking-e-commerce-1/social.php on line 51
-[15-May-2025 19:32:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/admin/class-admin.php on line 236
-[15-May-2025 19:32:30 UTC] PHP Warning:  Undefined array key "HTTP_REFERER" in /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/frontend/class-init.php on line 21
-[15-May-2025 19:32:30 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/frontend/class-init.php on line 24
-[15-May-2025 19:32:30 UTC] PHP Fatal error:  Uncaught Error: Non-static method SpamLyticsHelper::is_ip_blocked() cannot be called statically in /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/frontend/class-ip.php:22
-Stack trace:
-#0 /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/frontend/class-init.php(24): SpamLytics\Frontend\Ip->__construct(NULL)
-#1 /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/core/class-init.php(24): SpamLytics\Frontend\Init->__construct()
-#2 /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/spam-prevention-by-spamlytics.php(25): SpamLytics\Core\Init->init_plugin()
-#3 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/frontend/class-ip.php on line 22
-[15-May-2025 19:32:38 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/admin/class-admin.php on line 236
-[15-May-2025 19:32:39 UTC] PHP Warning:  Undefined array key "HTTP_REFERER" in /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/frontend/class-init.php on line 21
-[15-May-2025 19:32:39 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/frontend/class-init.php on line 24
-[15-May-2025 19:32:39 UTC] PHP Fatal error:  Uncaught Error: Non-static method SpamLyticsHelper::is_ip_blocked() cannot be called statically in /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/frontend/class-ip.php:22
-Stack trace:
-#0 /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/frontend/class-init.php(24): SpamLytics\Frontend\Ip->__construct(NULL)
-#1 /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/core/class-init.php(24): SpamLytics\Frontend\Init->__construct()
-#2 /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/spam-prevention-by-spamlytics.php(25): SpamLytics\Core\Init->init_plugin()
-#3 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/frontend/class-ip.php on line 22
-[15-May-2025 19:32:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/admin/class-admin.php on line 236
-[15-May-2025 19:32:48 UTC] PHP Warning:  Undefined array key "HTTP_REFERER" in /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/frontend/class-init.php on line 21
-[15-May-2025 19:32:48 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/frontend/class-init.php on line 24
-[15-May-2025 19:32:48 UTC] PHP Fatal error:  Uncaught Error: Non-static method SpamLyticsHelper::is_ip_blocked() cannot be called statically in /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/frontend/class-ip.php:22
-Stack trace:
-#0 /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/frontend/class-init.php(24): SpamLytics\Frontend\Ip->__construct(NULL)
-#1 /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/core/class-init.php(24): SpamLytics\Frontend\Init->__construct()
-#2 /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/spam-prevention-by-spamlytics.php(25): SpamLytics\Core\Init->init_plugin()
-#3 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/spam-prevention-by-spamlytics/frontend/class-ip.php on line 22
+  thrown in /wordpress/wp-content/plugins/quick-adsense-cn/quick-adsense.php on line 459
+[17-May-2025 14:54:08 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 14:54:10 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 14:54:18 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 14:54:20 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 14:54:27 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[17-May-2025 14:54:28 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
     at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"realtime-financial-news"},"options":{"activate":true}}) : Could not download "https://downloads.wordpress.org/plugin/realtime-financial-news.latest-stable.zip".
+  				Check if the URL is correct and the server is reachable.
+  				If it is reachable, the server might be blocking the request.
+  				Check the browser console and network tabs for more information.
+  
+  				## Does the console show the error "No 'Access-Control-Allow-Origin' header"?
+  
+  				This means the server that hosts your file does not allow requests from other sites
+  				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
+  				cross-origin file downloads. Learn more about CORS at
+  				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
+  
+  				If your file is on GitHub, load it from "raw.githubusercontent.com".
+  				Here's how to do that:
+  
+  				1. Start with the original GitHub URL of the file. For example:
+  				https://github.com/username/repository/blob/branch/filename.
+  				2. Replace "github.com" with "raw.githubusercontent.com".
+  				3. Remove the "/blob/" part of the URL.
+  
+  				The resulting URL should look like this:
+  				https://raw.githubusercontent.com/username/repository/branch/filename
+  
+  				Error:
+  				Error: Could not download "https://downloads.wordpress.org/plugin/realtime-financial-news.latest-stable.zip"
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+      at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+    [cause]: Error: Could not download "https://downloads.wordpress.org/plugin/realtime-financial-news.latest-stable.zip".
+    				Check if the URL is correct and the server is reachable.
+    				If it is reachable, the server might be blocking the request.
+    				Check the browser console and network tabs for more information.
+    
+    				## Does the console show the error "No 'Access-Control-Allow-Origin' header"?
+    
+    				This means the server that hosts your file does not allow requests from other sites
+    				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
+    				cross-origin file downloads. Learn more about CORS at
+    				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
+    
+    				If your file is on GitHub, load it from "raw.githubusercontent.com".
+    				Here's how to do that:
+    
+    				1. Start with the original GitHub URL of the file. For example:
+    				https://github.com/username/repository/blob/branch/filename.
+    				2. Replace "github.com" with "raw.githubusercontent.com".
+    				3. Remove the "/blob/" part of the URL.
+    
+    				The resulting URL should look like this:
+    				https://raw.githubusercontent.com/username/repository/branch/filename
+    
+    				Error:
+    				Error: Could not download "https://downloads.wordpress.org/plugin/realtime-financial-news.latest-stable.zip"
+        at Ct.resolve (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1472:13)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async _.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/util/index.js:45:14)
+  }
+}
 
 Node.js v23.11.0
