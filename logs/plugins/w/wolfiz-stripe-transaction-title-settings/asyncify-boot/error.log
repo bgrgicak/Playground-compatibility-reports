@@ -2,233 +2,107 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [16-May-2025 09:51:01 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[16-May-2025 09:51:43 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[16-May-2025 09:52:23 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[16-May-2025 09:53:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [18-May-2025 02:01:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_wemalo_return_pos (
-			id mediumint(9) NOT NULL AUTO_INCREMENT,
-			order_id mediumint(9) NOT NULL,
-			product_id mediumint(9) NOT NULL,
-			quantity mediumint(9) NOT NULL,
-			choice VARCHAR(255),
-			return_reason VARCHAR(255),
-			product_name VARCHAR(255),
-			timestamp DATETIME,
-			serial_number VARCHAR(255),
-			lot VARCHAR(255),
-			sku VARCHAR(255),
-			PRIMARY KEY id (id)
-		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>select * from wp_rpg_usermeta</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: select * from `wp_rpg_usermeta` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+SQLSTATE[HY000]: General error: 1 no such table: wp_rpg_usermeta
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/wemalo-api/plugin/class-wemaloapiinstaller.php(157): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/wemalo-api/plugin/class-wemaloapiinstaller.php(96): WemaloAPIInstaller->create_tables()
-#4 /wordpress/wp-content/plugins/wemalo-api/WemaloAPI.php(67): WemaloAPIInstaller->set_up()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wemalo_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wemalo...', false)
-#9 /internal/eval.php(20): activate_plugin('wemalo-api/Wema...')
-#10 {main}</pre>
- for query CREATE TABLE wp_wemalo_return_pos (
-			id mediumint(9) NOT NULL AUTO_INCREMENT,
-			order_id mediumint(9) NOT NULL,
-			product_id mediumint(9) NOT NULL,
-			quantity mediumint(9) NOT NULL,
-			choice VARCHAR(255),
-			return_reason VARCHAR(255),
-			product_name VARCHAR(255),
-			timestamp DATETIME,
-			serial_number VARCHAR(255),
-			lot VARCHAR(255),
-			sku VARCHAR(255),
-			PRIMARY KEY id (id)
-		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wemalo-api/WemaloAPI.php'), WP_Hook->do_action, WP_Hook->apply_filters, wemalo_activation, WemaloAPIInstaller->set_up, WemaloAPIInstaller->create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-May-2025 09:53:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select * from w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select * from w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select * from w...')
+#4 /wordpress/wp-content/plugins/wprpg/wordpress-rpg.php(63): wpdb->get_results('select * from w...')
+#5 /wordpress/wp-content/plugins/wprpg/wordpress-rpg.php(33): transition_db()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wprpg/wordpress...')
+#8 /internal/eval.php(20): activate_plugin('wprpg/wordpress...')
+#9 {main}</pre>
+ for query select * from wp_rpg_usermeta made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wprpg/wordpress-rpg.php'), transition_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-May-2025 02:01:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_wemalo_timerate_limiter (
-				`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-				`order_id` INT(20) NOT NULL ,
-				`function` VARCHAR (255) NOT NULL,
-				`status` INT(20) NOT NULL,
-				`text` TEXT NOT NULL COLLATE 'utf8_general_ci',
-				PRIMARY KEY USING BTREE (`id`),
-                UNIQUE INDEX order_id_function USING BTREE (`order_id`, `function`)
-			)DEFAULT CHARACTER SET utf8mb4</p>
+<p>select * from wp_rpg_usermeta</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: select * from wp_rpg_usermeta | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_rpg_usermeta.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/wemalo-api/plugin/class-wemaloapiinstaller.php(180): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/wemalo-api/plugin/class-wemaloapiinstaller.php(96): WemaloAPIInstaller->create_tables()
-#4 /wordpress/wp-content/plugins/wemalo-api/WemaloAPI.php(67): WemaloAPIInstaller->set_up()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wemalo_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wemalo...', false)
-#9 /internal/eval.php(20): activate_plugin('wemalo-api/Wema...')
-#10 {main}</pre>
- for query CREATE TABLE wp_wemalo_timerate_limiter (
-				`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-				`order_id` INT(20) NOT NULL ,
-				`function` VARCHAR (255) NOT NULL,
-				`status` INT(20) NOT NULL,
-				`text` TEXT NOT NULL COLLATE 'utf8_general_ci',
-				PRIMARY KEY USING BTREE (`id`),
-                UNIQUE INDEX order_id_function USING BTREE (`order_id`, `function`)
-			)DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wemalo-api/WemaloAPI.php'), WP_Hook->do_action, WP_Hook->apply_filters, wemalo_activation, WemaloAPIInstaller->set_up, WemaloAPIInstaller->create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-May-2025 09:53:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select * from w...')
+#2 /wordpress/wp-content/plugins/wprpg/wordpress-rpg.php(63): wpdb->get_results('select * from w...')
+#3 /wordpress/wp-content/plugins/wprpg/wordpress-rpg.php(33): transition_db()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wprpg/wordpress...')
+#6 /internal/eval.php(20): activate_plugin('wprpg/wordpress...')
+#7 {main}</pre>
+ for query select * from wp_rpg_usermeta made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wprpg/wordpress-rpg.php'), transition_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-May-2025 02:01:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_wemalo_return_pos (
-			id mediumint(9) NOT NULL AUTO_INCREMENT,
-			order_id mediumint(9) NOT NULL,
-			product_id mediumint(9) NOT NULL,
-			quantity mediumint(9) NOT NULL,
-			choice VARCHAR(255),
-			return_reason VARCHAR(255),
-			product_name VARCHAR(255),
-			timestamp DATETIME,
-			serial_number VARCHAR(255),
-			lot VARCHAR(255),
-			sku VARCHAR(255),
-			PRIMARY KEY id (id)
-		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>select * from wp_rpg_usermeta</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: select * from wp_rpg_usermeta | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_rpg_usermeta.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/wemalo-api/plugin/class-wemaloapiinstaller.php(157): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/wemalo-api/plugin/class-wemaloapiinstaller.php(96): WemaloAPIInstaller->create_tables()
-#4 /wordpress/wp-content/plugins/wemalo-api/WemaloAPI.php(67): WemaloAPIInstaller->set_up()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wemalo_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wemalo...', false)
-#9 /internal/eval.php(20): activate_plugin('wemalo-api/Wema...')
-#10 {main}</pre>
- for query CREATE TABLE wp_wemalo_return_pos (
-			id mediumint(9) NOT NULL AUTO_INCREMENT,
-			order_id mediumint(9) NOT NULL,
-			product_id mediumint(9) NOT NULL,
-			quantity mediumint(9) NOT NULL,
-			choice VARCHAR(255),
-			return_reason VARCHAR(255),
-			product_name VARCHAR(255),
-			timestamp DATETIME,
-			serial_number VARCHAR(255),
-			lot VARCHAR(255),
-			sku VARCHAR(255),
-			PRIMARY KEY id (id)
-		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wemalo-api/WemaloAPI.php'), WP_Hook->do_action, WP_Hook->apply_filters, wemalo_activation, WemaloAPIInstaller->set_up, WemaloAPIInstaller->create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-May-2025 09:53:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_wemalo_timerate_limiter (
-				`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-				`order_id` INT(20) NOT NULL ,
-				`function` VARCHAR (255) NOT NULL,
-				`status` INT(20) NOT NULL,
-				`text` TEXT NOT NULL COLLATE 'utf8_general_ci',
-				PRIMARY KEY USING BTREE (`id`),
-                UNIQUE INDEX order_id_function USING BTREE (`order_id`, `function`)
-			)DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/wemalo-api/plugin/class-wemaloapiinstaller.php(180): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/wemalo-api/plugin/class-wemaloapiinstaller.php(96): WemaloAPIInstaller->create_tables()
-#4 /wordpress/wp-content/plugins/wemalo-api/WemaloAPI.php(67): WemaloAPIInstaller->set_up()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wemalo_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wemalo...', false)
-#9 /internal/eval.php(20): activate_plugin('wemalo-api/Wema...')
-#10 {main}</pre>
- for query CREATE TABLE wp_wemalo_timerate_limiter (
-				`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-				`order_id` INT(20) NOT NULL ,
-				`function` VARCHAR (255) NOT NULL,
-				`status` INT(20) NOT NULL,
-				`text` TEXT NOT NULL COLLATE 'utf8_general_ci',
-				PRIMARY KEY USING BTREE (`id`),
-                UNIQUE INDEX order_id_function USING BTREE (`order_id`, `function`)
-			)DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wemalo-api/WemaloAPI.php'), WP_Hook->do_action, WP_Hook->apply_filters, wemalo_activation, WemaloAPIInstaller->set_up, WemaloAPIInstaller->create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-May-2025 09:54:15 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method wpAccountingInstall::install() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select * from w...')
+#2 /wordpress/wp-content/plugins/wprpg/wordpress-rpg.php(63): wpdb->get_results('select * from w...')
+#3 /wordpress/wp-content/plugins/wprpg/wordpress-rpg.php(33): transition_db()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wprpg/wordpress...')
+#6 /internal/eval.php(20): activate_plugin('wprpg/wordpress...')
+#7 {main}</pre>
+ for query select * from wp_rpg_usermeta made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wprpg/wordpress-rpg.php'), transition_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-May-2025 02:01:43 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method WUKPRERENDER::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-acc...', false)
-#3 /internal/eval.php(20): activate_plugin('wp-accounting/w...')
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wukch-...', false)
+#3 /internal/eval.php(20): activate_plugin('wukch-dns-prefe...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[16-May-2025 09:54:22 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method wpAccountingInstall::install() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+[18-May-2025 02:01:50 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method WUKPRERENDER::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-acc...', false)
-#3 /internal/eval.php(20): activate_plugin('wp-accounting/w...')
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wukch-...', false)
+#3 /internal/eval.php(20): activate_plugin('wukch-dns-prefe...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[16-May-2025 09:54:30 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method wpAccountingInstall::install() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+[18-May-2025 02:01:57 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method WUKPRERENDER::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-acc...', false)
-#3 /internal/eval.php(20): activate_plugin('wp-accounting/w...')
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wukch-...', false)
+#3 /internal/eval.php(20): activate_plugin('wukch-dns-prefe...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[16-May-2025 09:57:20 UTC] PHP Warning:  Undefined array key "winebadge_embed" in /wordpress/wp-content/plugins/winelog/includes/functions.php on line 4
-[16-May-2025 09:57:20 UTC] PHP Warning:  Undefined array key "winelist_embed" in /wordpress/wp-content/plugins/winelog/includes/functions.php on line 4
-[16-May-2025 09:57:21 UTC] PHP Warning:  Undefined array key "winebadge_embed" in /wordpress/wp-content/plugins/winelog/includes/functions.php on line 4
-[16-May-2025 09:57:21 UTC] PHP Warning:  Undefined array key "winelist_embed" in /wordpress/wp-content/plugins/winelog/includes/functions.php on line 4
-[16-May-2025 09:57:29 UTC] PHP Warning:  Undefined array key "winebadge_embed" in /wordpress/wp-content/plugins/winelog/includes/functions.php on line 4
-[16-May-2025 09:57:29 UTC] PHP Warning:  Undefined array key "winelist_embed" in /wordpress/wp-content/plugins/winelog/includes/functions.php on line 4
-[16-May-2025 09:57:30 UTC] PHP Warning:  Undefined array key "winebadge_embed" in /wordpress/wp-content/plugins/winelog/includes/functions.php on line 4
-[16-May-2025 09:57:30 UTC] PHP Warning:  Undefined array key "winelist_embed" in /wordpress/wp-content/plugins/winelog/includes/functions.php on line 4
-[16-May-2025 09:57:37 UTC] PHP Warning:  Undefined array key "winebadge_embed" in /wordpress/wp-content/plugins/winelog/includes/functions.php on line 4
-[16-May-2025 09:57:37 UTC] PHP Warning:  Undefined array key "winelist_embed" in /wordpress/wp-content/plugins/winelog/includes/functions.php on line 4
-[16-May-2025 09:57:39 UTC] PHP Warning:  Undefined array key "winebadge_embed" in /wordpress/wp-content/plugins/winelog/includes/functions.php on line 4
-[16-May-2025 09:57:39 UTC] PHP Warning:  Undefined array key "winelist_embed" in /wordpress/wp-content/plugins/winelog/includes/functions.php on line 4
+[18-May-2025 02:02:07 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpwq</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-May-2025 02:02:16 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpwq</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-May-2025 02:02:26 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpwq</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
