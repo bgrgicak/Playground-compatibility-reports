@@ -2,91 +2,70 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [16-May-2025 21:49:20 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>gallery-images-ape</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[16-May-2025 21:49:32 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>gallery-images-ape</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[16-May-2025 21:49:43 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>gallery-images-ape</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[16-May-2025 21:50:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [18-May-2025 13:08:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-adsense-lite/google-adsense-widget.php:43
+Stack trace:
+#0 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(42): require_once()
+#1 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(147): GoogleAdSense->addWidgets()
+#2 /wordpress/wp-content/plugins/google-adsense-lite/google-adsense.php(30): require('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('google-adsense-...')
+#5 /internal/eval.php(20): activate_plugin('google-adsense-...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/google-adsense-lite/google-adsense-widget.php on line 43
+[18-May-2025 13:09:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE  (
-		  id bigint(20) NOT NULL AUTO_INCREMENT,
-		  post_author bigint(20) DEFAULT 0 NOT NULL,
-		  post_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		  category int DEFAULT 0 NOT NULL,
-		  name varchar(120) DEFAULT '' NOT NULL,
-		  description text DEFAULT '' NOT NULL,
-		  picture text DEFAULT '' NOT NULL,
-		  picture_original text DEFAULT '' NOT NULL,
-		  price varchar(120) DEFAULT '' NOT NULL,
-		  contact text DEFAULT '' NOT NULL,
-		  status int DEFAULT 0 NOT NULL,
-		  UNIQUE KEY id (id),
-		  KEY category (category),
-		  KEY price (price),
-		  KEY status (status),
-		  KEY post_author (post_author),
-		  KEY post_date (post_date)
-		)</p>
+<p>CREATE TABLE IF NOT EXISTS wp_ez_adsense_options (
+  id int(10) unsigned NOT NULL auto_increment,
+  created TIMESTAMP DEFAULT NOW(),
+  plugin_slug varchar(255) DEFAULT '' NOT NULL,
+  theme varchar(255) DEFAULT '' NOT NULL,
+  provider varchar(255) DEFAULT '' NOT NULL,
+  optionset varchar(255) DEFAULT 'Default' NOT NULL,
+  name varchar(255) DEFAULT '' NOT NULL,
+  value text NOT NULL,
+  PRIMARY KEY id (id),
+  UNIQUE KEY option_id (plugin_slug(32), theme(32), optionset(32), name(32))
+) DEFAULT CHARACTER SET utf8mb4;</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE  (...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE  (...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE  (...')
-#4 /wordpress/wp-content/plugins/garagesale/garagesale.php(184): dbDelta(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): GarageSalePlugin->init(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_garage...', false)
-#9 /internal/eval.php(20): activate_plugin('garagesale/gara...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/google-adsense-lite/admin/Migrator.php(191): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/google-adsense-lite/admin/Migrator.php(200): Migrator->createDB()
+#3 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(50): Migrator->migrate()
+#4 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(81): GoogleAdSense::install()
+#5 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(144): GoogleAdSense->verifyDB()
+#6 /wordpress/wp-content/plugins/google-adsense-lite/google-adsense.php(30): require('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('google-adsense-...')
+#9 /internal/eval.php(20): activate_plugin('google-adsense-...')
 #10 {main}</pre>
- for query CREATE TABLE  (
-		  id bigint(20) NOT NULL AUTO_INCREMENT,
-		  post_author bigint(20) DEFAULT 0 NOT NULL,
-		  post_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		  category int DEFAULT 0 NOT NULL,
-		  name varchar(120) DEFAULT '' NOT NULL,
-		  description text DEFAULT '' NOT NULL,
-		  picture text DEFAULT '' NOT NULL,
-		  picture_original text DEFAULT '' NOT NULL,
-		  price varchar(120) DEFAULT '' NOT NULL,
-		  contact text DEFAULT '' NOT NULL,
-		  status int DEFAULT 0 NOT NULL,
-		  UNIQUE KEY id (id),
-		  KEY category (category),
-		  KEY price (price),
-		  KEY status (status),
-		  KEY post_author (post_author),
-		  KEY post_date (post_date)
-		) made by activate_plugin, do_action('activate_garagesale/garagesale.php'), WP_Hook->do_action, WP_Hook->apply_filters, GarageSalePlugin->init, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-May-2025 21:50:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE IF NOT EXISTS wp_ez_adsense_options (
+  id int(10) unsigned NOT NULL auto_increment,
+  created TIMESTAMP DEFAULT NOW(),
+  plugin_slug varchar(255) DEFAULT '' NOT NULL,
+  theme varchar(255) DEFAULT '' NOT NULL,
+  provider varchar(255) DEFAULT '' NOT NULL,
+  optionset varchar(255) DEFAULT 'Default' NOT NULL,
+  name varchar(255) DEFAULT '' NOT NULL,
+  value text NOT NULL,
+  PRIMARY KEY id (id),
+  UNIQUE KEY option_id (plugin_slug(32), theme(32), optionset(32), name(32))
+) DEFAULT CHARACTER SET utf8mb4; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/google-adsense-lite/google-adsense.php'), require('/plugins/google-adsense-lite/wp-google-adsense.php'), GoogleAdSense->verifyDB, GoogleAdSense::install, Migrator->migrate, Migrator->createDB, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-May-2025 13:09:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE  (
-		  id bigint(20) NOT NULL AUTO_INCREMENT,
-		  post_author bigint(20) DEFAULT 0 NOT NULL,
-		  post_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		  category int DEFAULT 0 NOT NULL,
-		  name varchar(120) DEFAULT '' NOT NULL,
-		  description text DEFAULT '' NOT NULL,
-		  picture text DEFAULT '' NOT NULL,
-		  picture_original text DEFAULT '' NOT NULL,
-		  price varchar(120) DEFAULT '' NOT NULL,
-		  contact text DEFAULT '' NOT NULL,
-		  status int DEFAULT 0 NOT NULL,
-		  UNIQUE KEY id (id),
-		  KEY category (category),
-		  KEY price (price),
-		  KEY status (status),
-		  KEY post_author (post_author),
-		  KEY post_date (post_date)
-		)</p>
+<p>ALTER TABLE wp_ez_adsense_options
+   ALTER COLUMN optionset SET DEFAULT 'Default',
+   ALTER COLUMN name SET DEFAULT ''</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -94,59 +73,104 @@ Failed to parse the MySQL query.
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: 20.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ALTER.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE  (...')
-#2 /wordpress/wp-content/plugins/garagesale/garagesale.php(184): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): GarageSalePlugin->init(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_garage...', false)
-#7 /internal/eval.php(20): activate_plugin('garagesale/gara...')
-#8 {main}</pre>
- for query CREATE TABLE  (
-		  id bigint(20) NOT NULL AUTO_INCREMENT,
-		  post_author bigint(20) DEFAULT 0 NOT NULL,
-		  post_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		  category int DEFAULT 0 NOT NULL,
-		  name varchar(120) DEFAULT '' NOT NULL,
-		  description text DEFAULT '' NOT NULL,
-		  picture text DEFAULT '' NOT NULL,
-		  picture_original text DEFAULT '' NOT NULL,
-		  price varchar(120) DEFAULT '' NOT NULL,
-		  contact text DEFAULT '' NOT NULL,
-		  status int DEFAULT 0 NOT NULL,
-		  UNIQUE KEY id (id),
-		  KEY category (category),
-		  KEY price (price),
-		  KEY status (status),
-		  KEY post_author (post_author),
-		  KEY post_date (post_date)
-		) made by activate_plugin, do_action('activate_garagesale/garagesale.php'), WP_Hook->do_action, WP_Hook->apply_filters, GarageSalePlugin->init, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-May-2025 21:50:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/google-adsense-lite/admin/Migrator.php(195): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/google-adsense-lite/admin/Migrator.php(200): Migrator->createDB()
+#3 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(50): Migrator->migrate()
+#4 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(81): GoogleAdSense::install()
+#5 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(144): GoogleAdSense->verifyDB()
+#6 /wordpress/wp-content/plugins/google-adsense-lite/google-adsense.php(30): require('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('google-adsense-...')
+#9 /internal/eval.php(20): activate_plugin('google-adsense-...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_ez_adsense_options
+   ALTER COLUMN optionset SET DEFAULT 'Default',
+   ALTER COLUMN name SET DEFAULT '' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/google-adsense-lite/google-adsense.php'), require('/plugins/google-adsense-lite/wp-google-adsense.php'), GoogleAdSense->verifyDB, GoogleAdSense::install, Migrator->migrate, Migrator->createDB, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-May-2025 13:09:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE  (
-		  id bigint(20) NOT NULL AUTO_INCREMENT,
-		  post_author bigint(20) DEFAULT 0 NOT NULL,
-		  post_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		  category int DEFAULT 0 NOT NULL,
-		  name varchar(120) DEFAULT '' NOT NULL,
-		  description text DEFAULT '' NOT NULL,
-		  picture text DEFAULT '' NOT NULL,
-		  picture_original text DEFAULT '' NOT NULL,
-		  price varchar(120) DEFAULT '' NOT NULL,
-		  contact text DEFAULT '' NOT NULL,
-		  status int DEFAULT 0 NOT NULL,
-		  UNIQUE KEY id (id),
-		  KEY category (category),
-		  KEY price (price),
-		  KEY status (status),
-		  KEY post_author (post_author),
-		  KEY post_date (post_date)
-		)</p>
+<p>REPLACE INTO `wp_ez_adsense_options` (`name`, `value`, `plugin_slug`, `theme`, `provider`, `optionset`) VALUES ('last_iframe_src', 'index.php', 'All', 'All', 'All', 'All')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: REPLACE INTO `wp_ez_adsense_options` (`name`, `value`, `plugin_slug`, `theme`, `provider`, `optionset`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 ) | parameters: last_iframe_src, index.php, All, All, All, All</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ez_adsense_options.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('REPLACE INTO `w...')
+#2 /wordpress/wp-includes/class-wpdb.php(2556): wpdb->_insert_replace_helper('wp_ez_adsense_o...', Array, NULL, 'REPLACE')
+#3 /wordpress/wp-content/plugins/google-adsense-lite/EZWP.php(149): wpdb->replace('wp_ez_adsense_o...', Array)
+#4 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(51): EZWP::putGenOption('last_iframe_src', 'index.php')
+#5 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(81): GoogleAdSense::install()
+#6 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(144): GoogleAdSense->verifyDB()
+#7 /wordpress/wp-content/plugins/google-adsense-lite/google-adsense.php(30): require('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('google-adsense-...')
+#10 /internal/eval.php(20): activate_plugin('google-adsense-...')
+#11 {main}</pre>
+ for query REPLACE INTO `wp_ez_adsense_options` (`name`, `value`, `plugin_slug`, `theme`, `provider`, `optionset`) VALUES ('last_iframe_src', 'index.php', 'All', 'All', 'All', 'All') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/google-adsense-lite/google-adsense.php'), require('/plugins/google-adsense-lite/wp-google-adsense.php'), GoogleAdSense->verifyDB, GoogleAdSense::install, EZWP::putGenOption, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-May-2025 13:09:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>REPLACE INTO `wp_ez_adsense_options` (`name`, `value`, `plugin_slug`, `theme`, `provider`, `optionset`) VALUES ('editing', 'Default', 'All', 'All', 'All', 'All')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: REPLACE INTO `wp_ez_adsense_options` (`name`, `value`, `plugin_slug`, `theme`, `provider`, `optionset`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 ) | parameters: editing, Default, All, All, All, All</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ez_adsense_options.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('REPLACE INTO `w...')
+#2 /wordpress/wp-includes/class-wpdb.php(2556): wpdb->_insert_replace_helper('wp_ez_adsense_o...', Array, NULL, 'REPLACE')
+#3 /wordpress/wp-content/plugins/google-adsense-lite/EZWP.php(149): wpdb->replace('wp_ez_adsense_o...', Array)
+#4 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(52): EZWP::putGenOption('editing', 'Default')
+#5 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(81): GoogleAdSense::install()
+#6 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(144): GoogleAdSense->verifyDB()
+#7 /wordpress/wp-content/plugins/google-adsense-lite/google-adsense.php(30): require('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('google-adsense-...')
+#10 /internal/eval.php(20): activate_plugin('google-adsense-...')
+#11 {main}</pre>
+ for query REPLACE INTO `wp_ez_adsense_options` (`name`, `value`, `plugin_slug`, `theme`, `provider`, `optionset`) VALUES ('editing', 'Default', 'All', 'All', 'All', 'All') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/google-adsense-lite/google-adsense.php'), require('/plugins/google-adsense-lite/wp-google-adsense.php'), GoogleAdSense->verifyDB, GoogleAdSense::install, EZWP::putGenOption, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-May-2025 13:09:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-adsense-lite/google-adsense-widget.php:43
+Stack trace:
+#0 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(42): require_once()
+#1 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(147): GoogleAdSense->addWidgets()
+#2 /wordpress/wp-content/plugins/google-adsense-lite/google-adsense.php(30): require('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('google-adsense-...')
+#5 /internal/eval.php(20): activate_plugin('google-adsense-...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/google-adsense-lite/google-adsense-widget.php on line 43
+[18-May-2025 13:09:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_ez_adsense_options (
+  id int(10) unsigned NOT NULL auto_increment,
+  created TIMESTAMP DEFAULT NOW(),
+  plugin_slug varchar(255) DEFAULT '' NOT NULL,
+  theme varchar(255) DEFAULT '' NOT NULL,
+  provider varchar(255) DEFAULT '' NOT NULL,
+  optionset varchar(255) DEFAULT 'Default' NOT NULL,
+  name varchar(255) DEFAULT '' NOT NULL,
+  value text NOT NULL,
+  PRIMARY KEY id (id),
+  UNIQUE KEY option_id (plugin_slug(32), theme(32), optionset(32), name(32))
+) DEFAULT CHARACTER SET utf8mb4;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -154,74 +178,135 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: 20.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE  (...')
-#2 /wordpress/wp-content/plugins/garagesale/garagesale.php(184): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): GarageSalePlugin->init(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_garage...', false)
-#7 /internal/eval.php(20): activate_plugin('garagesale/gara...')
-#8 {main}</pre>
- for query CREATE TABLE  (
-		  id bigint(20) NOT NULL AUTO_INCREMENT,
-		  post_author bigint(20) DEFAULT 0 NOT NULL,
-		  post_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		  category int DEFAULT 0 NOT NULL,
-		  name varchar(120) DEFAULT '' NOT NULL,
-		  description text DEFAULT '' NOT NULL,
-		  picture text DEFAULT '' NOT NULL,
-		  picture_original text DEFAULT '' NOT NULL,
-		  price varchar(120) DEFAULT '' NOT NULL,
-		  contact text DEFAULT '' NOT NULL,
-		  status int DEFAULT 0 NOT NULL,
-		  UNIQUE KEY id (id),
-		  KEY category (category),
-		  KEY price (price),
-		  KEY status (status),
-		  KEY post_author (post_author),
-		  KEY post_date (post_date)
-		) made by activate_plugin, do_action('activate_garagesale/garagesale.php'), WP_Hook->do_action, WP_Hook->apply_filters, GarageSalePlugin->init, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-May-2025 21:50:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gdgt-databox/plugin.php:57
+#1 /wordpress/wp-content/plugins/google-adsense-lite/admin/Migrator.php(191): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/google-adsense-lite/admin/Migrator.php(200): Migrator->createDB()
+#3 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(50): Migrator->migrate()
+#4 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(81): GoogleAdSense::install()
+#5 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(144): GoogleAdSense->verifyDB()
+#6 /wordpress/wp-content/plugins/google-adsense-lite/google-adsense.php(30): require('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('google-adsense-...')
+#9 /internal/eval.php(20): activate_plugin('google-adsense-...')
+#10 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_ez_adsense_options (
+  id int(10) unsigned NOT NULL auto_increment,
+  created TIMESTAMP DEFAULT NOW(),
+  plugin_slug varchar(255) DEFAULT '' NOT NULL,
+  theme varchar(255) DEFAULT '' NOT NULL,
+  provider varchar(255) DEFAULT '' NOT NULL,
+  optionset varchar(255) DEFAULT 'Default' NOT NULL,
+  name varchar(255) DEFAULT '' NOT NULL,
+  value text NOT NULL,
+  PRIMARY KEY id (id),
+  UNIQUE KEY option_id (plugin_slug(32), theme(32), optionset(32), name(32))
+) DEFAULT CHARACTER SET utf8mb4; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/google-adsense-lite/google-adsense.php'), require('/plugins/google-adsense-lite/wp-google-adsense.php'), GoogleAdSense->verifyDB, GoogleAdSense::install, Migrator->migrate, Migrator->createDB, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-May-2025 13:09:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_ez_adsense_options
+   ALTER COLUMN optionset SET DEFAULT 'Default',
+   ALTER COLUMN name SET DEFAULT ''</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ALTER.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/google-adsense-lite/admin/Migrator.php(195): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/google-adsense-lite/admin/Migrator.php(200): Migrator->createDB()
+#3 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(50): Migrator->migrate()
+#4 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(81): GoogleAdSense::install()
+#5 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(144): GoogleAdSense->verifyDB()
+#6 /wordpress/wp-content/plugins/google-adsense-lite/google-adsense.php(30): require('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('google-adsense-...')
+#9 /internal/eval.php(20): activate_plugin('google-adsense-...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_ez_adsense_options
+   ALTER COLUMN optionset SET DEFAULT 'Default',
+   ALTER COLUMN name SET DEFAULT '' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/google-adsense-lite/google-adsense.php'), require('/plugins/google-adsense-lite/wp-google-adsense.php'), GoogleAdSense->verifyDB, GoogleAdSense::install, Migrator->migrate, Migrator->createDB, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-May-2025 13:09:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>REPLACE INTO `wp_ez_adsense_options` (`name`, `value`, `plugin_slug`, `theme`, `provider`, `optionset`) VALUES ('last_iframe_src', 'index.php', 'All', 'All', 'All', 'All')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: REPLACE INTO `wp_ez_adsense_options` (`name`, `value`, `plugin_slug`, `theme`, `provider`, `optionset`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 ) | parameters: last_iframe_src, index.php, All, All, All, All</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ez_adsense_options.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('REPLACE INTO `w...')
+#2 /wordpress/wp-includes/class-wpdb.php(2556): wpdb->_insert_replace_helper('wp_ez_adsense_o...', Array, NULL, 'REPLACE')
+#3 /wordpress/wp-content/plugins/google-adsense-lite/EZWP.php(149): wpdb->replace('wp_ez_adsense_o...', Array)
+#4 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(51): EZWP::putGenOption('last_iframe_src', 'index.php')
+#5 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(81): GoogleAdSense::install()
+#6 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(144): GoogleAdSense->verifyDB()
+#7 /wordpress/wp-content/plugins/google-adsense-lite/google-adsense.php(30): require('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('google-adsense-...')
+#10 /internal/eval.php(20): activate_plugin('google-adsense-...')
+#11 {main}</pre>
+ for query REPLACE INTO `wp_ez_adsense_options` (`name`, `value`, `plugin_slug`, `theme`, `provider`, `optionset`) VALUES ('last_iframe_src', 'index.php', 'All', 'All', 'All', 'All') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/google-adsense-lite/google-adsense.php'), require('/plugins/google-adsense-lite/wp-google-adsense.php'), GoogleAdSense->verifyDB, GoogleAdSense::install, EZWP::putGenOption, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-May-2025 13:09:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>REPLACE INTO `wp_ez_adsense_options` (`name`, `value`, `plugin_slug`, `theme`, `provider`, `optionset`) VALUES ('editing', 'Default', 'All', 'All', 'All', 'All')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: REPLACE INTO `wp_ez_adsense_options` (`name`, `value`, `plugin_slug`, `theme`, `provider`, `optionset`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 ) | parameters: editing, Default, All, All, All, All</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ez_adsense_options.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('REPLACE INTO `w...')
+#2 /wordpress/wp-includes/class-wpdb.php(2556): wpdb->_insert_replace_helper('wp_ez_adsense_o...', Array, NULL, 'REPLACE')
+#3 /wordpress/wp-content/plugins/google-adsense-lite/EZWP.php(149): wpdb->replace('wp_ez_adsense_o...', Array)
+#4 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(52): EZWP::putGenOption('editing', 'Default')
+#5 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(81): GoogleAdSense::install()
+#6 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(144): GoogleAdSense->verifyDB()
+#7 /wordpress/wp-content/plugins/google-adsense-lite/google-adsense.php(30): require('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('google-adsense-...')
+#10 /internal/eval.php(20): activate_plugin('google-adsense-...')
+#11 {main}</pre>
+ for query REPLACE INTO `wp_ez_adsense_options` (`name`, `value`, `plugin_slug`, `theme`, `provider`, `optionset`) VALUES ('editing', 'Default', 'All', 'All', 'All', 'All') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/google-adsense-lite/google-adsense.php'), require('/plugins/google-adsense-lite/wp-google-adsense.php'), GoogleAdSense->verifyDB, GoogleAdSense::install, EZWP::putGenOption, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-May-2025 13:09:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-adsense-lite/google-adsense-widget.php:43
 Stack trace:
-#0 /wordpress/wp-content/plugins/gdgt-databox/plugin.php(87): GDGT_Databox_Plugin->__construct()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): gdgt_init_plugin('')
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-settings.php(727): do_action('init')
-#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/gdgt-databox/plugin.php on line 57
-[16-May-2025 21:50:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gdgt-databox/plugin.php:57
-Stack trace:
-#0 /wordpress/wp-content/plugins/gdgt-databox/plugin.php(87): GDGT_Databox_Plugin->__construct()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): gdgt_init_plugin('')
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-settings.php(727): do_action('init')
-#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/gdgt-databox/plugin.php on line 57
-[16-May-2025 21:51:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gdgt-databox/plugin.php:57
-Stack trace:
-#0 /wordpress/wp-content/plugins/gdgt-databox/plugin.php(87): GDGT_Databox_Plugin->__construct()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): gdgt_init_plugin('')
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-settings.php(727): do_action('init')
-#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/gdgt-databox/plugin.php on line 57
-[16-May-2025 21:57:10 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(42): require_once()
+#1 /wordpress/wp-content/plugins/google-adsense-lite/wp-google-adsense.php(147): GoogleAdSense->addWidgets()
+#2 /wordpress/wp-content/plugins/google-adsense-lite/google-adsense.php(30): require('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('google-adsense-...')
+#5 /internal/eval.php(20): activate_plugin('google-adsense-...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/google-adsense-lite/google-adsense-widget.php on line 43
+[18-May-2025 13:09:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/google-images-redirect/google-images-redirect.php on line 83
+[18-May-2025 13:09:26 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/google-images-redirect/google-images-redirect.php on line 83
+[18-May-2025 13:09:35 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/google-images-redirect/google-images-redirect.php on line 83
+[18-May-2025 13:09:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/google-images-redirect/google-images-redirect.php on line 83
+[18-May-2025 13:09:44 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/google-images-redirect/google-images-redirect.php on line 83
+[18-May-2025 13:09:45 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/google-images-redirect/google-images-redirect.php on line 83
+[18-May-2025 13:09:54 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Gravatar_Widget')
@@ -239,7 +324,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[16-May-2025 21:57:19 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[18-May-2025 13:10:03 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Gravatar_Widget')
