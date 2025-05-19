@@ -2,205 +2,89 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [19-May-2025 11:27:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [19-May-2025 11:26:09 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/quote-cart/quote-cart.php on line 20
+[19-May-2025 11:26:09 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/quote-cart/quote-cart.php on line 20
+[19-May-2025 11:26:09 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/quote-cart/quote-cart.php on line 21
+[19-May-2025 11:26:09 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/quote-cart/quote-cart.php on line 21
+[19-May-2025 11:26:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_stock_ticker_data DROP PRIMARY KEY</p>
+<p>CREATE TABLE IF NOT EXISTS wp_favorite_quote ( id int(11) UNSIGNED NOT NULL AUTO_INCREMENT, user_id MEDIUMINT NULL, post_id TEXT NULL, cookie_id int(11) NULL, quote_id TEXT NULL, UNIQUE KEY id (id) ) TYPE = MYISAM;</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: DROP INDEX  | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 incomplete input.
+Failed to parse the MySQL query.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/stock-ticker/update.php(140): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/stock-ticker/update.php(32): au_stockticker_update_routine_4()
-#3 /wordpress/wp-content/plugins/stock-ticker/classes/class-wpau-stock-ticker.php(236): au_stockticker_update()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Wpau_Stock_Ticker->maybe_update('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-content/plugins/quote-cart/quote-cart.php(56): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): my_fav_quote_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_stock_ticker_data DROP PRIMARY KEY made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Wpau_Stock_Ticker->maybe_update, au_stockticker_update, au_stockticker_update_routine_4, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[19-May-2025 11:27:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quote-...', false)
+#8 /internal/eval.php(20): activate_plugin('quote-cart/quot...')
+#9 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_favorite_quote ( id int(11) UNSIGNED NOT NULL AUTO_INCREMENT, user_id MEDIUMINT NULL, post_id TEXT NULL, cookie_id int(11) NULL, quote_id TEXT NULL, UNIQUE KEY id (id) ) TYPE = MYISAM; made by activate_plugin, do_action('activate_quote-cart/quote-cart.php'), WP_Hook->do_action, WP_Hook->apply_filters, my_fav_quote_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[19-May-2025 11:26:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_stock_ticker_data ADD id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST</p>
+<p>CREATE TABLE IF NOT EXISTS wp_add_fav_quote ( id int(11) UNSIGNED NOT NULL AUTO_INCREMENT, title varchar(255) NULL, url varchar(255) NULL, PRIMARY KEY (id) ) TYPE = MYISAM;</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_stock_ticker_data, ID, int(10)</li>
-<li>Executing: ALTER TABLE wp_stock_ticker_data ADD id integer NOT NULL AUTO_INCREMENT PRIMARY KEY  | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "AUTO_INCREMENT": syntax error.
+Failed to parse the MySQL query.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/stock-ticker/update.php(141): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/stock-ticker/update.php(32): au_stockticker_update_routine_4()
-#3 /wordpress/wp-content/plugins/stock-ticker/classes/class-wpau-stock-ticker.php(236): au_stockticker_update()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Wpau_Stock_Ticker->maybe_update('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-content/plugins/quote-cart/quote-cart.php(81): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): my_fav_quote_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_stock_ticker_data ADD id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Wpau_Stock_Ticker->maybe_update, au_stockticker_update, au_stockticker_update_routine_4, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[19-May-2025 11:27:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_stock_ticker_data DROP PRIMARY KEY</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: DROP INDEX  | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 incomplete input.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/stock-ticker/update.php(140): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/stock-ticker/update.php(32): au_stockticker_update_routine_4()
-#3 /wordpress/wp-content/plugins/stock-ticker/classes/class-wpau-stock-ticker.php(236): au_stockticker_update()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Wpau_Stock_Ticker->maybe_update('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_stock_ticker_data DROP PRIMARY KEY made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Wpau_Stock_Ticker->maybe_update, au_stockticker_update, au_stockticker_update_routine_4, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[19-May-2025 11:27:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_stock_ticker_data ADD id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_stock_ticker_data, ID, int(10)</li>
-<li>Executing: ALTER TABLE wp_stock_ticker_data ADD id integer NOT NULL AUTO_INCREMENT PRIMARY KEY  | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "AUTO_INCREMENT": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/stock-ticker/update.php(141): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/stock-ticker/update.php(32): au_stockticker_update_routine_4()
-#3 /wordpress/wp-content/plugins/stock-ticker/classes/class-wpau-stock-ticker.php(236): au_stockticker_update()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Wpau_Stock_Ticker->maybe_update('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_stock_ticker_data ADD id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Wpau_Stock_Ticker->maybe_update, au_stockticker_update, au_stockticker_update_routine_4, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[19-May-2025 11:28:03 UTC] PHP Notice:  Undefined variable: term in /internal/eval.php on line 22
-[19-May-2025 11:28:03 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/eval.php on line 22
-[19-May-2025 11:28:16 UTC] PHP Notice:  Undefined variable: term in /internal/eval.php on line 22
-[19-May-2025 11:28:16 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/eval.php on line 22
-[19-May-2025 11:28:28 UTC] PHP Notice:  Undefined variable: term in /internal/eval.php on line 22
-[19-May-2025 11:28:28 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/eval.php on line 22
-[19-May-2025 11:30:44 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('StargutscheinWi...')
-#2 /wordpress/wp-content/plugins/stargutschein-gutschein-widget/stargutschein.widget.php(43): register_widget('StargutscheinWi...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): load_sgs('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[19-May-2025 11:30:52 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('StargutscheinWi...')
-#2 /wordpress/wp-content/plugins/stargutschein-gutschein-widget/stargutschein.widget.php(43): register_widget('StargutscheinWi...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): load_sgs('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[19-May-2025 11:31:01 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('StargutscheinWi...')
-#2 /wordpress/wp-content/plugins/stargutschein-gutschein-widget/stargutschein.widget.php(43): register_widget('StargutscheinWi...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): load_sgs('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[19-May-2025 11:32:03 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>super-light-cache-buster</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[19-May-2025 11:32:12 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>super-light-cache-buster</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[19-May-2025 11:32:21 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>super-light-cache-buster</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[19-May-2025 11:33:50 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/synapser/synapser.php on line 42
-[19-May-2025 11:33:50 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/synapser/synapser.php on line 48
-[19-May-2025 11:33:51 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/synapser/synapser.php on line 42
-[19-May-2025 11:33:51 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/synapser/synapser.php on line 48
-[19-May-2025 11:33:51 UTC] PHP Warning:  file_get_contents(?hashkey=&amp;url=): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/synapser/SynapserV1API.php on line 65
-[19-May-2025 11:33:59 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/synapser/synapser.php on line 42
-[19-May-2025 11:33:59 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/synapser/synapser.php on line 48
-[19-May-2025 11:34:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/synapser/synapser.php on line 42
-[19-May-2025 11:34:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/synapser/synapser.php on line 48
-[19-May-2025 11:34:00 UTC] PHP Warning:  file_get_contents(?hashkey=&amp;url=): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/synapser/SynapserV1API.php on line 65
-[19-May-2025 11:34:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/synapser/synapser.php on line 42
-[19-May-2025 11:34:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/synapser/synapser.php on line 48
-[19-May-2025 11:34:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/synapser/synapser.php on line 42
-[19-May-2025 11:34:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/synapser/synapser.php on line 48
-[19-May-2025 11:34:09 UTC] PHP Warning:  file_get_contents(?hashkey=&amp;url=): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/synapser/SynapserV1API.php on line 65
-[19-May-2025 11:35:11 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "REALTY_PORTAL" in /wordpress/wp-content/plugins/realty-portal-agent-dashboard/realty-portal-agent-dashboard.php:99
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quote-...', false)
+#8 /internal/eval.php(20): activate_plugin('quote-cart/quot...')
+#9 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_add_fav_quote ( id int(11) UNSIGNED NOT NULL AUTO_INCREMENT, title varchar(255) NULL, url varchar(255) NULL, PRIMARY KEY (id) ) TYPE = MYISAM; made by activate_plugin, do_action('activate_quote-cart/quote-cart.php'), WP_Hook->do_action, WP_Hook->apply_filters, my_fav_quote_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[19-May-2025 11:26:10 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[19-May-2025 11:26:10 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[19-May-2025 11:26:17 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/quote-cart/quote-cart.php on line 20
+[19-May-2025 11:26:17 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/quote-cart/quote-cart.php on line 20
+[19-May-2025 11:26:17 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/quote-cart/quote-cart.php on line 21
+[19-May-2025 11:26:17 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/quote-cart/quote-cart.php on line 21
+[19-May-2025 11:26:19 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[19-May-2025 11:26:19 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[19-May-2025 11:26:26 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/quote-cart/quote-cart.php on line 20
+[19-May-2025 11:26:26 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/quote-cart/quote-cart.php on line 20
+[19-May-2025 11:26:26 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/quote-cart/quote-cart.php on line 21
+[19-May-2025 11:26:26 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/quote-cart/quote-cart.php on line 21
+[19-May-2025 11:26:28 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[19-May-2025 11:26:28 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[19-May-2025 11:27:07 UTC] PHP Warning:  Undefined property: richtexteditor_wordpress_class::$aOptions in /wordpress/wp-content/plugins/richtexteditor/richtexteditor_wordpress_class.php on line 651
+[19-May-2025 11:27:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/richtexteditor/richtexteditor_wordpress_class.php on line 651
+[19-May-2025 11:27:18 UTC] PHP Warning:  Undefined property: richtexteditor_wordpress_class::$aOptions in /wordpress/wp-content/plugins/richtexteditor/richtexteditor_wordpress_class.php on line 651
+[19-May-2025 11:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/richtexteditor/richtexteditor_wordpress_class.php on line 651
+[19-May-2025 11:27:30 UTC] PHP Warning:  Undefined property: richtexteditor_wordpress_class::$aOptions in /wordpress/wp-content/plugins/richtexteditor/richtexteditor_wordpress_class.php on line 651
+[19-May-2025 11:27:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/richtexteditor/richtexteditor_wordpress_class.php on line 651
+[19-May-2025 11:27:40 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/riden/rsc-riden-wp.php on line 281
+[19-May-2025 11:27:40 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/riden/rsc-riden-wp.php on line 283
+[19-May-2025 11:27:40 UTC] RIDEN: Invalid IP: 
+[19-May-2025 11:27:40 UTC] PHP Warning:  Undefined array key "SERVER_PROTOCOL" in /wordpress/wp-content/plugins/riden/rsc-riden-wp.php on line 284
+[19-May-2025 11:27:50 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/riden/rsc-riden-wp.php on line 281
+[19-May-2025 11:27:50 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/riden/rsc-riden-wp.php on line 283
+[19-May-2025 11:27:50 UTC] RIDEN: Invalid IP: 
+[19-May-2025 11:27:50 UTC] PHP Warning:  Undefined array key "SERVER_PROTOCOL" in /wordpress/wp-content/plugins/riden/rsc-riden-wp.php on line 284
+[19-May-2025 11:28:00 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/riden/rsc-riden-wp.php on line 281
+[19-May-2025 11:28:00 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/riden/rsc-riden-wp.php on line 283
+[19-May-2025 11:28:00 UTC] RIDEN: Invalid IP: 
+[19-May-2025 11:28:00 UTC] PHP Warning:  Undefined array key "SERVER_PROTOCOL" in /wordpress/wp-content/plugins/riden/rsc-riden-wp.php on line 284
+[19-May-2025 11:29:06 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "REALTY_PORTAL" in /wordpress/wp-content/plugins/realty-portal-agent-dashboard/realty-portal-agent-dashboard.php:99
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): RP_AddOn_Agent_Dashboard::activation(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
