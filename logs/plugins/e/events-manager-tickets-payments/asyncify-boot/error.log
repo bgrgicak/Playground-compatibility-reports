@@ -2,98 +2,275 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [18-May-2025 05:49:55 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/esell//includes/init.class.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/esell/Esell.php on line 50
-[18-May-2025 05:49:55 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/esell//includes/init.class.php' (include_path='.:') in /wordpress/wp-content/plugins/esell/Esell.php:50
+Error: [19-May-2025 18:57:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)
+BEGIN
+
+   SET @lck_name = 'erpc_lck';
+   SET @lck_result = 0;
+   SET @result = 0;
+
+   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;
+  
+   IF @lck_result = 1 THEN
+   
+       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;
+       
+       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;
+       IF @lck_result = 1 THEN
+             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);
+             SET @result = 1;
+       END IF;
+             
+          
+       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; 
+      
+   END IF;
+
+   RETURN @result;
+
+END</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createFunction"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(848): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE FUNCTION...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE FUNCTION...')
+#4 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(144): WP_SQLite_DB->query('CREATE FUNCTION...')
+#5 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(23): ERPC_Install::create_functions_v1_0()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): ERPC_Install::install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erp-co...', false)
+#10 /internal/eval.php(20): activate_plugin('erp-connector/e...')
+#11 {main}</pre>
+ for query CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)
+BEGIN
+
+   SET @lck_name = 'erpc_lck';
+   SET @lck_result = 0;
+   SET @result = 0;
+
+   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;
+  
+   IF @lck_result = 1 THEN
+   
+       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;
+       
+       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;
+       IF @lck_result = 1 THEN
+             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);
+             SET @result = 1;
+       END IF;
+             
+          
+       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; 
+      
+   END IF;
+
+   RETURN @result;
+
+END made by activate_plugin, do_action('activate_erp-connector/erp-connector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ERPC_Install::install, ERPC_Install::create_functions_v1_0, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[19-May-2025 18:57:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)
+BEGIN
+
+   SET @lck_name = 'erpc_lck';
+   SET @lck_result = 0;
+   SET @result = 0;
+
+   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;
+  
+   IF @lck_result = 1 THEN
+   
+       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;
+       
+       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;
+       IF @lck_result = 1 THEN
+             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);
+             SET @result = 1;
+       END IF;
+             
+          
+       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; 
+      
+   END IF;
+
+   RETURN @result;
+
+END</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(144): WP_SQLite_DB->query('CREATE FUNCTION...')
+#2 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(23): ERPC_Install::create_functions_v1_0()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ERPC_Install::install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erp-co...', false)
+#7 /internal/eval.php(20): activate_plugin('erp-connector/e...')
+#8 {main}</pre>
+ for query CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)
+BEGIN
+
+   SET @lck_name = 'erpc_lck';
+   SET @lck_result = 0;
+   SET @result = 0;
+
+   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;
+  
+   IF @lck_result = 1 THEN
+   
+       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;
+       
+       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;
+       IF @lck_result = 1 THEN
+             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);
+             SET @result = 1;
+       END IF;
+             
+          
+       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; 
+      
+   END IF;
+
+   RETURN @result;
+
+END made by activate_plugin, do_action('activate_erp-connector/erp-connector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ERPC_Install::install, ERPC_Install::create_functions_v1_0, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[19-May-2025 18:57:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)
+BEGIN
+
+   SET @lck_name = 'erpc_lck';
+   SET @lck_result = 0;
+   SET @result = 0;
+
+   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;
+  
+   IF @lck_result = 1 THEN
+   
+       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;
+       
+       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;
+       IF @lck_result = 1 THEN
+             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);
+             SET @result = 1;
+       END IF;
+             
+          
+       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; 
+      
+   END IF;
+
+   RETURN @result;
+
+END</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(144): WP_SQLite_DB->query('CREATE FUNCTION...')
+#2 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(23): ERPC_Install::create_functions_v1_0()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ERPC_Install::install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erp-co...', false)
+#7 /internal/eval.php(20): activate_plugin('erp-connector/e...')
+#8 {main}</pre>
+ for query CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)
+BEGIN
+
+   SET @lck_name = 'erpc_lck';
+   SET @lck_result = 0;
+   SET @result = 0;
+
+   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;
+  
+   IF @lck_result = 1 THEN
+   
+       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;
+       
+       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;
+       IF @lck_result = 1 THEN
+             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);
+             SET @result = 1;
+       END IF;
+             
+          
+       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; 
+      
+   END IF;
+
+   RETURN @result;
+
+END made by activate_plugin, do_action('activate_erp-connector/erp-connector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ERPC_Install::install, ERPC_Install::create_functions_v1_0, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[19-May-2025 18:57:32 UTC] PHP Notice:  Function convert_to_screen(), add_meta_box() was called <strong>incorrectly</strong>. Likely direct inclusion of <code>wp-admin/includes/template.php</code> in order to use <code>add_meta_box()</code>. This is very wrong. Hook the <code>add_meta_box()</code> call into the <code>add_meta_boxes</code> action instead. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[19-May-2025 18:57:33 UTC] PHP Notice:  Function convert_to_screen(), add_meta_box() was called <strong>incorrectly</strong>. Likely direct inclusion of <code>wp-admin/includes/template.php</code> in order to use <code>add_meta_box()</code>. This is very wrong. Hook the <code>add_meta_box()</code> call into the <code>add_meta_boxes</code> action instead. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[19-May-2025 18:57:42 UTC] PHP Notice:  Function convert_to_screen(), add_meta_box() was called <strong>incorrectly</strong>. Likely direct inclusion of <code>wp-admin/includes/template.php</code> in order to use <code>add_meta_box()</code>. This is very wrong. Hook the <code>add_meta_box()</code> call into the <code>add_meta_boxes</code> action instead. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[19-May-2025 18:57:43 UTC] PHP Notice:  Function convert_to_screen(), add_meta_box() was called <strong>incorrectly</strong>. Likely direct inclusion of <code>wp-admin/includes/template.php</code> in order to use <code>add_meta_box()</code>. This is very wrong. Hook the <code>add_meta_box()</code> call into the <code>add_meta_boxes</code> action instead. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[19-May-2025 18:57:50 UTC] PHP Notice:  Function convert_to_screen(), add_meta_box() was called <strong>incorrectly</strong>. Likely direct inclusion of <code>wp-admin/includes/template.php</code> in order to use <code>add_meta_box()</code>. This is very wrong. Hook the <code>add_meta_box()</code> call into the <code>add_meta_boxes</code> action instead. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[19-May-2025 18:57:51 UTC] PHP Notice:  Function convert_to_screen(), add_meta_box() was called <strong>incorrectly</strong>. Likely direct inclusion of <code>wp-admin/includes/template.php</code> in order to use <code>add_meta_box()</code>. This is very wrong. Hook the <code>add_meta_box()</code> call into the <code>add_meta_boxes</code> action instead. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[19-May-2025 19:00:22 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[19-May-2025 19:01:03 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[19-May-2025 19:01:43 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[19-May-2025 19:03:56 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/easy-team-builder/easy-team-builder.php on line 67
+[19-May-2025 19:04:04 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/easy-team-builder/easy-team-builder.php on line 67
+[19-May-2025 19:04:13 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/easy-team-builder/easy-team-builder.php on line 67
+[19-May-2025 19:05:16 UTC] PHP Parse error:  Invalid numeric literal in /wordpress/wp-content/plugins/event-commerce-wp-event-calendar/evntgen-scbooking.php on line 216
+[19-May-2025 19:05:24 UTC] PHP Parse error:  Invalid numeric literal in /wordpress/wp-content/plugins/event-commerce-wp-event-calendar/evntgen-scbooking.php on line 216
+[19-May-2025 19:05:31 UTC] PHP Parse error:  Invalid numeric literal in /wordpress/wp-content/plugins/event-commerce-wp-event-calendar/evntgen-scbooking.php on line 216
+[19-May-2025 19:05:40 UTC] PHP Fatal error:  Uncaught Error: Non-static method EB::init() cannot be called statically in /wordpress/wp-content/plugins/eventbrite/eventbrite.php:31
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('esell/Esell.php')
-#2 /internal/eval.php(20): activate_plugin('esell/Esell.php')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eventbrite/even...')
+#2 /internal/eval.php(20): activate_plugin('eventbrite/even...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/esell/Esell.php on line 50
-[18-May-2025 05:50:02 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/esell//includes/init.class.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/esell/Esell.php on line 50
-[18-May-2025 05:50:02 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/esell//includes/init.class.php' (include_path='.:') in /wordpress/wp-content/plugins/esell/Esell.php:50
+  thrown in /wordpress/wp-content/plugins/eventbrite/eventbrite.php on line 31
+[19-May-2025 19:05:47 UTC] PHP Fatal error:  Uncaught Error: Non-static method EB::init() cannot be called statically in /wordpress/wp-content/plugins/eventbrite/eventbrite.php:31
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('esell/Esell.php')
-#2 /internal/eval.php(20): activate_plugin('esell/Esell.php')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eventbrite/even...')
+#2 /internal/eval.php(20): activate_plugin('eventbrite/even...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/esell/Esell.php on line 50
-[18-May-2025 05:50:11 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/esell//includes/init.class.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/esell/Esell.php on line 50
-[18-May-2025 05:50:11 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/esell//includes/init.class.php' (include_path='.:') in /wordpress/wp-content/plugins/esell/Esell.php:50
+  thrown in /wordpress/wp-content/plugins/eventbrite/eventbrite.php on line 31
+[19-May-2025 19:05:54 UTC] PHP Fatal error:  Uncaught Error: Non-static method EB::init() cannot be called statically in /wordpress/wp-content/plugins/eventbrite/eventbrite.php:31
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('esell/Esell.php')
-#2 /internal/eval.php(20): activate_plugin('esell/Esell.php')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eventbrite/even...')
+#2 /internal/eval.php(20): activate_plugin('eventbrite/even...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/esell/Esell.php on line 50
-[18-May-2025 05:52:07 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>learndash-easy-dash</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[18-May-2025 05:52:18 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>learndash-easy-dash</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[18-May-2025 05:52:28 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>learndash-easy-dash</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[18-May-2025 05:54:33 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('thissimyurl_Eas...')
-#2 /wordpress/wp-content/plugins/easy-scheduled-posts/easy-scheduled-posts.php(241): register_widget('thissimyurl_Eas...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): thissimyurl_EasyScheduledPosts->widget_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[18-May-2025 05:54:42 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('thissimyurl_Eas...')
-#2 /wordpress/wp-content/plugins/easy-scheduled-posts/easy-scheduled-posts.php(241): register_widget('thissimyurl_Eas...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): thissimyurl_EasyScheduledPosts->widget_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[18-May-2025 05:54:51 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('thissimyurl_Eas...')
-#2 /wordpress/wp-content/plugins/easy-scheduled-posts/easy-scheduled-posts.php(241): register_widget('thissimyurl_Eas...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): thissimyurl_EasyScheduledPosts->widget_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[18-May-2025 05:56:24 UTC] PHP Warning:  The magic method Events_Maker::__wakeup() must have public visibility in /wordpress/wp-content/plugins/events-maker/events-maker.php on line 151
-[18-May-2025 05:56:25 UTC] PHP Warning:  The magic method Events_Maker::__wakeup() must have public visibility in /wordpress/wp-content/plugins/events-maker/events-maker.php on line 151
-[18-May-2025 05:56:25 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>events-maker</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[18-May-2025 05:56:33 UTC] PHP Warning:  The magic method Events_Maker::__wakeup() must have public visibility in /wordpress/wp-content/plugins/events-maker/events-maker.php on line 151
-[18-May-2025 05:56:35 UTC] PHP Warning:  The magic method Events_Maker::__wakeup() must have public visibility in /wordpress/wp-content/plugins/events-maker/events-maker.php on line 151
-[18-May-2025 05:56:35 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>events-maker</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[18-May-2025 05:56:43 UTC] PHP Warning:  The magic method Events_Maker::__wakeup() must have public visibility in /wordpress/wp-content/plugins/events-maker/events-maker.php on line 151
-[18-May-2025 05:56:45 UTC] PHP Warning:  The magic method Events_Maker::__wakeup() must have public visibility in /wordpress/wp-content/plugins/events-maker/events-maker.php on line 151
-[18-May-2025 05:56:45 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>events-maker</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[18-May-2025 05:56:55 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/events-manager-tickets-payments/inc/models/HC_IO.php on line 82
-[18-May-2025 05:57:04 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/events-manager-tickets-payments/inc/models/HC_IO.php on line 82
+  thrown in /wordpress/wp-content/plugins/eventbrite/eventbrite.php on line 31
+[19-May-2025 19:06:58 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/events-manager-tickets-payments/inc/models/HC_IO.php on line 82
+[19-May-2025 19:07:06 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/events-manager-tickets-payments/inc/models/HC_IO.php on line 82
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
