@@ -2,13 +2,278 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [19-May-2025 10:37:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/reveal-modal/inc/metabox.php on line 10
-[19-May-2025 10:37:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/reveal-modal/inc/metabox.php on line 10
-[19-May-2025 10:37:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/reveal-modal/inc/metabox.php on line 10
-[19-May-2025 10:39:13 UTC] PHP Warning:  file_get_contents(/wordpress/.htaccess): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/rest-cache/includes/class.rewrite-rule.php on line 22
-[19-May-2025 10:39:13 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/rest-cache/includes/class.rewrite-rule.php on line 44
-[19-May-2025 10:39:13 UTC] PHP Warning:  file_get_contents(/wordpress/.htaccess): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/rest-cache/includes/class.rewrite-rule.php on line 61
-[19-May-2025 10:39:16 UTC] PHP Fatal error:  Uncaught GuzzleHttp\Exception\ClientException: Client error: `GET http://127.0.0.1:9405/wp-content/plugins/rest-cache/service/public/api/install` resulted in a `404 Not Found` response:
+Error: [21-May-2025 02:28:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `wp_posts`.`ID` , `wp_posts`.`post_title` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock' LIMIT 1 ) as `_stock` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock_status' LIMIT 1 ) as `_stock_status` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_regular_price' LIMIT 1 ) as `_regular_price` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_sale_price' LIMIT 1 ) as `_sale_price` , ( SELECT GROUP_CONCAT ( `CONCAT_WS` ( ':' , `t`.`term_id` , `t`.`name` ) ) FROM `wp_term_relationships` `tr` INNER JOIN `wp_term_taxonomy` `tt` ON `tr`.`term_taxonomy_id` = `tt`.`term_taxonomy_id` INNER JOIN `wp_terms` `t` ON `t`.`term_id` = `tt`.`term_id` WHERE `tr`.`object_id` = `wp_posts`.`ID` AND `tt`.`taxonomy` = 'product_type' LIMIT 1 ) as `product_type` From `wp_posts` WHERE `wp_posts`.`post_type` IN ( 'product' , 'product_variation' ) AND `wp_posts`.`post_status` IN ( 'publish' ) GROUP BY `wp_posts`.`ID` ORDER BY `wp_posts`.`post_date` ASC LIMIT 100 OFFSET 0 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such function: CONCAT_WS
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT wp_posts...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT wp_posts...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT wp_posts...')
+#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(310): wpdb->get_results('SELECT wp_posts...')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(342): StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data(NULL, 0, 0, Array, true)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced, StockSyncWithGoogleSheetForWooCommerce\Product->sync_all, StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products, StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data, StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-May-2025 02:28:17 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php:344
+Stack trace:
+#0 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(344): count('<div style="cle...')
+#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
+#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
+#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php on line 344
+[21-May-2025 02:28:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_ssgsw_products MODIFY COLUMN product_id INT NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(112): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
+#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#8 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_ssgsw_products MODIFY COLUMN product_id INT NOT NULL made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-May-2025 02:28:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_ssgsw_products ADD UNIQUE KEY (product_id);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_ssgsw_products, wp_ssgsw_products__(, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_ssgsw_products__(&quot; ON &quot;wp_ssgsw_products&quot; (); | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(119): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
+#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#8 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_ssgsw_products ADD UNIQUE KEY (product_id); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-May-2025 02:28:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param0  LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param1  LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param2  LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param3  LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(:param4  , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = :param5  LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN (:param6 ,:param7 ) AND wp_posts.post_status IN (:param8 ) GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 | parameters: _stock, _stock_status, _regular_price, _sale_price, :, product_type, product, product_variation, publish</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: CONCAT_WS.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT wp_posts...')
+#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(310): wpdb->get_results('SELECT wp_posts...')
+#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(342): StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data(NULL, 0, 0, Array, true)
+#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced, StockSyncWithGoogleSheetForWooCommerce\Product->sync_all, StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products, StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data, StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-May-2025 02:28:27 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php:344
+Stack trace:
+#0 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(344): count('<div style="cle...')
+#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
+#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
+#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php on line 344
+[21-May-2025 02:28:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_ssgsw_products MODIFY COLUMN product_id INT NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(112): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
+#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#8 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_ssgsw_products MODIFY COLUMN product_id INT NOT NULL made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-May-2025 02:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_ssgsw_products ADD UNIQUE KEY (product_id);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_ssgsw_products, wp_ssgsw_products__(, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_ssgsw_products__(&quot; ON &quot;wp_ssgsw_products&quot; (); | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(119): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
+#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#8 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_ssgsw_products ADD UNIQUE KEY (product_id); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-May-2025 02:28:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param0  LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param1  LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param2  LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param3  LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(:param4  , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = :param5  LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN (:param6 ,:param7 ) AND wp_posts.post_status IN (:param8 ) GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 | parameters: _stock, _stock_status, _regular_price, _sale_price, :, product_type, product, product_variation, publish</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: CONCAT_WS.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT wp_posts...')
+#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(310): wpdb->get_results('SELECT wp_posts...')
+#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(342): StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data(NULL, 0, 0, Array, true)
+#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced, StockSyncWithGoogleSheetForWooCommerce\Product->sync_all, StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products, StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data, StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-May-2025 02:28:37 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php:344
+Stack trace:
+#0 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(344): count('<div style="cle...')
+#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
+#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
+#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php on line 344
+[21-May-2025 02:32:19 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 15
+[21-May-2025 02:32:19 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 15
+[21-May-2025 02:32:19 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 38
+[21-May-2025 02:32:20 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 15
+[21-May-2025 02:32:20 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 15
+[21-May-2025 02:32:20 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 38
+[21-May-2025 02:32:29 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 15
+[21-May-2025 02:32:29 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 15
+[21-May-2025 02:32:29 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 38
+[21-May-2025 02:32:30 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 15
+[21-May-2025 02:32:30 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 15
+[21-May-2025 02:32:30 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 38
+[21-May-2025 02:32:39 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 15
+[21-May-2025 02:32:39 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 15
+[21-May-2025 02:32:39 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 38
+[21-May-2025 02:32:39 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 15
+[21-May-2025 02:32:39 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 15
+[21-May-2025 02:32:39 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $subgroup in /wordpress/wp-content/plugins/sv-woocommerce-order-export/lib/common/stats.inc.php on line 38
+[21-May-2025 02:35:25 UTC] PHP Warning:  file_get_contents(/wordpress/.htaccess): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/rest-cache/includes/class.rewrite-rule.php on line 22
+[21-May-2025 02:35:25 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/rest-cache/includes/class.rewrite-rule.php on line 44
+[21-May-2025 02:35:25 UTC] PHP Warning:  file_get_contents(/wordpress/.htaccess): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/rest-cache/includes/class.rewrite-rule.php on line 61
+[21-May-2025 02:35:28 UTC] PHP Fatal error:  Uncaught GuzzleHttp\Exception\ClientException: Client error: `GET http://127.0.0.1:9407/wp-content/plugins/rest-cache/service/public/api/install` resulted in a `404 Not Found` response:
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -34,7 +299,7 @@ Stack trace:
 #15 /internal/eval.php(20): activate_plugin('rest-cache/rest...')
 #16 {main}
   thrown in /wordpress/wp-content/plugins/rest-cache/vendor/guzzlehttp/guzzle/src/Exception/RequestException.php on line 111
-[19-May-2025 10:39:41 UTC] PHP Fatal error:  Uncaught GuzzleHttp\Exception\ClientException: Client error: `GET http://127.0.0.1:9405/wp-content/plugins/rest-cache/service/public/api/install` resulted in a `404 Not Found` response:
+[21-May-2025 02:35:54 UTC] PHP Fatal error:  Uncaught GuzzleHttp\Exception\ClientException: Client error: `GET http://127.0.0.1:9407/wp-content/plugins/rest-cache/service/public/api/install` resulted in a `404 Not Found` response:
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -60,7 +325,7 @@ Stack trace:
 #15 /internal/eval.php(20): activate_plugin('rest-cache/rest...')
 #16 {main}
   thrown in /wordpress/wp-content/plugins/rest-cache/vendor/guzzlehttp/guzzle/src/Exception/RequestException.php on line 111
-[19-May-2025 10:40:06 UTC] PHP Fatal error:  Uncaught GuzzleHttp\Exception\ClientException: Client error: `GET http://127.0.0.1:9405/wp-content/plugins/rest-cache/service/public/api/install` resulted in a `404 Not Found` response:
+[21-May-2025 02:36:20 UTC] PHP Fatal error:  Uncaught GuzzleHttp\Exception\ClientException: Client error: `GET http://127.0.0.1:9407/wp-content/plugins/rest-cache/service/public/api/install` resulted in a `404 Not Found` response:
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -110,7 +375,7 @@ Stack trace:
         headers: {
           'x-powered-by': [ 'PHP/8.0.30-dev' ],
           'set-cookie': [
-            'rest-cache-admin-key=bf7f0cad64105d2eed0230d3f863fedfaf7ce6e54b5e95aa9033ccf05a3eb7f87cf14052fe4137ba2d436e7d06454e9b4d43258cc734920bfe458317a68e5cd8; expires=Tue, 20-May-2025 10:40:04 GMT; Max-Age=86400; path=/'
+            'rest-cache-admin-key=3afeaec02d4f4638e28acfd34c87def3bfa713d83b7fb4d79cca2e132f65d9943ddd95d5fc861e40c64d725c3c698fca3c426b2bfbcc8e7c0c51ba4f34f1f251; expires=Thu, 22-May-2025 02:36:17 GMT; Max-Age=86400; path=/'
           ],
           'content-type': [ 'text/html; charset=UTF-8' ]
         },
