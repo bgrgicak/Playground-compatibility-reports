@@ -2,758 +2,615 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [21-May-2025 09:53:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [22-May-2025 10:54:22 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/ultimate-browser-specific-css/ultimate-browser-specific-css.php on line 105
+[22-May-2025 10:54:32 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/ultimate-browser-specific-css/ultimate-browser-specific-css.php on line 105
+[22-May-2025 10:54:41 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/ultimate-browser-specific-css/ultimate-browser-specific-css.php on line 105
+[22-May-2025 10:54:51 UTC] PHP Warning:  Undefined variable $opt in /wordpress/wp-content/plugins/visitoraudit/visitor-audit.setup.php on line 65
+[22-May-2025 10:54:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>RENAME TABLE wp_uamazon_cache TO wp_ucontext4a_cache</p>
+<p>INSERT INTO `wp_visitor_audit_history` (`visitor_audit_id`, `visitor_audit_history_url`, `visitor_audit_history_status`, `visitor_audit_history_benchmark`) VALUES ('1', '', '200', '2.5500011444092')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_visitor_audit_history</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_visitor_audit_history</li>
+<li>Executing: INSERT INTO `wp_visitor_audit_history` (`visitor_audit_history_id`, `visitor_audit_id`, `visitor_audit_history_timestamp`, `visitor_audit_history_url`, `visitor_audit_history_status`, `visitor_audit_history_analyzed`, `visitor_audit_history_benchmark`) SELECT NULL, `column1`, 'CURRENT_TIMESTAMP', `column2`, `column3`, '0', `column4` FROM (VALUES ( '1' , '' , '200' , '2.5500011444092' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "renameTableStatement"
+SQLSTATE[23000]: Integrity constraint violation: 19 cannot store REAL value in INTEGER column wp_visitor_audit_history.visitor_audit_history_benchmark
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(916): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('RENAME TABLE wp...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('RENAME TABLE wp...')
-#4 /wordpress/wp-content/plugins/ucontext-for-amazon/app/integration/amazon/activate.php(5): WP_SQLite_DB->query('RENAME TABLE wp...')
-#5 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(34): include('/wordpress/wp-c...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_visitor_audi...', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/visitoraudit/visitor-audit.class.php(272): wpdb->insert('wp_visitor_audi...', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(322): Visitor_Audit\Visitor_Audit->log()
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#10 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
+#9 /wordpress/wp-includes/load.php(1304): do_action('shutdown')
+#10 [internal function]: shutdown_action_hook()
 #11 {main}</pre>
- for query RENAME TABLE wp_uamazon_cache TO wp_ucontext4a_cache made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, include('/plugins/ucontext-for-amazon/app/integration/amazon/activate.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:53:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_visitor_audit_history` (`visitor_audit_id`, `visitor_audit_history_url`, `visitor_audit_history_status`, `visitor_audit_history_benchmark`) VALUES ('1', '', '200', '2.5500011444092') made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, Visitor_Audit\Visitor_Audit->log, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:54:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>RENAME TABLE wp_uamazon_click_log TO wp_ucontext4a_click_log</p>
+<p>INSERT INTO `wp_visitor_audit_history` (`visitor_audit_id`, `visitor_audit_history_url`, `visitor_audit_history_status`, `visitor_audit_history_benchmark`) VALUES ('1', '', '200', '3.4200000762939')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_visitor_audit_history</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_visitor_audit_history</li>
+<li>Executing: INSERT INTO `wp_visitor_audit_history` (`visitor_audit_history_id`, `visitor_audit_id`, `visitor_audit_history_timestamp`, `visitor_audit_history_url`, `visitor_audit_history_status`, `visitor_audit_history_analyzed`, `visitor_audit_history_benchmark`) SELECT NULL, `column1`, 'CURRENT_TIMESTAMP', `column2`, `column3`, '0', `column4` FROM (VALUES ( '1' , '' , '200' , '3.4200000762939' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "renameTableStatement"
+SQLSTATE[23000]: Integrity constraint violation: 19 cannot store REAL value in INTEGER column wp_visitor_audit_history.visitor_audit_history_benchmark
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(916): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('RENAME TABLE wp...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('RENAME TABLE wp...')
-#4 /wordpress/wp-content/plugins/ucontext-for-amazon/app/integration/amazon/activate.php(6): WP_SQLite_DB->query('RENAME TABLE wp...')
-#5 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(34): include('/wordpress/wp-c...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_visitor_audi...', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/visitoraudit/visitor-audit.class.php(272): wpdb->insert('wp_visitor_audi...', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(322): Visitor_Audit\Visitor_Audit->log()
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#10 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
+#9 /wordpress/wp-includes/load.php(1304): do_action('shutdown')
+#10 [internal function]: shutdown_action_hook()
 #11 {main}</pre>
- for query RENAME TABLE wp_uamazon_click_log TO wp_ucontext4a_click_log made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, include('/plugins/ucontext-for-amazon/app/integration/amazon/activate.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:53:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_visitor_audit_history` (`visitor_audit_id`, `visitor_audit_history_url`, `visitor_audit_history_status`, `visitor_audit_history_benchmark`) VALUES ('1', '', '200', '3.4200000762939') made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, Visitor_Audit\Visitor_Audit->log, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:55:01 UTC] PHP Warning:  Undefined variable $opt in /wordpress/wp-content/plugins/visitoraudit/visitor-audit.setup.php on line 65
+[22-May-2025 10:55:10 UTC] PHP Warning:  Undefined variable $opt in /wordpress/wp-content/plugins/visitoraudit/visitor-audit.setup.php on line 65
+[22-May-2025 10:55:56 UTC] Sending first visit request...
+[22-May-2025 10:56:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>RENAME TABLE wp_uamazon_keyword TO wp_ucontext4a_keyword</p>
+<p>SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "renameTableStatement"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(916): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('RENAME TABLE wp...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('RENAME TABLE wp...')
-#4 /wordpress/wp-content/plugins/ucontext-for-amazon/app/integration/amazon/activate.php(7): WP_SQLite_DB->query('RENAME TABLE wp...')
-#5 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(34): include('/wordpress/wp-c...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#10 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#11 {main}</pre>
- for query RENAME TABLE wp_uamazon_keyword TO wp_ucontext4a_keyword made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, include('/plugins/ucontext-for-amazon/app/integration/amazon/activate.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:53:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>RENAME TABLE wp_uamazon_spider_agent TO wp_ucontext4a_spider_agent</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "renameTableStatement"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(916): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('RENAME TABLE wp...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('RENAME TABLE wp...')
-#4 /wordpress/wp-content/plugins/ucontext-for-amazon/app/integration/amazon/activate.php(8): WP_SQLite_DB->query('RENAME TABLE wp...')
-#5 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(34): include('/wordpress/wp-c...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#10 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#11 {main}</pre>
- for query RENAME TABLE wp_uamazon_spider_agent TO wp_ucontext4a_spider_agent made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, include('/plugins/ucontext-for-amazon/app/integration/amazon/activate.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>RENAME TABLE wp_uamazon_cache TO wp_ucontext4a_cache</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: ahc_settings.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/integration/amazon/activate.php(5): WP_SQLite_DB->query('RENAME TABLE wp...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(34): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT set_hits...')
+#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(422): wpdb->get_results('SELECT set_hits...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/init.php(35): ahcfree_get_save_settings()
+#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php(17): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('visitors-traffi...')
+#7 /internal/eval.php(20): activate_plugin('visitors-traffi...')
 #8 {main}</pre>
- for query RENAME TABLE wp_uamazon_cache TO wp_ucontext4a_cache made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, include('/plugins/ucontext-for-amazon/app/integration/amazon/activate.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), require_once('/plugins/visitors-traffic-real-time-statistics/init.php'), ahcfree_get_save_settings, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>RENAME TABLE wp_uamazon_click_log TO wp_ucontext4a_click_log</p>
+<p>SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/integration/amazon/activate.php(6): WP_SQLite_DB->query('RENAME TABLE wp...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(34): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query RENAME TABLE wp_uamazon_click_log TO wp_ucontext4a_click_log made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, include('/plugins/ucontext-for-amazon/app/integration/amazon/activate.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COUNT(  ...')
+#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(550): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(628): ahcfree_getCountriesCount(1)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#9 {main}</pre>
+ for query SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getCountriesCount, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>RENAME TABLE wp_uamazon_keyword TO wp_ucontext4a_keyword</p>
+<p>INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES ('Anonymous Proxy', 'A1', NULL, NULL, 1)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES (:param0 , :param1 , NULL, NULL, 1) | parameters: Anonymous Proxy, A1</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_countries has no column named site_id.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/integration/amazon/activate.php(7): WP_SQLite_DB->query('RENAME TABLE wp...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(34): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query RENAME TABLE wp_uamazon_keyword TO wp_ucontext4a_keyword made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, include('/plugins/ucontext-for-amazon/app/integration/amazon/activate.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_countries', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1324): wpdb->insert('ahc_countries', Array, Array)
+#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(629): ahcfree_insert_countries_into_table(Array, Array, 1)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#10 {main}</pre>
+ for query INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES ('Anonymous Proxy', 'A1', NULL, NULL, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_countries_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>RENAME TABLE wp_uamazon_spider_agent TO wp_ucontext4a_spider_agent</p>
+<p>SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/integration/amazon/activate.php(8): WP_SQLite_DB->query('RENAME TABLE wp...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(34): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query RENAME TABLE wp_uamazon_spider_agent TO wp_ucontext4a_spider_agent made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, include('/plugins/ucontext-for-amazon/app/integration/amazon/activate.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COUNT(  ...')
+#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(251): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(631): ahcfree_getVisitsTime(1)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#9 {main}</pre>
+ for query SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getVisitsTime, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:06 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 253
+[22-May-2025 10:56:06 UTC] PHP Warning:  Attempt to read property "cnt" on null in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 253
+[22-May-2025 10:56:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("<html lang=\"es-PE\">")</p>
+<p>INSERT INTO `ahc_visits_time` (`vtm_time_from`, `vtm_time_to`, `vtm_visitors`, `site_id`) VALUES ('00:00:00', '00:59:59', 0, 1)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;&lt;html lang=\&quot;es-PE\&quot;&gt;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO `ahc_visits_time` (`vtm_time_from`, `vtm_time_to`, `vtm_visitors`, `site_id`) VALUES (:param0 , :param1 , 0, 1) | parameters: 00:00:00, 00:59:59</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "es": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_visits_time has no column named site_id.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("<html lang=\"es-PE\">") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_visits_time', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1476): wpdb->insert('ahc_visits_time', Array, Array)
+#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(632): ahcfree_insert_visit_times_into_table(Array, 1)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#10 {main}</pre>
+ for query INSERT INTO `ahc_visits_time` (`vtm_time_from`, `vtm_time_to`, `vtm_visitors`, `site_id`) VALUES ('00:00:00', '00:59:59', 0, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_visit_times_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<meta charset=\"utf-8\">")</p>
+<p>SELECT COUNT(  `bsr_id` ) cnt FROM ahc_browsers  where site_id = 1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;	&lt;meta charset=\&quot;utf-8\&quot;&gt;&quot;) | (no parameters)</li>
+<li>Executing: SELECT COUNT(  `bsr_id` ) cnt FROM ahc_browsers  where site_id = 1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "utf": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<meta charset=\"utf-8\">") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COUNT(  ...')
+#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(569): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(634): ahcfree_getBrowsersCount(1)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#9 {main}</pre>
+ for query SELECT COUNT(  `bsr_id` ) cnt FROM ahc_browsers  where site_id = 1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getBrowsersCount, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:06 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 571
+[22-May-2025 10:56:06 UTC] PHP Warning:  Attempt to read property "cnt" on null in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 571
+[22-May-2025 10:56:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<meta name=\"viewport\" content=\"width=device-width")</p>
+<p>INSERT INTO `ahc_browsers` (`bsr_id`, `bsr_name`, `bsr_icon`, `site_id`) VALUES (1, 'IE', 'ie.png', 1)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;	&lt;meta name=\&quot;viewport\&quot; content=\&quot;width=device-width&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO `ahc_browsers` (`bsr_id`, `bsr_name`, `bsr_icon`, `site_id`) VALUES (1, :param0 , :param1 , 1) | parameters: IE, ie.png</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "viewport": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_browsers has no column named site_id.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<meta name=\"viewport\" content=\"width=device-width") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_browsers', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1441): wpdb->insert('ahc_browsers', Array, Array)
+#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(635): ahcfree_insert_browsers_into_table(Array, 1)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#10 {main}</pre>
+ for query INSERT INTO `ahc_browsers` (`bsr_id`, `bsr_name`, `bsr_icon`, `site_id`) VALUES (1, 'IE', 'ie.png', 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_browsers_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<meta name=\"generator\" content=\"frappe\">")</p>
+<p>INSERT INTO `ahc_search_engine_crawlers` (`bot_name`, `srh_id`, `site_id`) VALUES ('Googlebot', 1, 1)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;	&lt;meta name=\&quot;generator\&quot; content=\&quot;frappe\&quot;&gt;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO `ahc_search_engine_crawlers` (`bot_name`, `srh_id`, `site_id`) VALUES (:param0 , 1, 1) | parameters: Googlebot</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "generator": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_search_engine_crawlers has no column named site_id.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<meta name=\"generator\" content=\"frappe\">") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_search_engi...', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1402): wpdb->insert('ahc_search_engi...', Array, Array)
+#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(640): ahcfree_insert_search_engines_into_table(Array)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#10 {main}</pre>
+ for query INSERT INTO `ahc_search_engine_crawlers` (`bot_name`, `srh_id`, `site_id`) VALUES ('Googlebot', 1, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_search_engines_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:07 UTC] Sending first visit request...
+[22-May-2025 10:56:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		<meta name=\"title\" content=\"404\"><meta name=\"language\" content=\"es-PE\"><meta property=\"og:type\"  content=\"article\"><meta property=\"og:title\"  content=\"404\"><meta name=\"twitter:title\" content=\"404\"><meta name=\"twitter:card\" content=\"summary\">")</p>
+<p>SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;		&lt;meta name=\&quot;title\&quot; content=\&quot;404\&quot;&gt;&lt;meta name=\&quot;language\&quot; content=\&quot;es-PE\&quot;&gt;&lt;meta property=\&quot;og:type\&quot;  content=\&quot;article\&quot;&gt;&lt;meta property=\&quot;og:title\&quot;  content=\&quot;404\&quot;&gt;&lt;meta name=\&quot;twitter:title\&quot; content=\&quot;404\&quot;&gt;&lt;meta name=\&quot;twitter:card\&quot; content=\&quot;summary\&quot;&gt;&quot;) | (no parameters)</li>
+<li>Executing: SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "title": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: ahc_settings.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT set_hits...')
+#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(422): wpdb->get_results('SELECT set_hits...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/init.php(35): ahcfree_get_save_settings()
+#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php(17): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('visitors-traffi...')
+#7 /internal/eval.php(20): activate_plugin('visitors-traffi...')
 #8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		<meta name=\"title\" content=\"404\"><meta name=\"language\" content=\"es-PE\"><meta property=\"og:type\"  content=\"article\"><meta property=\"og:title\"  content=\"404\"><meta name=\"twitter:title\" content=\"404\"><meta name=\"twitter:card\" content=\"summary\">") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), require_once('/plugins/visitors-traffic-real-time-statistics/init.php'), ahcfree_get_save_settings, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		rel=\"shortcut icon\"")</p>
+<p>SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;		rel=\&quot;shortcut icon\&quot;&quot;) | (no parameters)</li>
+<li>Executing: SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "shortcut": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		rel=\"shortcut icon\"") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COUNT(  ...')
+#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(550): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(628): ahcfree_getCountriesCount(1)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#9 {main}</pre>
+ for query SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getCountriesCount, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		href=\"/assets/erpnext/images/erpnext-favicon.svg\"")</p>
+<p>INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES ('Anonymous Proxy', 'A1', NULL, NULL, 1)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;		href=\&quot;/assets/erpnext/images/erpnext-favicon.svg\&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES (:param0 , :param1 , NULL, NULL, 1) | parameters: Anonymous Proxy, A1</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 unrecognized token: "\".
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_countries has no column named site_id.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		href=\"/assets/erpnext/images/erpnext-favicon.svg\"") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_countries', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1324): wpdb->insert('ahc_countries', Array, Array)
+#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(629): ahcfree_insert_countries_into_table(Array, Array, 1)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#10 {main}</pre>
+ for query INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES ('Anonymous Proxy', 'A1', NULL, NULL, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_countries_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		type=\"image/x-icon\"")</p>
+<p>SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;		type=\&quot;image/x-icon\&quot;&quot;) | (no parameters)</li>
+<li>Executing: SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "image": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		type=\"image/x-icon\"") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COUNT(  ...')
+#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(251): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(631): ahcfree_getVisitsTime(1)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#9 {main}</pre>
+ for query SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getVisitsTime, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:17 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 253
+[22-May-2025 10:56:17 UTC] PHP Warning:  Attempt to read property "cnt" on null in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 253
+[22-May-2025 10:56:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<link type=\"text/css\" rel=\"stylesheet\" href=\"/assets/frappe/dist/css/website.bundle.O6CJJQIW.css\">")</p>
+<p>INSERT INTO `ahc_visits_time` (`vtm_time_from`, `vtm_time_to`, `vtm_visitors`, `site_id`) VALUES ('00:00:00', '00:59:59', 0, 1)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;	&lt;link type=\&quot;text/css\&quot; rel=\&quot;stylesheet\&quot; href=\&quot;/assets/frappe/dist/css/website.bundle.O6CJJQIW.css\&quot;&gt;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO `ahc_visits_time` (`vtm_time_from`, `vtm_time_to`, `vtm_visitors`, `site_id`) VALUES (:param0 , :param1 , 0, 1) | parameters: 00:00:00, 00:59:59</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "text": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_visits_time has no column named site_id.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<link type=\"text/css\" rel=\"stylesheet\" href=\"/assets/frappe/dist/css/website.bundle.O6CJJQIW.css\">") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_visits_time', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1476): wpdb->insert('ahc_visits_time', Array, Array)
+#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(632): ahcfree_insert_visit_times_into_table(Array, 1)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#10 {main}</pre>
+ for query INSERT INTO `ahc_visits_time` (`vtm_time_from`, `vtm_time_to`, `vtm_visitors`, `site_id`) VALUES ('00:00:00', '00:59:59', 0, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_visit_times_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("<link type=\"text/css\" rel=\"stylesheet\" href=\"/assets/erpnext/dist/css/erpnext-web.bundle.SG3UJACM.css\">")</p>
+<p>SELECT COUNT(  `bsr_id` ) cnt FROM ahc_browsers  where site_id = 1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;&lt;link type=\&quot;text/css\&quot; rel=\&quot;stylesheet\&quot; href=\&quot;/assets/erpnext/dist/css/erpnext-web.bundle.SG3UJACM.css\&quot;&gt;&quot;) | (no parameters)</li>
+<li>Executing: SELECT COUNT(  `bsr_id` ) cnt FROM ahc_browsers  where site_id = 1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "text": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("<link type=\"text/css\" rel=\"stylesheet\" href=\"/assets/erpnext/dist/css/erpnext-web.bundle.SG3UJACM.css\">") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COUNT(  ...')
+#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(569): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(634): ahcfree_getBrowsersCount(1)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#9 {main}</pre>
+ for query SELECT COUNT(  `bsr_id` ) cnt FROM ahc_browsers  where site_id = 1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getBrowsersCount, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:17 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 571
+[22-May-2025 10:56:17 UTC] PHP Warning:  Attempt to read property "cnt" on null in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 571
+[22-May-2025 10:56:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("<body frappe-session-status=\"logged-out\" data-path=\"404\" class=\"\">")</p>
+<p>INSERT INTO `ahc_browsers` (`bsr_id`, `bsr_name`, `bsr_icon`, `site_id`) VALUES (1, 'IE', 'ie.png', 1)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;&lt;body frappe-session-status=\&quot;logged-out\&quot; data-path=\&quot;404\&quot; class=\&quot;\&quot;&gt;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO `ahc_browsers` (`bsr_id`, `bsr_name`, `bsr_icon`, `site_id`) VALUES (1, :param0 , :param1 , 1) | parameters: IE, ie.png</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "logged": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_browsers has no column named site_id.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("<body frappe-session-status=\"logged-out\" data-path=\"404\" class=\"\">") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_browsers', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1441): wpdb->insert('ahc_browsers', Array, Array)
+#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(635): ahcfree_insert_browsers_into_table(Array, 1)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#10 {main}</pre>
+ for query INSERT INTO `ahc_browsers` (`bsr_id`, `bsr_name`, `bsr_icon`, `site_id`) VALUES (1, 'IE', 'ie.png', 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_browsers_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<svg id=\"frappe-symbols\" aria-hidden=\"true\" style=\"position: absolute; width: 0; height: 0; overflow: hidden;\" class=\"d-block\" xmlns=\"http://www.w3.org/2000/svg\">")</p>
+<p>INSERT INTO `ahc_search_engine_crawlers` (`bot_name`, `srh_id`, `site_id`) VALUES ('Googlebot', 1, 1)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;	&lt;svg id=\&quot;frappe-symbols\&quot; aria-hidden=\&quot;true\&quot; style=\&quot;position: absolute; width: 0; height: 0; overflow: hidden;\&quot; class=\&quot;d-block\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot;&gt;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO `ahc_search_engine_crawlers` (`bot_name`, `srh_id`, `site_id`) VALUES (:param0 , 1, 1) | parameters: Googlebot</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "frappe": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_search_engine_crawlers has no column named site_id.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<svg id=\"frappe-symbols\" aria-hidden=\"true\" style=\"position: absolute; width: 0; height: 0; overflow: hidden;\" class=\"d-block\" xmlns=\"http://www.w3.org/2000/svg\">") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<symbol viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\" id=\"icon-up-line\">")</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;	&lt;symbol viewBox=\&quot;0 0 16 16\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot; id=\&quot;icon-up-line\&quot;&gt;&quot;) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "0": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<symbol viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\" id=\"icon-up-line\">") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		<path d=\"M13 10.5L8 5.5L3 10.5\" stroke=\"var(--icon-stroke)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>")</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;		&lt;path d=\&quot;M13 10.5L8 5.5L3 10.5\&quot; stroke=\&quot;var(--icon-stroke)\&quot; stroke-linecap=\&quot;round\&quot; stroke-linejoin=\&quot;round\&quot;/&gt;&quot;) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "M13": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		<path d=\"M13 10.5L8 5.5L3 10.5\" stroke=\"var(--icon-stroke)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<symbol viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\" id=\"icon-small-up\">")</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;	&lt;symbol viewBox=\&quot;0 0 12 12\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot; id=\&quot;icon-small-up\&quot;&gt;&quot;) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "0": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<symbol viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\" id=\"icon-small-up\">") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		<path d=\"M9.5 7.75L6 4.25L2.5 7.75\" stroke=\"var(--icon-stroke)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>")</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;		&lt;path d=\&quot;M9.5 7.75L6 4.25L2.5 7.75\&quot; stroke=\&quot;var(--icon-stroke)\&quot; stroke-linecap=\&quot;round\&quot; stroke-linejoin=\&quot;round\&quot;/&gt;&quot;) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "M9": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		<path d=\"M9.5 7.75L6 4.25L2.5 7.75\" stroke=\"var(--icon-stroke)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<symbol viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\" id=\"icon-down\">")</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;	&lt;symbol viewBox=\&quot;0 0 16 16\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot; id=\&quot;icon-down\&quot;&gt;&quot;) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "0": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<symbol viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\" id=\"icon-down\">") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		<path d=\"M3 5.5l5 5 5-5\" stroke=\"var(--icon-stroke)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>")</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;		&lt;path d=\&quot;M3 5.5l5 5 5-5\&quot; stroke=\&quot;var(--icon-stroke)\&quot; stroke-linecap=\&quot;round\&quot; stroke-linejoin=\&quot;round\&quot;&gt;&lt;/path&gt;&quot;) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "M3": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		<path d=\"M3 5.5l5 5 5-5\" stroke=\"var(--icon-stroke)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<symbol viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\" id=\"icon-small-down\">")</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;	&lt;symbol viewBox=\&quot;0 0 12 12\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot; id=\&quot;icon-small-down\&quot;&gt;&quot;) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "0": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<symbol viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\" id=\"icon-small-down\">") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		<path d=\"M2.625 4.375L6 7.75l3.375-3.375\" stroke=\"var(--icon-stroke)\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>")</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;		&lt;path d=\&quot;M2.625 4.375L6 7.75l3.375-3.375\&quot; stroke=\&quot;var(--icon-stroke)\&quot; stroke-miterlimit=\&quot;10\&quot; stroke-linecap=\&quot;round\&quot; stroke-linejoin=\&quot;round\&quot;&gt;&lt;/path&gt;&quot;) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "M2": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		<path d=\"M2.625 4.375L6 7.75l3.375-3.375\" stroke=\"var(--icon-stroke)\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<symbol viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\" id=\"icon-right\">")</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;	&lt;symbol viewBox=\&quot;0 0 12 12\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot; id=\&quot;icon-right\&quot;&gt;&quot;) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "0": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("	<symbol viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\" id=\"icon-right\">") made by activate_plugin, do_action('activate_ucontext-for-amazon/ucontext_for_amazon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ucontext4a_activatePlugin, Ucontext4a_Cron::updateAgents, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 09:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		<path d=\"M4.25 9.5L7.75 6L4.25 2.5\" stroke=\"var(--icon-stroke)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>")</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES (&quot;		&lt;path d=\&quot;M4.25 9.5L7.75 6L4.25 2.5\&quot; stroke=\&quot;var(--icon-stroke)\&quot; stroke-linecap=\&quot;round\&quot; stroke-linejoin=\&quot;round\&quot;/&gt;&quot;) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "M4": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ucontext-for-amazon/app/Ucontext4a_Cron.php(55): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/ucontext-for-amazon/ucontext_for_amazon.php(41): Ucontext4a_Cron::updateAgents()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ucontext4a_activatePlugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_uconte...', false)
-#7 /internal/eval.php(20): activate_plugin('ucontext-for-am...')
-#8 {main}</pre>
- for query INSERT INTO wp_ucontext4a_spider_agent (sig) VALUES ("		<path d=\"M4.25 9.5L7.75 6L4.25 2.5\" stroke=\"var(--icon-stroke)\" stroke-linecap=\"round\" stroke-linejo
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_search_engi...', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1402): wpdb->insert('ahc_search_engi...', Array, Array)
+#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(640): ahcfree_insert_search_engines_into_table(Array)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#10 {main}</pre>
+ for query INSERT INTO `ahc_search_engine_crawlers` (`bot_name`, `srh_id`, `site_id`) VALUES ('Googlebot', 1, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_search_engines_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 10:56:18 UTC] Sending first visit request...
+[22-May-2025 10:57:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/visual-editor-font-size/visual-editor-font-size.php:18
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): WriteFieldFontSize->init('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/visual-editor-font-size/visual-editor-font-size.php on line 18
+[22-May-2025 10:58:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/visual-editor-font-size/visual-editor-font-size.php:18
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): WriteFieldFontSize->init('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/visual-editor-font-size/visual-editor-font-size.php on line 18
+[22-May-2025 10:58:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/visual-editor-font-size/visual-editor-font-size.php:18
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): WriteFieldFontSize->init('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/visual-editor-font-size/visual-editor-font-size.php on line 18
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"ultimate-woo-kit"},"options":{"activate":true}}) : Could not download "https://downloads.wordpress.org/plugin/ultimate-woo-kit.latest-stable.zip".
+  				Check if the URL is correct and the server is reachable.
+  				If it is reachable, the server might be blocking the request.
+  				Check the browser console and network tabs for more information.
+  
+  				## Does the console show the error "No 'Access-Control-Allow-Origin' header"?
+  
+  				This means the server that hosts your file does not allow requests from other sites
+  				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
+  				cross-origin file downloads. Learn more about CORS at
+  				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
+  
+  				If your file is on GitHub, load it from "raw.githubusercontent.com".
+  				Here's how to do that:
+  
+  				1. Start with the original GitHub URL of the file. For example:
+  				https://github.com/username/repository/blob/branch/filename.
+  				2. Replace "github.com" with "raw.githubusercontent.com".
+  				3. Remove the "/blob/" part of the URL.
+  
+  				The resulting URL should look like this:
+  				https://raw.githubusercontent.com/username/repository/branch/filename
+  
+  				Error:
+  				Error: Could not download "https://downloads.wordpress.org/plugin/ultimate-woo-kit.latest-stable.zip"
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+      at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+    [cause]: Error: Could not download "https://downloads.wordpress.org/plugin/ultimate-woo-kit.latest-stable.zip".
+    				Check if the URL is correct and the server is reachable.
+    				If it is reachable, the server might be blocking the request.
+    				Check the browser console and network tabs for more information.
+    
+    				## Does the console show the error "No 'Access-Control-Allow-Origin' header"?
+    
+    				This means the server that hosts your file does not allow requests from other sites
+    				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
+    				cross-origin file downloads. Learn more about CORS at
+    				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
+    
+    				If your file is on GitHub, load it from "raw.githubusercontent.com".
+    				Here's how to do that:
+    
+    				1. Start with the original GitHub URL of the file. For example:
+    				https://github.com/username/repository/blob/branch/filename.
+    				2. Replace "github.com" with "raw.githubusercontent.com".
+    				3. Remove the "/blob/" part of the URL.
+    
+    				The resulting URL should look like this:
+    				https://raw.githubusercontent.com/username/repository/branch/filename
+    
+    				Error:
+    				Error: Could not download "https://downloads.wordpress.org/plugin/ultimate-woo-kit.latest-stable.zip"
+        at Ct.resolve (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1472:13)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async _.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/util/index.js:45:14)
+  }
+}
+
 Node.js v23.11.0
