@@ -2,223 +2,185 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [20-May-2025 15:33:50 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 108
-[20-May-2025 15:33:50 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 108
-[20-May-2025 15:33:50 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 127
-[20-May-2025 15:33:50 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 127
-[20-May-2025 15:33:50 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 146
-[20-May-2025 15:33:50 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 146
-[20-May-2025 15:33:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [22-May-2025 06:38:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_feature_request (
-			id mediumint(9) NOT NULL AUTO_INCREMENT,
-			postid bigint(20) NOT NULL,
-			time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-			ip varchar(20) NOT NULL,
-			userid varchar(20) NOT NULL,
-			email varchar(100) NOT NULL,
-			groups varchar(100) DEFAULT 'none group' NOT NULL,
-			type varchar(20) DEFAULT 'vote' NOT NULL,
-			votes smallint(5) DEFAULT '1' NOT NULL,
-			UNIQUE KEY id (id)
-		)</p>
+<p>SELECT * FROM `wp_madeit_forms`</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_madeit_forms` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 no such table: wp_madeit_forms
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#4 /wordpress/wp-content/plugins/feature-request/includes/class-axiom-table.php(266): dbDelta(Array, true)
-#5 /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php(56): Axiom_Table->dbDelta('CREATE TABLE wp...')
-#6 /wordpress/wp-content/plugins/feature-request/public/class-feature-request.php(125): Avfr_DB->single_activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Feature_Request::activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_featur...', false)
-#11 /internal/eval.php(20): activate_plugin('feature-request...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM `...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM `...')
+#4 /wordpress/wp-content/plugins/forms-by-made-it/DataInit.php(12): wpdb->get_results('SELECT * FROM `...', 'ARRAY_A')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): DataInit->dbMigrate('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #12 {main}</pre>
- for query CREATE TABLE wp_feature_request (
-			id mediumint(9) NOT NULL AUTO_INCREMENT,
-			postid bigint(20) NOT NULL,
-			time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-			ip varchar(20) NOT NULL,
-			userid varchar(20) NOT NULL,
-			email varchar(100) NOT NULL,
-			groups varchar(100) DEFAULT 'none group' NOT NULL,
-			type varchar(20) DEFAULT 'vote' NOT NULL,
-			votes smallint(5) DEFAULT '1' NOT NULL,
-			UNIQUE KEY id (id)
-		) made by activate_plugin, do_action('activate_feature-request/feature-request.php'), WP_Hook->do_action, WP_Hook->apply_filters, Feature_Request::activate, Avfr_DB->single_activate, Axiom_Table->dbDelta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[20-May-2025 15:33:51 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 108
-[20-May-2025 15:33:51 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 108
-[20-May-2025 15:33:51 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 127
-[20-May-2025 15:33:51 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 127
-[20-May-2025 15:33:51 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 146
-[20-May-2025 15:33:51 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 146
-[20-May-2025 15:34:02 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 108
-[20-May-2025 15:34:02 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 108
-[20-May-2025 15:34:02 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 127
-[20-May-2025 15:34:02 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 127
-[20-May-2025 15:34:02 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 146
-[20-May-2025 15:34:02 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 146
-[20-May-2025 15:34:03 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 108
-[20-May-2025 15:34:03 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 108
-[20-May-2025 15:34:03 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 127
-[20-May-2025 15:34:03 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 127
-[20-May-2025 15:34:03 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 146
-[20-May-2025 15:34:03 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 146
-[20-May-2025 15:34:14 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 108
-[20-May-2025 15:34:14 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 108
-[20-May-2025 15:34:14 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 127
-[20-May-2025 15:34:14 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 127
-[20-May-2025 15:34:14 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 146
-[20-May-2025 15:34:14 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 146
-[20-May-2025 15:34:15 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 108
-[20-May-2025 15:34:15 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 108
-[20-May-2025 15:34:15 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 127
-[20-May-2025 15:34:15 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 127
-[20-May-2025 15:34:15 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 146
-[20-May-2025 15:34:15 UTC] PHP Deprecated:  Required parameter $voted_group follows optional parameter $userid in /wordpress/wp-content/plugins/feature-request/includes/class-avfr-db.php on line 146
-[20-May-2025 15:34:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/features-by-woothemes/classes/class-woothemes-widget-features.php:308
-Stack trace:
-#0 /wordpress/wp-content/plugins/features-by-woothemes/woothemes-features.php(20): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('features-by-woo...')
-#3 /internal/eval.php(20): activate_plugin('features-by-woo...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/features-by-woothemes/classes/class-woothemes-widget-features.php on line 308
-[20-May-2025 15:35:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/features-by-woothemes/classes/class-woothemes-widget-features.php:308
-Stack trace:
-#0 /wordpress/wp-content/plugins/features-by-woothemes/woothemes-features.php(20): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('features-by-woo...')
-#3 /internal/eval.php(20): activate_plugin('features-by-woo...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/features-by-woothemes/classes/class-woothemes-widget-features.php on line 308
-[20-May-2025 15:35:09 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/features-by-woothemes/classes/class-woothemes-widget-features.php:308
-Stack trace:
-#0 /wordpress/wp-content/plugins/features-by-woothemes/woothemes-features.php(20): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('features-by-woo...')
-#3 /internal/eval.php(20): activate_plugin('features-by-woo...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/features-by-woothemes/classes/class-woothemes-widget-features.php on line 308
-[20-May-2025 15:35:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Create_Function() in /wordpress/wp-content/plugins/feed-link-widget/wp-plugin-widget-feed-text-link.php:140
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('feed-link-widge...')
-#2 /internal/eval.php(20): activate_plugin('feed-link-widge...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/feed-link-widget/wp-plugin-widget-feed-text-link.php on line 140
-[20-May-2025 15:35:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Create_Function() in /wordpress/wp-content/plugins/feed-link-widget/wp-plugin-widget-feed-text-link.php:140
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('feed-link-widge...')
-#2 /internal/eval.php(20): activate_plugin('feed-link-widge...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/feed-link-widget/wp-plugin-widget-feed-text-link.php on line 140
-[20-May-2025 15:35:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Create_Function() in /wordpress/wp-content/plugins/feed-link-widget/wp-plugin-widget-feed-text-link.php:140
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('feed-link-widge...')
-#2 /internal/eval.php(20): activate_plugin('feed-link-widge...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/feed-link-widget/wp-plugin-widget-feed-text-link.php on line 140
-[20-May-2025 15:36:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/feeddelay/feeddelay.php:210
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('feeddelay/feedd...')
-#2 /internal/eval.php(20): activate_plugin('feeddelay/feedd...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/feeddelay/feeddelay.php on line 210
-[20-May-2025 15:36:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/feeddelay/feeddelay.php:210
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('feeddelay/feedd...')
-#2 /internal/eval.php(20): activate_plugin('feeddelay/feedd...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/feeddelay/feeddelay.php on line 210
-[20-May-2025 15:36:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/feeddelay/feeddelay.php:210
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('feeddelay/feedd...')
-#2 /internal/eval.php(20): activate_plugin('feeddelay/feedd...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/feeddelay/feeddelay.php on line 210
-[20-May-2025 15:37:20 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('fest_widget')
-#2 /wordpress/wp-content/plugins/fest-widget/fest.php(18): register_widget('fest_widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): fest_init('')
+ for query SELECT * FROM `wp_madeit_forms` made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, DataInit->dbMigrate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 06:38:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM `wp_madeit_form_inputs`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_madeit_form_inputs` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_madeit_form_inputs
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM `...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM `...')
+#4 /wordpress/wp-content/plugins/forms-by-made-it/DataInit.php(43): wpdb->get_results('SELECT * FROM `...', 'ARRAY_A')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): DataInit->dbMigrate('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query SELECT * FROM `wp_madeit_form_inputs` made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, DataInit->dbMigrate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 06:39:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM `wp_madeit_forms`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_madeit_forms` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_madeit_forms.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM `...')
+#2 /wordpress/wp-content/plugins/forms-by-made-it/DataInit.php(12): wpdb->get_results('SELECT * FROM `...', 'ARRAY_A')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): DataInit->dbMigrate('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[20-May-2025 15:37:29 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('fest_widget')
-#2 /wordpress/wp-content/plugins/fest-widget/fest.php(18): register_widget('fest_widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): fest_init('')
+#6 /wordpress/wp-settings.php(727): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query SELECT * FROM `wp_madeit_forms` made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, DataInit->dbMigrate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 06:39:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM `wp_madeit_form_inputs`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_madeit_form_inputs` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_madeit_form_inputs.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM `...')
+#2 /wordpress/wp-content/plugins/forms-by-made-it/DataInit.php(43): wpdb->get_results('SELECT * FROM `...', 'ARRAY_A')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): DataInit->dbMigrate('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[20-May-2025 15:37:38 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('fest_widget')
-#2 /wordpress/wp-content/plugins/fest-widget/fest.php(18): register_widget('fest_widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): fest_init('')
+#6 /wordpress/wp-settings.php(727): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query SELECT * FROM `wp_madeit_form_inputs` made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, DataInit->dbMigrate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 06:39:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM `wp_madeit_forms`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_madeit_forms` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_madeit_forms.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM `...')
+#2 /wordpress/wp-content/plugins/forms-by-made-it/DataInit.php(12): wpdb->get_results('SELECT * FROM `...', 'ARRAY_A')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): DataInit->dbMigrate('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[20-May-2025 15:39:20 UTC] PHP Warning:  Undefined variable $domain in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
-[20-May-2025 15:39:20 UTC] PHP Warning:  Undefined variable $token in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
-[20-May-2025 15:39:21 UTC] PHP Warning:  Undefined variable $domain in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
-[20-May-2025 15:39:21 UTC] PHP Warning:  Undefined variable $token in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
-[20-May-2025 15:39:28 UTC] PHP Warning:  Undefined variable $domain in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
-[20-May-2025 15:39:28 UTC] PHP Warning:  Undefined variable $token in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
-[20-May-2025 15:39:29 UTC] PHP Warning:  Undefined variable $domain in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
-[20-May-2025 15:39:29 UTC] PHP Warning:  Undefined variable $token in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
-[20-May-2025 15:39:37 UTC] PHP Warning:  Undefined variable $domain in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
-[20-May-2025 15:39:37 UTC] PHP Warning:  Undefined variable $token in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
-[20-May-2025 15:39:38 UTC] PHP Warning:  Undefined variable $domain in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
-[20-May-2025 15:39:38 UTC] PHP Warning:  Undefined variable $token in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
-[20-May-2025 15:39:47 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#6 /wordpress/wp-settings.php(727): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query SELECT * FROM `wp_madeit_forms` made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, DataInit->dbMigrate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 06:39:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM `wp_madeit_form_inputs`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_madeit_form_inputs` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_madeit_form_inputs.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM `...')
+#2 /wordpress/wp-content/plugins/forms-by-made-it/DataInit.php(43): wpdb->get_results('SELECT * FROM `...', 'ARRAY_A')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): DataInit->dbMigrate('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(727): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query SELECT * FROM `wp_madeit_form_inputs` made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, DataInit->dbMigrate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-May-2025 06:39:25 UTC] PHP Warning:  Undefined variable $domain in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
+[22-May-2025 06:39:25 UTC] PHP Warning:  Undefined variable $token in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
+[22-May-2025 06:39:26 UTC] PHP Warning:  Undefined variable $domain in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
+[22-May-2025 06:39:26 UTC] PHP Warning:  Undefined variable $token in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
+[22-May-2025 06:39:34 UTC] PHP Warning:  Undefined variable $domain in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
+[22-May-2025 06:39:34 UTC] PHP Warning:  Undefined variable $token in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
+[22-May-2025 06:39:35 UTC] PHP Warning:  Undefined variable $domain in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
+[22-May-2025 06:39:35 UTC] PHP Warning:  Undefined variable $token in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
+[22-May-2025 06:39:42 UTC] PHP Warning:  Undefined variable $domain in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
+[22-May-2025 06:39:42 UTC] PHP Warning:  Undefined variable $token in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
+[22-May-2025 06:39:43 UTC] PHP Warning:  Undefined variable $domain in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
+[22-May-2025 06:39:43 UTC] PHP Warning:  Undefined variable $token in /wordpress/wp-content/plugins/freshbooks-daily-billing-stats-lite/fb_opmc_email_projectsReport.php on line 22
+[22-May-2025 06:39:52 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ftse_widget')
@@ -236,7 +198,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[20-May-2025 15:39:56 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[22-May-2025 06:40:01 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ftse_widget')
@@ -254,7 +216,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[20-May-2025 15:40:05 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[22-May-2025 06:40:09 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ftse_widget')
