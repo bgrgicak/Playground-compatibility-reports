@@ -2,147 +2,107 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [21-May-2025 13:58:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [23-May-2025 06:43:40 UTC] PHP Warning:  foreach() argument must be of type array|object, string given in /wordpress/wp-includes/class-wp-post-type.php on line 681
+[23-May-2025 06:43:49 UTC] PHP Warning:  foreach() argument must be of type array|object, string given in /wordpress/wp-includes/class-wp-post-type.php on line 681
+[23-May-2025 06:43:58 UTC] PHP Warning:  foreach() argument must be of type array|object, string given in /wordpress/wp-includes/class-wp-post-type.php on line 681
+[23-May-2025 06:44:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_sa_plugin (Id INT NOT NULL AUTO_INCREMENT, settings TEXT NOT NULL, PRIMARY KEY Id (Id) )</p>
+<p>SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_seo_hostindex';</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_COLUMNS WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_seo_hostindex' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+SQLSTATE[HY000]: General error: 1 no such function: DATABASE
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/sermonaudio-widgets/sermonaudiowidget.php(45): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): sa_widget_install(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sermon...', false)
-#7 /internal/eval.php(20): activate_plugin('sermonaudio-wid...')
-#8 {main}</pre>
- for query CREATE TABLE wp_sa_plugin (Id INT NOT NULL AUTO_INCREMENT, settings TEXT NOT NULL, PRIMARY KEY Id (Id) ) made by activate_plugin, do_action('activate_sermonaudio-widgets/sermonaudiowidget.php'), WP_Hook->do_action, WP_Hook->apply_filters, sa_widget_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 13:58:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM I...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM I...')
+#3 /wordpress/wp-content/plugins/seo-consultant/app/modules/Database.php(369): WP_SQLite_DB->query('SELECT * FROM I...')
+#4 /wordpress/wp-content/plugins/seo-consultant/app/modules/Database.php(345): SeoConsultant\Database->checkTableName('wp_seo_hostinde...')
+#5 /wordpress/wp-content/plugins/seo-consultant/app/SeoConsultant.php(104): SeoConsultant\Database->updateTables()
+#6 /wordpress/wp-content/plugins/seo-consultant/app/SeoConsultant.php(71): SeoConsultant->update()
+#7 /wordpress/wp-content/plugins/seo-consultant/app/SeoConsultant.php(58): SeoConsultant->init()
+#8 /wordpress/wp-content/plugins/seo-consultant/plugin.php(38): SeoConsultant->__construct()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): seo_consultant_start('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_seo_hostindex'; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, seo_consultant_start, SeoConsultant->__construct, SeoConsultant->init, SeoConsultant->update, SeoConsultant\Database->updateTables, SeoConsultant\Database->checkTableName, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 06:44:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_sa_plugin` (`settings`) VALUES ('{\"name\":\"Example Widget\",\"slug\":\"example widget\",\"description\":\"This is an example widget.\",\"memberID\":\"FAITH\",\"type\":\"sermon_browser\",\"style\":1}')</p>
+<p>SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_seo_hostlog';</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_sa_plugin` (`settings`) VALUES (:param0 ) | parameters: {&quot;name&quot;:&quot;Example Widget&quot;,&quot;slug&quot;:&quot;example widget&quot;,&quot;description&quot;:&quot;This is an example widget.&quot;,&quot;memberID&quot;:&quot;FAITH&quot;,&quot;type&quot;:&quot;sermon_browser&quot;,&quot;style&quot;:1}</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_COLUMNS WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_seo_hostlog' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sa_plugin.
+SQLSTATE[HY000]: General error: 1 no such function: DATABASE
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_sa_plugin', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/sermonaudio-widgets/sermonaudiowidget.php(59): wpdb->insert('wp_sa_plugin', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): sa_widget_install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sermon...', false)
-#8 /internal/eval.php(20): activate_plugin('sermonaudio-wid...')
-#9 {main}</pre>
- for query INSERT INTO `wp_sa_plugin` (`settings`) VALUES ('{\"name\":\"Example Widget\",\"slug\":\"example widget\",\"description\":\"This is an example widget.\",\"memberID\":\"FAITH\",\"type\":\"sermon_browser\",\"style\":1}') made by activate_plugin, do_action('activate_sermonaudio-widgets/sermonaudiowidget.php'), WP_Hook->do_action, WP_Hook->apply_filters, sa_widget_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 13:58:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_sa_plugin (Id INT NOT NULL AUTO_INCREMENT, settings TEXT NOT NULL, PRIMARY KEY Id (Id) )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/sermonaudio-widgets/sermonaudiowidget.php(45): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): sa_widget_install(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sermon...', false)
-#7 /internal/eval.php(20): activate_plugin('sermonaudio-wid...')
-#8 {main}</pre>
- for query CREATE TABLE wp_sa_plugin (Id INT NOT NULL AUTO_INCREMENT, settings TEXT NOT NULL, PRIMARY KEY Id (Id) ) made by activate_plugin, do_action('activate_sermonaudio-widgets/sermonaudiowidget.php'), WP_Hook->do_action, WP_Hook->apply_filters, sa_widget_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 13:58:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_sa_plugin` (`settings`) VALUES ('{\"name\":\"Example Widget\",\"slug\":\"example widget\",\"description\":\"This is an example widget.\",\"memberID\":\"FAITH\",\"type\":\"sermon_browser\",\"style\":1}')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_sa_plugin` (`settings`) VALUES (:param0 ) | parameters: {&quot;name&quot;:&quot;Example Widget&quot;,&quot;slug&quot;:&quot;example widget&quot;,&quot;description&quot;:&quot;This is an example widget.&quot;,&quot;memberID&quot;:&quot;FAITH&quot;,&quot;type&quot;:&quot;sermon_browser&quot;,&quot;style&quot;:1}</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sa_plugin.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_sa_plugin', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/sermonaudio-widgets/sermonaudiowidget.php(59): wpdb->insert('wp_sa_plugin', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): sa_widget_install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sermon...', false)
-#8 /internal/eval.php(20): activate_plugin('sermonaudio-wid...')
-#9 {main}</pre>
- for query INSERT INTO `wp_sa_plugin` (`settings`) VALUES ('{\"name\":\"Example Widget\",\"slug\":\"example widget\",\"description\":\"This is an example widget.\",\"memberID\":\"FAITH\",\"type\":\"sermon_browser\",\"style\":1}') made by activate_plugin, do_action('activate_sermonaudio-widgets/sermonaudiowidget.php'), WP_Hook->do_action, WP_Hook->apply_filters, sa_widget_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-May-2025 14:00:11 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>radiant-registration</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[21-May-2025 14:00:11 UTC] PHP Warning:  Attempt to read property "feeds" on null in /wordpress/wp-includes/post.php on line 5409
-[21-May-2025 14:00:11 UTC] PHP Warning:  Attempt to read property "role_names" on null in /wordpress/wp-content/plugins/radiant-registration-form/includes/functions.php on line 73
-[21-May-2025 14:00:20 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>radiant-registration</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[21-May-2025 14:00:20 UTC] PHP Warning:  Attempt to read property "feeds" on null in /wordpress/wp-includes/post.php on line 5409
-[21-May-2025 14:00:20 UTC] PHP Warning:  Attempt to read property "role_names" on null in /wordpress/wp-content/plugins/radiant-registration-form/includes/functions.php on line 73
-[21-May-2025 14:00:30 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>radiant-registration</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[21-May-2025 14:00:30 UTC] PHP Warning:  Attempt to read property "feeds" on null in /wordpress/wp-includes/post.php on line 5409
-[21-May-2025 14:00:30 UTC] PHP Warning:  Attempt to read property "role_names" on null in /wordpress/wp-content/plugins/radiant-registration-form/includes/functions.php on line 73
-[21-May-2025 14:00:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/random-related-posts/index.php:77
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM I...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM I...')
+#3 /wordpress/wp-content/plugins/seo-consultant/app/modules/Database.php(369): WP_SQLite_DB->query('SELECT * FROM I...')
+#4 /wordpress/wp-content/plugins/seo-consultant/app/modules/Database.php(352): SeoConsultant\Database->checkTableName('wp_seo_hostlog')
+#5 /wordpress/wp-content/plugins/seo-consultant/app/SeoConsultant.php(104): SeoConsultant\Database->updateTables()
+#6 /wordpress/wp-content/plugins/seo-consultant/app/SeoConsultant.php(71): SeoConsultant->update()
+#7 /wordpress/wp-content/plugins/seo-consultant/app/SeoConsultant.php(58): SeoConsultant->init()
+#8 /wordpress/wp-content/plugins/seo-consultant/plugin.php(38): SeoConsultant->__construct()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): seo_consultant_start('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_seo_hostlog'; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, seo_consultant_start, SeoConsultant->__construct, SeoConsultant->init, SeoConsultant->update, SeoConsultant\Database->updateTables, SeoConsultant\Database->checkTableName, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 06:44:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seo-consultant/app/modules/Logger.php on line 22
+[23-May-2025 06:44:17 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seo-consultant/app/modules/Logger.php on line 22
+[23-May-2025 06:44:27 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seo-consultant/app/modules/Logger.php on line 22
+[23-May-2025 06:45:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/rb-most-views-colorful/rb-most-views-colorful.php:255
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('random-related-...')
-#2 /internal/eval.php(20): activate_plugin('random-related-...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rb-most-views-c...')
+#2 /internal/eval.php(20): activate_plugin('rb-most-views-c...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/random-related-posts/index.php on line 77
-[21-May-2025 14:00:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/random-related-posts/index.php:77
+  thrown in /wordpress/wp-content/plugins/rb-most-views-colorful/rb-most-views-colorful.php on line 255
+[23-May-2025 06:45:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/rb-most-views-colorful/rb-most-views-colorful.php:255
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('random-related-...')
-#2 /internal/eval.php(20): activate_plugin('random-related-...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rb-most-views-c...')
+#2 /internal/eval.php(20): activate_plugin('rb-most-views-c...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/random-related-posts/index.php on line 77
-[21-May-2025 14:00:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/random-related-posts/index.php:77
+  thrown in /wordpress/wp-content/plugins/rb-most-views-colorful/rb-most-views-colorful.php on line 255
+[23-May-2025 06:45:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/rb-most-views-colorful/rb-most-views-colorful.php:255
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('random-related-...')
-#2 /internal/eval.php(20): activate_plugin('random-related-...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rb-most-views-c...')
+#2 /internal/eval.php(20): activate_plugin('rb-most-views-c...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/random-related-posts/index.php on line 77
-[21-May-2025 14:01:58 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[21-May-2025 14:02:07 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[21-May-2025 14:02:17 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[21-May-2025 14:02:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/realsatisfied-widget/realsatisfied.php:466
+  thrown in /wordpress/wp-content/plugins/rb-most-views-colorful/rb-most-views-colorful.php on line 255
+[23-May-2025 06:46:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/realsatisfied-widget/realsatisfied.php:466
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('realsatisfied-w...')
 #2 /internal/eval.php(20): activate_plugin('realsatisfied-w...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/realsatisfied-widget/realsatisfied.php on line 466
-[21-May-2025 14:02:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/realsatisfied-widget/realsatisfied.php:466
+[23-May-2025 06:47:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/realsatisfied-widget/realsatisfied.php:466
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('realsatisfied-w...')
