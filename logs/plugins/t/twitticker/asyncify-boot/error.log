@@ -2,619 +2,162 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [22-May-2025 03:38:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [23-May-2025 04:36:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method WP_SQLite_Driver::get_columns() in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:524
+Stack trace:
+#0 /wordpress/wp-includes/class-wpdb.php(3883): WP_SQLite_DB->load_col_info()
+#1 /wordpress/wp-content/plugins/tf-faq/tf-faq.php(484): wpdb->get_col_info('wp_faq_question...', 4)
+#2 /wordpress/wp-content/plugins/tf-faq/tf-faq.php(439): _tffaq_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): tffaq_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tf-faq...', false)
+#7 /internal/eval.php(20): activate_plugin('tf-faq/tf-faq.p...')
+#8 {main}
+  thrown in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php on line 524
+[23-May-2025 04:36:20 UTC] PHP Warning:  Trying to access array offset on value of type int in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-translator.php on line 717
+[23-May-2025 04:36:20 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-translator.php on line 717
+[23-May-2025 04:36:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_terms ADD `term_order` INT( 4 ) NULL DEFAULT '0'</p>
+<p>ALTER TABLE wp_faq_questions ADD email VARCHAR(56) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_terms</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_terms, term_order, 6, 0, YES, int, , , 10, 0, , , , int(4), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_terms</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_terms</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_terms_682e9c4883d60` (
-  `term_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `name` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
-  `slug` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
-  `term_group` INTEGER NOT NULL DEFAULT '0',
-  `term_order` INTEGER DEFAULT '0',
-  `term_order` INTEGER DEFAULT '0'
-) STRICT | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_faq_questions, EMAIL, varchar(56)</li>
+<li>Executing: ALTER TABLE wp_faq_questions ADD email text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: term_order
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/terms-order-wp/includes/class-terms-order-wp.php(133): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/terms-order-wp/includes/class-terms-order-wp.php(123): Terms_Order_Wp->terms_database_fix()
-#5 /wordpress/wp-content/plugins/terms-order-wp/terms-order-wp.php(60): Terms_Order_Wp->run()
-#6 /wordpress/wp-content/plugins/terms-order-wp/terms-order-wp.php(63): run_terms_order_wp()
-#7 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_terms ADD `term_order` INT( 4 ) NULL DEFAULT '0' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/terms-order-wp/terms-order-wp.php'), run_terms_order_wp, Terms_Order_Wp->run, Terms_Order_Wp->terms_database_fix, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:41:47 UTC] [Plugin:Text Zoom] Service responded with code 404.
-[22-May-2025 03:41:47 UTC] PHP Notice:  [Plugin:Text Zoom] Service responded with code 404. in /wordpress/wp-content/plugins/text-zoom-premium/includes/utils.php on line 76
-[22-May-2025 03:41:57 UTC] [Plugin:Text Zoom] Service responded with code 404.
-[22-May-2025 03:41:57 UTC] PHP Notice:  [Plugin:Text Zoom] Service responded with code 404. in /wordpress/wp-content/plugins/text-zoom-premium/includes/utils.php on line 76
-[22-May-2025 03:42:07 UTC] [Plugin:Text Zoom] Service responded with code 404.
-[22-May-2025 03:42:07 UTC] PHP Notice:  [Plugin:Text Zoom] Service responded with code 404. in /wordpress/wp-content/plugins/text-zoom-premium/includes/utils.php on line 76
-[22-May-2025 03:43:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-development-preview/theme-dev-preview.php on line 76
-[22-May-2025 03:43:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-development-preview/theme-dev-preview.php on line 77
-[22-May-2025 03:43:24 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-development-preview/theme-dev-preview.php on line 76
-[22-May-2025 03:43:24 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-development-preview/theme-dev-preview.php on line 77
-[22-May-2025 03:43:32 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-development-preview/theme-dev-preview.php on line 76
-[22-May-2025 03:43:32 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-development-preview/theme-dev-preview.php on line 77
-[22-May-2025 03:43:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/trading-signals-widget/tradingsignalswidget.php:169
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/tf-faq/tf-faq.php(488): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/tf-faq/tf-faq.php(439): _tffaq_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): tffaq_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tf-faq...', false)
+#7 /internal/eval.php(20): activate_plugin('tf-faq/tf-faq.p...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_faq_questions ADD email VARCHAR(56) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL; made by activate_plugin, do_action('activate_tf-faq/tf-faq.php'), WP_Hook->do_action, WP_Hook->apply_filters, tffaq_install, _tffaq_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 04:36:30 UTC] PHP Warning:  Trying to access array offset on value of type int in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-translator.php on line 717
+[23-May-2025 04:36:30 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-translator.php on line 717
+[23-May-2025 04:36:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_faq_questions ADD email VARCHAR(56) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_faq_questions, EMAIL, varchar(56)</li>
+<li>Executing: ALTER TABLE wp_faq_questions ADD email text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/tf-faq/tf-faq.php(488): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/tf-faq/tf-faq.php(439): _tffaq_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): tffaq_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tf-faq...', false)
+#7 /internal/eval.php(20): activate_plugin('tf-faq/tf-faq.p...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_faq_questions ADD email VARCHAR(56) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL; made by activate_plugin, do_action('activate_tf-faq/tf-faq.php'), WP_Hook->do_action, WP_Hook->apply_filters, tffaq_install, _tffaq_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 04:37:34 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[23-May-2025 04:37:43 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[23-May-2025 04:37:51 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[23-May-2025 04:38:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function restore_include_path() in /wordpress/wp-content/plugins/tractis-identity-verifications/tractis_auth.php:23
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('trading-signals...')
-#2 /internal/eval.php(20): activate_plugin('trading-signals...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tractis-identit...')
+#2 /internal/eval.php(20): activate_plugin('tractis-identit...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/trading-signals-widget/tradingsignalswidget.php on line 169
-[22-May-2025 03:43:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/trading-signals-widget/tradingsignalswidget.php:169
+  thrown in /wordpress/wp-content/plugins/tractis-identity-verifications/tractis_auth.php on line 23
+[23-May-2025 04:38:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function restore_include_path() in /wordpress/wp-content/plugins/tractis-identity-verifications/tractis_auth.php:23
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('trading-signals...')
-#2 /internal/eval.php(20): activate_plugin('trading-signals...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tractis-identit...')
+#2 /internal/eval.php(20): activate_plugin('tractis-identit...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/trading-signals-widget/tradingsignalswidget.php on line 169
-[22-May-2025 03:43:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/trading-signals-widget/tradingsignalswidget.php:169
+  thrown in /wordpress/wp-content/plugins/tractis-identity-verifications/tractis_auth.php on line 23
+[23-May-2025 04:38:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function restore_include_path() in /wordpress/wp-content/plugins/tractis-identity-verifications/tractis_auth.php:23
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('trading-signals...')
-#2 /internal/eval.php(20): activate_plugin('trading-signals...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tractis-identit...')
+#2 /internal/eval.php(20): activate_plugin('tractis-identit...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/trading-signals-widget/tradingsignalswidget.php on line 169
-[22-May-2025 03:44:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p> delete from wp_{tanalyzer_resources} </p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query(' delete from wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query(' delete from wp...')
-#3 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(74): WP_SQLite_DB->query(' delete from wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#8 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#9 {main}</pre>
- for query  delete from wp_{tanalyzer_resources}  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:05 UTC] PHP Warning:  Undefined array key "resource" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3065
-[22-May-2025 03:44:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3066
-[22-May-2025 03:44:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3067
-[22-May-2025 03:44:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3068
-[22-May-2025 03:44:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>update wp__tanalyzer_visits set resource='-1' where resource='' and resource_type='HOME' </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp__tanalyzer_visits</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp__tanalyzer_visits</li>
-<li>Executing: update `wp__tanalyzer_visits` set `resource` = '-1' where `resource` = '' and `resource_type` = 'HOME' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp__tanalyzer_visits
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('update wp__tana...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('update wp__tana...')
-#3 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(82): WP_SQLite_DB->query('update wp__tana...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#8 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#9 {main}</pre>
- for query update wp__tanalyzer_visits set resource='-1' where resource='' and resource_type='HOME'  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:06 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>ta_flot_views</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:44:06 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>ta_flot_excanvas</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:44:06 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>ta_flot_loader_trend_widget</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:44:06 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:44:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p> create table if not exists wp_tanalyzer_visits (  	id integer primary key auto_increment,  	ip varchar(100) ,  	script_name varchar(2000),  	user_agent varchar(2000), 	request_uri	varchar(2000),  	remarks text, 	browser	varchar(1000),	resource_type	varchar(100),	resource	varchar(2000), 	vtime timestamp default now(),	http_referer text  ) </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(44): WP_SQLite_DB->query(' create table i...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query  create table if not exists wp_tanalyzer_visits (  	id integer primary key auto_increment,  	ip varchar(100) ,  	script_name varchar(2000),  	user_agent varchar(2000), 	request_uri	varchar(2000),  	remarks text, 	browser	varchar(1000),	resource_type	varchar(100),	resource	varchar(2000), 	vtime timestamp default now(),	http_referer text  )  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p> create table if not exists wp_tanalyzer_resources (  	resource_id int primary key ,  	resource_type varchar(100) ,  	resource_title varchar(2000)  ) </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(52): WP_SQLite_DB->query(' create table i...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query  create table if not exists wp_tanalyzer_resources (  	resource_id int primary key ,  	resource_type varchar(100) ,  	resource_title varchar(2000)  )  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p> create table if not exists wp_tanalyzer_pre (  	hid varchar(100) ,  	ip varchar(100) ,  	script_name varchar(2000),  	user_agent varchar(2000), 	request_uri	varchar(2000),  	remarks text, 	browser	varchar(1000),	resource_type	varchar(100),	resource	varchar(2000), 	vtime timestamp default now(),	http_referer text  ) </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(68): WP_SQLite_DB->query(' create table i...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query  create table if not exists wp_tanalyzer_pre (  	hid varchar(100) ,  	ip varchar(100) ,  	script_name varchar(2000),  	user_agent varchar(2000), 	request_uri	varchar(2000),  	remarks text, 	browser	varchar(1000),	resource_type	varchar(100),	resource	varchar(2000), 	vtime timestamp default now(),	http_referer text  )  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p> delete from wp_{tanalyzer_resources} </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Array
-(
-    [query] =>  delete from wp_{tanalyzer_resources} 
-    [message] => Unexpected character.
-    [str] => {
-    [position] => 16
-    [code] => 0
-)
-.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(74): WP_SQLite_DB->query(' delete from wp...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query  delete from wp_{tanalyzer_resources}  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p> insert into wp_tanalyzer_resources(resource_id,resource_type,resource_title)  values( -1,'HOME','Home') </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing:  insert into wp_tanalyzer_resources(resource_id,resource_type,resource_title)  values( -1,:param0 ,:param1 )  | parameters: HOME, Home</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_tanalyzer_resources.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(79): WP_SQLite_DB->query(' insert into wp...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query  insert into wp_tanalyzer_resources(resource_id,resource_type,resource_title)  values( -1,'HOME','Home')  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>update wp__tanalyzer_visits set resource='-1' where resource='' and resource_type='HOME' </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: update wp__tanalyzer_visits set resource=:param0  where rowid IN (SELECT rowid FROM wp__tanalyzer_visits WHERE resource=:param1  and resource_type=:param2  ) | parameters: -1, , HOME</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp__tanalyzer_visits.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(82): WP_SQLite_DB->query('update wp__tana...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query update wp__tanalyzer_visits set resource='-1' where resource='' and resource_type='HOME'  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p> alter table wp_tanalyzer_visits add column wpta_cookie varchar(100) </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_tanalyzer_visits, wpta_cookie, varchar(100)</li>
-<li>Executing: ALTER TABLE wp_tanalyzer_visits add column wpta_cookie text  | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_tanalyzer_visits.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(91): WP_SQLite_DB->query(' alter table wp...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query  alter table wp_tanalyzer_visits add column wpta_cookie varchar(100)  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p> alter table wp_tanalyzer_pre add column wpta_cookie varchar(100) </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_tanalyzer_pre, wpta_cookie, varchar(100)</li>
-<li>Executing: ALTER TABLE wp_tanalyzer_pre add column wpta_cookie text  | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_tanalyzer_pre.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(94): WP_SQLite_DB->query(' alter table wp...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query  alter table wp_tanalyzer_pre add column wpta_cookie varchar(100)  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:16 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>ta_flot_views</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:44:16 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>ta_flot_excanvas</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:44:16 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>ta_flot_loader_trend_widget</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:44:16 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:44:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p> create table if not exists wp_tanalyzer_visits (  	id integer primary key auto_increment,  	ip varchar(100) ,  	script_name varchar(2000),  	user_agent varchar(2000), 	request_uri	varchar(2000),  	remarks text, 	browser	varchar(1000),	resource_type	varchar(100),	resource	varchar(2000), 	vtime timestamp default now(),	http_referer text  ) </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(44): WP_SQLite_DB->query(' create table i...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query  create table if not exists wp_tanalyzer_visits (  	id integer primary key auto_increment,  	ip varchar(100) ,  	script_name varchar(2000),  	user_agent varchar(2000), 	request_uri	varchar(2000),  	remarks text, 	browser	varchar(1000),	resource_type	varchar(100),	resource	varchar(2000), 	vtime timestamp default now(),	http_referer text  )  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p> create table if not exists wp_tanalyzer_resources (  	resource_id int primary key ,  	resource_type varchar(100) ,  	resource_title varchar(2000)  ) </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(52): WP_SQLite_DB->query(' create table i...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query  create table if not exists wp_tanalyzer_resources (  	resource_id int primary key ,  	resource_type varchar(100) ,  	resource_title varchar(2000)  )  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p> create table if not exists wp_tanalyzer_pre (  	hid varchar(100) ,  	ip varchar(100) ,  	script_name varchar(2000),  	user_agent varchar(2000), 	request_uri	varchar(2000),  	remarks text, 	browser	varchar(1000),	resource_type	varchar(100),	resource	varchar(2000), 	vtime timestamp default now(),	http_referer text  ) </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(68): WP_SQLite_DB->query(' create table i...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query  create table if not exists wp_tanalyzer_pre (  	hid varchar(100) ,  	ip varchar(100) ,  	script_name varchar(2000),  	user_agent varchar(2000), 	request_uri	varchar(2000),  	remarks text, 	browser	varchar(1000),	resource_type	varchar(100),	resource	varchar(2000), 	vtime timestamp default now(),	http_referer text  )  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p> delete from wp_{tanalyzer_resources} </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Array
-(
-    [query] =>  delete from wp_{tanalyzer_resources} 
-    [message] => Unexpected character.
-    [str] => {
-    [position] => 16
-    [code] => 0
-)
-.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(74): WP_SQLite_DB->query(' delete from wp...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query  delete from wp_{tanalyzer_resources}  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p> insert into wp_tanalyzer_resources(resource_id,resource_type,resource_title)  values( -1,'HOME','Home') </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing:  insert into wp_tanalyzer_resources(resource_id,resource_type,resource_title)  values( -1,:param0 ,:param1 )  | parameters: HOME, Home</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_tanalyzer_resources.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(79): WP_SQLite_DB->query(' insert into wp...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query  insert into wp_tanalyzer_resources(resource_id,resource_type,resource_title)  values( -1,'HOME','Home')  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>update wp__tanalyzer_visits set resource='-1' where resource='' and resource_type='HOME' </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: update wp__tanalyzer_visits set resource=:param0  where rowid IN (SELECT rowid FROM wp__tanalyzer_visits WHERE resource=:param1  and resource_type=:param2  ) | parameters: -1, , HOME</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp__tanalyzer_visits.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(82): WP_SQLite_DB->query('update wp__tana...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query update wp__tanalyzer_visits set resource='-1' where resource='' and resource_type='HOME'  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p> alter table wp_tanalyzer_visits add column wpta_cookie varchar(100) </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_tanalyzer_visits, wpta_cookie, varchar(100)</li>
-<li>Executing: ALTER TABLE wp_tanalyzer_visits add column wpta_cookie text  | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_tanalyzer_visits.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(91): WP_SQLite_DB->query(' alter table wp...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query  alter table wp_tanalyzer_visits add column wpta_cookie varchar(100)  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p> alter table wp_tanalyzer_pre add column wpta_cookie varchar(100) </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_tanalyzer_pre, wpta_cookie, varchar(100)</li>
-<li>Executing: ALTER TABLE wp_tanalyzer_pre add column wpta_cookie text  | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_tanalyzer_pre.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/trafficanalyzer/class-TrafficAnalyzer.php(94): WP_SQLite_DB->query(' alter table wp...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): TrafficAnalyzer->activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_traffi...', false)
-#6 /internal/eval.php(20): activate_plugin('trafficanalyzer...')
-#7 {main}</pre>
- for query  alter table wp_tanalyzer_pre add column wpta_cookie varchar(100)  made by activate_plugin, do_action('activate_trafficanalyzer/traffic-analyzer.php'), WP_Hook->do_action, WP_Hook->apply_filters, TrafficAnalyzer->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 03:44:25 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>ta_flot_views</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:44:25 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>ta_flot_excanvas</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:44:25 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>ta_flot_loader_trend_widget</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:44:25 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:44:54 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:44:54 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:45:02 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:45:02 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:45:11 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:45:11 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 03:45:47 UTC] PHP Deprecated:  Required parameter $position follows optional parameter $args in /wordpress/wp-content/plugins/twiiter-wp-widget/my-twitter.php on line 173
-[22-May-2025 03:45:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twiiter-wp-widget/my-twitter.php:339
+  thrown in /wordpress/wp-content/plugins/tractis-identity-verifications/tractis_auth.php on line 23
+[23-May-2025 04:39:31 UTC] PHP Warning:  require_once(Zend/XmlRpc/Client.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/transfer/library/Aperto/XmlRpc.php on line 3
+[23-May-2025 04:39:31 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'Zend/XmlRpc/Client.php' (include_path='.:/wordpress/wp-content/plugins/transfer/library/:.:') in /wordpress/wp-content/plugins/transfer/library/Aperto/XmlRpc.php:3
+Stack trace:
+#0 /wordpress/wp-content/plugins/transfer/transfer.php(39): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('transfer/transf...')
+#3 /internal/eval.php(20): activate_plugin('transfer/transf...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/transfer/library/Aperto/XmlRpc.php on line 3
+[23-May-2025 04:39:39 UTC] PHP Warning:  require_once(Zend/XmlRpc/Client.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/transfer/library/Aperto/XmlRpc.php on line 3
+[23-May-2025 04:39:39 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'Zend/XmlRpc/Client.php' (include_path='.:/wordpress/wp-content/plugins/transfer/library/:.:') in /wordpress/wp-content/plugins/transfer/library/Aperto/XmlRpc.php:3
+Stack trace:
+#0 /wordpress/wp-content/plugins/transfer/transfer.php(39): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('transfer/transf...')
+#3 /internal/eval.php(20): activate_plugin('transfer/transf...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/transfer/library/Aperto/XmlRpc.php on line 3
+[23-May-2025 04:39:47 UTC] PHP Warning:  require_once(Zend/XmlRpc/Client.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/transfer/library/Aperto/XmlRpc.php on line 3
+[23-May-2025 04:39:47 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'Zend/XmlRpc/Client.php' (include_path='.:/wordpress/wp-content/plugins/transfer/library/:.:') in /wordpress/wp-content/plugins/transfer/library/Aperto/XmlRpc.php:3
+Stack trace:
+#0 /wordpress/wp-content/plugins/transfer/transfer.php(39): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('transfer/transf...')
+#3 /internal/eval.php(20): activate_plugin('transfer/transf...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/transfer/library/Aperto/XmlRpc.php on line 3
+[23-May-2025 04:39:57 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[23-May-2025 04:39:57 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[23-May-2025 04:40:06 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[23-May-2025 04:40:06 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[23-May-2025 04:40:15 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[23-May-2025 04:40:15 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[23-May-2025 04:40:51 UTC] PHP Deprecated:  Required parameter $position follows optional parameter $args in /wordpress/wp-content/plugins/twiiter-wp-widget/my-twitter.php on line 173
+[23-May-2025 04:40:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twiiter-wp-widget/my-twitter.php:339
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('twiiter-wp-widg...')
 #2 /internal/eval.php(20): activate_plugin('twiiter-wp-widg...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/twiiter-wp-widget/my-twitter.php on line 339
-[22-May-2025 03:45:55 UTC] PHP Deprecated:  Required parameter $position follows optional parameter $args in /wordpress/wp-content/plugins/twiiter-wp-widget/my-twitter.php on line 173
-[22-May-2025 03:45:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twiiter-wp-widget/my-twitter.php:339
+[23-May-2025 04:40:58 UTC] PHP Deprecated:  Required parameter $position follows optional parameter $args in /wordpress/wp-content/plugins/twiiter-wp-widget/my-twitter.php on line 173
+[23-May-2025 04:40:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twiiter-wp-widget/my-twitter.php:339
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('twiiter-wp-widg...')
 #2 /internal/eval.php(20): activate_plugin('twiiter-wp-widg...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/twiiter-wp-widget/my-twitter.php on line 339
-[22-May-2025 03:46:03 UTC] PHP Deprecated:  Required parameter $position follows optional parameter $args in /wordpress/wp-content/plugins/twiiter-wp-widget/my-twitter.php on line 173
-[22-May-2025 03:46:03 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twiiter-wp-widget/my-twitter.php:339
+[23-May-2025 04:41:05 UTC] PHP Deprecated:  Required parameter $position follows optional parameter $args in /wordpress/wp-content/plugins/twiiter-wp-widget/my-twitter.php on line 173
+[23-May-2025 04:41:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twiiter-wp-widget/my-twitter.php:339
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('twiiter-wp-widg...')
 #2 /internal/eval.php(20): activate_plugin('twiiter-wp-widg...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/twiiter-wp-widget/my-twitter.php on line 339
-[22-May-2025 03:46:13 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[23-May-2025 04:41:14 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('twitticker_widg...')
@@ -632,7 +175,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[22-May-2025 03:46:21 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[23-May-2025 04:41:23 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('twitticker_widg...')
