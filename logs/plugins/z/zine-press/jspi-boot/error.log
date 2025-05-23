@@ -2,314 +2,796 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [22-May-2025 21:27:59 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>zero-bs-crm</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 21:28:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [23-May-2025 22:27:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/time-sheets/time-sheets.php on line 577
+[23-May-2025 22:27:15 UTC] PHP Warning:  Undefined array key "b`.`ProjectId" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3065
+[23-May-2025 22:27:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3066
+[23-May-2025 22:27:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3067
+[23-May-2025 22:27:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3068
+[23-May-2025 22:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_zbs_externalsources ADD COLUMN `zbss_origin` VARCHAR(400) NULL DEFAULT NULL AFTER `zbss_uid`, ADD INDEX (zbss_origin);</p>
+<p>UPDATE wp_timesheet b
+				inner join wp_timesheet_client_projects a on b.ClientId = a.ClientId 
+					AND ProjectName = case when project_name = '' then 'Not Specified' else project_name end
+				SET b.ProjectId = a.ProjectId
+				WHERE b.ProjectId IS NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_zbs_externalsources</li>
-<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_zbs_externalsources</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_zbs_externalsources</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_timesheet` `b` inner join `wp_timesheet_client_projects` `a` on `b`.`ClientId` = `a`.`ClientId` AND `ProjectName` = case when `project_name` = '' then 'Not Specified' else `project_name` en</li>
 <li>Executing: 
-				SELECT MAX(ordinal_position)
+				SELECT column_name, is_nullable, data_type, column_default
 				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_zbs_externalsources</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_zbs_externalsources, zbss_origin, 12, , YES, varchar, 400, 1600, , , , utf8mb4, utf8mb4_general_ci, varchar(400), , , select,insert,update,references, , , </li>
-<li>Executing: 
-					SELECT column_name, data_type, is_nullable, character_maximum_length
-					FROM `_wp_sqlite_mysql_information_schema_columns`
-					WHERE table_schema = ?
-					AND table_name = ?
-					AND column_name IN (?)
-				 | parameters: database_name_here, wp_zbs_externalsources, zbss_origin</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_zbs_externalsources, 1, database_name_here, zbss_origin, 1, zbss_origin, A, 0, , , YES, BTREE, , , YES, </li>
-<li>Executing: 
-				WITH s AS (
-					SELECT
-						column_name,
-						CASE
-							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
-							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
-							WHEN MAX(seq_in_index = 1) THEN 'MUL'
-							ELSE ''
-						END AS column_key
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					GROUP BY column_name
-				)
-				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
-				SET
-					column_key = s.column_key,
-					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
-			    FROM s
-			    WHERE c.table_schema = ?
-			    AND c.table_name = ?
-				AND s.column_name = c.column_name
-			 | parameters: database_name_here, wp_zbs_externalsources, database_name_here, wp_zbs_externalsources</li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_zbs_externalsources</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_zbs_externalsources</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_zbs_externalsources</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_zbs_externalsources_682f96e39e728` (
-  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `zbs_site` INTEGER,
-  `zbs_team` INTEGER,
-  `zbs_owner` INTEGER NOT NULL,
-  `zbss_objtype` INTEGER NOT NULL DEFAULT '-1',
-  `zbss_objid` INTEGER NOT NULL,
-  `zbss_source` TEXT COLLATE NOCASE NOT NULL,
-  `zbss_uid` TEXT COLLATE NOCASE NOT NULL,
-  `zbss_origin` TEXT COLLATE NOCASE,
-  `zbss_created` INTEGER NOT NULL,
-  `zbss_lastupdated` INTEGER NOT NULL,
-  `zbss_origin` TEXT COLLATE NOCASE
-) STRICT | (no parameters)</li>
+			 | parameters: database_name_here, wp_timesheet` `b` inner join `wp_timesheet_client_projects` `a` on `b`.`ClientId` = `a`.`ClientId` AND `ProjectName` = case when `project_name` = '' then 'Not Specified' else `project_name` en</li>
+<li>Executing: UPDATE `wp_timesheet` `b` inner join `wp_timesheet_client_projects` `a` on `b`.`ClientId` = `a`.`ClientId` AND `ProjectName` = case when `project_name` = '' then 'Not Specified' else `project_name` end SET `b`.`ProjectId` = `a`.`ProjectId` WHERE `b`.`ProjectId` IS NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: zbss_origin
+SQLSTATE[HY000]: General error: 1 near "`b`": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/zero-bs-crm/includes/ZeroBSCRM.Migrations.php(551): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/zero-bs-crm/includes/ZeroBSCRM.Migrations.php(207): zeroBSCRM_migration_50()
-#5 /wordpress/wp-content/plugins/zero-bs-crm/includes/ZeroBSCRM.Core.php(3079): zeroBSCRM_migrations_run(Array, 'init')
-#6 /wordpress/wp-content/plugins/zero-bs-crm/includes/ZeroBSCRM.Core.php(1764): ZeroBSCRM->run_migrations('init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ZeroBSCRM->init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query ALTER TABLE wp_zbs_externalsources ADD COLUMN `zbss_origin` VARCHAR(400) NULL DEFAULT NULL AFTER `zbss_uid`, ADD INDEX (zbss_origin); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ZeroBSCRM->init, ZeroBSCRM->run_migrations, zeroBSCRM_migrations_run, zeroBSCRM_migration_50, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 21:28:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE wp_times...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('UPDATE wp_times...')
+#3 /wordpress/wp-content/plugins/time-sheets/setup.php(154): WP_SQLite_DB->query('UPDATE wp_times...')
+#4 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#5 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#10 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#11 {main}</pre>
+ for query UPDATE wp_timesheet b
+				inner join wp_timesheet_client_projects a on b.ClientId = a.ClientId 
+					AND ProjectName = case when project_name = '' then 'Not Specified' else project_name end
+				SET b.ProjectId = a.ProjectId
+				WHERE b.ProjectId IS NULL made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:15 UTC] PHP Warning:  Undefined array key "t`.`ClientId" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3065
+[23-May-2025 22:27:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3066
+[23-May-2025 22:27:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3067
+[23-May-2025 22:27:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3068
+[23-May-2025 22:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_zbs_logs ADD `zbsl_pinned` int(1) NULL AFTER `zbsl_longdesc`;</p>
+<p>UPDATE wp_timesheet t
+				JOIN wp_timesheet_clients c ON t.client_name = c.ClientName
+				SET t.ClientId = c.ClientId
+				WHERE t.ClientId IS NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_zbs_logs</li>
-<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_zbs_logs</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_zbs_logs</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_timesheet` `t` JOIN `wp_timesheet_clients` `c` ON `t`.`client_name` = `c`.`ClientName</li>
 <li>Executing: 
-				SELECT MAX(ordinal_position)
+				SELECT column_name, is_nullable, data_type, column_default
 				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_zbs_logs</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_zbs_logs, zbsl_pinned, 13, , YES, int, , , 10, 0, , , , int(1), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_zbs_logs</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_zbs_logs</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_zbs_logs</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_zbs_logs_682f96e3c44a0` (
-  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `zbs_site` INTEGER,
-  `zbs_team` INTEGER,
-  `zbs_owner` INTEGER NOT NULL,
-  `zbsl_objtype` INTEGER NOT NULL,
-  `zbsl_objid` INTEGER NOT NULL,
-  `zbsl_type` TEXT COLLATE NOCASE NOT NULL,
-  `zbsl_shortdesc` TEXT COLLATE NOCASE,
-  `zbsl_longdesc` TEXT COLLATE NOCASE,
-  `zbsl_pinned` INTEGER,
-  `zbsl_created` INTEGER NOT NULL,
-  `zbsl_lastupdated` INTEGER NOT NULL,
-  `zbsl_pinned` INTEGER
-) STRICT | (no parameters)</li>
+			 | parameters: database_name_here, wp_timesheet` `t` JOIN `wp_timesheet_clients` `c` ON `t`.`client_name` = `c`.`ClientName</li>
+<li>Executing: UPDATE `wp_timesheet` `t` JOIN `wp_timesheet_clients` `c` ON `t`.`client_name` = `c`.`ClientName` SET `t`.`ClientId` = `c`.`ClientId` WHERE `t`.`ClientId` IS NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: zbsl_pinned
+SQLSTATE[HY000]: General error: 1 near "`t`": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/zero-bs-crm/includes/ZeroBSCRM.Migrations.php(706): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/zero-bs-crm/includes/ZeroBSCRM.Migrations.php(207): zeroBSCRM_migration_54()
-#5 /wordpress/wp-content/plugins/zero-bs-crm/includes/ZeroBSCRM.Core.php(3079): zeroBSCRM_migrations_run(Array, 'init')
-#6 /wordpress/wp-content/plugins/zero-bs-crm/includes/ZeroBSCRM.Core.php(1764): ZeroBSCRM->run_migrations('init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ZeroBSCRM->init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query ALTER TABLE wp_zbs_logs ADD `zbsl_pinned` int(1) NULL AFTER `zbsl_longdesc`; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ZeroBSCRM->init, ZeroBSCRM->run_migrations, zeroBSCRM_migrations_run, zeroBSCRM_migration_54, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 21:28:23 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>zero-bs-crm</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 21:28:48 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>zero-bs-crm</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 21:29:01 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WP_ZAUN_PATH" in /wordpress/wp-content/plugins/zes-admin-update-notification/wp-ze-admin-update-notifications.php:28
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zes-admin-updat...')
-#2 /internal/eval.php(20): activate_plugin('zes-admin-updat...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/zes-admin-update-notification/wp-ze-admin-update-notifications.php on line 28
-[22-May-2025 21:29:08 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WP_ZAUN_PATH" in /wordpress/wp-content/plugins/zes-admin-update-notification/wp-ze-admin-update-notifications.php:28
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zes-admin-updat...')
-#2 /internal/eval.php(20): activate_plugin('zes-admin-updat...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/zes-admin-update-notification/wp-ze-admin-update-notifications.php on line 28
-[22-May-2025 21:29:16 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WP_ZAUN_PATH" in /wordpress/wp-content/plugins/zes-admin-update-notification/wp-ze-admin-update-notifications.php:28
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zes-admin-updat...')
-#2 /internal/eval.php(20): activate_plugin('zes-admin-updat...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/zes-admin-update-notification/wp-ze-admin-update-notifications.php on line 28
-[22-May-2025 21:32:14 UTC] PHP Warning:  The magic method zightaccess::__wakeup() must have public visibility in /wordpress/wp-content/plugins/zightaccess/zightaccess.php on line 69
-[22-May-2025 21:32:15 UTC] PHP Warning:  The magic method zightaccess::__wakeup() must have public visibility in /wordpress/wp-content/plugins/zightaccess/zightaccess.php on line 69
-[22-May-2025 21:32:22 UTC] PHP Warning:  The magic method zightaccess::__wakeup() must have public visibility in /wordpress/wp-content/plugins/zightaccess/zightaccess.php on line 69
-[22-May-2025 21:32:23 UTC] PHP Warning:  The magic method zightaccess::__wakeup() must have public visibility in /wordpress/wp-content/plugins/zightaccess/zightaccess.php on line 69
-[22-May-2025 21:32:31 UTC] PHP Warning:  The magic method zightaccess::__wakeup() must have public visibility in /wordpress/wp-content/plugins/zightaccess/zightaccess.php on line 69
-[22-May-2025 21:32:32 UTC] PHP Warning:  The magic method zightaccess::__wakeup() must have public visibility in /wordpress/wp-content/plugins/zightaccess/zightaccess.php on line 69
-[22-May-2025 21:34:09 UTC] PHP Fatal error:  Cannot redeclare update_term_meta() (previously declared in /wordpress/wp-includes/taxonomy.php:1471) in /wordpress/wp-content/plugins/termmeta-api/termmeta-api.php on line 33
-[22-May-2025 21:34:16 UTC] PHP Fatal error:  Cannot redeclare update_term_meta() (previously declared in /wordpress/wp-includes/taxonomy.php:1471) in /wordpress/wp-content/plugins/termmeta-api/termmeta-api.php on line 33
-[22-May-2025 21:34:24 UTC] PHP Fatal error:  Cannot redeclare update_term_meta() (previously declared in /wordpress/wp-includes/taxonomy.php:1471) in /wordpress/wp-content/plugins/termmeta-api/termmeta-api.php on line 33
-[22-May-2025 21:34:32 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ZIKIURL" in /wordpress/wp-content/plugins/zikiplugin/zikiplugin.php:11
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zikiplugin/ziki...')
-#2 /internal/eval.php(20): activate_plugin('zikiplugin/ziki...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/zikiplugin/zikiplugin.php on line 11
-[22-May-2025 21:34:40 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ZIKIURL" in /wordpress/wp-content/plugins/zikiplugin/zikiplugin.php:11
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zikiplugin/ziki...')
-#2 /internal/eval.php(20): activate_plugin('zikiplugin/ziki...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/zikiplugin/zikiplugin.php on line 11
-[22-May-2025 21:34:48 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ZIKIURL" in /wordpress/wp-content/plugins/zikiplugin/zikiplugin.php:11
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zikiplugin/ziki...')
-#2 /internal/eval.php(20): activate_plugin('zikiplugin/ziki...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/zikiplugin/zikiplugin.php on line 11
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"zine-press"},"options":{"activate":true}}) : Could not download "https://downloads.wordpress.org/plugin/zine-press.latest-stable.zip".
-  				Check if the URL is correct and the server is reachable.
-  				If it is reachable, the server might be blocking the request.
-  				Check the browser console and network tabs for more information.
-  
-  				## Does the console show the error "No 'Access-Control-Allow-Origin' header"?
-  
-  				This means the server that hosts your file does not allow requests from other sites
-  				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
-  				cross-origin file downloads. Learn more about CORS at
-  				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
-  
-  				If your file is on GitHub, load it from "raw.githubusercontent.com".
-  				Here's how to do that:
-  
-  				1. Start with the original GitHub URL of the file. For example:
-  				https://github.com/username/repository/blob/branch/filename.
-  				2. Replace "github.com" with "raw.githubusercontent.com".
-  				3. Remove the "/blob/" part of the URL.
-  
-  				The resulting URL should look like this:
-  				https://raw.githubusercontent.com/username/repository/branch/filename
-  
-  				Error:
-  				Error: Could not download "https://downloads.wordpress.org/plugin/zine-press.latest-stable.zip"
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
-      at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-    [cause]: Error: Could not download "https://downloads.wordpress.org/plugin/zine-press.latest-stable.zip".
-    				Check if the URL is correct and the server is reachable.
-    				If it is reachable, the server might be blocking the request.
-    				Check the browser console and network tabs for more information.
-    
-    				## Does the console show the error "No 'Access-Control-Allow-Origin' header"?
-    
-    				This means the server that hosts your file does not allow requests from other sites
-    				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
-    				cross-origin file downloads. Learn more about CORS at
-    				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
-    
-    				If your file is on GitHub, load it from "raw.githubusercontent.com".
-    				Here's how to do that:
-    
-    				1. Start with the original GitHub URL of the file. For example:
-    				https://github.com/username/repository/blob/branch/filename.
-    				2. Replace "github.com" with "raw.githubusercontent.com".
-    				3. Remove the "/blob/" part of the URL.
-    
-    				The resulting URL should look like this:
-    				https://raw.githubusercontent.com/username/repository/branch/filename
-    
-    				Error:
-    				Error: Could not download "https://downloads.wordpress.org/plugin/zine-press.latest-stable.zip"
-        at Ct.resolve (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1472:13)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async _.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/util/index.js:45:14)
-  }
-}
-
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE wp_times...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('UPDATE wp_times...')
+#3 /wordpress/wp-content/plugins/time-sheets/setup.php(167): WP_SQLite_DB->query('UPDATE wp_times...')
+#4 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#5 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#10 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#11 {main}</pre>
+ for query UPDATE wp_timesheet t
+				JOIN wp_timesheet_clients c ON t.client_name = c.ClientName
+				SET t.ClientId = c.ClientId
+				WHERE t.ClientId IS NULL made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:16 UTC] PHP Warning:  Undefined array key "HoursUsed" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3065
+[23-May-2025 22:27:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3066
+[23-May-2025 22:27:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3067
+[23-May-2025 22:27:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3068
+[23-May-2025 22:27:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_timesheet_client_projects` INNER JOIN ( SELECT `ProjectId` , sum ( `total_hours` ) as `sumhours` FROM `wp_timesheet` GROUP BY `ProjectId` ) `t` ON `wp_timesheet_client_projects`.`ProjectId` = `t`.`ProjectId</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, data_type, column_default
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_timesheet_client_projects` INNER JOIN ( SELECT `ProjectId` , sum ( `total_hours` ) as `sumhours` FROM `wp_timesheet` GROUP BY `ProjectId` ) `t` ON `wp_timesheet_client_projects`.`ProjectId` = `t`.`ProjectId</li>
+<li>Executing: UPDATE `wp_timesheet_client_projects` INNER JOIN ( SELECT `ProjectId` , sum ( `total_hours` ) as `sumhours` FROM `wp_timesheet` GROUP BY `ProjectId` ) `t` ON `wp_timesheet_client_projects`.`ProjectId` = `t`.`ProjectId` SET `HoursUsed` = `t`.`sumhours` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "INNER": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE wp_times...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('UPDATE wp_times...')
+#3 /wordpress/wp-content/plugins/time-sheets/setup.php(417): WP_SQLite_DB->query('UPDATE wp_times...')
+#4 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#5 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#10 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#11 {main}</pre>
+ for query UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:16 UTC] PHP Warning:  Undefined array key "HoursUsed" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3065
+[23-May-2025 22:27:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3066
+[23-May-2025 22:27:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3067
+[23-May-2025 22:27:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3068
+[23-May-2025 22:27:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet where week_complete = 1 GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_timesheet_client_projects` INNER JOIN ( SELECT `ProjectId` , sum ( `total_hours` ) as `sumhours` FROM `wp_timesheet` where `week_complete` = 1 GROUP BY `ProjectId` ) `t` ON `wp_timesheet_client_projects`.`ProjectId` = `t`.`ProjectId</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, data_type, column_default
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_timesheet_client_projects` INNER JOIN ( SELECT `ProjectId` , sum ( `total_hours` ) as `sumhours` FROM `wp_timesheet` where `week_complete` = 1 GROUP BY `ProjectId` ) `t` ON `wp_timesheet_client_projects`.`ProjectId` = `t`.`ProjectId</li>
+<li>Executing: UPDATE `wp_timesheet_client_projects` INNER JOIN ( SELECT `ProjectId` , sum ( `total_hours` ) as `sumhours` FROM `wp_timesheet` where `week_complete` = 1 GROUP BY `ProjectId` ) `t` ON `wp_timesheet_client_projects`.`ProjectId` = `t`.`ProjectId` SET `HoursUsed` = `t`.`sumhours` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "INNER": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE wp_times...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('UPDATE wp_times...')
+#3 /wordpress/wp-content/plugins/time-sheets/setup.php(426): WP_SQLite_DB->query('UPDATE wp_times...')
+#4 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#5 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#10 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#11 {main}</pre>
+ for query UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet where week_complete = 1 GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:18 UTC] PHP Warning:  Undefined array key "p`.`retainer_id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3065
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3066
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3067
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3068
+[23-May-2025 22:27:18 UTC] PHP Warning:  Undefined array key "p`.`hours_included" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3065
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3066
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3067
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3068
+[23-May-2025 22:27:18 UTC] PHP Warning:  Undefined array key "p`.`hourly_rate" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3065
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3066
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3067
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3068
+[23-May-2025 22:27:18 UTC] PHP Warning:  Undefined array key "p`.`notes" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3065
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3066
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3067
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3068
+[23-May-2025 22:27:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>update wp_timesheet_client_projects p
+					inner join wp_timesheet_recurring_invoices_monthly r on r.client_id = p.ClientId
+					set p.retainer_id = r.reqular_interval,
+						p.hours_included = r.MonthlyHours,
+						p.hourly_rate = r.HourlyRate,
+						p.notes = p.notes + ' ' + r.Notes
+					where p.IsRetainer = 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_timesheet_client_projects` `p` inner join `wp_timesheet_recurring_invoices_monthly` `r` on `r`.`client_id` = `p`.`ClientId</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, data_type, column_default
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_timesheet_client_projects` `p` inner join `wp_timesheet_recurring_invoices_monthly` `r` on `r`.`client_id` = `p`.`ClientId</li>
+<li>Executing: update `wp_timesheet_client_projects` `p` inner join `wp_timesheet_recurring_invoices_monthly` `r` on `r`.`client_id` = `p`.`ClientId` set `p`.`retainer_id` = `r`.`reqular_interval`, `p`.`hours_included` = `r`.`MonthlyHours`, `p`.`hourly_rate` = `r`.`HourlyRate`, `p`.`notes` = `p`.`notes` + ' ' + `r`.`Notes` where `p`.`IsRetainer` = 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "`p`": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('update wp_times...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('update wp_times...')
+#3 /wordpress/wp-content/plugins/time-sheets/setup.php(937): WP_SQLite_DB->query('update wp_times...')
+#4 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#5 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#10 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#11 {main}</pre>
+ for query update wp_timesheet_client_projects p
+					inner join wp_timesheet_recurring_invoices_monthly r on r.client_id = p.ClientId
+					set p.retainer_id = r.reqular_interval,
+						p.hours_included = r.MonthlyHours,
+						p.hourly_rate = r.HourlyRate,
+						p.notes = p.notes + ' ' + r.Notes
+					where p.IsRetainer = 1 made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:18 UTC] PHP Warning:  Undefined array key "p`.`retainer_id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3065
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3066
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3067
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3068
+[23-May-2025 22:27:18 UTC] PHP Warning:  Undefined array key "p`.`hours_included" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3065
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3066
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3067
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3068
+[23-May-2025 22:27:18 UTC] PHP Warning:  Undefined array key "p`.`hourly_rate" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3065
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3066
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3067
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3068
+[23-May-2025 22:27:18 UTC] PHP Warning:  Undefined array key "p`.`notes" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3065
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3066
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3067
+[23-May-2025 22:27:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3068
+[23-May-2025 22:27:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>update wp_timesheet_client_projects p
+				inner join wp_timesheet_recurring_invoices_monthly r on r.client_id = p.ClientId
+				set p.retainer_id = r.reqular_interval,
+				p.hours_included = r.MonthlyHours,
+				p.hourly_rate = r.HourlyRate,
+				p.notes = concat(p.notes, ' ', r.Notes)
+				where p.IsRetainer = 1
+				and p.notes = '0'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_timesheet_client_projects` `p` inner join `wp_timesheet_recurring_invoices_monthly` `r` on `r`.`client_id` = `p`.`ClientId</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, data_type, column_default
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_timesheet_client_projects` `p` inner join `wp_timesheet_recurring_invoices_monthly` `r` on `r`.`client_id` = `p`.`ClientId</li>
+<li>Executing: update `wp_timesheet_client_projects` `p` inner join `wp_timesheet_recurring_invoices_monthly` `r` on `r`.`client_id` = `p`.`ClientId` set `p`.`retainer_id` = `r`.`reqular_interval`, `p`.`hours_included` = `r`.`MonthlyHours`, `p`.`hourly_rate` = `r`.`HourlyRate`, `p`.`notes` = (`p`.`notes` || ' ' || `r`.`Notes`) where `p`.`IsRetainer` = 1 and `p`.`notes` = '0' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "`p`": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('update wp_times...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('update wp_times...')
+#3 /wordpress/wp-content/plugins/time-sheets/setup.php(966): WP_SQLite_DB->query('update wp_times...')
+#4 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#5 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#10 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#11 {main}</pre>
+ for query update wp_timesheet_client_projects p
+				inner join wp_timesheet_recurring_invoices_monthly r on r.client_id = p.ClientId
+				set p.retainer_id = r.reqular_interval,
+				p.hours_included = r.MonthlyHours,
+				p.hourly_rate = r.HourlyRate,
+				p.notes = concat(p.notes, ' ', r.Notes)
+				where p.IsRetainer = 1
+				and p.notes = '0' made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:29 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/time-sheets/time-sheets.php on line 577
+[23-May-2025 22:27:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_timesheet b
+				inner join wp_timesheet_client_projects a on b.ClientId = a.ClientId 
+					AND ProjectName = case when project_name = '' then 'Not Specified' else project_name end
+				SET b.ProjectId = a.ProjectId
+				WHERE b.ProjectId IS NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE wp_timesheet b
+				inner join wp_timesheet_client_projects a on b.ClientId = a.ClientId 
+					AND ProjectName = case when project_name = :param0  then :param1  else project_name end
+				SET b.ProjectId = a.ProjectId
+				WHERE rowid IN (SELECT rowid FROM wp_timesheet WHERE b.ProjectId IS NULL) | parameters: , Not Specified</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "b": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/time-sheets/setup.php(154): WP_SQLite_DB->query('UPDATE wp_times...')
+#2 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#3 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#8 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#9 {main}</pre>
+ for query UPDATE wp_timesheet b
+				inner join wp_timesheet_client_projects a on b.ClientId = a.ClientId 
+					AND ProjectName = case when project_name = '' then 'Not Specified' else project_name end
+				SET b.ProjectId = a.ProjectId
+				WHERE b.ProjectId IS NULL made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_timesheet t
+				JOIN wp_timesheet_clients c ON t.client_name = c.ClientName
+				SET t.ClientId = c.ClientId
+				WHERE t.ClientId IS NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE wp_timesheet t
+				JOIN wp_timesheet_clients c ON t.client_name = c.ClientName
+				SET t.ClientId = c.ClientId
+				WHERE rowid IN (SELECT rowid FROM wp_timesheet WHERE t.ClientId IS NULL) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "t": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/time-sheets/setup.php(167): WP_SQLite_DB->query('UPDATE wp_times...')
+#2 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#3 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#8 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#9 {main}</pre>
+ for query UPDATE wp_timesheet t
+				JOIN wp_timesheet_clients c ON t.client_name = c.ClientName
+				SET t.ClientId = c.ClientId
+				WHERE t.ClientId IS NULL made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_timesheet_client_projects
+			MODIFY HoursUsed numeric(12,2)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/time-sheets/setup.php(412): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#3 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#8 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_timesheet_client_projects
+			MODIFY HoursUsed numeric(12,2) made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "INNER": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/time-sheets/setup.php(417): WP_SQLite_DB->query('UPDATE wp_times...')
+#2 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#3 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#8 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#9 {main}</pre>
+ for query UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet where week_complete = 1 GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet where week_complete = 1 GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "INNER": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/time-sheets/setup.php(426): WP_SQLite_DB->query('UPDATE wp_times...')
+#2 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#3 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#8 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#9 {main}</pre>
+ for query UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet where week_complete = 1 GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_timesheet_custom_retainer_frequency` AUTO_INCREMENT = 100</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: AUTO_INCREMENT.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/time-sheets/setup.php(922): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#3 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#8 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#9 {main}</pre>
+ for query ALTER TABLE `wp_timesheet_custom_retainer_frequency` AUTO_INCREMENT = 100 made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>update wp_timesheet_client_projects p
+					inner join wp_timesheet_recurring_invoices_monthly r on r.client_id = p.ClientId
+					set p.retainer_id = r.reqular_interval,
+						p.hours_included = r.MonthlyHours,
+						p.hourly_rate = r.HourlyRate,
+						p.notes = p.notes + ' ' + r.Notes
+					where p.IsRetainer = 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: update wp_timesheet_client_projects p
+					inner join wp_timesheet_recurring_invoices_monthly r on r.client_id = p.ClientId
+					set p.retainer_id = r.reqular_interval,
+						p.hours_included = r.MonthlyHours,
+						p.hourly_rate = r.HourlyRate,
+						p.notes = p.notes + :param0  + r.Notes
+					where rowid IN (SELECT rowid FROM wp_timesheet_client_projects WHERE p.IsRetainer = 1) | parameters:  </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "p": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/time-sheets/setup.php(937): WP_SQLite_DB->query('update wp_times...')
+#2 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#3 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#8 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#9 {main}</pre>
+ for query update wp_timesheet_client_projects p
+					inner join wp_timesheet_recurring_invoices_monthly r on r.client_id = p.ClientId
+					set p.retainer_id = r.reqular_interval,
+						p.hours_included = r.MonthlyHours,
+						p.hourly_rate = r.HourlyRate,
+						p.notes = p.notes + ' ' + r.Notes
+					where p.IsRetainer = 1 made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>update wp_timesheet_client_projects p
+				inner join wp_timesheet_recurring_invoices_monthly r on r.client_id = p.ClientId
+				set p.retainer_id = r.reqular_interval,
+				p.hours_included = r.MonthlyHours,
+				p.hourly_rate = r.HourlyRate,
+				p.notes = concat(p.notes, ' ', r.Notes)
+				where p.IsRetainer = 1
+				and p.notes = '0'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: update wp_timesheet_client_projects p
+				inner join wp_timesheet_recurring_invoices_monthly r on r.client_id = p.ClientId
+				set p.retainer_id = r.reqular_interval,
+				p.hours_included = r.MonthlyHours,
+				p.hourly_rate = r.HourlyRate,
+				p.notes = (p.notes, :param0 , r.Notes)
+				where rowid IN (SELECT rowid FROM wp_timesheet_client_projects WHERE p.IsRetainer = 1
+				and p.notes = :param1 ) | parameters:  , 0</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "p": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/time-sheets/setup.php(966): WP_SQLite_DB->query('update wp_times...')
+#2 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#3 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#8 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#9 {main}</pre>
+ for query update wp_timesheet_client_projects p
+				inner join wp_timesheet_recurring_invoices_monthly r on r.client_id = p.ClientId
+				set p.retainer_id = r.reqular_interval,
+				p.hours_included = r.MonthlyHours,
+				p.hourly_rate = r.HourlyRate,
+				p.notes = concat(p.notes, ' ', r.Notes)
+				where p.IsRetainer = 1
+				and p.notes = '0' made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:40 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/time-sheets/time-sheets.php on line 577
+[23-May-2025 22:27:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_timesheet b
+				inner join wp_timesheet_client_projects a on b.ClientId = a.ClientId 
+					AND ProjectName = case when project_name = '' then 'Not Specified' else project_name end
+				SET b.ProjectId = a.ProjectId
+				WHERE b.ProjectId IS NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE wp_timesheet b
+				inner join wp_timesheet_client_projects a on b.ClientId = a.ClientId 
+					AND ProjectName = case when project_name = :param0  then :param1  else project_name end
+				SET b.ProjectId = a.ProjectId
+				WHERE rowid IN (SELECT rowid FROM wp_timesheet WHERE b.ProjectId IS NULL) | parameters: , Not Specified</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "b": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/time-sheets/setup.php(154): WP_SQLite_DB->query('UPDATE wp_times...')
+#2 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#3 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#8 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#9 {main}</pre>
+ for query UPDATE wp_timesheet b
+				inner join wp_timesheet_client_projects a on b.ClientId = a.ClientId 
+					AND ProjectName = case when project_name = '' then 'Not Specified' else project_name end
+				SET b.ProjectId = a.ProjectId
+				WHERE b.ProjectId IS NULL made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_timesheet t
+				JOIN wp_timesheet_clients c ON t.client_name = c.ClientName
+				SET t.ClientId = c.ClientId
+				WHERE t.ClientId IS NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE wp_timesheet t
+				JOIN wp_timesheet_clients c ON t.client_name = c.ClientName
+				SET t.ClientId = c.ClientId
+				WHERE rowid IN (SELECT rowid FROM wp_timesheet WHERE t.ClientId IS NULL) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "t": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/time-sheets/setup.php(167): WP_SQLite_DB->query('UPDATE wp_times...')
+#2 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#3 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#8 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#9 {main}</pre>
+ for query UPDATE wp_timesheet t
+				JOIN wp_timesheet_clients c ON t.client_name = c.ClientName
+				SET t.ClientId = c.ClientId
+				WHERE t.ClientId IS NULL made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_timesheet_client_projects
+			MODIFY HoursUsed numeric(12,2)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/time-sheets/setup.php(412): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#3 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#8 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_timesheet_client_projects
+			MODIFY HoursUsed numeric(12,2) made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "INNER": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/time-sheets/setup.php(417): WP_SQLite_DB->query('UPDATE wp_times...')
+#2 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#3 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#8 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#9 {main}</pre>
+ for query UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet where week_complete = 1 GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet where week_complete = 1 GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "INNER": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/time-sheets/setup.php(426): WP_SQLite_DB->query('UPDATE wp_times...')
+#2 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#3 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#8 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#9 {main}</pre>
+ for query UPDATE wp_timesheet_client_projects
+			INNER JOIN (SELECT ProjectId, sum(total_hours) as sumhours FROM wp_timesheet where week_complete = 1 GROUP BY ProjectId) t ON wp_timesheet_client_projects.ProjectId = t.ProjectId
+			SET HoursUsed = t.sumhours made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_timesheet_custom_retainer_frequency` AUTO_INCREMENT = 100</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: AUTO_INCREMENT.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/time-sheets/setup.php(922): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/time-sheets/setup.php(5): time_sheets_setup->create_tables()
+#3 /wordpress/wp-content/plugins/time-sheets/time-sheets.php(65): time_sheets_setup->create_db_objects()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): time_sheets_main->activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_time-s...', false)
+#8 /internal/eval.php(20): activate_plugin('time-sheets/tim...')
+#9 {main}</pre>
+ for query ALTER TABLE `wp_timesheet_custom_retainer_frequency` AUTO_INCREMENT = 100 made by activate_plugin, do_action('activate_time-sheets/time-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, time_sheets_main->activation, time_sheets_setup->create_db_objects, time_sheets_setup->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-May-2025 22:27:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>update wp_timesheet_client_projects p
+					inner join wp_timesheet_recurring_invoices_monthly r on r.client_id = p.ClientId
+					set p.retainer_id = r.reqular_interval,
+						p.hours_included = r.MonthlyHours,
+						p.hourly_rate = r.HourlyRate,
+						p.notes = p.notes + ' ' + r.Notes
+					where p.IsRetainer = 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: update wp_timesheet_client_p
 Node.js v23.11.0
