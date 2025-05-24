@@ -2,147 +2,424 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [22-May-2025 09:31:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [24-May-2025 02:23:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>DROP TABLE wp_sc_catalog;</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_spbc_scan_results` (`path` varchar(1024) NOT NULL,
+`size` int NOT NULL,
+`perms` int NOT NULL,
+`mtime` int NOT NULL,
+`detected_at` int NULL DEFAULT NULL,
+`source_type` enum('CORE', 'PLUGIN', 'THEME') NULL DEFAULT NULL,
+`source` varchar(300) NULL DEFAULT NULL,
+`source_status` set('UP_TO_DATE','OUTDATED','NOT_IN_DIRECTORY','UNKNOWN') NULL DEFAULT NULL,
+`version` varchar(20) NULL DEFAULT NULL,
+`checked_heuristic` int NOT NULL,
+`checked_signatures` int NOT NULL,
+`status` enum('UNKNOWN','OK','APPROVED_BY_USER','APPROVED_BY_CT','DENIED_BY_CT','MODIFIED','INFECTED','QUARANTINED', 'DENIED_BY_CLOUD', 'APPROVED_BY_CLOUD', 'ERROR') NOT NULL DEFAULT 'UNKNOWN',
+`error_msg` varchar(1024) NULL DEFAULT NULL,
+`severity` enum('CRITICAL', 'SUSPICIOUS', 'NONE') NULL DEFAULT NULL,
+`weak_spots` varchar(2048) NULL DEFAULT NULL,
+`difference` varchar(1024) NULL DEFAULT NULL,
+`last_sent` int NULL DEFAULT NULL,
+`fast_hash` varchar(32) NOT NULL,
+`full_hash` varchar(32) NULL DEFAULT NULL,
+`real_full_hash` varchar(32) NULL DEFAULT NULL,
+`previous_state` varchar(1024) NULL DEFAULT NULL,
+`q_path` varchar(1024) NULL DEFAULT NULL,
+`q_time` int NULL DEFAULT NULL,
+`pscan_status` enum('DANGEROUS', 'SAFE') NULL DEFAULT NULL,
+`pscan_processing_status` enum('NEW', 'DONE', 'ERROR', 'IN_SCANER', 'NEW_CLOUD', 'IN_CLOUD', 'IN_SANDBOX', 'NEW_SANDBOX', 'UNKNOWN') NULL DEFAULT NULL,
+`pscan_pending_queue` SMALLINT NULL DEFAULT NULL,
+`pscan_balls` varchar(1024) NULL DEFAULT NULL,
+`pscan_file_id` varchar(32) NULL DEFAULT NULL,
+`pscan_estimated_execution_time` int NULL DEFAULT NULL,
+PRIMARY KEY (`fast_hash`));</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_sc_catalog</li>
-<li>Executing: DELETE FROM `_wp_sqlite_mysql_information_schema_tables` WHERE `table_schema` = ? AND `table_name` = ? | parameters: database_name_here, wp_sc_catalog</li>
-<li>Executing: DELETE FROM `_wp_sqlite_mysql_information_schema_columns` WHERE `table_schema` = ? AND `table_name` = ? | parameters: database_name_here, wp_sc_catalog</li>
-<li>Executing: DELETE FROM `_wp_sqlite_mysql_information_schema_statistics` WHERE `table_schema` = ? AND `table_name` = ? | parameters: database_name_here, wp_sc_catalog</li>
-<li>Executing: DROP TABLE `wp_sc_catalog` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_sc_catalog
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: set.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DROP TABLE wp_s...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DROP TABLE wp_s...')
-#3 /wordpress/wp-content/plugins/sc-catalog/sc-catalog.php(47): WP_SQLite_DB->query('DROP TABLE wp_s...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): sc_catalog_install(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB.php(128): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB/TablesCreator.php(66): CleantalkSP\SpbctWP\DB->execute('CREATE TABLE IF...')
+#3 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/Activator.php(31): CleantalkSP\SpbctWP\DB\TablesCreator->createTable('wp_spbc_scan_re...')
+#4 /wordpress/wp-content/plugins/security-malware-firewall/security-malware-firewall.php(505): CleantalkSP\SpbctWP\Activator::activation(false, true)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spbc_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_securi...', false)
+#9 /internal/eval.php(20): activate_plugin('security-malwar...')
+#10 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_spbc_scan_results` (`path` varchar(1024) NOT NULL,
+`size` int NOT NULL,
+`perms` int NOT NULL,
+`mtime` int NOT NULL,
+`detected_at` int NULL DEFAULT NULL,
+`source_type` enum('CORE', 'PLUGIN', 'THEME') NULL DEFAULT NULL,
+`source` varchar(300) NULL DEFAULT NULL,
+`source_status` set('UP_TO_DATE','OUTDATED','NOT_IN_DIRECTORY','UNKNOWN') NULL DEFAULT NULL,
+`version` varchar(20) NULL DEFAULT NULL,
+`checked_heuristic` int NOT NULL,
+`checked_signatures` int NOT NULL,
+`status` enum('UNKNOWN','OK','APPROVED_BY_USER','APPROVED_BY_CT','DENIED_BY_CT','MODIFIED','INFECTED','QUARANTINED', 'DENIED_BY_CLOUD', 'APPROVED_BY_CLOUD', 'ERROR') NOT NULL DEFAULT 'UNKNOWN',
+`error_msg` varchar(1024) NULL DEFAULT NULL,
+`severity` enum('CRITICAL', 'SUSPICIOUS', 'NONE') NULL DEFAULT NULL,
+`weak_spots` varchar(2048) NULL DEFAULT NULL,
+`difference` varchar(1024) NULL DEFAULT NULL,
+`last_sent` int NULL DEFAULT NULL,
+`fast_hash` varchar(32) NOT NULL,
+`full_hash` varchar(32) NULL DEFAULT NULL,
+`real_full_hash` varchar(32) NULL DEFAULT NULL,
+`previous_state` varchar(1024) NULL DEFAULT NULL,
+`q_path` varchar(1024) NULL DEFAULT NULL,
+`q_time` int NULL DEFAULT NULL,
+`pscan_status` enum('DANGEROUS', 'SAFE') NULL DEFAULT NULL,
+`pscan_processing_status` enum('NEW', 'DONE', 'ERROR', 'IN_SCANER', 'NEW_CLOUD', 'IN_CLOUD', 'IN_SANDBOX', 'NEW_SANDBOX', 'UNKNOWN') NULL DEFAULT NULL,
+`pscan_pending_queue` SMALLINT NULL DEFAULT NULL,
+`pscan_balls` varchar(1024) NULL DEFAULT NULL,
+`pscan_file_id` varchar(32) NULL DEFAULT NULL,
+`pscan_estimated_execution_time` int NULL DEFAULT NULL,
+PRIMARY KEY (`fast_hash`)); made by activate_plugin, do_action('activate_security-malware-firewall/security-malware-firewall.php'), WP_Hook->do_action, WP_Hook->apply_filters, spbc_activation, CleantalkSP\SpbctWP\Activator::activation, CleantalkSP\SpbctWP\DB\TablesCreator->createTable, CleantalkSP\SpbctWP\DB->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[24-May-2025 02:23:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_spbc_scan_signatures` (`id` int unsigned NOT NULL AUTO_INCREMENT,
+`name` varchar(128) NOT NULL,
+`body` text NOT NULL,
+`type` enum('FILE','CODE_PHP','CODE_HTML','CODE_JS','WAF_RULE') NOT NULL,
+`attack_type` set('SQL_INJECTION','XSS','MALWARE','EXPLOIT','SUSPICIOUS') NOT NULL,
+`waf_action` enum('DENY','LOG','ALLOW') NULL DEFAULT NULL,
+`submitted` datetime NOT NULL,
+`cci` text NULL DEFAULT NULL,
+`waf_headers` varchar(1024) NULL DEFAULT NULL,
+`waf_url` varchar(512) NULL DEFAULT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY (`name`));</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: set.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB.php(128): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB/TablesCreator.php(66): CleantalkSP\SpbctWP\DB->execute('CREATE TABLE IF...')
+#3 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/Activator.php(31): CleantalkSP\SpbctWP\DB\TablesCreator->createTable('wp_spbc_scan_si...')
+#4 /wordpress/wp-content/plugins/security-malware-firewall/security-malware-firewall.php(505): CleantalkSP\SpbctWP\Activator::activation(false, true)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spbc_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_securi...', false)
+#9 /internal/eval.php(20): activate_plugin('security-malwar...')
+#10 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_spbc_scan_signatures` (`id` int unsigned NOT NULL AUTO_INCREMENT,
+`name` varchar(128) NOT NULL,
+`body` text NOT NULL,
+`type` enum('FILE','CODE_PHP','CODE_HTML','CODE_JS','WAF_RULE') NOT NULL,
+`attack_type` set('SQL_INJECTION','XSS','MALWARE','EXPLOIT','SUSPICIOUS') NOT NULL,
+`waf_action` enum('DENY','LOG','ALLOW') NULL DEFAULT NULL,
+`submitted` datetime NOT NULL,
+`cci` text NULL DEFAULT NULL,
+`waf_headers` varchar(1024) NULL DEFAULT NULL,
+`waf_url` varchar(512) NULL DEFAULT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY (`name`)); made by activate_plugin, do_action('activate_security-malware-firewall/security-malware-firewall.php'), WP_Hook->do_action, WP_Hook->apply_filters, spbc_activation, CleantalkSP\SpbctWP\Activator::activation, CleantalkSP\SpbctWP\DB\TablesCreator->createTable, CleantalkSP\SpbctWP\DB->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[24-May-2025 02:24:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_spbc_scan_results` (`path` varchar(1024) NOT NULL,
+`size` int NOT NULL,
+`perms` int NOT NULL,
+`mtime` int NOT NULL,
+`detected_at` int NULL DEFAULT NULL,
+`source_type` enum('CORE', 'PLUGIN', 'THEME') NULL DEFAULT NULL,
+`source` varchar(300) NULL DEFAULT NULL,
+`source_status` set('UP_TO_DATE','OUTDATED','NOT_IN_DIRECTORY','UNKNOWN') NULL DEFAULT NULL,
+`version` varchar(20) NULL DEFAULT NULL,
+`checked_heuristic` int NOT NULL,
+`checked_signatures` int NOT NULL,
+`status` enum('UNKNOWN','OK','APPROVED_BY_USER','APPROVED_BY_CT','DENIED_BY_CT','MODIFIED','INFECTED','QUARANTINED', 'DENIED_BY_CLOUD', 'APPROVED_BY_CLOUD', 'ERROR') NOT NULL DEFAULT 'UNKNOWN',
+`error_msg` varchar(1024) NULL DEFAULT NULL,
+`severity` enum('CRITICAL', 'SUSPICIOUS', 'NONE') NULL DEFAULT NULL,
+`weak_spots` varchar(2048) NULL DEFAULT NULL,
+`difference` varchar(1024) NULL DEFAULT NULL,
+`last_sent` int NULL DEFAULT NULL,
+`fast_hash` varchar(32) NOT NULL,
+`full_hash` varchar(32) NULL DEFAULT NULL,
+`real_full_hash` varchar(32) NULL DEFAULT NULL,
+`previous_state` varchar(1024) NULL DEFAULT NULL,
+`q_path` varchar(1024) NULL DEFAULT NULL,
+`q_time` int NULL DEFAULT NULL,
+`pscan_status` enum('DANGEROUS', 'SAFE') NULL DEFAULT NULL,
+`pscan_processing_status` enum('NEW', 'DONE', 'ERROR', 'IN_SCANER', 'NEW_CLOUD', 'IN_CLOUD', 'IN_SANDBOX', 'NEW_SANDBOX', 'UNKNOWN') NULL DEFAULT NULL,
+`pscan_pending_queue` SMALLINT NULL DEFAULT NULL,
+`pscan_balls` varchar(1024) NULL DEFAULT NULL,
+`pscan_file_id` varchar(32) NULL DEFAULT NULL,
+`pscan_estimated_execution_time` int NULL DEFAULT NULL,
+PRIMARY KEY (`fast_hash`));</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: set.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB.php(128): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB/TablesCreator.php(66): CleantalkSP\SpbctWP\DB->execute('CREATE TABLE IF...')
+#3 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/Activator.php(31): CleantalkSP\SpbctWP\DB\TablesCreator->createTable('wp_spbc_scan_re...')
+#4 /wordpress/wp-content/plugins/security-malware-firewall/security-malware-firewall.php(505): CleantalkSP\SpbctWP\Activator::activation(false, true)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spbc_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_securi...', false)
+#9 /internal/eval.php(20): activate_plugin('security-malwar...')
+#10 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_spbc_scan_results` (`path` varchar(1024) NOT NULL,
+`size` int NOT NULL,
+`perms` int NOT NULL,
+`mtime` int NOT NULL,
+`detected_at` int NULL DEFAULT NULL,
+`source_type` enum('CORE', 'PLUGIN', 'THEME') NULL DEFAULT NULL,
+`source` varchar(300) NULL DEFAULT NULL,
+`source_status` set('UP_TO_DATE','OUTDATED','NOT_IN_DIRECTORY','UNKNOWN') NULL DEFAULT NULL,
+`version` varchar(20) NULL DEFAULT NULL,
+`checked_heuristic` int NOT NULL,
+`checked_signatures` int NOT NULL,
+`status` enum('UNKNOWN','OK','APPROVED_BY_USER','APPROVED_BY_CT','DENIED_BY_CT','MODIFIED','INFECTED','QUARANTINED', 'DENIED_BY_CLOUD', 'APPROVED_BY_CLOUD', 'ERROR') NOT NULL DEFAULT 'UNKNOWN',
+`error_msg` varchar(1024) NULL DEFAULT NULL,
+`severity` enum('CRITICAL', 'SUSPICIOUS', 'NONE') NULL DEFAULT NULL,
+`weak_spots` varchar(2048) NULL DEFAULT NULL,
+`difference` varchar(1024) NULL DEFAULT NULL,
+`last_sent` int NULL DEFAULT NULL,
+`fast_hash` varchar(32) NOT NULL,
+`full_hash` varchar(32) NULL DEFAULT NULL,
+`real_full_hash` varchar(32) NULL DEFAULT NULL,
+`previous_state` varchar(1024) NULL DEFAULT NULL,
+`q_path` varchar(1024) NULL DEFAULT NULL,
+`q_time` int NULL DEFAULT NULL,
+`pscan_status` enum('DANGEROUS', 'SAFE') NULL DEFAULT NULL,
+`pscan_processing_status` enum('NEW', 'DONE', 'ERROR', 'IN_SCANER', 'NEW_CLOUD', 'IN_CLOUD', 'IN_SANDBOX', 'NEW_SANDBOX', 'UNKNOWN') NULL DEFAULT NULL,
+`pscan_pending_queue` SMALLINT NULL DEFAULT NULL,
+`pscan_balls` varchar(1024) NULL DEFAULT NULL,
+`pscan_file_id` varchar(32) NULL DEFAULT NULL,
+`pscan_estimated_execution_time` int NULL DEFAULT NULL,
+PRIMARY KEY (`fast_hash`)); made by activate_plugin, do_action('activate_security-malware-firewall/security-malware-firewall.php'), WP_Hook->do_action, WP_Hook->apply_filters, spbc_activation, CleantalkSP\SpbctWP\Activator::activation, CleantalkSP\SpbctWP\DB\TablesCreator->createTable, CleantalkSP\SpbctWP\DB->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[24-May-2025 02:24:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_spbc_scan_signatures` (`id` int unsigned NOT NULL AUTO_INCREMENT,
+`name` varchar(128) NOT NULL,
+`body` text NOT NULL,
+`type` enum('FILE','CODE_PHP','CODE_HTML','CODE_JS','WAF_RULE') NOT NULL,
+`attack_type` set('SQL_INJECTION','XSS','MALWARE','EXPLOIT','SUSPICIOUS') NOT NULL,
+`waf_action` enum('DENY','LOG','ALLOW') NULL DEFAULT NULL,
+`submitted` datetime NOT NULL,
+`cci` text NULL DEFAULT NULL,
+`waf_headers` varchar(1024) NULL DEFAULT NULL,
+`waf_url` varchar(512) NULL DEFAULT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY (`name`));</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: set.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB.php(128): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB/TablesCreator.php(66): CleantalkSP\SpbctWP\DB->execute('CREATE TABLE IF...')
+#3 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/Activator.php(31): CleantalkSP\SpbctWP\DB\TablesCreator->createTable('wp_spbc_scan_si...')
+#4 /wordpress/wp-content/plugins/security-malware-firewall/security-malware-firewall.php(505): CleantalkSP\SpbctWP\Activator::activation(false, true)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spbc_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_securi...', false)
+#9 /internal/eval.php(20): activate_plugin('security-malwar...')
+#10 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_spbc_scan_signatures` (`id` int unsigned NOT NULL AUTO_INCREMENT,
+`name` varchar(128) NOT NULL,
+`body` text NOT NULL,
+`type` enum('FILE','CODE_PHP','CODE_HTML','CODE_JS','WAF_RULE') NOT NULL,
+`attack_type` set('SQL_INJECTION','XSS','MALWARE','EXPLOIT','SUSPICIOUS') NOT NULL,
+`waf_action` enum('DENY','LOG','ALLOW') NULL DEFAULT NULL,
+`submitted` datetime NOT NULL,
+`cci` text NULL DEFAULT NULL,
+`waf_headers` varchar(1024) NULL DEFAULT NULL,
+`waf_url` varchar(512) NULL DEFAULT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY (`name`)); made by activate_plugin, do_action('activate_security-malware-firewall/security-malware-firewall.php'), WP_Hook->do_action, WP_Hook->apply_filters, spbc_activation, CleantalkSP\SpbctWP\Activator::activation, CleantalkSP\SpbctWP\DB\TablesCreator->createTable, CleantalkSP\SpbctWP\DB->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[24-May-2025 02:24:17 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[24-May-2025 02:24:18 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[24-May-2025 02:24:26 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[24-May-2025 02:24:27 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[24-May-2025 02:24:36 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[24-May-2025 02:24:36 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[24-May-2025 02:25:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_ami_share_socials_settings (
+			id BIGINT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+			name TEXT NULL,
+			status bool NULL
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_ami_share_socials_settings, id, bigint(20)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_ami_share_socials_settings, name, text</li>
+<li>Executing: CREATE TABLE &quot;wp_ami_share_socials_settings&quot; (
+&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;name&quot; text COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: CREATE  INDEX  &quot;wp_ami_share_socials_settings__&quot; ON &quot;wp_ami_share_socials_settings&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_ami_share_socials_settings, wp_ami_share_socials_settings__, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/share-social-networks/includes/class-share-sociale-networks-activator.php(44): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/share-social-networks/share-sociale-networks.php(51): Share_Sociale_Networks_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_share_sociale_networks(false)
 #5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sc-cat...', false)
-#8 /internal/eval.php(20): activate_plugin('sc-catalog/sc-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_share-...', false)
+#8 /internal/eval.php(20): activate_plugin('share-social-ne...')
 #9 {main}</pre>
- for query DROP TABLE wp_sc_catalog; made by activate_plugin, do_action('activate_sc-catalog/sc-catalog.php'), WP_Hook->do_action, WP_Hook->apply_filters, sc_catalog_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 09:31:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE wp_ami_share_socials_settings (
+			id BIGINT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+			name TEXT NULL,
+			status bool NULL
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_share-social-networks/share-sociale-networks.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_share_sociale_networks, Share_Sociale_Networks_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[24-May-2025 02:25:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>DROP TABLE wp_sc_catalog;</p>
+<p>INSERT INTO `wp_ami_share_socials_settings` (`name`, `status`)VALUES ('facebook', TRUE),('linkedin', TRUE),('pinterest', TRUE),('reddit', TRUE),('telegram', TRUE),('tumblr', TRUE),('twitter', TRUE),('vk', TRUE);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: DROP TABLE wp_sc_catalog; | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_ami_share_socials_settings` (`name`, `status`)VALUES (:param0 , TRUE),(:param1 , TRUE),(:param2 , TRUE),(:param3 , TRUE),(:param4 , TRUE),(:param5 , TRUE),(:param6 , TRUE),(:param7 , TRUE); | parameters: facebook, linkedin, pinterest, reddit, telegram, tumblr, twitter, vk</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sc_catalog.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ami_share_socials_settings.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/sc-catalog/sc-catalog.php(47): WP_SQLite_DB->query('DROP TABLE wp_s...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): sc_catalog_install(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sc-cat...', false)
-#6 /internal/eval.php(20): activate_plugin('sc-catalog/sc-c...')
-#7 {main}</pre>
- for query DROP TABLE wp_sc_catalog; made by activate_plugin, do_action('activate_sc-catalog/sc-catalog.php'), WP_Hook->do_action, WP_Hook->apply_filters, sc_catalog_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 09:31:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/share-social-networks/includes/class-share-sociale-networks-activator.php(68): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-content/plugins/share-social-networks/share-sociale-networks.php(51): Share_Sociale_Networks_Activator::activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): activate_share_sociale_networks(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_share-...', false)
+#7 /internal/eval.php(20): activate_plugin('share-social-ne...')
+#8 {main}</pre>
+ for query INSERT INTO `wp_ami_share_socials_settings` (`name`, `status`)VALUES ('facebook', TRUE),('linkedin', TRUE),('pinterest', TRUE),('reddit', TRUE),('telegram', TRUE),('tumblr', TRUE),('twitter', TRUE),('vk', TRUE); made by activate_plugin, do_action('activate_share-social-networks/share-sociale-networks.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_share_sociale_networks, Share_Sociale_Networks_Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[24-May-2025 02:25:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>DROP TABLE wp_sc_catalog;</p>
+<p>CREATE TABLE wp_ami_share_socials_settings (
+			id BIGINT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+			name TEXT NULL,
+			status bool NULL
+		) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: DROP TABLE wp_sc_catalog; | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_ami_share_socials_settings, id, bigint(20)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_ami_share_socials_settings, name, text</li>
+<li>Executing: CREATE TABLE &quot;wp_ami_share_socials_settings&quot; (
+&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;name&quot; text COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: CREATE  INDEX  &quot;wp_ami_share_socials_settings__&quot; ON &quot;wp_ami_share_socials_settings&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_ami_share_socials_settings, wp_ami_share_socials_settings__, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sc_catalog.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/sc-catalog/sc-catalog.php(47): WP_SQLite_DB->query('DROP TABLE wp_s...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): sc_catalog_install(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sc-cat...', false)
-#6 /internal/eval.php(20): activate_plugin('sc-catalog/sc-c...')
-#7 {main}</pre>
- for query DROP TABLE wp_sc_catalog; made by activate_plugin, do_action('activate_sc-catalog/sc-catalog.php'), WP_Hook->do_action, WP_Hook->apply_filters, sc_catalog_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-May-2025 09:34:16 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/springbot/views/springbot-requirements-error.php on line 13
-[22-May-2025 09:34:25 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/springbot/views/springbot-requirements-error.php on line 13
-[22-May-2025 09:34:34 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/springbot/views/springbot-requirements-error.php on line 13
-[22-May-2025 09:37:11 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 09:37:12 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 09:37:19 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 09:37:20 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 09:37:28 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 09:37:29 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-May-2025 09:39:46 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Sexy_Login_Widg...')
-#2 /wordpress/wp-content/plugins/sexy-login/sexy-login-init.php(25): register_widget('Sexy_Login_Widg...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): sexy_login_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/share-social-networks/includes/class-share-sociale-networks-activator.php(44): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/share-social-networks/share-sociale-networks.php(51): Share_Sociale_Networks_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_share_sociale_networks(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_share-...', false)
+#8 /internal/eval.php(20): activate_plugin('share-social-ne...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_ami_share_socials_settings (
+			id BIGINT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+			name TEXT NULL,
+			status bool NULL
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_share-social-networks/share-sociale-networks.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_share_sociale_networks, Share_Sociale_Networks_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[24-May-2025 02:25:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_ami_share_socials_settings` (`name`, `status`)VALUES ('facebook', TRUE),('linkedin', TRUE),('pinterest', TRUE),('reddit', TRUE),('telegram', TRUE),('tumblr', TRUE),('twitter', TRUE),('vk', TRUE);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_ami_share_socials_settings` (`name`, `status`)VALUES (:param0 , TRUE),(:param1 , TRUE),(:param2 , TRUE),(:param3 , TRUE),(:param4 , TRUE),(:param5 , TRUE),(:param6 , TRUE),(:param7 , TRUE); | parameters: facebook, linkedin, pinterest, reddit, telegram, tumblr, twitter, vk</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ami_share_socials_settings.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/share-social-networks/includes/class-share-sociale-networks-activator.php(68): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-content/plugins/share-social-networks/share-sociale-networks.php(51): Share_Sociale_Networks_Activator::activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): activate_share_sociale_networks(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[22-May-2025 09:39:55 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Sexy_Login_Widg...')
-#2 /wordpress/wp-content/plugins/sexy-login/sexy-login-init.php(25): register_widget('Sexy_Login_Widg...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): sexy_login_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[22-May-2025 09:40:04 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Sexy_Login_Widg...')
-#2 /wordpress/wp-content/plugins/sexy-login/sexy-login-init.php(25): register_widget('Sexy_Login_Widg...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): sexy_login_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_share-...', false)
+#7 /internal/eval.php(20): activate_plugin('share-social-ne...')
+#8 {main}</pre>
+ for query INSERT INTO `wp_ami_share_socials_settings` (`name`, `status`)VALUES ('facebook', TRUE),('linkedin', TRUE),('pinterest', TRUE),('reddit', TRUE),('telegram', TRUE),('tumblr', TRUE),('twitter', TRUE),('vk', TRUE); made by activate_plugin, do_action('activate_share-social-networks/share-sociale-networks.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_share_sociale_networks, Share_Sociale_Networks_Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
