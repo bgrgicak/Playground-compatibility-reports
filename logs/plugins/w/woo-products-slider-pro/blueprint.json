@@ -1,5 +1,6 @@
 {
-  "landingPage": "/wp-admin/plugins.php",
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/wp-admin/admin.php?page=woo-products-slider-pro",
   "preferredVersions": {
     "php": "8.0",
     "wp": "latest"
@@ -17,6 +18,11 @@
         "WP_AUTO_UPDATE_CORE": false,
         "DISABLE_WP_CRON": true
       }
+    },
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
     },
     {
       "step": "installPlugin",
@@ -39,9 +45,15 @@
       }
     },
     {
-      "step": "login",
-      "username": "admin",
-      "password": "password"
+      "step": "importWxr",
+      "file": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/sajjadh47/wc-store-dummy-data/refs/heads/main/sample_products.xml"
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php include 'wordpress/wp-load.php'; delete_transient( '_wc_activation_redirect' );"
     }
   ]
 }
