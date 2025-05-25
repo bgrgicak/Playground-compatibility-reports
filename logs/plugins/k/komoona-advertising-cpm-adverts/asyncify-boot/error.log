@@ -2,97 +2,151 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [24-May-2025 05:26:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [25-May-2025 16:54:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_otgkofcs_knights (
-		knight_id mediumint(9) NOT NULL AUTO_INCREMENT,
-		name_first varchar(50) NOT NULL,
-		name_last varchar(50) NOT NULL,
-		council_id mediumint(9),
-		score mediumint(9),
-		PRIMARY KEY knight_id (knight_id)
-		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>INSERT INTO `wp_knowledgegraph` (`id_knowledgegraph`, `knowledgegraph_actif`, `knowledgegraph_logo`, `knowledgegraph_tel`, `knowledgegraph_type_tel`, `knowledgegraph_type`, `knowledgegraph_nom`, `knowledgegraph_facebook`, `knowledgegraph_twitter`, `knowledgegraph_googleplus`, `knowledgegraph_instagram`, `knowledgegraph_linkedin`) VALUES (' ', 'ON', '#', '#', '#', 'Organization', '#', 'http://', 'http://', 'http://', 'http://', 'http://')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_knowledgegraph</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_knowledgegraph</li>
+<li>Executing: INSERT INTO `wp_knowledgegraph` (`id_knowledgegraph`, `knowledgegraph_actif`, `knowledgegraph_logo`, `knowledgegraph_tel`, `knowledgegraph_type_tel`, `knowledgegraph_type`, `knowledgegraph_nom`, `knowledgegraph_facebook`, `knowledgegraph_twitter`, `knowledgegraph_googleplus`, `knowledgegraph_instagram`, `knowledgegraph_linkedin`) SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8`, `column9`, `column10`, `column11`, `column12` FROM (VALUES ( ' ' , 'ON' , '#' , '#' , '#' , 'Organization' , '#' , 'http://' , 'http://' , 'http://' , 'http://' , 'http://' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+SQLSTATE[HY000]: General error: 20 datatype mismatch
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/kofc-state/kofc-state.php(109): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): otgkofcs_install(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_kofc-s...', false)
-#7 /internal/eval.php(20): activate_plugin('kofc-state/kofc...')
-#8 {main}</pre>
- for query CREATE TABLE wp_otgkofcs_knights (
-		knight_id mediumint(9) NOT NULL AUTO_INCREMENT,
-		name_first varchar(50) NOT NULL,
-		name_last varchar(50) NOT NULL,
-		council_id mediumint(9),
-		score mediumint(9),
-		PRIMARY KEY knight_id (knight_id)
-		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_kofc-state/kofc-state.php'), WP_Hook->do_action, WP_Hook->apply_filters, otgkofcs_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-May-2025 05:26:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_knowledgegra...', Array, Array, 'INSERT')
+#5 /wordpress/wp-content/plugins/knowledge-graph/index.php(59): wpdb->insert('wp_knowledgegra...', Array, Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): insert_table_knowledgegraph(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_knowle...', false)
+#10 /internal/eval.php(20): activate_plugin('knowledge-graph...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_knowledgegraph` (`id_knowledgegraph`, `knowledgegraph_actif`, `knowledgegraph_logo`, `knowledgegraph_tel`, `knowledgegraph_type_tel`, `knowledgegraph_type`, `knowledgegraph_nom`, `knowledgegraph_facebook`, `knowledgegraph_twitter`, `knowledgegraph_googleplus`, `knowledgegraph_instagram`, `knowledgegraph_linkedin`) VALUES (' ', 'ON', '#', '#', '#', 'Organization', '#', 'http://', 'http://', 'http://', 'http://', 'http://') made by activate_plugin, do_action('activate_knowledge-graph/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, insert_table_knowledgegraph, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[25-May-2025 16:54:47 UTC] PHP Warning:  Undefined variable $sql in /wordpress/wp-content/plugins/knowledge-graph/index.php on line 62
+[25-May-2025 16:54:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_otgkofcs_knights (
-		knight_id mediumint(9) NOT NULL AUTO_INCREMENT,
-		name_first varchar(50) NOT NULL,
-		name_last varchar(50) NOT NULL,
-		council_id mediumint(9),
-		score mediumint(9),
-		PRIMARY KEY knight_id (knight_id)
-		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>INSERT INTO `wp_knowledgegraph` (`id_knowledgegraph`, `knowledgegraph_actif`, `knowledgegraph_logo`, `knowledgegraph_tel`, `knowledgegraph_type_tel`, `knowledgegraph_type`, `knowledgegraph_nom`, `knowledgegraph_facebook`, `knowledgegraph_twitter`, `knowledgegraph_googleplus`, `knowledgegraph_instagram`, `knowledgegraph_linkedin`) VALUES (' ', 'ON', '#', '#', '#', 'Organization', '#', 'http://', 'http://', 'http://', 'http://', 'http://')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_knowledgegraph` (`id_knowledgegraph`, `knowledgegraph_actif`, `knowledgegraph_logo`, `knowledgegraph_tel`, `knowledgegraph_type_tel`, `knowledgegraph_type`, `knowledgegraph_nom`, `knowledgegraph_facebook`, `knowledgegraph_twitter`, `knowledgegraph_googleplus`, `knowledgegraph_instagram`, `knowledgegraph_linkedin`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 , :param7 , :param8 , :param9 , :param10 , :param11 ) | parameters:  , ON, #, #, #, Organization, #, http://, http://, http://, http://, http://</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 20 datatype mismatch.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/kofc-state/kofc-state.php(109): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): otgkofcs_install(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_kofc-s...', false)
-#7 /internal/eval.php(20): activate_plugin('kofc-state/kofc...')
-#8 {main}</pre>
- for query CREATE TABLE wp_otgkofcs_knights (
-		knight_id mediumint(9) NOT NULL AUTO_INCREMENT,
-		name_first varchar(50) NOT NULL,
-		name_last varchar(50) NOT NULL,
-		council_id mediumint(9),
-		score mediumint(9),
-		PRIMARY KEY knight_id (knight_id)
-		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_kofc-state/kofc-state.php'), WP_Hook->do_action, WP_Hook->apply_filters, otgkofcs_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-May-2025 05:27:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/komentbox/komentbox.php on line 34
-[24-May-2025 05:27:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/komentbox/komentbox.php on line 27
-[24-May-2025 05:27:17 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/komentbox/komentbox.php on line 34
-[24-May-2025 05:27:17 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/komentbox/komentbox.php on line 27
-[24-May-2025 05:27:26 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/komentbox/komentbox.php on line 34
-[24-May-2025 05:27:26 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/komentbox/komentbox.php on line 27
-[24-May-2025 05:28:03 UTC] PHP Warning:  Undefined variable $position in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Func.php on line 91
-[24-May-2025 05:28:03 UTC] PHP Warning:  Undefined array key "komoona_ads_hidden" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 45
-[24-May-2025 05:28:03 UTC] PHP Warning:  Undefined array key "komoona_ads_create" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 51
-[24-May-2025 05:28:03 UTC] PHP Warning:  Undefined array key "komoona_ads_add_site" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 60
-[24-May-2025 05:28:04 UTC] PHP Warning:  Undefined variable $position in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Func.php on line 91
-[24-May-2025 05:28:04 UTC] PHP Warning:  Undefined array key "komoona_ads_hidden" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 45
-[24-May-2025 05:28:04 UTC] PHP Warning:  Undefined array key "komoona_ads_create" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 51
-[24-May-2025 05:28:04 UTC] PHP Warning:  Undefined array key "komoona_ads_add_site" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 60
-[24-May-2025 05:28:04 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_knowledgegra...', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/knowledge-graph/index.php(59): wpdb->insert('wp_knowledgegra...', Array, Array)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): insert_table_knowledgegraph(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_knowle...', false)
+#8 /internal/eval.php(20): activate_plugin('knowledge-graph...')
+#9 {main}</pre>
+ for query INSERT INTO `wp_knowledgegraph` (`id_knowledgegraph`, `knowledgegraph_actif`, `knowledgegraph_logo`, `knowledgegraph_tel`, `knowledgegraph_type_tel`, `knowledgegraph_type`, `knowledgegraph_nom`, `knowledgegraph_facebook`, `knowledgegraph_twitter`, `knowledgegraph_googleplus`, `knowledgegraph_instagram`, `knowledgegraph_linkedin`) VALUES (' ', 'ON', '#', '#', '#', 'Organization', '#', 'http://', 'http://', 'http://', 'http://', 'http://') made by activate_plugin, do_action('activate_knowledge-graph/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, insert_table_knowledgegraph, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[25-May-2025 16:54:56 UTC] PHP Warning:  Undefined variable $sql in /wordpress/wp-content/plugins/knowledge-graph/index.php on line 62
+[25-May-2025 16:55:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_knowledgegraph` (`id_knowledgegraph`, `knowledgegraph_actif`, `knowledgegraph_logo`, `knowledgegraph_tel`, `knowledgegraph_type_tel`, `knowledgegraph_type`, `knowledgegraph_nom`, `knowledgegraph_facebook`, `knowledgegraph_twitter`, `knowledgegraph_googleplus`, `knowledgegraph_instagram`, `knowledgegraph_linkedin`) VALUES (' ', 'ON', '#', '#', '#', 'Organization', '#', 'http://', 'http://', 'http://', 'http://', 'http://')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_knowledgegraph` (`id_knowledgegraph`, `knowledgegraph_actif`, `knowledgegraph_logo`, `knowledgegraph_tel`, `knowledgegraph_type_tel`, `knowledgegraph_type`, `knowledgegraph_nom`, `knowledgegraph_facebook`, `knowledgegraph_twitter`, `knowledgegraph_googleplus`, `knowledgegraph_instagram`, `knowledgegraph_linkedin`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 , :param7 , :param8 , :param9 , :param10 , :param11 ) | parameters:  , ON, #, #, #, Organization, #, http://, http://, http://, http://, http://</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 20 datatype mismatch.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_knowledgegra...', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/knowledge-graph/index.php(59): wpdb->insert('wp_knowledgegra...', Array, Array)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): insert_table_knowledgegraph(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_knowle...', false)
+#8 /internal/eval.php(20): activate_plugin('knowledge-graph...')
+#9 {main}</pre>
+ for query INSERT INTO `wp_knowledgegraph` (`id_knowledgegraph`, `knowledgegraph_actif`, `knowledgegraph_logo`, `knowledgegraph_tel`, `knowledgegraph_type_tel`, `knowledgegraph_type`, `knowledgegraph_nom`, `knowledgegraph_facebook`, `knowledgegraph_twitter`, `knowledgegraph_googleplus`, `knowledgegraph_instagram`, `knowledgegraph_linkedin`) VALUES (' ', 'ON', '#', '#', '#', 'Organization', '#', 'http://', 'http://', 'http://', 'http://', 'http://') made by activate_plugin, do_action('activate_knowledge-graph/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, insert_table_knowledgegraph, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[25-May-2025 16:55:05 UTC] PHP Warning:  Undefined variable $sql in /wordpress/wp-content/plugins/knowledge-graph/index.php on line 62
+[25-May-2025 16:56:59 UTC] PHP Warning:  Undefined array key "QUERY_STRING" in /wordpress/wp-content/plugins/kodeks-dashboard/functions.php on line 476
+[25-May-2025 16:57:07 UTC] PHP Warning:  Undefined array key "QUERY_STRING" in /wordpress/wp-content/plugins/kodeks-dashboard/functions.php on line 476
+[25-May-2025 16:57:16 UTC] PHP Warning:  Undefined array key "QUERY_STRING" in /wordpress/wp-content/plugins/kodeks-dashboard/functions.php on line 476
+[25-May-2025 16:57:25 UTC] PHP Parse error:  syntax error, unexpected identifier "text" in /wordpress/wp-content/plugins/kofthitscounter/wp-KOFThitscounter.php on line 67
+[25-May-2025 16:57:33 UTC] PHP Parse error:  syntax error, unexpected identifier "text" in /wordpress/wp-content/plugins/kofthitscounter/wp-KOFThitscounter.php on line 67
+[25-May-2025 16:57:40 UTC] PHP Parse error:  syntax error, unexpected identifier "text" in /wordpress/wp-content/plugins/kofthitscounter/wp-KOFThitscounter.php on line 67
+[25-May-2025 16:58:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function KolorWeb\KWLogManager\WP_Filesystem() in /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-config.php:107
+Stack trace:
+#0 /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-config.php(200): KolorWeb\KWLogManager\Config->is_wp_config_writable()
+#1 /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-config.php(184): KolorWeb\KWLogManager\Config->update_debug_status(true)
+#2 /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-config.php(159): KolorWeb\KWLogManager\Config->set_debugging_status(true)
+#3 /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-plugin.php(81): KolorWeb\KWLogManager\Config->enable_debugging()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): KolorWeb\KWLogManager\Plugin->plugin_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_kolorw...', false)
+#8 /internal/eval.php(20): activate_plugin('kolorweb-log-ma...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-config.php on line 107
+[25-May-2025 16:58:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function KolorWeb\KWLogManager\WP_Filesystem() in /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-config.php:107
+Stack trace:
+#0 /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-config.php(200): KolorWeb\KWLogManager\Config->is_wp_config_writable()
+#1 /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-config.php(184): KolorWeb\KWLogManager\Config->update_debug_status(true)
+#2 /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-config.php(159): KolorWeb\KWLogManager\Config->set_debugging_status(true)
+#3 /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-plugin.php(81): KolorWeb\KWLogManager\Config->enable_debugging()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): KolorWeb\KWLogManager\Plugin->plugin_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_kolorw...', false)
+#8 /internal/eval.php(20): activate_plugin('kolorweb-log-ma...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-config.php on line 107
+[25-May-2025 16:58:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function KolorWeb\KWLogManager\WP_Filesystem() in /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-config.php:107
+Stack trace:
+#0 /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-config.php(200): KolorWeb\KWLogManager\Config->is_wp_config_writable()
+#1 /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-config.php(184): KolorWeb\KWLogManager\Config->update_debug_status(true)
+#2 /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-config.php(159): KolorWeb\KWLogManager\Config->set_debugging_status(true)
+#3 /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-plugin.php(81): KolorWeb\KWLogManager\Config->enable_debugging()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): KolorWeb\KWLogManager\Plugin->plugin_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_kolorw...', false)
+#8 /internal/eval.php(20): activate_plugin('kolorweb-log-ma...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/kolorweb-log-manager/libs/class-config.php on line 107
+[25-May-2025 16:59:14 UTC] PHP Warning:  Undefined variable $position in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Func.php on line 91
+[25-May-2025 16:59:14 UTC] PHP Warning:  Undefined array key "komoona_ads_hidden" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 45
+[25-May-2025 16:59:14 UTC] PHP Warning:  Undefined array key "komoona_ads_create" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 51
+[25-May-2025 16:59:14 UTC] PHP Warning:  Undefined array key "komoona_ads_add_site" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 60
+[25-May-2025 16:59:16 UTC] PHP Warning:  Undefined variable $position in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Func.php on line 91
+[25-May-2025 16:59:16 UTC] PHP Warning:  Undefined array key "komoona_ads_hidden" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 45
+[25-May-2025 16:59:16 UTC] PHP Warning:  Undefined array key "komoona_ads_create" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 51
+[25-May-2025 16:59:16 UTC] PHP Warning:  Undefined array key "komoona_ads_add_site" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 60
+[25-May-2025 16:59:16 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Komoona_Ads_Wid...')
@@ -111,15 +165,15 @@ Stack trace:
 #14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #15 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[24-May-2025 05:28:13 UTC] PHP Warning:  Undefined variable $position in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Func.php on line 91
-[24-May-2025 05:28:13 UTC] PHP Warning:  Undefined array key "komoona_ads_hidden" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 45
-[24-May-2025 05:28:13 UTC] PHP Warning:  Undefined array key "komoona_ads_create" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 51
-[24-May-2025 05:28:13 UTC] PHP Warning:  Undefined array key "komoona_ads_add_site" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 60
-[24-May-2025 05:28:13 UTC] PHP Warning:  Undefined variable $position in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Func.php on line 91
-[24-May-2025 05:28:13 UTC] PHP Warning:  Undefined array key "komoona_ads_hidden" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 45
-[24-May-2025 05:28:13 UTC] PHP Warning:  Undefined array key "komoona_ads_create" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 51
-[24-May-2025 05:28:13 UTC] PHP Warning:  Undefined array key "komoona_ads_add_site" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 60
-[24-May-2025 05:28:13 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[25-May-2025 16:59:23 UTC] PHP Warning:  Undefined variable $position in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Func.php on line 91
+[25-May-2025 16:59:23 UTC] PHP Warning:  Undefined array key "komoona_ads_hidden" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 45
+[25-May-2025 16:59:23 UTC] PHP Warning:  Undefined array key "komoona_ads_create" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 51
+[25-May-2025 16:59:23 UTC] PHP Warning:  Undefined array key "komoona_ads_add_site" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 60
+[25-May-2025 16:59:24 UTC] PHP Warning:  Undefined variable $position in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Func.php on line 91
+[25-May-2025 16:59:24 UTC] PHP Warning:  Undefined array key "komoona_ads_hidden" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 45
+[25-May-2025 16:59:24 UTC] PHP Warning:  Undefined array key "komoona_ads_create" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 51
+[25-May-2025 16:59:24 UTC] PHP Warning:  Undefined array key "komoona_ads_add_site" in /wordpress/wp-content/plugins/komoona-advertising-cpm-adverts/Komoona_Cpm.php on line 60
+[25-May-2025 16:59:24 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Komoona_Ads_Wid...')
