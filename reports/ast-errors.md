@@ -10759,6 +10759,31 @@
 | wp-super-login | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-sns-share/open/OAuth.php on line 101 | [View logs](/logs/plugins/w/wp-super-login/error.json) |
 | wp-super-login | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-sns-share/open/OAuth.php on line 101 | [View logs](/logs/plugins/w/wp-super-login/error.json) |
 | wp-super-login | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-sns-share/open/OAuth.php on line 101 | [View logs](/logs/plugins/w/wp-super-login/error.json) |
+| wp-ultimate-recipe | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-mobileme-gallery/wp_mmg_plugin.php:81 | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-mobileme-gallery/wp_mmg_plugin.php:81 | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-mobileme-gallery/wp_mmg_plugin.php:81 | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | [26-May-2025 16:55:32 UTC] Array | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | ( | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | [!!! activate !!! wp_next_scheduled( 'a3rw_check_ip' )] => | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | ) | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe |  | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | [26-May-2025 16:55:41 UTC] Array | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | ( | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | [!!! activate !!! wp_next_scheduled( 'a3rw_check_ip' )] => | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | ) | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe |  | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | [26-May-2025 16:55:49 UTC] Array | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | ( | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | [!!! activate !!! wp_next_scheduled( 'a3rw_check_ip' )] => | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | ) | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe |  | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-secure-login/includes/functions.php on line 18 | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-secure-login/includes/functions.php on line 18 | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-secure-login/includes/functions.php on line 18 | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
+| wp-ultimate-recipe | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
 | wp-ultimate-recipe | Undefined array key "id" in /wordpress/wp-content/plugins/wp-slideup/wp-slideup.php on line 176 | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
 | wp-ultimate-recipe | Undefined array key "id" in /wordpress/wp-content/plugins/wp-slideup/wp-slideup.php on line 176 | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
 | wp-ultimate-recipe | Undefined array key "id" in /wordpress/wp-content/plugins/wp-slideup/wp-slideup.php on line 176 | [View logs](/logs/plugins/w/wp-ultimate-recipe/error.json) |
@@ -10884,15 +10909,18 @@
 | yugioh-card-links | Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/y/yugioh-card-links/error.json) |
 | yugioh-card-links | Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/y/yugioh-card-links/error.json) |
 | yugioh-card-links | Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/y/yugioh-card-links/error.json) |
-| yabp | Uncaught Error: Call to undefined function edd_get_option() in /wordpress/wp-content/plugins/xunhu-alipay-payment-for-easy-digital-downloads/class-xh-alipay-edd-api.php:88 | [View logs](/logs/plugins/y/yabp/error.json) |
-| yabp | Uncaught Error: Call to undefined function edd_get_option() in /wordpress/wp-content/plugins/xunhu-alipay-payment-for-easy-digital-downloads/class-xh-alipay-edd-api.php:88 | [View logs](/logs/plugins/y/yabp/error.json) |
-| yabp | Uncaught Error: Call to undefined function edd_get_option() in /wordpress/wp-content/plugins/xunhu-alipay-payment-for-easy-digital-downloads/class-xh-alipay-edd-api.php:88 | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Required parameter $args follows optional parameter $message in /wordpress/wp-content/plugins/ultimate-sms/helpers.php on line 109 | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Required parameter $args follows optional parameter $message in /wordpress/wp-content/plugins/ultimate-sms/helpers.php on line 109 | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Required parameter $args follows optional parameter $message in /wordpress/wp-content/plugins/ultimate-sms/helpers.php on line 109 | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Required parameter $args follows optional parameter $message in /wordpress/wp-content/plugins/ultimate-sms/helpers.php on line 109 | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Required parameter $args follows optional parameter $message in /wordpress/wp-content/plugins/ultimate-sms/helpers.php on line 109 | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Required parameter $args follows optional parameter $message in /wordpress/wp-content/plugins/ultimate-sms/helpers.php on line 109 | [View logs](/logs/plugins/y/yabp/error.json) |
 | yabp | Uncaught Error: Call to undefined function edd_get_option() in /wordpress/wp-content/plugins/xunhu-wechat-payment-for-easy-digital-downloads/class-xh-new-wechat-edd-api.php:53 | [View logs](/logs/plugins/y/yabp/error.json) |
 | yabp | Uncaught Error: Call to undefined function edd_get_option() in /wordpress/wp-content/plugins/xunhu-wechat-payment-for-easy-digital-downloads/class-xh-new-wechat-edd-api.php:53 | [View logs](/logs/plugins/y/yabp/error.json) |
 | yabp | Uncaught Error: Call to undefined function edd_get_option() in /wordpress/wp-content/plugins/xunhu-wechat-payment-for-easy-digital-downloads/class-xh-new-wechat-edd-api.php:53 | [View logs](/logs/plugins/y/yabp/error.json) |
-| yabp | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/xwidgets/xwidgets.class.php:801 | [View logs](/logs/plugins/y/yabp/error.json) |
-| yabp | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/xwidgets/xwidgets.class.php:801 | [View logs](/logs/plugins/y/yabp/error.json) |
-| yabp | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/xwidgets/xwidgets.class.php:801 | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/xwolf-progress-bar/xw-progressbar.php:428 | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/xwolf-progress-bar/xw-progressbar.php:428 | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/xwolf-progress-bar/xw-progressbar.php:428 | [View logs](/logs/plugins/y/yabp/error.json) |
 | yabp | Required parameter $totalpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274 | [View logs](/logs/plugins/y/yabp/error.json) |
 | yabp | Required parameter $curpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274 | [View logs](/logs/plugins/y/yabp/error.json) |
 | yabp | Required parameter $item_ids_array follows optional parameter $test in /wordpress/wp-content/plugins/yabp/yabp.php on line 323 | [View logs](/logs/plugins/y/yabp/error.json) |
