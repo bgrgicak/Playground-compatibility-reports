@@ -2,227 +2,729 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [25-May-2025 09:27:09 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wc-ukr-shipping-i18n</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[25-May-2025 09:27:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [26-May-2025 23:48:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-        </p>
+<p>ALTER TABLE  `wp_wpns_malware_scan_report` ADD  `scan_mode` mediumtext AFTER  `id` ;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpns_malware_scan_report</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpns_malware_scan_report</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_wpns_malware_scan_report, scan_mode, 12, , YES, mediumtext, 16777215, 16777215, , , , utf8mb4, utf8mb4_general_ci, mediumtext, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpns_malware_scan_report_6834fdcb3ff70` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `scan_mode` TEXT COLLATE NOCASE NOT NULL,
+  `scanned_folders` TEXT COLLATE NOCASE NOT NULL,
+  `scanned_files` INTEGER NOT NULL,
+  `malware_count` INTEGER NOT NULL DEFAULT '0',
+  `repo_issues` INTEGER NOT NULL DEFAULT '0',
+  `malicious_links` INTEGER NOT NULL DEFAULT '0',
+  `repo_key` TEXT COLLATE NOCASE,
+  `net_connection` INTEGER,
+  `start_timestamp` INTEGER,
+  `completed_timestamp` INTEGER,
+  `scan_mode` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-ukr-shipping/src/DB/Migrations/UpdateShippingLabels_20250428213701.php(21): WP_SQLite_DB->query('\n            AL...')
-#2 /wordpress/wp-content/plugins/wc-ukr-shipping/vendor/kirillbdev/wcus-core/src/DB/Migrator.php(70): kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up(Object(WP_SQLite_DB))
-#3 /wordpress/wp-content/plugins/wc-ukr-shipping/src/Modules/Core/Activator.php(39): kirillbdev\WCUSCore\DB\Migrator->run()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): kirillbdev\WCUkrShipping\Modules\Core\Activator->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-ukr...', false)
-#8 /internal/eval.php(20): activate_plugin('wc-ukr-shipping...')
-#9 {main}</pre>
- for query 
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-         made by activate_plugin, do_action('activate_wc-ukr-shipping/wc-ukr-shipping.php'), WP_Hook->do_action, WP_Hook->apply_filters, kirillbdev\WCUkrShipping\Modules\Core\Activator->activate, kirillbdev\WCUSCore\DB\Migrator->run, kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 09:27:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-        </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-ukr-shipping/src/DB/Migrations/UpdateShippingLabels_20250428213701.php(21): WP_SQLite_DB->query('\n            AL...')
-#2 /wordpress/wp-content/plugins/wc-ukr-shipping/vendor/kirillbdev/wcus-core/src/DB/Migrator.php(70): kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up(Object(WP_SQLite_DB))
-#3 /wordpress/wp-content/plugins/wc-ukr-shipping/src/Modules/Core/Activator.php(39): kirillbdev\WCUSCore\DB\Migrator->run()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): kirillbdev\WCUkrShipping\Modules\Core\Activator->activate('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-         made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, kirillbdev\WCUkrShipping\Modules\Core\Activator->activate, kirillbdev\WCUSCore\DB\Migrator->run, kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 09:27:20 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wc-ukr-shipping-i18n</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[25-May-2025 09:27:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-        </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-ukr-shipping/src/DB/Migrations/UpdateShippingLabels_20250428213701.php(21): WP_SQLite_DB->query('\n            AL...')
-#2 /wordpress/wp-content/plugins/wc-ukr-shipping/vendor/kirillbdev/wcus-core/src/DB/Migrator.php(70): kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up(Object(WP_SQLite_DB))
-#3 /wordpress/wp-content/plugins/wc-ukr-shipping/src/Modules/Core/Activator.php(39): kirillbdev\WCUSCore\DB\Migrator->run()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): kirillbdev\WCUkrShipping\Modules\Core\Activator->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-ukr...', false)
-#8 /internal/eval.php(20): activate_plugin('wc-ukr-shipping...')
-#9 {main}</pre>
- for query 
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-         made by activate_plugin, do_action('activate_wc-ukr-shipping/wc-ukr-shipping.php'), WP_Hook->do_action, WP_Hook->apply_filters, kirillbdev\WCUkrShipping\Modules\Core\Activator->activate, kirillbdev\WCUSCore\DB\Migrator->run, kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 09:27:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-        </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-ukr-shipping/src/DB/Migrations/UpdateShippingLabels_20250428213701.php(21): WP_SQLite_DB->query('\n            AL...')
-#2 /wordpress/wp-content/plugins/wc-ukr-shipping/vendor/kirillbdev/wcus-core/src/DB/Migrator.php(70): kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up(Object(WP_SQLite_DB))
-#3 /wordpress/wp-content/plugins/wc-ukr-shipping/src/Modules/Core/Activator.php(39): kirillbdev\WCUSCore\DB\Migrator->run()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): kirillbdev\WCUkrShipping\Modules\Core\Activator->activate('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-         made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, kirillbdev\WCUkrShipping\Modules\Core\Activator->activate, kirillbdev\WCUSCore\DB\Migrator->run, kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 09:27:29 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wc-ukr-shipping-i18n</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[25-May-2025 09:27:38 UTC] PHP Warning:  The magic method WC_Smartpay_Loader::__wakeup() must have public visibility in /wordpress/wp-content/plugins/woo-gateway-smartpay/woocommerce-gateway-smartpay.php on line 222
-[25-May-2025 09:27:38 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6121
-[25-May-2025 09:27:39 UTC] PHP Warning:  The magic method WC_Smartpay_Loader::__wakeup() must have public visibility in /wordpress/wp-content/plugins/woo-gateway-smartpay/woocommerce-gateway-smartpay.php on line 222
-[25-May-2025 09:27:46 UTC] PHP Warning:  The magic method WC_Smartpay_Loader::__wakeup() must have public visibility in /wordpress/wp-content/plugins/woo-gateway-smartpay/woocommerce-gateway-smartpay.php on line 222
-[25-May-2025 09:27:46 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6121
-[25-May-2025 09:27:47 UTC] PHP Warning:  The magic method WC_Smartpay_Loader::__wakeup() must have public visibility in /wordpress/wp-content/plugins/woo-gateway-smartpay/woocommerce-gateway-smartpay.php on line 222
-[25-May-2025 09:27:55 UTC] PHP Warning:  The magic method WC_Smartpay_Loader::__wakeup() must have public visibility in /wordpress/wp-content/plugins/woo-gateway-smartpay/woocommerce-gateway-smartpay.php on line 222
-[25-May-2025 09:27:55 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6121
-[25-May-2025 09:27:56 UTC] PHP Warning:  The magic method WC_Smartpay_Loader::__wakeup() must have public visibility in /wordpress/wp-content/plugins/woo-gateway-smartpay/woocommerce-gateway-smartpay.php on line 222
-[25-May-2025 09:28:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SHOW TABLE STATUS WHERE Name LIKE 'ip2nation'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND `Name` LIKE 'ip2nation' ESCAPE '\' ORDER BY table_name | parameters: database_name_here</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Name
+SQLSTATE[HY000]: General error: 1 duplicate column name: scan_mode
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW TABLE STAT...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
-#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SHOW TABLE STAT...')
-#4 /wordpress/wp-content/plugins/wordpress-amazon-associate/WPAA/Module/IP2Nation.php(226): wpdb->get_row('SHOW TABLE STAT...')
-#5 /wordpress/wp-content/plugins/wordpress-amazon-associate/WPAA/Module/IP2Nation.php(107): WPAA_Module_IP2Nation->getStatus()
-#6 /wordpress/wp-content/plugins/wordpress-amazon-associate/WPAA.php(260): WPAA_Module_IP2Nation->__construct('wordpress-amazo...', '2.0.0', '09-11-2012')
-#7 /wordpress/wp-content/plugins/wordpress-amazon-associate/WPAA.php(238): WPAA->loadModules()
-#8 /wordpress/wp-content/plugins/wordpress-amazon-associate/wordpress_amazon_associate.php(52): WPAA->__construct('2.0.0', '09-11-2012')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-amazo...')
-#11 /internal/eval.php(20): activate_plugin('wordpress-amazo...')
-#12 {main}</pre>
- for query SHOW TABLE STATUS WHERE Name LIKE 'ip2nation' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-amazon-associate/wordpress_amazon_associate.php'), WPAA->__construct, WPAA->loadModules, WPAA_Module_IP2Nation->__construct, WPAA_Module_IP2Nation->getStatus, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 09:28:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE  `w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE  `w...')
+#3 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(121): WP_SQLite_DB->query('ALTER TABLE  `w...')
+#4 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(43): Mo_wpmpDB->generate_tables()
+#5 /wordpress/wp-content/plugins/wp-security-pro/mo-wpns.php(188): Mo_wpmpDB->mo_plugin_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WPSecurityPro->mo_wpns_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-security-pro...')
+#11 {main}</pre>
+ for query ALTER TABLE  `wp_wpns_malware_scan_report` ADD  `scan_mode` mediumtext AFTER  `id` ; made by activate_plugin, do_action('activate_wp-security-pro/mo-wpns.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSecurityPro->mo_wpns_activate, Mo_wpmpDB->mo_plugin_activate, Mo_wpmpDB->generate_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:48:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SHOW TABLE STATUS WHERE Name LIKE 'ip2nation'</p>
+<p>ALTER TABLE  `wp_wpns_files_scan` ADD  `repo_key` mediumtext AFTER  `link_check` ;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND `Name` LIKE 'ip2nation' ESCAPE '\' ORDER BY table_name | parameters: database_name_here</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpns_files_scan</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpns_files_scan</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpns_files_scan</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpns_files_scan</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_wpns_files_scan, repo_key, 8, , YES, mediumtext, 16777215, 16777215, , , , utf8mb4, utf8mb4_general_ci, mediumtext, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpns_files_scan</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_wpns_files_scan</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_wpns_files_scan</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpns_files_scan_6834fdcb67840` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `path` TEXT COLLATE NOCASE NOT NULL,
+  `name_hash` TEXT COLLATE NOCASE NOT NULL,
+  `malware_service` INTEGER NOT NULL,
+  `repo_check` INTEGER NOT NULL,
+  `link_check` INTEGER NOT NULL,
+  `repo_key` TEXT COLLATE NOCASE NOT NULL,
+  `repo_key` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Name
+SQLSTATE[HY000]: General error: 1 duplicate column name: repo_key
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW TABLE STAT...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
-#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SHOW TABLE STAT...')
-#4 /wordpress/wp-content/plugins/wordpress-amazon-associate/WPAA/Module/IP2Nation.php(226): wpdb->get_row('SHOW TABLE STAT...')
-#5 /wordpress/wp-content/plugins/wordpress-amazon-associate/WPAA/Module/IP2Nation.php(107): WPAA_Module_IP2Nation->getStatus()
-#6 /wordpress/wp-content/plugins/wordpress-amazon-associate/WPAA.php(260): WPAA_Module_IP2Nation->__construct('wordpress-amazo...', '2.0.0', '09-11-2012')
-#7 /wordpress/wp-content/plugins/wordpress-amazon-associate/WPAA.php(238): WPAA->loadModules()
-#8 /wordpress/wp-content/plugins/wordpress-amazon-associate/wordpress_amazon_associate.php(52): WPAA->__construct('2.0.0', '09-11-2012')
-#9 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query SHOW TABLE STATUS WHERE Name LIKE 'ip2nation' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wordpress-amazon-associate/wordpress_amazon_associate.php'), WPAA->__construct, WPAA->loadModules, WPAA_Module_IP2Nation->__construct, WPAA_Module_IP2Nation->getStatus, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 09:28:33 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE  `w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE  `w...')
+#3 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(152): WP_SQLite_DB->query('ALTER TABLE  `w...')
+#4 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(43): Mo_wpmpDB->generate_tables()
+#5 /wordpress/wp-content/plugins/wp-security-pro/mo-wpns.php(188): Mo_wpmpDB->mo_plugin_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WPSecurityPro->mo_wpns_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-security-pro...')
+#11 {main}</pre>
+ for query ALTER TABLE  `wp_wpns_files_scan` ADD  `repo_key` mediumtext AFTER  `link_check` ; made by activate_plugin, do_action('activate_wp-security-pro/mo-wpns.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSecurityPro->mo_wpns_activate, Mo_wpmpDB->mo_plugin_activate, Mo_wpmpDB->generate_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:48:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wpns_malware_scan_report ADD COLUMN `malware_count` INT NOT NULL DEFAULT 0 AFTER `scanned_files`, ADD COLUMN `repo_issues` INT NOT NULL DEFAULT 0 AFTER `malware_count`, ADD COLUMN `malicious_links` INT NOT NULL DEFAULT 0 AFTER `repo_issues`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpns_malware_scan_report</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpns_malware_scan_report</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_wpns_malware_scan_report, malware_count, 12, 0, NO, int, , , 10, 0, , , , int, , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_wpns_malware_scan_report, repo_issues, 13, 0, NO, int, , , 10, 0, , , , int, , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_wpns_malware_scan_report, malicious_links, 14, 0, NO, int, , , 10, 0, , , , int, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpns_malware_scan_report_6834fdcb77240` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `scan_mode` TEXT COLLATE NOCASE NOT NULL,
+  `scanned_folders` TEXT COLLATE NOCASE NOT NULL,
+  `scanned_files` INTEGER NOT NULL,
+  `malware_count` INTEGER NOT NULL DEFAULT '0',
+  `repo_issues` INTEGER NOT NULL DEFAULT '0',
+  `malicious_links` INTEGER NOT NULL DEFAULT '0',
+  `repo_key` TEXT COLLATE NOCASE,
+  `net_connection` INTEGER,
+  `start_timestamp` INTEGER,
+  `completed_timestamp` INTEGER,
+  `malware_count` INTEGER NOT NULL DEFAULT '0',
+  `repo_issues` INTEGER NOT NULL DEFAULT '0',
+  `malicious_links` INTEGER NOT NULL DEFAULT '0'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: malware_count
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(166): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(43): Mo_wpmpDB->generate_tables()
+#5 /wordpress/wp-content/plugins/wp-security-pro/mo-wpns.php(188): Mo_wpmpDB->mo_plugin_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WPSecurityPro->mo_wpns_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-security-pro...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wpns_malware_scan_report ADD COLUMN `malware_count` INT NOT NULL DEFAULT 0 AFTER `scanned_files`, ADD COLUMN `repo_issues` INT NOT NULL DEFAULT 0 AFTER `malware_count`, ADD COLUMN `malicious_links` INT NOT NULL DEFAULT 0 AFTER `repo_issues` made by activate_plugin, do_action('activate_wp-security-pro/mo-wpns.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSecurityPro->mo_wpns_activate, Mo_wpmpDB->mo_plugin_activate, Mo_wpmpDB->generate_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:48:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wpns_malware_hash_file ADD COLUMN `scan_data` mediumtext NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpns_malware_hash_file</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpns_malware_hash_file</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpns_malware_hash_file</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpns_malware_hash_file</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_wpns_malware_hash_file, scan_data, 5, , NO, mediumtext, 16777215, 16777215, , , , utf8mb4, utf8mb4_general_ci, mediumtext, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpns_malware_hash_file</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_wpns_malware_hash_file</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_wpns_malware_hash_file</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpns_malware_hash_file_6834fdcb7c060` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `file name` TEXT COLLATE NOCASE NOT NULL,
+  `file hash` TEXT COLLATE NOCASE NOT NULL,
+  `scan_data` TEXT COLLATE NOCASE NOT NULL,
+  `scan_data` TEXT COLLATE NOCASE NOT NULL
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: scan_data
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(179): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(43): Mo_wpmpDB->generate_tables()
+#5 /wordpress/wp-content/plugins/wp-security-pro/mo-wpns.php(188): Mo_wpmpDB->mo_plugin_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WPSecurityPro->mo_wpns_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-security-pro...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wpns_malware_hash_file ADD COLUMN `scan_data` mediumtext NOT NULL made by activate_plugin, do_action('activate_wp-security-pro/mo-wpns.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSecurityPro->mo_wpns_activate, Mo_wpmpDB->mo_plugin_activate, Mo_wpmpDB->generate_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:48:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE  wp_wpns_malware_scan_report ADD  `repo_key` mediumtext AFTER  `malicious_links` ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpns_malware_scan_report</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpns_malware_scan_report</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_wpns_malware_scan_report, repo_key, 12, , YES, mediumtext, 16777215, 16777215, , , , utf8mb4, utf8mb4_general_ci, mediumtext, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpns_malware_scan_report_6834fdcb7e388` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `scan_mode` TEXT COLLATE NOCASE NOT NULL,
+  `scanned_folders` TEXT COLLATE NOCASE NOT NULL,
+  `scanned_files` INTEGER NOT NULL,
+  `malware_count` INTEGER NOT NULL DEFAULT '0',
+  `repo_issues` INTEGER NOT NULL DEFAULT '0',
+  `malicious_links` INTEGER NOT NULL DEFAULT '0',
+  `repo_key` TEXT COLLATE NOCASE,
+  `net_connection` INTEGER,
+  `start_timestamp` INTEGER,
+  `completed_timestamp` INTEGER,
+  `repo_key` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: repo_key
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE  wp...')
+#3 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(184): WP_SQLite_DB->query('ALTER TABLE  wp...')
+#4 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(43): Mo_wpmpDB->generate_tables()
+#5 /wordpress/wp-content/plugins/wp-security-pro/mo-wpns.php(188): Mo_wpmpDB->mo_plugin_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WPSecurityPro->mo_wpns_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-security-pro...')
+#11 {main}</pre>
+ for query ALTER TABLE  wp_wpns_malware_scan_report ADD  `repo_key` mediumtext AFTER  `malicious_links` ; made by activate_plugin, do_action('activate_wp-security-pro/mo-wpns.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSecurityPro->mo_wpns_activate, Mo_wpmpDB->mo_plugin_activate, Mo_wpmpDB->generate_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:48:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wpns_malware_scan_report ADD  `net_connection` mediumtext AFTER  `repo_key` ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpns_malware_scan_report</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpns_malware_scan_report</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_wpns_malware_scan_report, net_connection, 12, , YES, mediumtext, 16777215, 16777215, , , , utf8mb4, utf8mb4_general_ci, mediumtext, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_wpns_malware_scan_report</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpns_malware_scan_report_6834fdcb87be0` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `scan_mode` TEXT COLLATE NOCASE NOT NULL,
+  `scanned_folders` TEXT COLLATE NOCASE NOT NULL,
+  `scanned_files` INTEGER NOT NULL,
+  `malware_count` INTEGER NOT NULL DEFAULT '0',
+  `repo_issues` INTEGER NOT NULL DEFAULT '0',
+  `malicious_links` INTEGER NOT NULL DEFAULT '0',
+  `repo_key` TEXT COLLATE NOCASE,
+  `net_connection` INTEGER,
+  `start_timestamp` INTEGER,
+  `completed_timestamp` INTEGER,
+  `net_connection` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: net_connection
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(191): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(43): Mo_wpmpDB->generate_tables()
+#5 /wordpress/wp-content/plugins/wp-security-pro/mo-wpns.php(188): Mo_wpmpDB->mo_plugin_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WPSecurityPro->mo_wpns_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-security-pro...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wpns_malware_scan_report ADD  `net_connection` mediumtext AFTER  `repo_key` ; made by activate_plugin, do_action('activate_wp-security-pro/mo-wpns.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSecurityPro->mo_wpns_activate, Mo_wpmpDB->mo_plugin_activate, Mo_wpmpDB->generate_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:48:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>create table wp_wpns_attack_logs (
+						ip varchar(20),
+						type varchar(20),
+						time bigint,
+						input mediumtext );</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('create table wp...')
+#2 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(108): wpdb->get_results('create table wp...')
+#3 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(43): Mo_wpmpDB->generate_tables()
+#4 /wordpress/wp-content/plugins/wp-security-pro/mo-wpns.php(188): Mo_wpmpDB->mo_plugin_activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): WPSecurityPro->mo_wpns_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-security-pro...')
+#10 {main}</pre>
+ for query create table wp_wpns_attack_logs (
+						ip varchar(20),
+						type varchar(20),
+						time bigint,
+						input mediumtext ); made by activate_plugin, do_action('activate_wp-security-pro/mo-wpns.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSecurityPro->mo_wpns_activate, Mo_wpmpDB->mo_plugin_activate, Mo_wpmpDB->generate_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:48:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE  `wp_wpns_malware_scan_report` ADD  `scan_mode` mediumtext AFTER  `id` ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wpns_malware_scan_report, `SCAN_MODE`, mediumtext</li>
+<li>Executing: ALTER TABLE wp_wpns_malware_scan_report ADD  `scan_mode` text    ; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: scan_mode.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(121): WP_SQLite_DB->query('ALTER TABLE  `w...')
+#2 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(43): Mo_wpmpDB->generate_tables()
+#3 /wordpress/wp-content/plugins/wp-security-pro/mo-wpns.php(188): Mo_wpmpDB->mo_plugin_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): WPSecurityPro->mo_wpns_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
+#8 /internal/eval.php(20): activate_plugin('wp-security-pro...')
+#9 {main}</pre>
+ for query ALTER TABLE  `wp_wpns_malware_scan_report` ADD  `scan_mode` mediumtext AFTER  `id` ; made by activate_plugin, do_action('activate_wp-security-pro/mo-wpns.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSecurityPro->mo_wpns_activate, Mo_wpmpDB->mo_plugin_activate, Mo_wpmpDB->generate_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:48:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_wpns_files_scan (
+				`id` bigint NOT NULL AUTO_INCREMENT, `path` mediumtext NOT NULL, `name_hash` varchar(45) NOT NULL, `malware_service` int NOT NULL, `repo_check` int NOT NULL, `link_check` int NOT NULL, `repo_key` mediumtext NOT NULL, PRIMARY KEY id (id), UNIQUE KEY name_hash (name_hash) )</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(147): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(43): Mo_wpmpDB->generate_tables()
+#4 /wordpress/wp-content/plugins/wp-security-pro/mo-wpns.php(188): Mo_wpmpDB->mo_plugin_activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): WPSecurityPro->mo_wpns_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-security-pro...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_wpns_files_scan (
+				`id` bigint NOT NULL AUTO_INCREMENT, `path` mediumtext NOT NULL, `name_hash` varchar(45) NOT NULL, `malware_service` int NOT NULL, `repo_check` int NOT NULL, `link_check` int NOT NULL, `repo_key` mediumtext NOT NULL, PRIMARY KEY id (id), UNIQUE KEY name_hash (name_hash) ) made by activate_plugin, do_action('activate_wp-security-pro/mo-wpns.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSecurityPro->mo_wpns_activate, Mo_wpmpDB->mo_plugin_activate, Mo_wpmpDB->generate_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:48:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE  `wp_wpns_files_scan` ADD  `repo_key` mediumtext AFTER  `link_check` ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wpns_files_scan, `REPO_KEY`, mediumtext</li>
+<li>Executing: ALTER TABLE wp_wpns_files_scan ADD  `repo_key` text    ; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpns_files_scan.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(152): WP_SQLite_DB->query('ALTER TABLE  `w...')
+#2 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(43): Mo_wpmpDB->generate_tables()
+#3 /wordpress/wp-content/plugins/wp-security-pro/mo-wpns.php(188): Mo_wpmpDB->mo_plugin_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): WPSecurityPro->mo_wpns_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
+#8 /internal/eval.php(20): activate_plugin('wp-security-pro...')
+#9 {main}</pre>
+ for query ALTER TABLE  `wp_wpns_files_scan` ADD  `repo_key` mediumtext AFTER  `link_check` ; made by activate_plugin, do_action('activate_wp-security-pro/mo-wpns.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSecurityPro->mo_wpns_activate, Mo_wpmpDB->mo_plugin_activate, Mo_wpmpDB->generate_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:48:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>create table wp_wpns_attack_logs (
+						ip varchar(20),
+						type varchar(20),
+						time bigint,
+						input mediumtext );</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('create table wp...')
+#2 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(108): wpdb->get_results('create table wp...')
+#3 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(43): Mo_wpmpDB->generate_tables()
+#4 /wordpress/wp-content/plugins/wp-security-pro/mo-wpns.php(188): Mo_wpmpDB->mo_plugin_activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): WPSecurityPro->mo_wpns_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-security-pro...')
+#10 {main}</pre>
+ for query create table wp_wpns_attack_logs (
+						ip varchar(20),
+						type varchar(20),
+						time bigint,
+						input mediumtext ); made by activate_plugin, do_action('activate_wp-security-pro/mo-wpns.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSecurityPro->mo_wpns_activate, Mo_wpmpDB->mo_plugin_activate, Mo_wpmpDB->generate_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:48:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE  `wp_wpns_malware_scan_report` ADD  `scan_mode` mediumtext AFTER  `id` ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wpns_malware_scan_report, `SCAN_MODE`, mediumtext</li>
+<li>Executing: ALTER TABLE wp_wpns_malware_scan_report ADD  `scan_mode` text    ; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: scan_mode.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(121): WP_SQLite_DB->query('ALTER TABLE  `w...')
+#2 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(43): Mo_wpmpDB->generate_tables()
+#3 /wordpress/wp-content/plugins/wp-security-pro/mo-wpns.php(188): Mo_wpmpDB->mo_plugin_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): WPSecurityPro->mo_wpns_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
+#8 /internal/eval.php(20): activate_plugin('wp-security-pro...')
+#9 {main}</pre>
+ for query ALTER TABLE  `wp_wpns_malware_scan_report` ADD  `scan_mode` mediumtext AFTER  `id` ; made by activate_plugin, do_action('activate_wp-security-pro/mo-wpns.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSecurityPro->mo_wpns_activate, Mo_wpmpDB->mo_plugin_activate, Mo_wpmpDB->generate_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:48:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_wpns_files_scan (
+				`id` bigint NOT NULL AUTO_INCREMENT, `path` mediumtext NOT NULL, `name_hash` varchar(45) NOT NULL, `malware_service` int NOT NULL, `repo_check` int NOT NULL, `link_check` int NOT NULL, `repo_key` mediumtext NOT NULL, PRIMARY KEY id (id), UNIQUE KEY name_hash (name_hash) )</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(147): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(43): Mo_wpmpDB->generate_tables()
+#4 /wordpress/wp-content/plugins/wp-security-pro/mo-wpns.php(188): Mo_wpmpDB->mo_plugin_activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): WPSecurityPro->mo_wpns_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-security-pro...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_wpns_files_scan (
+				`id` bigint NOT NULL AUTO_INCREMENT, `path` mediumtext NOT NULL, `name_hash` varchar(45) NOT NULL, `malware_service` int NOT NULL, `repo_check` int NOT NULL, `link_check` int NOT NULL, `repo_key` mediumtext NOT NULL, PRIMARY KEY id (id), UNIQUE KEY name_hash (name_hash) ) made by activate_plugin, do_action('activate_wp-security-pro/mo-wpns.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSecurityPro->mo_wpns_activate, Mo_wpmpDB->mo_plugin_activate, Mo_wpmpDB->generate_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:48:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE  `wp_wpns_files_scan` ADD  `repo_key` mediumtext AFTER  `link_check` ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wpns_files_scan, `REPO_KEY`, mediumtext</li>
+<li>Executing: ALTER TABLE wp_wpns_files_scan ADD  `repo_key` text    ; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpns_files_scan.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(152): WP_SQLite_DB->query('ALTER TABLE  `w...')
+#2 /wordpress/wp-content/plugins/wp-security-pro/database/database_functions.php(43): Mo_wpmpDB->generate_tables()
+#3 /wordpress/wp-content/plugins/wp-security-pro/mo-wpns.php(188): Mo_wpmpDB->mo_plugin_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): WPSecurityPro->mo_wpns_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
+#8 /internal/eval.php(20): activate_plugin('wp-security-pro...')
+#9 {main}</pre>
+ for query ALTER TABLE  `wp_wpns_files_scan` ADD  `repo_key` mediumtext AFTER  `link_check` ; made by activate_plugin, do_action('activate_wp-security-pro/mo-wpns.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSecurityPro->mo_wpns_activate, Mo_wpmpDB->mo_plugin_activate, Mo_wpmpDB->generate_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:48:57 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Widget_Amazon_C...')
-#2 /wordpress/wp-content/plugins/wordpress-amazon-associate/WPAA/Module/Widget.php(129): register_widget('Widget_Amazon_C...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): WPAA_Module_Widget->init_widgets('')
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('db_wpss_my_info')
+#2 /wordpress/wp-content/plugins/wp-simple-social/wp-simple-social.php(17): register_widget('db_wpss_my_info')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): db_wpss_register_widgets('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
@@ -235,12 +737,12 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[25-May-2025 09:28:42 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[26-May-2025 23:49:06 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Widget_Amazon_C...')
-#2 /wordpress/wp-content/plugins/wordpress-amazon-associate/WPAA/Module/Widget.php(129): register_widget('Widget_Amazon_C...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): WPAA_Module_Widget->init_widgets('')
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('db_wpss_my_info')
+#2 /wordpress/wp-content/plugins/wp-simple-social/wp-simple-social.php(17): register_widget('db_wpss_my_info')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): db_wpss_register_widgets('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
@@ -253,12 +755,12 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[25-May-2025 09:28:54 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[26-May-2025 23:49:15 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Widget_Amazon_C...')
-#2 /wordpress/wp-content/plugins/wordpress-amazon-associate/WPAA/Module/Widget.php(129): register_widget('Widget_Amazon_C...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): WPAA_Module_Widget->init_widgets('')
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('db_wpss_my_info')
+#2 /wordpress/wp-content/plugins/wp-simple-social/wp-simple-social.php(17): register_widget('db_wpss_my_info')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): db_wpss_register_widgets('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
@@ -271,16 +773,31 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[25-May-2025 09:29:56 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/wp-roids/wp-roids.php on line 2575
-[25-May-2025 09:30:04 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/wp-roids/wp-roids.php on line 2575
-[25-May-2025 09:30:11 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/wp-roids/wp-roids.php on line 2575
-[25-May-2025 09:31:43 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in wpcs_search_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[25-May-2025 09:31:43 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in wpcs_most_view_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[25-May-2025 09:31:52 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in wpcs_search_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[25-May-2025 09:31:52 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in wpcs_most_view_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[25-May-2025 09:32:00 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in wpcs_search_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[25-May-2025 09:32:00 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in wpcs_most_view_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[25-May-2025 09:33:27 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/wpsocialite/wpsocialite.php on line 118
+[26-May-2025 23:49:51 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class "TJC_Init" not found in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpcool...', false)
+#3 /internal/eval.php(20): activate_plugin('wpcoolform/WpCo...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[26-May-2025 23:49:59 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class "TJC_Init" not found in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpcool...', false)
+#3 /internal/eval.php(20): activate_plugin('wpcoolform/WpCo...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[26-May-2025 23:50:08 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class "TJC_Init" not found in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpcool...', false)
+#3 /internal/eval.php(20): activate_plugin('wpcoolform/WpCo...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[26-May-2025 23:51:33 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/wpsocialite/wpsocialite.php on line 118
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
