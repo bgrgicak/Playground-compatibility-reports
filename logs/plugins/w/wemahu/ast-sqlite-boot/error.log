@@ -2,112 +2,234 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [26-May-2025 08:48:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-sportnews/WP-Sportnews.php on line 553
-[26-May-2025 08:48:17 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-sportnews/WP-Sportnews.php on line 553
-[26-May-2025 08:48:27 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-sportnews/WP-Sportnews.php on line 553
-[26-May-2025 08:49:03 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-content/plugins/wpchameleon/wpchameleon.php on line 207 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Error: [27-May-2025 22:29:26 UTC] PHP Fatal error:  Cannot use $this as parameter in /wordpress/wp-content/plugins/wp-jump/framework/classes/class-meta-boxes.php on line 217
+[27-May-2025 22:29:33 UTC] PHP Fatal error:  Cannot use $this as parameter in /wordpress/wp-content/plugins/wp-jump/framework/classes/class-meta-boxes.php on line 217
+[27-May-2025 22:29:40 UTC] PHP Fatal error:  Cannot use $this as parameter in /wordpress/wp-content/plugins/wp-jump/framework/classes/class-meta-boxes.php on line 217
+[27-May-2025 22:31:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_ratings</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_ratings')
+#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_ratings', 0)
+#3 /wordpress/wp-content/plugins/wp-postratings/includes/postratings-activation.php(68): maybe_add_column('wp_ratings', 'rating_userid', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-postratings/includes/postratings-activation.php(30): ratings_activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ratings_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pos...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-postratings/...')
+#10 {main}</pre>
+ for query DESC wp_ratings made by activate_plugin, do_action('activate_wp-postratings/wp-postratings.php'), WP_Hook->do_action, WP_Hook->apply_filters, ratings_activation, ratings_activate, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 22:31:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_ratings ADD rating_userid INT( 10 ) NOT NULL DEFAULT '0';</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_ratings, RATING_USERID, int(10)</li>
+<li>Executing: ALTER TABLE wp_ratings ADD rating_userid   integer NOT NULL DEFAULT '0'; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rating_userid.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-postratings/includes/postratings-activation.php(68): maybe_add_column('wp_ratings', 'rating_userid', 'ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wp-postratings/includes/postratings-activation.php(30): ratings_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ratings_activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pos...', false)
+#8 /internal/eval.php(20): activate_plugin('wp-postratings/...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_ratings ADD rating_userid INT( 10 ) NOT NULL DEFAULT '0'; made by activate_plugin, do_action('activate_wp-postratings/wp-postratings.php'), WP_Hook->do_action, WP_Hook->apply_filters, ratings_activation, ratings_activate, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 22:31:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_ratings</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_ratings')
+#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_ratings', 0)
+#3 /wordpress/wp-content/plugins/wp-postratings/includes/postratings-activation.php(68): maybe_add_column('wp_ratings', 'rating_userid', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-postratings/includes/postratings-activation.php(30): ratings_activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ratings_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pos...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-postratings/...')
+#10 {main}</pre>
+ for query DESC wp_ratings made by activate_plugin, do_action('activate_wp-postratings/wp-postratings.php'), WP_Hook->do_action, WP_Hook->apply_filters, ratings_activation, ratings_activate, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 22:31:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_ratings</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_ratings')
+#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_ratings', 0)
+#3 /wordpress/wp-content/plugins/wp-postratings/includes/postratings-activation.php(68): maybe_add_column('wp_ratings', 'rating_userid', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-postratings/includes/postratings-activation.php(30): ratings_activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ratings_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pos...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-postratings/...')
+#10 {main}</pre>
+ for query DESC wp_ratings made by activate_plugin, do_action('activate_wp-postratings/wp-postratings.php'), WP_Hook->do_action, WP_Hook->apply_filters, ratings_activation, ratings_activate, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 22:31:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_ratings ADD rating_userid INT( 10 ) NOT NULL DEFAULT '0';</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_ratings, RATING_USERID, int(10)</li>
+<li>Executing: ALTER TABLE wp_ratings ADD rating_userid   integer NOT NULL DEFAULT '0'; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rating_userid.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-postratings/includes/postratings-activation.php(68): maybe_add_column('wp_ratings', 'rating_userid', 'ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wp-postratings/includes/postratings-activation.php(30): ratings_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ratings_activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pos...', false)
+#8 /internal/eval.php(20): activate_plugin('wp-postratings/...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_ratings ADD rating_userid INT( 10 ) NOT NULL DEFAULT '0'; made by activate_plugin, do_action('activate_wp-postratings/wp-postratings.php'), WP_Hook->do_action, WP_Hook->apply_filters, ratings_activation, ratings_activate, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 22:31:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_ratings</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_ratings')
+#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_ratings', 0)
+#3 /wordpress/wp-content/plugins/wp-postratings/includes/postratings-activation.php(68): maybe_add_column('wp_ratings', 'rating_userid', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-postratings/includes/postratings-activation.php(30): ratings_activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ratings_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pos...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-postratings/...')
+#10 {main}</pre>
+ for query DESC wp_ratings made by activate_plugin, do_action('activate_wp-postratings/wp-postratings.php'), WP_Hook->do_action, WP_Hook->apply_filters, ratings_activation, ratings_activate, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 22:31:41 UTC] PHP Warning:  Constant WP_EXNAVIGATION_DETECT already defined in /wordpress/wp-content/plugins/wp-remove-css-js/inc/configure.php on line 54
+[27-May-2025 22:31:41 UTC] PHP Warning:  Undefined variable $new_version in /wordpress/wp-content/plugins/wp-remove-css-js/admin/functions.php on line 31
+[27-May-2025 22:31:41 UTC] PHP Warning:  Undefined variable $new_version in /wordpress/wp-content/plugins/wp-remove-css-js/admin/functions.php on line 32
+[27-May-2025 22:31:42 UTC] PHP Warning:  Constant WP_EXNAVIGATION_DETECT already defined in /wordpress/wp-content/plugins/wp-remove-css-js/inc/configure.php on line 54
+[27-May-2025 22:31:50 UTC] PHP Warning:  Constant WP_EXNAVIGATION_DETECT already defined in /wordpress/wp-content/plugins/wp-remove-css-js/inc/configure.php on line 54
+[27-May-2025 22:31:50 UTC] PHP Warning:  Undefined variable $new_version in /wordpress/wp-content/plugins/wp-remove-css-js/admin/functions.php on line 31
+[27-May-2025 22:31:50 UTC] PHP Warning:  Undefined variable $new_version in /wordpress/wp-content/plugins/wp-remove-css-js/admin/functions.php on line 32
+[27-May-2025 22:31:52 UTC] PHP Warning:  Constant WP_EXNAVIGATION_DETECT already defined in /wordpress/wp-content/plugins/wp-remove-css-js/inc/configure.php on line 54
+[27-May-2025 22:31:59 UTC] PHP Warning:  Constant WP_EXNAVIGATION_DETECT already defined in /wordpress/wp-content/plugins/wp-remove-css-js/inc/configure.php on line 54
+[27-May-2025 22:31:59 UTC] PHP Warning:  Undefined variable $new_version in /wordpress/wp-content/plugins/wp-remove-css-js/admin/functions.php on line 31
+[27-May-2025 22:31:59 UTC] PHP Warning:  Undefined variable $new_version in /wordpress/wp-content/plugins/wp-remove-css-js/admin/functions.php on line 32
+[27-May-2025 22:32:00 UTC] PHP Warning:  Constant WP_EXNAVIGATION_DETECT already defined in /wordpress/wp-content/plugins/wp-remove-css-js/inc/configure.php on line 54
+[27-May-2025 22:32:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/wp-start-bar/index.php:34
 Stack trace:
-#0 /wordpress/wp-content/plugins/wpchameleon/wpchameleon.php(207): WP_Widget->__construct()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpchameleon/wpc...')
-#3 /internal/eval.php(20): activate_plugin('wpchameleon/wpc...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[26-May-2025 08:49:11 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-content/plugins/wpchameleon/wpchameleon.php on line 207 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-includes/class-wp-hook.php(324): wpstartbar_activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
+#4 /internal/eval.php(20): activate_plugin('wp-start-bar/in...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-start-bar/index.php on line 34
+[27-May-2025 22:32:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/wp-start-bar/index.php:34
 Stack trace:
-#0 /wordpress/wp-content/plugins/wpchameleon/wpchameleon.php(207): WP_Widget->__construct()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpchameleon/wpc...')
-#3 /internal/eval.php(20): activate_plugin('wpchameleon/wpc...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[26-May-2025 08:49:18 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-content/plugins/wpchameleon/wpchameleon.php on line 207 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-includes/class-wp-hook.php(324): wpstartbar_activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
+#4 /internal/eval.php(20): activate_plugin('wp-start-bar/in...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-start-bar/index.php on line 34
+[27-May-2025 22:33:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/wp-start-bar/index.php:34
 Stack trace:
-#0 /wordpress/wp-content/plugins/wpchameleon/wpchameleon.php(207): WP_Widget->__construct()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpchameleon/wpc...')
-#3 /internal/eval.php(20): activate_plugin('wpchameleon/wpc...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[26-May-2025 08:49:27 UTC] PHP Warning:  Undefined array key "plugin-uri" in /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php on line 195
-[26-May-2025 08:49:27 UTC] PHP Warning:  Undefined array key "author-uri" in /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php on line 196
-[26-May-2025 08:49:27 UTC] PHP Fatal error:  Uncaught TypeError: sizeof(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php:205
+#0 /wordpress/wp-includes/class-wp-hook.php(324): wpstartbar_activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
+#4 /internal/eval.php(20): activate_plugin('wp-start-bar/in...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-start-bar/index.php on line 34
+[27-May-2025 22:33:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/w3devil-wp-nopagesearch/w3devil-wp-nopagesearch.php:14
 Stack trace:
-#0 /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php(114): wp_countdown->get_plugin_data()
-#1 /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php(74): wp_countdown->default_options()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): wp_countdown->activationCallback(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpcoun...', false)
-#6 /internal/eval.php(20): activate_plugin('wpcountdown/wpc...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php on line 205
-[26-May-2025 08:49:33 UTC] PHP Warning:  Undefined array key "plugin-uri" in /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php on line 195
-[26-May-2025 08:49:33 UTC] PHP Warning:  Undefined array key "author-uri" in /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php on line 196
-[26-May-2025 08:49:33 UTC] PHP Fatal error:  Uncaught TypeError: sizeof(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php:205
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('w3devil-wp-nopa...')
+#2 /internal/eval.php(20): activate_plugin('w3devil-wp-nopa...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/w3devil-wp-nopagesearch/w3devil-wp-nopagesearch.php on line 14
+[27-May-2025 22:33:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/w3devil-wp-nopagesearch/w3devil-wp-nopagesearch.php:14
 Stack trace:
-#0 /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php(114): wp_countdown->get_plugin_data()
-#1 /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php(74): wp_countdown->default_options()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): wp_countdown->activationCallback(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpcoun...', false)
-#6 /internal/eval.php(20): activate_plugin('wpcountdown/wpc...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php on line 205
-[26-May-2025 08:49:40 UTC] PHP Warning:  Undefined array key "plugin-uri" in /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php on line 195
-[26-May-2025 08:49:40 UTC] PHP Warning:  Undefined array key "author-uri" in /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php on line 196
-[26-May-2025 08:49:40 UTC] PHP Fatal error:  Uncaught TypeError: sizeof(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php:205
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('w3devil-wp-nopa...')
+#2 /internal/eval.php(20): activate_plugin('w3devil-wp-nopa...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/w3devil-wp-nopagesearch/w3devil-wp-nopagesearch.php on line 14
+[27-May-2025 22:33:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/w3devil-wp-nopagesearch/w3devil-wp-nopagesearch.php:14
 Stack trace:
-#0 /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php(114): wp_countdown->get_plugin_data()
-#1 /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php(74): wp_countdown->default_options()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): wp_countdown->activationCallback(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpcoun...', false)
-#6 /internal/eval.php(20): activate_plugin('wpcountdown/wpc...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/wpcountdown/wpcountdown.php on line 205
-[26-May-2025 08:52:38 UTC] PHP Warning:  mkdir(): No such file or directory in /wordpress/wp-content/plugins/woocompany015/woocompany015.php on line 12
-[26-May-2025 08:52:39 UTC] PHP Warning:  mkdir(): No such file or directory in /wordpress/wp-content/plugins/woocompany015/woocompany015.php on line 12
-[26-May-2025 08:52:47 UTC] PHP Warning:  mkdir(): No such file or directory in /wordpress/wp-content/plugins/woocompany015/woocompany015.php on line 12
-[26-May-2025 08:52:48 UTC] PHP Warning:  mkdir(): No such file or directory in /wordpress/wp-content/plugins/woocompany015/woocompany015.php on line 12
-[26-May-2025 08:52:55 UTC] PHP Warning:  mkdir(): No such file or directory in /wordpress/wp-content/plugins/woocompany015/woocompany015.php on line 12
-[26-May-2025 08:52:56 UTC] PHP Warning:  mkdir(): No such file or directory in /wordpress/wp-content/plugins/woocompany015/woocompany015.php on line 12
-[26-May-2025 08:53:08 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "STDERR" in /wordpress/wp-content/plugins/wordless/vendor/composer/platform_check.php:17
-Stack trace:
-#0 /wordpress/wp-content/plugins/wordless/vendor/composer/autoload_real.php(25): require()
-#1 /wordpress/wp-content/plugins/wordless/vendor/autoload.php(25): ComposerAutoloaderInit5b87aebe00358f4fc8395376dfb7f686::getLoader()
-#2 /wordpress/wp-content/plugins/wordless/wordless/wordless.php(3): require_once('/wordpress/wp-c...')
-#3 /wordpress/wp-content/plugins/wordless/wordless.php(12): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordless/wordle...')
-#6 /internal/eval.php(20): activate_plugin('wordless/wordle...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/wordless/vendor/composer/platform_check.php on line 17
-[26-May-2025 08:53:20 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "STDERR" in /wordpress/wp-content/plugins/wordless/vendor/composer/platform_check.php:17
-Stack trace:
-#0 /wordpress/wp-content/plugins/wordless/vendor/composer/autoload_real.php(25): require()
-#1 /wordpress/wp-content/plugins/wordless/vendor/autoload.php(25): ComposerAutoloaderInit5b87aebe00358f4fc8395376dfb7f686::getLoader()
-#2 /wordpress/wp-content/plugins/wordless/wordless/wordless.php(3): require_once('/wordpress/wp-c...')
-#3 /wordpress/wp-content/plugins/wordless/wordless.php(12): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordless/wordle...')
-#6 /internal/eval.php(20): activate_plugin('wordless/wordle...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/wordless/vendor/composer/platform_check.php on line 17
-[26-May-2025 08:53:31 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "STDERR" in /wordpress/wp-content/plugins/wordless/vendor/composer/platform_check.php:17
-Stack trace:
-#0 /wordpress/wp-content/plugins/wordless/vendor/composer/autoload_real.php(25): require()
-#1 /wordpress/wp-content/plugins/wordless/vendor/autoload.php(25): ComposerAutoloaderInit5b87aebe00358f4fc8395376dfb7f686::getLoader()
-#2 /wordpress/wp-content/plugins/wordless/wordless/wordless.php(3): require_once('/wordpress/wp-c...')
-#3 /wordpress/wp-content/plugins/wordless/wordless.php(12): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordless/wordle...')
-#6 /internal/eval.php(20): activate_plugin('wordless/wordle...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/wordless/vendor/composer/platform_check.php on line 17
-[26-May-2025 08:57:57 UTC] PHP Fatal error:  Cannot use "parent" when current class scope has no parent in /wordpress/wp-content/plugins/wemahu/admin/libs/class.wemahu_ajax.php on line 252
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('w3devil-wp-nopa...')
+#2 /internal/eval.php(20): activate_plugin('w3devil-wp-nopa...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/w3devil-wp-nopagesearch/w3devil-wp-nopagesearch.php on line 14
+[27-May-2025 22:35:44 UTC] PHP Fatal error:  Cannot use "parent" when current class scope has no parent in /wordpress/wp-content/plugins/wemahu/admin/libs/class.wemahu_ajax.php on line 252
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
