@@ -2,95 +2,88 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [25-May-2025 14:25:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_smart_smtp_mail_logs ADD COLUMN `primary_id` BIGINT(20) DEFAULT NULL</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_smart_smtp_mail_logs</li>
-<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_smart_smtp_mail_logs</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_smart_smtp_mail_logs</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_smart_smtp_mail_logs</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_smart_smtp_mail_logs, primary_id, 20, , YES, bigint, , , 19, 0, , , , bigint(20), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_smart_smtp_mail_logs</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_smart_smtp_mail_logs</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_smart_smtp_mail_logs</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_smart_smtp_mail_logs_6833286f1ffb8` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `site_id` INTEGER,
-  `to` TEXT COLLATE NOCASE NOT NULL,
-  `from` TEXT COLLATE NOCASE NOT NULL,
-  `subject` TEXT COLLATE NOCASE,
-  `body` TEXT COLLATE NOCASE,
-  `header` TEXT COLLATE NOCASE,
-  `attachments` TEXT COLLATE NOCASE,
-  `status` TEXT COLLATE NOCASE,
-  `response` TEXT COLLATE NOCASE,
-  `extra` TEXT COLLATE NOCASE,
-  `retries` INTEGER,
-  `resent_count` INTEGER,
-  `source` TEXT COLLATE NOCASE,
-  `primary_id` INTEGER,
-  `ip_address` TEXT COLLATE NOCASE,
-  `error_message` TEXT COLLATE NOCASE,
-  `created_at` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `primary_id` INTEGER
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: primary_id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/smart-smtp/includes/Migration/MailLogsMigration.php(117): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/smart-smtp/includes/Migration/MailLogsMigration.php(29): SmartSMTP\Migration\MailLogsMigration->alter_table()
-#5 /wordpress/wp-content/plugins/smart-smtp/includes/Traits/Singleton.php(29): SmartSMTP\Migration\MailLogsMigration->__construct()
-#6 /wordpress/wp-content/plugins/smart-smtp/includes/SmartSMTP.php(110): SmartSMTP\Migration\Migration::init()
-#7 /wordpress/wp-content/plugins/smart-smtp/includes/SmartSMTP.php(43): SmartSMTP\SmartSMTP->includes()
-#8 /wordpress/wp-content/plugins/smart-smtp/includes/Traits/Singleton.php(29): SmartSMTP\SmartSMTP->__construct()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): SmartSMTP\SmartSMTP::init('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query ALTER TABLE wp_smart_smtp_mail_logs ADD COLUMN `primary_id` BIGINT(20) DEFAULT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, SmartSMTP\SmartSMTP::init, SmartSMTP\SmartSMTP->__construct, SmartSMTP\SmartSMTP->includes, SmartSMTP\Migration\Migration::init, SmartSMTP\Migration\MailLogsMigration->__construct, SmartSMTP\Migration\MailLogsMigration->alter_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:27:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-login-for-wordpress-in-french-language-francais/header.php:76
+Error: [27-May-2025 06:57:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/simple-twitter-feed/simple-twitter-feed.php:178
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simple-twitter-...')
+#2 /internal/eval.php(20): activate_plugin('simple-twitter-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/simple-twitter-feed/simple-twitter-feed.php on line 178
+[27-May-2025 06:57:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/simple-twitter-feed/simple-twitter-feed.php:178
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simple-twitter-...')
+#2 /internal/eval.php(20): activate_plugin('simple-twitter-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/simple-twitter-feed/simple-twitter-feed.php on line 178
+[27-May-2025 06:58:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/simple-twitter-feed/simple-twitter-feed.php:178
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simple-twitter-...')
+#2 /internal/eval.php(20): activate_plugin('simple-twitter-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/simple-twitter-feed/simple-twitter-feed.php on line 178
+[27-May-2025 06:58:13 UTC] PHP Warning:  Undefined array key "manage_link_show" in /wordpress/wp-content/plugins/simple-widgets/simple-widgets.php on line 49
+[27-May-2025 06:58:14 UTC] PHP Warning:  Undefined array key "manage_link_show" in /wordpress/wp-content/plugins/simple-widgets/simple-widgets.php on line 49
+[27-May-2025 06:58:22 UTC] PHP Warning:  Undefined array key "manage_link_show" in /wordpress/wp-content/plugins/simple-widgets/simple-widgets.php on line 49
+[27-May-2025 06:58:22 UTC] PHP Warning:  Undefined array key "manage_link_show" in /wordpress/wp-content/plugins/simple-widgets/simple-widgets.php on line 49
+[27-May-2025 06:58:30 UTC] PHP Warning:  Undefined array key "manage_link_show" in /wordpress/wp-content/plugins/simple-widgets/simple-widgets.php on line 49
+[27-May-2025 06:58:31 UTC] PHP Warning:  Undefined array key "manage_link_show" in /wordpress/wp-content/plugins/simple-widgets/simple-widgets.php on line 49
+[27-May-2025 06:59:10 UTC] PHP Fatal error:  Uncaught Error: Class "Jigoshop\Integration" not found in /wordpress/wp-content/plugins/sisow-jigoshop-ecommerce/src/Jigoshop/Extension/SisowGateway/Gateways.php:11
+Stack trace:
+#0 /wordpress/wp-content/plugins/sisow-jigoshop-ecommerce/src/Jigoshop/Extension/SisowGateway/Gateways.php(58): Jigoshop\Extension\SisowGateway\Gateways->__construct()
+#1 /wordpress/wp-content/plugins/sisow-jigoshop-ecommerce/jigoshop-ecommerce-sisow.php(25): require_once('/wordpress/wp-c...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): {closure}('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/sisow-jigoshop-ecommerce/src/Jigoshop/Extension/SisowGateway/Gateways.php on line 11
+[27-May-2025 06:59:18 UTC] PHP Fatal error:  Uncaught Error: Class "Jigoshop\Integration" not found in /wordpress/wp-content/plugins/sisow-jigoshop-ecommerce/src/Jigoshop/Extension/SisowGateway/Gateways.php:11
+Stack trace:
+#0 /wordpress/wp-content/plugins/sisow-jigoshop-ecommerce/src/Jigoshop/Extension/SisowGateway/Gateways.php(58): Jigoshop\Extension\SisowGateway\Gateways->__construct()
+#1 /wordpress/wp-content/plugins/sisow-jigoshop-ecommerce/jigoshop-ecommerce-sisow.php(25): require_once('/wordpress/wp-c...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): {closure}('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/sisow-jigoshop-ecommerce/src/Jigoshop/Extension/SisowGateway/Gateways.php on line 11
+[27-May-2025 06:59:26 UTC] PHP Fatal error:  Uncaught Error: Class "Jigoshop\Integration" not found in /wordpress/wp-content/plugins/sisow-jigoshop-ecommerce/src/Jigoshop/Extension/SisowGateway/Gateways.php:11
+Stack trace:
+#0 /wordpress/wp-content/plugins/sisow-jigoshop-ecommerce/src/Jigoshop/Extension/SisowGateway/Gateways.php(58): Jigoshop\Extension\SisowGateway\Gateways->__construct()
+#1 /wordpress/wp-content/plugins/sisow-jigoshop-ecommerce/jigoshop-ecommerce-sisow.php(25): require_once('/wordpress/wp-c...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): {closure}('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/sisow-jigoshop-ecommerce/src/Jigoshop/Extension/SisowGateway/Gateways.php on line 11
+[27-May-2025 07:00:57 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; Browser has a deprecated constructor in /wordpress/wp-content/plugins/simple-system-status/includes/browser.php on line 148
+[27-May-2025 07:01:06 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; Browser has a deprecated constructor in /wordpress/wp-content/plugins/simple-system-status/includes/browser.php on line 148
+[27-May-2025 07:01:16 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; Browser has a deprecated constructor in /wordpress/wp-content/plugins/simple-system-status/includes/browser.php on line 148
+[27-May-2025 07:04:13 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>simple-feature-requests</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-May-2025 07:04:32 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>simple-feature-requests</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-May-2025 07:04:50 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>simple-feature-requests</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-May-2025 07:05:52 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>sjbPluginWidget</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-May-2025 07:06:01 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>sjbPluginWidget</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-May-2025 07:06:09 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>sjbPluginWidget</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-May-2025 07:06:39 UTC] PHP Notice:  date_default_timezone_set(): Timezone ID '' is invalid in /wordpress/wp-content/plugins/snapcall/snapcall.php on line 19
+[27-May-2025 07:06:40 UTC] PHP Notice:  date_default_timezone_set(): Timezone ID '' is invalid in /wordpress/wp-content/plugins/snapcall/snapcall.php on line 19
+[27-May-2025 07:06:48 UTC] PHP Notice:  date_default_timezone_set(): Timezone ID '' is invalid in /wordpress/wp-content/plugins/snapcall/snapcall.php on line 19
+[27-May-2025 07:06:49 UTC] PHP Notice:  date_default_timezone_set(): Timezone ID '' is invalid in /wordpress/wp-content/plugins/snapcall/snapcall.php on line 19
+[27-May-2025 07:06:57 UTC] PHP Notice:  date_default_timezone_set(): Timezone ID '' is invalid in /wordpress/wp-content/plugins/snapcall/snapcall.php on line 19
+[27-May-2025 07:06:58 UTC] PHP Notice:  date_default_timezone_set(): Timezone ID '' is invalid in /wordpress/wp-content/plugins/snapcall/snapcall.php on line 19
+[27-May-2025 07:07:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-login-for-wordpress-in-french-language-francais/header.php:76
 Stack trace:
 #0 /wordpress/wp-content/plugins/social-login-for-wordpress-in-french-language-francais/LoginRadius.php(11): include()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
