@@ -2,139 +2,85 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [25-May-2025 14:48:56 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[25-May-2025 14:49:07 UTC] PHP Notice:  Undefined index: apd`.`atum_stock_status in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3065
-[25-May-2025 14:49:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3066
-[25-May-2025 14:49:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3067
-[25-May-2025 14:49:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3068
-[25-May-2025 14:49:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [26-May-2025 23:50:09 UTC] PHP Warning:  Undefined array key "t`.`postgoaltype" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3085
+[26-May-2025 23:50:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3086
+[26-May-2025 23:50:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3087
+[26-May-2025 23:50:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3088
+[26-May-2025 23:50:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-			UPDATE wp_atum_product_data apd
-			INNER JOIN wp_posts p ON apd.product_id = p.ID
-			INNER JOIN wp_postmeta pm ON p.ID = pm.post_id
-			INNER JOIN wp_postmeta mpm ON p.ID = mpm.post_id
-			SET apd.atum_stock_status = pm.meta_value
-			WHERE p.post_type = 'product_variation' AND
-			pm.meta_key = '_stock_status' AND mpm.meta_key = '_manage_stock' AND
-	      	mpm.meta_value = 'yes' AND pm.meta_value <> apd.atum_stock_status
-		</p>
+<p>UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postGoal = p.ID
+        SET t.postGoalType = p.post_type
+        WHERE t.postGoalType IS NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_atum_product_data` `apd` INNER JOIN `wp_posts` `p` ON `apd`.`product_id` = `p`.`ID` INNER JOIN `wp_postmeta` `pm` ON `p`.`ID` = `pm`.`post_id` INNER JOIN `wp_postmeta` `mpm` ON `p`.`ID` = `mpm`.`post_id</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ab_testing_for_wp_ab_test` AS `t` INNER JOIN `wp_posts` AS `p` on `t`.`postGoal` = `p`.`ID</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
+				SELECT LOWER(column_name) AS COLUMN_NAME, is_nullable, data_type, column_default
 				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_atum_product_data` `apd` INNER JOIN `wp_posts` `p` ON `apd`.`product_id` = `p`.`ID` INNER JOIN `wp_postmeta` `pm` ON `p`.`ID` = `pm`.`post_id` INNER JOIN `wp_postmeta` `mpm` ON `p`.`ID` = `mpm`.`post_id</li>
-<li>Executing: UPDATE `wp_atum_product_data` `apd` INNER JOIN `wp_posts` `p` ON `apd`.`product_id` = `p`.`ID` INNER JOIN `wp_postmeta` `pm` ON `p`.`ID` = `pm`.`post_id` INNER JOIN `wp_postmeta` `mpm` ON `p`.`ID` = `mpm`.`post_id` SET `apd`.`atum_stock_status` = `pm`.`meta_value` WHERE `p`.`post_type` = 'product_variation' AND `pm`.`meta_key` = '_stock_status' AND `mpm`.`meta_key` = '_manage_stock' AND `mpm`.`meta_value` = 'yes' AND `pm`.`meta_value` &lt;&gt; `apd`.`atum_stock_status` | (no parameters)</li>
+			 | parameters: database_name_here, wp_ab_testing_for_wp_ab_test` AS `t` INNER JOIN `wp_posts` AS `p` on `t`.`postGoal` = `p`.`ID</li>
+<li>Executing: UPDATE `wp_ab_testing_for_wp_ab_test` AS `t` INNER JOIN `wp_posts` AS `p` on `t`.`postGoal` = `p`.`ID` SET `t`.`postGoalType` = `p`.`post_type` WHERE `t`.`postGoalType` IS NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "`apd`": syntax error
+SQLSTATE[HY000]: General error: 1 near "INNER": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n\t\t\tUPDATE wp_a...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n\t\t\tUPDATE wp_a...')
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(880): WP_SQLite_DB->query('\n\t\t\tUPDATE wp_a...')
-#4 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(143): Atum\Inc\Upgrade->update_atum_stock_status()
-#5 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(727): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query 
-			UPDATE wp_atum_product_data apd
-			INNER JOIN wp_posts p ON apd.product_id = p.ID
-			INNER JOIN wp_postmeta pm ON p.ID = pm.post_id
-			INNER JOIN wp_postmeta mpm ON p.ID = mpm.post_id
-			SET apd.atum_stock_status = pm.meta_value
-			WHERE p.post_type = 'product_variation' AND
-			pm.meta_key = '_stock_status' AND mpm.meta_key = '_manage_stock' AND
-	      	mpm.meta_value = 'yes' AND pm.meta_value <> apd.atum_stock_status
-		 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->update_atum_stock_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:49:07 UTC] PHP Notice:  Undefined index: apd`.`calc_backorders in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3065
-[25-May-2025 14:49:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3066
-[25-May-2025 14:49:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3067
-[25-May-2025 14:49:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3068
-[25-May-2025 14:49:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE `wp_ab_t...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('UPDATE `wp_ab_t...')
+#3 /wordpress/wp-content/plugins/ab-testing-for-wp/src/php/data/installer.php(53): WP_SQLite_DB->query('UPDATE `wp_ab_t...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ABTestingForWP\Installer->runMigrations('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postGoal = p.ID
+        SET t.postGoalType = p.post_type
+        WHERE t.postGoalType IS NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ABTestingForWP\Installer->runMigrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:50:09 UTC] PHP Warning:  Undefined array key "t`.`title" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3085
+[26-May-2025 23:50:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3086
+[26-May-2025 23:50:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3087
+[26-May-2025 23:50:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3088
+[26-May-2025 23:50:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-			UPDATE wp_atum_product_data apd
-			INNER JOIN wp_postmeta pms ON (apd.product_id = pms.post_id AND pms.meta_key = '_stock')
-			INNER JOIN wp_postmeta pmb ON (apd.product_id = pmb.post_id AND pmb.meta_key = '_backorders')
-			SET apd.calc_backorders = pms.meta_value
-			WHERE pmb.meta_value != 'no' AND pms.meta_value <= 0 
-		</p>
+<p>UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postId = p.ID
+        SET t.title = CONCAT('Test "', p.post_title, '"')
+        WHERE t.title IS NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_atum_product_data` `apd` INNER JOIN `wp_postmeta` `pms` ON ( `apd`.`product_id` = `pms`.`post_id` AND `pms`.`meta_key` = '_stock' ) INNER JOIN `wp_postmeta` `pmb` ON ( `apd`.`product_id` = `pmb`.`post_id` AND `pmb`.`meta_key` = '_backorders' </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ab_testing_for_wp_ab_test` AS `t` INNER JOIN `wp_posts` AS `p` on `t`.`postId` = `p`.`ID</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
+				SELECT LOWER(column_name) AS COLUMN_NAME, is_nullable, data_type, column_default
 				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_atum_product_data` `apd` INNER JOIN `wp_postmeta` `pms` ON ( `apd`.`product_id` = `pms`.`post_id` AND `pms`.`meta_key` = '_stock' ) INNER JOIN `wp_postmeta` `pmb` ON ( `apd`.`product_id` = `pmb`.`post_id` AND `pmb`.`meta_key` = '_backorders' </li>
-<li>Executing: UPDATE `wp_atum_product_data` `apd` INNER JOIN `wp_postmeta` `pms` ON ( `apd`.`product_id` = `pms`.`post_id` AND `pms`.`meta_key` = '_stock' ) INNER JOIN `wp_postmeta` `pmb` ON ( `apd`.`product_id` = `pmb`.`post_id` AND `pmb`.`meta_key` = '_backorders' ) SET `apd`.`calc_backorders` = `pms`.`meta_value` WHERE `pmb`.`meta_value` != 'no' AND `pms`.`meta_value` &lt;= 0 | (no parameters)</li>
+			 | parameters: database_name_here, wp_ab_testing_for_wp_ab_test` AS `t` INNER JOIN `wp_posts` AS `p` on `t`.`postId` = `p`.`ID</li>
+<li>Executing: UPDATE `wp_ab_testing_for_wp_ab_test` AS `t` INNER JOIN `wp_posts` AS `p` on `t`.`postId` = `p`.`ID` SET `t`.`title` = ('Test &quot;' || `p`.`post_title` || '&quot;') WHERE `t`.`title` IS NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "`apd`": syntax error
+SQLSTATE[HY000]: General error: 1 near "INNER": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n\t\t\tUPDATE wp_a...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n\t\t\tUPDATE wp_a...')
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(1201): WP_SQLite_DB->query('\n\t\t\tUPDATE wp_a...')
-#4 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(193): Atum\Inc\Upgrade->update_calc_backorders()
-#5 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(727): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query 
-			UPDATE wp_atum_product_data apd
-			INNER JOIN wp_postmeta pms ON (apd.product_id = pms.post_id AND pms.meta_key = '_stock')
-			INNER JOIN wp_postmeta pmb ON (apd.product_id = pmb.post_id AND pmb.meta_key = '_backorders')
-			SET apd.calc_backorders = pms.meta_value
-			WHERE pmb.meta_value != 'no' AND pms.meta_value <= 0 
-		 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->update_calc_backorders, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:49:49 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[25-May-2025 14:50:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `sold_today` DOUBLE DEFAULT NULL;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE `wp_ab_t...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('UPDATE `wp_ab_t...')
+#3 /wordpress/wp-content/plugins/ab-testing-for-wp/src/php/data/installer.php(53): WP_SQLite_DB->query('UPDATE `wp_ab_t...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ABTestingForWP\Installer->runMigrations('')
 #5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #7 /wordpress/wp-settings.php(727): do_action('init')
@@ -142,674 +88,347 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `sold_today` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postId = p.ID
+        SET t.title = CONCAT('Test "', p.post_title, '"')
+        WHERE t.title IS NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ABTestingForWP\Installer->runMigrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:50:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `sales_last_days` DOUBLE DEFAULT NULL;</p>
+<p>UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postGoal = p.ID
+        SET t.postGoalType = p.post_type
+        WHERE t.postGoalType IS NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postGoal = p.ID
+        SET t.postGoalType = p.post_type
+        WHERE rowid IN (SELECT rowid FROM wp_ab_testing_for_wp_ab_test WHERE t.postGoalType IS NULL) | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "INNER": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `sales_last_days` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/ab-testing-for-wp/src/php/data/installer.php(53): WP_SQLite_DB->query('UPDATE `wp_ab_t...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): ABTestingForWP\Installer->runMigrations('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(727): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postGoal = p.ID
+        SET t.postGoalType = p.post_type
+        WHERE t.postGoalType IS NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ABTestingForWP\Installer->runMigrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:50:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `reserved_stock` DOUBLE DEFAULT NULL;</p>
+<p>UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postId = p.ID
+        SET t.title = CONCAT('Test "', p.post_title, '"')
+        WHERE t.title IS NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postId = p.ID
+        SET t.title = (:param0 || p.post_title|| :param1 )
+        WHERE rowid IN (SELECT rowid FROM wp_ab_testing_for_wp_ab_test WHERE t.title IS NULL) | parameters: Test &quot;, &quot;</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "INNER": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `reserved_stock` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/ab-testing-for-wp/src/php/data/installer.php(53): WP_SQLite_DB->query('UPDATE `wp_ab_t...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): ABTestingForWP\Installer->runMigrations('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(727): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postId = p.ID
+        SET t.title = CONCAT('Test "', p.post_title, '"')
+        WHERE t.title IS NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ABTestingForWP\Installer->runMigrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:50:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `customer_returns` DOUBLE DEFAULT NULL;</p>
+<p>UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postGoal = p.ID
+        SET t.postGoalType = p.post_type
+        WHERE t.postGoalType IS NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postGoal = p.ID
+        SET t.postGoalType = p.post_type
+        WHERE rowid IN (SELECT rowid FROM wp_ab_testing_for_wp_ab_test WHERE t.postGoalType IS NULL) | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "INNER": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `customer_returns` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/ab-testing-for-wp/src/php/data/installer.php(53): WP_SQLite_DB->query('UPDATE `wp_ab_t...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): ABTestingForWP\Installer->runMigrations('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(727): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postGoal = p.ID
+        SET t.postGoalType = p.post_type
+        WHERE t.postGoalType IS NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ABTestingForWP\Installer->runMigrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:50:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `warehouse_damage` DOUBLE DEFAULT NULL;</p>
+<p>UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postId = p.ID
+        SET t.title = CONCAT('Test "', p.post_title, '"')
+        WHERE t.title IS NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postId = p.ID
+        SET t.title = (:param0 || p.post_title|| :param1 )
+        WHERE rowid IN (SELECT rowid FROM wp_ab_testing_for_wp_ab_test WHERE t.title IS NULL) | parameters: Test &quot;, &quot;</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "INNER": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `warehouse_damage` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `lost_in_post` DOUBLE DEFAULT NULL;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `lost_in_post` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `other_logs` DOUBLE DEFAULT NULL;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `other_logs` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `lost_sales` DOUBLE DEFAULT NULL;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `lost_sales` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `atum_stock_status` VARCHAR(15) NOT NULL DEFAULT 'instock';</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(664): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(111): Atum\Inc\Upgrade->add_atum_stock_fields()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `atum_stock_status` VARCHAR(15) NOT NULL DEFAULT 'instock'; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->add_atum_stock_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `restock_status` TINYINT(1) NOT NULL DEFAULT 0;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(664): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(111): Atum\Inc\Upgrade->add_atum_stock_fields()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `restock_status` TINYINT(1) NOT NULL DEFAULT 0; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->add_atum_stock_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-			UPDATE wp_atum_product_data apd
-			INNER JOIN wp_posts p ON apd.product_id = p.ID
-			INNER JOIN wp_postmeta pm ON p.ID = pm.post_id
-			INNER JOIN wp_postmeta mpm ON p.ID = mpm.post_id
-			SET apd.atum_stock_status = pm.meta_value
-			WHERE p.post_type = 'product_variation' AND
-			pm.meta_key = '_stock_status' AND mpm.meta_key = '_manage_stock' AND
-	      	mpm.meta_value = 'yes' AND pm.meta_value <> apd.atum_stock_status
-		</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: 
-			UPDATE wp_atum_product_data apd
-			INNER JOIN wp_posts p ON apd.product_id = p.ID
-			INNER JOIN wp_postmeta pm ON p.ID = pm.post_id
-			INNER JOIN wp_postmeta mpm ON p.ID = mpm.post_id
-			SET apd.atum_stock_status = pm.meta_value
-			WHERE rowid IN (SELECT rowid FROM wp_atum_product_data WHERE p.post_type = :param0  AND
-			pm.meta_key = :param1  AND mpm.meta_key = :param2  AND
-	      	mpm.meta_value = :param3  AND pm.meta_value &lt;&gt; apd.atum_stock_status
-		) | parameters: product_variation, _stock_status, _manage_stock, yes</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "apd": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(880): WP_SQLite_DB->query('\n\t\t\tUPDATE wp_a...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(143): Atum\Inc\Upgrade->update_atum_stock_status()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-			UPDATE wp_atum_product_data apd
-			INNER JOIN wp_posts p ON apd.product_id = p.ID
-			INNER JOIN wp_postmeta pm ON p.ID = pm.post_id
-			INNER JOIN wp_postmeta mpm ON p.ID = mpm.post_id
-			SET apd.atum_stock_status = pm.meta_value
-			WHERE p.post_type = 'product_variation' AND
-			pm.meta_key = '_stock_status' AND mpm.meta_key = '_manage_stock' AND
-	      	mpm.meta_value = 'yes' AND pm.meta_value <> apd.atum_stock_status
-		 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->update_atum_stock_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-			UPDATE wp_atum_product_data apd
-			INNER JOIN wp_postmeta pms ON (apd.product_id = pms.post_id AND pms.meta_key = '_stock')
-			INNER JOIN wp_postmeta pmb ON (apd.product_id = pmb.post_id AND pmb.meta_key = '_backorders')
-			SET apd.calc_backorders = pms.meta_value
-			WHERE pmb.meta_value != 'no' AND pms.meta_value <= 0 
-		</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: 
-			UPDATE wp_atum_product_data apd
-			INNER JOIN wp_postmeta pms ON (apd.product_id = pms.post_id AND pms.meta_key = :param0 )
-			INNER JOIN wp_postmeta pmb ON (apd.product_id = pmb.post_id AND pmb.meta_key = :param1 )
-			SET apd.calc_backorders = pms.meta_value
-			WHERE rowid IN (SELECT rowid FROM wp_atum_product_data WHERE pmb.meta_value != :param2  AND pms.meta_value &lt;= 0 
-		) | parameters: _stock, _backorders, no</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "apd": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(1201): WP_SQLite_DB->query('\n\t\t\tUPDATE wp_a...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(193): Atum\Inc\Upgrade->update_calc_backorders()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-			UPDATE wp_atum_product_data apd
-			INNER JOIN wp_postmeta pms ON (apd.product_id = pms.post_id AND pms.meta_key = '_stock')
-			INNER JOIN wp_postmeta pmb ON (apd.product_id = pmb.post_id AND pmb.meta_key = '_backorders')
-			SET apd.calc_backorders = pms.meta_value
-			WHERE pmb.meta_value != 'no' AND pms.meta_value <= 0 
-		 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->update_calc_backorders, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:44 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[25-May-2025 14:50:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `sold_today` DOUBLE DEFAULT NULL;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `sold_today` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `sales_last_days` DOUBLE DEFAULT NULL;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `sales_last_days` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `reserved_stock` DOUBLE DEFAULT NULL;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `reserved_stock` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `customer_returns` DOUBLE DEFAULT NULL;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `customer_returns` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `warehouse_damage` DOUBLE DEFAULT NULL;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `warehouse_damage` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `lost_in_post` DOUBLE DEFAULT NULL;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `lost_in_post` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `other_logs` DOUBLE DEFAULT NULL;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `other_logs` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `lost_sales` DOUBLE DEFAULT NULL;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(589): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(101): Atum\Inc\Upgrade->alter_list_table_columns()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `lost_sales` DOUBLE DEFAULT NULL; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->alter_list_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `atum_stock_status` VARCHAR(15) NOT NULL DEFAULT 'instock';</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(664): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(111): Atum\Inc\Upgrade->add_atum_stock_fields()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `atum_stock_status` VARCHAR(15) NOT NULL DEFAULT 'instock'; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->add_atum_stock_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_atum_product_data MODIFY `restock_status` TINYINT(1) NOT NULL DEFAULT 0;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(664): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(111): Atum\Inc\Upgrade->add_atum_stock_fields()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_atum_product_data MODIFY `restock_status` TINYINT(1) NOT NULL DEFAULT 0; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc\Upgrade->add_atum_stock_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 14:50:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-			UPDATE wp_atum_product_data apd
-			INNER JOIN wp_posts p ON apd.product_id = p.ID
-			INNER JOIN wp_postmeta pm ON p.ID = pm.post_id
-			INNER JOIN wp_postmeta mpm ON p.ID = mpm.post_id
-			SET apd.atum_stock_status = pm.meta_value
-			WHERE p.post_type = 'product_variation' AND
-			pm.meta_key = '_stock_status' AND mpm.meta_key = '_manage_stock' AND
-	      	mpm.meta_value = 'yes' AND pm.meta_value <> apd.atum_stock_status
-		</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: 
-			UPDATE wp_atum_product_data apd
-			INNER JOIN wp_posts p ON apd.product_id = p.ID
-			INNER JOIN wp_postmeta pm ON p.ID = pm.post_id
-			INNER JOIN wp_postmeta mpm ON p.ID = mpm.post_id
-			SET apd.atum_stock_status = pm.meta_value
-			WHERE rowid IN (SELECT rowid FROM wp_atum_product_data WHERE p.post_type = :param0  AND
-			pm.meta_key = :param1  AND mpm.meta_key = :param2  AND
-	      	mpm.meta_value = :param3  AND pm.meta_value &lt;&gt; apd.atum_stock_status
-		) | parameters: product_variation, _stock_status, _manage_stock, yes</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "apd": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(880): WP_SQLite_DB->query('\n\t\t\tUPDATE wp_a...')
-#2 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Upgrade.php(143): Atum\Inc\Upgrade->update_atum_stock_status()
-#3 /wordpress/wp-content/plugins/atum-stock-manager-for-woocommerce/classes/Inc/Main.php(145): Atum\Inc\Upgrade->__construct('0.0.1')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Atum\Inc\Main->pre_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-			UPDATE wp_atum_product_data apd
-			INNER JOIN wp_posts p ON apd.product_id = p.ID
-			INNER JOIN wp_postmeta pm ON p.ID = pm.post_id
-			INNER JOIN wp_postmeta mpm ON p.ID = mpm.post_id
-			SET apd.atum_stock_status = pm.meta_value
-			WHERE p.post_type = 'product_variation' AND
-			pm.meta_key = '_stock_status' AND mpm.meta_key = '_manage_stock' AND
-	      	mpm.meta_value = 'yes' AND pm.meta_value <> apd.atum_stock_status
-		 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Atum\Inc\Main->pre_init, Atum\Inc\Upgrade->__construct, Atum\Inc
+#1 /wordpress/wp-content/plugins/ab-testing-for-wp/src/php/data/installer.php(53): WP_SQLite_DB->query('UPDATE `wp_ab_t...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): ABTestingForWP\Installer->runMigrations('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(727): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query UPDATE `wp_ab_testing_for_wp_ab_test` AS t
+        INNER JOIN `wp_posts` AS p on t.postId = p.ID
+        SET t.title = CONCAT('Test "', p.post_title, '"')
+        WHERE t.title IS NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ABTestingForWP\Installer->runMigrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-May-2025 23:50:37 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1333
+[26-May-2025 23:50:37 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1333
+[26-May-2025 23:50:37 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1397
+[26-May-2025 23:50:37 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1397
+[26-May-2025 23:50:37 UTC] PHP Deprecated:  Required parameter $userdata follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1463
+[26-May-2025 23:50:37 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1333
+[26-May-2025 23:50:37 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1333
+[26-May-2025 23:50:37 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1397
+[26-May-2025 23:50:37 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1397
+[26-May-2025 23:50:37 UTC] PHP Deprecated:  Required parameter $userdata follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1463
+[26-May-2025 23:50:45 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1333
+[26-May-2025 23:50:45 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1333
+[26-May-2025 23:50:45 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1397
+[26-May-2025 23:50:45 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1397
+[26-May-2025 23:50:45 UTC] PHP Deprecated:  Required parameter $userdata follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1463
+[26-May-2025 23:50:47 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1333
+[26-May-2025 23:50:47 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1333
+[26-May-2025 23:50:47 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1397
+[26-May-2025 23:50:47 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1397
+[26-May-2025 23:50:47 UTC] PHP Deprecated:  Required parameter $userdata follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1463
+[26-May-2025 23:50:55 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1333
+[26-May-2025 23:50:55 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1333
+[26-May-2025 23:50:55 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1397
+[26-May-2025 23:50:55 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1397
+[26-May-2025 23:50:55 UTC] PHP Deprecated:  Required parameter $userdata follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1463
+[26-May-2025 23:50:55 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1333
+[26-May-2025 23:50:55 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1333
+[26-May-2025 23:50:55 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1397
+[26-May-2025 23:50:55 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1397
+[26-May-2025 23:50:55 UTC] PHP Deprecated:  Required parameter $userdata follows optional parameter $form_name in /wordpress/wp-content/plugins/access-by-category/access-by-category.php on line 1463
+[26-May-2025 23:51:31 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/add-flickr-photo-with-geo-tag/flickr.php on line 54
+[26-May-2025 23:51:39 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/add-flickr-photo-with-geo-tag/flickr.php on line 54
+[26-May-2025 23:51:47 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/add-flickr-photo-with-geo-tag/flickr.php on line 54
+[26-May-2025 23:54:21 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:54:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/adsense-deluxe2/adsense_deluxe.php on line 1081
+[26-May-2025 23:54:21 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:54:21 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:54:22 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:54:22 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/adsense-deluxe2/adsense_deluxe.php on line 1081
+[26-May-2025 23:54:22 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:54:30 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:54:30 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/adsense-deluxe2/adsense_deluxe.php on line 1081
+[26-May-2025 23:54:30 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:54:30 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:54:31 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:54:31 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/adsense-deluxe2/adsense_deluxe.php on line 1081
+[26-May-2025 23:54:31 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:54:38 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:54:38 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/adsense-deluxe2/adsense_deluxe.php on line 1081
+[26-May-2025 23:54:38 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:54:38 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:54:39 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:54:39 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/adsense-deluxe2/adsense_deluxe.php on line 1081
+[26-May-2025 23:54:39 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:55:59 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 15
+[26-May-2025 23:55:59 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 16
+[26-May-2025 23:55:59 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 19
+[26-May-2025 23:55:59 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 21
+[26-May-2025 23:56:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 15
+[26-May-2025 23:56:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 16
+[26-May-2025 23:56:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 19
+[26-May-2025 23:56:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 21
+[26-May-2025 23:56:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 15
+[26-May-2025 23:56:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 16
+[26-May-2025 23:56:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 19
+[26-May-2025 23:56:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 21
+[26-May-2025 23:56:09 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 15
+[26-May-2025 23:56:09 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 16
+[26-May-2025 23:56:09 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 19
+[26-May-2025 23:56:09 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 21
+[26-May-2025 23:56:17 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 15
+[26-May-2025 23:56:17 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 16
+[26-May-2025 23:56:17 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 19
+[26-May-2025 23:56:17 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 21
+[26-May-2025 23:56:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 15
+[26-May-2025 23:56:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 16
+[26-May-2025 23:56:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 19
+[26-May-2025 23:56:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/aitendant-for-wordpress/aitendant.php on line 21
+[26-May-2025 23:56:56 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:57:05 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:57:14 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[26-May-2025 23:59:36 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('author_info_Wid...')
+#2 /wordpress/wp-content/plugins/author-info/author-info.php(88): register_widget('author_info_Wid...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): author_info_widget_register('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[26-May-2025 23:59:46 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('author_info_Wid...')
+#2 /wordpress/wp-content/plugins/author-info/author-info.php(88): register_widget('author_info_Wid...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): author_info_widget_register('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[26-May-2025 23:59:55 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('author_info_Wid...')
+#2 /wordpress/wp-content/plugins/author-info/author-info.php(88): register_widget('author_info_Wid...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): author_info_widget_register('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[27-May-2025 00:00:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function WC() in /wordpress/wp-content/plugins/automated-aramex-livemanual-shipping-rates-labels/a2zaramexexpress_basic.php:32
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(326): hit_woo_aramex_express_plugin_activation('automated-arame...')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'automated-arame...', false)
+#4 /internal/eval.php(20): activate_plugin('automated-arame...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/automated-aramex-livemanual-shipping-rates-labels/a2zaramexexpress_basic.php on line 32
+[27-May-2025 00:01:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function WC() in /wordpress/wp-content/plugins/automated-aramex-livemanual-shipping-rates-labels/a2zaramexexpress_basic.php:32
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(326): hit_woo_aramex_express_plugin_activation('automated-arame...')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'automated-arame...', false)
+#4 /internal/eval.php(20): activate_plugin('automated-arame...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/automated-aramex-livemanual-shipping-rates-labels/a2zaramexexpress_basic.php on line 32
+[27-May-2025 00:01:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function WC() in /wordpress/wp-content/plugins/automated-aramex-livemanual-shipping-rates-labels/a2zaramexexpress_basic.php:32
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(326): hit_woo_aramex_express_plugin_activation('automated-arame...')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'automated-arame...', false)
+#4 /internal/eval.php(20): activate_plugin('automated-arame...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/automated-aramex-livemanual-shipping-rates-labels/a2zaramexexpress_basic.php on line 32
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"automated-aramex-livemanual-shipping-rates-labels"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      ... 2 lines matching cause stack trace ...
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
+        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
+        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
