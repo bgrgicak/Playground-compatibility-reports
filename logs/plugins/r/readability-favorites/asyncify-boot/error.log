@@ -2,30 +2,16 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [27-May-2025 17:25:55 UTC] PHP Deprecated:  Required parameter $fieldType follows optional parameter $tablename in /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php on line 46
-[27-May-2025 17:25:55 UTC] PHP Deprecated:  Required parameter $fieldComment follows optional parameter $tablename in /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php on line 46
-[27-May-2025 17:25:56 UTC] PHP Deprecated:  Required parameter $fieldType follows optional parameter $tablename in /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php on line 46
-[27-May-2025 17:25:56 UTC] PHP Deprecated:  Required parameter $fieldComment follows optional parameter $tablename in /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php on line 46
-[27-May-2025 17:26:04 UTC] PHP Deprecated:  Required parameter $fieldType follows optional parameter $tablename in /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php on line 46
-[27-May-2025 17:26:04 UTC] PHP Deprecated:  Required parameter $fieldComment follows optional parameter $tablename in /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php on line 46
-[27-May-2025 17:26:05 UTC] PHP Deprecated:  Required parameter $fieldType follows optional parameter $tablename in /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php on line 46
-[27-May-2025 17:26:05 UTC] PHP Deprecated:  Required parameter $fieldComment follows optional parameter $tablename in /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php on line 46
-[27-May-2025 17:26:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [27-May-2025 17:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE `wp_postcodes` (
-								  `id` int(11) NOT NULL AUTO_INCREMENT,
-								  `postcode` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
-								  `area` longtext CHARACTER SET utf8mb4 NOT NULL,
-								  `city` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `state` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `country` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `cash_on_delivery` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'no',
-								  `delivered_in_days` INT NOT NULL,
-								  `order_note` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `created_at` date NOT NULL,
-								   PRIMARY KEY `id`(`id`)
-								) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1</p>
+<p>DELETE `wp_sgs_log_visitors`
+				FROM `wp_sgs_log_visitors`
+				LEFT JOIN `wp_sgs_log_events` ON `wp_sgs_log_visitors`.id = `wp_sgs_log_events`.visitor_id
+				WHERE `wp_sgs_log_visitors`.user_id = 0
+				AND `wp_sgs_log_visitors`.block = 0
+				AND `wp_sgs_log_events`.visitor_id IS NULL
+			;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -33,47 +19,99 @@ Error: [27-May-2025 17:25:55 UTC] PHP Deprecated:  Required parameter $fieldType
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+WP_SQLite_Driver::unquote_sqlite_identifier(): Argument #1 ($quoted_identifier) must be of type string, null given, called in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 1147
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE `w...')
-#2 /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php(40): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/controller/admin/admin-controller.php(224): RsilitechPostcodeAvailability\App\Rspa_model->rspa_create_table_postcode()
-#4 /wordpress/wp-content/plugins/rsilitech-postcode-availability/config/plugin-settings.php(115): RsilitechPostcodeAvailability\App\controller\admin\AdminController->rspa_create_table()
-#5 /wordpress/wp-content/plugins/rsilitech-postcode-availability/rsilitech-postcode-availability.php(70): RsilitechPostcodeAvailability\Config\PluginSettings->rspa_create_table()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): RsilitechPostcode->rspa_activate('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('WP_SQLite_Drive...', 0, Object(TypeError))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELETE `wp_sgs_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELETE `wp_sgs_...')
+#3 /wordpress/wp-content/plugins/sg-security/core/Activity_Log/Activity_Log.php(292): WP_SQLite_DB->query('DELETE `wp_sgs_...')
+#4 /wordpress/wp-content/plugins/sg-security/core/Activity_Log/Activity_Log.php(191): SG_Security\Activity_Log\Activity_Log->delete_old_visitors_logs()
+#5 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_1_4_2.php(45): SG_Security\Activity_Log\Activity_Log->delete_old_activity_logs()
+#6 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(88): SG_Security\Install_Service\Install_1_4_2->install()
+#7 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(64): SG_Security\Install_Service\Install_Service->do_install()
+#8 /wordpress/wp-content/plugins/sg-security/core/Activator/Activator.php(58): SG_Security\Install_Service\Install_Service->install()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): SG_Security\Activator\Activator->activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sg-sec...', false)
+#13 /internal/eval.php(20): activate_plugin('sg-security/sg-...')
+#14 {main}</pre>
+ for query DELETE `wp_sgs_log_visitors`
+				FROM `wp_sgs_log_visitors`
+				LEFT JOIN `wp_sgs_log_events` ON `wp_sgs_log_visitors`.id = `wp_sgs_log_events`.visitor_id
+				WHERE `wp_sgs_log_visitors`.user_id = 0
+				AND `wp_sgs_log_visitors`.block = 0
+				AND `wp_sgs_log_events`.visitor_id IS NULL
+			; made by activate_plugin, do_action('activate_sg-security/sg-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, SG_Security\Activator\Activator->activate, SG_Security\Install_Service\Install_Service->install, SG_Security\Install_Service\Install_Service->do_install, SG_Security\Install_Service\Install_1_4_2->install, SG_Security\Activity_Log\Activity_Log->delete_old_activity_logs, SG_Security\Activity_Log\Activity_Log->delete_old_visitors_logs, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 17:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP INDEX `user_id_index` ON `wp_sgs_log_visitors`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP INDEX `user_id_index` ON `wp_sgs_log_visitors` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "ON": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DROP INDEX `use...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DROP INDEX `use...')
+#3 /wordpress/wp-content/plugins/sg-security/core/Activity_Log/Activity_Log_Helper.php(311): WP_SQLite_DB->query('DROP INDEX `use...')
+#4 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_1_4_4.php(42): SG_Security\Activity_Log\Activity_Log_Helper->adjust_visitors_indexes()
+#5 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(88): SG_Security\Install_Service\Install_1_4_4->install()
+#6 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(64): SG_Security\Install_Service\Install_Service->do_install()
+#7 /wordpress/wp-content/plugins/sg-security/core/Activator/Activator.php(58): SG_Security\Install_Service\Install_Service->install()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): SG_Security\Activator\Activator->activate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sg-sec...', false)
+#12 /internal/eval.php(20): activate_plugin('sg-security/sg-...')
 #13 {main}</pre>
- for query CREATE TABLE `wp_postcodes` (
-								  `id` int(11) NOT NULL AUTO_INCREMENT,
-								  `postcode` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
-								  `area` longtext CHARACTER SET utf8mb4 NOT NULL,
-								  `city` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `state` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `country` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `cash_on_delivery` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'no',
-								  `delivered_in_days` INT NOT NULL,
-								  `order_note` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `created_at` date NOT NULL,
-								   PRIMARY KEY `id`(`id`)
-								) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, RsilitechPostcode->rspa_activate, RsilitechPostcodeAvailability\Config\PluginSettings->rspa_create_table, RsilitechPostcodeAvailability\App\controller\admin\AdminController->rspa_create_table, RsilitechPostcodeAvailability\App\Rspa_model->rspa_create_table_postcode, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[27-May-2025 17:26:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query DROP INDEX `user_id_index` ON `wp_sgs_log_visitors` made by activate_plugin, do_action('activate_sg-security/sg-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, SG_Security\Activator\Activator->activate, SG_Security\Install_Service\Install_Service->install, SG_Security\Install_Service\Install_Service->do_install, SG_Security\Install_Service\Install_1_4_4->install, SG_Security\Activity_Log\Activity_Log_Helper->adjust_visitors_indexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 17:26:23 UTC] PHP Warning:  Undefined property: stdClass::$ID in /wordpress/wp-content/plugins/sg-security/core/Activity_Log/Activity_Log_Helper.php on line 249
+[27-May-2025 17:26:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE `wp_settings` (
-								`id` int(11) NOT NULL AUTO_INCREMENT,
-								`rspa_settings_meta_key` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
-								`rspa_settings_meta_value` longtext CHARACTER SET utf8mb4 NOT NULL,
-								`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-								`updated_at` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
-									PRIMARY KEY `id`(`id`)
-								) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1</p>
+<p>INSERT INTO `wp_sgs_log_events` (`visitor_id`, `ts`, `activity`, `description`, `ip`, `hostname`, `code`, `object_id`, `type`, `action`, `visitor_type`) VALUES (NULL, 1748366783, '', '', '127.0.0.1', '127.0.0.1', 200, '0', 'unknown', 'visit', 'Unknown')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_sgs_log_events</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_sgs_log_events</li>
+<li>Executing: INSERT INTO `wp_sgs_log_events` (`id`, `visitor_id`, `ts`, `activity`, `description`, `ip`, `hostname`, `code`, `object_id`, `type`, `action`, `visitor_type`) SELECT NULL, `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8`, `column9`, `column10`, `column11` FROM (VALUES ( NULL , 1748366783 , '' , '' , '127.0.0.1' , '127.0.0.1' , 200 , '0' , 'unknown' , 'visit' , 'Unknown' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: wp_sgs_log_events.visitor_id
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_sgs_log_even...', Array, Array, 'INSERT')
+#5 /wordpress/wp-content/plugins/sg-security/core/Activity_Log/Activity_Log_Helper.php(181): wpdb->insert('wp_sgs_log_even...', Array, Array)
+#6 /wordpress/wp-content/plugins/sg-security/core/Activity_Log/Activity_Log_Unknown.php(324): SG_Security\Activity_Log\Activity_Log_Helper->insert(Array)
+#7 [internal function]: SG_Security\Activity_Log\Activity_Log_Unknown->log_visit()
+#8 {main}</pre>
+ for query INSERT INTO `wp_sgs_log_events` (`visitor_id`, `ts`, `activity`, `description`, `ip`, `hostname`, `code`, `object_id`, `type`, `action`, `visitor_type`) VALUES (NULL, 1748366783, '', '', '127.0.0.1', '127.0.0.1', 200, '0', 'unknown', 'visit', 'Unknown') made by SG_Security\Activity_Log\Activity_Log_Unknown->log_visit, SG_Security\Activity_Log\Activity_Log_Helper->insert, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 17:26:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_sgs_log_events` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -81,456 +119,349 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: CONVERT.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE `w...')
-#2 /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php(160): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/controller/admin/admin-controller.php(226): RsilitechPostcodeAvailability\App\Rspa_model->rspa_create_table_settings()
-#4 /wordpress/wp-content/plugins/rsilitech-postcode-availability/config/plugin-settings.php(115): RsilitechPostcodeAvailability\App\controller\admin\AdminController->rspa_create_table()
-#5 /wordpress/wp-content/plugins/rsilitech-postcode-availability/rsilitech-postcode-availability.php(70): RsilitechPostcodeAvailability\Config\PluginSettings->rspa_create_table()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): RsilitechPostcode->rspa_activate('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query CREATE TABLE `wp_settings` (
-								`id` int(11) NOT NULL AUTO_INCREMENT,
-								`rspa_settings_meta_key` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
-								`rspa_settings_meta_value` longtext CHARACTER SET utf8mb4 NOT NULL,
-								`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-								`updated_at` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
-									PRIMARY KEY `id`(`id`)
-								) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, RsilitechPostcode->rspa_activate, RsilitechPostcodeAvailability\Config\PluginSettings->rspa_create_table, RsilitechPostcodeAvailability\App\controller\admin\AdminController->rspa_create_table, RsilitechPostcodeAvailability\App\Rspa_model->rspa_create_table_settings, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[27-May-2025 17:26:13 UTC] PHP Deprecated:  Required parameter $fieldType follows optional parameter $tablename in /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php on line 46
-[27-May-2025 17:26:13 UTC] PHP Deprecated:  Required parameter $fieldComment follows optional parameter $tablename in /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php on line 46
-[27-May-2025 17:26:14 UTC] PHP Deprecated:  Required parameter $fieldType follows optional parameter $tablename in /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php on line 46
-[27-May-2025 17:26:14 UTC] PHP Deprecated:  Required parameter $fieldComment follows optional parameter $tablename in /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php on line 46
-[27-May-2025 17:26:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE `wp_postcodes` (
-								  `id` int(11) NOT NULL AUTO_INCREMENT,
-								  `postcode` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
-								  `area` longtext CHARACTER SET utf8mb4 NOT NULL,
-								  `city` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `state` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `country` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `cash_on_delivery` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'no',
-								  `delivered_in_days` INT NOT NULL,
-								  `order_note` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `created_at` date NOT NULL,
-								   PRIMARY KEY `id`(`id`)
-								) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE `w...')
-#2 /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php(40): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/controller/admin/admin-controller.php(224): RsilitechPostcodeAvailability\App\Rspa_model->rspa_create_table_postcode()
-#4 /wordpress/wp-content/plugins/rsilitech-postcode-availability/config/plugin-settings.php(115): RsilitechPostcodeAvailability\App\controller\admin\AdminController->rspa_create_table()
-#5 /wordpress/wp-content/plugins/rsilitech-postcode-availability/rsilitech-postcode-availability.php(70): RsilitechPostcodeAvailability\Config\PluginSettings->rspa_create_table()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): RsilitechPostcode->rspa_activate('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query CREATE TABLE `wp_postcodes` (
-								  `id` int(11) NOT NULL AUTO_INCREMENT,
-								  `postcode` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
-								  `area` longtext CHARACTER SET utf8mb4 NOT NULL,
-								  `city` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `state` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `country` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `cash_on_delivery` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'no',
-								  `delivered_in_days` INT NOT NULL,
-								  `order_note` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
-								  `created_at` date NOT NULL,
-								   PRIMARY KEY `id`(`id`)
-								) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, RsilitechPostcode->rspa_activate, RsilitechPostcodeAvailability\Config\PluginSettings->rspa_create_table, RsilitechPostcodeAvailability\App\controller\admin\AdminController->rspa_create_table, RsilitechPostcodeAvailability\App\Rspa_model->rspa_create_table_postcode, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[27-May-2025 17:26:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE `wp_settings` (
-								`id` int(11) NOT NULL AUTO_INCREMENT,
-								`rspa_settings_meta_key` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
-								`rspa_settings_meta_value` longtext CHARACTER SET utf8mb4 NOT NULL,
-								`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-								`updated_at` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
-									PRIMARY KEY `id`(`id`)
-								) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE `w...')
-#2 /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/model.php(160): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/rsilitech-postcode-availability/app/controller/admin/admin-controller.php(226): RsilitechPostcodeAvailability\App\Rspa_model->rspa_create_table_settings()
-#4 /wordpress/wp-content/plugins/rsilitech-postcode-availability/config/plugin-settings.php(115): RsilitechPostcodeAvailability\App\controller\admin\AdminController->rspa_create_table()
-#5 /wordpress/wp-content/plugins/rsilitech-postcode-availability/rsilitech-postcode-availability.php(70): RsilitechPostcodeAvailability\Config\PluginSettings->rspa_create_table()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): RsilitechPostcode->rspa_activate('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query CREATE TABLE `wp_settings` (
-								`id` int(11) NOT NULL AUTO_INCREMENT,
-								`rspa_settings_meta_key` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
-								`rspa_settings_meta_value` longtext CHARACTER SET utf8mb4 NOT NULL,
-								`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-								`updated_at` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
-									PRIMARY KEY `id`(`id`)
-								) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, RsilitechPostcode->rspa_activate, RsilitechPostcodeAvailability\Config\PluginSettings->rspa_create_table, RsilitechPostcodeAvailability\App\controller\admin\AdminController->rspa_create_table, RsilitechPostcodeAvailability\App\Rspa_model->rspa_create_table_settings, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[27-May-2025 17:28:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_promag_msg_conversation (
-        `m_id` int(11) NOT NULL AUTO_INCREMENT,
-        `s_id` int(11) NOT NULL,
-        `t_id` int(11) NOT NULL,
-        `content` longtext DEFAULT NULL,
-        `timestamp` datetime NOT NULL ,
-        `subject` varchar(255),
-        `status` int(11),
-        `msg_desc` longtext DEFAULT NULL,
-        FOREIGN KEY (`t_id`) REFERENCES wp_promag_msg_threads(`t_id`),
-        PRIMARY KEY (`m_id`))DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_promag_msg_conversation</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_tables` (`table_schema`, `table_name`, `table_type`, `engine`, `row_format`, `table_collation`, `table_comment`) VALUES (?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_promag_msg_conversation, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci, </li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_promag_msg_conversation, m_id, 1, , NO, int, , , 10, 0, , , , int(11), , auto_increment, select,insert,update,references, , , </li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_promag_msg_conversation, s_id, 2, , NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_promag_msg_conversation, t_id, 3, , NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_promag_msg_conversation, content, 4, , YES, longtext, 4294967295, 4294967295, , , , utf8mb4, utf8mb4_general_ci, longtext, , , select,insert,update,references, , , </li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_promag_msg_conversation, timestamp, 5, , NO, datetime, , , , , 0, , , datetime, , , select,insert,update,references, , , </li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_promag_msg_conversation, subject, 6, , YES, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_promag_msg_conversation, status, 7, , YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_promag_msg_conversation, msg_desc, 8, , YES, longtext, 4294967295, 4294967295, , , , utf8mb4, utf8mb4_general_ci, longtext, , , select,insert,update,references, , , </li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-FOREIGN KEY and CHECK constraints are not supported yet.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
-#4 /wordpress/wp-content/plugins/profilegrid-user-profiles-groups-and-communities/includes/class-profile-magic-activator.php(161): dbDelta(Array)
-#5 /wordpress/wp-content/plugins/profilegrid-user-profiles-groups-and-communities/includes/class-profile-magic-activator.php(32): Profile_Magic_Activator->create_table()
-#6 /wordpress/wp-content/plugins/profilegrid-user-profiles-groups-and-communities/profile-magic.php(44): Profile_Magic_Activator->activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_profile_magic(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_profil...', false)
-#11 /internal/eval.php(20): activate_plugin('profilegrid-use...')
-#12 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_promag_msg_conversation (
-        `m_id` int(11) NOT NULL AUTO_INCREMENT,
-        `s_id` int(11) NOT NULL,
-        `t_id` int(11) NOT NULL,
-        `content` longtext DEFAULT NULL,
-        `timestamp` datetime NOT NULL ,
-        `subject` varchar(255),
-        `status` int(11),
-        `msg_desc` longtext DEFAULT NULL,
-        FOREIGN KEY (`t_id`) REFERENCES wp_promag_msg_threads(`t_id`),
-        PRIMARY KEY (`m_id`))DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_profilegrid-user-profiles-groups-and-communities/profile-magic.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_profile_magic, Profile_Magic_Activator->activate, Profile_Magic_Activator->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[27-May-2025 17:29:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_promag_msg_conversation (
-        `m_id` int(11) NOT NULL AUTO_INCREMENT,
-        `s_id` int(11) NOT NULL,
-        `t_id` int(11) NOT NULL,
-        `content` longtext DEFAULT NULL,
-        `timestamp` datetime NOT NULL ,
-        `subject` varchar(255),
-        `status` int(11),
-        `msg_desc` longtext DEFAULT NULL,
-        FOREIGN KEY (`t_id`) REFERENCES wp_promag_msg_threads(`t_id`),
-        PRIMARY KEY (`m_id`))DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, m_id, int(11)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, s_id, int(11)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, t_id, int(11)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, content, longtext</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, timestamp, datetime</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, subject, varchar(255)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, status, int(11)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, msg_desc, longtext</li>
-<li>Executing: CREATE TABLE IF NOT EXISTS &quot;wp_promag_msg_conversation&quot; (
-&quot;m_id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;s_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;t_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;content&quot; text DEFAULT NULL COLLATE NOCASE,
-&quot;timestamp&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
-&quot;subject&quot; text COLLATE NOCASE,
-&quot;status&quot; integer,
-&quot;msg_desc&quot; text DEFAULT NULL COLLATE NOCASE) | (no parameters)</li>
-<li>Executing: CREATE  INDEX IF NOT EXISTS &quot;wp_promag_msg_conversation__&quot; ON &quot;wp_promag_msg_conversation&quot; (&quot;&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, wp_promag_msg_conversation__, </li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/profilegrid-user-profiles-groups-and-communities/includes/class-profile-magic-activator.php(161): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/profilegrid-user-profiles-groups-and-communities/includes/class-profile-magic-activator.php(32): Profile_Magic_Activator->create_table()
-#4 /wordpress/wp-content/plugins/profilegrid-user-profiles-groups-and-communities/profile-magic.php(44): Profile_Magic_Activator->activate()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): activate_profile_magic(false)
+#1 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_1_2_0.php(35): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(88): SG_Security\Install_Service\Install_1_2_0->install()
+#3 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(64): SG_Security\Install_Service\Install_Service->do_install()
+#4 /wordpress/wp-content/plugins/sg-security/core/Activator/Activator.php(58): SG_Security\Install_Service\Install_Service->install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): SG_Security\Activator\Activator->activate(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_profil...', false)
-#9 /internal/eval.php(20): activate_plugin('profilegrid-use...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sg-sec...', false)
+#9 /internal/eval.php(20): activate_plugin('sg-security/sg-...')
 #10 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_promag_msg_conversation (
-        `m_id` int(11) NOT NULL AUTO_INCREMENT,
-        `s_id` int(11) NOT NULL,
-        `t_id` int(11) NOT NULL,
-        `content` longtext DEFAULT NULL,
-        `timestamp` datetime NOT NULL ,
-        `subject` varchar(255),
-        `status` int(11),
-        `msg_desc` longtext DEFAULT NULL,
-        FOREIGN KEY (`t_id`) REFERENCES wp_promag_msg_threads(`t_id`),
-        PRIMARY KEY (`m_id`))DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_profilegrid-user-profiles-groups-and-communities/profile-magic.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_profile_magic, Profile_Magic_Activator->activate, Profile_Magic_Activator->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[27-May-2025 17:29:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE `wp_sgs_log_events` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci; made by activate_plugin, do_action('activate_sg-security/sg-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, SG_Security\Activator\Activator->activate, SG_Security\Install_Service\Install_Service->install, SG_Security\Install_Service\Install_Service->do_install, SG_Security\Install_Service\Install_1_2_0->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 17:26:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_promag_msg_conversation (
-        `m_id` int(11) NOT NULL AUTO_INCREMENT,
-        `s_id` int(11) NOT NULL,
-        `t_id` int(11) NOT NULL,
-        `content` longtext DEFAULT NULL,
-        `timestamp` datetime NOT NULL ,
-        `subject` varchar(255),
-        `status` int(11),
-        `msg_desc` longtext DEFAULT NULL,
-        FOREIGN KEY (`t_id`) REFERENCES wp_promag_msg_threads(`t_id`),
-        PRIMARY KEY (`m_id`))DEFAULT CHARACTER SET utf8mb4</p>
+<p>ALTER TABLE `wp_sgs_log_visitors` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: CONVERT.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_1_2_0.php(36): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(88): SG_Security\Install_Service\Install_1_2_0->install()
+#3 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(64): SG_Security\Install_Service\Install_Service->do_install()
+#4 /wordpress/wp-content/plugins/sg-security/core/Activator/Activator.php(58): SG_Security\Install_Service\Install_Service->install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): SG_Security\Activator\Activator->activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sg-sec...', false)
+#9 /internal/eval.php(20): activate_plugin('sg-security/sg-...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_sgs_log_visitors` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci; made by activate_plugin, do_action('activate_sg-security/sg-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, SG_Security\Activator\Activator->activate, SG_Security\Install_Service\Install_Service->install, SG_Security\Install_Service\Install_Service->do_install, SG_Security\Install_Service\Install_1_2_0->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 17:26:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_sgs_log_events` ADD INDEX `log_event_index` (`visitor_id`, `ts`, `activity`, `id`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
 <li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
 				VALUES (:table, :column, :datatype)
 				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, m_id, int(11)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, s_id, int(11)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, t_id, int(11)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, content, longtext</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, timestamp, datetime</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, subject, varchar(255)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, status, int(11)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, msg_desc, longtext</li>
-<li>Executing: CREATE TABLE IF NOT EXISTS &quot;wp_promag_msg_conversation&quot; (
-&quot;m_id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;s_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;t_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;content&quot; text DEFAULT NULL COLLATE NOCASE,
-&quot;timestamp&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
-&quot;subject&quot; text COLLATE NOCASE,
-&quot;status&quot; integer,
-&quot;msg_desc&quot; text DEFAULT NULL COLLATE NOCASE) | (no parameters)</li>
-<li>Executing: CREATE  INDEX IF NOT EXISTS &quot;wp_promag_msg_conversation__&quot; ON &quot;wp_promag_msg_conversation&quot; (&quot;&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_promag_msg_conversation, wp_promag_msg_conversation__, </li>
+			 | parameters: wp_sgs_log_events, wp_sgs_log_events__log_event_index, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_sgs_log_events__log_event_index&quot; ON &quot;wp_sgs_log_events&quot; ( `visitor_id`, `ts`, `activity`, `id`) | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_sgs_log_events__log_event_index already exists.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/profilegrid-user-profiles-groups-and-communities/includes/class-profile-magic-activator.php(161): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/profilegrid-user-profiles-groups-and-communities/includes/class-profile-magic-activator.php(32): Profile_Magic_Activator->create_table()
-#4 /wordpress/wp-content/plugins/profilegrid-user-profiles-groups-and-communities/profile-magic.php(44): Profile_Magic_Activator->activate()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): activate_profile_magic(false)
+#1 /wordpress/wp-content/plugins/sg-security/core/Activity_Log/Activity_Log_Helper.php(285): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_1_4_2.php(48): SG_Security\Activity_Log\Activity_Log_Helper->add_log_visitor_indexes()
+#3 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(88): SG_Security\Install_Service\Install_1_4_2->install()
+#4 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(64): SG_Security\Install_Service\Install_Service->do_install()
+#5 /wordpress/wp-content/plugins/sg-security/core/Activator/Activator.php(58): SG_Security\Install_Service\Install_Service->install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): SG_Security\Activator\Activator->activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sg-sec...', false)
+#10 /internal/eval.php(20): activate_plugin('sg-security/sg-...')
+#11 {main}</pre>
+ for query ALTER TABLE `wp_sgs_log_events` ADD INDEX `log_event_index` (`visitor_id`, `ts`, `activity`, `id`) made by activate_plugin, do_action('activate_sg-security/sg-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, SG_Security\Activator\Activator->activate, SG_Security\Install_Service\Install_Service->install, SG_Security\Install_Service\Install_Service->do_install, SG_Security\Install_Service\Install_1_4_2->install, SG_Security\Activity_Log\Activity_Log_Helper->add_log_visitor_indexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 17:26:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_sgs_log_visitors` ADD INDEX `ip_index` (`ip`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_sgs_log_visitors, wp_sgs_log_visitors__ip_index, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_sgs_log_visitors__ip_index&quot; ON &quot;wp_sgs_log_visitors&quot; ( `ip`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_sgs_log_visitors__ip_index already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/sg-security/core/Activity_Log/Activity_Log_Helper.php(290): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_1_4_2.php(48): SG_Security\Activity_Log\Activity_Log_Helper->add_log_visitor_indexes()
+#3 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(88): SG_Security\Install_Service\Install_1_4_2->install()
+#4 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(64): SG_Security\Install_Service\Install_Service->do_install()
+#5 /wordpress/wp-content/plugins/sg-security/core/Activator/Activator.php(58): SG_Security\Install_Service\Install_Service->install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): SG_Security\Activator\Activator->activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sg-sec...', false)
+#10 /internal/eval.php(20): activate_plugin('sg-security/sg-...')
+#11 {main}</pre>
+ for query ALTER TABLE `wp_sgs_log_visitors` ADD INDEX `ip_index` (`ip`) made by activate_plugin, do_action('activate_sg-security/sg-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, SG_Security\Activator\Activator->activate, SG_Security\Install_Service\Install_Service->install, SG_Security\Install_Service\Install_Service->do_install, SG_Security\Install_Service\Install_1_4_2->install, SG_Security\Activity_Log\Activity_Log_Helper->add_log_visitor_indexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 17:26:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_sgs_log_visitors` ADD INDEX `block_user_index` (`block`, `user_id`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_sgs_log_visitors, wp_sgs_log_visitors__block_user_index, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_sgs_log_visitors__block_user_index&quot; ON &quot;wp_sgs_log_visitors&quot; ( `block`, `user_id`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_sgs_log_visitors__block_user_index already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/sg-security/core/Activity_Log/Activity_Log_Helper.php(316): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_1_4_4.php(42): SG_Security\Activity_Log\Activity_Log_Helper->adjust_visitors_indexes()
+#3 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(88): SG_Security\Install_Service\Install_1_4_4->install()
+#4 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(64): SG_Security\Install_Service\Install_Service->do_install()
+#5 /wordpress/wp-content/plugins/sg-security/core/Activator/Activator.php(58): SG_Security\Install_Service\Install_Service->install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): SG_Security\Activator\Activator->activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sg-sec...', false)
+#10 /internal/eval.php(20): activate_plugin('sg-security/sg-...')
+#11 {main}</pre>
+ for query ALTER TABLE `wp_sgs_log_visitors` ADD INDEX `block_user_index` (`block`, `user_id`) made by activate_plugin, do_action('activate_sg-security/sg-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, SG_Security\Activator\Activator->activate, SG_Security\Install_Service\Install_Service->install, SG_Security\Install_Service\Install_Service->do_install, SG_Security\Install_Service\Install_1_4_4->install, SG_Security\Activity_Log\Activity_Log_Helper->adjust_visitors_indexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 17:26:36 UTC] PHP Warning:  Undefined property: stdClass::$ID in /wordpress/wp-content/plugins/sg-security/core/Activity_Log/Activity_Log_Helper.php on line 249
+[27-May-2025 17:26:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_sgs_log_events` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: CONVERT.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_1_2_0.php(35): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(88): SG_Security\Install_Service\Install_1_2_0->install()
+#3 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(64): SG_Security\Install_Service\Install_Service->do_install()
+#4 /wordpress/wp-content/plugins/sg-security/core/Activator/Activator.php(58): SG_Security\Install_Service\Install_Service->install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): SG_Security\Activator\Activator->activate(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_profil...', false)
-#9 /internal/eval.php(20): activate_plugin('profilegrid-use...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sg-sec...', false)
+#9 /internal/eval.php(20): activate_plugin('sg-security/sg-...')
 #10 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_promag_msg_conversation (
-        `m_id` int(11) NOT NULL AUTO_INCREMENT,
-        `s_id` int(11) NOT NULL,
-        `t_id` int(11) NOT NULL,
-        `content` longtext DEFAULT NULL,
-        `timestamp` datetime NOT NULL ,
-        `subject` varchar(255),
-        `status` int(11),
-        `msg_desc` longtext DEFAULT NULL,
-        FOREIGN KEY (`t_id`) REFERENCES wp_promag_msg_threads(`t_id`),
-        PRIMARY KEY (`m_id`))DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_profilegrid-user-profiles-groups-and-communities/profile-magic.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_profile_magic, Profile_Magic_Activator->activate, Profile_Magic_Activator->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[27-May-2025 17:29:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 694
-[27-May-2025 17:29:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 698
-[27-May-2025 17:29:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 702
-[27-May-2025 17:29:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 706
-[27-May-2025 17:29:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 710
-[27-May-2025 17:29:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 715
-[27-May-2025 17:29:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 694
-[27-May-2025 17:29:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 698
-[27-May-2025 17:29:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 702
-[27-May-2025 17:29:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 706
-[27-May-2025 17:29:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 710
-[27-May-2025 17:29:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 715
-[27-May-2025 17:29:50 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 694
-[27-May-2025 17:29:50 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 698
-[27-May-2025 17:29:50 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 702
-[27-May-2025 17:29:50 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 706
-[27-May-2025 17:29:50 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 710
-[27-May-2025 17:29:50 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/quick-and-easy-seo-tool/public/class-quick-and-easy-seo-public.php on line 715
-[27-May-2025 17:30:00 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
-[27-May-2025 17:30:00 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "ql_activate" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+ for query ALTER TABLE `wp_sgs_log_events` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci; made by activate_plugin, do_action('activate_sg-security/sg-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, SG_Security\Activator\Activator->activate, SG_Security\Install_Service\Install_Service->install, SG_Security\Install_Service\Install_Service->do_install, SG_Security\Install_Service\Install_1_2_0->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 17:26:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_sgs_log_visitors` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: CONVERT.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_1_2_0.php(36): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(88): SG_Security\Install_Service\Install_1_2_0->install()
+#3 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(64): SG_Security\Install_Service\Install_Service->do_install()
+#4 /wordpress/wp-content/plugins/sg-security/core/Activator/Activator.php(58): SG_Security\Install_Service\Install_Service->install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): SG_Security\Activator\Activator->activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sg-sec...', false)
+#9 /internal/eval.php(20): activate_plugin('sg-security/sg-...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_sgs_log_visitors` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci; made by activate_plugin, do_action('activate_sg-security/sg-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, SG_Security\Activator\Activator->activate, SG_Security\Install_Service\Install_Service->install, SG_Security\Install_Service\Install_Service->do_install, SG_Security\Install_Service\Install_1_2_0->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 17:26:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_sgs_log_events` ADD INDEX `log_event_index` (`visitor_id`, `ts`, `activity`, `id`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_sgs_log_events, wp_sgs_log_events__log_event_index, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_sgs_log_events__log_event_index&quot; ON &quot;wp_sgs_log_events&quot; ( `visitor_id`, `ts`, `activity`, `id`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_sgs_log_events__log_event_index already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/sg-security/core/Activity_Log/Activity_Log_Helper.php(285): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_1_4_2.php(48): SG_Security\Activity_Log\Activity_Log_Helper->add_log_visitor_indexes()
+#3 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(88): SG_Security\Install_Service\Install_1_4_2->install()
+#4 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(64): SG_Security\Install_Service\Install_Service->do_install()
+#5 /wordpress/wp-content/plugins/sg-security/core/Activator/Activator.php(58): SG_Security\Install_Service\Install_Service->install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): SG_Security\Activator\Activator->activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sg-sec...', false)
+#10 /internal/eval.php(20): activate_plugin('sg-security/sg-...')
+#11 {main}</pre>
+ for query ALTER TABLE `wp_sgs_log_events` ADD INDEX `log_event_index` (`visitor_id`, `ts`, `activity`, `id`) made by activate_plugin, do_action('activate_sg-security/sg-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, SG_Security\Activator\Activator->activate, SG_Security\Install_Service\Install_Service->install, SG_Security\Install_Service\Install_Service->do_install, SG_Security\Install_Service\Install_1_4_2->install, SG_Security\Activity_Log\Activity_Log_Helper->add_log_visitor_indexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 17:26:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_sgs_log_visitors` ADD INDEX `ip_index` (`ip`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_sgs_log_visitors, wp_sgs_log_visitors__ip_index, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_sgs_log_visitors__ip_index&quot; ON &quot;wp_sgs_log_visitors&quot; ( `ip`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_sgs_log_visitors__ip_index already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/sg-security/core/Activity_Log/Activity_Log_Helper.php(290): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_1_4_2.php(48): SG_Security\Activity_Log\Activity_Log_Helper->add_log_visitor_indexes()
+#3 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(88): SG_Security\Install_Service\Install_1_4_2->install()
+#4 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(64): SG_Security\Install_Service\Install_Service->do_install()
+#5 /wordpress/wp-content/plugins/sg-security/core/Activator/Activator.php(58): SG_Security\Install_Service\Install_Service->install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): SG_Security\Activator\Activator->activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sg-sec...', false)
+#10 /internal/eval.php(20): activate_plugin('sg-security/sg-...')
+#11 {main}</pre>
+ for query ALTER TABLE `wp_sgs_log_visitors` ADD INDEX `ip_index` (`ip`) made by activate_plugin, do_action('activate_sg-security/sg-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, SG_Security\Activator\Activator->activate, SG_Security\Install_Service\Install_Service->install, SG_Security\Install_Service\Install_Service->do_install, SG_Security\Install_Service\Install_1_4_2->install, SG_Security\Activity_Log\Activity_Log_Helper->add_log_visitor_indexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 17:26:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_sgs_log_visitors` ADD INDEX `block_user_index` (`block`, `user_id`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_sgs_log_visitors, wp_sgs_log_visitors__block_user_index, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_sgs_log_visitors__block_user_index&quot; ON &quot;wp_sgs_log_visitors&quot; ( `block`, `user_id`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_sgs_log_visitors__block_user_index already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/sg-security/core/Activity_Log/Activity_Log_Helper.php(316): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_1_4_4.php(42): SG_Security\Activity_Log\Activity_Log_Helper->adjust_visitors_indexes()
+#3 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(88): SG_Security\Install_Service\Install_1_4_4->install()
+#4 /wordpress/wp-content/plugins/sg-security/core/Install_Service/Install_Service.php(64): SG_Security\Install_Service\Install_Service->do_install()
+#5 /wordpress/wp-content/plugins/sg-security/core/Activator/Activator.php(58): SG_Security\Install_Service\Install_Service->install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): SG_Security\Activator\Activator->activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sg-sec...', false)
+#10 /internal/eval.php(20): activate_plugin('sg-security/sg-...')
+#11 {main}</pre>
+ for query ALTER TABLE `wp_sgs_log_visitors` ADD INDEX `block_user_index` (`block`, `user_id`) made by activate_plugin, do_action('activate_sg-security/sg-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, SG_Security\Activator\Activator->activate, SG_Security\Install_Service\Install_Service->install, SG_Security\Install_Service\Install_Service->do_install, SG_Security\Install_Service\Install_1_4_4->install, SG_Security\Activity_Log\Activity_Log_Helper->adjust_visitors_indexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 17:26:50 UTC] PHP Warning:  Undefined property: stdClass::$ID in /wordpress/wp-content/plugins/sg-security/core/Activity_Log/Activity_Log_Helper.php on line 249
+[27-May-2025 17:29:35 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Twitter_Styles_For_Jetpack::init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quick-...', false)
-#3 /internal/eval.php(20): activate_plugin('quick-localisat...')
-#4 {main}
+#2 /wordpress/wp-settings.php(727): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[27-May-2025 17:30:08 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
-[27-May-2025 17:30:08 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "ql_activate" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+[27-May-2025 17:29:44 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Twitter_Styles_For_Jetpack::init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quick-...', false)
-#3 /internal/eval.php(20): activate_plugin('quick-localisat...')
-#4 {main}
+#2 /wordpress/wp-settings.php(727): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[27-May-2025 17:30:16 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
-[27-May-2025 17:30:17 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "ql_activate" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+[27-May-2025 17:29:54 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Twitter_Styles_For_Jetpack::init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quick-...', false)
-#3 /internal/eval.php(20): activate_plugin('quick-localisat...')
-#4 {main}
+#2 /wordpress/wp-settings.php(727): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[27-May-2025 17:31:27 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/quickeys/quickeys.master.php:68
+[27-May-2025 17:30:03 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/subscribe-news-letter/subscribers.php:73
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): quickeys_add_options(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quicke...', false)
-#4 /internal/eval.php(20): activate_plugin('quickeys/quicke...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/quickeys/quickeys.master.php on line 68
-[27-May-2025 17:31:34 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/quickeys/quickeys.master.php:68
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('subscribe-news-...')
+#2 /internal/eval.php(20): activate_plugin('subscribe-news-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/subscribe-news-letter/subscribers.php on line 73
+[27-May-2025 17:30:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/subscribe-news-letter/subscribers.php:73
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): quickeys_add_options(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quicke...', false)
-#4 /internal/eval.php(20): activate_plugin('quickeys/quicke...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/quickeys/quickeys.master.php on line 68
-[27-May-2025 17:31:42 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/quickeys/quickeys.master.php:68
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('subscribe-news-...')
+#2 /internal/eval.php(20): activate_plugin('subscribe-news-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/subscribe-news-letter/subscribers.php on line 73
+[27-May-2025 17:30:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/subscribe-news-letter/subscribers.php:73
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): quickeys_add_options(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quicke...', false)
-#4 /internal/eval.php(20): activate_plugin('quickeys/quicke...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/quickeys/quickeys.master.php on line 68
-[27-May-2025 17:32:20 UTC] PHP Warning:  Undefined array key "HTTP_REFERER" in /wordpress/wp-content/plugins/quickreviewer-html-review/QR-Proof.php on line 12
-[27-May-2025 17:32:28 UTC] PHP Warning:  Undefined array key "HTTP_REFERER" in /wordpress/wp-content/plugins/quickreviewer-html-review/QR-Proof.php on line 12
-[27-May-2025 17:32:37 UTC] PHP Warning:  Undefined array key "HTTP_REFERER" in /wordpress/wp-content/plugins/quickreviewer-html-review/QR-Proof.php on line 12
-[27-May-2025 17:33:44 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/quiz-by-categories/usersmanagement.php on line 19
-[27-May-2025 17:33:44 UTC] PHP Warning:  Undefined array key "SERVER_ADDR" in /wordpress/wp-content/plugins/quiz-by-categories/usersmanagement.php on line 74
-[27-May-2025 17:33:53 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/quiz-by-categories/usersmanagement.php on line 19
-[27-May-2025 17:33:53 UTC] PHP Warning:  Undefined array key "SERVER_ADDR" in /wordpress/wp-content/plugins/quiz-by-categories/usersmanagement.php on line 74
-[27-May-2025 17:34:02 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/quiz-by-categories/usersmanagement.php on line 19
-[27-May-2025 17:34:02 UTC] PHP Warning:  Undefined array key "SERVER_ADDR" in /wordpress/wp-content/plugins/quiz-by-categories/usersmanagement.php on line 74
-[27-May-2025 17:34:10 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/readability-favorites/OAuth.php on line 101
-[27-May-2025 17:34:18 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/readability-favorites/OAuth.php on line 101
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('subscribe-news-...')
+#2 /internal/eval.php(20): activate_plugin('subscribe-news-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/subscribe-news-letter/subscribers.php on line 73
+[27-May-2025 17:30:53 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-May-2025 17:31:35 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-May-2025 17:32:14 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-May-2025 17:33:00 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/readability-favorites/OAuth.php on line 101
+[27-May-2025 17:33:07 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/readability-favorites/OAuth.php on line 101
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
