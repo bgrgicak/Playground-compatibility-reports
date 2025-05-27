@@ -2,80 +2,140 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [25-May-2025 15:27:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [27-May-2025 06:58:24 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/wooreviews-importer/WooreviewsImporter_Plugin.php on line 33
+[27-May-2025 06:58:32 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/wooreviews-importer/WooreviewsImporter_Plugin.php on line 33
+[27-May-2025 06:58:41 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/wooreviews-importer/WooreviewsImporter_Plugin.php on line 33
+[27-May-2025 07:04:55 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wsol-wp-smsto-otp</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-May-2025 07:05:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SHOW TABLES LIKE wp_google_events</p>
+<p>CREATE TABLE IF NOT EXISTS wp_smstootp_send(
+            ID int(10) NOT NULL auto_increment,
+            _id VARCHAR(50),
+            type VARCHAR(10),
+            cost REAL,
+            message_count INTEGER,
+            sms_parts INTEGER,
+            sent INTEGER,
+            failed INTEGER,
+            pending INTEGER,
+            date DATETIME,
+            updated_at DATETIME,
+            sender VARCHAR(20) NOT NULL,
+            message TEXT NOT NULL,
+            recipient TEXT NOT NULL,
+            response TEXT NOT NULL,
+            status varchar(100) NOT NULL,
+            PRIMARY KEY(ID)) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: real.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW TABLES LIK...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW TABLES LIK...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SHOW TABLES LIK...')
-#4 /wordpress/wp-content/plugins/wp-google-calendar/wp-google-calendar.php(66): wpdb->get_var('SHOW TABLES LIK...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wp_gc_calendar_activate(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/wp-sms-otp-login/includes/class-wpsmstootp-install.php(79): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/wp-sms-otp-login/includes/class-wpsmstootp-install.php(42): WSOL_WP_SMS_TO_OTP\Install::table_sql()
+#4 /wordpress/wp-content/plugins/wp-sms-otp-login/includes/class-wpsmstootp-install.php(107): WSOL_WP_SMS_TO_OTP\Install::create_table(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): WSOL_WP_SMS_TO_OTP\Install::install(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-goo...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-google-calen...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sms...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-sms-otp-logi...')
 #10 {main}</pre>
- for query SHOW TABLES LIKE wp_google_events made by activate_plugin, do_action('activate_wp-google-calendar/wp-google-calendar.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_gc_calendar_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 15:27:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE IF NOT EXISTS wp_smstootp_send(
+            ID int(10) NOT NULL auto_increment,
+            _id VARCHAR(50),
+            type VARCHAR(10),
+            cost REAL,
+            message_count INTEGER,
+            sms_parts INTEGER,
+            sent INTEGER,
+            failed INTEGER,
+            pending INTEGER,
+            date DATETIME,
+            updated_at DATETIME,
+            sender VARCHAR(20) NOT NULL,
+            message TEXT NOT NULL,
+            recipient TEXT NOT NULL,
+            response TEXT NOT NULL,
+            status varchar(100) NOT NULL,
+            PRIMARY KEY(ID)) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wp-sms-otp-login/wp-sms-to-otp.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSOL_WP_SMS_TO_OTP\Install::install, WSOL_WP_SMS_TO_OTP\Install::create_table, WSOL_WP_SMS_TO_OTP\Install::table_sql, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 07:05:03 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wsol-wp-smsto-otp</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-May-2025 07:05:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SHOW TABLES LIKE wp_google_api_setting</p>
+<p>CREATE TABLE IF NOT EXISTS wp_smstootp_send(
+            ID int(10) NOT NULL auto_increment,
+            _id VARCHAR(50),
+            type VARCHAR(10),
+            cost REAL,
+            message_count INTEGER,
+            sms_parts INTEGER,
+            sent INTEGER,
+            failed INTEGER,
+            pending INTEGER,
+            date DATETIME,
+            updated_at DATETIME,
+            sender VARCHAR(20) NOT NULL,
+            message TEXT NOT NULL,
+            recipient TEXT NOT NULL,
+            response TEXT NOT NULL,
+            status varchar(100) NOT NULL,
+            PRIMARY KEY(ID)) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: real.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW TABLES LIK...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW TABLES LIK...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SHOW TABLES LIK...')
-#4 /wordpress/wp-content/plugins/wp-google-calendar/wp-google-calendar.php(85): wpdb->get_var('SHOW TABLES LIK...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wp_gc_calendar_activate(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/wp-sms-otp-login/includes/class-wpsmstootp-install.php(79): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/wp-sms-otp-login/includes/class-wpsmstootp-install.php(42): WSOL_WP_SMS_TO_OTP\Install::table_sql()
+#4 /wordpress/wp-content/plugins/wp-sms-otp-login/includes/class-wpsmstootp-install.php(107): WSOL_WP_SMS_TO_OTP\Install::create_table(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): WSOL_WP_SMS_TO_OTP\Install::install(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-goo...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-google-calen...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sms...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-sms-otp-logi...')
 #10 {main}</pre>
- for query SHOW TABLES LIKE wp_google_api_setting made by activate_plugin, do_action('activate_wp-google-calendar/wp-google-calendar.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_gc_calendar_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-May-2025 15:28:13 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-spam-hitman/wp-spam-hitman.php on line 141
-[25-May-2025 15:28:21 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-spam-hitman/wp-spam-hitman.php on line 141
-[25-May-2025 15:28:28 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-spam-hitman/wp-spam-hitman.php on line 141
-[25-May-2025 15:29:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-twitter-feeder-widget-10/twitter.php:609
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-twitter-feed...')
-#2 /internal/eval.php(20): activate_plugin('wp-twitter-feed...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-twitter-feeder-widget-10/twitter.php on line 609
-[25-May-2025 15:29:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-twitter-feeder-widget-10/twitter.php:609
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-twitter-feed...')
-#2 /internal/eval.php(20): activate_plugin('wp-twitter-feed...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-twitter-feeder-widget-10/twitter.php on line 609
-[25-May-2025 15:30:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-twitter-feeder-widget-10/twitter.php:609
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-twitter-feed...')
-#2 /internal/eval.php(20): activate_plugin('wp-twitter-feed...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-twitter-feeder-widget-10/twitter.php on line 609
-[25-May-2025 15:30:15 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-vcard/classes/util/class.vcard.php on line 92
-[25-May-2025 15:30:23 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-vcard/classes/util/class.vcard.php on line 92
+ for query CREATE TABLE IF NOT EXISTS wp_smstootp_send(
+            ID int(10) NOT NULL auto_increment,
+            _id VARCHAR(50),
+            type VARCHAR(10),
+            cost REAL,
+            message_count INTEGER,
+            sms_parts INTEGER,
+            sent INTEGER,
+            failed INTEGER,
+            pending INTEGER,
+            date DATETIME,
+            updated_at DATETIME,
+            sender VARCHAR(20) NOT NULL,
+            message TEXT NOT NULL,
+            recipient TEXT NOT NULL,
+            response TEXT NOT NULL,
+            status varchar(100) NOT NULL,
+            PRIMARY KEY(ID)) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wp-sms-otp-login/wp-sms-to-otp.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSOL_WP_SMS_TO_OTP\Install::install, WSOL_WP_SMS_TO_OTP\Install::create_table, WSOL_WP_SMS_TO_OTP\Install::table_sql, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-May-2025 07:05:12 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wsol-wp-smsto-otp</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-May-2025 07:05:21 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-speedup/index.php on line 32
+[27-May-2025 07:05:23 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-speedup/index.php on line 32
+[27-May-2025 07:05:30 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-speedup/index.php on line 32
+[27-May-2025 07:05:31 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-speedup/index.php on line 32
+[27-May-2025 07:05:39 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-speedup/index.php on line 32
+[27-May-2025 07:05:40 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-speedup/index.php on line 32
+[27-May-2025 07:07:10 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-vcard/classes/util/class.vcard.php on line 92
+[27-May-2025 07:07:17 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-vcard/classes/util/class.vcard.php on line 92
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
