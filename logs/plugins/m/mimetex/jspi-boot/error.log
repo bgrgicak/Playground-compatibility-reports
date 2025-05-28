@@ -2,24 +2,66 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [26-May-2025 14:54:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [28-May-2025 04:05:28 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 04:05:29 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 04:05:36 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 04:05:37 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 04:05:45 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 04:05:46 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 04:06:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_metizpayment (
-                      id int(11) NOT NULL auto_increment,
-                      OrderId int(11)  NULL,
-                      name_on_card text NOT NULL,
-                      status text NOT NULL,
-                      bank_ref_no text NOT NULL,
-                      net_amount_debit varchar(255)  NULL,
-                      response text NOT NULL,
-                      PostDate text NOT NULL,
-                      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                      update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                      
-                      PRIMARY KEY id(id)
-
-              ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>ALTER TABLE wp_magazinedition_uitgaven ADD PRIMARY KEY ( cat_date ) </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_magazinedition_uitgaven</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_magazinedition_uitgaven</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_magazinedition_uitgaven</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_magazinedition_uitgaven, cat_date</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_magazinedition_uitgaven, 0, database_name_here, PRIMARY, 1, cat_date, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_table_constraints` (`table_schema`, `table_name`, `constraint_schema`, `constraint_name`, `constraint_type`) VALUES (?, ?, ?, ?, ?) | parameters: database_name_here, wp_magazinedition_uitgaven, database_name_here, PRIMARY, PRIMARY KEY</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: _wp_sqlite_mysql_information_schema_table_constraints.CONSTRAINT_SCHEMA, _wp_sqlite_mysql_information_schema_table_constraints.TABLE_NAME, _wp_sqlite_mysql_information_schema_table_constraints.CONSTRAINT_TYPE, _wp_sqlite_mysql_information_schema_table_constraints.CONSTRAINT_NAME
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/magazine-edition-control/beheer.php(59): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(326): magazinedition_install('magazine-editio...')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'magazine-editio...', false)
+#8 /internal/eval.php(20): activate_plugin('magazine-editio...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_magazinedition_uitgaven ADD PRIMARY KEY ( cat_date )  made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, magazinedition_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-May-2025 04:06:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_magazinedition_uitgaven (
+        id INT(9) NOT NULL AUTO_INCREMENT,
+        cat_date DATE NOT NULL,
+        cat_name VARCHAR (255) NOT NULL,
+	cat_front VARCHAR (255) NOT NULL,
+        cat_guid VARCHAR(255) NOT NULL,
+        cat_visible INT(1) NOT NULL DEFAULT '0',
+        uitgave_desc text NOT NULL,
+        PRIMARY KEY (cat_date),
+	UNIQUE KEY id (id)
+    );</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -31,47 +73,66 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/metizpay-payment-gateway-for-woocommerce/metizpay-payment-gateway-for-woocommerce.php(49): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): metiz_payment(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_metizp...', false)
-#7 /internal/eval.php(20): activate_plugin('metizpay-paymen...')
-#8 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_metizpayment (
-                      id int(11) NOT NULL auto_increment,
-                      OrderId int(11)  NULL,
-                      name_on_card text NOT NULL,
-                      status text NOT NULL,
-                      bank_ref_no text NOT NULL,
-                      net_amount_debit varchar(255)  NULL,
-                      response text NOT NULL,
-                      PostDate text NOT NULL,
-                      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                      update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                      
-                      PRIMARY KEY id(id)
-
-              ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_metizpay-payment-gateway-for-woocommerce/metizpay-payment-gateway-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, metiz_payment, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[26-May-2025 14:55:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/magazine-edition-control/beheer.php(57): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-includes/class-wp-hook.php(326): magazinedition_install('magazine-editio...')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'magazine-editio...', false)
+#6 /internal/eval.php(20): activate_plugin('magazine-editio...')
+#7 {main}</pre>
+ for query CREATE TABLE wp_magazinedition_uitgaven (
+        id INT(9) NOT NULL AUTO_INCREMENT,
+        cat_date DATE NOT NULL,
+        cat_name VARCHAR (255) NOT NULL,
+	cat_front VARCHAR (255) NOT NULL,
+        cat_guid VARCHAR(255) NOT NULL,
+        cat_visible INT(1) NOT NULL DEFAULT '0',
+        uitgave_desc text NOT NULL,
+        PRIMARY KEY (cat_date),
+	UNIQUE KEY id (id)
+    ); made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, magazinedition_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-May-2025 04:06:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_metizpayment (
-                      id int(11) NOT NULL auto_increment,
-                      OrderId int(11)  NULL,
-                      name_on_card text NOT NULL,
-                      status text NOT NULL,
-                      bank_ref_no text NOT NULL,
-                      net_amount_debit varchar(255)  NULL,
-                      response text NOT NULL,
-                      PostDate text NOT NULL,
-                      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                      update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                      
-                      PRIMARY KEY id(id)
-
-              ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>ALTER TABLE wp_magazinedition_uitgaven ADD PRIMARY KEY ( cat_date ) </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_magazinedition_uitgaven, wp_magazinedition_uitgaven__(, PRIMARY</li>
+<li>Executing: CREATE PRIMARY KEY &quot;wp_magazinedition_uitgaven__(&quot; ON &quot;wp_magazinedition_uitgaven&quot; (  )  | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/magazine-edition-control/beheer.php(59): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(326): magazinedition_install('magazine-editio...')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'magazine-editio...', false)
+#6 /internal/eval.php(20): activate_plugin('magazine-editio...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_magazinedition_uitgaven ADD PRIMARY KEY ( cat_date )  made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, magazinedition_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-May-2025 04:06:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_magazinedition_uitgaven (
+        id INT(9) NOT NULL AUTO_INCREMENT,
+        cat_date DATE NOT NULL,
+        cat_name VARCHAR (255) NOT NULL,
+	cat_front VARCHAR (255) NOT NULL,
+        cat_guid VARCHAR(255) NOT NULL,
+        cat_visible INT(1) NOT NULL DEFAULT '0',
+        uitgave_desc text NOT NULL,
+        PRIMARY KEY (cat_date),
+	UNIQUE KEY id (id)
+    );</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -83,29 +144,52 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/metizpay-payment-gateway-for-woocommerce/metizpay-payment-gateway-for-woocommerce.php(49): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): metiz_payment(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_metizp...', false)
-#7 /internal/eval.php(20): activate_plugin('metizpay-paymen...')
-#8 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_metizpayment (
-                      id int(11) NOT NULL auto_increment,
-                      OrderId int(11)  NULL,
-                      name_on_card text NOT NULL,
-                      status text NOT NULL,
-                      bank_ref_no text NOT NULL,
-                      net_amount_debit varchar(255)  NULL,
-                      response text NOT NULL,
-                      PostDate text NOT NULL,
-                      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                      update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                      
-                      PRIMARY KEY id(id)
-
-              ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_metizpay-payment-gateway-for-woocommerce/metizpay-payment-gateway-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, metiz_payment, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+#1 /wordpress/wp-content/plugins/magazine-edition-control/beheer.php(57): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-includes/class-wp-hook.php(326): magazinedition_install('magazine-editio...')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'magazine-editio...', false)
+#6 /internal/eval.php(20): activate_plugin('magazine-editio...')
+#7 {main}</pre>
+ for query CREATE TABLE wp_magazinedition_uitgaven (
+        id INT(9) NOT NULL AUTO_INCREMENT,
+        cat_date DATE NOT NULL,
+        cat_name VARCHAR (255) NOT NULL,
+	cat_front VARCHAR (255) NOT NULL,
+        cat_guid VARCHAR(255) NOT NULL,
+        cat_visible INT(1) NOT NULL DEFAULT '0',
+        uitgave_desc text NOT NULL,
+        PRIMARY KEY (cat_date),
+	UNIQUE KEY id (id)
+    ); made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, magazinedition_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-May-2025 04:06:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_magazinedition_uitgaven ADD PRIMARY KEY ( cat_date ) </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_magazinedition_uitgaven, wp_magazinedition_uitgaven__(, PRIMARY</li>
+<li>Executing: CREATE PRIMARY KEY &quot;wp_magazinedition_uitgaven__(&quot; ON &quot;wp_magazinedition_uitgaven&quot; (  )  | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/magazine-edition-control/beheer.php(59): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(326): magazinedition_install('magazine-editio...')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'magazine-editio...', false)
+#6 /internal/eval.php(20): activate_plugin('magazine-editio...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_magazinedition_uitgaven ADD PRIMARY KEY ( cat_date )  made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, magazinedition_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
