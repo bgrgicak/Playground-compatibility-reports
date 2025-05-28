@@ -2,125 +2,302 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [26-May-2025 22:25:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [28-May-2025 13:14:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE `wp_fb_photos` (
-	                        `pid` varchar(40),
-	                        `aid` varchar(40),
-	                        `owner` bigint(20) unsigned,
-	                        `src` varchar(255) NOT NULL default '',
-	                        `src_big` varchar(255) NOT NULL default '',
-	                        `src_small` varchar(255) NOT NULL default '',
-	                        `link` varchar(255) NOT NULL default '',
-	                        `caption` text,
-	                        `created` datetime,
-	                        `ordinal` int(11) unsigned NOT NULL default 0,
-									KEY `pid` (`pid`)
-	                      ) TYPE = MyISAM</p>
+<p>ALTER TABLE wp_formgent_responses ADD CONSTRAINT fk_wp_formgent_responses_form_id FOREIGN KEY ( form_id ) REFERENCES wp_posts(ID) ON DELETE CASCADE</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_responses</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_formgent_responses</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_responses</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+FOREIGN KEY and CHECK constraints are not supported yet.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE `w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE `w...')
-#3 /wordpress/wp-content/plugins/fotobook/fotobook.php(482): WP_SQLite_DB->query('CREATE TABLE `w...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): fb_initialize(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fotobo...', false)
-#8 /internal/eval.php(20): activate_plugin('fotobook/fotobo...')
-#9 {main}</pre>
- for query CREATE TABLE `wp_fb_photos` (
-	                        `pid` varchar(40),
-	                        `aid` varchar(40),
-	                        `owner` bigint(20) unsigned,
-	                        `src` varchar(255) NOT NULL default '',
-	                        `src_big` varchar(255) NOT NULL default '',
-	                        `src_small` varchar(255) NOT NULL default '',
-	                        `link` varchar(255) NOT NULL default '',
-	                        `caption` text,
-	                        `created` datetime,
-	                        `ordinal` int(11) unsigned NOT NULL default 0,
-									KEY `pid` (`pid`)
-	                      ) TYPE = MyISAM made by activate_plugin, do_action('activate_fotobook/fotobook.php'), WP_Hook->do_action, WP_Hook->apply_filters, fb_initialize, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[26-May-2025 22:25:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(174): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(140): FormGent\Database\Migrations\CreateDB->add_constraints_to_table('responses', Array, 'wp_formgent_')
+#5 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(109): FormGent\Database\Migrations\CreateDB->add_constraints('wp_formgent_')
+#6 /wordpress/wp-content/plugins/formgent/app/Setup/Activation.php(11): FormGent\Database\Migrations\CreateDB->execute()
+#7 /wordpress/wp-content/plugins/formgent/formgent.php(62): FormGent\App\Setup\Activation->__construct()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): FormGent->on_activation(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_formge...', false)
+#12 /internal/eval.php(20): activate_plugin('formgent/formge...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_formgent_responses ADD CONSTRAINT fk_wp_formgent_responses_form_id FOREIGN KEY ( form_id ) REFERENCES wp_posts(ID) ON DELETE CASCADE made by activate_plugin, do_action('activate_formgent/formgent.php'), WP_Hook->do_action, WP_Hook->apply_filters, FormGent->on_activation, FormGent\App\Setup\Activation->__construct, FormGent\Database\Migrations\CreateDB->execute, FormGent\Database\Migrations\CreateDB->add_constraints, FormGent\Database\Migrations\CreateDB->add_constraints_to_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-May-2025 13:14:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE `wp_fb_albums` (
-	                        `aid` varchar(40),
-	                        `page_id` bigint(20) unsigned,
-	                        `cover_pid` varchar(40),
-	                        `owner` bigint(20) unsigned,
-	                        `name` varchar(255) NOT NULL default '',
-	                        `description` text,
-	                        `location` varchar(255) NOT NULL default '',
-	                        `link` varchar(255) NOT NULL,
-	                        `size` int(11) unsigned NOT NULL default 0,
-	                        `created` datetime,
-	                        `modified` datetime,
-	                        `hidden` tinyint(1) unsigned NOT NULL default 0,
-	                        `ordinal` int(11) unsigned NOT NULL default 0,
-	                        UNIQUE KEY `aid` (`aid`)
-	                      ) TYPE = MyISAM</p>
+<p>ALTER TABLE wp_formgent_answers ADD CONSTRAINT fk_wp_formgent_answers_form_id FOREIGN KEY ( form_id ) REFERENCES wp_posts(ID) ON DELETE CASCADE</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_answers</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_formgent_answers</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_answers</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+FOREIGN KEY and CHECK constraints are not supported yet.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE `w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE `w...')
-#3 /wordpress/wp-content/plugins/fotobook/fotobook.php(486): WP_SQLite_DB->query('CREATE TABLE `w...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): fb_initialize(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fotobo...', false)
-#8 /internal/eval.php(20): activate_plugin('fotobook/fotobo...')
-#9 {main}</pre>
- for query CREATE TABLE `wp_fb_albums` (
-	                        `aid` varchar(40),
-	                        `page_id` bigint(20) unsigned,
-	                        `cover_pid` varchar(40),
-	                        `owner` bigint(20) unsigned,
-	                        `name` varchar(255) NOT NULL default '',
-	                        `description` text,
-	                        `location` varchar(255) NOT NULL default '',
-	                        `link` varchar(255) NOT NULL,
-	                        `size` int(11) unsigned NOT NULL default 0,
-	                        `created` datetime,
-	                        `modified` datetime,
-	                        `hidden` tinyint(1) unsigned NOT NULL default 0,
-	                        `ordinal` int(11) unsigned NOT NULL default 0,
-	                        UNIQUE KEY `aid` (`aid`)
-	                      ) TYPE = MyISAM made by activate_plugin, do_action('activate_fotobook/fotobook.php'), WP_Hook->do_action, WP_Hook->apply_filters, fb_initialize, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[26-May-2025 22:25:50 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:25:50 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:25:50 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:25:50 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:25:59 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:25:59 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:25:59 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:25:59 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:26:09 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:26:09 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:26:09 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:26:09 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:27:16 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:27:16 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:27:24 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:27:24 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:27:32 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:27:32 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-May-2025 22:29:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/fancy-latest-post-widget/includes/fancy_latest_post_widget.php:283
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(174): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(140): FormGent\Database\Migrations\CreateDB->add_constraints_to_table('answers', Array, 'wp_formgent_')
+#5 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(109): FormGent\Database\Migrations\CreateDB->add_constraints('wp_formgent_')
+#6 /wordpress/wp-content/plugins/formgent/app/Setup/Activation.php(11): FormGent\Database\Migrations\CreateDB->execute()
+#7 /wordpress/wp-content/plugins/formgent/formgent.php(62): FormGent\App\Setup\Activation->__construct()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): FormGent->on_activation(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_formge...', false)
+#12 /internal/eval.php(20): activate_plugin('formgent/formge...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_formgent_answers ADD CONSTRAINT fk_wp_formgent_answers_form_id FOREIGN KEY ( form_id ) REFERENCES wp_posts(ID) ON DELETE CASCADE made by activate_plugin, do_action('activate_formgent/formgent.php'), WP_Hook->do_action, WP_Hook->apply_filters, FormGent->on_activation, FormGent\App\Setup\Activation->__construct, FormGent\Database\Migrations\CreateDB->execute, FormGent\Database\Migrations\CreateDB->add_constraints, FormGent\Database\Migrations\CreateDB->add_constraints_to_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-May-2025 13:14:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_formgent_answers ADD CONSTRAINT fk_wp_formgent_answers_response_id FOREIGN KEY ( response_id ) REFERENCES wp_formgent_responses(id) ON DELETE CASCADE</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_answers</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_formgent_answers</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_answers</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(174): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(140): FormGent\Database\Migrations\CreateDB->add_constraints_to_table('answers', Array, 'wp_formgent_')
+#5 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(109): FormGent\Database\Migrations\CreateDB->add_constraints('wp_formgent_')
+#6 /wordpress/wp-content/plugins/formgent/app/Setup/Activation.php(11): FormGent\Database\Migrations\CreateDB->execute()
+#7 /wordpress/wp-content/plugins/formgent/formgent.php(62): FormGent\App\Setup\Activation->__construct()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): FormGent->on_activation(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_formge...', false)
+#12 /internal/eval.php(20): activate_plugin('formgent/formge...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_formgent_answers ADD CONSTRAINT fk_wp_formgent_answers_response_id FOREIGN KEY ( response_id ) REFERENCES wp_formgent_responses(id) ON DELETE CASCADE made by activate_plugin, do_action('activate_formgent/formgent.php'), WP_Hook->do_action, WP_Hook->apply_filters, FormGent->on_activation, FormGent\App\Setup\Activation->__construct, FormGent\Database\Migrations\CreateDB->execute, FormGent\Database\Migrations\CreateDB->add_constraints, FormGent\Database\Migrations\CreateDB->add_constraints_to_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-May-2025 13:14:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_formgent_answers ADD CONSTRAINT fk_wp_formgent_answers_parent_id FOREIGN KEY ( parent_id ) REFERENCES wp_formgent_answers(id) ON DELETE CASCADE</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_answers</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_formgent_answers</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_answers</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(174): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(140): FormGent\Database\Migrations\CreateDB->add_constraints_to_table('answers', Array, 'wp_formgent_')
+#5 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(109): FormGent\Database\Migrations\CreateDB->add_constraints('wp_formgent_')
+#6 /wordpress/wp-content/plugins/formgent/app/Setup/Activation.php(11): FormGent\Database\Migrations\CreateDB->execute()
+#7 /wordpress/wp-content/plugins/formgent/formgent.php(62): FormGent\App\Setup\Activation->__construct()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): FormGent->on_activation(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_formge...', false)
+#12 /internal/eval.php(20): activate_plugin('formgent/formge...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_formgent_answers ADD CONSTRAINT fk_wp_formgent_answers_parent_id FOREIGN KEY ( parent_id ) REFERENCES wp_formgent_answers(id) ON DELETE CASCADE made by activate_plugin, do_action('activate_formgent/formgent.php'), WP_Hook->do_action, WP_Hook->apply_filters, FormGent->on_activation, FormGent\App\Setup\Activation->__construct, FormGent\Database\Migrations\CreateDB->execute, FormGent\Database\Migrations\CreateDB->add_constraints, FormGent\Database\Migrations\CreateDB->add_constraints_to_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-May-2025 13:14:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_formgent_notes ADD CONSTRAINT fk_wp_formgent_notes_response_id FOREIGN KEY ( response_id ) REFERENCES wp_formgent_responses(id) ON DELETE CASCADE</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_notes</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_formgent_notes</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_notes</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(174): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(140): FormGent\Database\Migrations\CreateDB->add_constraints_to_table('notes', Array, 'wp_formgent_')
+#5 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(109): FormGent\Database\Migrations\CreateDB->add_constraints('wp_formgent_')
+#6 /wordpress/wp-content/plugins/formgent/app/Setup/Activation.php(11): FormGent\Database\Migrations\CreateDB->execute()
+#7 /wordpress/wp-content/plugins/formgent/formgent.php(62): FormGent\App\Setup\Activation->__construct()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): FormGent->on_activation(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_formge...', false)
+#12 /internal/eval.php(20): activate_plugin('formgent/formge...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_formgent_notes ADD CONSTRAINT fk_wp_formgent_notes_response_id FOREIGN KEY ( response_id ) REFERENCES wp_formgent_responses(id) ON DELETE CASCADE made by activate_plugin, do_action('activate_formgent/formgent.php'), WP_Hook->do_action, WP_Hook->apply_filters, FormGent->on_activation, FormGent\App\Setup\Activation->__construct, FormGent\Database\Migrations\CreateDB->execute, FormGent\Database\Migrations\CreateDB->add_constraints, FormGent\Database\Migrations\CreateDB->add_constraints_to_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-May-2025 13:14:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_formgent_response_token ADD CONSTRAINT fk_wp_formgent_response_token_form_id FOREIGN KEY ( form_id ) REFERENCES wp_posts(ID) ON DELETE CASCADE</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_response_token</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_formgent_response_token</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_response_token</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(174): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(140): FormGent\Database\Migrations\CreateDB->add_constraints_to_table('response_token', Array, 'wp_formgent_')
+#5 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(109): FormGent\Database\Migrations\CreateDB->add_constraints('wp_formgent_')
+#6 /wordpress/wp-content/plugins/formgent/app/Setup/Activation.php(11): FormGent\Database\Migrations\CreateDB->execute()
+#7 /wordpress/wp-content/plugins/formgent/formgent.php(62): FormGent\App\Setup\Activation->__construct()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): FormGent->on_activation(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_formge...', false)
+#12 /internal/eval.php(20): activate_plugin('formgent/formge...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_formgent_response_token ADD CONSTRAINT fk_wp_formgent_response_token_form_id FOREIGN KEY ( form_id ) REFERENCES wp_posts(ID) ON DELETE CASCADE made by activate_plugin, do_action('activate_formgent/formgent.php'), WP_Hook->do_action, WP_Hook->apply_filters, FormGent->on_activation, FormGent\App\Setup\Activation->__construct, FormGent\Database\Migrations\CreateDB->execute, FormGent\Database\Migrations\CreateDB->add_constraints, FormGent\Database\Migrations\CreateDB->add_constraints_to_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-May-2025 13:14:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_formgent_response_token ADD CONSTRAINT fk_wp_formgent_response_token_response_id FOREIGN KEY ( response_id ) REFERENCES wp_formgent_responses(id) ON DELETE CASCADE</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_response_token</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_formgent_response_token</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_response_token</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(174): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(140): FormGent\Database\Migrations\CreateDB->add_constraints_to_table('response_token', Array, 'wp_formgent_')
+#5 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(109): FormGent\Database\Migrations\CreateDB->add_constraints('wp_formgent_')
+#6 /wordpress/wp-content/plugins/formgent/app/Setup/Activation.php(11): FormGent\Database\Migrations\CreateDB->execute()
+#7 /wordpress/wp-content/plugins/formgent/formgent.php(62): FormGent\App\Setup\Activation->__construct()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): FormGent->on_activation(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_formge...', false)
+#12 /internal/eval.php(20): activate_plugin('formgent/formge...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_formgent_response_token ADD CONSTRAINT fk_wp_formgent_response_token_response_id FOREIGN KEY ( response_id ) REFERENCES wp_formgent_responses(id) ON DELETE CASCADE made by activate_plugin, do_action('activate_formgent/formgent.php'), WP_Hook->do_action, WP_Hook->apply_filters, FormGent->on_activation, FormGent\App\Setup\Activation->__construct, FormGent\Database\Migrations\CreateDB->execute, FormGent\Database\Migrations\CreateDB->add_constraints, FormGent\Database\Migrations\CreateDB->add_constraints_to_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-May-2025 13:14:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_formgent_email_notifications ADD CONSTRAINT fk_wp_formgent_email_notifications_form_id FOREIGN KEY ( form_id ) REFERENCES wp_posts(ID) ON DELETE CASCADE</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_email_notifications</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_formgent_email_notifications</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_formgent_email_notifications</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(174): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(140): FormGent\Database\Migrations\CreateDB->add_constraints_to_table('email_notificat...', Array, 'wp_formgent_')
+#5 /wordpress/wp-content/plugins/formgent/database/Migrations/CreateDB.php(109): FormGent\Database\Migrations\CreateDB->add_constraints('wp_formgent_')
+#6 /wordpress/wp-content/plugins/formgent/app/Setup/Activation.php(11): FormGent\Database\Migrations\CreateDB->execute()
+#7 /wordpress/wp-content/plugins/formgent/formgent.php(62): FormGent\App\Setup\Activation->__construct()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): FormGent->on_activation(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_formge...', false)
+#12 /internal/eval.php(20): activate_plugin('formgent/formge...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_formgent_email_notifications ADD CONSTRAINT fk_wp_formgent_email_notifications_form_id FOREIGN KEY ( form_id ) REFERENCES wp_posts(ID) ON DELETE CASCADE made by activate_plugin, do_action('activate_formgent/formgent.php'), WP_Hook->do_action, WP_Hook->apply_filters, FormGent->on_activation, FormGent\App\Setup\Activation->__construct, FormGent\Database\Migrations\CreateDB->execute, FormGent\Database\Migrations\CreateDB->add_constraints, FormGent\Database\Migrations\CreateDB->add_constraints_to_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-May-2025 13:17:21 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>foxyshop</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 13:17:30 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>foxyshop</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 13:17:41 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>foxyshop</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 13:18:43 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>facebook-likebox-widget-and-shortcode</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 13:18:52 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>facebook-likebox-widget-and-shortcode</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 13:19:02 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>facebook-likebox-widget-and-shortcode</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 13:19:12 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 13:19:20 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 13:19:29 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 13:19:38 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 13:19:38 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 13:19:47 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 13:19:47 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 13:19:55 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 13:19:55 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[28-May-2025 13:20:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/fancy-latest-post-widget/includes/fancy_latest_post_widget.php:283
 Stack trace:
 #0 /wordpress/wp-content/plugins/fancy-latest-post-widget/fancy_latest_post.php(29): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -128,7 +305,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('fancy-latest-po...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/fancy-latest-post-widget/includes/fancy_latest_post_widget.php on line 283
-[26-May-2025 22:29:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/fancy-latest-post-widget/includes/fancy_latest_post_widget.php:283
+[28-May-2025 13:20:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/fancy-latest-post-widget/includes/fancy_latest_post_widget.php:283
 Stack trace:
 #0 /wordpress/wp-content/plugins/fancy-latest-post-widget/fancy_latest_post.php(29): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
