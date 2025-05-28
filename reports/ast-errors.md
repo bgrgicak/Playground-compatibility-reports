@@ -650,28 +650,28 @@
 | hello-christmas | Uncaught Error: Non-static method hacklogzz::init() cannot be called statically in /wordpress/wp-content/plugins/hacklog-zimagez/loader.php:43 | [View logs](/logs/plugins/h/hello-christmas/error.json) |
 | hello-christmas | Uncaught Error: Non-static method hacklogzz::init() cannot be called statically in /wordpress/wp-content/plugins/hacklog-zimagez/loader.php:43 | [View logs](/logs/plugins/h/hello-christmas/error.json) |
 | hello-christmas | Uncaught Error: Non-static method hacklogzz::init() cannot be called statically in /wordpress/wp-content/plugins/hacklog-zimagez/loader.php:43 | [View logs](/logs/plugins/h/hello-christmas/error.json) |
+| javascript-optimization | Required parameter $base_url follows optional parameter $token in /wordpress/wp-content/plugins/mind-doodle-sitemap/lib/dfx_oauth.php on line 6 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $url follows optional parameter $data in /wordpress/wp-content/plugins/mind-doodle-sitemap/lib/dfx_oauth.php on line 177 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/mind-doodle-sitemap/index.php on line 201 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/mind-doodle-sitemap/index.php on line 202 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $base_url follows optional parameter $token in /wordpress/wp-content/plugins/mind-doodle-sitemap/lib/dfx_oauth.php on line 6 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $url follows optional parameter $data in /wordpress/wp-content/plugins/mind-doodle-sitemap/lib/dfx_oauth.php on line 177 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/mind-doodle-sitemap/index.php on line 201 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/mind-doodle-sitemap/index.php on line 202 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $base_url follows optional parameter $token in /wordpress/wp-content/plugins/mind-doodle-sitemap/lib/dfx_oauth.php on line 6 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $url follows optional parameter $data in /wordpress/wp-content/plugins/mind-doodle-sitemap/lib/dfx_oauth.php on line 177 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/mind-doodle-sitemap/index.php on line 201 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/mind-doodle-sitemap/index.php on line 202 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | Undefined array key "license" in /wordpress/wp-content/plugins/jam/jam-admin.php on line 13 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | Undefined array key "license" in /wordpress/wp-content/plugins/jam/jam-admin.php on line 13 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | Undefined array key "license" in /wordpress/wp-content/plugins/jam/jam-admin.php on line 13 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Cannot use "parent" when current class scope has no parent in /wordpress/wp-content/plugins/miniorange-saml-cloud/Response.php on line 111 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Cannot use "parent" when current class scope has no parent in /wordpress/wp-content/plugins/miniorange-saml-cloud/Response.php on line 111 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Cannot use "parent" when current class scope has no parent in /wordpress/wp-content/plugins/miniorange-saml-cloud/Response.php on line 111 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/missed-call-mobile-number-verification-add-on-for-contactform7-cognalyscom/cf7_cognalys_addon.php on line 176 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/missed-call-mobile-number-verification-add-on-for-contactform7-cognalyscom/cf7_cognalys_addon.php on line 177 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/missed-call-mobile-number-verification-add-on-for-contactform7-cognalyscom/cf7_cognalys_addon.php on line 179 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/missed-call-mobile-number-verification-add-on-for-contactform7-cognalyscom/cf7_cognalys_addon.php on line 176 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/missed-call-mobile-number-verification-add-on-for-contactform7-cognalyscom/cf7_cognalys_addon.php on line 177 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/missed-call-mobile-number-verification-add-on-for-contactform7-cognalyscom/cf7_cognalys_addon.php on line 179 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/missed-call-mobile-number-verification-add-on-for-contactform7-cognalyscom/cf7_cognalys_addon.php on line 176 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/missed-call-mobile-number-verification-add-on-for-contactform7-cognalyscom/cf7_cognalys_addon.php on line 177 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/missed-call-mobile-number-verification-add-on-for-contactform7-cognalyscom/cf7_cognalys_addon.php on line 179 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Cannot use "parent" when current class scope has no parent in /wordpress/wp-content/plugins/mixmarket-store/classes/fields_model.php on line 9 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Cannot use "parent" when current class scope has no parent in /wordpress/wp-content/plugins/mixmarket-store/classes/fields_model.php on line 9 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Cannot use "parent" when current class scope has no parent in /wordpress/wp-content/plugins/mixmarket-store/classes/fields_model.php on line 9 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/mm-did-you-know/mm-did-you-know.php:242 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/mm-did-you-know/mm-did-you-know.php:242 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/mm-did-you-know/mm-did-you-know.php:242 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [26-May-2025 22:54:32 UTC] mNotify: Installing defaults - Templates: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $tag follows optional parameter $atts in /wordpress/wp-content/plugins/javagee-one-heal-one-earth/OneHealOneEarth.php on line 233 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $tag follows optional parameter $atts in /wordpress/wp-content/plugins/javagee-one-heal-one-earth/OneHealOneEarth.php on line 233 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $tag follows optional parameter $atts in /wordpress/wp-content/plugins/javagee-one-heal-one-earth/OneHealOneEarth.php on line 233 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $tag follows optional parameter $atts in /wordpress/wp-content/plugins/javagee-one-heal-one-earth/OneHealOneEarth.php on line 233 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $tag follows optional parameter $atts in /wordpress/wp-content/plugins/javagee-one-heal-one-earth/OneHealOneEarth.php on line 233 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $tag follows optional parameter $atts in /wordpress/wp-content/plugins/javagee-one-heal-one-earth/OneHealOneEarth.php on line 233 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | [28-May-2025 11:54:03 UTC] mNotify: Installing defaults - Templates: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ( | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [template_pending] => Hi [billing_first_name], your order #[order_id] is pending. Total: [order_currency][order_amount] | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [template_processing] => Hi [billing_first_name], your order #[order_id] is being processed. | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
@@ -682,14 +682,14 @@
 | javascript-optimization | [template_refunded] => Hi [billing_first_name], your order #[order_id] has been refunded. | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ) | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [26-May-2025 22:54:32 UTC] mNotify: Installing defaults - Basics: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | [28-May-2025 11:54:03 UTC] mNotify: Installing defaults - Basics: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ( | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [api_key] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [sender_id] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [admin_phone] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ) | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [26-May-2025 22:54:33 UTC] mNotify: Installing defaults - Templates: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | [28-May-2025 11:54:04 UTC] mNotify: Installing defaults - Templates: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ( | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [template_pending] => Hi [billing_first_name], your order #[order_id] is pending. Total: [order_currency][order_amount] | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [template_processing] => Hi [billing_first_name], your order #[order_id] is being processed. | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
@@ -700,14 +700,14 @@
 | javascript-optimization | [template_refunded] => Hi [billing_first_name], your order #[order_id] has been refunded. | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ) | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [26-May-2025 22:54:33 UTC] mNotify: Installing defaults - Basics: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | [28-May-2025 11:54:04 UTC] mNotify: Installing defaults - Basics: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ( | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [api_key] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [sender_id] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [admin_phone] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ) | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [26-May-2025 22:54:41 UTC] mNotify: Installing defaults - Templates: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | [28-May-2025 11:54:11 UTC] mNotify: Installing defaults - Templates: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ( | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [template_pending] => Hi [billing_first_name], your order #[order_id] is pending. Total: [order_currency][order_amount] | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [template_processing] => Hi [billing_first_name], your order #[order_id] is being processed. | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
@@ -718,14 +718,14 @@
 | javascript-optimization | [template_refunded] => Hi [billing_first_name], your order #[order_id] has been refunded. | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ) | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [26-May-2025 22:54:41 UTC] mNotify: Installing defaults - Basics: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | [28-May-2025 11:54:11 UTC] mNotify: Installing defaults - Basics: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ( | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [api_key] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [sender_id] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [admin_phone] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ) | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [26-May-2025 22:54:42 UTC] mNotify: Installing defaults - Templates: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | [28-May-2025 11:54:12 UTC] mNotify: Installing defaults - Templates: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ( | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [template_pending] => Hi [billing_first_name], your order #[order_id] is pending. Total: [order_currency][order_amount] | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [template_processing] => Hi [billing_first_name], your order #[order_id] is being processed. | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
@@ -736,14 +736,14 @@
 | javascript-optimization | [template_refunded] => Hi [billing_first_name], your order #[order_id] has been refunded. | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ) | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [26-May-2025 22:54:42 UTC] mNotify: Installing defaults - Basics: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | [28-May-2025 11:54:12 UTC] mNotify: Installing defaults - Basics: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ( | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [api_key] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [sender_id] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [admin_phone] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ) | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [26-May-2025 22:54:51 UTC] mNotify: Installing defaults - Templates: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | [28-May-2025 11:54:20 UTC] mNotify: Installing defaults - Templates: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ( | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [template_pending] => Hi [billing_first_name], your order #[order_id] is pending. Total: [order_currency][order_amount] | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [template_processing] => Hi [billing_first_name], your order #[order_id] is being processed. | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
@@ -754,14 +754,14 @@
 | javascript-optimization | [template_refunded] => Hi [billing_first_name], your order #[order_id] has been refunded. | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ) | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [26-May-2025 22:54:51 UTC] mNotify: Installing defaults - Basics: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | [28-May-2025 11:54:20 UTC] mNotify: Installing defaults - Basics: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ( | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [api_key] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [sender_id] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [admin_phone] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ) | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [26-May-2025 22:54:52 UTC] mNotify: Installing defaults - Templates: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | [28-May-2025 11:54:21 UTC] mNotify: Installing defaults - Templates: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ( | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [template_pending] => Hi [billing_first_name], your order #[order_id] is pending. Total: [order_currency][order_amount] | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [template_processing] => Hi [billing_first_name], your order #[order_id] is being processed. | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
@@ -772,7 +772,7 @@
 | javascript-optimization | [template_refunded] => Hi [billing_first_name], your order #[order_id] has been refunded. | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ) | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [26-May-2025 22:54:52 UTC] mNotify: Installing defaults - Basics: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | [28-May-2025 11:54:21 UTC] mNotify: Installing defaults - Basics: Array | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | ( | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [api_key] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | [sender_id] => | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
