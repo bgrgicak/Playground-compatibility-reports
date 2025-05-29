@@ -2,10 +2,605 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [27-May-2025 20:32:05 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $join in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 783
-[27-May-2025 20:32:05 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $fields in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 799
-[27-May-2025 20:32:05 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $order_by in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 815
-[27-May-2025 20:32:05 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Simple_Post_Gmaps_Base::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Error: [29-May-2025 12:50:13 UTC] PHP Parse error:  syntax error, unexpected 'Admin_Hook' (T_STRING), expecting function (T_FUNCTION) or const (T_CONST) in /wordpress/wp-content/plugins/sargas-recaptcha/includes/Init/Core.php on line 24
+[29-May-2025 12:50:22 UTC] PHP Parse error:  syntax error, unexpected 'Admin_Hook' (T_STRING), expecting function (T_FUNCTION) or const (T_CONST) in /wordpress/wp-content/plugins/sargas-recaptcha/includes/Init/Core.php on line 24
+[29-May-2025 12:50:30 UTC] PHP Parse error:  syntax error, unexpected 'Admin_Hook' (T_STRING), expecting function (T_FUNCTION) or const (T_CONST) in /wordpress/wp-content/plugins/sargas-recaptcha/includes/Init/Core.php on line 24
+[29-May-2025 12:51:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP FUNCTION IF EXISTS `fnStripTags` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "FUNCTION": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DROP FUNCTION I...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DROP FUNCTION I...')
+#3 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#8 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#9 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 12:51:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createFunction"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(848): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE FUNCTION...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE FUNCTION...')
+#4 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#9 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#10 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 12:51:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 12:51:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 12:51:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 12:51:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 12:51:31 UTC] PHP Deprecated:  WP_SQLite_Information_Schema_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-exception.php on line 37
+[29-May-2025 12:51:34 UTC] PHP Deprecated:  WP_SQLite_Information_Schema_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-exception.php on line 37
+[29-May-2025 12:53:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_sendpress_customfields;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_sendpress_customfields` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_sendpress_customfields
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/sendpress/classes/db/class-sendpress-db-customfields.php(51): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(559): SendPress_DB_Customfields->get_all()
+#6 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(748): spnl_load_custom_field_tags()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): spnl_setup_template_tags('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(552): do_action('spnl_add_templa...')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): spnl_load_template_tags('')
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-settings.php(727): do_action('init')
+#15 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#16 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#17 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#18 {main}</pre>
+ for query SELECT * FROM wp_sendpress_customfields; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_load_template_tags, do_action('spnl_add_template_tags'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_setup_template_tags, spnl_load_custom_field_tags, SendPress_DB_Customfields->get_all, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 12:53:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_sendpress_customfields;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_sendpress_customfields; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sendpress_customfields.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/sendpress/classes/db/class-sendpress-db-customfields.php(51): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(559): SendPress_DB_Customfields->get_all()
+#4 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(748): spnl_load_custom_field_tags()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spnl_setup_template_tags('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(552): do_action('spnl_add_templa...')
+#9 /wordpress/wp-includes/class-wp-hook.php(324): spnl_load_template_tags('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT * FROM wp_sendpress_customfields; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_load_template_tags, do_action('spnl_add_template_tags'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_setup_template_tags, spnl_load_custom_field_tags, SendPress_DB_Customfields->get_all, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 12:53:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_sendpress_customfields;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_sendpress_customfields; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sendpress_customfields.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/sendpress/classes/db/class-sendpress-db-customfields.php(51): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(559): SendPress_DB_Customfields->get_all()
+#4 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(748): spnl_load_custom_field_tags()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spnl_setup_template_tags('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(552): do_action('spnl_add_templa...')
+#9 /wordpress/wp-includes/class-wp-hook.php(324): spnl_load_template_tags('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT * FROM wp_sendpress_customfields; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_load_template_tags, do_action('spnl_add_template_tags'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_setup_template_tags, spnl_load_custom_field_tags, SendPress_DB_Customfields->get_all, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 12:54:08 UTC] API Plugin: Data sent successfully to API
+[29-May-2025 12:54:18 UTC] API Plugin: Data sent successfully to API
+[29-May-2025 12:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_srkit_keytrack_settings ( 
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            keytrack_name VARCHAR(255) NOT NULL,
+            selected_keywords LONGTEXT NOT NULL,
+            date_range VARCHAR(50) NOT NULL,
+            setting_value LONGTEXT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            next_run_at DATETIME NULL,
+            PRIMARY KEY (id)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, id, bigint</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, keytrack_name, varchar(255)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, selected_keywords, longtext</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, date_range, varchar(50)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, setting_value, longtext</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, created_at, datetime</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, updated_at, datetime</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, next_run_at, datetime</li>
+<li>Executing: CREATE TABLE IF NOT EXISTS &quot;wp_srkit_keytrack_settings&quot; (
+&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;keytrack_name&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;selected_keywords&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;date_range&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;setting_value&quot; text COLLATE NOCASE,
+&quot;created_at&quot; text DEFAULT CURRENT_TIMESTAMP COLLATE NOCASE,
+&quot;updated_at&quot; text DEFAULT CURRENT_TIMESTAMP COLLATE NOCASE,
+&quot;next_run_at&quot; text COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: CREATE TRIGGER &quot;__wp_srkit_keytrack_settings_updated_at_on_update__&quot;
+			AFTER UPDATE ON &quot;wp_srkit_keytrack_settings&quot;
+			FOR EACH ROW
+			BEGIN
+			  UPDATE &quot;wp_srkit_keytrack_settings&quot; SET &quot;updated_at&quot; = CURRENT_TIMESTAMP WHERE rowid = NEW.rowid;
+			END | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 trigger "__wp_srkit_keytrack_settings_updated_at_on_update__" already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/seo-repair-kit/includes/class-seo-repair-kit-activator.php(148): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/seo-repair-kit/includes/class-seo-repair-kit-activator.php(41): SeoRepairKit_Activator::srkit_create_keytrack_table()
+#4 /wordpress/wp-content/plugins/seo-repair-kit/seo-repair-kit.php(46): SeoRepairKit_Activator::activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): activate_seorepairkit_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-re...', false)
+#9 /internal/eval.php(20): activate_plugin('seo-repair-kit/...')
+#10 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_srkit_keytrack_settings ( 
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            keytrack_name VARCHAR(255) NOT NULL,
+            selected_keywords LONGTEXT NOT NULL,
+            date_range VARCHAR(50) NOT NULL,
+            setting_value LONGTEXT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            next_run_at DATETIME NULL,
+            PRIMARY KEY (id)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_seo-repair-kit/seo-repair-kit.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_seorepairkit_plugin, SeoRepairKit_Activator::activate, SeoRepairKit_Activator::srkit_create_keytrack_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 12:54:28 UTC] API Plugin: Data sent successfully to API
+[29-May-2025 12:54:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_srkit_keytrack_settings ( 
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            keytrack_name VARCHAR(255) NOT NULL,
+            selected_keywords LONGTEXT NOT NULL,
+            date_range VARCHAR(50) NOT NULL,
+            setting_value LONGTEXT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            next_run_at DATETIME NULL,
+            PRIMARY KEY (id)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, id, bigint</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, keytrack_name, varchar(255)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, selected_keywords, longtext</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, date_range, varchar(50)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, setting_value, longtext</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, created_at, datetime</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, updated_at, datetime</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_srkit_keytrack_settings, next_run_at, datetime</li>
+<li>Executing: CREATE TABLE IF NOT EXISTS &quot;wp_srkit_keytrack_settings&quot; (
+&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;keytrack_name&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;selected_keywords&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;date_range&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;setting_value&quot; text COLLATE NOCASE,
+&quot;created_at&quot; text DEFAULT CURRENT_TIMESTAMP COLLATE NOCASE,
+&quot;updated_at&quot; text DEFAULT CURRENT_TIMESTAMP COLLATE NOCASE,
+&quot;next_run_at&quot; text COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: CREATE TRIGGER &quot;__wp_srkit_keytrack_settings_updated_at_on_update__&quot;
+			AFTER UPDATE ON &quot;wp_srkit_keytrack_settings&quot;
+			FOR EACH ROW
+			BEGIN
+			  UPDATE &quot;wp_srkit_keytrack_settings&quot; SET &quot;updated_at&quot; = CURRENT_TIMESTAMP WHERE rowid = NEW.rowid;
+			END | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 trigger "__wp_srkit_keytrack_settings_updated_at_on_update__" already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/seo-repair-kit/includes/class-seo-repair-kit-activator.php(148): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/seo-repair-kit/includes/class-seo-repair-kit-activator.php(41): SeoRepairKit_Activator::srkit_create_keytrack_table()
+#4 /wordpress/wp-content/plugins/seo-repair-kit/seo-repair-kit.php(46): SeoRepairKit_Activator::activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): activate_seorepairkit_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-re...', false)
+#9 /internal/eval.php(20): activate_plugin('seo-repair-kit/...')
+#10 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_srkit_keytrack_settings ( 
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            keytrack_name VARCHAR(255) NOT NULL,
+            selected_keywords LONGTEXT NOT NULL,
+            date_range VARCHAR(50) NOT NULL,
+            setting_value LONGTEXT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            next_run_at DATETIME NULL,
+            PRIMARY KEY (id)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_seo-repair-kit/seo-repair-kit.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_seorepairkit_plugin, SeoRepairKit_Activator::activate, SeoRepairKit_Activator::srkit_create_keytrack_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 12:54:38 UTC] PHP Warning:  Undefined array key "serpd_action" in /wordpress/wp-content/plugins/serpd-vote-button/wp-serpd.php on line 19
+[29-May-2025 12:54:46 UTC] PHP Warning:  Undefined array key "serpd_action" in /wordpress/wp-content/plugins/serpd-vote-button/wp-serpd.php on line 19
+[29-May-2025 12:54:55 UTC] PHP Warning:  Undefined array key "serpd_action" in /wordpress/wp-content/plugins/serpd-vote-button/wp-serpd.php on line 19
+[29-May-2025 12:57:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/simple-instagram-slideshow/slideshow.php:123
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simple-instagra...')
+#2 /internal/eval.php(20): activate_plugin('simple-instagra...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/simple-instagram-slideshow/slideshow.php on line 123
+[29-May-2025 12:57:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/simple-instagram-slideshow/slideshow.php:123
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simple-instagra...')
+#2 /internal/eval.php(20): activate_plugin('simple-instagra...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/simple-instagram-slideshow/slideshow.php on line 123
+[29-May-2025 12:57:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/simple-instagram-slideshow/slideshow.php:123
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simple-instagra...')
+#2 /internal/eval.php(20): activate_plugin('simple-instagra...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/simple-instagram-slideshow/slideshow.php on line 123
+[29-May-2025 12:58:13 UTC] PHP Warning:  Undefined array key "merchant_return_link" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 71
+[29-May-2025 12:58:13 UTC] PHP Warning:  Undefined array key "mc_gross" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 76
+[29-May-2025 12:58:13 UTC] PHP Warning:  Undefined array key "addcart" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 93
+[29-May-2025 12:58:13 UTC] PHP Warning:  Undefined array key "cquantity" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 130
+[29-May-2025 12:58:13 UTC] PHP Warning:  Undefined array key "delcart" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 147
+[29-May-2025 12:58:14 UTC] PHP Warning:  Undefined array key "merchant_return_link" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 71
+[29-May-2025 12:58:14 UTC] PHP Warning:  Undefined array key "mc_gross" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 76
+[29-May-2025 12:58:14 UTC] PHP Warning:  Undefined array key "addcart" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 93
+[29-May-2025 12:58:14 UTC] PHP Warning:  Undefined array key "cquantity" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 130
+[29-May-2025 12:58:14 UTC] PHP Warning:  Undefined array key "delcart" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 147
+[29-May-2025 12:58:21 UTC] PHP Warning:  Undefined array key "merchant_return_link" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 71
+[29-May-2025 12:58:21 UTC] PHP Warning:  Undefined array key "mc_gross" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 76
+[29-May-2025 12:58:21 UTC] PHP Warning:  Undefined array key "addcart" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 93
+[29-May-2025 12:58:21 UTC] PHP Warning:  Undefined array key "cquantity" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 130
+[29-May-2025 12:58:21 UTC] PHP Warning:  Undefined array key "delcart" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 147
+[29-May-2025 12:58:22 UTC] PHP Warning:  Undefined array key "merchant_return_link" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 71
+[29-May-2025 12:58:22 UTC] PHP Warning:  Undefined array key "mc_gross" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 76
+[29-May-2025 12:58:22 UTC] PHP Warning:  Undefined array key "addcart" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 93
+[29-May-2025 12:58:22 UTC] PHP Warning:  Undefined array key "cquantity" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 130
+[29-May-2025 12:58:22 UTC] PHP Warning:  Undefined array key "delcart" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 147
+[29-May-2025 12:58:30 UTC] PHP Warning:  Undefined array key "merchant_return_link" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 71
+[29-May-2025 12:58:30 UTC] PHP Warning:  Undefined array key "mc_gross" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 76
+[29-May-2025 12:58:30 UTC] PHP Warning:  Undefined array key "addcart" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 93
+[29-May-2025 12:58:30 UTC] PHP Warning:  Undefined array key "cquantity" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 130
+[29-May-2025 12:58:30 UTC] PHP Warning:  Undefined array key "delcart" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 147
+[29-May-2025 12:58:30 UTC] PHP Warning:  Undefined array key "merchant_return_link" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 71
+[29-May-2025 12:58:30 UTC] PHP Warning:  Undefined array key "mc_gross" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 76
+[29-May-2025 12:58:30 UTC] PHP Warning:  Undefined array key "addcart" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 93
+[29-May-2025 12:58:30 UTC] PHP Warning:  Undefined array key "cquantity" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 130
+[29-May-2025 12:58:30 UTC] PHP Warning:  Undefined array key "delcart" in /wordpress/wp-content/plugins/simple-parspal-shopping-cart/wp_shopping_cart.php on line 147
+[29-May-2025 12:58:39 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $join in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 783
+[29-May-2025 12:58:39 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $fields in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 799
+[29-May-2025 12:58:39 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $order_by in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 815
+[29-May-2025 12:58:39 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Simple_Post_Gmaps_Base::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
@@ -13,10 +608,10 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('simple-post-gma...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[27-May-2025 20:32:13 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $join in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 783
-[27-May-2025 20:32:13 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $fields in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 799
-[27-May-2025 20:32:13 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $order_by in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 815
-[27-May-2025 20:32:13 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Simple_Post_Gmaps_Base::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+[29-May-2025 12:58:47 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $join in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 783
+[29-May-2025 12:58:47 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $fields in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 799
+[29-May-2025 12:58:47 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $order_by in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 815
+[29-May-2025 12:58:47 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Simple_Post_Gmaps_Base::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
@@ -24,10 +619,10 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('simple-post-gma...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[27-May-2025 20:32:21 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $join in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 783
-[27-May-2025 20:32:21 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $fields in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 799
-[27-May-2025 20:32:21 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $order_by in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 815
-[27-May-2025 20:32:21 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Simple_Post_Gmaps_Base::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+[29-May-2025 12:58:55 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $join in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 783
+[29-May-2025 12:58:55 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $fields in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 799
+[29-May-2025 12:58:55 UTC] PHP Deprecated:  Required parameter $current_query follows optional parameter $order_by in /wordpress/wp-content/plugins/simple-post-gmaps/inc/class.client.php on line 815
+[29-May-2025 12:58:55 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Simple_Post_Gmaps_Base::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
