@@ -2,39 +2,330 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [27-May-2025 21:26:36 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-eform</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[27-May-2025 21:26:52 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-eform</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[27-May-2025 21:27:09 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-eform</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[27-May-2025 21:28:09 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
-[27-May-2025 21:28:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [29-May-2025 13:14:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_posts ADD COLUMN IF NOT EXISTS wi_post_post int(25) DEFAULT 0</p>
+<p>select * from wp_rpg_usermeta</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: select * from `wp_rpg_usermeta` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 no such table: wp_rpg_usermeta
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select * from w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select * from w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select * from w...')
+#4 /wordpress/wp-content/plugins/wprpg/wordpress-rpg.php(63): wpdb->get_results('select * from w...')
+#5 /wordpress/wp-content/plugins/wprpg/wordpress-rpg.php(33): transition_db()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wprpg/wordpress...')
+#8 /internal/eval.php(20): activate_plugin('wprpg/wordpress...')
+#9 {main}</pre>
+ for query select * from wp_rpg_usermeta made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wprpg/wordpress-rpg.php'), transition_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:14:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>select * from wp_rpg_usermeta</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: select * from wp_rpg_usermeta | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_rpg_usermeta.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select * from w...')
+#2 /wordpress/wp-content/plugins/wprpg/wordpress-rpg.php(63): wpdb->get_results('select * from w...')
+#3 /wordpress/wp-content/plugins/wprpg/wordpress-rpg.php(33): transition_db()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wprpg/wordpress...')
+#6 /internal/eval.php(20): activate_plugin('wprpg/wordpress...')
+#7 {main}</pre>
+ for query select * from wp_rpg_usermeta made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wprpg/wordpress-rpg.php'), transition_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:14:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>select * from wp_rpg_usermeta</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: select * from wp_rpg_usermeta | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_rpg_usermeta.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select * from w...')
+#2 /wordpress/wp-content/plugins/wprpg/wordpress-rpg.php(63): wpdb->get_results('select * from w...')
+#3 /wordpress/wp-content/plugins/wprpg/wordpress-rpg.php(33): transition_db()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wprpg/wordpress...')
+#6 /internal/eval.php(20): activate_plugin('wprpg/wordpress...')
+#7 {main}</pre>
+ for query select * from wp_rpg_usermeta made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wprpg/wordpress-rpg.php'), transition_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:14:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_conversations ADD FOREIGN KEY (`chat_user_id`) REFERENCES wp_wschat_users (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wschat_conversations</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wschat_conversations</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wschat_conversations</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/wi-posts/includes/Setup.php(74): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/wi-posts/wi_posts.php(47): wi_post_Setup()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wi_post_onActivation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wi-pos...', false)
-#9 /internal/eval.php(20): activate_plugin('wi-posts/wi_pos...')
-#10 {main}</pre>
- for query ALTER TABLE wp_posts ADD COLUMN IF NOT EXISTS wi_post_post int(25) DEFAULT 0 made by activate_plugin, do_action('activate_wi-posts/wi_posts.php'), WP_Hook->do_action, WP_Hook->apply_filters, wi_post_onActivation, wi_post_Setup, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[27-May-2025 21:28:19 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
-[27-May-2025 21:28:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(174): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#6 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#7 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#12 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wschat_conversations ADD FOREIGN KEY (`chat_user_id`) REFERENCES wp_wschat_users (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:14:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_posts ADD COLUMN IF NOT EXISTS wi_post_post int(25) DEFAULT 0</p>
+<p>ALTER TABLE wp_wschat_participants ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wschat_participants</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wschat_participants</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wschat_participants</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(177): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#6 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#7 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#12 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wschat_participants ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:14:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_messages ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wschat_messages</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wschat_messages</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wschat_messages</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(180): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#6 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#7 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#12 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wschat_messages ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:14:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_messages ADD FOREIGN KEY (`participant_id`) REFERENCES wp_wschat_participants (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wschat_messages</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wschat_messages</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wschat_messages</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(182): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#6 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#7 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#12 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wschat_messages ADD FOREIGN KEY (`participant_id`) REFERENCES wp_wschat_participants (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:14:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wschat_message_notifications</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wschat_message_notifications</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wschat_message_notifications</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(185): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#6 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#7 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#12 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:14:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`participant_id`) REFERENCES wp_wschat_participants (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wschat_message_notifications</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wschat_message_notifications</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wschat_message_notifications</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(187): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#6 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#7 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#12 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`participant_id`) REFERENCES wp_wschat_participants (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:14:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`message_id`) REFERENCES wp_wschat_messages (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wschat_message_notifications</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wschat_message_notifications</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wschat_message_notifications</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(189): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#6 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#7 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#12 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`message_id`) REFERENCES wp_wschat_messages (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:14:54 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wschat-live-chat</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[29-May-2025 13:15:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_conversations ADD FOREIGN KEY (`chat_user_id`) REFERENCES wp_wschat_users (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -42,24 +333,26 @@ Failed to parse the MySQL query.
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: wi_post_post.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wi-posts/includes/Setup.php(74): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/wi-posts/wi_posts.php(47): wi_post_Setup()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): wi_post_onActivation(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wi-pos...', false)
-#7 /internal/eval.php(20): activate_plugin('wi-posts/wi_pos...')
-#8 {main}</pre>
- for query ALTER TABLE wp_posts ADD COLUMN IF NOT EXISTS wi_post_post int(25) DEFAULT 0 made by activate_plugin, do_action('activate_wi-posts/wi_posts.php'), WP_Hook->do_action, WP_Hook->apply_filters, wi_post_onActivation, wi_post_Setup, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[27-May-2025 21:28:27 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
-[27-May-2025 21:28:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(174): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#10 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wschat_conversations ADD FOREIGN KEY (`chat_user_id`) REFERENCES wp_wschat_users (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:15:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_posts ADD COLUMN IF NOT EXISTS wi_post_post int(25) DEFAULT 0</p>
+<p>ALTER TABLE wp_wschat_participants ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -67,72 +360,362 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: wi_post_post.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wi-posts/includes/Setup.php(74): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/wi-posts/wi_posts.php(47): wi_post_Setup()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): wi_post_onActivation(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wi-pos...', false)
-#7 /internal/eval.php(20): activate_plugin('wi-posts/wi_pos...')
-#8 {main}</pre>
- for query ALTER TABLE wp_posts ADD COLUMN IF NOT EXISTS wi_post_post int(25) DEFAULT 0 made by activate_plugin, do_action('activate_wi-posts/wi_posts.php'), WP_Hook->do_action, WP_Hook->apply_filters, wi_post_onActivation, wi_post_Setup, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[27-May-2025 21:29:31 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WOOCOMMERCE_WOOCOMMERCE_PRICE_UPDATER_NAMESPACE" in /wordpress/wp-content/plugins/woo-price-updater/classes/Woocommerce_Price_Updater_Plugin.php:32
+#1 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(177): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#10 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wschat_participants ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:15:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_messages ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(180): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#10 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wschat_messages ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:15:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_messages ADD FOREIGN KEY (`participant_id`) REFERENCES wp_wschat_participants (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(182): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#10 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wschat_messages ADD FOREIGN KEY (`participant_id`) REFERENCES wp_wschat_participants (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:15:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(185): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#10 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:15:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`participant_id`) REFERENCES wp_wschat_participants (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(187): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#10 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`participant_id`) REFERENCES wp_wschat_participants (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:15:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`message_id`) REFERENCES wp_wschat_messages (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(189): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#10 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`message_id`) REFERENCES wp_wschat_messages (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:15:18 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wschat-live-chat</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[29-May-2025 13:15:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_conversations ADD FOREIGN KEY (`chat_user_id`) REFERENCES wp_wschat_users (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(174): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#10 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wschat_conversations ADD FOREIGN KEY (`chat_user_id`) REFERENCES wp_wschat_users (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:15:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_participants ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(177): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#10 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wschat_participants ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:15:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_messages ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(180): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#10 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wschat_messages ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:15:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_messages ADD FOREIGN KEY (`participant_id`) REFERENCES wp_wschat_participants (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(182): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#10 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wschat_messages ADD FOREIGN KEY (`participant_id`) REFERENCES wp_wschat_participants (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:15:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(185): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#10 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`conversation_id`) REFERENCES wp_wschat_conversations (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:15:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`participant_id`) REFERENCES wp_wschat_participants (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(187): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#10 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`participant_id`) REFERENCES wp_wschat_participants (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:15:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`message_id`) REFERENCES wp_wschat_messages (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wschat-live-chat/src/wp-fluent/src/QueryBuilder/QueryBuilderHandler.php(96): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(189): WpFluent\QueryBuilder\QueryBuilderHandler->statement('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(55): WSChat\Migrate->upgrade_2()
+#4 /wordpress/wp-content/plugins/wschat-live-chat/src/Migrate.php(32): WSChat\Migrate->up()
+#5 /wordpress/wp-content/plugins/wschat-live-chat/src/WSChat.php(231): WSChat\Migrate::run()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WSChat\WSChat->migrate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wschat...', false)
+#10 /internal/eval.php(20): activate_plugin('wschat-live-cha...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wschat_message_notifications ADD FOREIGN KEY (`message_id`) REFERENCES wp_wschat_messages (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT made by activate_plugin, do_action('activate_wschat-live-chat/wschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, WSChat\WSChat->migrate, WSChat\Migrate::run, WSChat\Migrate->up, WSChat\Migrate->upgrade_2, WpFluent\QueryBuilder\QueryBuilderHandler->statement, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-May-2025 13:15:44 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wschat-live-chat</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[29-May-2025 13:15:52 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/woo-custom-related-products-slider-lite-by-au\inc\activate.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/woo-custom-related-products-slider-lite-by-au/woo-custom-related-products-slider-lite.php on line 31
+[29-May-2025 13:15:52 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/woo-custom-related-products-slider-lite-by-au\inc\activate.php' (include_path='.:') in /wordpress/wp-content/plugins/woo-custom-related-products-slider-lite-by-au/woo-custom-related-products-slider-lite.php:31
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): Woocommerce_Price_Updater_Plugin::hook_activate(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woo-pr...', false)
-#4 /internal/eval.php(20): activate_plugin('woo-price-updat...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/woo-price-updater/classes/Woocommerce_Price_Updater_Plugin.php on line 32
-[27-May-2025 21:29:39 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WOOCOMMERCE_WOOCOMMERCE_PRICE_UPDATER_NAMESPACE" in /wordpress/wp-content/plugins/woo-price-updater/classes/Woocommerce_Price_Updater_Plugin.php:32
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-custom-rela...')
+#2 /internal/eval.php(20): activate_plugin('woo-custom-rela...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/woo-custom-related-products-slider-lite-by-au/woo-custom-related-products-slider-lite.php on line 31
+[29-May-2025 13:16:00 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/woo-custom-related-products-slider-lite-by-au\inc\activate.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/woo-custom-related-products-slider-lite-by-au/woo-custom-related-products-slider-lite.php on line 31
+[29-May-2025 13:16:00 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/woo-custom-related-products-slider-lite-by-au\inc\activate.php' (include_path='.:') in /wordpress/wp-content/plugins/woo-custom-related-products-slider-lite-by-au/woo-custom-related-products-slider-lite.php:31
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): Woocommerce_Price_Updater_Plugin::hook_activate(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woo-pr...', false)
-#4 /internal/eval.php(20): activate_plugin('woo-price-updat...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/woo-price-updater/classes/Woocommerce_Price_Updater_Plugin.php on line 32
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"woo-price-updater"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
-      ... 2 lines matching cause stack trace ...
-      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
-        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
-        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
-        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
-        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-      response: PHPResponse {
-        httpStatusCode: 500,
-        headers: {
-          'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'content-type': [ 'text/html; charset=UTF-8' ]
-        },
-        bytes: Uint8Array(0) [],
-        exitCode: 255,
-        errors: ''
-      },
-      source: 'request'
-    }
-  }
-}
-
-Node.js v23.11.0
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-custom-rela...')
+#2 /internal/eval.php(20): activate_plugin('woo-custom-rela...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/woo-custom-related-products-slider-lite-by-au/woo-custom-related-products-slider-lite.php on line 31
+[29-May-2025 13:16:08 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/woo-custom-related-products-slider-lite-by-au\inc\activate.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/woo-custom-related-products-slider-lite-by-au/woo-cus
