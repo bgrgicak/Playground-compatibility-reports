@@ -2,82 +2,730 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [28-May-2025 22:26:20 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ObfuscaTOR_widg...')
-#2 /wordpress/wp-content/plugins/obfuscator/obfuscaTOR.php(373): register_widget('ObfuscaTOR_widg...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): ObfuscaTOR_addwidget('')
+Error: [30-May-2025 14:28:44 UTC] PHP Warning:  openssl_pkey_export(): cannot get key from parameter 1 in /wordpress/wp-content/plugins/oauth2-provider/includes/functions.php on line 376
+[30-May-2025 14:28:44 UTC] PHP Warning:  openssl_pkey_get_details() expects parameter 1 to be resource, bool given in /wordpress/wp-content/plugins/oauth2-provider/includes/functions.php on line 381
+[30-May-2025 14:28:44 UTC] PHP Notice:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/oauth2-provider/includes/functions.php on line 382
+[30-May-2025 14:28:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_access_tokens ADD `ap_generated` VARCHAR( 32 ) AFTER 	`scope`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_oauth_access_tokens</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_oauth_access_tokens</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_oauth_access_tokens</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_oauth_access_tokens</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_oauth_access_tokens, ap_generated, 8, , YES, varchar, 32, 128, , , , utf8mb4, utf8mb4_general_ci, varchar(32), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_oauth_access_tokens</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_oauth_access_tokens</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_oauth_access_tokens</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_oauth_access_tokens_6839c09c5ad20` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `access_token` TEXT COLLATE NOCASE,
+  `client_id` TEXT COLLATE NOCASE NOT NULL,
+  `user_id` TEXT COLLATE NOCASE,
+  `expires` TEXT COLLATE NOCASE NOT NULL,
+  `scope` TEXT COLLATE NOCASE,
+  `ap_generated` TEXT COLLATE NOCASE,
+  `ap_generated` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: ap_generated
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(391): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#8 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_oauth_access_tokens ADD `ap_generated` VARCHAR( 32 ) AFTER 	`scope` made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:28:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge` VARCHAR( 1000 ) AFTER `id_token`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_oauth_authorization_codes</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_oauth_authorization_codes</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_oauth_authorization_codes</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_oauth_authorization_codes</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_oauth_authorization_codes, code_challenge, 10, , YES, varchar, 1000, 4000, , , , utf8mb4, utf8mb4_general_ci, varchar(1000), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_oauth_authorization_codes</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_oauth_authorization_codes</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_oauth_authorization_codes</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_oauth_authorization_codes_6839c09c5e7b8` (
+  `authorization_code` TEXT COLLATE NOCASE NOT NULL,
+  `client_id` TEXT COLLATE NOCASE,
+  `user_id` TEXT COLLATE NOCASE,
+  `redirect_uri` TEXT COLLATE NOCASE,
+  `expires` TEXT COLLATE NOCASE NOT NULL,
+  `scope` TEXT COLLATE NOCASE,
+  `id_token` TEXT COLLATE NOCASE,
+  `code_challenge` TEXT COLLATE NOCASE,
+  `code_challenge_method` TEXT COLLATE NOCASE,
+  `code_challenge` TEXT COLLATE NOCASE,
+  PRIMARY KEY (`authorization_code`)
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(401): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#8 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge` VARCHAR( 1000 ) AFTER `id_token` made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:28:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge_method` VARCHAR( 32 ) AFTER `id_token`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_oauth_authorization_codes</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_oauth_authorization_codes</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_oauth_authorization_codes</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_oauth_authorization_codes</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_oauth_authorization_codes, code_challenge_method, 10, , YES, varchar, 32, 128, , , , utf8mb4, utf8mb4_general_ci, varchar(32), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_oauth_authorization_codes</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_oauth_authorization_codes</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_oauth_authorization_codes</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_oauth_authorization_codes_6839c09c64578` (
+  `authorization_code` TEXT COLLATE NOCASE NOT NULL,
+  `client_id` TEXT COLLATE NOCASE,
+  `user_id` TEXT COLLATE NOCASE,
+  `redirect_uri` TEXT COLLATE NOCASE,
+  `expires` TEXT COLLATE NOCASE NOT NULL,
+  `scope` TEXT COLLATE NOCASE,
+  `id_token` TEXT COLLATE NOCASE,
+  `code_challenge` TEXT COLLATE NOCASE,
+  `code_challenge_method` TEXT COLLATE NOCASE,
+  `code_challenge_method` TEXT COLLATE NOCASE,
+  PRIMARY KEY (`authorization_code`)
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge_method
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(411): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#8 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge_method` VARCHAR( 32 ) AFTER `id_token` made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:28:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_refresh_tokens MODIFY refresh_token VARCHAR(191);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(358): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_refresh_tokens MODIFY refresh_token VARCHAR(191); made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:28:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_refresh_tokens MODIFY client_id VARCHAR(191);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(359): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_refresh_tokens MODIFY client_id VARCHAR(191); made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:28:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_public_keys MODIFY client_id VARCHAR(191);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(361): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_public_keys MODIFY client_id VARCHAR(191); made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:28:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_jwt MODIFY client_id VARCHAR(191);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(362): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_jwt MODIFY client_id VARCHAR(191); made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:28:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_authorization_codes MODIFY client_id VARCHAR(191);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(363): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_authorization_codes MODIFY client_id VARCHAR(191); made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:28:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW KEYS FROM wp_oauth_access_tokens</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: KEYS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW KEYS FROM ...')
+#2 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(375): wpdb->get_results('SHOW KEYS FROM ...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[28-May-2025 22:26:29 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ObfuscaTOR_widg...')
-#2 /wordpress/wp-content/plugins/obfuscator/obfuscaTOR.php(373): register_widget('ObfuscaTOR_widg...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): ObfuscaTOR_addwidget('')
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#7 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#8 {main}</pre>
+ for query SHOW KEYS FROM wp_oauth_access_tokens made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:28:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_access_tokens MODIFY access_token VARCHAR(1000);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(383): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_access_tokens MODIFY access_token VARCHAR(1000); made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:28:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_access_tokens ADD `ap_generated` VARCHAR( 32 ) AFTER 	`scope`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_oauth_access_tokens, `AP_GENERATED`, varchar(32)</li>
+<li>Executing: ALTER TABLE wp_oauth_access_tokens ADD `ap_generated`   text  	 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: ap_generated.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(391): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_access_tokens ADD `ap_generated` VARCHAR( 32 ) AFTER 	`scope` made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:28:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge` VARCHAR( 1000 ) AFTER `id_token`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_oauth_authorization_codes, `CODE_CHALLENGE`, varchar(1000)</li>
+<li>Executing: ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge`   text   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(401): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge` VARCHAR( 1000 ) AFTER `id_token` made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:28:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge_method` VARCHAR( 32 ) AFTER `id_token`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_oauth_authorization_codes, `CODE_CHALLENGE_METHOD`, varchar(32)</li>
+<li>Executing: ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge_method`   text   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge_method.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(411): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge_method` VARCHAR( 32 ) AFTER `id_token` made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:29:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_refresh_tokens MODIFY refresh_token VARCHAR(191);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(358): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_refresh_tokens MODIFY refresh_token VARCHAR(191); made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:29:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_refresh_tokens MODIFY client_id VARCHAR(191);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(359): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_refresh_tokens MODIFY client_id VARCHAR(191); made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:29:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_public_keys MODIFY client_id VARCHAR(191);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(361): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_public_keys MODIFY client_id VARCHAR(191); made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:29:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_jwt MODIFY client_id VARCHAR(191);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(362): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_jwt MODIFY client_id VARCHAR(191); made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:29:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_authorization_codes MODIFY client_id VARCHAR(191);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(363): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_authorization_codes MODIFY client_id VARCHAR(191); made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:29:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW KEYS FROM wp_oauth_access_tokens</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: KEYS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW KEYS FROM ...')
+#2 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(375): wpdb->get_results('SHOW KEYS FROM ...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[28-May-2025 22:26:38 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ObfuscaTOR_widg...')
-#2 /wordpress/wp-content/plugins/obfuscator/obfuscaTOR.php(373): register_widget('ObfuscaTOR_widg...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): ObfuscaTOR_addwidget('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[28-May-2025 22:26:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_oauth_method() in /wordpress/wp-content/plugins/oauthrest/oauthrest.php:84
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('oauthrest/oauth...')
-#2 /internal/eval.php(20): activate_plugin('oauthrest/oauth...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/oauthrest/oauthrest.php on line 84
-[28-May-2025 22:26:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_oauth_method() in /wordpress/wp-content/plugins/oauthrest/oauthrest.php:84
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('oauthrest/oauth...')
-#2 /internal/eval.php(20): activate_plugin('oauthrest/oauth...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/oauthrest/oauthrest.php on line 84
-[28-May-2025 22:27:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_oauth_method() in /wordpress/wp-content/plugins/oauthrest/oauthrest.php:84
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('oauthrest/oauth...')
-#2 /internal/eval.php(20): activate_plugin('oauthrest/oauth...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/oauthrest/oauthrest.php on line 84
-[28-May-2025 22:28:41 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/occomy/occomy.php:46
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#7 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#8 {main}</pre>
+ for query SHOW KEYS FROM wp_oauth_access_tokens made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:29:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_access_tokens MODIFY access_token VARCHAR(1000);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(383): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_access_tokens MODIFY access_token VARCHAR(1000); made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:29:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_access_tokens ADD `ap_generated` VARCHAR( 32 ) AFTER 	`scope`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_oauth_access_tokens, `AP_GENERATED`, varchar(32)</li>
+<li>Executing: ALTER TABLE wp_oauth_access_tokens ADD `ap_generated`   text  	 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: ap_generated.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(391): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_access_tokens ADD `ap_generated` VARCHAR( 32 ) AFTER 	`scope` made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:29:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge` VARCHAR( 1000 ) AFTER `id_token`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_oauth_authorization_codes, `CODE_CHALLENGE`, varchar(1000)</li>
+<li>Executing: ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge`   text   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(401): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge` VARCHAR( 1000 ) AFTER `id_token` made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:29:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge_method` VARCHAR( 32 ) AFTER `id_token`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_oauth_authorization_codes, `CODE_CHALLENGE_METHOD`, varchar(32)</li>
+<li>Executing: ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge_method`   text   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge_method.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/oauth2-provider/wp-oauth-main.php(411): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WO_Server->upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth2...', false)
+#6 /internal/eval.php(20): activate_plugin('oauth2-provider...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_oauth_authorization_codes ADD `code_challenge_method` VARCHAR( 32 ) AFTER `id_token` made by activate_plugin, do_action('activate_oauth2-provider/wp-oauth-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, WO_Server->upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:29:15 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>aframe</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[30-May-2025 14:29:23 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>aframe</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[30-May-2025 14:29:32 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>aframe</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[30-May-2025 14:30:08 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[30-May-2025 14:30:17 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[30-May-2025 14:30:24 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[30-May-2025 14:31:07 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/occomy/occomy.php:46
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): wc_occomy_gateway_init('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
@@ -88,7 +736,7 @@ Stack trace:
 #6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #7 {main}
   thrown in /wordpress/wp-content/plugins/occomy/occomy.php on line 46
-[28-May-2025 22:28:50 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/occomy/occomy.php:46
+[30-May-2025 14:31:16 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/occomy/occomy.php:46
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): wc_occomy_gateway_init('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
@@ -99,7 +747,7 @@ Stack trace:
 #6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #7 {main}
   thrown in /wordpress/wp-content/plugins/occomy/occomy.php on line 46
-[28-May-2025 22:28:59 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/occomy/occomy.php:46
+[30-May-2025 14:31:25 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/occomy/occomy.php:46
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): wc_occomy_gateway_init('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
@@ -110,7 +758,7 @@ Stack trace:
 #6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #7 {main}
   thrown in /wordpress/wp-content/plugins/occomy/occomy.php on line 46
-[28-May-2025 22:30:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/octolio/octolio.php:90
+[30-May-2025 14:33:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/octolio/octolio.php:90
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): block_direct_access(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
@@ -119,7 +767,7 @@ Stack trace:
 #4 /internal/eval.php(20): activate_plugin('octolio/octolio...')
 #5 {main}
   thrown in /wordpress/wp-content/plugins/octolio/octolio.php on line 90
-[28-May-2025 22:30:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/octolio/octolio.php:90
+[30-May-2025 14:33:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/octolio/octolio.php:90
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): block_direct_access(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
@@ -128,7 +776,7 @@ Stack trace:
 #4 /internal/eval.php(20): activate_plugin('octolio/octolio...')
 #5 {main}
   thrown in /wordpress/wp-content/plugins/octolio/octolio.php on line 90
-[28-May-2025 22:30:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/octolio/octolio.php:90
+[30-May-2025 14:34:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/octolio/octolio.php:90
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): block_direct_access(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
