@@ -2,332 +2,736 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [29-May-2025 05:52:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [30-May-2025 19:47:02 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-sentinel/classes/sentinel.class.php on line 186
+[30-May-2025 19:47:11 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-sentinel/classes/sentinel.class.php on line 186
+[30-May-2025 19:47:20 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-sentinel/classes/sentinel.class.php on line 186
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select id,setting,setting_value from wp_whereivebeen_settings where user_id=1</p>
+<p>SHOW COLUMNS FROM ``</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select `id` , `setting` , `setting_value` from `wp_whereivebeen_settings` where `user_id` = 1 | (no parameters)</li>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_settings
+Table 'database_name_here.' doesn't exist
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select id,setti...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select id,setti...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select id,setti...')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select id,setti...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(40): DbController->select('select id,setti...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(29): WhereIveBeenModel->load_settings()
-#7 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#8 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#11 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#12 {main}</pre>
- for query select id,setting,setting_value from wp_whereivebeen_settings where user_id=1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_settings, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[29-May-2025 05:52:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1768): WP_SQLite_Driver->new_driver_exception('Table 'database...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1473): WP_SQLite_Driver->execute_show_columns_statement(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(928): WP_SQLite_Driver->execute_show_statement(Object(WP_Parser_Node))
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
+#6 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW COLUMNS FR...')
+#7 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/functions.class.php(647): wpdb->get_results('SHOW COLUMNS FR...', 'ARRAY_A')
+#8 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(2034): Functions->checkTable(NULL, Array)
+#9 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(121): pageFlip_plugin_base->check_db()
+#10 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.php(36): pageFlip_plugin_base->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-galle...')
+#13 /internal/eval.php(20): activate_plugin('wordpress-galle...')
+#14 {main}</pre>
+ for query SHOW COLUMNS FROM `` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-gallery-page-flip/pageFlip.php'), pageFlip_plugin_base->init, pageFlip_plugin_base->check_db, Functions->checkTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select wp_whereivebeen_user_countries.id,wp_whereivebeen_user_countries.country_id,wp_whereivebeen_countries.title,wp_whereivebeen_user_countries.status_id,wp_whereivebeen_user_countries.url,wp_whereivebeen_user_countries.new_window from wp_whereivebeen_user_countries inner join wp_whereivebeen_countries on wp_whereivebeen_user_countries.country_id=wp_whereivebeen_countries.id where wp_whereivebeen_user_countries.user_id=1 ORDER BY wp_whereivebeen_countries.title</p>
+<p>ALTER TABLE `` ADD `id` BIGINT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY;</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select `wp_whereivebeen_user_countries`.`id` , `wp_whereivebeen_user_countries`.`country_id` , `wp_whereivebeen_countries`.`title` , `wp_whereivebeen_user_countries`.`status_id` , `wp_whereivebeen_user_countries`.`url` , `wp_whereivebeen_user_countries`.`new_window` from `wp_whereivebeen_user_countries` inner join `wp_whereivebeen_countries` on `wp_whereivebeen_user_countries`.`country_id` = `wp_whereivebeen_countries`.`id` where `wp_whereivebeen_user_countries`.`user_id` = 1 ORDER BY `wp_whereivebeen_countries`.`title` | (no parameters)</li>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, , id, 1, , NO, bigint, , , 19, 0, , , , bigint(20), PRI, auto_increment, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, , 0, database_name_here, PRIMARY, 1, id, A, 0, , , YES, BTREE, , , YES, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_table_constraints` (`table_schema`, `table_name`, `constraint_schema`, `constraint_name`, `constraint_type`) VALUES (?, ?, ?, ?, ?) | parameters: database_name_here, , database_name_here, PRIMARY, PRIMARY KEY</li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_user_countries
+Table '' doesn't exist
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select wp_where...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select wp_where...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select wp_where...')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select wp_where...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(81): DbController->select('select wp_where...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(30): WhereIveBeenModel->load_user_countries()
-#7 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#8 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#11 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#12 {main}</pre>
- for query select wp_whereivebeen_user_countries.id,wp_whereivebeen_user_countries.country_id,wp_whereivebeen_countries.title,wp_whereivebeen_user_countries.status_id,wp_whereivebeen_user_countries.url,wp_whereivebeen_user_countries.new_window from wp_whereivebeen_user_countries inner join wp_whereivebeen_countries on wp_whereivebeen_user_countries.country_id=wp_whereivebeen_countries.id where wp_whereivebeen_user_countries.user_id=1 ORDER BY wp_whereivebeen_countries.title made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_user_countries, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[29-May-2025 05:52:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table '' doesn'...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, '', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1380): WP_SQLite_Driver->recreate_table_from_information_schema(false, '', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(896): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `` ...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `` ...')
+#7 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/functions.class.php(652): WP_SQLite_DB->query('ALTER TABLE `` ...')
+#8 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(2034): Functions->checkTable(NULL, Array)
+#9 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(121): pageFlip_plugin_base->check_db()
+#10 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.php(36): pageFlip_plugin_base->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-galle...')
+#13 /internal/eval.php(20): activate_plugin('wordpress-galle...')
+#14 {main}</pre>
+ for query ALTER TABLE `` ADD `id` BIGINT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-gallery-page-flip/pageFlip.php'), pageFlip_plugin_base->init, pageFlip_plugin_base->check_db, Functions->checkTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select id,title from wp_whereivebeen_countries where id NOT IN (select country_id from wp_whereivebeen_user_countries where user_id=1)</p>
+<p>ALTER TABLE `` ADD `name` TEXT NOT NULL;</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select `id` , `title` from `wp_whereivebeen_countries` where `id` NOT IN ( select `country_id` from `wp_whereivebeen_user_countries` where `user_id` = 1 ) | (no parameters)</li>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, , name, 1, , NO, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_countries
+Table '' doesn't exist
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select id,title...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select id,title...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select id,title...')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select id,title...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(53): DbController->select('select id,title...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(31): WhereIveBeenModel->load_countries()
-#7 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#8 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#11 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#12 {main}</pre>
- for query select id,title from wp_whereivebeen_countries where id NOT IN (select country_id from wp_whereivebeen_user_countries where user_id=1) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_countries, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[29-May-2025 05:52:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table '' doesn'...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, '', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1380): WP_SQLite_Driver->recreate_table_from_information_schema(false, '', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(896): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `` ...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `` ...')
+#7 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/functions.class.php(652): WP_SQLite_DB->query('ALTER TABLE `` ...')
+#8 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(2034): Functions->checkTable(NULL, Array)
+#9 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(121): pageFlip_plugin_base->check_db()
+#10 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.php(36): pageFlip_plugin_base->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-galle...')
+#13 /internal/eval.php(20): activate_plugin('wordpress-galle...')
+#14 {main}</pre>
+ for query ALTER TABLE `` ADD `name` TEXT NOT NULL; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-gallery-page-flip/pageFlip.php'), pageFlip_plugin_base->init, pageFlip_plugin_base->check_db, Functions->checkTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select id,setting,setting_value from wp_whereivebeen_settings where user_id=1</p>
+<p>ALTER TABLE `` ADD `date` BIGINT( 11 ) NOT NULL DEFAULT '1748634476';</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select id,setting,setting_value from wp_whereivebeen_settings where user_id=1 | (no parameters)</li>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, , date, 1, 1748634476, NO, bigint, , , 19, 0, , , , bigint(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_settings.
+Table '' doesn't exist
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select id,setti...')
-#2 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select id,setti...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(40): DbController->select('select id,setti...', 'ARRAY_A')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(29): WhereIveBeenModel->load_settings()
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#9 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#10 {main}</pre>
- for query select id,setting,setting_value from wp_whereivebeen_settings where user_id=1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_settings, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[29-May-2025 05:52:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table '' doesn'...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, '', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1380): WP_SQLite_Driver->recreate_table_from_information_schema(false, '', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(896): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `` ...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `` ...')
+#7 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/functions.class.php(652): WP_SQLite_DB->query('ALTER TABLE `` ...')
+#8 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(2034): Functions->checkTable(NULL, Array)
+#9 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(121): pageFlip_plugin_base->check_db()
+#10 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.php(36): pageFlip_plugin_base->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-galle...')
+#13 /internal/eval.php(20): activate_plugin('wordpress-galle...')
+#14 {main}</pre>
+ for query ALTER TABLE `` ADD `date` BIGINT( 11 ) NOT NULL DEFAULT '1748634476'; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-gallery-page-flip/pageFlip.php'), pageFlip_plugin_base->init, pageFlip_plugin_base->check_db, Functions->checkTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select wp_whereivebeen_user_countries.id,wp_whereivebeen_user_countries.country_id,wp_whereivebeen_countries.title,wp_whereivebeen_user_countries.status_id,wp_whereivebeen_user_countries.url,wp_whereivebeen_user_countries.new_window from wp_whereivebeen_user_countries inner join wp_whereivebeen_countries on wp_whereivebeen_user_countries.country_id=wp_whereivebeen_countries.id where wp_whereivebeen_user_countries.user_id=1 ORDER BY wp_whereivebeen_countries.title</p>
+<p>ALTER TABLE `` ADD `bgImage` BIGINT( 11 ) NOT NULL;</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select wp_whereivebeen_user_countries.id,wp_whereivebeen_user_countries.country_id,wp_whereivebeen_countries.title,wp_whereivebeen_user_countries.status_id,wp_whereivebeen_user_countries.url,wp_whereivebeen_user_countries.new_window from wp_whereivebeen_user_countries inner join wp_whereivebeen_countries on wp_whereivebeen_user_countries.country_id=wp_whereivebeen_countries.id where wp_whereivebeen_user_countries.user_id=1 ORDER BY wp_whereivebeen_countries.title | (no parameters)</li>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, , bgImage, 1, , NO, bigint, , , 19, 0, , , , bigint(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_user_countries.
+Table '' doesn't exist
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select wp_where...')
-#2 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select wp_where...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(81): DbController->select('select wp_where...', 'ARRAY_A')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(30): WhereIveBeenModel->load_user_countries()
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#9 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#10 {main}</pre>
- for query select wp_whereivebeen_user_countries.id,wp_whereivebeen_user_countries.country_id,wp_whereivebeen_countries.title,wp_whereivebeen_user_countries.status_id,wp_whereivebeen_user_countries.url,wp_whereivebeen_user_countries.new_window from wp_whereivebeen_user_countries inner join wp_whereivebeen_countries on wp_whereivebeen_user_countries.country_id=wp_whereivebeen_countries.id where wp_whereivebeen_user_countries.user_id=1 ORDER BY wp_whereivebeen_countries.title made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_user_countries, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[29-May-2025 05:52:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table '' doesn'...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, '', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1380): WP_SQLite_Driver->recreate_table_from_information_schema(false, '', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(896): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `` ...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `` ...')
+#7 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/functions.class.php(652): WP_SQLite_DB->query('ALTER TABLE `` ...')
+#8 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(2034): Functions->checkTable(NULL, Array)
+#9 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(121): pageFlip_plugin_base->check_db()
+#10 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.php(36): pageFlip_plugin_base->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-galle...')
+#13 /internal/eval.php(20): activate_plugin('wordpress-galle...')
+#14 {main}</pre>
+ for query ALTER TABLE `` ADD `bgImage` BIGINT( 11 ) NOT NULL; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-gallery-page-flip/pageFlip.php'), pageFlip_plugin_base->init, pageFlip_plugin_base->check_db, Functions->checkTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select id,title from wp_whereivebeen_countries where id NOT IN (select country_id from wp_whereivebeen_user_countries where user_id=1)</p>
+<p>SHOW COLUMNS FROM ``</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select id,title from wp_whereivebeen_countries where id NOT IN (select country_id from wp_whereivebeen_user_countries where user_id=1) | (no parameters)</li>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_countries.
+Table 'database_name_here.' doesn't exist
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select id,title...')
-#2 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select id,title...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(53): DbController->select('select id,title...', 'ARRAY_A')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(31): WhereIveBeenModel->load_countries()
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#9 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#10 {main}</pre>
- for query select id,title from wp_whereivebeen_countries where id NOT IN (select country_id from wp_whereivebeen_user_countries where user_id=1) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_countries, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[29-May-2025 05:52:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1768): WP_SQLite_Driver->new_driver_exception('Table 'database...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1473): WP_SQLite_Driver->execute_show_columns_statement(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(928): WP_SQLite_Driver->execute_show_statement(Object(WP_Parser_Node))
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
+#6 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW COLUMNS FR...')
+#7 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/functions.class.php(647): wpdb->get_results('SHOW COLUMNS FR...', 'ARRAY_A')
+#8 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(2040): Functions->checkTable(NULL, Array)
+#9 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(121): pageFlip_plugin_base->check_db()
+#10 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.php(36): pageFlip_plugin_base->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-galle...')
+#13 /internal/eval.php(20): activate_plugin('wordpress-galle...')
+#14 {main}</pre>
+ for query SHOW COLUMNS FROM `` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-gallery-page-flip/pageFlip.php'), pageFlip_plugin_base->init, pageFlip_plugin_base->check_db, Functions->checkTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select id,setting,setting_value from wp_whereivebeen_settings where user_id=1</p>
+<p>ALTER TABLE `` ADD `id` BIGINT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY;</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select id,setting,setting_value from wp_whereivebeen_settings where user_id=1 | (no parameters)</li>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, , id, 1, , NO, bigint, , , 19, 0, , , , bigint(20), PRI, auto_increment, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, , 0, database_name_here, PRIMARY, 1, id, A, 0, , , YES, BTREE, , , YES, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_table_constraints` (`table_schema`, `table_name`, `constraint_schema`, `constraint_name`, `constraint_type`) VALUES (?, ?, ?, ?, ?) | parameters: database_name_here, , database_name_here, PRIMARY, PRIMARY KEY</li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_settings.
+Table '' doesn't exist
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select id,setti...')
-#2 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select id,setti...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(40): DbController->select('select id,setti...', 'ARRAY_A')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(29): WhereIveBeenModel->load_settings()
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#9 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#10 {main}</pre>
- for query select id,setting,setting_value from wp_whereivebeen_settings where user_id=1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_settings, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[29-May-2025 05:52:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table '' doesn'...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, '', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1380): WP_SQLite_Driver->recreate_table_from_information_schema(false, '', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(896): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `` ...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `` ...')
+#7 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/functions.class.php(652): WP_SQLite_DB->query('ALTER TABLE `` ...')
+#8 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(2040): Functions->checkTable(NULL, Array)
+#9 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(121): pageFlip_plugin_base->check_db()
+#10 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.php(36): pageFlip_plugin_base->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-galle...')
+#13 /internal/eval.php(20): activate_plugin('wordpress-galle...')
+#14 {main}</pre>
+ for query ALTER TABLE `` ADD `id` BIGINT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-gallery-page-flip/pageFlip.php'), pageFlip_plugin_base->init, pageFlip_plugin_base->check_db, Functions->checkTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select wp_whereivebeen_user_countries.id,wp_whereivebeen_user_countries.country_id,wp_whereivebeen_countries.title,wp_whereivebeen_user_countries.status_id,wp_whereivebeen_user_countries.url,wp_whereivebeen_user_countries.new_window from wp_whereivebeen_user_countries inner join wp_whereivebeen_countries on wp_whereivebeen_user_countries.country_id=wp_whereivebeen_countries.id where wp_whereivebeen_user_countries.user_id=1 ORDER BY wp_whereivebeen_countries.title</p>
+<p>ALTER TABLE `` ADD `name` TEXT NOT NULL;</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select wp_whereivebeen_user_countries.id,wp_whereivebeen_user_countries.country_id,wp_whereivebeen_countries.title,wp_whereivebeen_user_countries.status_id,wp_whereivebeen_user_countries.url,wp_whereivebeen_user_countries.new_window from wp_whereivebeen_user_countries inner join wp_whereivebeen_countries on wp_whereivebeen_user_countries.country_id=wp_whereivebeen_countries.id where wp_whereivebeen_user_countries.user_id=1 ORDER BY wp_whereivebeen_countries.title | (no parameters)</li>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, , name, 1, , NO, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_user_countries.
+Table '' doesn't exist
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select wp_where...')
-#2 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select wp_where...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(81): DbController->select('select wp_where...', 'ARRAY_A')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(30): WhereIveBeenModel->load_user_countries()
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#9 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#10 {main}</pre>
- for query select wp_whereivebeen_user_countries.id,wp_whereivebeen_user_countries.country_id,wp_whereivebeen_countries.title,wp_whereivebeen_user_countries.status_id,wp_whereivebeen_user_countries.url,wp_whereivebeen_user_countries.new_window from wp_whereivebeen_user_countries inner join wp_whereivebeen_countries on wp_whereivebeen_user_countries.country_id=wp_whereivebeen_countries.id where wp_whereivebeen_user_countries.user_id=1 ORDER BY wp_whereivebeen_countries.title made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_user_countries, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[29-May-2025 05:52:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table '' doesn'...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, '', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1380): WP_SQLite_Driver->recreate_table_from_information_schema(false, '', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(896): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `` ...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `` ...')
+#7 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/functions.class.php(652): WP_SQLite_DB->query('ALTER TABLE `` ...')
+#8 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(2040): Functions->checkTable(NULL, Array)
+#9 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(121): pageFlip_plugin_base->check_db()
+#10 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.php(36): pageFlip_plugin_base->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-galle...')
+#13 /internal/eval.php(20): activate_plugin('wordpress-galle...')
+#14 {main}</pre>
+ for query ALTER TABLE `` ADD `name` TEXT NOT NULL; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-gallery-page-flip/pageFlip.php'), pageFlip_plugin_base->init, pageFlip_plugin_base->check_db, Functions->checkTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select id,title from wp_whereivebeen_countries where id NOT IN (select country_id from wp_whereivebeen_user_countries where user_id=1)</p>
+<p>ALTER TABLE `` ADD `filename` TEXT NOT NULL;</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select id,title from wp_whereivebeen_countries where id NOT IN (select country_id from wp_whereivebeen_user_countries where user_id=1) | (no parameters)</li>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, , filename, 1, , NO, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_countries.
+Table '' doesn't exist
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select id,title...')
-#2 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select id,title...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(53): DbController->select('select id,title...', 'ARRAY_A')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(31): WhereIveBeenModel->load_countries()
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#9 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#10 {main}</pre>
- for query select id,title from wp_whereivebeen_countries where id NOT IN (select country_id from wp_whereivebeen_user_countries where user_id=1) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_countries, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[29-May-2025 05:53:39 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-restaurant-booking</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[29-May-2025 05:53:49 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-restaurant-booking</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[29-May-2025 05:53:59 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-restaurant-booking</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[29-May-2025 05:54:09 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_FOR" in /wordpress/wp-content/plugins/wp-security-optimizer/wp-security-optimizer.php on line 314
-[29-May-2025 05:54:09 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-security-optimizer/wp-security-optimizer.php on line 316
-[29-May-2025 05:54:09 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/wp-security-optimizer/wp-security-optimizer.php on line 80
-[29-May-2025 05:54:18 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_FOR" in /wordpress/wp-content/plugins/wp-security-optimizer/wp-security-optimizer.php on line 314
-[29-May-2025 05:54:18 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-security-optimizer/wp-security-optimizer.php on line 316
-[29-May-2025 05:54:19 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/wp-security-optimizer/wp-security-optimizer.php on line 80
-[29-May-2025 05:54:28 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_FOR" in /wordpress/wp-content/plugins/wp-security-optimizer/wp-security-optimizer.php on line 314
-[29-May-2025 05:54:28 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-security-optimizer/wp-security-optimizer.php on line 316
-[29-May-2025 05:54:28 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/wp-security-optimizer/wp-security-optimizer.php on line 80
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wp-simple-bloggerei-icon"},"options":{"activate":true}}) : Could not download "https://downloads.wordpress.org/plugin/wp-simple-bloggerei-icon.latest-stable.zip".
-  				Check if the URL is correct and the server is reachable.
-  				If it is reachable, the server might be blocking the request.
-  				Check the browser console and network tabs for more information.
-  
-  				## Does the console show the error "No 'Access-Control-Allow-Origin' header"?
-  
-  				This means the server that hosts your file does not allow requests from other sites
-  				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
-  				cross-origin file downloads. Learn more about CORS at
-  				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
-  
-  				If your file is on GitHub, load it from "raw.githubusercontent.com".
-  				Here's how to do that:
-  
-  				1. Start with the original GitHub URL of the file. For example:
-  				https://github.com/username/repository/blob/branch/filename.
-  				2. Replace "github.com" with "raw.githubusercontent.com".
-  				3. Remove the "/blob/" part of the URL.
-  
-  				The resulting URL should look like this:
-  				https://raw.githubusercontent.com/username/repository/branch/filename
-  
-  				Error:
-  				Error: Could not download "https://downloads.wordpress.org/plugin/wp-simple-bloggerei-icon.latest-stable.zip"
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
-      at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-    [cause]: Error: Could not download "https://downloads.wordpress.org/plugin/wp-simple-bloggerei-icon.latest-stable.zip".
-    				Check if the URL is correct and the server is reachable.
-    				If it is reachable, the server might be blocking the request.
-    				Check the browser console and network tabs for more information.
-    
-    				## Does the console show the error "No 'Access-Control-Allow-Origin' header"?
-    
-    				This means the server that hosts your file does not allow requests from other sites
-    				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
-    				cross-origin file downloads. Learn more about CORS at
-    				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
-    
-    				If your file is on GitHub, load it from "raw.githubusercontent.com".
-    				Here's how to do that:
-    
-    				1. Start with the original GitHub URL of the file. For example:
-    				https://github.com/username/repository/blob/branch/filename.
-    				2. Replace "github.com" with "raw.githubusercontent.com".
-    				3. Remove the "/blob/" part of the URL.
-    
-    				The resulting URL should look like this:
-    				https://raw.githubusercontent.com/username/repository/branch/filename
-    
-    				Error:
-    				Error: Could not download "https://downloads.wordpress.org/plugin/wp-simple-bloggerei-icon.latest-stable.zip"
-        at Ct.resolve (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1472:13)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async _.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/util/index.js:45:14)
-  }
-}
-
-Node.js v23.11.0
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table '' doesn'...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, '', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1380): WP_SQLite_Driver->recreate_table_from_information_schema(false, '', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(896): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `` ...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `` ...')
+#7 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/functions.class.php(652): WP_SQLite_DB->query('ALTER TABLE `` ...')
+#8 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(2040): Functions->checkTable(NULL, Array)
+#9 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(121): pageFlip_plugin_base->check_db()
+#10 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.php(36): pageFlip_plugin_base->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-galle...')
+#13 /internal/eval.php(20): activate_plugin('wordpress-galle...')
+#14 {main}</pre>
+ for query ALTER TABLE `` ADD `filename` TEXT NOT NULL; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-gallery-page-flip/pageFlip.php'), pageFlip_plugin_base->init, pageFlip_plugin_base->check_db, Functions->checkTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `` ADD `date` BIGINT( 11 ) NOT NULL DEFAULT '1748634476';</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, , date, 1, 1748634476, NO, bigint, , , 19, 0, , , , bigint(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table '' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table '' doesn'...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, '', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1380): WP_SQLite_Driver->recreate_table_from_information_schema(false, '', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(896): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `` ...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `` ...')
+#7 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/functions.class.php(652): WP_SQLite_DB->query('ALTER TABLE `` ...')
+#8 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(2040): Functions->checkTable(NULL, Array)
+#9 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(121): pageFlip_plugin_base->check_db()
+#10 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.php(36): pageFlip_plugin_base->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-galle...')
+#13 /internal/eval.php(20): activate_plugin('wordpress-galle...')
+#14 {main}</pre>
+ for query ALTER TABLE `` ADD `date` BIGINT( 11 ) NOT NULL DEFAULT '1748634476'; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-gallery-page-flip/pageFlip.php'), pageFlip_plugin_base->init, pageFlip_plugin_base->check_db, Functions->checkTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `` ADD `type` VARCHAR( 10 ) NOT NULL DEFAULT 'img';</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, , type, 1, img, NO, varchar, 10, 40, , , , utf8mb4, utf8mb4_general_ci, varchar(10), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table '' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table '' doesn'...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, '', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1380): WP_SQLite_Driver->recreate_table_from_information_schema(false, '', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(896): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `` ...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `` ...')
+#7 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/functions.class.php(652): WP_SQLite_DB->query('ALTER TABLE `` ...')
+#8 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(2040): Functions->checkTable(NULL, Array)
+#9 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(121): pageFlip_plugin_base->check_db()
+#10 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.php(36): pageFlip_plugin_base->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-galle...')
+#13 /internal/eval.php(20): activate_plugin('wordpress-galle...')
+#14 {main}</pre>
+ for query ALTER TABLE `` ADD `type` VARCHAR( 10 ) NOT NULL DEFAULT 'img'; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-gallery-page-flip/pageFlip.php'), pageFlip_plugin_base->init, pageFlip_plugin_base->check_db, Functions->checkTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `` ADD `gallery` BIGINT( 20 ) NOT NULL;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, , gallery, 1, , NO, bigint, , , 19, 0, , , , bigint(20), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table '' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table '' doesn'...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, '', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1380): WP_SQLite_Driver->recreate_table_from_information_schema(false, '', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(896): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `` ...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `` ...')
+#7 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/functions.class.php(652): WP_SQLite_DB->query('ALTER TABLE `` ...')
+#8 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(2040): Functions->checkTable(NULL, Array)
+#9 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(121): pageFlip_plugin_base->check_db()
+#10 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.php(36): pageFlip_plugin_base->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-galle...')
+#13 /internal/eval.php(20): activate_plugin('wordpress-galle...')
+#14 {main}</pre>
+ for query ALTER TABLE `` ADD `gallery` BIGINT( 20 ) NOT NULL; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-gallery-page-flip/pageFlip.php'), pageFlip_plugin_base->init, pageFlip_plugin_base->check_db, Functions->checkTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW COLUMNS FROM ``</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'database_name_here.' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1768): WP_SQLite_Driver->new_driver_exception('Table 'database...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1473): WP_SQLite_Driver->execute_show_columns_statement(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(928): WP_SQLite_Driver->execute_show_statement(Object(WP_Parser_Node))
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
+#6 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW COLUMNS FR...')
+#7 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/functions.class.php(647): wpdb->get_results('SHOW COLUMNS FR...', 'ARRAY_A')
+#8 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(2046): Functions->checkTable(NULL, Array)
+#9 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(121): pageFlip_plugin_base->check_db()
+#10 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.php(36): pageFlip_plugin_base->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-galle...')
+#13 /internal/eval.php(20): activate_plugin('wordpress-galle...')
+#14 {main}</pre>
+ for query SHOW COLUMNS FROM `` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-gallery-page-flip/pageFlip.php'), pageFlip_plugin_base->init, pageFlip_plugin_base->check_db, Functions->checkTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `` ADD `id` BIGINT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, , id, 1, , NO, bigint, , , 19, 0, , , , bigint(20), PRI, auto_increment, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, , 0, database_name_here, PRIMARY, 1, id, A, 0, , , YES, BTREE, , , YES, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_table_constraints` (`table_schema`, `table_name`, `constraint_schema`, `constraint_name`, `constraint_type`) VALUES (?, ?, ?, ?, ?) | parameters: database_name_here, , database_name_here, PRIMARY, PRIMARY KEY</li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table '' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table '' doesn'...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, '', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1380): WP_SQLite_Driver->recreate_table_from_information_schema(false, '', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(896): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `` ...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `` ...')
+#7 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/functions.class.php(652): WP_SQLite_DB->query('ALTER TABLE `` ...')
+#8 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(2046): Functions->checkTable(NULL, Array)
+#9 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(121): pageFlip_plugin_base->check_db()
+#10 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.php(36): pageFlip_plugin_base->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-galle...')
+#13 /internal/eval.php(20): activate_plugin('wordpress-galle...')
+#14 {main}</pre>
+ for query ALTER TABLE `` ADD `id` BIGINT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-gallery-page-flip/pageFlip.php'), pageFlip_plugin_base->init, pageFlip_plugin_base->check_db, Functions->checkTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `` ADD `name` TEXT NOT NULL;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, , name, 1, , NO, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table '' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table '' doesn'...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, '', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1380): WP_SQLite_Driver->recreate_table_from_information_schema(false, '', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(896): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `` ...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `` ...')
+#7 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/functions.class.php(652): WP_SQLite_DB->query('ALTER TABLE `` ...')
+#8 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(2046): Functions->checkTable(NULL, Array)
+#9 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.class.php(121): pageFlip_plugin_base->check_db()
+#10 /wordpress/wp-content/plugins/wordpress-gallery-page-flip/pageFlip.php(36): pageFlip_plugin_base->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-galle...')
+#13 /internal/eval.php(20): activate_plugin('wordpress-galle...')
+#14 {main}</pre>
+ for query ALTER TABLE `` ADD `name` TEXT NOT NULL; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-gallery-page-flip/pageFlip.php'), pageFlip_plugin_base->init, pageFlip_plugin_base->check_db, Functions->checkTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 19:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `` ADD `date` BIGIN
