@@ -2,43 +2,99 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [28-May-2025 22:52:15 UTC] PHP Notice:  Undefined index: id in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 1046
-[28-May-2025 22:52:15 UTC] PHP Notice:  Undefined index: id in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 1055
-[28-May-2025 22:52:15 UTC] PHP Notice:  Undefined index: id in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 1046
-[28-May-2025 22:52:15 UTC] PHP Notice:  Undefined index: id in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 1055
-[28-May-2025 22:52:15 UTC] PHP Notice:  Undefined index: id in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 1046
-[28-May-2025 22:52:15 UTC] PHP Notice:  Undefined index: id in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 1055
-[28-May-2025 22:52:15 UTC] PHP Notice:  Undefined index: id in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 1046
-[28-May-2025 22:52:15 UTC] PHP Notice:  Undefined index: id in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 1055
-[28-May-2025 22:52:15 UTC] PHP Notice:  Undefined index: id in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 1046
-[28-May-2025 22:52:15 UTC] PHP Notice:  Undefined index: id in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 1055
-[28-May-2025 22:52:15 UTC] PHP Notice:  Undefined index: id in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 1046
-[28-May-2025 22:52:15 UTC] PHP Notice:  Undefined index: id in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 1055
-[28-May-2025 22:52:17 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/webinar-ignition/inc/class-webinar-ignition-helper.php on line 40
-[28-May-2025 22:52:29 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/webinar-ignition/inc/class-webinar-ignition-helper.php on line 40
-[28-May-2025 22:52:42 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/webinar-ignition/inc/class-webinar-ignition-helper.php on line 40
-[28-May-2025 22:54:26 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "url" in /wordpress/wp-content/plugins/wp-applie-widget/wp-applie-widget.php:10
+Error: [30-May-2025 14:52:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE name = 'wp_users'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND `name` = 'wp_users' ORDER BY table_name | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/wp-business-intelligence-lite/Database/WpConfig.php(62): wpdb->get_row('SHOW TABLE STAT...')
+#5 /wordpress/wp-content/plugins/wp-business-intelligence-lite/Database/PhinxConfig.php(55): Wpbi\Database\WpConfig->getEngine()
+#6 /wordpress/wp-content/plugins/wp-business-intelligence-lite/Database/PhinxConfig.php(22): Wpbi\Database\PhinxConfig->databaseConfig()
+#7 /wordpress/wp-content/plugins/wp-business-intelligence-lite/Database/PhinxMigrator.php(13): Wpbi\Database\PhinxConfig->getConfig()
+#8 /wordpress/wp-content/plugins/wp-business-intelligence-lite/Loader.php(26): Wpbi\Database\PhinxMigrator->ensureDatabaseMigrated()
+#9 /wordpress/wp-content/plugins/wp-business-intelligence-lite/index.php(22): Wpbi\Loader::setupDatabase()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-business-int...')
+#12 /internal/eval.php(20): activate_plugin('wp-business-int...')
+#13 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE name = 'wp_users' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-business-intelligence-lite/index.php'), Wpbi\Loader::setupDatabase, Wpbi\Database\PhinxMigrator->ensureDatabaseMigrated, Wpbi\Database\PhinxConfig->getConfig, Wpbi\Database\PhinxConfig->databaseConfig, Wpbi\Database\WpConfig->getEngine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:52:38 UTC] PHP Warning:  Attempt to read property "Engine" on null in /wordpress/wp-content/plugins/wp-business-intelligence-lite/Database/WpConfig.php on line 64
+[30-May-2025 14:52:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>select * from information_schema.columns where information_schema.columns.table_schema = 'database_name_here';</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: select * from _wp_sqlite_mysql_information_schema_columns where _wp_sqlite_mysql_information_schema_table_schema.`columns` = 'database_name_here' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: _wp_sqlite_mysql_information_schema_table_schema.columns
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select * from i...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select * from i...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select * from i...')
+#4 /wordpress/wp-content/plugins/wp-business-intelligence-lite/Database/PhinxMigrator.php(43): wpdb->get_results('select * from i...')
+#5 /wordpress/wp-content/plugins/wp-business-intelligence-lite/Database/PhinxMigrator.php(27): Wpbi\Database\PhinxMigrator->databaseInfo()
+#6 /wordpress/wp-content/plugins/wp-business-intelligence-lite/Loader.php(26): Wpbi\Database\PhinxMigrator->ensureDatabaseMigrated()
+#7 /wordpress/wp-content/plugins/wp-business-intelligence-lite/index.php(22): Wpbi\Loader::setupDatabase()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-business-int...')
+#10 /internal/eval.php(20): activate_plugin('wp-business-int...')
+#11 {main}</pre>
+ for query select * from information_schema.columns where information_schema.columns.table_schema = 'database_name_here'; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-business-intelligence-lite/index.php'), Wpbi\Loader::setupDatabase, Wpbi\Database\PhinxMigrator->ensureDatabaseMigrated, Wpbi\Database\PhinxMigrator->databaseInfo, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[30-May-2025 14:54:33 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wpp-ip-blocker/myp.php on line 181
+[30-May-2025 14:54:34 UTC] PHP Fatal error:  Uncaught TypeError: extract(): Argument #1 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/wpp-ip-blocker/myp.php:154
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-applie-widge...')
-#2 /internal/eval.php(20): activate_plugin('wp-applie-widge...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-applie-widget/wp-applie-widget.php on line 10
-[28-May-2025 22:54:33 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "url" in /wordpress/wp-content/plugins/wp-applie-widget/wp-applie-widget.php:10
+#0 /wordpress/wp-content/plugins/wpp-ip-blocker/myp.php(154): extract(false)
+#1 /wordpress/wp-content/plugins/wpp-ip-blocker/myp.php(181): check_ip(NULL)
+#2 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/wpp-ip-blocker/myp.php on line 154
+[30-May-2025 14:54:41 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wpp-ip-blocker/myp.php on line 181
+[30-May-2025 14:54:41 UTC] PHP Fatal error:  Uncaught TypeError: extract(): Argument #1 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/wpp-ip-blocker/myp.php:154
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-applie-widge...')
-#2 /internal/eval.php(20): activate_plugin('wp-applie-widge...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-applie-widget/wp-applie-widget.php on line 10
-[28-May-2025 22:54:41 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "url" in /wordpress/wp-content/plugins/wp-applie-widget/wp-applie-widget.php:10
+#0 /wordpress/wp-content/plugins/wpp-ip-blocker/myp.php(154): extract(false)
+#1 /wordpress/wp-content/plugins/wpp-ip-blocker/myp.php(181): check_ip(NULL)
+#2 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/wpp-ip-blocker/myp.php on line 154
+[30-May-2025 14:54:49 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wpp-ip-blocker/myp.php on line 181
+[30-May-2025 14:54:49 UTC] PHP Fatal error:  Uncaught TypeError: extract(): Argument #1 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/wpp-ip-blocker/myp.php:154
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-applie-widge...')
-#2 /internal/eval.php(20): activate_plugin('wp-applie-widge...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-applie-widget/wp-applie-widget.php on line 10
-[28-May-2025 22:56:10 UTC] PHP Fatal error:  Declaration of Social_Stats_Table::get_sortable_columns($is_sortable) must be compatible with WP_List_Table::get_sortable_columns() in /wordpress/wp-content/plugins/wpsocialstats/classes/social_stats_table.php on line 66
+#0 /wordpress/wp-content/plugins/wpp-ip-blocker/myp.php(154): extract(false)
+#1 /wordpress/wp-content/plugins/wpp-ip-blocker/myp.php(181): check_ip(NULL)
+#2 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/wpp-ip-blocker/myp.php on line 154
+[30-May-2025 14:54:57 UTC] PHP Fatal error:  Declaration of Social_Stats_Table::get_sortable_columns($is_sortable) must be compatible with WP_List_Table::get_sortable_columns() in /wordpress/wp-content/plugins/wpsocialstats/classes/social_stats_table.php on line 66
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
