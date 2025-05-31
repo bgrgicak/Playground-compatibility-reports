@@ -2,789 +2,375 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [30-May-2025 06:37:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [31-May-2025 07:26:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_zefw_custom_emails (
-	        id bigint(20) NOT NULL AUTO_INCREMENT,
-	        json JSON DEFAULT NULL,
-	        triggers JSON DEFAULT NULL,
-	        status varchar(32),
-	        css LONGTEXT,
-	        email_type VARCHAR(256),
-	        template BOOLEAN,
-	       	save_time bigint(20),
-			user_ID bigint(20),
-	        primary key (id)
-	    ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_events' AND INDEX_NAME = 'post_id'</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM _wp_sqlite_mysql_information_schema_statistics WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_tec_events' AND `INDEX_NAME` = 'post_id' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
+SQLSTATE[HY000]: General error: 1 no such function: DATABASE
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(24): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(33): zefw_create_custom_emails_table()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query CREATE TABLE wp_zefw_custom_emails (
-	        id bigint(20) NOT NULL AUTO_INCREMENT,
-	        json JSON DEFAULT NULL,
-	        triggers JSON DEFAULT NULL,
-	        status varchar(32),
-	        css LONGTEXT,
-	        email_type VARCHAR(256),
-	        template BOOLEAN,
-	       	save_time bigint(20),
-			user_ID bigint(20),
-	        primary key (id)
-	    ) DEFAULT CHARACTER SET utf8mb4 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, zefw_create_custom_emails_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:37:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(154): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Events.php(92): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index('post_id')
+#6 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Events->after_update(Array)
+#7 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
+#8 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_events' AND INDEX_NAME = 'post_id' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Events->after_update, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[31-May-2025 07:26:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT id FROM wp_zefw_custom_emails</p>
+<p>SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'event_id'</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT id FROM wp_zefw_custom_emails | (no parameters)</li>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM _wp_sqlite_mysql_information_schema_statistics WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_tec_occurrences' AND `INDEX_NAME` = 'event_id' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
+SQLSTATE[HY000]: General error: 1 no such function: DATABASE
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT id FROM ...')
-#2 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(45): wpdb->get_results('SELECT id FROM ...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query SELECT id FROM wp_zefw_custom_emails made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:37:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(154): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(109): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index('event_id', 'wp_tec_occurren...')
+#6 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
+#7 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
+#8 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'event_id' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[31-May-2025 07:26:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'admin_cancelled_order', '0', '1748587069', '0')</p>
+<p>SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'idx_wp_tec_occurrences_post_id_dates'</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, admin_cancelled_order, 0, 1748587069, 0</li>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM _wp_sqlite_mysql_information_schema_statistics WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_tec_occurrences' AND `INDEX_NAME` = 'idx_wp_tec_occurrences_post_id_dates' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
+SQLSTATE[HY000]: General error: 1 no such function: DATABASE
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'admin_cancelled_order', '0', '1748587069', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:37:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(154): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(109): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index('idx_wp_tec_occu...', 'wp_tec_occurren...')
+#6 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
+#7 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
+#8 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'idx_wp_tec_occurrences_post_id_dates' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[31-May-2025 07:26:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'admin_failed_order', '0', '1748587069', '0')</p>
+<p>SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'idx_wp_tec_occurrences_post_id_dates_utc'</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, admin_failed_order, 0, 1748587069, 0</li>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM _wp_sqlite_mysql_information_schema_statistics WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_tec_occurrences' AND `INDEX_NAME` = 'idx_wp_tec_occurrences_post_id_dates_utc' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
+SQLSTATE[HY000]: General error: 1 no such function: DATABASE
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'admin_failed_order', '0', '1748587069', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:37:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(154): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(109): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index('idx_wp_tec_occu...', 'wp_tec_occurren...')
+#6 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
+#7 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
+#8 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'idx_wp_tec_occurrences_post_id_dates_utc' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[31-May-2025 07:26:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'admin_new_order', '0', '1748587069', '0')</p>
+<p>SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'hash'</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, admin_new_order, 0, 1748587069, 0</li>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM _wp_sqlite_mysql_information_schema_statistics WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_tec_occurrences' AND `INDEX_NAME` = 'hash' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
+SQLSTATE[HY000]: General error: 1 no such function: DATABASE
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'admin_new_order', '0', '1748587069', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:37:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(154): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(133): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index('hash')
+#6 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
+#7 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
+#8 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'hash' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[31-May-2025 07:27:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'completed_order', '0', '1748587069', '0')</p>
+<p>ALTER TABLE `wp_tec_events`ADD UNIQUE( `post_id` )</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, completed_order, 0, 1748587069, 0</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_tec_events, wp_tec_events__(, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_tec_events__(&quot; ON &quot;wp_tec_events&quot; (  ) | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'completed_order', '0', '1748587069', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:37:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Events.php(93): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Events->after_update(Array)
+#3 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
+#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE `wp_tec_events`ADD UNIQUE( `post_id` ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Events->after_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[31-May-2025 07:27:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'customer_note', '0', '1748587069', '0')</p>
+<p>ALTER TABLE wp_tec_occurrences ADD INDEX (event_id)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, customer_note, 0, 1748587069, 0</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_tec_occurrences, wp_tec_occurrences__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_tec_occurrences__(&quot; ON &quot;wp_tec_occurrences&quot; () | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'customer_note', '0', '1748587069', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:37:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(113): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
+#3 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
+#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_tec_occurrences ADD INDEX (event_id) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[31-May-2025 07:27:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'invoice', '0', '1748587069', '0')</p>
+<p>ALTER TABLE `wp_tec_occurrences`ADD UNIQUE( `hash` )</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, invoice, 0, 1748587069, 0</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_tec_occurrences, wp_tec_occurrences__(, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_tec_occurrences__(&quot; ON &quot;wp_tec_occurrences&quot; (  ) | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'invoice', '0', '1748587069', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:37:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(134): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
+#3 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
+#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE `wp_tec_occurrences`ADD UNIQUE( `hash` ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[31-May-2025 07:27:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'new_account', '0', '1748587069', '0')</p>
+<p>ALTER TABLE `wp_tec_events`ADD UNIQUE( `post_id` )</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, new_account, 0, 1748587069, 0</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_tec_events, wp_tec_events__(, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_tec_events__(&quot; ON &quot;wp_tec_events&quot; (  ) | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'new_account', '0', '1748587069', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:37:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Events.php(93): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Events->after_update(Array)
+#3 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
+#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE `wp_tec_events`ADD UNIQUE( `post_id` ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Events->after_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[31-May-2025 07:27:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'order_on_hold', '0', '1748587069', '0')</p>
+<p>ALTER TABLE wp_tec_occurrences ADD INDEX (event_id)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, order_on_hold, 0, 1748587069, 0</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_tec_occurrences, wp_tec_occurrences__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_tec_occurrences__(&quot; ON &quot;wp_tec_occurrences&quot; () | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'order_on_hold', '0', '1748587069', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:37:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(113): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
+#3 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
+#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_tec_occurrences ADD INDEX (event_id) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[31-May-2025 07:27:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'processing_order', '0', '1748587069', '0')</p>
+<p>ALTER TABLE `wp_tec_occurrences`ADD UNIQUE( `hash` )</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, processing_order, 0, 1748587069, 0</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_tec_occurrences, wp_tec_occurrences__(, UNIQUE</li>
+<li>Executing: CREATE UNIQUE INDEX &quot;wp_tec_occurrences__(&quot; ON &quot;wp_tec_occurrences&quot; (  ) | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'processing_order', '0', '1748587069', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:37:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'refunded_order', '0', '1748587069', '0')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, refunded_order, 0, 1748587069, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'refunded_order', '0', '1748587069', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:37:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'reset_password', '0', '1748587069', '0')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, reset_password, 0, 1748587069, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'reset_password', '0', '1748587069', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_zefw_custom_emails (
-	        id bigint(20) NOT NULL AUTO_INCREMENT,
-	        json JSON DEFAULT NULL,
-	        triggers JSON DEFAULT NULL,
-	        status varchar(32),
-	        css LONGTEXT,
-	        email_type VARCHAR(256),
-	        template BOOLEAN,
-	       	save_time bigint(20),
-			user_ID bigint(20),
-	        primary key (id)
-	    ) DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(24): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(33): zefw_create_custom_emails_table()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query CREATE TABLE wp_zefw_custom_emails (
-	        id bigint(20) NOT NULL AUTO_INCREMENT,
-	        json JSON DEFAULT NULL,
-	        triggers JSON DEFAULT NULL,
-	        status varchar(32),
-	        css LONGTEXT,
-	        email_type VARCHAR(256),
-	        template BOOLEAN,
-	       	save_time bigint(20),
-			user_ID bigint(20),
-	        primary key (id)
-	    ) DEFAULT CHARACTER SET utf8mb4 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, zefw_create_custom_emails_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT id FROM wp_zefw_custom_emails</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT id FROM wp_zefw_custom_emails | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT id FROM ...')
-#2 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(45): wpdb->get_results('SELECT id FROM ...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query SELECT id FROM wp_zefw_custom_emails made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'admin_cancelled_order', '0', '1748587080', '0')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, admin_cancelled_order, 0, 1748587080, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'admin_cancelled_order', '0', '1748587080', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'admin_failed_order', '0', '1748587080', '0')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, admin_failed_order, 0, 1748587080, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'admin_failed_order', '0', '1748587080', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'admin_new_order', '0', '1748587080', '0')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, admin_new_order, 0, 1748587080, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'admin_new_order', '0', '1748587080', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'completed_order', '0', '1748587080', '0')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, completed_order, 0, 1748587080, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'completed_order', '0', '1748587080', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'customer_note', '0', '1748587080', '0')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, customer_note, 0, 1748587080, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'customer_note', '0', '1748587080', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'invoice', '0', '1748587080', '0')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, invoice, 0, 1748587080, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'invoice', '0', '1748587080', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'new_account', '0', '1748587080', '0')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, new_account, 0, 1748587080, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'new_account', '0', '1748587080', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'order_on_hold', '0', '1748587080', '0')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, order_on_hold, 0, 1748587080, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'order_on_hold', '0', '1748587080', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'processing_order', '0', '1748587080', '0')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, processing_order, 0, 1748587080, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'processing_order', '0', '1748587080', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'refunded_order', '0', '1748587080', '0')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, refunded_order, 0, 1748587080, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'refunded_order', '0', '1748587080', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'reset_password', '0', '1748587080', '0')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES (:param0 , NULL, :param1 , :param2 , :param3 , :param4 ) | parameters: disabled, reset_password, 0, 1748587080, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_zefw_custom_emails.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_zefw_custom_...', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/zesty-emails-custom-template-designer-for-woocommerce/init/tables.php(55): wpdb->insert('wp_zefw_custom_...', Array)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): zefw_update_db_tracking_table_check('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_zefw_custom_emails` (`status`, `css`, `email_type`, `template`, `save_time`, `user_ID`) VALUES ('disabled', NULL, 'reset_password', '0', '1748587080', '0') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zefw_update_db_tracking_table_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 06:40:13 UTC] PHP Warning:  Undefined variable $zsc_db_version in /wordpress/wp-content/plugins/zielke-specialized-catalog/install_zsc.php on line 174
-[30-May-2025 06:40:25 UTC] PHP Warning:  Undefined variable $zsc_db_version in /wordpress/wp-content/plugins/zielke-specialized-catalog/install_zsc.php on line 174
-[30-May-2025 06:40:36 UTC] PHP Warning:  Undefined variable $zsc_db_version in /wordpress/wp-content/plugins/zielke-specialized-catalog/install_zsc.php on line 174
-[30-May-2025 06:41:34 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/team-member-group-for-visual-composer/team-member-group.php on line 263
-[30-May-2025 06:41:35 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/team-member-group-for-visual-composer/team-member-group.php on line 263
-[30-May-2025 06:41:44 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/team-member-group-for-visual-composer/team-member-group.php on line 263
-[30-May-2025 06:41:44 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/team-member-group-for-visual-composer/team-member-group.php on line 263
-[30-May-2025 06:41:52 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/team-member-group-for-visual-composer/team-member-group.php on line 263
-[30-May-2025 06:41:53 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/team-member-group-for-visual-composer/team-member-group.php on line 263
-[30-May-2025 06:42:03 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[30-May-2025 06:42:04 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[30-May-2025 06:42:12 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[30-May-2025 06:42:13 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[30-May-2025 06:42:20 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[30-May-2025 06:42:21 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+#1 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(134): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
+#3 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
+#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE `wp_tec_occurrences`ADD UNIQUE( `hash` ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[31-May-2025 07:30:44 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[31-May-2025 07:30:44 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[31-May-2025 07:30:53 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[31-May-2025 07:30:53 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[31-May-2025 07:31:02 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[31-May-2025 07:31:02 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
