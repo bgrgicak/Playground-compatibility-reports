@@ -2,11 +2,18 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [29-May-2025 18:56:51 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>subscribe-to-comments</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[29-May-2025 18:56:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [31-May-2025 10:53:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>DESC wp_comments</p>
+<p>
+CREATE TABLE wp_rp_sessions (
+  session_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  session_key char(32) NOT NULL,
+  session_value longtext NOT NULL,
+  session_expiry BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY  (session_key),
+  UNIQUE KEY session_id (session_id)
+) </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -14,25 +21,40 @@ Error: [29-May-2025 18:56:51 UTC] PHP Notice:  Function _load_textdomain_just_in
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_comment...')
-#2 /wordpress/wp-content/plugins/subscribe-to-comments/subscribe-to-comments.php(932): wpdb->get_col('DESC wp_comment...', 0)
-#3 /wordpress/wp-content/plugins/subscribe-to-comments/subscribe-to-comments.php(135): CWS_STC->db_upgrade_check()
-#4 /wordpress/wp-content/plugins/subscribe-to-comments/subscribe-to-comments.php(27): CWS_STC->__construct()
-#5 /wordpress/wp-content/plugins/subscribe-to-comments/subscribe-to-comments.php(1630): _stc()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('subscribe-to-co...')
-#8 /internal/eval.php(20): activate_plugin('subscribe-to-co...')
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('\nCREATE TABLE w...')
+#2 /wordpress/wp-content/plugins/restaurantpress/includes/class-rp-install.php(321): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/restaurantpress/includes/class-rp-install.php(137): RP_Install::create_tables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): RP_Install::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_restau...', false)
+#8 /internal/eval.php(20): activate_plugin('restaurantpress...')
 #9 {main}</pre>
- for query DESC wp_comments made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/subscribe-to-comments/subscribe-to-comments.php'), _stc, CWS_STC->__construct, CWS_STC->db_upgrade_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[29-May-2025 18:57:00 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>subscribe-to-comments</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[29-May-2025 18:57:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query 
+CREATE TABLE wp_rp_sessions (
+  session_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  session_key char(32) NOT NULL,
+  session_value longtext NOT NULL,
+  session_expiry BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY  (session_key),
+  UNIQUE KEY session_id (session_id)
+)  made by activate_plugin, do_action('activate_restaurantpress/restaurantpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, RP_Install::install, RP_Install::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[31-May-2025 10:54:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>DESC wp_comments</p>
+<p>
+CREATE TABLE wp_rp_sessions (
+  session_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  session_key char(32) NOT NULL,
+  session_value longtext NOT NULL,
+  session_expiry BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY  (session_key),
+  UNIQUE KEY session_id (session_id)
+) </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -40,43 +62,35 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_comment...')
-#2 /wordpress/wp-content/plugins/subscribe-to-comments/subscribe-to-comments.php(932): wpdb->get_col('DESC wp_comment...', 0)
-#3 /wordpress/wp-content/plugins/subscribe-to-comments/subscribe-to-comments.php(135): CWS_STC->db_upgrade_check()
-#4 /wordpress/wp-content/plugins/subscribe-to-comments/subscribe-to-comments.php(27): CWS_STC->__construct()
-#5 /wordpress/wp-content/plugins/subscribe-to-comments/subscribe-to-comments.php(1630): _stc()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('subscribe-to-co...')
-#8 /internal/eval.php(20): activate_plugin('subscribe-to-co...')
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('\nCREATE TABLE w...')
+#2 /wordpress/wp-content/plugins/restaurantpress/includes/class-rp-install.php(321): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/restaurantpress/includes/class-rp-install.php(137): RP_Install::create_tables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): RP_Install::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_restau...', false)
+#8 /internal/eval.php(20): activate_plugin('restaurantpress...')
 #9 {main}</pre>
- for query DESC wp_comments made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/subscribe-to-comments/subscribe-to-comments.php'), _stc, CWS_STC->__construct, CWS_STC->db_upgrade_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[29-May-2025 18:57:09 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>subscribe-to-comments</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[29-May-2025 18:58:41 UTC] PHP Deprecated:  Required parameter $metrics follows optional parameter $dimensions in /wordpress/wp-content/plugins/reporteur/gapi.class.php on line 113
-[29-May-2025 18:58:41 UTC] PHP Fatal error:  A function with return type must return a value in /wordpress/wp-content/plugins/reporteur/gapi.class.php on line 691
-[29-May-2025 18:58:48 UTC] PHP Deprecated:  Required parameter $metrics follows optional parameter $dimensions in /wordpress/wp-content/plugins/reporteur/gapi.class.php on line 113
-[29-May-2025 18:58:48 UTC] PHP Fatal error:  A function with return type must return a value in /wordpress/wp-content/plugins/reporteur/gapi.class.php on line 691
-[29-May-2025 18:58:55 UTC] PHP Deprecated:  Required parameter $metrics follows optional parameter $dimensions in /wordpress/wp-content/plugins/reporteur/gapi.class.php on line 113
-[29-May-2025 18:58:55 UTC] PHP Fatal error:  A function with return type must return a value in /wordpress/wp-content/plugins/reporteur/gapi.class.php on line 691
-[29-May-2025 19:00:30 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
-[29-May-2025 19:00:30 UTC] PHP Deprecated:  Required parameter $url follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
-[29-May-2025 19:00:31 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
-[29-May-2025 19:00:31 UTC] PHP Deprecated:  Required parameter $url follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
-[29-May-2025 19:00:39 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
-[29-May-2025 19:00:39 UTC] PHP Deprecated:  Required parameter $url follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
-[29-May-2025 19:00:40 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
-[29-May-2025 19:00:40 UTC] PHP Deprecated:  Required parameter $url follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
-[29-May-2025 19:00:48 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
-[29-May-2025 19:00:48 UTC] PHP Deprecated:  Required parameter $url follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
-[29-May-2025 19:00:49 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
-[29-May-2025 19:00:49 UTC] PHP Deprecated:  Required parameter $url follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
-[29-May-2025 19:02:14 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/rocket-async-css/vendor/level-2/dice/Dice.php on line 73
-[29-May-2025 19:02:14 UTC] PHP Fatal error:  Declaration of Rocket\Async\CSS\DOMElementTrait::remove() must be compatible with DOMElement::remove(): void in /wordpress/wp-content/plugins/rocket-async-css/lib/Rocket/Async/CSS/DOMElement.php on line 29
-[29-May-2025 19:02:22 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/rocket-async-css/vendor/level-2/dice/Dice.php on line 73
-[29-May-2025 19:02:22 UTC] PHP Fatal error:  Declaration of Rocket\Async\CSS\DOMElementTrait::remove() must be compatible with DOMElement::remove(): void in /wordpress/wp-content/plugins/rocket-async-css/lib/Rocket/Async/CSS/DOMElement.php on line 29
+ for query 
+CREATE TABLE wp_rp_sessions (
+  session_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  session_key char(32) NOT NULL,
+  session_value longtext NOT NULL,
+  session_expiry BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY  (session_key),
+  UNIQUE KEY session_id (session_id)
+)  made by activate_plugin, do_action('activate_restaurantpress/restaurantpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, RP_Install::install, RP_Install::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[31-May-2025 10:54:43 UTC] PHP Warning:  Undefined array key "integrations" in /wordpress/wp-content/plugins/reviewpack-reviews/src/Admin/Settings.php on line 224
+[31-May-2025 10:54:52 UTC] PHP Warning:  Undefined array key "integrations" in /wordpress/wp-content/plugins/reviewpack-reviews/src/Admin/Settings.php on line 224
+[31-May-2025 10:55:00 UTC] PHP Warning:  Undefined array key "integrations" in /wordpress/wp-content/plugins/reviewpack-reviews/src/Admin/Settings.php on line 224
+[31-May-2025 10:57:44 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/rocket-async-css/vendor/level-2/dice/Dice.php on line 73
+[31-May-2025 10:57:44 UTC] PHP Fatal error:  Declaration of Rocket\Async\CSS\DOMElementTrait::remove() must be compatible with DOMElement::remove(): void in /wordpress/wp-content/plugins/rocket-async-css/lib/Rocket/Async/CSS/DOMElement.php on line 29
+[31-May-2025 10:57:51 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/rocket-async-css/vendor/level-2/dice/Dice.php on line 73
+[31-May-2025 10:57:51 UTC] PHP Fatal error:  Declaration of Rocket\Async\CSS\DOMElementTrait::remove() must be compatible with DOMElement::remove(): void in /wordpress/wp-content/plugins/rocket-async-css/lib/Rocket/Async/CSS/DOMElement.php on line 29
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
