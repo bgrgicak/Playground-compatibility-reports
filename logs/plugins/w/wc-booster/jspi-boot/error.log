@@ -2,43 +2,20 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [30-May-2025 18:37:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [01-Jun-2025 10:28:54 UTC] PHP Warning:  Undefined array key "id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 1055
+[01-Jun-2025 10:28:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 1055
+[01-Jun-2025 10:29:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-CREATE TABLE wp_pmxi_imports (
-	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-	parent_import_id BIGINT(20) NOT NULL DEFAULT 0,
-	name TEXT,
-	friendly_name VARCHAR(255) NOT NULL DEFAULT '',
-	type VARCHAR(32) NOT NULL DEFAULT '',
-	feed_type ENUM('xml','csv','zip','gz','') NOT NULL DEFAULT '',	
-	path TEXT,	
-	xpath TEXT,		
-	options LONGTEXT,		
-	registered_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',				
-  	root_element VARCHAR(255) DEFAULT '',
-  	processing BOOL NOT NULL DEFAULT 0,
-  	executing BOOL NOT NULL DEFAULT 0,
-  	triggered BOOL NOT NULL DEFAULT 0,
-  	queue_chunk_number BIGINT(20) NOT NULL DEFAULT 0,  	
-  	first_import TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,	
-  	count BIGINT(20) NOT NULL DEFAULT 0,
-  	imported BIGINT(20) NOT NULL DEFAULT 0,
-  	created BIGINT(20) NOT NULL DEFAULT 0,
-  	updated BIGINT(20) NOT NULL DEFAULT 0,
-  	skipped BIGINT(20) NOT NULL DEFAULT 0,
-  	deleted BIGINT(20) NOT NULL DEFAULT 0,
-  	changed_missing BIGINT(20) NOT NULL DEFAULT 0,
-  	canceled BOOL NOT NULL DEFAULT 0,  	
-  	canceled_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-  	failed BOOL NOT NULL DEFAULT 0,  	
-  	failed_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-  	settings_update_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-  	last_activity DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',			
-  	iteration BIGINT(20) NOT NULL DEFAULT 0,
-	PRIMARY KEY  (id)
-) DEFAULT CHARACTER SET utf8mb4</p>
+<p>CREATE TABLE wp_disclosure_userlabels (
+				ID bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				cap_title varchar(64) NOT NULL,
+				capability varchar(128) NOT NULL,
+				blog_id bigint(20) NOT NULL,
+				PRIMARY KEY id (`id`),
+				UNIQUE KEY capability (`capability`),
+				KEY blog_id (`blog_id`)
+				)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -46,66 +23,41 @@ CREATE TABLE wp_pmxi_imports (
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: processing.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('\nCREATE TABLE w...')
-#2 /wordpress/wp-content/plugins/wp-all-import/plugin.php(882): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): PMXI_Plugin->activation(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-all...', false)
-#7 /internal/eval.php(20): activate_plugin('wp-all-import/p...')
-#8 {main}</pre>
- for query 
-CREATE TABLE wp_pmxi_imports (
-	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-	parent_import_id BIGINT(20) NOT NULL DEFAULT 0,
-	name TEXT,
-	friendly_name VARCHAR(255) NOT NULL DEFAULT '',
-	type VARCHAR(32) NOT NULL DEFAULT '',
-	feed_type ENUM('xml','csv','zip','gz','') NOT NULL DEFAULT '',	
-	path TEXT,	
-	xpath TEXT,		
-	options LONGTEXT,		
-	registered_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',				
-  	root_element VARCHAR(255) DEFAULT '',
-  	processing BOOL NOT NULL DEFAULT 0,
-  	executing BOOL NOT NULL DEFAULT 0,
-  	triggered BOOL NOT NULL DEFAULT 0,
-  	queue_chunk_number BIGINT(20) NOT NULL DEFAULT 0,  	
-  	first_import TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,	
-  	count BIGINT(20) NOT NULL DEFAULT 0,
-  	imported BIGINT(20) NOT NULL DEFAULT 0,
-  	created BIGINT(20) NOT NULL DEFAULT 0,
-  	updated BIGINT(20) NOT NULL DEFAULT 0,
-  	skipped BIGINT(20) NOT NULL DEFAULT 0,
-  	deleted BIGINT(20) NOT NULL DEFAULT 0,
-  	changed_missing BIGINT(20) NOT NULL DEFAULT 0,
-  	canceled BOOL NOT NULL DEFAULT 0,  	
-  	canceled_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-  	failed BOOL NOT NULL DEFAULT 0,  	
-  	failed_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-  	settings_update_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-  	last_activity DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',			
-  	iteration BIGINT(20) NOT NULL DEFAULT 0,
-	PRIMARY KEY  (id)
-) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wp-all-import/plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, PMXI_Plugin->activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 18:37:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wp-access-areas/inc/class-wpaa_install.php(196): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/wp-access-areas/inc/class-wpaa_install.php(30): WPAA_Install::_install_capabilities_table()
+#4 /wordpress/wp-content/plugins/wp-access-areas/wp-access-areas.php(70): WPAA_Install::activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): accessareas_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-acc...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-access-areas...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_disclosure_userlabels (
+				ID bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				cap_title varchar(64) NOT NULL,
+				capability varchar(128) NOT NULL,
+				blog_id bigint(20) NOT NULL,
+				PRIMARY KEY id (`id`),
+				UNIQUE KEY capability (`capability`),
+				KEY blog_id (`blog_id`)
+				) made by activate_plugin, do_action('activate_wp-access-areas/wp-access-areas.php'), WP_Hook->do_action, WP_Hook->apply_filters, accessareas_activate, WPAA_Install::activate, WPAA_Install::_install_capabilities_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-Jun-2025 10:29:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-CREATE TABLE wp_pmxi_posts (
-	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-	post_id BIGINT(20) UNSIGNED NOT NULL,
-	import_id BIGINT(20) UNSIGNED NOT NULL,
-	unique_key TEXT,
-	product_key TEXT,
-	iteration BIGINT(20) NOT NULL DEFAULT 0,
-	specified BOOL NOT NULL DEFAULT 0,
-	PRIMARY KEY  (id)  		
-) DEFAULT CHARACTER SET utf8mb4</p>
+<p>CREATE TABLE wp_disclosure_userlabels (
+				ID bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				cap_title varchar(64) NOT NULL,
+				capability varchar(128) NOT NULL,
+				blog_id bigint(20) NOT NULL,
+				PRIMARY KEY id (`id`),
+				UNIQUE KEY capability (`capability`),
+				KEY blog_id (`blog_id`)
+				)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -113,264 +65,125 @@ CREATE TABLE wp_pmxi_posts (
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: specified.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('\nCREATE TABLE w...')
-#2 /wordpress/wp-content/plugins/wp-all-import/plugin.php(882): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): PMXI_Plugin->activation(false)
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wp-access-areas/inc/class-wpaa_install.php(196): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/wp-access-areas/inc/class-wpaa_install.php(30): WPAA_Install::_install_capabilities_table()
+#4 /wordpress/wp-content/plugins/wp-access-areas/wp-access-areas.php(70): WPAA_Install::activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): accessareas_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-acc...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-access-areas...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_disclosure_userlabels (
+				ID bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				cap_title varchar(64) NOT NULL,
+				capability varchar(128) NOT NULL,
+				blog_id bigint(20) NOT NULL,
+				PRIMARY KEY id (`id`),
+				UNIQUE KEY capability (`capability`),
+				KEY blog_id (`blog_id`)
+				) made by activate_plugin, do_action('activate_wp-access-areas/wp-access-areas.php'), WP_Hook->do_action, WP_Hook->apply_filters, accessareas_activate, WPAA_Install::activate, WPAA_Install::_install_capabilities_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-Jun-2025 10:32:00 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "SHOWCASEEXT_URL" in /wordpress/wp-content/plugins/wp-theme-showcase-ext-and-i18n/theme-showcase-ext.php:51
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-theme-showcase-ext-and-i18n/theme-showcase-ext.php(61): showcaseext_constants_initialization()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-theme-showca...')
+#3 /internal/eval.php(20): activate_plugin('wp-theme-showca...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-theme-showcase-ext-and-i18n/theme-showcase-ext.php on line 51
+[01-Jun-2025 10:32:07 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "SHOWCASEEXT_URL" in /wordpress/wp-content/plugins/wp-theme-showcase-ext-and-i18n/theme-showcase-ext.php:51
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-theme-showcase-ext-and-i18n/theme-showcase-ext.php(61): showcaseext_constants_initialization()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-theme-showca...')
+#3 /internal/eval.php(20): activate_plugin('wp-theme-showca...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-theme-showcase-ext-and-i18n/theme-showcase-ext.php on line 51
+[01-Jun-2025 10:32:15 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "SHOWCASEEXT_URL" in /wordpress/wp-content/plugins/wp-theme-showcase-ext-and-i18n/theme-showcase-ext.php:51
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-theme-showcase-ext-and-i18n/theme-showcase-ext.php(61): showcaseext_constants_initialization()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-theme-showca...')
+#3 /internal/eval.php(20): activate_plugin('wp-theme-showca...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-theme-showcase-ext-and-i18n/theme-showcase-ext.php on line 51
+[01-Jun-2025 10:32:53 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$url in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 30
+[01-Jun-2025 10:32:53 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$domain in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 31
+[01-Jun-2025 10:32:53 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$id in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 32
+[01-Jun-2025 10:32:54 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$url in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 30
+[01-Jun-2025 10:32:54 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$domain in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 31
+[01-Jun-2025 10:32:54 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$id in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 32
+[01-Jun-2025 10:33:02 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$url in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 30
+[01-Jun-2025 10:33:02 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$domain in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 31
+[01-Jun-2025 10:33:02 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$id in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 32
+[01-Jun-2025 10:33:03 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$url in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 30
+[01-Jun-2025 10:33:03 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$domain in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 31
+[01-Jun-2025 10:33:03 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$id in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 32
+[01-Jun-2025 10:33:09 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$url in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 30
+[01-Jun-2025 10:33:09 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$domain in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 31
+[01-Jun-2025 10:33:09 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$id in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 32
+[01-Jun-2025 10:33:10 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$url in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 30
+[01-Jun-2025 10:33:10 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$domain in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 31
+[01-Jun-2025 10:33:10 UTC] PHP Warning:  Undefined property: eebme_Short_URL::$id in /wordpress/wp-content/plugins/wp-url-shorten/inc/class.eebme_Short_URL.php on line 32
+[01-Jun-2025 10:33:41 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in Language_Switcher_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[01-Jun-2025 10:33:49 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in Language_Switcher_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[01-Jun-2025 10:33:57 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in Language_Switcher_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[01-Jun-2025 10:34:54 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[01-Jun-2025 10:34:54 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[01-Jun-2025 10:35:02 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[01-Jun-2025 10:35:02 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[01-Jun-2025 10:35:10 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[01-Jun-2025 10:35:10 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[01-Jun-2025 10:35:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_filesystem_method() in /wordpress/wp-content/plugins/wp-appkit/lib/themes/themes.php:296
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-appkit/lib/themes/themes.php(165): WpakThemes::create_themes_zip()
+#1 /wordpress/wp-content/plugins/wp-appkit/lib/themes/themes.php(343): WpakThemes::copy_default_themes()
+#2 /wordpress/wp-content/plugins/wp-appkit/wp-appkit.php(72): WpakThemes::install_default_themes()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): WpAppKit::on_activation(false)
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-all...', false)
-#7 /internal/eval.php(20): activate_plugin('wp-all-import/p...')
-#8 {main}</pre>
- for query 
-CREATE TABLE wp_pmxi_posts (
-	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-	post_id BIGINT(20) UNSIGNED NOT NULL,
-	import_id BIGINT(20) UNSIGNED NOT NULL,
-	unique_key TEXT,
-	product_key TEXT,
-	iteration BIGINT(20) NOT NULL DEFAULT 0,
-	specified BOOL NOT NULL DEFAULT 0,
-	PRIMARY KEY  (id)  		
-) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wp-all-import/plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, PMXI_Plugin->activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 18:37:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT id FROM wp_pmxi_imports</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT id FROM wp_pmxi_imports | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT id FROM ...')
-#2 /wordpress/wp-content/plugins/wp-all-import/plugin.php(891): wpdb->get_results('SELECT id FROM ...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): PMXI_Plugin->activation(false)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-app...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-appkit/wp-ap...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/wp-appkit/lib/themes/themes.php on line 296
+[01-Jun-2025 10:35:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_filesystem_method() in /wordpress/wp-content/plugins/wp-appkit/lib/themes/themes.php:296
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-appkit/lib/themes/themes.php(165): WpakThemes::create_themes_zip()
+#1 /wordpress/wp-content/plugins/wp-appkit/lib/themes/themes.php(343): WpakThemes::copy_default_themes()
+#2 /wordpress/wp-content/plugins/wp-appkit/wp-appkit.php(72): WpakThemes::install_default_themes()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): WpAppKit::on_activation(false)
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-all...', false)
-#7 /internal/eval.php(20): activate_plugin('wp-all-import/p...')
-#8 {main}</pre>
- for query SELECT id FROM wp_pmxi_imports made by activate_plugin, do_action('activate_wp-all-import/plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, PMXI_Plugin->activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 18:37:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-CREATE TABLE wp_pmxi_imports (
-	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-	parent_import_id BIGINT(20) NOT NULL DEFAULT 0,
-	name TEXT,
-	friendly_name VARCHAR(255) NOT NULL DEFAULT '',
-	type VARCHAR(32) NOT NULL DEFAULT '',
-	feed_type ENUM('xml','csv','zip','gz','') NOT NULL DEFAULT '',	
-	path TEXT,	
-	xpath TEXT,		
-	options LONGTEXT,		
-	registered_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',				
-  	root_element VARCHAR(255) DEFAULT '',
-  	processing BOOL NOT NULL DEFAULT 0,
-  	executing BOOL NOT NULL DEFAULT 0,
-  	triggered BOOL NOT NULL DEFAULT 0,
-  	queue_chunk_number BIGINT(20) NOT NULL DEFAULT 0,  	
-  	first_import TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,	
-  	count BIGINT(20) NOT NULL DEFAULT 0,
-  	imported BIGINT(20) NOT NULL DEFAULT 0,
-  	created BIGINT(20) NOT NULL DEFAULT 0,
-  	updated BIGINT(20) NOT NULL DEFAULT 0,
-  	skipped BIGINT(20) NOT NULL DEFAULT 0,
-  	deleted BIGINT(20) NOT NULL DEFAULT 0,
-  	changed_missing BIGINT(20) NOT NULL DEFAULT 0,
-  	canceled BOOL NOT NULL DEFAULT 0,  	
-  	canceled_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-  	failed BOOL NOT NULL DEFAULT 0,  	
-  	failed_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-  	settings_update_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-  	last_activity DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',			
-  	iteration BIGINT(20) NOT NULL DEFAULT 0,
-	PRIMARY KEY  (id)
-) DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: processing.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('\nCREATE TABLE w...')
-#2 /wordpress/wp-content/plugins/wp-all-import/plugin.php(882): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): PMXI_Plugin->activation(false)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-app...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-appkit/wp-ap...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/wp-appkit/lib/themes/themes.php on line 296
+[01-Jun-2025 10:35:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_filesystem_method() in /wordpress/wp-content/plugins/wp-appkit/lib/themes/themes.php:296
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-appkit/lib/themes/themes.php(165): WpakThemes::create_themes_zip()
+#1 /wordpress/wp-content/plugins/wp-appkit/lib/themes/themes.php(343): WpakThemes::copy_default_themes()
+#2 /wordpress/wp-content/plugins/wp-appkit/wp-appkit.php(72): WpakThemes::install_default_themes()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): WpAppKit::on_activation(false)
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-all...', false)
-#7 /internal/eval.php(20): activate_plugin('wp-all-import/p...')
-#8 {main}</pre>
- for query 
-CREATE TABLE wp_pmxi_imports (
-	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-	parent_import_id BIGINT(20) NOT NULL DEFAULT 0,
-	name TEXT,
-	friendly_name VARCHAR(255) NOT NULL DEFAULT '',
-	type VARCHAR(32) NOT NULL DEFAULT '',
-	feed_type ENUM('xml','csv','zip','gz','') NOT NULL DEFAULT '',	
-	path TEXT,	
-	xpath TEXT,		
-	options LONGTEXT,		
-	registered_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',				
-  	root_element VARCHAR(255) DEFAULT '',
-  	processing BOOL NOT NULL DEFAULT 0,
-  	executing BOOL NOT NULL DEFAULT 0,
-  	triggered BOOL NOT NULL DEFAULT 0,
-  	queue_chunk_number BIGINT(20) NOT NULL DEFAULT 0,  	
-  	first_import TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,	
-  	count BIGINT(20) NOT NULL DEFAULT 0,
-  	imported BIGINT(20) NOT NULL DEFAULT 0,
-  	created BIGINT(20) NOT NULL DEFAULT 0,
-  	updated BIGINT(20) NOT NULL DEFAULT 0,
-  	skipped BIGINT(20) NOT NULL DEFAULT 0,
-  	deleted BIGINT(20) NOT NULL DEFAULT 0,
-  	changed_missing BIGINT(20) NOT NULL DEFAULT 0,
-  	canceled BOOL NOT NULL DEFAULT 0,  	
-  	canceled_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-  	failed BOOL NOT NULL DEFAULT 0,  	
-  	failed_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-  	settings_update_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-  	last_activity DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',			
-  	iteration BIGINT(20) NOT NULL DEFAULT 0,
-	PRIMARY KEY  (id)
-) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wp-all-import/plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, PMXI_Plugin->activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 18:37:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-CREATE TABLE wp_pmxi_posts (
-	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-	post_id BIGINT(20) UNSIGNED NOT NULL,
-	import_id BIGINT(20) UNSIGNED NOT NULL,
-	unique_key TEXT,
-	product_key TEXT,
-	iteration BIGINT(20) NOT NULL DEFAULT 0,
-	specified BOOL NOT NULL DEFAULT 0,
-	PRIMARY KEY  (id)  		
-) DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: specified.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('\nCREATE TABLE w...')
-#2 /wordpress/wp-content/plugins/wp-all-import/plugin.php(882): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): PMXI_Plugin->activation(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-all...', false)
-#7 /internal/eval.php(20): activate_plugin('wp-all-import/p...')
-#8 {main}</pre>
- for query 
-CREATE TABLE wp_pmxi_posts (
-	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-	post_id BIGINT(20) UNSIGNED NOT NULL,
-	import_id BIGINT(20) UNSIGNED NOT NULL,
-	unique_key TEXT,
-	product_key TEXT,
-	iteration BIGINT(20) NOT NULL DEFAULT 0,
-	specified BOOL NOT NULL DEFAULT 0,
-	PRIMARY KEY  (id)  		
-) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wp-all-import/plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, PMXI_Plugin->activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 18:37:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT id FROM wp_pmxi_imports</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT id FROM wp_pmxi_imports | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT id FROM ...')
-#2 /wordpress/wp-content/plugins/wp-all-import/plugin.php(891): wpdb->get_results('SELECT id FROM ...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): PMXI_Plugin->activation(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-all...', false)
-#7 /internal/eval.php(20): activate_plugin('wp-all-import/p...')
-#8 {main}</pre>
- for query SELECT id FROM wp_pmxi_imports made by activate_plugin, do_action('activate_wp-all-import/plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, PMXI_Plugin->activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-May-2025 18:38:26 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/includes/api/api-value.php on line 270
-[30-May-2025 18:38:26 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/includes/api/api-value.php on line 398
-[30-May-2025 18:38:26 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/includes/api/api-value.php on line 483
-[30-May-2025 18:38:26 UTC] PHP Deprecated:  Required parameter $data follows optional parameter $key in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/includes/cache.php on line 399
-[30-May-2025 18:38:26 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 99
-[30-May-2025 18:38:26 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-repeater.php on line 700
-[30-May-2025 18:38:26 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-repeater.php on line 700
-[30-May-2025 18:38:26 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-repeater.php on line 766
-[30-May-2025 18:38:26 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-repeater.php on line 766
-[30-May-2025 18:38:26 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $name in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-flexible-content.php on line 1044
-[30-May-2025 18:38:26 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-flexible-content.php on line 1080
-[30-May-2025 18:38:26 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-flexible-content.php on line 1080
-[30-May-2025 18:38:26 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-flexible-content.php on line 1132
-[30-May-2025 18:38:26 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-flexible-content.php on line 1132
-[30-May-2025 18:38:26 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $id in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-gallery.php on line 283
-[30-May-2025 18:38:36 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/includes/api/api-value.php on line 270
-[30-May-2025 18:38:36 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/includes/api/api-value.php on line 398
-[30-May-2025 18:38:36 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/includes/api/api-value.php on line 483
-[30-May-2025 18:38:36 UTC] PHP Deprecated:  Required parameter $data follows optional parameter $key in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/includes/cache.php on line 399
-[30-May-2025 18:38:36 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 99
-[30-May-2025 18:38:36 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-repeater.php on line 700
-[30-May-2025 18:38:36 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-repeater.php on line 700
-[30-May-2025 18:38:36 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-repeater.php on line 766
-[30-May-2025 18:38:36 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-repeater.php on line 766
-[30-May-2025 18:38:36 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $name in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-flexible-content.php on line 1044
-[30-May-2025 18:38:36 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-flexible-content.php on line 1080
-[30-May-2025 18:38:36 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-flexible-content.php on line 1080
-[30-May-2025 18:38:36 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-flexible-content.php on line 1132
-[30-May-2025 18:38:36 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-flexible-content.php on line 1132
-[30-May-2025 18:38:36 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $id in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-gallery.php on line 283
-[30-May-2025 18:38:46 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/includes/api/api-value.php on line 270
-[30-May-2025 18:38:46 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/includes/api/api-value.php on line 398
-[30-May-2025 18:38:46 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/includes/api/api-value.php on line 483
-[30-May-2025 18:38:46 UTC] PHP Deprecated:  Required parameter $data follows optional parameter $key in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/includes/cache.php on line 399
-[30-May-2025 18:38:46 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 99
-[30-May-2025 18:38:46 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-repeater.php on line 700
-[30-May-2025 18:38:46 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-repeater.php on line 700
-[30-May-2025 18:38:46 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-repeater.php on line 766
-[30-May-2025 18:38:46 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-repeater.php on line 766
-[30-May-2025 18:38:46 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $name in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-flexible-content.php on line 1044
-[30-May-2025 18:38:46 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-flexible-content.php on line 1080
-[30-May-2025 18:38:46 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-flexible-content.php on line 1080
-[30-May-2025 18:38:46 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-flexible-content.php on line 1132
-[30-May-2025 18:38:46 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $i in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-flexible-content.php on line 1132
-[30-May-2025 18:38:46 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $id in /wordpress/wp-content/plugins/wp-church-center/advanced-custom-fields/pro/fields/class-acf-field-gallery.php on line 283
-[30-May-2025 18:40:53 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-masonry-layout/plugin_interface.php on line 206
-[30-May-2025 18:41:01 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-masonry-layout/plugin_interface.php on line 206
-[30-May-2025 18:41:10 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-masonry-layout/plugin_interface.php on line 206
-[30-May-2025 18:42:39 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>product-selector-ajax-script</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[30-May-2025 18:42:48 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>product-selector-ajax-script</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[30-May-2025 18:42:56 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>product-selector-ajax-script</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-app...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-appkit/wp-ap...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/wp-appkit/lib/themes/themes.php on line 296
+[01-Jun-2025 10:36:01 UTC] PHP Deprecated:  Required parameter $cachePath follows optional parameter $viewPaths in /wordpress/wp-content/plugins/wp-blade-engine/vendor/philo/laravel-blade/src/Blade.php on line 45
+[01-Jun-2025 10:36:02 UTC] PHP Deprecated:  Required parameter $cachePath follows optional parameter $viewPaths in /wordpress/wp-content/plugins/wp-blade-engine/vendor/philo/laravel-blade/src/Blade.php on line 45
+[01-Jun-2025 10:36:09 UTC] PHP Deprecated:  Required parameter $cachePath follows optional parameter $viewPaths in /wordpress/wp-content/plugins/wp-blade-engine/vendor/philo/laravel-blade/src/Blade.php on line 45
+[01-Jun-2025 10:36:10 UTC] PHP Deprecated:  Required parameter $cachePath follows optional parameter $viewPaths in /wordpress/wp-content/plugins/wp-blade-engine/vendor/philo/laravel-blade/src/Blade.php on line 45
+[01-Jun-2025 10:36:17 UTC] PHP Deprecated:  Required parameter $cachePath follows optional parameter $viewPaths in /wordpress/wp-content/plugins/wp-blade-engine/vendor/philo/laravel-blade/src/Blade.php on line 45
+[01-Jun-2025 10:36:18 UTC] PHP Deprecated:  Required parameter $cachePath follows optional parameter $viewPaths in /wordpress/wp-content/plugins/wp-blade-engine/vendor/philo/laravel-blade/src/Blade.php on line 45
+[01-Jun-2025 10:36:26 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-catprogallery/catpro.php on line 751
+[01-Jun-2025 10:36:32 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-catprogallery/catpro.php on line 751
+[01-Jun-2025 10:36:39 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-catprogallery/catpro.php on line 751
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
