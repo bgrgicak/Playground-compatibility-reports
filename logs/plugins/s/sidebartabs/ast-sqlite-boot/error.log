@@ -2,22 +2,76 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [31-May-2025 01:55:42 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>submitpress</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 01:55:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [01-Jun-2025 17:00:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/serviceplatform/widgets.php:16
+Stack trace:
+#0 /wordpress/wp-content/plugins/serviceplatform/serviceplatform.php(58): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('serviceplatform...')
+#3 /internal/eval.php(20): activate_plugin('serviceplatform...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/serviceplatform/widgets.php on line 16
+[01-Jun-2025 17:00:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/serviceplatform/widgets.php:16
+Stack trace:
+#0 /wordpress/wp-content/plugins/serviceplatform/serviceplatform.php(58): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('serviceplatform...')
+#3 /internal/eval.php(20): activate_plugin('serviceplatform...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/serviceplatform/widgets.php on line 16
+[01-Jun-2025 17:01:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/serviceplatform/widgets.php:16
+Stack trace:
+#0 /wordpress/wp-content/plugins/serviceplatform/serviceplatform.php(58): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('serviceplatform...')
+#3 /internal/eval.php(20): activate_plugin('serviceplatform...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/serviceplatform/widgets.php on line 16
+[01-Jun-2025 17:01:11 UTC] PHP Deprecated:  Function wpdb::escape is <strong>deprecated</strong> since version 3.6.0! Use wpdb::prepare() or esc_sql() instead. in /wordpress/wp-includes/functions.php on line 6121
+[01-Jun-2025 17:01:12 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Admin_ShashinWi...')
+#2 /wordpress/wp-content/plugins/shashin/ShashinWp.php(367): register_widget('Admin_ShashinWi...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ShashinWp->registerWidget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[01-Jun-2025 17:01:21 UTC] PHP Deprecated:  Function wpdb::escape is <strong>deprecated</strong> since version 3.6.0! Use wpdb::prepare() or esc_sql() instead. in /wordpress/wp-includes/functions.php on line 6121
+[01-Jun-2025 17:01:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table if not exists wp_sp_submissions (
-                `submission_id` int not null,
-                `correspondence_id` int null,
-                `accept_count` int not null default 0,
-                `reject_count` int not null default 0,
-                `total_count` int not null default 0,
-                UNIQUE KEY `submission_id` (`submission_id`),
-                UNIQUE KEY `correspondence_id` (`correspondence_id`),
-                KEY `accept_count` (`accept_count`),
-                KEY `reject_count` (`reject_count`),
-                KEY `total_count` (`total_count`)
-                ) DEFAULT CHARACTER SET utf8mb4;</p>
+<p>CREATE TABLE wp_shashin_album (
+id smallint unsigned NOT NULL AUTO_INCREMENT,
+sourceId varchar(255) NOT NULL,
+albumType varchar(20) NOT NULL,
+dataUrl varchar(255) NOT NULL,
+user varchar(255) NOT NULL,
+name varchar(255) NOT NULL,
+linkUrl varchar(255) NOT NULL,
+title varchar(255) NOT NULL,
+description text,
+location varchar(255),
+coverPhotoUrl varchar(255),
+width smallint unsigned,
+height smallint unsigned,
+lastSync int unsigned,
+photoCount smallint unsigned NOT NULL,
+pubDate int unsigned NOT NULL,
+geoPos varchar(25),
+includeInRandom char(1) default 'Y',
+PRIMARY KEY id (id),
+UNIQUE KEY sourceId (sourceId)
+)
+DEFAULT CHARACTER SET utf8mb4 COLLATE utf8_general_ci</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -25,46 +79,74 @@ Error: [31-May-2025 01:55:42 UTC] PHP Notice:  Function _load_textdomain_just_in
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/submitpress/classes/submit_press_db.php(29): WP_SQLite_DB->query('create table if...')
-#2 /wordpress/wp-content/plugins/submitpress/submitpress.php(82): SubmitPressDb->create_tables()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): SubmitPress->activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_submit...', false)
-#7 /internal/eval.php(20): activate_plugin('submitpress/sub...')
-#8 {main}</pre>
- for query create table if not exists wp_sp_submissions (
-                `submission_id` int not null,
-                `correspondence_id` int null,
-                `accept_count` int not null default 0,
-                `reject_count` int not null default 0,
-                `total_count` int not null default 0,
-                UNIQUE KEY `submission_id` (`submission_id`),
-                UNIQUE KEY `correspondence_id` (`correspondence_id`),
-                KEY `accept_count` (`accept_count`),
-                KEY `reject_count` (`reject_count`),
-                KEY `total_count` (`total_count`)
-                ) DEFAULT CHARACTER SET utf8mb4; made by activate_plugin, do_action('activate_submitpress/submitpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, SubmitPress->activate, SubmitPressDb->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[31-May-2025 01:55:51 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>submitpress</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 01:55:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/shashin/lib/ShashinDatabaseFacade.php(64): dbDelta(Array, true)
+#3 /wordpress/wp-content/plugins/shashin/admin/ShashinInstall.php(87): Lib_ShashinDatabaseFacade->createTable('wp_shashin_albu...', Array)
+#4 /wordpress/wp-content/plugins/shashin/admin/ShashinInstall.php(78): Admin_ShashinInstall->createAlbumTable('wp_shashin_albu...')
+#5 /wordpress/wp-content/plugins/shashin/lib/ShashinFunctionsFacade.php(176): Admin_ShashinInstall->runForNetworkSites()
+#6 /wordpress/wp-content/plugins/shashin/admin/ShashinInstall.php(70): Lib_ShashinFunctionsFacade->callFunctionForNetworkSites(Array)
+#7 /wordpress/wp-content/plugins/shashin/ShashinWp.php(19): Admin_ShashinInstall->run()
+#8 /wordpress/wp-content/plugins/shashin/start.php(48): ShashinWp->install()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): shashinActivate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shashi...', false)
+#13 /internal/eval.php(20): activate_plugin('shashin/start.p...')
+#14 {main}</pre>
+ for query CREATE TABLE wp_shashin_album (
+id smallint unsigned NOT NULL AUTO_INCREMENT,
+sourceId varchar(255) NOT NULL,
+albumType varchar(20) NOT NULL,
+dataUrl varchar(255) NOT NULL,
+user varchar(255) NOT NULL,
+name varchar(255) NOT NULL,
+linkUrl varchar(255) NOT NULL,
+title varchar(255) NOT NULL,
+description text,
+location varchar(255),
+coverPhotoUrl varchar(255),
+width smallint unsigned,
+height smallint unsigned,
+lastSync int unsigned,
+photoCount smallint unsigned NOT NULL,
+pubDate int unsigned NOT NULL,
+geoPos varchar(25),
+includeInRandom char(1) default 'Y',
+PRIMARY KEY id (id),
+UNIQUE KEY sourceId (sourceId)
+)
+DEFAULT CHARACTER SET utf8mb4 COLLATE utf8_general_ci made by activate_plugin, do_action('activate_shashin/start.php'), WP_Hook->do_action, WP_Hook->apply_filters, shashinActivate, ShashinWp->install, Admin_ShashinInstall->run, Lib_ShashinFunctionsFacade->callFunctionForNetworkSites, Admin_ShashinInstall->runForNetworkSites, Admin_ShashinInstall->createAlbumTable, Lib_ShashinDatabaseFacade->createTable, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-Jun-2025 17:01:30 UTC] PHP Deprecated:  Function wpdb::escape is <strong>deprecated</strong> since version 3.6.0! Use wpdb::prepare() or esc_sql() instead. in /wordpress/wp-includes/functions.php on line 6121
+[01-Jun-2025 17:01:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table if not exists wp_sp_submissions (
-                `submission_id` int not null,
-                `correspondence_id` int null,
-                `accept_count` int not null default 0,
-                `reject_count` int not null default 0,
-                `total_count` int not null default 0,
-                UNIQUE KEY `submission_id` (`submission_id`),
-                UNIQUE KEY `correspondence_id` (`correspondence_id`),
-                KEY `accept_count` (`accept_count`),
-                KEY `reject_count` (`reject_count`),
-                KEY `total_count` (`total_count`)
-                ) DEFAULT CHARACTER SET utf8mb4;</p>
+<p>CREATE TABLE wp_shashin_album (
+id smallint unsigned NOT NULL AUTO_INCREMENT,
+sourceId varchar(255) NOT NULL,
+albumType varchar(20) NOT NULL,
+dataUrl varchar(255) NOT NULL,
+user varchar(255) NOT NULL,
+name varchar(255) NOT NULL,
+linkUrl varchar(255) NOT NULL,
+title varchar(255) NOT NULL,
+description text,
+location varchar(255),
+coverPhotoUrl varchar(255),
+width smallint unsigned,
+height smallint unsigned,
+lastSync int unsigned,
+photoCount smallint unsigned NOT NULL,
+pubDate int unsigned NOT NULL,
+geoPos varchar(25),
+includeInRandom char(1) default 'Y',
+PRIMARY KEY id (id),
+UNIQUE KEY sourceId (sourceId)
+)
+DEFAULT CHARACTER SET utf8mb4 COLLATE utf8_general_ci</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -72,36 +154,52 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/submitpress/classes/submit_press_db.php(29): WP_SQLite_DB->query('create table if...')
-#2 /wordpress/wp-content/plugins/submitpress/submitpress.php(82): SubmitPressDb->create_tables()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): SubmitPress->activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_submit...', false)
-#7 /internal/eval.php(20): activate_plugin('submitpress/sub...')
-#8 {main}</pre>
- for query create table if not exists wp_sp_submissions (
-                `submission_id` int not null,
-                `correspondence_id` int null,
-                `accept_count` int not null default 0,
-                `reject_count` int not null default 0,
-                `total_count` int not null default 0,
-                UNIQUE KEY `submission_id` (`submission_id`),
-                UNIQUE KEY `correspondence_id` (`correspondence_id`),
-                KEY `accept_count` (`accept_count`),
-                KEY `reject_count` (`reject_count`),
-                KEY `total_count` (`total_count`)
-                ) DEFAULT CHARACTER SET utf8mb4; made by activate_plugin, do_action('activate_submitpress/submitpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, SubmitPress->activate, SubmitPressDb->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[31-May-2025 01:56:00 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>submitpress</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 02:00:03 UTC] PHP Deprecated:  Required parameter $layout_horizontal follows optional parameter $layout_instance in /wordpress/wp-content/plugins/sidebartabs/sidebarTabs.php on line 401
-[31-May-2025 02:00:03 UTC] PHP Deprecated:  Required parameter $effect follows optional parameter $layout_instance in /wordpress/wp-content/plugins/sidebartabs/sidebarTabs.php on line 401
-[31-May-2025 02:00:04 UTC] PHP Deprecated:  Required parameter $layout_horizontal follows optional parameter $layout_instance in /wordpress/wp-content/plugins/sidebartabs/sidebarTabs.php on line 401
-[31-May-2025 02:00:04 UTC] PHP Deprecated:  Required parameter $effect follows optional parameter $layout_instance in /wordpress/wp-content/plugins/sidebartabs/sidebarTabs.php on line 401
-[31-May-2025 02:00:04 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/shashin/lib/ShashinDatabaseFacade.php(64): dbDelta(Array, true)
+#3 /wordpress/wp-content/plugins/shashin/admin/ShashinInstall.php(87): Lib_ShashinDatabaseFacade->createTable('wp_shashin_albu...', Array)
+#4 /wordpress/wp-content/plugins/shashin/admin/ShashinInstall.php(78): Admin_ShashinInstall->createAlbumTable('wp_shashin_albu...')
+#5 /wordpress/wp-content/plugins/shashin/lib/ShashinFunctionsFacade.php(176): Admin_ShashinInstall->runForNetworkSites()
+#6 /wordpress/wp-content/plugins/shashin/admin/ShashinInstall.php(70): Lib_ShashinFunctionsFacade->callFunctionForNetworkSites(Array)
+#7 /wordpress/wp-content/plugins/shashin/ShashinWp.php(19): Admin_ShashinInstall->run()
+#8 /wordpress/wp-content/plugins/shashin/start.php(48): ShashinWp->install()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): shashinActivate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shashi...', false)
+#13 /internal/eval.php(20): activate_plugin('shashin/start.p...')
+#14 {main}</pre>
+ for query CREATE TABLE wp_shashin_album (
+id smallint unsigned NOT NULL AUTO_INCREMENT,
+sourceId varchar(255) NOT NULL,
+albumType varchar(20) NOT NULL,
+dataUrl varchar(255) NOT NULL,
+user varchar(255) NOT NULL,
+name varchar(255) NOT NULL,
+linkUrl varchar(255) NOT NULL,
+title varchar(255) NOT NULL,
+description text,
+location varchar(255),
+coverPhotoUrl varchar(255),
+width smallint unsigned,
+height smallint unsigned,
+lastSync int unsigned,
+photoCount smallint unsigned NOT NULL,
+pubDate int unsigned NOT NULL,
+geoPos varchar(25),
+includeInRandom char(1) default 'Y',
+PRIMARY KEY id (id),
+UNIQUE KEY sourceId (sourceId)
+)
+DEFAULT CHARACTER SET utf8mb4 COLLATE utf8_general_ci made by activate_plugin, do_action('activate_shashin/start.php'), WP_Hook->do_action, WP_Hook->apply_filters, shashinActivate, ShashinWp->install, Admin_ShashinInstall->run, Lib_ShashinFunctionsFacade->callFunctionForNetworkSites, Admin_ShashinInstall->runForNetworkSites, Admin_ShashinInstall->createAlbumTable, Lib_ShashinDatabaseFacade->createTable, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-Jun-2025 17:03:02 UTC] PHP Deprecated:  Required parameter $layout_horizontal follows optional parameter $layout_instance in /wordpress/wp-content/plugins/sidebartabs/sidebarTabs.php on line 401
+[01-Jun-2025 17:03:02 UTC] PHP Deprecated:  Required parameter $effect follows optional parameter $layout_instance in /wordpress/wp-content/plugins/sidebartabs/sidebarTabs.php on line 401
+[01-Jun-2025 17:03:03 UTC] PHP Deprecated:  Required parameter $layout_horizontal follows optional parameter $layout_instance in /wordpress/wp-content/plugins/sidebartabs/sidebarTabs.php on line 401
+[01-Jun-2025 17:03:03 UTC] PHP Deprecated:  Required parameter $effect follows optional parameter $layout_instance in /wordpress/wp-content/plugins/sidebartabs/sidebarTabs.php on line 401
+[01-Jun-2025 17:03:03 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_Widget_sideb...')
