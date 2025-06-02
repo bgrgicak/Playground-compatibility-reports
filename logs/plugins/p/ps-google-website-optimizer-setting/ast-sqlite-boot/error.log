@@ -2,24 +2,77 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [31-May-2025 17:47:12 UTC] PHP Warning:  file_get_contents(/wordpress/wp-content/plugins/pdf-for-gravity-forms/gravityforms/form-import.json): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/pdf-for-gravity-forms/pdf-for-gravity-forms.php on line 71
-[31-May-2025 17:47:23 UTC] PHP Warning:  file_get_contents(/wordpress/wp-content/plugins/pdf-for-gravity-forms/gravityforms/form-import.json): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/pdf-for-gravity-forms/pdf-for-gravity-forms.php on line 71
-[31-May-2025 17:47:34 UTC] PHP Warning:  file_get_contents(/wordpress/wp-content/plugins/pdf-for-gravity-forms/gravityforms/form-import.json): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/pdf-for-gravity-forms/pdf-for-gravity-forms.php on line 71
-[31-May-2025 17:47:44 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cf7sms</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 17:47:54 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cf7sms</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 17:47:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [02-Jun-2025 10:59:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE `wp_cf7sms` (
-            `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-            `form_id` VARCHAR(512),
-            `reciever` VARCHAR(320),
-            `status` VARCHAR(320),
-            `msgbody` TEXT,
-            `extra_info` TEXT,
-            PRIMARY KEY id (id)
-          ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>SHOW FULL COLUMNS FROM wp_posts WHERE field = 'post_content'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_posts</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `field` = 'post_content' ORDER BY ordinal_position | parameters: database_name_here, wp_posts</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW FULL COLUM...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW FULL COLUM...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SHOW FULL COLUM...')
+#4 /wordpress/wp-content/plugins/pretty-link/app/models/PrliDb.php(36): wpdb->get_row('SHOW FULL COLUM...')
+#5 /wordpress/wp-content/plugins/pretty-link/app/controllers/PrliAppController.php(651): PrliDb->prli_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): PrliAppController::install('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(727): do_action('init')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query SHOW FULL COLUMNS FROM wp_posts WHERE field = 'post_content' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, PrliAppController::install, PrliDb->prli_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[02-Jun-2025 11:00:29 UTC] PHP Notice:  Undefined index: REMOTE_ADDR in /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-helpers.php on line 2715
+[02-Jun-2025 11:00:49 UTC] PHP Notice:  Undefined index: REMOTE_ADDR in /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-helpers.php on line 2715
+[02-Jun-2025 11:01:02 UTC] PHP Notice:  Undefined index: REMOTE_ADDR in /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-helpers.php on line 2715
+[02-Jun-2025 11:01:31 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "DB_TYPE" in /wordpress/wp-content/plugins/pdo-for-wordpress/db.php:73
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pdo-for-wordpre...')
+#2 /internal/eval.php(20): activate_plugin('pdo-for-wordpre...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/pdo-for-wordpress/db.php on line 73
+[02-Jun-2025 11:01:39 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "DB_TYPE" in /wordpress/wp-content/plugins/pdo-for-wordpress/db.php:73
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pdo-for-wordpre...')
+#2 /internal/eval.php(20): activate_plugin('pdo-for-wordpre...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/pdo-for-wordpress/db.php on line 73
+[02-Jun-2025 11:01:47 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "DB_TYPE" in /wordpress/wp-content/plugins/pdo-for-wordpress/db.php:73
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pdo-for-wordpre...')
+#2 /internal/eval.php(20): activate_plugin('pdo-for-wordpre...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/pdo-for-wordpress/db.php on line 73
+[02-Jun-2025 11:01:56 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cf7db</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 11:02:05 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cf7db</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 11:02:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE `wp_cf7db` (
+          `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+          `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+          `subject` VARCHAR(512),
+          `from` VARCHAR(320),
+          `email` VARCHAR(320),
+          `details` TEXT,
+          `extra_info` TEXT,
+          PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -32,9 +85,9 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
 #1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE `w...')
-#2 /wordpress/wp-content/plugins/pepro-cf7-sms-notifier/pepro-cf7-sms.php(526): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/pepro-cf7-sms-notifier/pepro-cf7-sms.php(111): PeproContactformse7enSMS_Notifier->CreateDatabase()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): PeproContactformse7enSMS_Notifier->init_plugin('')
+#2 /wordpress/wp-content/plugins/pepro-cf7-database/pepro-cf7-db.php(174): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/pepro-cf7-database/pepro-cf7-db.php(62): cf7Database->CreateDatabase(true)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): cf7Database->init_plugin('')
 #5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #7 /wordpress/wp-settings.php(727): do_action('init')
@@ -42,30 +95,30 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #11 {main}</pre>
- for query CREATE TABLE `wp_cf7sms` (
-            `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-            `form_id` VARCHAR(512),
-            `reciever` VARCHAR(320),
-            `status` VARCHAR(320),
-            `msgbody` TEXT,
-            `extra_info` TEXT,
-            PRIMARY KEY id (id)
-          ) DEFAULT CHARACTER SET utf8mb4 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, PeproContactformse7enSMS_Notifier->init_plugin, PeproContactformse7enSMS_Notifier->CreateDatabase, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[31-May-2025 17:48:03 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cf7sms</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 17:48:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE `wp_cf7db` (
+          `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+          `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+          `subject` VARCHAR(512),
+          `from` VARCHAR(320),
+          `email` VARCHAR(320),
+          `details` TEXT,
+          `extra_info` TEXT,
+          PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, cf7Database->init_plugin, cf7Database->CreateDatabase, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[02-Jun-2025 11:02:14 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cf7db</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 11:02:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE `wp_cf7sms` (
-            `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-            `form_id` VARCHAR(512),
-            `reciever` VARCHAR(320),
-            `status` VARCHAR(320),
-            `msgbody` TEXT,
-            `extra_info` TEXT,
-            PRIMARY KEY id (id)
-          ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>CREATE TABLE `wp_cf7db` (
+          `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+          `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+          `subject` VARCHAR(512),
+          `from` VARCHAR(320),
+          `email` VARCHAR(320),
+          `details` TEXT,
+          `extra_info` TEXT,
+          PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -78,9 +131,9 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
 #1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE `w...')
-#2 /wordpress/wp-content/plugins/pepro-cf7-sms-notifier/pepro-cf7-sms.php(526): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/pepro-cf7-sms-notifier/pepro-cf7-sms.php(111): PeproContactformse7enSMS_Notifier->CreateDatabase()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): PeproContactformse7enSMS_Notifier->init_plugin('')
+#2 /wordpress/wp-content/plugins/pepro-cf7-database/pepro-cf7-db.php(174): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/pepro-cf7-database/pepro-cf7-db.php(62): cf7Database->CreateDatabase(true)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): cf7Database->init_plugin('')
 #5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #7 /wordpress/wp-settings.php(727): do_action('init')
@@ -88,53 +141,20 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #11 {main}</pre>
- for query CREATE TABLE `wp_cf7sms` (
-            `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-            `form_id` VARCHAR(512),
-            `reciever` VARCHAR(320),
-            `status` VARCHAR(320),
-            `msgbody` TEXT,
-            `extra_info` TEXT,
-            PRIMARY KEY id (id)
-          ) DEFAULT CHARACTER SET utf8mb4 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, PeproContactformse7enSMS_Notifier->init_plugin, PeproContactformse7enSMS_Notifier->CreateDatabase, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[31-May-2025 17:48:12 UTC] PHP Fatal error:  Uncaught ValueError: Unknown format specifier "a" in /wordpress/wp-content/plugins/projects-by-woothemes/projects.php:154
-Stack trace:
-#0 /wordpress/wp-content/plugins/projects-by-woothemes/projects.php(154): sprintf('Search %a', 'Projects')
-#1 /wordpress/wp-includes/class-wp-hook.php(324): Projects->register_post_type('')
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-settings.php(727): do_action('init')
-#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/projects-by-woothemes/projects.php on line 154
-[31-May-2025 17:48:22 UTC] PHP Fatal error:  Uncaught ValueError: Unknown format specifier "a" in /wordpress/wp-content/plugins/projects-by-woothemes/projects.php:154
-Stack trace:
-#0 /wordpress/wp-content/plugins/projects-by-woothemes/projects.php(154): sprintf('Search %a', 'Projects')
-#1 /wordpress/wp-includes/class-wp-hook.php(324): Projects->register_post_type('')
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-settings.php(727): do_action('init')
-#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/projects-by-woothemes/projects.php on line 154
-[31-May-2025 17:48:30 UTC] PHP Fatal error:  Uncaught ValueError: Unknown format specifier "a" in /wordpress/wp-content/plugins/projects-by-woothemes/projects.php:154
-Stack trace:
-#0 /wordpress/wp-content/plugins/projects-by-woothemes/projects.php(154): sprintf('Search %a', 'Projects')
-#1 /wordpress/wp-includes/class-wp-hook.php(324): Projects->register_post_type('')
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-settings.php(727): do_action('init')
-#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/projects-by-woothemes/projects.php on line 154
-[31-May-2025 17:48:38 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/ps-google-website-optimizer-setting/ps_google_optimizer.php on line 12
+ for query CREATE TABLE `wp_cf7db` (
+          `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+          `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+          `subject` VARCHAR(512),
+          `from` VARCHAR(320),
+          `email` VARCHAR(320),
+          `details` TEXT,
+          `extra_info` TEXT,
+          PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, cf7Database->init_plugin, cf7Database->CreateDatabase, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[02-Jun-2025 11:02:49 UTC] PHP Fatal error:  Cannot declare class WP_Screen, because the name is already in use in /wordpress/wp-admin/includes/class-wp-screen.php on line 16
+[02-Jun-2025 11:02:57 UTC] PHP Fatal error:  Cannot declare class WP_Screen, because the name is already in use in /wordpress/wp-admin/includes/class-wp-screen.php on line 16
+[02-Jun-2025 11:03:06 UTC] PHP Fatal error:  Cannot declare class WP_Screen, because the name is already in use in /wordpress/wp-admin/includes/class-wp-screen.php on line 16
+[02-Jun-2025 11:03:15 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/ps-google-website-optimizer-setting/ps_google_optimizer.php on line 12
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
