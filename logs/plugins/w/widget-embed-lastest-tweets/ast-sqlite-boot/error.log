@@ -2,15 +2,57 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [31-May-2025 20:49:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [02-Jun-2025 13:41:23 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-morph/wp-morph.php on line 62
+[02-Jun-2025 13:41:30 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-morph/wp-morph.php on line 62
+[02-Jun-2025 13:41:39 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-morph/wp-morph.php on line 62
+[02-Jun-2025 13:42:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-        </p>
+<p>CREATE TABLE wp_mystatdata (
+id int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+hash varchar(32),
+ua text,
+browser varchar(200),
+browser_version varchar(10),
+device varchar(200),
+device_name varchar(200),
+time_start int(11) UNSIGNED,
+time_load float(9,4) UNSIGNED,
+ip bigint,
+image bool,
+proxy bool,
+is404 bool,
+is_tor bool,
+is_feed bool,
+title text,
+host varchar(200),
+www bool,
+file varchar(200),
+uri text,
+referer text,
+lang char(2),
+reftype varchar(50),
+refname varchar(50),
+refquery text,
+country char(2),
+city char(150),
+screen varchar(12),
+depth smallint,
+gzip bool,
+deflate bool,
+mobile bool,
+tablet bool,
+crawler bool,
+os varchar(50),
+osver varchar(10),
+osname varchar(250),
+osbit tinyint,
+count int(11) UNSIGNED,
+param longtext,
+created_at timestamp NOT NULL default '0000-00-00 00:00:00',
+updated_at timestamp NOT NULL default '0000-00-00 00:00:00',
+UNIQUE KEY id (id)
+) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -18,34 +60,80 @@ Error: [31-May-2025 20:49:05 UTC] WordPress database error <div style="clear:bot
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: image.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-ukr-shipping/src/DB/Migrations/UpdateShippingLabels_20250428213701.php(21): WP_SQLite_DB->query('\n            AL...')
-#2 /wordpress/wp-content/plugins/wc-ukr-shipping/vendor/kirillbdev/wcus-core/src/DB/Migrator.php(70): kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up(Object(WP_SQLite_DB))
-#3 /wordpress/wp-content/plugins/wc-ukr-shipping/src/Modules/Core/Activator.php(39): kirillbdev\WCUSCore\DB\Migrator->run()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): kirillbdev\WCUkrShipping\Modules\Core\Activator->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-ukr...', false)
-#8 /internal/eval.php(20): activate_plugin('wc-ukr-shipping...')
-#9 {main}</pre>
- for query 
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-         made by activate_plugin, do_action('activate_wc-ukr-shipping/wc-ukr-shipping.php'), WP_Hook->do_action, WP_Hook->apply_filters, kirillbdev\WCUkrShipping\Modules\Core\Activator->activate, kirillbdev\WCUSCore\DB\Migrator->run, kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[31-May-2025 20:49:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wp-mystat/driver/wordpress.class.php(796): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/wp-mystat/driver/wordpress.class.php(737): mystat_wordpress->installPluginRun()
+#4 /wordpress/wp-content/plugins/wp-mystat/driver/wordpress.class.php(883): mystat_wordpress->installPlugin()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): mystat_wordpress->updatePlugin('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query CREATE TABLE wp_mystatdata (
+id int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+hash varchar(32),
+ua text,
+browser varchar(200),
+browser_version varchar(10),
+device varchar(200),
+device_name varchar(200),
+time_start int(11) UNSIGNED,
+time_load float(9,4) UNSIGNED,
+ip bigint,
+image bool,
+proxy bool,
+is404 bool,
+is_tor bool,
+is_feed bool,
+title text,
+host varchar(200),
+www bool,
+file varchar(200),
+uri text,
+referer text,
+lang char(2),
+reftype varchar(50),
+refname varchar(50),
+refquery text,
+country char(2),
+city char(150),
+screen varchar(12),
+depth smallint,
+gzip bool,
+deflate bool,
+mobile bool,
+tablet bool,
+crawler bool,
+os varchar(50),
+osver varchar(10),
+osname varchar(250),
+osbit tinyint,
+count int(11) UNSIGNED,
+param longtext,
+created_at timestamp NOT NULL default '0000-00-00 00:00:00',
+updated_at timestamp NOT NULL default '0000-00-00 00:00:00',
+UNIQUE KEY id (id)
+) DEFAULT CHARACTER SET utf8mb4 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, mystat_wordpress->updatePlugin, mystat_wordpress->installPlugin, mystat_wordpress->installPluginRun, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[02-Jun-2025 13:42:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-        </p>
+<p>CREATE TABLE wp_mystatclick (
+x smallint(6) UNSIGNED,
+y smallint(6) UNSIGNED,
+width smallint(6) UNSIGNED,
+touch bool,
+uri text,
+xpath text,
+id_usr int(11) UNSIGNED,
+created_at timestamp NOT NULL default '0000-00-00 00:00:00'
+) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -53,36 +141,80 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: touch.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-ukr-shipping/src/DB/Migrations/UpdateShippingLabels_20250428213701.php(21): WP_SQLite_DB->query('\n            AL...')
-#2 /wordpress/wp-content/plugins/wc-ukr-shipping/vendor/kirillbdev/wcus-core/src/DB/Migrator.php(70): kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up(Object(WP_SQLite_DB))
-#3 /wordpress/wp-content/plugins/wc-ukr-shipping/src/Modules/Core/Activator.php(39): kirillbdev\WCUSCore\DB\Migrator->run()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): kirillbdev\WCUkrShipping\Modules\Core\Activator->activate('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-         made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, kirillbdev\WCUkrShipping\Modules\Core\Activator->activate, kirillbdev\WCUSCore\DB\Migrator->run, kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[31-May-2025 20:49:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wp-mystat/driver/wordpress.class.php(808): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/wp-mystat/driver/wordpress.class.php(737): mystat_wordpress->installPluginRun()
+#4 /wordpress/wp-content/plugins/wp-mystat/driver/wordpress.class.php(883): mystat_wordpress->installPlugin()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): mystat_wordpress->updatePlugin('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query CREATE TABLE wp_mystatclick (
+x smallint(6) UNSIGNED,
+y smallint(6) UNSIGNED,
+width smallint(6) UNSIGNED,
+touch bool,
+uri text,
+xpath text,
+id_usr int(11) UNSIGNED,
+created_at timestamp NOT NULL default '0000-00-00 00:00:00'
+) DEFAULT CHARACTER SET utf8mb4 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, mystat_wordpress->updatePlugin, mystat_wordpress->installPlugin, mystat_wordpress->installPluginRun, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[02-Jun-2025 13:42:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-        </p>
+<p>CREATE TABLE wp_mystatdata (
+id int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+hash varchar(32),
+ua text,
+browser varchar(200),
+browser_version varchar(10),
+device varchar(200),
+device_name varchar(200),
+time_start int(11) UNSIGNED,
+time_load float(9,4) UNSIGNED,
+ip bigint,
+image bool,
+proxy bool,
+is404 bool,
+is_tor bool,
+is_feed bool,
+title text,
+host varchar(200),
+www bool,
+file varchar(200),
+uri text,
+referer text,
+lang char(2),
+reftype varchar(50),
+refname varchar(50),
+refquery text,
+country char(2),
+city char(150),
+screen varchar(12),
+depth smallint,
+gzip bool,
+deflate bool,
+mobile bool,
+tablet bool,
+crawler bool,
+os varchar(50),
+osver varchar(10),
+osname varchar(250),
+osbit tinyint,
+count int(11) UNSIGNED,
+param longtext,
+created_at timestamp NOT NULL default '0000-00-00 00:00:00',
+updated_at timestamp NOT NULL default '0000-00-00 00:00:00',
+UNIQUE KEY id (id)
+) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -90,34 +222,80 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: image.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-ukr-shipping/src/DB/Migrations/UpdateShippingLabels_20250428213701.php(21): WP_SQLite_DB->query('\n            AL...')
-#2 /wordpress/wp-content/plugins/wc-ukr-shipping/vendor/kirillbdev/wcus-core/src/DB/Migrator.php(70): kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up(Object(WP_SQLite_DB))
-#3 /wordpress/wp-content/plugins/wc-ukr-shipping/src/Modules/Core/Activator.php(39): kirillbdev\WCUSCore\DB\Migrator->run()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): kirillbdev\WCUkrShipping\Modules\Core\Activator->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-ukr...', false)
-#8 /internal/eval.php(20): activate_plugin('wc-ukr-shipping...')
-#9 {main}</pre>
- for query 
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-         made by activate_plugin, do_action('activate_wc-ukr-shipping/wc-ukr-shipping.php'), WP_Hook->do_action, WP_Hook->apply_filters, kirillbdev\WCUkrShipping\Modules\Core\Activator->activate, kirillbdev\WCUSCore\DB\Migrator->run, kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[31-May-2025 20:49:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wp-mystat/driver/wordpress.class.php(796): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/wp-mystat/driver/wordpress.class.php(737): mystat_wordpress->installPluginRun()
+#4 /wordpress/wp-content/plugins/wp-mystat/driver/wordpress.class.php(883): mystat_wordpress->installPlugin()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): mystat_wordpress->updatePlugin('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query CREATE TABLE wp_mystatdata (
+id int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+hash varchar(32),
+ua text,
+browser varchar(200),
+browser_version varchar(10),
+device varchar(200),
+device_name varchar(200),
+time_start int(11) UNSIGNED,
+time_load float(9,4) UNSIGNED,
+ip bigint,
+image bool,
+proxy bool,
+is404 bool,
+is_tor bool,
+is_feed bool,
+title text,
+host varchar(200),
+www bool,
+file varchar(200),
+uri text,
+referer text,
+lang char(2),
+reftype varchar(50),
+refname varchar(50),
+refquery text,
+country char(2),
+city char(150),
+screen varchar(12),
+depth smallint,
+gzip bool,
+deflate bool,
+mobile bool,
+tablet bool,
+crawler bool,
+os varchar(50),
+osver varchar(10),
+osname varchar(250),
+osbit tinyint,
+count int(11) UNSIGNED,
+param longtext,
+created_at timestamp NOT NULL default '0000-00-00 00:00:00',
+updated_at timestamp NOT NULL default '0000-00-00 00:00:00',
+UNIQUE KEY id (id)
+) DEFAULT CHARACTER SET utf8mb4 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, mystat_wordpress->updatePlugin, mystat_wordpress->installPlugin, mystat_wordpress->installPluginRun, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[02-Jun-2025 13:42:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-        </p>
+<p>CREATE TABLE wp_mystatclick (
+x smallint(6) UNSIGNED,
+y smallint(6) UNSIGNED,
+width smallint(6) UNSIGNED,
+touch bool,
+uri text,
+xpath text,
+id_usr int(11) UNSIGNED,
+created_at timestamp NOT NULL default '0000-00-00 00:00:00'
+) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -125,169 +303,84 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: touch.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-ukr-shipping/src/DB/Migrations/UpdateShippingLabels_20250428213701.php(21): WP_SQLite_DB->query('\n            AL...')
-#2 /wordpress/wp-content/plugins/wc-ukr-shipping/vendor/kirillbdev/wcus-core/src/DB/Migrator.php(70): kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up(Object(WP_SQLite_DB))
-#3 /wordpress/wp-content/plugins/wc-ukr-shipping/src/Modules/Core/Activator.php(39): kirillbdev\WCUSCore\DB\Migrator->run()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): kirillbdev\WCUkrShipping\Modules\Core\Activator->activate('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-            ALTER TABLE `wp_wc_ukr_shipping_labels`
-            MODIFY COLUMN `label_id` VARCHAR(191) NULL DEFAULT NULL,
-            ADD COLUMN `carrier_label_id` VARCHAR(191) NULL DEFAULT NULL AFTER `label_id`,
-            ADD UNIQUE INDEX `u_tracking_number` (`tracking_number`)
-         made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, kirillbdev\WCUkrShipping\Modules\Core\Activator->activate, kirillbdev\WCUSCore\DB\Migrator->run, kirillbdev\WCUkrShipping\DB\Migrations\UpdateShippingLabels_20250428213701->up, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[31-May-2025 20:49:24 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:49:33 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:49:41 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:50:10 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): Address family not supported by protocol in /wordpress/wp-content/plugins/wortify/lib/database/mysqldatabase.php on line 78
-[31-May-2025 20:50:10 UTC] PHP Fatal error:  notrace:Unable to connect to database in /wordpress/wp-content/plugins/wortify/lib/database/databasefactory.php on line 61
-[31-May-2025 20:50:18 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): Address family not supported by protocol in /wordpress/wp-content/plugins/wortify/lib/database/mysqldatabase.php on line 78
-[31-May-2025 20:50:18 UTC] PHP Fatal error:  notrace:Unable to connect to database in /wordpress/wp-content/plugins/wortify/lib/database/databasefactory.php on line 61
-[31-May-2025 20:50:28 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): Address family not supported by protocol in /wordpress/wp-content/plugins/wortify/lib/database/mysqldatabase.php on line 78
-[31-May-2025 20:50:28 UTC] PHP Fatal error:  notrace:Unable to connect to database in /wordpress/wp-content/plugins/wortify/lib/database/databasefactory.php on line 61
-[31-May-2025 20:50:36 UTC] PHP Warning:  Undefined array key "process_wp_alert" in /wordpress/wp-content/plugins/wp-alert/wp-alert.php on line 278
-[31-May-2025 20:50:37 UTC] PHP Warning:  Undefined array key "process_wp_alert" in /wordpress/wp-content/plugins/wp-alert/wp-alert.php on line 278
-[31-May-2025 20:50:44 UTC] PHP Warning:  Undefined array key "process_wp_alert" in /wordpress/wp-content/plugins/wp-alert/wp-alert.php on line 278
-[31-May-2025 20:50:46 UTC] PHP Warning:  Undefined array key "process_wp_alert" in /wordpress/wp-content/plugins/wp-alert/wp-alert.php on line 278
-[31-May-2025 20:50:53 UTC] PHP Warning:  Undefined array key "process_wp_alert" in /wordpress/wp-content/plugins/wp-alert/wp-alert.php on line 278
-[31-May-2025 20:50:54 UTC] PHP Warning:  Undefined array key "process_wp_alert" in /wordpress/wp-content/plugins/wp-alert/wp-alert.php on line 278
-[31-May-2025 20:51:05 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/extensions/customizer/extension_customizer.php on line 273
-[31-May-2025 20:51:05 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/extensions/customizer/extension_customizer.php on line 286
-[31-May-2025 20:51:05 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/extensions/customizer/extension_customizer.php on line 312
-[31-May-2025 20:51:05 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/extensions/customizer/extension_customizer.php on line 324
-[31-May-2025 20:51:05 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/extensions/customizer/extension_customizer.php on line 343
-[31-May-2025 20:51:05 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/inc/tracking.php on line 58
-[31-May-2025 20:51:15 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/extensions/customizer/extension_customizer.php on line 273
-[31-May-2025 20:51:15 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/extensions/customizer/extension_customizer.php on line 286
-[31-May-2025 20:51:15 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/extensions/customizer/extension_customizer.php on line 312
-[31-May-2025 20:51:15 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/extensions/customizer/extension_customizer.php on line 324
-[31-May-2025 20:51:15 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/extensions/customizer/extension_customizer.php on line 343
-[31-May-2025 20:51:15 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/inc/tracking.php on line 58
-[31-May-2025 20:51:26 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/extensions/customizer/extension_customizer.php on line 273
-[31-May-2025 20:51:26 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/extensions/customizer/extension_customizer.php on line 286
-[31-May-2025 20:51:26 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/extensions/customizer/extension_customizer.php on line 312
-[31-May-2025 20:51:26 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/extensions/customizer/extension_customizer.php on line 324
-[31-May-2025 20:51:26 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/extensions/customizer/extension_customizer.php on line 343
-[31-May-2025 20:51:26 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-basics/ReduxFramework/ReduxCore/inc/tracking.php on line 58
-[31-May-2025 20:52:58 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method THEMEQX_WPSUB_BASE::themeqx_wpsub_initial_setup() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wp-mystat/driver/wordpress.class.php(808): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/wp-mystat/driver/wordpress.class.php(737): mystat_wordpress->installPluginRun()
+#4 /wordpress/wp-content/plugins/wp-mystat/driver/wordpress.class.php(883): mystat_wordpress->installPlugin()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): mystat_wordpress->updatePlugin('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query CREATE TABLE wp_mystatclick (
+x smallint(6) UNSIGNED,
+y smallint(6) UNSIGNED,
+width smallint(6) UNSIGNED,
+touch bool,
+uri text,
+xpath text,
+id_usr int(11) UNSIGNED,
+created_at timestamp NOT NULL default '0000-00-00 00:00:00'
+) DEFAULT CHARACTER SET utf8mb4 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, mystat_wordpress->updatePlugin, mystat_wordpress->installPlugin, mystat_wordpress->installPluginRun, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[02-Jun-2025 13:43:12 UTC] PHP Deprecated:  File class-phpmailer.php is <strong>deprecated</strong> since version 5.5.0! Use wp-includes/PHPMailer/PHPMailer.php instead. The PHPMailer class has been moved to wp-includes/PHPMailer subdirectory and now uses the PHPMailer\PHPMailer namespace. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 13:43:13 UTC] PHP Deprecated:  File class-phpmailer.php is <strong>deprecated</strong> since version 5.5.0! Use wp-includes/PHPMailer/PHPMailer.php instead. The PHPMailer class has been moved to wp-includes/PHPMailer subdirectory and now uses the PHPMailer\PHPMailer namespace. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 13:43:20 UTC] PHP Deprecated:  File class-phpmailer.php is <strong>deprecated</strong> since version 5.5.0! Use wp-includes/PHPMailer/PHPMailer.php instead. The PHPMailer class has been moved to wp-includes/PHPMailer subdirectory and now uses the PHPMailer\PHPMailer namespace. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 13:43:21 UTC] PHP Deprecated:  File class-phpmailer.php is <strong>deprecated</strong> since version 5.5.0! Use wp-includes/PHPMailer/PHPMailer.php instead. The PHPMailer class has been moved to wp-includes/PHPMailer subdirectory and now uses the PHPMailer\PHPMailer namespace. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 13:43:28 UTC] PHP Deprecated:  File class-phpmailer.php is <strong>deprecated</strong> since version 5.5.0! Use wp-includes/PHPMailer/PHPMailer.php instead. The PHPMailer class has been moved to wp-includes/PHPMailer subdirectory and now uses the PHPMailer\PHPMailer namespace. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 13:43:29 UTC] PHP Deprecated:  File class-phpmailer.php is <strong>deprecated</strong> since version 5.5.0! Use wp-includes/PHPMailer/PHPMailer.php instead. The PHPMailer class has been moved to wp-includes/PHPMailer subdirectory and now uses the PHPMailer\PHPMailer namespace. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 13:44:05 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-popup</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 13:44:14 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-popup</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 13:44:24 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-popup</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 13:45:57 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>write_jQuery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 13:46:06 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>write_jQuery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 13:46:14 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>write_jQuery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 13:49:06 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-webhotelier</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 13:49:15 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-webhotelier</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 13:49:24 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-webhotelier</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 13:49:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function as_has_scheduled_action() in /wordpress/wp-content/plugins/whatsiplus-order-notification-for-woocommerce/admin/class-whatsiplus-woocommerce-setting.php:537
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ser...', false)
-#3 /internal/eval.php(20): activate_plugin('wp-server-uptim...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[31-May-2025 20:53:06 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method THEMEQX_WPSUB_BASE::themeqx_wpsub_initial_setup() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-content/plugins/whatsiplus-order-notification-for-woocommerce/admin/class-whatsiplus-woocommerce-setting.php(535): Whatsiplus_WooCommerce_Setting->schedule_check_domain()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Whatsiplus_WooCommerce_Setting->schedule_check_domain('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(727): do_action('init')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/whatsiplus-order-notification-for-woocommerce/admin/class-whatsiplus-woocommerce-setting.php on line 537
+[02-Jun-2025 13:49:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function as_has_scheduled_action() in /wordpress/wp-content/plugins/whatsiplus-order-notification-for-woocommerce/admin/class-whatsiplus-woocommerce-setting.php:537
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ser...', false)
-#3 /internal/eval.php(20): activate_plugin('wp-server-uptim...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[31-May-2025 20:53:14 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method THEMEQX_WPSUB_BASE::themeqx_wpsub_initial_setup() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-content/plugins/whatsiplus-order-notification-for-woocommerce/admin/class-whatsiplus-woocommerce-setting.php(535): Whatsiplus_WooCommerce_Setting->schedule_check_domain()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Whatsiplus_WooCommerce_Setting->schedule_check_domain('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(727): do_action('init')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/whatsiplus-order-notification-for-woocommerce/admin/class-whatsiplus-woocommerce-setting.php on line 537
+[02-Jun-2025 13:49:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function as_has_scheduled_action() in /wordpress/wp-content/plugins/whatsiplus-order-notification-for-woocommerce/admin/class-whatsiplus-woocommerce-setting.php:537
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ser...', false)
-#3 /internal/eval.php(20): activate_plugin('wp-server-uptim...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[31-May-2025 20:54:08 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:08 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:08 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:08 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 252
-[31-May-2025 20:54:08 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:08 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:08 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:08 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:08 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:08 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:09 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 252
-[31-May-2025 20:54:09 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:09 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:09 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:10 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:10 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:10 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:10 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 252
-[31-May-2025 20:54:10 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:10 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:10 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:10 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:10 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:10 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:10 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 252
-[31-May-2025 20:54:10 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:10 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:10 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:17 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:17 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:17 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:17 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 252
-[31-May-2025 20:54:17 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:17 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:17 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:17 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:17 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:17 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:17 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 252
-[31-May-2025 20:54:17 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:17 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:17 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:19 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:19 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:19 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:19 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 252
-[31-May-2025 20:54:19 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:19 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:19 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:19 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:19 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:19 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:19 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 252
-[31-May-2025 20:54:19 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:19 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:19 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:26 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:26 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:26 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:26 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 252
-[31-May-2025 20:54:26 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:26 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:26 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:26 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:26 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:26 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:26 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 252
-[31-May-2025 20:54:26 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:26 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:26 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:28 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:28 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:28 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:28 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 252
-[31-May-2025 20:54:28 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:28 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:28 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:28 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:28 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:28 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:28 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 252
-[31-May-2025 20:54:28 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[31-May-2025 20:54:28 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:28 UTC] PHP Warning:  Undefined array key "std" in /wordpress/wp-content/plugins/wp-sup-contact-form/wpscf-settings.php on line 253
-[31-May-2025 20:54:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/widget-embed-lastest-tweets/widget-embed-latest-tweets.php:246
+#0 /wordpress/wp-content/plugins/whatsiplus-order-notification-for-woocommerce/admin/class-whatsiplus-woocommerce-setting.php(535): Whatsiplus_WooCommerce_Setting->schedule_check_domain()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Whatsiplus_WooCommerce_Setting->schedule_check_domain('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(727): do_action('init')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/whatsiplus-order-notification-for-woocommerce/admin/class-whatsiplus-woocommerce-setting.php on line 537
+[02-Jun-2025 13:50:03 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/widget-embed-lastest-tweets/widget-embed-latest-tweets.php:246
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('widget-embed-la...')
