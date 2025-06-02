@@ -2,92 +2,123 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [31-May-2025 18:55:15 UTC] PHP Deprecated:  WP_SQLite_Information_Schema_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-exception.php on line 37
-[31-May-2025 18:55:16 UTC] PHP Deprecated:  WP_SQLite_Information_Schema_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-exception.php on line 37
-[31-May-2025 18:57:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [02-Jun-2025 08:58:31 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 08:58:31 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 08:58:39 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 08:58:39 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 08:58:48 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 08:58:48 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 09:00:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_kt_redirect (
-		  id mediumint(9) NOT NULL AUTO_INCREMENT,
-		  rdct_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		  rdct_title varchar(255) NULL,
-		  rdct_dest_link varchar(255) NULL,
-		  rdct_assign_posts text NULL,
-		  rdct_menus VARCHAR(256) NOT NULL,
-		  rdct_status TINYINT(2) NOT NULL,
-		  PRIMARY KEY id (id)
-		) </p>
+<p>ALTER TABLE `wp_kotae_cats` ADD sort_order SMALLINT UNSIGNED NOT NULL DEFAULT 0, ADD parent_id INT UNSIGNED NOT NULL DEFAULT 0</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_kotae_cats, SORT_ORDER, smallint UNSIGNED</li>
+<li>Executing: ALTER TABLE wp_kotae_cats ADD sort_order  integer NOT NULL DEFAULT 0 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/kt-redirect-url/kt-rdct.php(39): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): add_ktrdct_plug(false)
+#1 /wordpress/wp-content/plugins/kotae/helpers/htmlhelper.php(35): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/kotae/models/basic.php(37): kotae_add_db_fields(Array, 'wp_kotae_cats')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): Kotae::install(false)
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_kt-red...', false)
-#7 /internal/eval.php(20): activate_plugin('kt-redirect-url...')
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_kotae/...', false)
+#7 /internal/eval.php(20): activate_plugin('kotae/kotae.php')
 #8 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_kt_redirect (
-		  id mediumint(9) NOT NULL AUTO_INCREMENT,
-		  rdct_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		  rdct_title varchar(255) NULL,
-		  rdct_dest_link varchar(255) NULL,
-		  rdct_assign_posts text NULL,
-		  rdct_menus VARCHAR(256) NOT NULL,
-		  rdct_status TINYINT(2) NOT NULL,
-		  PRIMARY KEY id (id)
-		)  made by activate_plugin, do_action('activate_kt-redirect-url/kt-rdct.php'), WP_Hook->do_action, WP_Hook->apply_filters, add_ktrdct_plug, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[31-May-2025 18:57:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE `wp_kotae_cats` ADD sort_order SMALLINT UNSIGNED NOT NULL DEFAULT 0, ADD parent_id INT UNSIGNED NOT NULL DEFAULT 0 made by activate_plugin, do_action('activate_kotae/kotae.php'), WP_Hook->do_action, WP_Hook->apply_filters, Kotae::install, kotae_add_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[02-Jun-2025 09:00:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_kt_redirect (
-		  id mediumint(9) NOT NULL AUTO_INCREMENT,
-		  rdct_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		  rdct_title varchar(255) NULL,
-		  rdct_dest_link varchar(255) NULL,
-		  rdct_assign_posts text NULL,
-		  rdct_menus VARCHAR(256) NOT NULL,
-		  rdct_status TINYINT(2) NOT NULL,
-		  PRIMARY KEY id (id)
-		) </p>
+<p>ALTER TABLE `wp_kotae_cats` ADD sort_order SMALLINT UNSIGNED NOT NULL DEFAULT 0, ADD parent_id INT UNSIGNED NOT NULL DEFAULT 0</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_kotae_cats, SORT_ORDER, smallint UNSIGNED</li>
+<li>Executing: ALTER TABLE wp_kotae_cats ADD sort_order  integer NOT NULL DEFAULT 0 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/kt-redirect-url/kt-rdct.php(39): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): add_ktrdct_plug(false)
+#1 /wordpress/wp-content/plugins/kotae/helpers/htmlhelper.php(35): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/kotae/models/basic.php(37): kotae_add_db_fields(Array, 'wp_kotae_cats')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): Kotae::install(false)
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_kt-red...', false)
-#7 /internal/eval.php(20): activate_plugin('kt-redirect-url...')
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_kotae/...', false)
+#7 /internal/eval.php(20): activate_plugin('kotae/kotae.php')
 #8 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_kt_redirect (
-		  id mediumint(9) NOT NULL AUTO_INCREMENT,
-		  rdct_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		  rdct_title varchar(255) NULL,
-		  rdct_dest_link varchar(255) NULL,
-		  rdct_assign_posts text NULL,
-		  rdct_menus VARCHAR(256) NOT NULL,
-		  rdct_status TINYINT(2) NOT NULL,
-		  PRIMARY KEY id (id)
-		)  made by activate_plugin, do_action('activate_kt-redirect-url/kt-rdct.php'), WP_Hook->do_action, WP_Hook->apply_filters, add_ktrdct_plug, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+ for query ALTER TABLE `wp_kotae_cats` ADD sort_order SMALLINT UNSIGNED NOT NULL DEFAULT 0, ADD parent_id INT UNSIGNED NOT NULL DEFAULT 0 made by activate_plugin, do_action('activate_kotae/kotae.php'), WP_Hook->do_action, WP_Hook->apply_filters, Kotae::install, kotae_add_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[02-Jun-2025 09:00:46 UTC] PHP Fatal error:  Uncaught Error: Non-static method Kphobia::bootstrap() cannot be called statically in /wordpress/wp-content/plugins/koumpounophobia/Kphobia.php:522
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('koumpounophobia...')
+#2 /internal/eval.php(20): activate_plugin('koumpounophobia...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/koumpounophobia/Kphobia.php on line 522
+[02-Jun-2025 09:00:54 UTC] PHP Fatal error:  Uncaught Error: Non-static method Kphobia::bootstrap() cannot be called statically in /wordpress/wp-content/plugins/koumpounophobia/Kphobia.php:522
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('koumpounophobia...')
+#2 /internal/eval.php(20): activate_plugin('koumpounophobia...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/koumpounophobia/Kphobia.php on line 522
+[02-Jun-2025 09:01:01 UTC] PHP Fatal error:  Uncaught Error: Non-static method Kphobia::bootstrap() cannot be called statically in /wordpress/wp-content/plugins/koumpounophobia/Kphobia.php:522
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('koumpounophobia...')
+#2 /internal/eval.php(20): activate_plugin('koumpounophobia...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/koumpounophobia/Kphobia.php on line 522
+[02-Jun-2025 09:01:39 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "KPICASA_GALLERY_DIR" in /wordpress/wp-content/plugins/kpicasa-gallery-php4mod/kpicasa_gallery.php:47
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('kpicasa-gallery...')
+#2 /internal/eval.php(20): activate_plugin('kpicasa-gallery...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/kpicasa-gallery-php4mod/kpicasa_gallery.php on line 47
+[02-Jun-2025 09:01:47 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "KPICASA_GALLERY_DIR" in /wordpress/wp-content/plugins/kpicasa-gallery-php4mod/kpicasa_gallery.php:47
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('kpicasa-gallery...')
+#2 /internal/eval.php(20): activate_plugin('kpicasa-gallery...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/kpicasa-gallery-php4mod/kpicasa_gallery.php on line 47
+[02-Jun-2025 09:01:55 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "KPICASA_GALLERY_DIR" in /wordpress/wp-content/plugins/kpicasa-gallery-php4mod/kpicasa_gallery.php:47
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('kpicasa-gallery...')
+#2 /internal/eval.php(20): activate_plugin('kpicasa-gallery...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/kpicasa-gallery-php4mod/kpicasa_gallery.php on line 47
+[02-Jun-2025 09:02:32 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 09:02:32 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 09:02:41 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 09:02:41 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 09:02:50 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 09:02:50 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 09:03:00 UTC] PHP Deprecated:  WP_SQLite_Information_Schema_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-exception.php on line 37
+[02-Jun-2025 09:03:01 UTC] PHP Deprecated:  WP_SQLite_Information_Schema_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-exception.php on line 37
+[02-Jun-2025 09:05:28 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>kuetemeier-essentials</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 09:05:37 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>kuetemeier-essentials</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[02-Jun-2025 09:05:46 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>kuetemeier-essentials</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
