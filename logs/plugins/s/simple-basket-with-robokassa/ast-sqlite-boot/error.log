@@ -2,7 +2,7 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [01-Jun-2025 19:24:45 UTC] Array
+Error: [03-Jun-2025 11:47:16 UTC] Array
 (
     [fields] => Array
         (
@@ -14,7 +14,7 @@ Error: [01-Jun-2025 19:24:45 UTC] Array
 
 )
 
-[01-Jun-2025 19:24:54 UTC] Array
+[03-Jun-2025 11:47:25 UTC] Array
 (
     [fields] => Array
         (
@@ -26,7 +26,7 @@ Error: [01-Jun-2025 19:24:45 UTC] Array
 
 )
 
-[01-Jun-2025 19:25:03 UTC] Array
+[03-Jun-2025 11:47:35 UTC] Array
 (
     [fields] => Array
         (
@@ -38,89 +38,329 @@ Error: [01-Jun-2025 19:24:45 UTC] Array
 
 )
 
-[01-Jun-2025 19:25:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[03-Jun-2025 11:51:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url )</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: Select * FROM `wp_ab_experiment` `AB_EXE` INNER JOIN `wp_ab_variations` `AB_VARI` ON `AB_EXE`.`experiment_id` = `AB_VARI`.`experiment_id` WHERE `AB_EXE`.`experiment_status` = 1 AND `FIND_IN_SET` ( 'example.com:443' , `AB_EXE`.`target_url` ) | (no parameters)</li>
+<li>Executing: DROP FUNCTION IF EXISTS `fnStripTags` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET
+SQLSTATE[HY000]: General error: 1 near "FUNCTION": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('Select * FROM w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('Select * FROM w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('Select * FROM w...')
-#4 /wordpress/wp-content/plugins/simple-ab-testing/public/class-wordpress-ab-testing-public.php(116): wpdb->get_results('Select * FROM w...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Wordpress_Ab_Testing_Public->ab_testing_cookie('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DROP FUNCTION I...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DROP FUNCTION I...')
+#3 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#8 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#9 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 11:51:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createFunction"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE FUNCTION...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE FUNCTION...')
+#4 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(727): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Wordpress_Ab_Testing_Public->ab_testing_cookie, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[01-Jun-2025 19:25:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#9 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#10 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 11:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url )</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( :param0 , AB_EXE.target_url ) | parameters: example.com:443</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: FUNCTION.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('Select * FROM w...')
-#2 /wordpress/wp-content/plugins/simple-ab-testing/public/class-wordpress-ab-testing-public.php(116): wpdb->get_results('Select * FROM w...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Wordpress_Ab_Testing_Public->ab_testing_cookie('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(727): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Wordpress_Ab_Testing_Public->ab_testing_cookie, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[01-Jun-2025 19:25:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 11:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url )</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( :param0 , AB_EXE.target_url ) | parameters: example.com:443</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('Select * FROM w...')
-#2 /wordpress/wp-content/plugins/simple-ab-testing/public/class-wordpress-ab-testing-public.php(116): wpdb->get_results('Select * FROM w...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Wordpress_Ab_Testing_Public->ab_testing_cookie('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(727): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Wordpress_Ab_Testing_Public->ab_testing_cookie, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 11:51:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 11:51:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 11:51:46 UTC] PHP Deprecated:  WP_SQLite_Information_Schema_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-exception.php on line 37
+[03-Jun-2025 11:51:48 UTC] PHP Deprecated:  WP_SQLite_Information_Schema_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-exception.php on line 37
+[03-Jun-2025 11:52:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 14
+[03-Jun-2025 11:52:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 18
+[03-Jun-2025 11:52:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 21
+[03-Jun-2025 11:52:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 24
+[03-Jun-2025 11:52:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 29
+[03-Jun-2025 11:52:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 33
+[03-Jun-2025 11:52:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 16
+[03-Jun-2025 11:52:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 21
+[03-Jun-2025 11:52:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 28
+[03-Jun-2025 11:52:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 34
+[03-Jun-2025 11:52:21 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 16
+[03-Jun-2025 11:52:21 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 21
+[03-Jun-2025 11:52:21 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 28
+[03-Jun-2025 11:52:21 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 34
+[03-Jun-2025 11:52:21 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method G2_General::check_bad_query() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[03-Jun-2025 11:52:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 14
+[03-Jun-2025 11:52:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 18
+[03-Jun-2025 11:52:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 21
+[03-Jun-2025 11:52:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 24
+[03-Jun-2025 11:52:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 29
+[03-Jun-2025 11:52:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 33
+[03-Jun-2025 11:52:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 16
+[03-Jun-2025 11:52:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 21
+[03-Jun-2025 11:52:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 28
+[03-Jun-2025 11:52:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 34
+[03-Jun-2025 11:52:29 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 16
+[03-Jun-2025 11:52:29 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 21
+[03-Jun-2025 11:52:29 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 28
+[03-Jun-2025 11:52:29 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 34
+[03-Jun-2025 11:52:29 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method G2_General::check_bad_query() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[03-Jun-2025 11:52:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 14
+[03-Jun-2025 11:52:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 18
+[03-Jun-2025 11:52:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 21
+[03-Jun-2025 11:52:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 24
+[03-Jun-2025 11:52:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 29
+[03-Jun-2025 11:52:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-general.php on line 33
+[03-Jun-2025 11:52:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 16
+[03-Jun-2025 11:52:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 21
+[03-Jun-2025 11:52:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 28
+[03-Jun-2025 11:52:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 34
+[03-Jun-2025 11:52:38 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 16
+[03-Jun-2025 11:52:38 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 21
+[03-Jun-2025 11:52:38 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 28
+[03-Jun-2025 11:52:38 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/seguroso/includes/modules/class-google-recaptcha.php on line 34
+[03-Jun-2025 11:52:38 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method G2_General::check_bad_query() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[03-Jun-2025 11:53:33 UTC] PHP Warning:  Undefined variable $optional_headers in /wordpress/wp-content/plugins/seo-nutrition-and-print-for-recipes-by-edamam/edamam.php on line 159
+[03-Jun-2025 11:53:43 UTC] PHP Warning:  Undefined variable $optional_headers in /wordpress/wp-content/plugins/seo-nutrition-and-print-for-recipes-by-edamam/edamam.php on line 159
+[03-Jun-2025 11:53:53 UTC] PHP Warning:  Undefined variable $optional_headers in /wordpress/wp-content/plugins/seo-nutrition-and-print-for-recipes-by-edamam/edamam.php on line 159
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
