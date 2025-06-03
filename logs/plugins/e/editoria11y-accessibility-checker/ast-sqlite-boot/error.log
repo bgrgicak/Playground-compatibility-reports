@@ -2,7 +2,697 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [01-Jun-2025 12:52:31 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19
+Error: [03-Jun-2025 03:41:27 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ePermission_Path_Name" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('epermissions/eP...')
+#2 /internal/eval.php(20): activate_plugin('epermissions/eP...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/epermissions/ePermissions.php on line 30
+[03-Jun-2025 03:41:35 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ePermission_Path_Name" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('epermissions/eP...')
+#2 /internal/eval.php(20): activate_plugin('epermissions/eP...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/epermissions/ePermissions.php on line 30
+[03-Jun-2025 03:41:43 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ePermission_Path_Name" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('epermissions/eP...')
+#2 /internal/eval.php(20): activate_plugin('epermissions/eP...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/epermissions/ePermissions.php on line 30
+[03-Jun-2025 03:42:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)
+BEGIN
+
+   SET @lck_name = 'erpc_lck';
+   SET @lck_result = 0;
+   SET @result = 0;
+
+   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;
+  
+   IF @lck_result = 1 THEN
+   
+       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;
+       
+       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;
+       IF @lck_result = 1 THEN
+             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);
+             SET @result = 1;
+       END IF;
+             
+          
+       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; 
+      
+   END IF;
+
+   RETURN @result;
+
+END</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createFunction"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE FUNCTION...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE FUNCTION...')
+#4 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(144): WP_SQLite_DB->query('CREATE FUNCTION...')
+#5 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(23): ERPC_Install::create_functions_v1_0()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): ERPC_Install::install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erp-co...', false)
+#10 /internal/eval.php(20): activate_plugin('erp-connector/e...')
+#11 {main}</pre>
+ for query CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)
+BEGIN
+
+   SET @lck_name = 'erpc_lck';
+   SET @lck_result = 0;
+   SET @result = 0;
+
+   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;
+  
+   IF @lck_result = 1 THEN
+   
+       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;
+       
+       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;
+       IF @lck_result = 1 THEN
+             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);
+             SET @result = 1;
+       END IF;
+             
+          
+       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; 
+      
+   END IF;
+
+   RETURN @result;
+
+END made by activate_plugin, do_action('activate_erp-connector/erp-connector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ERPC_Install::install, ERPC_Install::create_functions_v1_0, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:42:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)
+BEGIN
+
+   SET @lck_name = 'erpc_lck';
+   SET @lck_result = 0;
+   SET @result = 0;
+
+   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;
+  
+   IF @lck_result = 1 THEN
+   
+       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;
+       
+       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;
+       IF @lck_result = 1 THEN
+             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);
+             SET @result = 1;
+       END IF;
+             
+          
+       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; 
+      
+   END IF;
+
+   RETURN @result;
+
+END</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(144): WP_SQLite_DB->query('CREATE FUNCTION...')
+#2 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(23): ERPC_Install::create_functions_v1_0()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ERPC_Install::install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erp-co...', false)
+#7 /internal/eval.php(20): activate_plugin('erp-connector/e...')
+#8 {main}</pre>
+ for query CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)
+BEGIN
+
+   SET @lck_name = 'erpc_lck';
+   SET @lck_result = 0;
+   SET @result = 0;
+
+   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;
+  
+   IF @lck_result = 1 THEN
+   
+       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;
+       
+       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;
+       IF @lck_result = 1 THEN
+             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);
+             SET @result = 1;
+       END IF;
+             
+          
+       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; 
+      
+   END IF;
+
+   RETURN @result;
+
+END made by activate_plugin, do_action('activate_erp-connector/erp-connector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ERPC_Install::install, ERPC_Install::create_functions_v1_0, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:42:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)
+BEGIN
+
+   SET @lck_name = 'erpc_lck';
+   SET @lck_result = 0;
+   SET @result = 0;
+
+   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;
+  
+   IF @lck_result = 1 THEN
+   
+       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;
+       
+       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;
+       IF @lck_result = 1 THEN
+             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);
+             SET @result = 1;
+       END IF;
+             
+          
+       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; 
+      
+   END IF;
+
+   RETURN @result;
+
+END</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(144): WP_SQLite_DB->query('CREATE FUNCTION...')
+#2 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(23): ERPC_Install::create_functions_v1_0()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ERPC_Install::install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erp-co...', false)
+#7 /internal/eval.php(20): activate_plugin('erp-connector/e...')
+#8 {main}</pre>
+ for query CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)
+BEGIN
+
+   SET @lck_name = 'erpc_lck';
+   SET @lck_result = 0;
+   SET @result = 0;
+
+   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;
+  
+   IF @lck_result = 1 THEN
+   
+       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;
+       
+       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;
+       IF @lck_result = 1 THEN
+             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);
+             SET @result = 1;
+       END IF;
+             
+          
+       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; 
+      
+   END IF;
+
+   RETURN @result;
+
+END made by activate_plugin, do_action('activate_erp-connector/erp-connector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ERPC_Install::install, ERPC_Install::create_functions_v1_0, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property "id" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property "id" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[03-Jun-2025 03:45:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100));</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX in...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX in...')
+#4 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(66): WP_SQLite_DB->query('CREATE INDEX in...')
+#5 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')
+#6 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()
+#7 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:45:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE FULLTEXT...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE FULLTEXT...')
+#4 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(70): WP_SQLite_DB->query('CREATE FULLTEXT...')
+#5 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')
+#6 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()
+#7 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property "id" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property "id" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[03-Jun-2025 03:45:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100));</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX ge...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX ge...')
+#4 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(100): WP_SQLite_DB->query('CREATE INDEX ge...')
+#5 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(135): ETM_Gettext_Table_Creation->check_gettext_original_table()
+#6 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()
+#7 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property "id" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property "id" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[03-Jun-2025 03:45:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX ge...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX ge...')
+#4 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(129): WP_SQLite_DB->query('CREATE INDEX ge...')
+#5 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()
+#6 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()
+#7 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:45:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX ge...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX ge...')
+#4 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(131): WP_SQLite_DB->query('CREATE INDEX ge...')
+#5 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()
+#6 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()
+#7 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:45:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100));</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(66): WP_SQLite_DB->query('CREATE INDEX in...')
+#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')
+#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:45:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FULLTEXT INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(70): WP_SQLite_DB->query('CREATE FULLTEXT...')
+#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')
+#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:45:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100));</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(100): WP_SQLite_DB->query('CREATE INDEX ge...')
+#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(135): ETM_Gettext_Table_Creation->check_gettext_original_table()
+#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:45:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(129): WP_SQLite_DB->query('CREATE INDEX ge...')
+#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()
+#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:45:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(131): WP_SQLite_DB->query('CREATE INDEX ge...')
+#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()
+#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:45:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100));</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(66): WP_SQLite_DB->query('CREATE INDEX in...')
+#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')
+#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:45:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FULLTEXT INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(70): WP_SQLite_DB->query('CREATE FULLTEXT...')
+#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')
+#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:45:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100));</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(100): WP_SQLite_DB->query('CREATE INDEX ge...')
+#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(135): ETM_Gettext_Table_Creation->check_gettext_original_table()
+#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:45:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(129): WP_SQLite_DB->query('CREATE INDEX ge...')
+#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()
+#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:45:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(131): WP_SQLite_DB->query('CREATE INDEX ge...')
+#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()
+#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[03-Jun-2025 03:47:32 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[03-Jun-2025 03:47:34 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[03-Jun-2025 03:47:41 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[03-Jun-2025 03:47:42 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[03-Jun-2025 03:47:50 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[03-Jun-2025 03:47:51 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[03-Jun-2025 03:48:01 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)

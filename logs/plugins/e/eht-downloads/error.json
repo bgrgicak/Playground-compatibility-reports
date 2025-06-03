@@ -6,7 +6,304 @@
     "test": "ast-sqlite-boot",
     "plugin": "eht-downloads",
     "details": "file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237\n        throw new Error(y, { cause: u });\n              ^\n",
-    "log": "/tmp/tmp.xg32L2kXS0"
+    "log": "/tmp/tmp.3r2ERCgiyw"
+  },
+  {
+    "message": "Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30",
+    "level": "FATAL",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:41:27 UTC] PHP Fatal error:  Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30\nStack trace:\n#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()\n#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('epermissions/eP...')\n#2 /internal/eval.php(20): activate_plugin('epermissions/eP...')\n#3 {main}\n  thrown in /wordpress/wp-content/plugins/epermissions/ePermissions.php on line 30",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30",
+    "level": "FATAL",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:41:35 UTC] PHP Fatal error:  Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30\nStack trace:\n#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()\n#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('epermissions/eP...')\n#2 /internal/eval.php(20): activate_plugin('epermissions/eP...')\n#3 {main}\n  thrown in /wordpress/wp-content/plugins/epermissions/ePermissions.php on line 30",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30",
+    "level": "FATAL",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:41:43 UTC] PHP Fatal error:  Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30\nStack trace:\n#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()\n#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('epermissions/eP...')\n#2 /internal/eval.php(20): activate_plugin('epermissions/eP...')\n#3 {main}\n  thrown in /wordpress/wp-content/plugins/epermissions/ePermissions.php on line 30",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: FUNCTION.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:42:27 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)\nBEGIN\n\n   SET @lck_name = 'erpc_lck';\n   SET @lck_result = 0;\n   SET @result = 0;\n\n   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;\n  \n   IF @lck_result = 1 THEN\n   \n       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;\n       \n       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;\n       IF @lck_result = 1 THEN\n             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);\n             SET @result = 1;\n       END IF;\n             \n          \n       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; \n      \n   END IF;\n\n   RETURN @result;\n\nEND</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(144): WP_SQLite_DB->query('CREATE FUNCTION...')\n#2 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(23): ERPC_Install::create_functions_v1_0()\n#3 /wordpress/wp-includes/class-wp-hook.php(324): ERPC_Install::install(false)\n#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)\n#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erp-co...', false)\n#7 /internal/eval.php(20): activate_plugin('erp-connector/e...')\n#8 {main}</pre>\n for query CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)\nBEGIN\n\n   SET @lck_name = 'erpc_lck';\n   SET @lck_result = 0;\n   SET @result = 0;\n\n   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;\n  \n   IF @lck_result = 1 THEN\n   \n       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;\n       \n       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;\n       IF @lck_result = 1 THEN\n             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);\n             SET @result = 1;\n       END IF;\n             \n          \n       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; \n      \n   END IF;\n\n   RETURN @result;\n\nEND made by activate_plugin, do_action('activate_erp-connector/erp-connector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ERPC_Install::install, ERPC_Install::create_functions_v1_0, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: FUNCTION.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:42:35 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)\nBEGIN\n\n   SET @lck_name = 'erpc_lck';\n   SET @lck_result = 0;\n   SET @result = 0;\n\n   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;\n  \n   IF @lck_result = 1 THEN\n   \n       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;\n       \n       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;\n       IF @lck_result = 1 THEN\n             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);\n             SET @result = 1;\n       END IF;\n             \n          \n       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; \n      \n   END IF;\n\n   RETURN @result;\n\nEND</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(144): WP_SQLite_DB->query('CREATE FUNCTION...')\n#2 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(23): ERPC_Install::create_functions_v1_0()\n#3 /wordpress/wp-includes/class-wp-hook.php(324): ERPC_Install::install(false)\n#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)\n#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erp-co...', false)\n#7 /internal/eval.php(20): activate_plugin('erp-connector/e...')\n#8 {main}</pre>\n for query CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)\nBEGIN\n\n   SET @lck_name = 'erpc_lck';\n   SET @lck_result = 0;\n   SET @result = 0;\n\n   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;\n  \n   IF @lck_result = 1 THEN\n   \n       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;\n       \n       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;\n       IF @lck_result = 1 THEN\n             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);\n             SET @result = 1;\n       END IF;\n             \n          \n       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; \n      \n   END IF;\n\n   RETURN @result;\n\nEND made by activate_plugin, do_action('activate_erp-connector/erp-connector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ERPC_Install::install, ERPC_Install::create_functions_v1_0, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:37 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100));</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(66): WP_SQLite_DB->query('CREATE INDEX in...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: FULLTEXT INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:37 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FULLTEXT INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(70): WP_SQLite_DB->query('CREATE FULLTEXT...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:37 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100));</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(100): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(135): ETM_Gettext_Table_Creation->check_gettext_original_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:37 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(129): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:37 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(131): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:47 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100));</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(66): WP_SQLite_DB->query('CREATE INDEX in...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: FULLTEXT INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:47 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FULLTEXT INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(70): WP_SQLite_DB->query('CREATE FULLTEXT...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:47 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100));</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(100): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(135): ETM_Gettext_Table_Creation->check_gettext_original_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:47 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(129): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:47 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(131): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:32 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:34 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:41 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:42 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:50 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "ast-sqlite-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:51 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
     "message": "syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
@@ -14,7 +311,7 @@
     "type": "PHP",
     "test": "ast-sqlite-boot",
     "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:52:31 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
+    "details": "[03-Jun-2025 03:48:01 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
     "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
@@ -23,7 +320,7 @@
     "type": "PHP",
     "test": "ast-sqlite-boot",
     "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:52:40 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
+    "details": "[03-Jun-2025 03:48:10 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
     "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
@@ -32,34 +329,7 @@
     "type": "PHP",
     "test": "ast-sqlite-boot",
     "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:52:49 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
-    "log": "/logs/plugins/e/eht-downloads/error.json"
-  },
-  {
-    "message": "Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
-    "level": "WARNING",
-    "type": "PHP",
-    "test": "ast-sqlite-boot",
-    "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:53:25 UTC] PHP Warning:  Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
-    "log": "/logs/plugins/e/eht-downloads/error.json"
-  },
-  {
-    "message": "Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
-    "level": "WARNING",
-    "type": "PHP",
-    "test": "ast-sqlite-boot",
-    "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:53:36 UTC] PHP Warning:  Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
-    "log": "/logs/plugins/e/eht-downloads/error.json"
-  },
-  {
-    "message": "Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
-    "level": "WARNING",
-    "type": "PHP",
-    "test": "ast-sqlite-boot",
-    "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:53:45 UTC] PHP Warning:  Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
+    "details": "[03-Jun-2025 03:48:20 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
     "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
@@ -68,7 +338,7 @@
     "type": "PHP",
     "test": "ast-sqlite-boot",
     "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:53:56 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/eht-downloads/classes/Folder.php on line 37\n\n    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)\n    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n  [cause]: Error: Error when executing the blueprint step #5 ({\"step\":\"installPlugin\",\"pluginData\":{\"resource\":\"wordpress.org/plugins\",\"slug\":\"eht-downloads\"},\"options\":{\"activate\":true}}) : PHP.run() failed with exit code 255 and the following output: \n      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)\n      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)\n      ... 2 lines matching cause stack trace ...\n      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: \n        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)\n        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)\n        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)\n        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)\n        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)\n        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)\n        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)\n        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)\n        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n      response: PHPResponse {\n        httpStatusCode: 500,\n        headers: {\n          'x-powered-by': [ 'PHP/8.0.30-dev' ],\n          'content-type': [ 'text/html; charset=UTF-8' ]\n        },\n        bytes: Uint8Array(0) [],\n        exitCode: 255,\n        errors: ''\n      },\n      source: 'request'\n    }\n  }\n}\n\n",
+    "details": "[03-Jun-2025 03:49:21 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/eht-downloads/classes/Folder.php on line 37\n\n    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)\n    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n  [cause]: Error: Error when executing the blueprint step #5 ({\"step\":\"installPlugin\",\"pluginData\":{\"resource\":\"wordpress.org/plugins\",\"slug\":\"eht-downloads\"},\"options\":{\"activate\":true}}) : PHP.run() failed with exit code 255 and the following output: \n      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)\n      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)\n      ... 2 lines matching cause stack trace ...\n      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: \n        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)\n        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)\n        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)\n        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)\n        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)\n        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)\n        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)\n        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)\n        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n      response: PHPResponse {\n        httpStatusCode: 500,\n        headers: {\n          'x-powered-by': [ 'PHP/8.0.30-dev' ],\n          'content-type': [ 'text/html; charset=UTF-8' ]\n        },\n        bytes: Uint8Array(0) [],\n        exitCode: 255,\n        errors: ''\n      },\n      source: 'request'\n    }\n  }\n}\n\n",
     "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
@@ -78,7 +348,304 @@
     "test": "asyncify-boot",
     "plugin": "eht-downloads",
     "details": "file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237\n        throw new Error(y, { cause: u });\n              ^\n",
-    "log": "/tmp/tmp.xQeE2poJ0q"
+    "log": "/tmp/tmp.Hy6SZTmSZP"
+  },
+  {
+    "message": "Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30",
+    "level": "FATAL",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:41:27 UTC] PHP Fatal error:  Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30\nStack trace:\n#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()\n#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('epermissions/eP...')\n#2 /internal/eval.php(20): activate_plugin('epermissions/eP...')\n#3 {main}\n  thrown in /wordpress/wp-content/plugins/epermissions/ePermissions.php on line 30",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30",
+    "level": "FATAL",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:41:35 UTC] PHP Fatal error:  Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30\nStack trace:\n#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()\n#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('epermissions/eP...')\n#2 /internal/eval.php(20): activate_plugin('epermissions/eP...')\n#3 {main}\n  thrown in /wordpress/wp-content/plugins/epermissions/ePermissions.php on line 30",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30",
+    "level": "FATAL",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:41:43 UTC] PHP Fatal error:  Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30\nStack trace:\n#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()\n#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('epermissions/eP...')\n#2 /internal/eval.php(20): activate_plugin('epermissions/eP...')\n#3 {main}\n  thrown in /wordpress/wp-content/plugins/epermissions/ePermissions.php on line 30",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: FUNCTION.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:42:27 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)\nBEGIN\n\n   SET @lck_name = 'erpc_lck';\n   SET @lck_result = 0;\n   SET @result = 0;\n\n   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;\n  \n   IF @lck_result = 1 THEN\n   \n       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;\n       \n       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;\n       IF @lck_result = 1 THEN\n             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);\n             SET @result = 1;\n       END IF;\n             \n          \n       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; \n      \n   END IF;\n\n   RETURN @result;\n\nEND</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(144): WP_SQLite_DB->query('CREATE FUNCTION...')\n#2 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(23): ERPC_Install::create_functions_v1_0()\n#3 /wordpress/wp-includes/class-wp-hook.php(324): ERPC_Install::install(false)\n#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)\n#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erp-co...', false)\n#7 /internal/eval.php(20): activate_plugin('erp-connector/e...')\n#8 {main}</pre>\n for query CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)\nBEGIN\n\n   SET @lck_name = 'erpc_lck';\n   SET @lck_result = 0;\n   SET @result = 0;\n\n   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;\n  \n   IF @lck_result = 1 THEN\n   \n       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;\n       \n       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;\n       IF @lck_result = 1 THEN\n             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);\n             SET @result = 1;\n       END IF;\n             \n          \n       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; \n      \n   END IF;\n\n   RETURN @result;\n\nEND made by activate_plugin, do_action('activate_erp-connector/erp-connector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ERPC_Install::install, ERPC_Install::create_functions_v1_0, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: FUNCTION.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:42:35 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)\nBEGIN\n\n   SET @lck_name = 'erpc_lck';\n   SET @lck_result = 0;\n   SET @result = 0;\n\n   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;\n  \n   IF @lck_result = 1 THEN\n   \n       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;\n       \n       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;\n       IF @lck_result = 1 THEN\n             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);\n             SET @result = 1;\n       END IF;\n             \n          \n       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; \n      \n   END IF;\n\n   RETURN @result;\n\nEND</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(144): WP_SQLite_DB->query('CREATE FUNCTION...')\n#2 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(23): ERPC_Install::create_functions_v1_0()\n#3 /wordpress/wp-includes/class-wp-hook.php(324): ERPC_Install::install(false)\n#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)\n#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erp-co...', false)\n#7 /internal/eval.php(20): activate_plugin('erp-connector/e...')\n#8 {main}</pre>\n for query CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)\nBEGIN\n\n   SET @lck_name = 'erpc_lck';\n   SET @lck_result = 0;\n   SET @result = 0;\n\n   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;\n  \n   IF @lck_result = 1 THEN\n   \n       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;\n       \n       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;\n       IF @lck_result = 1 THEN\n             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);\n             SET @result = 1;\n       END IF;\n             \n          \n       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; \n      \n   END IF;\n\n   RETURN @result;\n\nEND made by activate_plugin, do_action('activate_erp-connector/erp-connector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ERPC_Install::install, ERPC_Install::create_functions_v1_0, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:37 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100));</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(66): WP_SQLite_DB->query('CREATE INDEX in...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: FULLTEXT INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:37 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FULLTEXT INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(70): WP_SQLite_DB->query('CREATE FULLTEXT...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:37 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100));</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(100): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(135): ETM_Gettext_Table_Creation->check_gettext_original_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:37 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(129): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:37 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(131): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:47 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100));</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(66): WP_SQLite_DB->query('CREATE INDEX in...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: FULLTEXT INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:47 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FULLTEXT INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(70): WP_SQLite_DB->query('CREATE FULLTEXT...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:47 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100));</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(100): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(135): ETM_Gettext_Table_Creation->check_gettext_original_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:47 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(129): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:47 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(131): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:32 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:34 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:41 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:42 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:50 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "asyncify-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:51 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
     "message": "syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
@@ -86,7 +653,7 @@
     "type": "PHP",
     "test": "asyncify-boot",
     "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:52:31 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
+    "details": "[03-Jun-2025 03:48:01 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
     "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
@@ -95,7 +662,7 @@
     "type": "PHP",
     "test": "asyncify-boot",
     "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:52:40 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
+    "details": "[03-Jun-2025 03:48:10 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
     "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
@@ -104,34 +671,7 @@
     "type": "PHP",
     "test": "asyncify-boot",
     "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:52:49 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
-    "log": "/logs/plugins/e/eht-downloads/error.json"
-  },
-  {
-    "message": "Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
-    "level": "WARNING",
-    "type": "PHP",
-    "test": "asyncify-boot",
-    "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:53:25 UTC] PHP Warning:  Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
-    "log": "/logs/plugins/e/eht-downloads/error.json"
-  },
-  {
-    "message": "Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
-    "level": "WARNING",
-    "type": "PHP",
-    "test": "asyncify-boot",
-    "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:53:36 UTC] PHP Warning:  Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
-    "log": "/logs/plugins/e/eht-downloads/error.json"
-  },
-  {
-    "message": "Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
-    "level": "WARNING",
-    "type": "PHP",
-    "test": "asyncify-boot",
-    "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:53:45 UTC] PHP Warning:  Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
+    "details": "[03-Jun-2025 03:48:20 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
     "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
@@ -140,7 +680,7 @@
     "type": "PHP",
     "test": "asyncify-boot",
     "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:53:56 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/eht-downloads/classes/Folder.php on line 37",
+    "details": "[03-Jun-2025 03:49:21 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/eht-downloads/classes/Folder.php on line 37",
     "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
@@ -149,7 +689,7 @@
     "type": "PHP",
     "test": "asyncify-boot",
     "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:54:03 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/eht-downloads/classes/Folder.php on line 37\n\n    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)\n    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n  [cause]: Error: Error when executing the blueprint step #1 ({\"step\":\"installPlugin\",\"pluginData\":{\"resource\":\"wordpress.org/plugins\",\"slug\":\"eht-downloads\"},\"options\":{\"activate\":true}}) : PHP.run() failed with exit code 255 and the following output: \n      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)\n      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)\n      ... 2 lines matching cause stack trace ...\n      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: \n        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)\n        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)\n        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)\n        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)\n        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)\n        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)\n        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)\n        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)\n        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n      response: PHPResponse {\n        httpStatusCode: 500,\n        headers: {\n          'x-powered-by': [ 'PHP/8.0.30-dev' ],\n          'content-type': [ 'text/html; charset=UTF-8' ]\n        },\n        bytes: Uint8Array(0) [],\n        exitCode: 255,\n        errors: ''\n      },\n      source: 'request'\n    }\n  }\n}\n\n",
+    "details": "[03-Jun-2025 03:49:29 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/eht-downloads/classes/Folder.php on line 37\n\n    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)\n    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n  [cause]: Error: Error when executing the blueprint step #1 ({\"step\":\"installPlugin\",\"pluginData\":{\"resource\":\"wordpress.org/plugins\",\"slug\":\"eht-downloads\"},\"options\":{\"activate\":true}}) : PHP.run() failed with exit code 255 and the following output: \n      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)\n      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)\n      ... 2 lines matching cause stack trace ...\n      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: \n        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)\n        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)\n        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)\n        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)\n        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)\n        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)\n        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)\n        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)\n        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n      response: PHPResponse {\n        httpStatusCode: 500,\n        headers: {\n          'x-powered-by': [ 'PHP/8.0.30-dev' ],\n          'content-type': [ 'text/html; charset=UTF-8' ]\n        },\n        bytes: Uint8Array(0) [],\n        exitCode: 255,\n        errors: ''\n      },\n      source: 'request'\n    }\n  }\n}\n\n",
     "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
@@ -159,7 +699,304 @@
     "test": "jspi-boot",
     "plugin": "eht-downloads",
     "details": "file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237\n        throw new Error(y, { cause: u });\n              ^\n",
-    "log": "/tmp/tmp.XN0EIswKl6"
+    "log": "/tmp/tmp.KSkzNSQFR6"
+  },
+  {
+    "message": "Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30",
+    "level": "FATAL",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:41:27 UTC] PHP Fatal error:  Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30\nStack trace:\n#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()\n#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('epermissions/eP...')\n#2 /internal/eval.php(20): activate_plugin('epermissions/eP...')\n#3 {main}\n  thrown in /wordpress/wp-content/plugins/epermissions/ePermissions.php on line 30",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30",
+    "level": "FATAL",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:41:35 UTC] PHP Fatal error:  Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30\nStack trace:\n#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()\n#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('epermissions/eP...')\n#2 /internal/eval.php(20): activate_plugin('epermissions/eP...')\n#3 {main}\n  thrown in /wordpress/wp-content/plugins/epermissions/ePermissions.php on line 30",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30",
+    "level": "FATAL",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:41:43 UTC] PHP Fatal error:  Uncaught Error: Undefined constant \"ePermission_Path_Name\" in /wordpress/wp-content/plugins/epermissions/ePermissions.php:30\nStack trace:\n#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()\n#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('epermissions/eP...')\n#2 /internal/eval.php(20): activate_plugin('epermissions/eP...')\n#3 {main}\n  thrown in /wordpress/wp-content/plugins/epermissions/ePermissions.php on line 30",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: FUNCTION.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:42:27 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)\nBEGIN\n\n   SET @lck_name = 'erpc_lck';\n   SET @lck_result = 0;\n   SET @result = 0;\n\n   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;\n  \n   IF @lck_result = 1 THEN\n   \n       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;\n       \n       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;\n       IF @lck_result = 1 THEN\n             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);\n             SET @result = 1;\n       END IF;\n             \n          \n       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; \n      \n   END IF;\n\n   RETURN @result;\n\nEND</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(144): WP_SQLite_DB->query('CREATE FUNCTION...')\n#2 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(23): ERPC_Install::create_functions_v1_0()\n#3 /wordpress/wp-includes/class-wp-hook.php(324): ERPC_Install::install(false)\n#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)\n#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erp-co...', false)\n#7 /internal/eval.php(20): activate_plugin('erp-connector/e...')\n#8 {main}</pre>\n for query CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)\nBEGIN\n\n   SET @lck_name = 'erpc_lck';\n   SET @lck_result = 0;\n   SET @result = 0;\n\n   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;\n  \n   IF @lck_result = 1 THEN\n   \n       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;\n       \n       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;\n       IF @lck_result = 1 THEN\n             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);\n             SET @result = 1;\n       END IF;\n             \n          \n       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; \n      \n   END IF;\n\n   RETURN @result;\n\nEND made by activate_plugin, do_action('activate_erp-connector/erp-connector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ERPC_Install::install, ERPC_Install::create_functions_v1_0, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: FUNCTION.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:42:35 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)\nBEGIN\n\n   SET @lck_name = 'erpc_lck';\n   SET @lck_result = 0;\n   SET @result = 0;\n\n   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;\n  \n   IF @lck_result = 1 THEN\n   \n       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;\n       \n       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;\n       IF @lck_result = 1 THEN\n             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);\n             SET @result = 1;\n       END IF;\n             \n          \n       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; \n      \n   END IF;\n\n   RETURN @result;\n\nEND</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(144): WP_SQLite_DB->query('CREATE FUNCTION...')\n#2 /wordpress/wp-content/plugins/erp-connector/includes/class-erpc-install.php(23): ERPC_Install::create_functions_v1_0()\n#3 /wordpress/wp-includes/class-wp-hook.php(324): ERPC_Install::install(false)\n#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)\n#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erp-co...', false)\n#7 /internal/eval.php(20): activate_plugin('erp-connector/e...')\n#8 {main}</pre>\n for query CREATE FUNCTION `wp_erpc_do_lock`(`name` VARCHAR(100), `timeout` INT, `owner` INT) RETURNS int(11)\nBEGIN\n\n   SET @lck_name = 'erpc_lck';\n   SET @lck_result = 0;\n   SET @result = 0;\n\n   SELECT GET_LOCK(@lck_name, 10) INTO @lck_result;\n  \n   IF @lck_result = 1 THEN\n   \n       DELETE FROM wp_erpc_locks WHERE TIMESTAMPDIFF(SECOND, lock_time, CURRENT_TIMESTAMP) >= lock_timeout;\n       \n       SELECT 0 INTO @lck_result FROM wp_erpc_locks WHERE lock_name = name;\n       IF @lck_result = 1 THEN\n             INSERT INTO `wp_erpc_locks`(`lock_name`, `lock_timeout`, `lock_owner`) VALUES (name, timeout, owner);\n             SET @result = 1;\n       END IF;\n             \n          \n       SELECT RELEASE_LOCK(@lck_name) INTO @lck_result; \n      \n   END IF;\n\n   RETURN @result;\n\nEND made by activate_plugin, do_action('activate_erp-connector/erp-connector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ERPC_Install::install, ERPC_Install::create_functions_v1_0, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "level": "WARNING",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:26 UTC] PHP Warning:  Attempt to read property \"id\" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:37 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100));</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(66): WP_SQLite_DB->query('CREATE INDEX in...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: FULLTEXT INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:37 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FULLTEXT INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(70): WP_SQLite_DB->query('CREATE FULLTEXT...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:37 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100));</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(100): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(135): ETM_Gettext_Table_Creation->check_gettext_original_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:37 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(129): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:37 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(131): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:47 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100));</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(66): WP_SQLite_DB->query('CREATE INDEX in...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX index_name ON `wp_etm_gettext_en_gb` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: FULLTEXT INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:47 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FULLTEXT INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(70): WP_SQLite_DB->query('CREATE FULLTEXT...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(132): ETM_Gettext_Table_Creation->check_gettext_table('en_GB')\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE FULLTEXT INDEX original_fulltext ON `wp_etm_gettext_en_gb`(original); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:47 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100));</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(100): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(135): ETM_Gettext_Table_Creation->check_gettext_original_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_index_original ON `wp_etm_gettext_original_strings` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:47 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(129): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_index_original_id ON `wp_etm_gettext_original_meta` (original_id); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Unknown create type: INDEX.",
+    "level": "FATAL",
+    "type": "SQL",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:45:47 UTC] WordPress database error <div style=\"clear:both\">&nbsp;</div>\n<div class=\"queries\" style=\"clear:both;margin-bottom:2px;border:red dotted thin;\">\n<p>MySQL query:</p>\n<p>CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key);</p>\n<p>Queries made or created this session were:</p>\n<ol>\n<li>Executing: BEGIN | (no parameters)</li>\n<li>Executing: ROLLBACK | (no parameters)</li>\n</ol>\n</div>\n<div style=\"clear:both;margin-bottom:2px;border:red dotted thin;\" class=\"error_message\" style=\"border-bottom:dotted blue thin;\">\nError occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.\n</div>\n<p>Backtrace:</p>\n<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()\n#1 /wordpress/wp-content/plugins/etranslation-multilingual/includes/queries/class-gettext-table-creation.php(131): WP_SQLite_DB->query('CREATE INDEX ge...')\n#2 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(136): ETM_Gettext_Table_Creation->check_gettext_original_meta_table()\n#3 /wordpress/wp-content/plugins/etranslation-multilingual/includes/class-upgrade.php(47): ETM_Upgrade->check_if_gettext_tables_exist()\n#4 /wordpress/wp-includes/class-wp-hook.php(322): ETM_Upgrade->check_for_necessary_updates()\n#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)\n#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')\n#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')\n#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')\n#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')\n#11 {main}</pre>\n for query CREATE INDEX gettext_meta_key ON `wp_etm_gettext_original_meta`(meta_key); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ETM_Upgrade->check_for_necessary_updates, ETM_Upgrade->check_if_gettext_tables_exist, ETM_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:32 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:34 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:41 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:42 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:50 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
+  },
+  {
+    "message": "Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "level": "NOTICE",
+    "type": "PHP",
+    "test": "jspi-boot",
+    "plugin": "eht-downloads",
+    "details": "[03-Jun-2025 03:47:51 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121",
+    "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
     "message": "syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
@@ -167,7 +1004,7 @@
     "type": "PHP",
     "test": "jspi-boot",
     "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:52:31 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
+    "details": "[03-Jun-2025 03:48:01 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
     "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
@@ -176,7 +1013,7 @@
     "type": "PHP",
     "test": "jspi-boot",
     "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:52:40 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
+    "details": "[03-Jun-2025 03:48:10 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
     "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
@@ -185,34 +1022,7 @@
     "type": "PHP",
     "test": "jspi-boot",
     "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:52:49 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
-    "log": "/logs/plugins/e/eht-downloads/error.json"
-  },
-  {
-    "message": "Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
-    "level": "WARNING",
-    "type": "PHP",
-    "test": "jspi-boot",
-    "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:53:25 UTC] PHP Warning:  Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
-    "log": "/logs/plugins/e/eht-downloads/error.json"
-  },
-  {
-    "message": "Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
-    "level": "WARNING",
-    "type": "PHP",
-    "test": "jspi-boot",
-    "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:53:36 UTC] PHP Warning:  Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
-    "log": "/logs/plugins/e/eht-downloads/error.json"
-  },
-  {
-    "message": "Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
-    "level": "WARNING",
-    "type": "PHP",
-    "test": "jspi-boot",
-    "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:53:45 UTC] PHP Warning:  Undefined variable $args in /wordpress/wp-content/plugins/effortless-marketing/effortless-marketing.php on line 151",
+    "details": "[03-Jun-2025 03:48:20 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/editoria11y-accessibility-checker/src/controller/class-editoria11y-api-results.php on line 19",
     "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
@@ -221,7 +1031,7 @@
     "type": "PHP",
     "test": "jspi-boot",
     "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:53:56 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/eht-downloads/classes/Folder.php on line 37",
+    "details": "[03-Jun-2025 03:49:21 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/eht-downloads/classes/Folder.php on line 37",
     "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
@@ -230,7 +1040,7 @@
     "type": "PHP",
     "test": "jspi-boot",
     "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:54:03 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/eht-downloads/classes/Folder.php on line 37",
+    "details": "[03-Jun-2025 03:49:29 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/eht-downloads/classes/Folder.php on line 37",
     "log": "/logs/plugins/e/eht-downloads/error.json"
   },
   {
@@ -239,7 +1049,7 @@
     "type": "PHP",
     "test": "jspi-boot",
     "plugin": "eht-downloads",
-    "details": "[01-Jun-2025 12:54:11 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/eht-downloads/classes/Folder.php on line 37\n\n    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)\n    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n  [cause]: Error: Error when executing the blueprint step #1 ({\"step\":\"installPlugin\",\"pluginData\":{\"resource\":\"wordpress.org/plugins\",\"slug\":\"eht-downloads\"},\"options\":{\"activate\":true}}) : PHP.run() failed with exit code 255 and the following output: \n      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)\n      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)\n      ... 2 lines matching cause stack trace ...\n      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: \n        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)\n        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)\n        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)\n        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)\n        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)\n        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)\n        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)\n        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)\n        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n      response: PHPResponse {\n        httpStatusCode: 500,\n        headers: {\n          'x-powered-by': [ 'PHP/8.0.30-dev' ],\n          'content-type': [ 'text/html; charset=UTF-8' ]\n        },\n        bytes: Uint8Array(0) [],\n        exitCode: 255,\n        errors: ''\n      },\n      source: 'request'\n    }\n  }\n}\n\n",
+    "details": "[03-Jun-2025 03:49:36 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/eht-downloads/classes/Folder.php on line 37\n\n    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)\n    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n  [cause]: Error: Error when executing the blueprint step #1 ({\"step\":\"installPlugin\",\"pluginData\":{\"resource\":\"wordpress.org/plugins\",\"slug\":\"eht-downloads\"},\"options\":{\"activate\":true}}) : PHP.run() failed with exit code 255 and the following output: \n      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)\n      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)\n      ... 2 lines matching cause stack trace ...\n      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: \n        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)\n        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)\n        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)\n        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)\n        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)\n        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)\n        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)\n        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)\n        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {\n      response: PHPResponse {\n        httpStatusCode: 500,\n        headers: {\n          'x-powered-by': [ 'PHP/8.0.30-dev' ],\n          'content-type': [ 'text/html; charset=UTF-8' ]\n        },\n        bytes: Uint8Array(0) [],\n        exitCode: 255,\n        errors: ''\n      },\n      source: 'request'\n    }\n  }\n}\n\n",
     "log": "/logs/plugins/e/eht-downloads/error.json"
   }
 ]
