@@ -465,69 +465,18 @@ Backt
 | SQLSTATE[HY000]: General error: 1 no such table: wp_StickWithMe. | ast-sqlite-boot | random-image | [View logs](/logs/plugins/r/random-image/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_StickWithMe. | asyncify-boot | random-image | [View logs](/logs/plugins/r/random-image/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_StickWithMe. | jspi-boot | random-image | [View logs](/logs/plugins/r/random-image/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "comment": syntax error. | ast-sqlite-boot | recent-twitter-readers | [View logs](/logs/plugins/r/recent-twitter-readers/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "comment": syntax error. | asyncify-boot | recent-twitter-readers | [View logs](/logs/plugins/r/recent-twitter-readers/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "comment": syntax error. | jspi-boot | recent-twitter-readers | [View logs](/logs/plugins/r/recent-twitter-readers/error.json) |
-| Unexpected token in MySQL query: allow. | ast-sqlite-boot | recent-twitter-readers | [View logs](/logs/plugins/r/recent-twitter-readers/error.json) |
-| Unexpected token in MySQL query: allow. | asyncify-boot | recent-twitter-readers | [View logs](/logs/plugins/r/recent-twitter-readers/error.json) |
-| Unexpected token in MySQL query: allow. | jspi-boot | recent-twitter-readers | [View logs](/logs/plugins/r/recent-twitter-readers/error.json) |
-| Unknown drop type: table. | ast-sqlite-boot | recent-twitter-readers | [View logs](/logs/plugins/r/recent-twitter-readers/error.json) |
-| Unknown drop type: table. | asyncify-boot | recent-twitter-readers | [View logs](/logs/plugins/r/recent-twitter-readers/error.json) |
-| Unknown drop type: table. | jspi-boot | recent-twitter-readers | [View logs](/logs/plugins/r/recent-twitter-readers/error.json) |
-| Unknown create type: FUNCTION. | ast-sqlite-boot | seguroso | [View logs](/logs/plugins/s/seguroso/error.json) |
-| Unknown create type: FUNCTION. | asyncify-boot | seguroso | [View logs](/logs/plugins/s/seguroso/error.json) |
-| Unknown create type: FUNCTION. | jspi-boot | seguroso | [View logs](/logs/plugins/s/seguroso/error.json) |
-| Unknown drop type: FUNCTION. | ast-sqlite-boot | seguroso | [View logs](/logs/plugins/s/seguroso/error.json) |
-| Unknown drop type: FUNCTION. | asyncify-boot | seguroso | [View logs](/logs/plugins/s/seguroso/error.json) |
-| Unknown drop type: FUNCTION. | jspi-boot | seguroso | [View logs](/logs/plugins/s/seguroso/error.json) |
-| Unknown create type: FUNCTION. | ast-sqlite-boot | sencha-touch | [View logs](/logs/plugins/s/sencha-touch/error.json) |
-| Unknown create type: FUNCTION. | asyncify-boot | sencha-touch | [View logs](/logs/plugins/s/sencha-touch/error.json) |
-| Unknown create type: FUNCTION. | jspi-boot | sencha-touch | [View logs](/logs/plugins/s/sencha-touch/error.json) |
-| Unknown drop type: FUNCTION. | ast-sqlite-boot | sencha-touch | [View logs](/logs/plugins/s/sencha-touch/error.json) |
-| Unknown drop type: FUNCTION. | asyncify-boot | sencha-touch | [View logs](/logs/plugins/s/sencha-touch/error.json) |
-| Unknown drop type: FUNCTION. | jspi-boot | sencha-touch | [View logs](/logs/plugins/s/sencha-touch/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET. | ast-sqlite-boot | simple-archive-generator | [View logs](/logs/plugins/s/simple-archive-generator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET. | asyncify-boot | simple-archive-generator | [View logs](/logs/plugins/s/simple-archive-generator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET. | jspi-boot | simple-archive-generator | [View logs](/logs/plugins/s/simple-archive-generator/error.json) |
-| Unknown create type: FUNCTION. | ast-sqlite-boot | simple-basket-with-robokassa | [View logs](/logs/plugins/s/simple-basket-with-robokassa/error.json) |
-| Unknown create type: FUNCTION. | asyncify-boot | simple-basket-with-robokassa | [View logs](/logs/plugins/s/simple-basket-with-robokassa/error.json) |
-| Unknown create type: FUNCTION. | jspi-boot | simple-basket-with-robokassa | [View logs](/logs/plugins/s/simple-basket-with-robokassa/error.json) |
-| Unknown drop type: FUNCTION. | ast-sqlite-boot | simple-basket-with-robokassa | [View logs](/logs/plugins/s/simple-basket-with-robokassa/error.json) |
-| Unknown drop type: FUNCTION. | asyncify-boot | simple-basket-with-robokassa | [View logs](/logs/plugins/s/simple-basket-with-robokassa/error.json) |
-| Unknown drop type: FUNCTION. | jspi-boot | simple-basket-with-robokassa | [View logs](/logs/plugins/s/simple-basket-with-robokassa/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET. | ast-sqlite-boot | simple-facebook-connect2 | [View logs](/logs/plugins/s/simple-facebook-connect2/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET. | asyncify-boot | simple-facebook-connect2 | [View logs](/logs/plugins/s/simple-facebook-connect2/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET. | jspi-boot | simple-facebook-connect2 | [View logs](/logs/plugins/s/simple-facebook-connect2/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | ast-sqlite-boot | sitepackage-newsletter-opt-in | [View logs](/logs/plugins/s/sitepackage-newsletter-opt-in/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | asyncify-boot | sitepackage-newsletter-opt-in | [View logs](/logs/plugins/s/sitepackage-newsletter-opt-in/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | jspi-boot | sitepackage-newsletter-opt-in | [View logs](/logs/plugins/s/sitepackage-newsletter-opt-in/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: uni_hash. | ast-sqlite-boot | sitepackage-newsletter-opt-in | [View logs](/logs/plugins/s/sitepackage-newsletter-opt-in/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: uni_hash. | asyncify-boot | sitepackage-newsletter-opt-in | [View logs](/logs/plugins/s/sitepackage-newsletter-opt-in/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: uni_hash. | jspi-boot | sitepackage-newsletter-opt-in | [View logs](/logs/plugins/s/sitepackage-newsletter-opt-in/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | spoki | [View logs](/logs/plugins/s/spoki/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | spoki | [View logs](/logs/plugins/s/spoki/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | spoki | [View logs](/logs/plugins/s/spoki/error.json) |
-| Table not found. | ast-sqlite-boot | spoki | [View logs](/logs/plugins/s/spoki/error.json) |
-| Table not found. | asyncify-boot | spoki | [View logs](/logs/plugins/s/spoki/error.json) |
-| Table not found. | jspi-boot | spoki | [View logs](/logs/plugins/s/spoki/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | st-google-map | [View logs](/logs/plugins/s/st-google-map/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | st-google-map | [View logs](/logs/plugins/s/st-google-map/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | st-google-map | [View logs](/logs/plugins/s/st-google-map/error.json) |
-| Table not found. | ast-sqlite-boot | st-google-map | [View logs](/logs/plugins/s/st-google-map/error.json) |
-| Table not found. | asyncify-boot | st-google-map | [View logs](/logs/plugins/s/st-google-map/error.json) |
-| Table not found. | jspi-boot | st-google-map | [View logs](/logs/plugins/s/st-google-map/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | ast-sqlite-boot | stackoverflow-answers-widget | [View logs](/logs/plugins/s/stackoverflow-answers-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | asyncify-boot | stackoverflow-answers-widget | [View logs](/logs/plugins/s/stackoverflow-answers-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | jspi-boot | stackoverflow-answers-widget | [View logs](/logs/plugins/s/stackoverflow-answers-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: uni_hash. | ast-sqlite-boot | stackoverflow-answers-widget | [View logs](/logs/plugins/s/stackoverflow-answers-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: uni_hash. | asyncify-boot | stackoverflow-answers-widget | [View logs](/logs/plugins/s/stackoverflow-answers-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: uni_hash. | jspi-boot | stackoverflow-answers-widget | [View logs](/logs/plugins/s/stackoverflow-answers-widget/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | stonehenge-em-gateway-selector | [View logs](/logs/plugins/s/stonehenge-em-gateway-selector/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | stonehenge-em-gateway-selector | [View logs](/logs/plugins/s/stonehenge-em-gateway-selector/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | stonehenge-em-gateway-selector | [View logs](/logs/plugins/s/stonehenge-em-gateway-selector/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET. | ast-sqlite-boot | swift-callouts | [View logs](/logs/plugins/s/swift-callouts/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET. | asyncify-boot | swift-callouts | [View logs](/logs/plugins/s/swift-callouts/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET. | jspi-boot | swift-callouts | [View logs](/logs/plugins/s/swift-callouts/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | asyncify-boot | wordpress-hit-counter | [View logs](/logs/plugins/w/wordpress-hit-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | jspi-boot | wordpress-hit-counter | [View logs](/logs/plugins/w/wordpress-hit-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpp_predict_entries. | ast-sqlite-boot | wp-botchecker | [View logs](/logs/plugins/w/wp-botchecker/error.json) |
