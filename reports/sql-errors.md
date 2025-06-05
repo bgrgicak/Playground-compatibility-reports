@@ -145,12 +145,6 @@ Backt
 | Unknown create type: INDEX. | ast-sqlite-boot | iglobal-woocommerce-extension | [View logs](/logs/plugins/i/iglobal-woocommerce-extension/error.json) |
 | Unknown create type: INDEX. | asyncify-boot | iglobal-woocommerce-extension | [View logs](/logs/plugins/i/iglobal-woocommerce-extension/error.json) |
 | Unknown create type: INDEX. | jspi-boot | iglobal-woocommerce-extension | [View logs](/logs/plugins/i/iglobal-woocommerce-extension/error.json) |
-| Unknown operation: MODIFY. | ast-sqlite-boot | nanoplazo-payment-gateway-for-woocommerce | [View logs](/logs/plugins/n/nanoplazo-payment-gateway-for-woocommerce/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | nanoplazo-payment-gateway-for-woocommerce | [View logs](/logs/plugins/n/nanoplazo-payment-gateway-for-woocommerce/error.json) |
-| Unknown operation: MODIFY. | jspi-boot | nanoplazo-payment-gateway-for-woocommerce | [View logs](/logs/plugins/n/nanoplazo-payment-gateway-for-woocommerce/error.json) |
-| Unknown show type: KEYS FROM. | ast-sqlite-boot | nanoplazo-payment-gateway-for-woocommerce | [View logs](/logs/plugins/n/nanoplazo-payment-gateway-for-woocommerce/error.json) |
-| Unknown show type: KEYS FROM. | asyncify-boot | nanoplazo-payment-gateway-for-woocommerce | [View logs](/logs/plugins/n/nanoplazo-payment-gateway-for-woocommerce/error.json) |
-| Unknown show type: KEYS FROM. | jspi-boot | nanoplazo-payment-gateway-for-woocommerce | [View logs](/logs/plugins/n/nanoplazo-payment-gateway-for-woocommerce/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | oganro-payment-gateway-for-seylan-bank | [View logs](/logs/plugins/o/oganro-payment-gateway-for-seylan-bank/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | oganro-payment-gateway-for-seylan-bank | [View logs](/logs/plugins/o/oganro-payment-gateway-for-seylan-bank/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | oganro-payment-gateway-for-seylan-bank | [View logs](/logs/plugins/o/oganro-payment-gateway-for-seylan-bank/error.json) |
@@ -347,112 +341,13 @@ Backt
 | Unknown show type: KEYS FROM. | asyncify-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
 | Unknown show type: KEYS FROM. | jspi-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | official-easyvideoplayer-plugin | [View logs](/logs/plugins/o/official-easyvideoplayer-plugin/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | post-relation-widget | [View logs](/logs/plugins/p/post-relation-widget/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | post-relation-widget | [View logs](/logs/plugins/p/post-relation-widget/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | post-relation-widget | [View logs](/logs/plugins/p/post-relation-widget/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | paytrail-for-woocommerce | [View logs](/logs/plugins/p/paytrail-for-woocommerce/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | paytrail-for-woocommerce | [View logs](/logs/plugins/p/paytrail-for-woocommerce/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | paytrail-for-woocommerce | [View logs](/logs/plugins/p/paytrail-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | ast-sqlite-boot | paytrail-for-woocommerce | [View logs](/logs/plugins/p/paytrail-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | asyncify-boot | paytrail-for-woocommerce | [View logs](/logs/plugins/p/paytrail-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | paytrail-for-woocommerce | [View logs](/logs/plugins/p/paytrail-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions. | ast-sqlite-boot | paytrail-for-woocommerce | [View logs](/logs/plugins/p/paytrail-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions. | asyncify-boot | paytrail-for-woocommerce | [View logs](/logs/plugins/p/paytrail-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions. | jspi-boot | paytrail-for-woocommerce | [View logs](/logs/plugins/p/paytrail-for-woocommerce/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | progression-contact-form | [View logs](/logs/plugins/p/progression-contact-form/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | progression-contact-form | [View logs](/logs/plugins/p/progression-contact-form/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | progression-contact-form | [View logs](/logs/plugins/p/progression-contact-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | progression-contact-form | [View logs](/logs/plugins/p/progression-contact-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | progression-contact-form | [View logs](/logs/plugins/p/progression-contact-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | progression-contact-form | [View logs](/logs/plugins/p/progression-contact-form/error.json) |
-| Unknown operation: MODIFY. | ast-sqlite-boot | progression-contact-form | [View logs](/logs/plugins/p/progression-contact-form/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | progression-contact-form | [View logs](/logs/plugins/p/progression-contact-form/error.json) |
-| Unknown operation: MODIFY. | jspi-boot | progression-contact-form | [View logs](/logs/plugins/p/progression-contact-form/error.json) |
-| Unknown operation: MODIFY. | ast-sqlite-boot | post-preview-card | [View logs](/logs/plugins/p/post-preview-card/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | post-preview-card | [View logs](/logs/plugins/p/post-preview-card/error.json) |
-| Unknown operation: MODIFY. | jspi-boot | post-preview-card | [View logs](/logs/plugins/p/post-preview-card/error.json) |
-| Unknown show type: KEYS FROM. | ast-sqlite-boot | post-preview-card | [View logs](/logs/plugins/p/post-preview-card/error.json) |
-| Unknown show type: KEYS FROM. | asyncify-boot | post-preview-card | [View logs](/logs/plugins/p/post-preview-card/error.json) |
-| Unknown show type: KEYS FROM. | jspi-boot | post-preview-card | [View logs](/logs/plugins/p/post-preview-card/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | publish | [View logs](/logs/plugins/p/publish/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | publish | [View logs](/logs/plugins/p/publish/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | publish | [View logs](/logs/plugins/p/publish/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | ast-sqlite-boot | publish | [View logs](/logs/plugins/p/publish/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | asyncify-boot | publish | [View logs](/logs/plugins/p/publish/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | publish | [View logs](/logs/plugins/p/publish/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions. | ast-sqlite-boot | publish | [View logs](/logs/plugins/p/publish/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions. | asyncify-boot | publish | [View logs](/logs/plugins/p/publish/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions. | jspi-boot | publish | [View logs](/logs/plugins/p/publish/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | plugin-de-facebook-me-gusta | [View logs](/logs/plugins/p/plugin-de-facebook-me-gusta/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | plugin-de-facebook-me-gusta | [View logs](/logs/plugins/p/plugin-de-facebook-me-gusta/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | plugin-de-facebook-me-gusta | [View logs](/logs/plugins/p/plugin-de-facebook-me-gusta/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | plugin-de-facebook-me-gusta | [View logs](/logs/plugins/p/plugin-de-facebook-me-gusta/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | plugin-de-facebook-me-gusta | [View logs](/logs/plugins/p/plugin-de-facebook-me-gusta/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | plugin-de-facebook-me-gusta | [View logs](/logs/plugins/p/plugin-de-facebook-me-gusta/error.json) |
-| Unknown operation: MODIFY. | ast-sqlite-boot | plugin-de-facebook-me-gusta | [View logs](/logs/plugins/p/plugin-de-facebook-me-gusta/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | plugin-de-facebook-me-gusta | [View logs](/logs/plugins/p/plugin-de-facebook-me-gusta/error.json) |
-| Unknown operation: MODIFY. | jspi-boot | plugin-de-facebook-me-gusta | [View logs](/logs/plugins/p/plugin-de-facebook-me-gusta/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | pretty-shortlinks | [View logs](/logs/plugins/p/pretty-shortlinks/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | pretty-shortlinks | [View logs](/logs/plugins/p/pretty-shortlinks/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | pretty-shortlinks | [View logs](/logs/plugins/p/pretty-shortlinks/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | paypalpro-zp-gateway | [View logs](/logs/plugins/p/paypalpro-zp-gateway/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | paypalpro-zp-gateway | [View logs](/logs/plugins/p/paypalpro-zp-gateway/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | paypalpro-zp-gateway | [View logs](/logs/plugins/p/paypalpro-zp-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | ast-sqlite-boot | paypalpro-zp-gateway | [View logs](/logs/plugins/p/paypalpro-zp-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | asyncify-boot | paypalpro-zp-gateway | [View logs](/logs/plugins/p/paypalpro-zp-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | paypalpro-zp-gateway | [View logs](/logs/plugins/p/paypalpro-zp-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions. | ast-sqlite-boot | paypalpro-zp-gateway | [View logs](/logs/plugins/p/paypalpro-zp-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions. | asyncify-boot | paypalpro-zp-gateway | [View logs](/logs/plugins/p/paypalpro-zp-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions. | jspi-boot | paypalpro-zp-gateway | [View logs](/logs/plugins/p/paypalpro-zp-gateway/error.json) |
-| Data type expected in MySQL query, unknown token received: fk_admin_id. | ast-sqlite-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: fk_admin_id. | asyncify-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: fk_admin_id. | jspi-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: fk_cal_id. | ast-sqlite-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: fk_cal_id. | asyncify-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: fk_cal_id. | jspi-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: fk_event_id. | ast-sqlite-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: fk_event_id. | asyncify-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: fk_event_id. | jspi-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: fk_user_id. | ast-sqlite-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: fk_user_id. | asyncify-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: fk_user_id. | jspi-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_admin_user_cals_ibfk_1. | ast-sqlite-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_admin_user_cals_ibfk_1. | asyncify-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_admin_user_cals_ibfk_1. | jspi-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_default_reminders_ibfk_1. | ast-sqlite-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_default_reminders_ibfk_1. | asyncify-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_default_reminders_ibfk_1. | jspi-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_event_calendar_settings_ibfk_1. | ast-sqlite-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_event_calendar_settings_ibfk_1. | asyncify-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_event_calendar_settings_ibfk_1. | jspi-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_events_ibfk_1. | ast-sqlite-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_events_ibfk_1. | asyncify-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_events_ibfk_1. | jspi-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_guests_ibfk_1. | ast-sqlite-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_guests_ibfk_1. | asyncify-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_guests_ibfk_1. | jspi-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_mobile_calendar_settings_ibfk_1. | ast-sqlite-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_mobile_calendar_settings_ibfk_1. | asyncify-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_mobile_calendar_settings_ibfk_1. | jspi-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_user_permissions_ibfk_1. | ast-sqlite-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_user_permissions_ibfk_1. | asyncify-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_user_permissions_ibfk_1. | jspi-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_user_share_free_busy_ibfk_1. | ast-sqlite-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_user_share_free_busy_ibfk_1. | asyncify-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
-| Data type expected in MySQL query, unknown token received: pec_user_share_free_busy_ibfk_1. | jspi-boot | premium-plugins | [View logs](/logs/plugins/p/premium-plugins/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: SECOND. | asyncify-boot | presstrends | [View logs](/logs/plugins/p/presstrends/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: SECOND. | jspi-boot | presstrends | [View logs](/logs/plugins/p/presstrends/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: DAYNAME. | asyncify-boot | presstrends | [View logs](/logs/plugins/p/presstrends/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: DAYNAME. | jspi-boot | presstrends | [View logs](/logs/plugins/p/presstrends/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | post-message | [View logs](/logs/plugins/p/post-message/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | post-message | [View logs](/logs/plugins/p/post-message/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | post-message | [View logs](/logs/plugins/p/post-message/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | post-message | [View logs](/logs/plugins/p/post-message/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | post-message | [View logs](/logs/plugins/p/post-message/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | post-message | [View logs](/logs/plugins/p/post-message/error.json) |
-| Unknown operation: MODIFY. | ast-sqlite-boot | post-message | [View logs](/logs/plugins/p/post-message/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | post-message | [View logs](/logs/plugins/p/post-message/error.json) |
-| Unknown operation: MODIFY. | jspi-boot | post-message | [View logs](/logs/plugins/p/post-message/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | rax-email-subscription-and-social-media-links-after-posts | [View logs](/logs/plugins/r/rax-email-subscription-and-social-media-links-after-posts/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | rax-email-subscription-and-social-media-links-after-posts | [View logs](/logs/plugins/r/rax-email-subscription-and-social-media-links-after-posts/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | rax-email-subscription-and-social-media-links-after-posts | [View logs](/logs/plugins/r/rax-email-subscription-and-social-media-links-after-posts/error.json) |
