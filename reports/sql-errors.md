@@ -360,18 +360,6 @@ Backt
 | SQLSTATE[HY000]: General error: 1 no such table: wp_StickWithMe. | ast-sqlite-boot | random-image | [View logs](/logs/plugins/r/random-image/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_StickWithMe. | asyncify-boot | random-image | [View logs](/logs/plugins/r/random-image/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_StickWithMe. | jspi-boot | random-image | [View logs](/logs/plugins/r/random-image/error.json) |
-| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | ast-sqlite-boot | sitepackage-newsletter-opt-in | [View logs](/logs/plugins/s/sitepackage-newsletter-opt-in/error.json) |
-| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | asyncify-boot | sitepackage-newsletter-opt-in | [View logs](/logs/plugins/s/sitepackage-newsletter-opt-in/error.json) |
-| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | jspi-boot | sitepackage-newsletter-opt-in | [View logs](/logs/plugins/s/sitepackage-newsletter-opt-in/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: uni_hash. | ast-sqlite-boot | sitepackage-newsletter-opt-in | [View logs](/logs/plugins/s/sitepackage-newsletter-opt-in/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: uni_hash. | asyncify-boot | sitepackage-newsletter-opt-in | [View logs](/logs/plugins/s/sitepackage-newsletter-opt-in/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: uni_hash. | jspi-boot | sitepackage-newsletter-opt-in | [View logs](/logs/plugins/s/sitepackage-newsletter-opt-in/error.json) |
-| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | ast-sqlite-boot | stackoverflow-answers-widget | [View logs](/logs/plugins/s/stackoverflow-answers-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | asyncify-boot | stackoverflow-answers-widget | [View logs](/logs/plugins/s/stackoverflow-answers-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | jspi-boot | stackoverflow-answers-widget | [View logs](/logs/plugins/s/stackoverflow-answers-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: uni_hash. | ast-sqlite-boot | stackoverflow-answers-widget | [View logs](/logs/plugins/s/stackoverflow-answers-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: uni_hash. | asyncify-boot | stackoverflow-answers-widget | [View logs](/logs/plugins/s/stackoverflow-answers-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: uni_hash. | jspi-boot | stackoverflow-answers-widget | [View logs](/logs/plugins/s/stackoverflow-answers-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | woo-orange-money-payment-gateway-by-rc | [View logs](/logs/plugins/w/woo-orange-money-payment-gateway-by-rc/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | woo-orange-money-payment-gateway-by-rc | [View logs](/logs/plugins/w/woo-orange-money-payment-gateway-by-rc/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | woo-orange-money-payment-gateway-by-rc | [View logs](/logs/plugins/w/woo-orange-money-payment-gateway-by-rc/error.json) |
