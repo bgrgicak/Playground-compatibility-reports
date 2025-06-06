@@ -2,67 +2,226 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [06-Jun-2025 20:35:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
-[06-Jun-2025 20:35:25 UTC] [RECOMMENDER] --- Sending client secret.
-[06-Jun-2025 20:35:25 UTC] [RECOMMENDER] --- 
-[06-Jun-2025 20:35:25 UTC] true
-[06-Jun-2025 20:35:25 UTC] activate with secret token: 9SZAKZa![_!6p!7h|$~ShXLtFb__}Yu[hz|$VNrt/{Ko%MM0RJm5QKoWSHF{3cb;hWzfX@q9Y{2(@w{%!:HH:0Q`iM7/^;H8yy;|qJB9:RwY}%QfngZAtsepn{kV!;f.=Z6Vi)X~0FcJV)M3$FPh2GofO|S4Q!s*z~(Uk*Y5_J.mrin1l7XSFvu99zl:P~D@`$%fB:yFl3~O]%`_`aIu_qn0M&y{N9jDt)$;Fj&B%;WlQ!JVeezWY*$xspMV|x%X
-[06-Jun-2025 20:35:27 UTC] [RECOMMENDER] --- Trying to send client secret.
-[06-Jun-2025 20:35:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
-[06-Jun-2025 20:35:37 UTC] [RECOMMENDER] --- Sending client secret.
-[06-Jun-2025 20:35:37 UTC] [RECOMMENDER] --- 
-[06-Jun-2025 20:35:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Recommender\wc_get_products() in /wordpress/wp-content/plugins/robera/core/recommender-admin.php:114
+Error: [06-Jun-2025 20:37:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELIMITER $$\r\nD...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELIMITER $$\r\nD...')
+#3 /wordpress/wp-content/plugins/quizlord/quizlord.php(128): WP_SQLite_DB->query('DELIMITER $$\r\nD...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ql_create_database(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quizlo...', false)
+#8 /internal/eval.php(20): activate_plugin('quizlord/quizlo...')
+#9 {main}</pre>
+ for query DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ; made by activate_plugin, do_action('activate_quizlord/quizlord.php'), WP_Hook->do_action, WP_Hook->apply_filters, ql_create_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Jun-2025 20:37:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELIMITER $$\r\nD...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELIMITER $$\r\nD...')
+#3 /wordpress/wp-content/plugins/quizlord/quizlord.php(128): WP_SQLite_DB->query('DELIMITER $$\r\nD...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ql_create_database(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quizlo...', false)
+#8 /internal/eval.php(20): activate_plugin('quizlord/quizlo...')
+#9 {main}</pre>
+ for query DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ; made by activate_plugin, do_action('activate_quizlord/quizlord.php'), WP_Hook->do_action, WP_Hook->apply_filters, ql_create_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Jun-2025 20:37:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELIMITER $$\r\nD...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELIMITER $$\r\nD...')
+#3 /wordpress/wp-content/plugins/quizlord/quizlord.php(128): WP_SQLite_DB->query('DELIMITER $$\r\nD...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ql_create_database(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quizlo...', false)
+#8 /internal/eval.php(20): activate_plugin('quizlord/quizlo...')
+#9 {main}</pre>
+ for query DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ; made by activate_plugin, do_action('activate_quizlord/quizlord.php'), WP_Hook->do_action, WP_Hook->apply_filters, ql_create_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Jun-2025 20:38:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/rnwp-app-template-config/inc/appearance-settings.php on line 53
+[06-Jun-2025 20:38:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/rnwp-app-template-config/inc/appearance-settings.php on line 54
+[06-Jun-2025 20:38:27 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/rnwp-app-template-config/inc/appearance-settings.php on line 53
+[06-Jun-2025 20:38:27 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/rnwp-app-template-config/inc/appearance-settings.php on line 54
+[06-Jun-2025 20:38:35 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/rnwp-app-template-config/inc/appearance-settings.php on line 53
+[06-Jun-2025 20:38:35 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/rnwp-app-template-config/inc/appearance-settings.php on line 54
+[06-Jun-2025 20:38:44 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/rw-divi-unite-gallery/freemius/includes/class-fs-logger.php on line 145
+[06-Jun-2025 20:38:44 UTC] PHP Deprecated:  Required parameter $function_name follows optional parameter $content in /wordpress/wp-content/plugins/rw-divi-unite-gallery/custom-modules/divi-unite-gallery.php on line 269
+[06-Jun-2025 20:38:45 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/rw-divi-unite-gallery/freemius/includes/class-fs-logger.php on line 145
+[06-Jun-2025 20:38:45 UTC] PHP Deprecated:  Required parameter $function_name follows optional parameter $content in /wordpress/wp-content/plugins/rw-divi-unite-gallery/custom-modules/divi-unite-gallery.php on line 269
+[06-Jun-2025 20:38:55 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/rw-divi-unite-gallery/freemius/includes/class-fs-logger.php on line 145
+[06-Jun-2025 20:38:56 UTC] PHP Deprecated:  Required parameter $function_name follows optional parameter $content in /wordpress/wp-content/plugins/rw-divi-unite-gallery/custom-modules/divi-unite-gallery.php on line 269
+[06-Jun-2025 20:38:57 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/rw-divi-unite-gallery/freemius/includes/class-fs-logger.php on line 145
+[06-Jun-2025 20:38:57 UTC] PHP Deprecated:  Required parameter $function_name follows optional parameter $content in /wordpress/wp-content/plugins/rw-divi-unite-gallery/custom-modules/divi-unite-gallery.php on line 269
+[06-Jun-2025 20:39:06 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/rw-divi-unite-gallery/freemius/includes/class-fs-logger.php on line 145
+[06-Jun-2025 20:39:06 UTC] PHP Deprecated:  Required parameter $function_name follows optional parameter $content in /wordpress/wp-content/plugins/rw-divi-unite-gallery/custom-modules/divi-unite-gallery.php on line 269
+[06-Jun-2025 20:39:07 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/rw-divi-unite-gallery/freemius/includes/class-fs-logger.php on line 145
+[06-Jun-2025 20:39:08 UTC] PHP Deprecated:  Required parameter $function_name follows optional parameter $content in /wordpress/wp-content/plugins/rw-divi-unite-gallery/custom-modules/divi-unite-gallery.php on line 269
+[06-Jun-2025 20:39:43 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/power-zoomer/powerzoomer.php on line 747
+[06-Jun-2025 20:39:52 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/power-zoomer/powerzoomer.php on line 747
+[06-Jun-2025 20:40:01 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/power-zoomer/powerzoomer.php on line 747
+[06-Jun-2025 20:41:10 UTC] PHP Fatal error:  Uncaught TypeError: array_values(): Argument #1 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/random-blog-article/rbcommon.php:10
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): Recommender\RecommenderAdmin->registerUserRecommendationsBlock('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(727): do_action('init')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/robera/core/recommender-admin.php on line 114
-[06-Jun-2025 20:35:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
-[06-Jun-2025 20:35:58 UTC] [RECOMMENDER] --- Sending client secret.
-[06-Jun-2025 20:35:58 UTC] [RECOMMENDER] --- 
-[06-Jun-2025 20:35:58 UTC] true
-[06-Jun-2025 20:35:58 UTC] activate with secret token: Q5V4Uaf&yj^QE^ykle[sN]sL4h:O._skpm6q:mcdpq.:ow*`.L}/bP//Z|4^0AB.71nk:{~P^(([&&Y|o2bmp]XZeADDOA2uO%RH90wfC{i$&TQ^H9{61:^3_=3k(6Z^90pYn7!K2pg@R]PTJlHali/%~9[YU:2foV=FsGhNB2TL_c{~^oycN{i`ba5KTjaQyfMQwrfhNP(rUQ;k]n&7~*`fMXdrjU~c:aWoKQ~G5jPhmI/i72|ahXb:KdSu}xO|
-[06-Jun-2025 20:36:00 UTC] [RECOMMENDER] --- Trying to send client secret.
-[06-Jun-2025 20:36:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
-[06-Jun-2025 20:36:10 UTC] [RECOMMENDER] --- Sending client secret.
-[06-Jun-2025 20:36:10 UTC] [RECOMMENDER] --- 
-[06-Jun-2025 20:36:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Recommender\wc_get_products() in /wordpress/wp-content/plugins/robera/core/recommender-admin.php:114
+#0 /wordpress/wp-content/plugins/random-blog-article/rbcommon.php(10): array_values(false)
+#1 /wordpress/wp-content/plugins/random-blog-article/rbarticle.php(12): include('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('random-blog-art...')
+#4 /internal/eval.php(20): activate_plugin('random-blog-art...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/random-blog-article/rbcommon.php on line 10
+[06-Jun-2025 20:41:19 UTC] PHP Fatal error:  Uncaught TypeError: array_values(): Argument #1 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/random-blog-article/rbcommon.php:10
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): Recommender\RecommenderAdmin->registerUserRecommendationsBlock('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(727): do_action('init')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/robera/core/recommender-admin.php on line 114
-[06-Jun-2025 20:36:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
-[06-Jun-2025 20:36:32 UTC] [RECOMMENDER] --- Sending client secret.
-[06-Jun-2025 20:36:32 UTC] [RECOMMENDER] --- 
-[06-Jun-2025 20:36:32 UTC] true
-[06-Jun-2025 20:36:32 UTC] activate with secret token: *_g^g]4K.:]&*Bgt3jcsAX}d)tfe{]NW^6cWfvx&iUfe{QC:E94~%04kUmA=bv1hg5Zp3D*McNF7)d|jp3:Qg[gRL}%nNoWjN&w9K5|vB%g7Jgl94g$@F=^Uv0Pig.^z/ePumL]MwGo0CF^GWZgMTZaW{%!B$/HH;UhKJ8IU1(@nSBtDo9}e1}(o^g50yTEcWRp&sUXxv0gna*s^4a~_xX1=Y2z./.2DH_m!u8i0hMJ|3R5(d&m[vmv@95c3nQtU
-[06-Jun-2025 20:36:34 UTC] [RECOMMENDER] --- Trying to send client secret.
-[06-Jun-2025 20:36:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
-[06-Jun-2025 20:36:44 UTC] [RECOMMENDER] --- Sending client secret.
-[06-Jun-2025 20:36:44 UTC] [RECOMMENDER] --- 
-[06-Jun-2025 20:36:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Recommender\wc_get_products() in /wordpress/wp-content/plugins/robera/core/recommender-admin.php:114
+#0 /wordpress/wp-content/plugins/random-blog-article/rbcommon.php(10): array_values(false)
+#1 /wordpress/wp-content/plugins/random-blog-article/rbarticle.php(12): include('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('random-blog-art...')
+#4 /internal/eval.php(20): activate_plugin('random-blog-art...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/random-blog-article/rbcommon.php on line 10
+[06-Jun-2025 20:41:27 UTC] PHP Fatal error:  Uncaught TypeError: array_values(): Argument #1 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/random-blog-article/rbcommon.php:10
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): Recommender\RecommenderAdmin->registerUserRecommendationsBlock('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(727): do_action('init')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/robera/core/recommender-admin.php on line 114
-[06-Jun-2025 20:36:56 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to TwitchStreamFormDataNormalizer::__construct() must be of the type array, bool given, called in /wordpress/wp-content/plugins/random-online-twitch-stream-from-selection/admin/TwitchStreamAdministrationPage.php on line 23 and defined in /wordpress/wp-content/plugins/random-online-twitch-stream-from-selection/services/TwitchStreamFormDataNormalizer.php:14
+#0 /wordpress/wp-content/plugins/random-blog-article/rbcommon.php(10): array_values(false)
+#1 /wordpress/wp-content/plugins/random-blog-article/rbarticle.php(12): include('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('random-blog-art...')
+#4 /internal/eval.php(20): activate_plugin('random-blog-art...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/random-blog-article/rbcommon.php on line 10
+[06-Jun-2025 20:41:36 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to TwitchStreamFormDataNormalizer::__construct() must be of the type array, bool given, called in /wordpress/wp-content/plugins/random-online-twitch-stream-from-selection/admin/TwitchStreamAdministrationPage.php on line 23 and defined in /wordpress/wp-content/plugins/random-online-twitch-stream-from-selection/services/TwitchStreamFormDataNormalizer.php:14
 Stack trace:
 #0 /wordpress/wp-content/plugins/random-online-twitch-stream-from-selection/admin/TwitchStreamAdministrationPage.php(23): TwitchStreamFormDataNormalizer->__construct(false)
 #1 /wordpress/wp-content/plugins/random-online-twitch-stream-from-selection/services/TwitchStreamKernel.php(22): TwitchStreamAdministrationPage->__construct('twitchStream', '1.1.0')
