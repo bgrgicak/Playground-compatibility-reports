@@ -2,1234 +2,564 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [06-Jun-2025 07:50:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [07-Jun-2025 20:51:56 UTC] PHP Warning:  The magic method Zitec\MkpApiWrapper\Client::__wakeup() must have public visibility in /wordpress/wp-content/plugins/emag-marketplace-connector/vendor/emag-marketplace-integrator/apiwrapper/src/Client.php on line 71
+[07-Jun-2025 20:51:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_clndr_instances SET instance_name='Full size calendar', instance_slug='full-size-calendar', instance_template='
-<div class=\"clndr-controls\">
-    <div class=\"current-month\"><%= month %> <%= year %></div>
-    <div class=\"clndr-nav clndr-clearfix\">
-        <div class=\"clndr-previous-button\">‹</div>
-        <div class=\"clndr-next-button\">›</div>
-    </div>
-</div>
-<div class=\"clndr-grid\">
-    <div class=\"days-of-the-week clndr-clearfix\">
-        <% _.each(daysOfTheWeek, function(day) { %>
-        <div class=\"header-day\"><%= day %></div>
-        <% }); %>
-    </div>
-    <div class=\"days clndr-clearfix\">
-        <% _.each(days, function(day) { %>
-        <div class=\"<%= day.classes %>\" id=\"<%= day.id %>\"><span class=\"day-number\"><%= day.day %></span></div>
-        <% }); %>
-    </div>
-</div>
-<div class=\"event-listing\">
-    <div class=\"event-listing-title\">Events</div>
-    <% _.each(eventsThisMonth, function(event) { %>
-        <% if (event.url) {  %><a target=\"<%= event.url_target %>\" href=\"<%= event.url %>\" <% } else {  %><div <% }  %> class=\"event-item clndr-clearfix\">
-            <span class=\"event-item-date\">
-                <% if (event.end != event.start) {
-                    startMY = moment(event.start).format(\"MM YY\");
-                    endMY = moment(event.end).format(\"MM YY\");
-                    if (startMY === endMY) { %>
-                        <%= moment(event.start).format(\"D\") %>–<%= moment(event.end).format(\"D MMMM\") %>
-                    <% } else { %>
-                        <%= moment(event.start).format(\"D MMMM\") %> – <%= moment(event.end).format(\"D MMMM\") %>
-                    <% }
-                } else {  %>
-                    <%= moment(event.start).format(\"D MMMM\") %>
-                <% } %>
-            </span>
-            <span class=\"event-item-name\"><%= event.title %></span>
-            <% if (event.time) {  %>
-                <span class=\"event-item-time\"><%= event.time %></span>
-            <% } %>
-            <% if (event.desc) {  %>
-                <span class=\"event-item-desc\"><%= event.desc %></span>
-            <% } %>
-        <% if (event.url) {  %></a><% } else {  %></div><% }  %>
-    <% }); %>
-</div>', instance_options='
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][\"element\"];
-    thisCLNDR.find(\".day\").each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(\"alternate-bg\"); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(\".event-item\").length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(\".event-listing\").append(
-            \"<div style=\'text-align:center;\' class=\'event-item\'>No events found</div>\"
-        );
-    }
-},
-weekOffset: 1'</p>
+<p>CREATE TRIGGER `wp_emkp_products_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_products_queue`
+  FOR EACH ROW
+  SET NEW.updated_at = NOW();</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_clndr_instances` SET `instance_name` = 'Full size calendar' , `instance_slug` = 'full-size-calendar' , `instance_template` = '
-&lt;div class=&quot;clndr-controls&quot;&gt;
-    &lt;div class=&quot;current-month&quot;&gt;&lt;%= month %&gt; &lt;%= year %&gt;&lt;/div&gt;
-    &lt;div class=&quot;clndr-nav clndr-clearfix&quot;&gt;
-        &lt;div class=&quot;clndr-previous-button&quot;&gt;‹&lt;/div&gt;
-        &lt;div class=&quot;clndr-next-button&quot;&gt;›&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;clndr-grid&quot;&gt;
-    &lt;div class=&quot;days-of-the-week clndr-clearfix&quot;&gt;
-        &lt;% _.each(daysOfTheWeek, function(day) { %&gt;
-        &lt;div class=&quot;header-day&quot;&gt;&lt;%= day %&gt;&lt;/div&gt;
-        &lt;% }); %&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;days clndr-clearfix&quot;&gt;
-        &lt;% _.each(days, function(day) { %&gt;
-        &lt;div class=&quot;&lt;%= day.classes %&gt;&quot; id=&quot;&lt;%= day.id %&gt;&quot;&gt;&lt;span class=&quot;day-number&quot;&gt;&lt;%= day.day %&gt;&lt;/span&gt;&lt;/div&gt;
-        &lt;% }); %&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;event-listing&quot;&gt;
-    &lt;div class=&quot;event-listing-title&quot;&gt;Events&lt;/div&gt;
-    &lt;% _.each(eventsThisMonth, function(event) { %&gt;
-        &lt;% if (event.url) {  %&gt;&lt;a target=&quot;&lt;%= event.url_target %&gt;&quot; href=&quot;&lt;%= event.url %&gt;&quot; &lt;% } else {  %&gt;&lt;div &lt;% }  %&gt; class=&quot;event-item clndr-clearfix&quot;&gt;
-            &lt;span class=&quot;event-item-date&quot;&gt;
-                &lt;% if (event.end != event.start) {
-                    startMY = moment(event.start).format(&quot;MM YY&quot;);
-                    endMY = moment(event.end).format(&quot;MM YY&quot;);
-                    if (startMY === endMY) { %&gt;
-                        &lt;%= moment(event.start).format(&quot;D&quot;) %&gt;–&lt;%= moment(event.end).format(&quot;D MMMM&quot;) %&gt;
-                    &lt;% } else { %&gt;
-                        &lt;%= moment(event.start).format(&quot;D MMMM&quot;) %&gt; – &lt;%= moment(event.end).format(&quot;D MMMM&quot;) %&gt;
-                    &lt;% }
-                } else {  %&gt;
-                    &lt;%= moment(event.start).format(&quot;D MMMM&quot;) %&gt;
-                &lt;% } %&gt;
-            &lt;/span&gt;
-            &lt;span class=&quot;event-item-name&quot;&gt;&lt;%= event.title %&gt;&lt;/span&gt;
-            &lt;% if (event.time) {  %&gt;
-                &lt;span class=&quot;event-item-time&quot;&gt;&lt;%= event.time %&gt;&lt;/span&gt;
-            &lt;% } %&gt;
-            &lt;% if (event.desc) {  %&gt;
-                &lt;span class=&quot;event-item-desc&quot;&gt;&lt;%= event.desc %&gt;&lt;/span&gt;
-            &lt;% } %&gt;
-        &lt;% if (event.url) {  %&gt;&lt;/a&gt;&lt;% } else {  %&gt;&lt;/div&gt;&lt;% }  %&gt;
-    &lt;% }); %&gt;
-&lt;/div&gt;' , `instance_options` = '
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][&quot;element&quot;];
-    thisCLNDR.find(&quot;.day&quot;).each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(&quot;alternate-bg&quot;); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(&quot;.event-item&quot;).length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(&quot;.event-listing&quot;).append(
-            &quot;&lt;div style=''text-align:center;'' class=''event-item''&gt;No events found&lt;/div&gt;&quot;
-        );
-    }
-},
-weekOffset: 1' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
-#3 /wordpress/wp-content/plugins/event-clndr/clndr.php(168): WP_SQLite_DB->query('INSERT INTO wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): CLDNR_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO wp_clndr_instances SET instance_name='Full size calendar', instance_slug='full-size-calendar', instance_template='
-<div class=\"clndr-controls\">
-    <div class=\"current-month\"><%= month %> <%= year %></div>
-    <div class=\"clndr-nav clndr-clearfix\">
-        <div class=\"clndr-previous-button\">‹</div>
-        <div class=\"clndr-next-button\">›</div>
-    </div>
-</div>
-<div class=\"clndr-grid\">
-    <div class=\"days-of-the-week clndr-clearfix\">
-        <% _.each(daysOfTheWeek, function(day) { %>
-        <div class=\"header-day\"><%= day %></div>
-        <% }); %>
-    </div>
-    <div class=\"days clndr-clearfix\">
-        <% _.each(days, function(day) { %>
-        <div class=\"<%= day.classes %>\" id=\"<%= day.id %>\"><span class=\"day-number\"><%= day.day %></span></div>
-        <% }); %>
-    </div>
-</div>
-<div class=\"event-listing\">
-    <div class=\"event-listing-title\">Events</div>
-    <% _.each(eventsThisMonth, function(event) { %>
-        <% if (event.url) {  %><a target=\"<%= event.url_target %>\" href=\"<%= event.url %>\" <% } else {  %><div <% }  %> class=\"event-item clndr-clearfix\">
-            <span class=\"event-item-date\">
-                <% if (event.end != event.start) {
-                    startMY = moment(event.start).format(\"MM YY\");
-                    endMY = moment(event.end).format(\"MM YY\");
-                    if (startMY === endMY) { %>
-                        <%= moment(event.start).format(\"D\") %>–<%= moment(event.end).format(\"D MMMM\") %>
-                    <% } else { %>
-                        <%= moment(event.start).format(\"D MMMM\") %> – <%= moment(event.end).format(\"D MMMM\") %>
-                    <% }
-                } else {  %>
-                    <%= moment(event.start).format(\"D MMMM\") %>
-                <% } %>
-            </span>
-            <span class=\"event-item-name\"><%= event.title %></span>
-            <% if (event.time) {  %>
-                <span class=\"event-item-time\"><%= event.time %></span>
-            <% } %>
-            <% if (event.desc) {  %>
-                <span class=\"event-item-desc\"><%= event.desc %></span>
-            <% } %>
-        <% if (event.url) {  %></a><% } else {  %></div><% }  %>
-    <% }); %>
-</div>', instance_options='
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][\"element\"];
-    thisCLNDR.find(\".day\").each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(\"alternate-bg\"); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(\".event-item\").length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(\".event-listing\").append(
-            \"<div style=\'text-align:center;\' class=\'event-item\'>No events found</div>\"
-        );
-    }
-},
-weekOffset: 1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, CLDNR_init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Jun-2025 07:50:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TRIGGER ...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TRIGGER ...')
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-001.php(52): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_001->run()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#12 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#13 {main}</pre>
+ for query CREATE TRIGGER `wp_emkp_products_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_products_queue`
+  FOR EACH ROW
+  SET NEW.updated_at = NOW(); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_001->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Jun-2025 20:51:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_clndr_instances SET instance_name='Mini calendar', instance_slug='mini-calendar', instance_template='
-<div class=\"clndr-controls\">
-    <div class=\"current-month\"><%= month %> <%= year %></div>
-    <div class=\"clndr-nav clndr-clearfix\">
-        <div class=\"clndr-previous-button\">‹</div>
-        <div class=\"clndr-next-button\">›</div>
-    </div>
-</div>
-<div class=\"clndr-grid\">
-    <div class=\"days-of-the-week clndr-clearfix\">
-        <% _.each(daysOfTheWeek, function(day) { %>
-        <div class=\"header-day\"><%= day %></div>
-        <% }); %>
-    </div>
-    <div class=\"days clndr-clearfix\">
-        <% _.each(days, function(day) { %>
-        <div class=\"<%= day.classes %>\" id=\"<%= day.id %>\"><span class=\"day-number\"><%= day.day %></span></div>
-        <% }); %>
-    </div>
-</div>
-<div class=\"event-listing\">
-    <div class=\"event-listing-title\">Events</div>
-    <% _.each(eventsThisMonth, function(event) { %>
-        <% if (event.url) {  %><a target=\"<%= event.url_target %>\" href=\"<%= event.url %>\" <% } else {  %><div <% }  %> class=\"event-item clndr-clearfix\">
-            <span class=\"event-item-date\">
-                <% if (event.end != event.start) {
-                    startMY = moment(event.start).format(\"MM YY\");
-                    endMY = moment(event.end).format(\"MM YY\");
-                    if (startMY === endMY) { %>
-                        <%= moment(event.start).format(\"D\") %>–<%= moment(event.end).format(\"D MMMM\") %>
-                    <% } else { %>
-                        <%= moment(event.start).format(\"D MMMM\") %> – <%= moment(event.end).format(\"D MMMM\") %>
-                    <% }
-                } else {  %>
-                    <%= moment(event.start).format(\"D MMMM\") %>
-                <% } %>
-            </span>
-            <span class=\"event-item-name\"><%= event.title %></span>
-            <% if (event.time) {  %>
-                <span class=\"event-item-time\"><%= event.time %></span>
-            <% } %>
-            <% if (event.desc) {  %>
-                <span class=\"event-item-desc\"><%= event.desc %></span>
-            <% } %>
-        <% if (event.url) {  %></a><% } else {  %></div><% }  %>
-    <% }); %>
-</div>', instance_options='
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][\"element\"];
-    thisCLNDR.find(\".day\").each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(\"alternate-bg\"); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(\".event-item\").length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(\".event-listing\").append(
-            \"<div style=\'text-align:center;\' class=\'event-item\'>No events found</div>\"
-        );
-    }
-},
-weekOffset: 1'</p>
+<p>CREATE TRIGGER `wp_emkp_orders_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_orders_queue`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW();</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_clndr_instances` SET `instance_name` = 'Mini calendar' , `instance_slug` = 'mini-calendar' , `instance_template` = '
-&lt;div class=&quot;clndr-controls&quot;&gt;
-    &lt;div class=&quot;current-month&quot;&gt;&lt;%= month %&gt; &lt;%= year %&gt;&lt;/div&gt;
-    &lt;div class=&quot;clndr-nav clndr-clearfix&quot;&gt;
-        &lt;div class=&quot;clndr-previous-button&quot;&gt;‹&lt;/div&gt;
-        &lt;div class=&quot;clndr-next-button&quot;&gt;›&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;clndr-grid&quot;&gt;
-    &lt;div class=&quot;days-of-the-week clndr-clearfix&quot;&gt;
-        &lt;% _.each(daysOfTheWeek, function(day) { %&gt;
-        &lt;div class=&quot;header-day&quot;&gt;&lt;%= day %&gt;&lt;/div&gt;
-        &lt;% }); %&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;days clndr-clearfix&quot;&gt;
-        &lt;% _.each(days, function(day) { %&gt;
-        &lt;div class=&quot;&lt;%= day.classes %&gt;&quot; id=&quot;&lt;%= day.id %&gt;&quot;&gt;&lt;span class=&quot;day-number&quot;&gt;&lt;%= day.day %&gt;&lt;/span&gt;&lt;/div&gt;
-        &lt;% }); %&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;event-listing&quot;&gt;
-    &lt;div class=&quot;event-listing-title&quot;&gt;Events&lt;/div&gt;
-    &lt;% _.each(eventsThisMonth, function(event) { %&gt;
-        &lt;% if (event.url) {  %&gt;&lt;a target=&quot;&lt;%= event.url_target %&gt;&quot; href=&quot;&lt;%= event.url %&gt;&quot; &lt;% } else {  %&gt;&lt;div &lt;% }  %&gt; class=&quot;event-item clndr-clearfix&quot;&gt;
-            &lt;span class=&quot;event-item-date&quot;&gt;
-                &lt;% if (event.end != event.start) {
-                    startMY = moment(event.start).format(&quot;MM YY&quot;);
-                    endMY = moment(event.end).format(&quot;MM YY&quot;);
-                    if (startMY === endMY) { %&gt;
-                        &lt;%= moment(event.start).format(&quot;D&quot;) %&gt;–&lt;%= moment(event.end).format(&quot;D MMMM&quot;) %&gt;
-                    &lt;% } else { %&gt;
-                        &lt;%= moment(event.start).format(&quot;D MMMM&quot;) %&gt; – &lt;%= moment(event.end).format(&quot;D MMMM&quot;) %&gt;
-                    &lt;% }
-                } else {  %&gt;
-                    &lt;%= moment(event.start).format(&quot;D MMMM&quot;) %&gt;
-                &lt;% } %&gt;
-            &lt;/span&gt;
-            &lt;span class=&quot;event-item-name&quot;&gt;&lt;%= event.title %&gt;&lt;/span&gt;
-            &lt;% if (event.time) {  %&gt;
-                &lt;span class=&quot;event-item-time&quot;&gt;&lt;%= event.time %&gt;&lt;/span&gt;
-            &lt;% } %&gt;
-            &lt;% if (event.desc) {  %&gt;
-                &lt;span class=&quot;event-item-desc&quot;&gt;&lt;%= event.desc %&gt;&lt;/span&gt;
-            &lt;% } %&gt;
-        &lt;% if (event.url) {  %&gt;&lt;/a&gt;&lt;% } else {  %&gt;&lt;/div&gt;&lt;% }  %&gt;
-    &lt;% }); %&gt;
-&lt;/div&gt;' , `instance_options` = '
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][&quot;element&quot;];
-    thisCLNDR.find(&quot;.day&quot;).each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(&quot;alternate-bg&quot;); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(&quot;.event-item&quot;).length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(&quot;.event-listing&quot;).append(
-            &quot;&lt;div style=''text-align:center;'' class=''event-item''&gt;No events found&lt;/div&gt;&quot;
-        );
-    }
-},
-weekOffset: 1' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
-#3 /wordpress/wp-content/plugins/event-clndr/clndr.php(173): WP_SQLite_DB->query('INSERT INTO wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): CLDNR_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO wp_clndr_instances SET instance_name='Mini calendar', instance_slug='mini-calendar', instance_template='
-<div class=\"clndr-controls\">
-    <div class=\"current-month\"><%= month %> <%= year %></div>
-    <div class=\"clndr-nav clndr-clearfix\">
-        <div class=\"clndr-previous-button\">‹</div>
-        <div class=\"clndr-next-button\">›</div>
-    </div>
-</div>
-<div class=\"clndr-grid\">
-    <div class=\"days-of-the-week clndr-clearfix\">
-        <% _.each(daysOfTheWeek, function(day) { %>
-        <div class=\"header-day\"><%= day %></div>
-        <% }); %>
-    </div>
-    <div class=\"days clndr-clearfix\">
-        <% _.each(days, function(day) { %>
-        <div class=\"<%= day.classes %>\" id=\"<%= day.id %>\"><span class=\"day-number\"><%= day.day %></span></div>
-        <% }); %>
-    </div>
-</div>
-<div class=\"event-listing\">
-    <div class=\"event-listing-title\">Events</div>
-    <% _.each(eventsThisMonth, function(event) { %>
-        <% if (event.url) {  %><a target=\"<%= event.url_target %>\" href=\"<%= event.url %>\" <% } else {  %><div <% }  %> class=\"event-item clndr-clearfix\">
-            <span class=\"event-item-date\">
-                <% if (event.end != event.start) {
-                    startMY = moment(event.start).format(\"MM YY\");
-                    endMY = moment(event.end).format(\"MM YY\");
-                    if (startMY === endMY) { %>
-                        <%= moment(event.start).format(\"D\") %>–<%= moment(event.end).format(\"D MMMM\") %>
-                    <% } else { %>
-                        <%= moment(event.start).format(\"D MMMM\") %> – <%= moment(event.end).format(\"D MMMM\") %>
-                    <% }
-                } else {  %>
-                    <%= moment(event.start).format(\"D MMMM\") %>
-                <% } %>
-            </span>
-            <span class=\"event-item-name\"><%= event.title %></span>
-            <% if (event.time) {  %>
-                <span class=\"event-item-time\"><%= event.time %></span>
-            <% } %>
-            <% if (event.desc) {  %>
-                <span class=\"event-item-desc\"><%= event.desc %></span>
-            <% } %>
-        <% if (event.url) {  %></a><% } else {  %></div><% }  %>
-    <% }); %>
-</div>', instance_options='
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][\"element\"];
-    thisCLNDR.find(\".day\").each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(\"alternate-bg\"); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(\".event-item\").length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(\".event-listing\").append(
-            \"<div style=\'text-align:center;\' class=\'event-item\'>No events found</div>\"
-        );
-    }
-},
-weekOffset: 1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, CLDNR_init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Jun-2025 07:51:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TRIGGER ...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TRIGGER ...')
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-001.php(52): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_001->run()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#12 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#13 {main}</pre>
+ for query CREATE TRIGGER `wp_emkp_orders_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_orders_queue`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW(); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_001->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Jun-2025 20:51:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_clndr_instances SET instance_name='Full size calendar', instance_slug='full-size-calendar', instance_template='
-<div class=\"clndr-controls\">
-    <div class=\"current-month\"><%= month %> <%= year %></div>
-    <div class=\"clndr-nav clndr-clearfix\">
-        <div class=\"clndr-previous-button\">‹</div>
-        <div class=\"clndr-next-button\">›</div>
-    </div>
-</div>
-<div class=\"clndr-grid\">
-    <div class=\"days-of-the-week clndr-clearfix\">
-        <% _.each(daysOfTheWeek, function(day) { %>
-        <div class=\"header-day\"><%= day %></div>
-        <% }); %>
-    </div>
-    <div class=\"days clndr-clearfix\">
-        <% _.each(days, function(day) { %>
-        <div class=\"<%= day.classes %>\" id=\"<%= day.id %>\"><span class=\"day-number\"><%= day.day %></span></div>
-        <% }); %>
-    </div>
-</div>
-<div class=\"event-listing\">
-    <div class=\"event-listing-title\">Events</div>
-    <% _.each(eventsThisMonth, function(event) { %>
-        <% if (event.url) {  %><a target=\"<%= event.url_target %>\" href=\"<%= event.url %>\" <% } else {  %><div <% }  %> class=\"event-item clndr-clearfix\">
-            <span class=\"event-item-date\">
-                <% if (event.end != event.start) {
-                    startMY = moment(event.start).format(\"MM YY\");
-                    endMY = moment(event.end).format(\"MM YY\");
-                    if (startMY === endMY) { %>
-                        <%= moment(event.start).format(\"D\") %>–<%= moment(event.end).format(\"D MMMM\") %>
-                    <% } else { %>
-                        <%= moment(event.start).format(\"D MMMM\") %> – <%= moment(event.end).format(\"D MMMM\") %>
-                    <% }
-                } else {  %>
-                    <%= moment(event.start).format(\"D MMMM\") %>
-                <% } %>
-            </span>
-            <span class=\"event-item-name\"><%= event.title %></span>
-            <% if (event.time) {  %>
-                <span class=\"event-item-time\"><%= event.time %></span>
-            <% } %>
-            <% if (event.desc) {  %>
-                <span class=\"event-item-desc\"><%= event.desc %></span>
-            <% } %>
-        <% if (event.url) {  %></a><% } else {  %></div><% }  %>
-    <% }); %>
-</div>', instance_options='
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][\"element\"];
-    thisCLNDR.find(\".day\").each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(\"alternate-bg\"); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(\".event-item\").length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(\".event-listing\").append(
-            \"<div style=\'text-align:center;\' class=\'event-item\'>No events found</div>\"
-        );
-    }
-},
-weekOffset: 1'</p>
+<p>CREATE TRIGGER `wp_emkp_localities_before`
+  BEFORE UPDATE
+  ON `wp_emkp_localities`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW();</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_clndr_instances` SET `instance_name` = 'Full size calendar' , `instance_slug` = 'full-size-calendar' , `instance_template` = '
-&lt;div class=&quot;clndr-controls&quot;&gt;
-    &lt;div class=&quot;current-month&quot;&gt;&lt;%= month %&gt; &lt;%= year %&gt;&lt;/div&gt;
-    &lt;div class=&quot;clndr-nav clndr-clearfix&quot;&gt;
-        &lt;div class=&quot;clndr-previous-button&quot;&gt;‹&lt;/div&gt;
-        &lt;div class=&quot;clndr-next-button&quot;&gt;›&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;clndr-grid&quot;&gt;
-    &lt;div class=&quot;days-of-the-week clndr-clearfix&quot;&gt;
-        &lt;% _.each(daysOfTheWeek, function(day) { %&gt;
-        &lt;div class=&quot;header-day&quot;&gt;&lt;%= day %&gt;&lt;/div&gt;
-        &lt;% }); %&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;days clndr-clearfix&quot;&gt;
-        &lt;% _.each(days, function(day) { %&gt;
-        &lt;div class=&quot;&lt;%= day.classes %&gt;&quot; id=&quot;&lt;%= day.id %&gt;&quot;&gt;&lt;span class=&quot;day-number&quot;&gt;&lt;%= day.day %&gt;&lt;/span&gt;&lt;/div&gt;
-        &lt;% }); %&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;event-listing&quot;&gt;
-    &lt;div class=&quot;event-listing-title&quot;&gt;Events&lt;/div&gt;
-    &lt;% _.each(eventsThisMonth, function(event) { %&gt;
-        &lt;% if (event.url) {  %&gt;&lt;a target=&quot;&lt;%= event.url_target %&gt;&quot; href=&quot;&lt;%= event.url %&gt;&quot; &lt;% } else {  %&gt;&lt;div &lt;% }  %&gt; class=&quot;event-item clndr-clearfix&quot;&gt;
-            &lt;span class=&quot;event-item-date&quot;&gt;
-                &lt;% if (event.end != event.start) {
-                    startMY = moment(event.start).format(&quot;MM YY&quot;);
-                    endMY = moment(event.end).format(&quot;MM YY&quot;);
-                    if (startMY === endMY) { %&gt;
-                        &lt;%= moment(event.start).format(&quot;D&quot;) %&gt;–&lt;%= moment(event.end).format(&quot;D MMMM&quot;) %&gt;
-                    &lt;% } else { %&gt;
-                        &lt;%= moment(event.start).format(&quot;D MMMM&quot;) %&gt; – &lt;%= moment(event.end).format(&quot;D MMMM&quot;) %&gt;
-                    &lt;% }
-                } else {  %&gt;
-                    &lt;%= moment(event.start).format(&quot;D MMMM&quot;) %&gt;
-                &lt;% } %&gt;
-            &lt;/span&gt;
-            &lt;span class=&quot;event-item-name&quot;&gt;&lt;%= event.title %&gt;&lt;/span&gt;
-            &lt;% if (event.time) {  %&gt;
-                &lt;span class=&quot;event-item-time&quot;&gt;&lt;%= event.time %&gt;&lt;/span&gt;
-            &lt;% } %&gt;
-            &lt;% if (event.desc) {  %&gt;
-                &lt;span class=&quot;event-item-desc&quot;&gt;&lt;%= event.desc %&gt;&lt;/span&gt;
-            &lt;% } %&gt;
-        &lt;% if (event.url) {  %&gt;&lt;/a&gt;&lt;% } else {  %&gt;&lt;/div&gt;&lt;% }  %&gt;
-    &lt;% }); %&gt;
-&lt;/div&gt;' , `instance_options` = '
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][&quot;element&quot;];
-    thisCLNDR.find(&quot;.day&quot;).each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(&quot;alternate-bg&quot;); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(&quot;.event-item&quot;).length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(&quot;.event-listing&quot;).append(
-            &quot;&lt;div style=''text-align:center;'' class=''event-item''&gt;No events found&lt;/div&gt;&quot;
-        );
-    }
-},
-weekOffset: 1' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
-#3 /wordpress/wp-content/plugins/event-clndr/clndr.php(168): WP_SQLite_DB->query('INSERT INTO wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): CLDNR_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO wp_clndr_instances SET instance_name='Full size calendar', instance_slug='full-size-calendar', instance_template='
-<div class=\"clndr-controls\">
-    <div class=\"current-month\"><%= month %> <%= year %></div>
-    <div class=\"clndr-nav clndr-clearfix\">
-        <div class=\"clndr-previous-button\">‹</div>
-        <div class=\"clndr-next-button\">›</div>
-    </div>
-</div>
-<div class=\"clndr-grid\">
-    <div class=\"days-of-the-week clndr-clearfix\">
-        <% _.each(daysOfTheWeek, function(day) { %>
-        <div class=\"header-day\"><%= day %></div>
-        <% }); %>
-    </div>
-    <div class=\"days clndr-clearfix\">
-        <% _.each(days, function(day) { %>
-        <div class=\"<%= day.classes %>\" id=\"<%= day.id %>\"><span class=\"day-number\"><%= day.day %></span></div>
-        <% }); %>
-    </div>
-</div>
-<div class=\"event-listing\">
-    <div class=\"event-listing-title\">Events</div>
-    <% _.each(eventsThisMonth, function(event) { %>
-        <% if (event.url) {  %><a target=\"<%= event.url_target %>\" href=\"<%= event.url %>\" <% } else {  %><div <% }  %> class=\"event-item clndr-clearfix\">
-            <span class=\"event-item-date\">
-                <% if (event.end != event.start) {
-                    startMY = moment(event.start).format(\"MM YY\");
-                    endMY = moment(event.end).format(\"MM YY\");
-                    if (startMY === endMY) { %>
-                        <%= moment(event.start).format(\"D\") %>–<%= moment(event.end).format(\"D MMMM\") %>
-                    <% } else { %>
-                        <%= moment(event.start).format(\"D MMMM\") %> – <%= moment(event.end).format(\"D MMMM\") %>
-                    <% }
-                } else {  %>
-                    <%= moment(event.start).format(\"D MMMM\") %>
-                <% } %>
-            </span>
-            <span class=\"event-item-name\"><%= event.title %></span>
-            <% if (event.time) {  %>
-                <span class=\"event-item-time\"><%= event.time %></span>
-            <% } %>
-            <% if (event.desc) {  %>
-                <span class=\"event-item-desc\"><%= event.desc %></span>
-            <% } %>
-        <% if (event.url) {  %></a><% } else {  %></div><% }  %>
-    <% }); %>
-</div>', instance_options='
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][\"element\"];
-    thisCLNDR.find(\".day\").each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(\"alternate-bg\"); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(\".event-item\").length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(\".event-listing\").append(
-            \"<div style=\'text-align:center;\' class=\'event-item\'>No events found</div>\"
-        );
-    }
-},
-weekOffset: 1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, CLDNR_init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Jun-2025 07:51:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TRIGGER ...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TRIGGER ...')
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-002.php(35): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_002->run()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#12 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#13 {main}</pre>
+ for query CREATE TRIGGER `wp_emkp_localities_before`
+  BEFORE UPDATE
+  ON `wp_emkp_localities`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW(); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_002->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Jun-2025 20:51:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_clndr_instances SET instance_name='Mini calendar', instance_slug='mini-calendar', instance_template='
-<div class=\"clndr-controls\">
-    <div class=\"current-month\"><%= month %> <%= year %></div>
-    <div class=\"clndr-nav clndr-clearfix\">
-        <div class=\"clndr-previous-button\">‹</div>
-        <div class=\"clndr-next-button\">›</div>
-    </div>
-</div>
-<div class=\"clndr-grid\">
-    <div class=\"days-of-the-week clndr-clearfix\">
-        <% _.each(daysOfTheWeek, function(day) { %>
-        <div class=\"header-day\"><%= day %></div>
-        <% }); %>
-    </div>
-    <div class=\"days clndr-clearfix\">
-        <% _.each(days, function(day) { %>
-        <div class=\"<%= day.classes %>\" id=\"<%= day.id %>\"><span class=\"day-number\"><%= day.day %></span></div>
-        <% }); %>
-    </div>
-</div>
-<div class=\"event-listing\">
-    <div class=\"event-listing-title\">Events</div>
-    <% _.each(eventsThisMonth, function(event) { %>
-        <% if (event.url) {  %><a target=\"<%= event.url_target %>\" href=\"<%= event.url %>\" <% } else {  %><div <% }  %> class=\"event-item clndr-clearfix\">
-            <span class=\"event-item-date\">
-                <% if (event.end != event.start) {
-                    startMY = moment(event.start).format(\"MM YY\");
-                    endMY = moment(event.end).format(\"MM YY\");
-                    if (startMY === endMY) { %>
-                        <%= moment(event.start).format(\"D\") %>–<%= moment(event.end).format(\"D MMMM\") %>
-                    <% } else { %>
-                        <%= moment(event.start).format(\"D MMMM\") %> – <%= moment(event.end).format(\"D MMMM\") %>
-                    <% }
-                } else {  %>
-                    <%= moment(event.start).format(\"D MMMM\") %>
-                <% } %>
-            </span>
-            <span class=\"event-item-name\"><%= event.title %></span>
-            <% if (event.time) {  %>
-                <span class=\"event-item-time\"><%= event.time %></span>
-            <% } %>
-            <% if (event.desc) {  %>
-                <span class=\"event-item-desc\"><%= event.desc %></span>
-            <% } %>
-        <% if (event.url) {  %></a><% } else {  %></div><% }  %>
-    <% }); %>
-</div>', instance_options='
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][\"element\"];
-    thisCLNDR.find(\".day\").each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(\"alternate-bg\"); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(\".event-item\").length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(\".event-listing\").append(
-            \"<div style=\'text-align:center;\' class=\'event-item\'>No events found</div>\"
-        );
-    }
-},
-weekOffset: 1'</p>
+<p>ALTER TABLE wp_emkp_categories ADD ean_is_mandatory tinyint(1) DEFAULT 0 NOT NULL;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_clndr_instances` SET `instance_name` = 'Mini calendar' , `instance_slug` = 'mini-calendar' , `instance_template` = '
-&lt;div class=&quot;clndr-controls&quot;&gt;
-    &lt;div class=&quot;current-month&quot;&gt;&lt;%= month %&gt; &lt;%= year %&gt;&lt;/div&gt;
-    &lt;div class=&quot;clndr-nav clndr-clearfix&quot;&gt;
-        &lt;div class=&quot;clndr-previous-button&quot;&gt;‹&lt;/div&gt;
-        &lt;div class=&quot;clndr-next-button&quot;&gt;›&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;clndr-grid&quot;&gt;
-    &lt;div class=&quot;days-of-the-week clndr-clearfix&quot;&gt;
-        &lt;% _.each(daysOfTheWeek, function(day) { %&gt;
-        &lt;div class=&quot;header-day&quot;&gt;&lt;%= day %&gt;&lt;/div&gt;
-        &lt;% }); %&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;days clndr-clearfix&quot;&gt;
-        &lt;% _.each(days, function(day) { %&gt;
-        &lt;div class=&quot;&lt;%= day.classes %&gt;&quot; id=&quot;&lt;%= day.id %&gt;&quot;&gt;&lt;span class=&quot;day-number&quot;&gt;&lt;%= day.day %&gt;&lt;/span&gt;&lt;/div&gt;
-        &lt;% }); %&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;event-listing&quot;&gt;
-    &lt;div class=&quot;event-listing-title&quot;&gt;Events&lt;/div&gt;
-    &lt;% _.each(eventsThisMonth, function(event) { %&gt;
-        &lt;% if (event.url) {  %&gt;&lt;a target=&quot;&lt;%= event.url_target %&gt;&quot; href=&quot;&lt;%= event.url %&gt;&quot; &lt;% } else {  %&gt;&lt;div &lt;% }  %&gt; class=&quot;event-item clndr-clearfix&quot;&gt;
-            &lt;span class=&quot;event-item-date&quot;&gt;
-                &lt;% if (event.end != event.start) {
-                    startMY = moment(event.start).format(&quot;MM YY&quot;);
-                    endMY = moment(event.end).format(&quot;MM YY&quot;);
-                    if (startMY === endMY) { %&gt;
-                        &lt;%= moment(event.start).format(&quot;D&quot;) %&gt;–&lt;%= moment(event.end).format(&quot;D MMMM&quot;) %&gt;
-                    &lt;% } else { %&gt;
-                        &lt;%= moment(event.start).format(&quot;D MMMM&quot;) %&gt; – &lt;%= moment(event.end).format(&quot;D MMMM&quot;) %&gt;
-                    &lt;% }
-                } else {  %&gt;
-                    &lt;%= moment(event.start).format(&quot;D MMMM&quot;) %&gt;
-                &lt;% } %&gt;
-            &lt;/span&gt;
-            &lt;span class=&quot;event-item-name&quot;&gt;&lt;%= event.title %&gt;&lt;/span&gt;
-            &lt;% if (event.time) {  %&gt;
-                &lt;span class=&quot;event-item-time&quot;&gt;&lt;%= event.time %&gt;&lt;/span&gt;
-            &lt;% } %&gt;
-            &lt;% if (event.desc) {  %&gt;
-                &lt;span class=&quot;event-item-desc&quot;&gt;&lt;%= event.desc %&gt;&lt;/span&gt;
-            &lt;% } %&gt;
-        &lt;% if (event.url) {  %&gt;&lt;/a&gt;&lt;% } else {  %&gt;&lt;/div&gt;&lt;% }  %&gt;
-    &lt;% }); %&gt;
-&lt;/div&gt;' , `instance_options` = '
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][&quot;element&quot;];
-    thisCLNDR.find(&quot;.day&quot;).each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(&quot;alternate-bg&quot;); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(&quot;.event-item&quot;).length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(&quot;.event-listing&quot;).append(
-            &quot;&lt;div style=''text-align:center;'' class=''event-item''&gt;No events found&lt;/div&gt;&quot;
-        );
-    }
-},
-weekOffset: 1' | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_emkp_categories</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_emkp_categories</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_emkp_categories</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_emkp_categories</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_emkp_categories, ean_is_mandatory, 1, 0, NO, tinyint, , , 3, 0, , , , tinyint(1), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_emkp_categories</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+Table 'wp_emkp_categories' doesn't exist
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
-#3 /wordpress/wp-content/plugins/event-clndr/clndr.php(173): WP_SQLite_DB->query('INSERT INTO wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): CLDNR_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO wp_clndr_instances SET instance_name='Mini calendar', instance_slug='mini-calendar', instance_template='
-<div class=\"clndr-controls\">
-    <div class=\"current-month\"><%= month %> <%= year %></div>
-    <div class=\"clndr-nav clndr-clearfix\">
-        <div class=\"clndr-previous-button\">‹</div>
-        <div class=\"clndr-next-button\">›</div>
-    </div>
-</div>
-<div class=\"clndr-grid\">
-    <div class=\"days-of-the-week clndr-clearfix\">
-        <% _.each(daysOfTheWeek, function(day) { %>
-        <div class=\"header-day\"><%= day %></div>
-        <% }); %>
-    </div>
-    <div class=\"days clndr-clearfix\">
-        <% _.each(days, function(day) { %>
-        <div class=\"<%= day.classes %>\" id=\"<%= day.id %>\"><span class=\"day-number\"><%= day.day %></span></div>
-        <% }); %>
-    </div>
-</div>
-<div class=\"event-listing\">
-    <div class=\"event-listing-title\">Events</div>
-    <% _.each(eventsThisMonth, function(event) { %>
-        <% if (event.url) {  %><a target=\"<%= event.url_target %>\" href=\"<%= event.url %>\" <% } else {  %><div <% }  %> class=\"event-item clndr-clearfix\">
-            <span class=\"event-item-date\">
-                <% if (event.end != event.start) {
-                    startMY = moment(event.start).format(\"MM YY\");
-                    endMY = moment(event.end).format(\"MM YY\");
-                    if (startMY === endMY) { %>
-                        <%= moment(event.start).format(\"D\") %>–<%= moment(event.end).format(\"D MMMM\") %>
-                    <% } else { %>
-                        <%= moment(event.start).format(\"D MMMM\") %> – <%= moment(event.end).format(\"D MMMM\") %>
-                    <% }
-                } else {  %>
-                    <%= moment(event.start).format(\"D MMMM\") %>
-                <% } %>
-            </span>
-            <span class=\"event-item-name\"><%= event.title %></span>
-            <% if (event.time) {  %>
-                <span class=\"event-item-time\"><%= event.time %></span>
-            <% } %>
-            <% if (event.desc) {  %>
-                <span class=\"event-item-desc\"><%= event.desc %></span>
-            <% } %>
-        <% if (event.url) {  %></a><% } else {  %></div><% }  %>
-    <% }); %>
-</div>', instance_options='
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][\"element\"];
-    thisCLNDR.find(\".day\").each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(\"alternate-bg\"); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(\".event-item\").length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(\".event-listing\").append(
-            \"<div style=\'text-align:center;\' class=\'event-item\'>No events found</div>\"
-        );
-    }
-},
-weekOffset: 1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, CLDNR_init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Jun-2025 07:51:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table 'wp_emkp_...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, 'wp_emkp_categor...', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1380): WP_SQLite_Driver->recreate_table_from_information_schema(false, 'wp_emkp_categor...', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(896): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-003.php(6): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_003->run()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#10 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#11 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#12 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#15 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#16 {main}</pre>
+ for query ALTER TABLE wp_emkp_categories ADD ean_is_mandatory tinyint(1) DEFAULT 0 NOT NULL; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_003->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Jun-2025 20:52:06 UTC] PHP Warning:  The magic method Zitec\MkpApiWrapper\Client::__wakeup() must have public visibility in /wordpress/wp-content/plugins/emag-marketplace-connector/vendor/emag-marketplace-integrator/apiwrapper/src/Client.php on line 71
+[07-Jun-2025 20:52:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_clndr_instances SET instance_name='Full size calendar', instance_slug='full-size-calendar', instance_template='
-<div class=\"clndr-controls\">
-    <div class=\"current-month\"><%= month %> <%= year %></div>
-    <div class=\"clndr-nav clndr-clearfix\">
-        <div class=\"clndr-previous-button\">‹</div>
-        <div class=\"clndr-next-button\">›</div>
-    </div>
-</div>
-<div class=\"clndr-grid\">
-    <div class=\"days-of-the-week clndr-clearfix\">
-        <% _.each(daysOfTheWeek, function(day) { %>
-        <div class=\"header-day\"><%= day %></div>
-        <% }); %>
-    </div>
-    <div class=\"days clndr-clearfix\">
-        <% _.each(days, function(day) { %>
-        <div class=\"<%= day.classes %>\" id=\"<%= day.id %>\"><span class=\"day-number\"><%= day.day %></span></div>
-        <% }); %>
-    </div>
-</div>
-<div class=\"event-listing\">
-    <div class=\"event-listing-title\">Events</div>
-    <% _.each(eventsThisMonth, function(event) { %>
-        <% if (event.url) {  %><a target=\"<%= event.url_target %>\" href=\"<%= event.url %>\" <% } else {  %><div <% }  %> class=\"event-item clndr-clearfix\">
-            <span class=\"event-item-date\">
-                <% if (event.end != event.start) {
-                    startMY = moment(event.start).format(\"MM YY\");
-                    endMY = moment(event.end).format(\"MM YY\");
-                    if (startMY === endMY) { %>
-                        <%= moment(event.start).format(\"D\") %>–<%= moment(event.end).format(\"D MMMM\") %>
-                    <% } else { %>
-                        <%= moment(event.start).format(\"D MMMM\") %> – <%= moment(event.end).format(\"D MMMM\") %>
-                    <% }
-                } else {  %>
-                    <%= moment(event.start).format(\"D MMMM\") %>
-                <% } %>
-            </span>
-            <span class=\"event-item-name\"><%= event.title %></span>
-            <% if (event.time) {  %>
-                <span class=\"event-item-time\"><%= event.time %></span>
-            <% } %>
-            <% if (event.desc) {  %>
-                <span class=\"event-item-desc\"><%= event.desc %></span>
-            <% } %>
-        <% if (event.url) {  %></a><% } else {  %></div><% }  %>
-    <% }); %>
-</div>', instance_options='
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][\"element\"];
-    thisCLNDR.find(\".day\").each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(\"alternate-bg\"); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(\".event-item\").length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(\".event-listing\").append(
-            \"<div style=\'text-align:center;\' class=\'event-item\'>No events found</div>\"
-        );
-    }
-},
-weekOffset: 1'</p>
+<p>CREATE TRIGGER `wp_emkp_products_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_products_queue`
+  FOR EACH ROW
+  SET NEW.updated_at = NOW();</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_clndr_instances` SET `instance_name` = 'Full size calendar' , `instance_slug` = 'full-size-calendar' , `instance_template` = '
-&lt;div class=&quot;clndr-controls&quot;&gt;
-    &lt;div class=&quot;current-month&quot;&gt;&lt;%= month %&gt; &lt;%= year %&gt;&lt;/div&gt;
-    &lt;div class=&quot;clndr-nav clndr-clearfix&quot;&gt;
-        &lt;div class=&quot;clndr-previous-button&quot;&gt;‹&lt;/div&gt;
-        &lt;div class=&quot;clndr-next-button&quot;&gt;›&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;clndr-grid&quot;&gt;
-    &lt;div class=&quot;days-of-the-week clndr-clearfix&quot;&gt;
-        &lt;% _.each(daysOfTheWeek, function(day) { %&gt;
-        &lt;div class=&quot;header-day&quot;&gt;&lt;%= day %&gt;&lt;/div&gt;
-        &lt;% }); %&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;days clndr-clearfix&quot;&gt;
-        &lt;% _.each(days, function(day) { %&gt;
-        &lt;div class=&quot;&lt;%= day.classes %&gt;&quot; id=&quot;&lt;%= day.id %&gt;&quot;&gt;&lt;span class=&quot;day-number&quot;&gt;&lt;%= day.day %&gt;&lt;/span&gt;&lt;/div&gt;
-        &lt;% }); %&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;event-listing&quot;&gt;
-    &lt;div class=&quot;event-listing-title&quot;&gt;Events&lt;/div&gt;
-    &lt;% _.each(eventsThisMonth, function(event) { %&gt;
-        &lt;% if (event.url) {  %&gt;&lt;a target=&quot;&lt;%= event.url_target %&gt;&quot; href=&quot;&lt;%= event.url %&gt;&quot; &lt;% } else {  %&gt;&lt;div &lt;% }  %&gt; class=&quot;event-item clndr-clearfix&quot;&gt;
-            &lt;span class=&quot;event-item-date&quot;&gt;
-                &lt;% if (event.end != event.start) {
-                    startMY = moment(event.start).format(&quot;MM YY&quot;);
-                    endMY = moment(event.end).format(&quot;MM YY&quot;);
-                    if (startMY === endMY) { %&gt;
-                        &lt;%= moment(event.start).format(&quot;D&quot;) %&gt;–&lt;%= moment(event.end).format(&quot;D MMMM&quot;) %&gt;
-                    &lt;% } else { %&gt;
-                        &lt;%= moment(event.start).format(&quot;D MMMM&quot;) %&gt; – &lt;%= moment(event.end).format(&quot;D MMMM&quot;) %&gt;
-                    &lt;% }
-                } else {  %&gt;
-                    &lt;%= moment(event.start).format(&quot;D MMMM&quot;) %&gt;
-                &lt;% } %&gt;
-            &lt;/span&gt;
-            &lt;span class=&quot;event-item-name&quot;&gt;&lt;%= event.title %&gt;&lt;/span&gt;
-            &lt;% if (event.time) {  %&gt;
-                &lt;span class=&quot;event-item-time&quot;&gt;&lt;%= event.time %&gt;&lt;/span&gt;
-            &lt;% } %&gt;
-            &lt;% if (event.desc) {  %&gt;
-                &lt;span class=&quot;event-item-desc&quot;&gt;&lt;%= event.desc %&gt;&lt;/span&gt;
-            &lt;% } %&gt;
-        &lt;% if (event.url) {  %&gt;&lt;/a&gt;&lt;% } else {  %&gt;&lt;/div&gt;&lt;% }  %&gt;
-    &lt;% }); %&gt;
-&lt;/div&gt;' , `instance_options` = '
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][&quot;element&quot;];
-    thisCLNDR.find(&quot;.day&quot;).each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(&quot;alternate-bg&quot;); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(&quot;.event-item&quot;).length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(&quot;.event-listing&quot;).append(
-            &quot;&lt;div style=''text-align:center;'' class=''event-item''&gt;No events found&lt;/div&gt;&quot;
-        );
-    }
-},
-weekOffset: 1' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
-#3 /wordpress/wp-content/plugins/event-clndr/clndr.php(168): WP_SQLite_DB->query('INSERT INTO wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): CLDNR_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO wp_clndr_instances SET instance_name='Full size calendar', instance_slug='full-size-calendar', instance_template='
-<div class=\"clndr-controls\">
-    <div class=\"current-month\"><%= month %> <%= year %></div>
-    <div class=\"clndr-nav clndr-clearfix\">
-        <div class=\"clndr-previous-button\">‹</div>
-        <div class=\"clndr-next-button\">›</div>
-    </div>
-</div>
-<div class=\"clndr-grid\">
-    <div class=\"days-of-the-week clndr-clearfix\">
-        <% _.each(daysOfTheWeek, function(day) { %>
-        <div class=\"header-day\"><%= day %></div>
-        <% }); %>
-    </div>
-    <div class=\"days clndr-clearfix\">
-        <% _.each(days, function(day) { %>
-        <div class=\"<%= day.classes %>\" id=\"<%= day.id %>\"><span class=\"day-number\"><%= day.day %></span></div>
-        <% }); %>
-    </div>
-</div>
-<div class=\"event-listing\">
-    <div class=\"event-listing-title\">Events</div>
-    <% _.each(eventsThisMonth, function(event) { %>
-        <% if (event.url) {  %><a target=\"<%= event.url_target %>\" href=\"<%= event.url %>\" <% } else {  %><div <% }  %> class=\"event-item clndr-clearfix\">
-            <span class=\"event-item-date\">
-                <% if (event.end != event.start) {
-                    startMY = moment(event.start).format(\"MM YY\");
-                    endMY = moment(event.end).format(\"MM YY\");
-                    if (startMY === endMY) { %>
-                        <%= moment(event.start).format(\"D\") %>–<%= moment(event.end).format(\"D MMMM\") %>
-                    <% } else { %>
-                        <%= moment(event.start).format(\"D MMMM\") %> – <%= moment(event.end).format(\"D MMMM\") %>
-                    <% }
-                } else {  %>
-                    <%= moment(event.start).format(\"D MMMM\") %>
-                <% } %>
-            </span>
-            <span class=\"event-item-name\"><%= event.title %></span>
-            <% if (event.time) {  %>
-                <span class=\"event-item-time\"><%= event.time %></span>
-            <% } %>
-            <% if (event.desc) {  %>
-                <span class=\"event-item-desc\"><%= event.desc %></span>
-            <% } %>
-        <% if (event.url) {  %></a><% } else {  %></div><% }  %>
-    <% }); %>
-</div>', instance_options='
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][\"element\"];
-    thisCLNDR.find(\".day\").each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(\"alternate-bg\"); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(\".event-item\").length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(\".event-listing\").append(
-            \"<div style=\'text-align:center;\' class=\'event-item\'>No events found</div>\"
-        );
-    }
-},
-weekOffset: 1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, CLDNR_init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Jun-2025 07:51:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TRIGGER ...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TRIGGER ...')
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-001.php(52): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_001->run()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#12 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#13 {main}</pre>
+ for query CREATE TRIGGER `wp_emkp_products_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_products_queue`
+  FOR EACH ROW
+  SET NEW.updated_at = NOW(); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_001->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Jun-2025 20:52:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_clndr_instances SET instance_name='Mini calendar', instance_slug='mini-calendar', instance_template='
-<div class=\"clndr-controls\">
-    <div class=\"current-month\"><%= month %> <%= year %></div>
-    <div class=\"clndr-nav clndr-clearfix\">
-        <div class=\"clndr-previous-button\">‹</div>
-        <div class=\"clndr-next-button\">›</div>
-    </div>
-</div>
-<div class=\"clndr-grid\">
-    <div class=\"days-of-the-week clndr-clearfix\">
-        <% _.each(daysOfTheWeek, function(day) { %>
-        <div class=\"header-day\"><%= day %></div>
-        <% }); %>
-    </div>
-    <div class=\"days clndr-clearfix\">
-        <% _.each(days, function(day) { %>
-        <div class=\"<%= day.classes %>\" id=\"<%= day.id %>\"><span class=\"day-number\"><%= day.day %></span></div>
-        <% }); %>
-    </div>
-</div>
-<div class=\"event-listing\">
-    <div class=\"event-listing-title\">Events</div>
-    <% _.each(eventsThisMonth, function(event) { %>
-        <% if (event.url) {  %><a target=\"<%= event.url_target %>\" href=\"<%= event.url %>\" <% } else {  %><div <% }  %> class=\"event-item clndr-clearfix\">
-            <span class=\"event-item-date\">
-                <% if (event.end != event.start) {
-                    startMY = moment(event.start).format(\"MM YY\");
-                    endMY = moment(event.end).format(\"MM YY\");
-                    if (startMY === endMY) { %>
-                        <%= moment(event.start).format(\"D\") %>–<%= moment(event.end).format(\"D MMMM\") %>
-                    <% } else { %>
-                        <%= moment(event.start).format(\"D MMMM\") %> – <%= moment(event.end).format(\"D MMMM\") %>
-                    <% }
-                } else {  %>
-                    <%= moment(event.start).format(\"D MMMM\") %>
-                <% } %>
-            </span>
-            <span class=\"event-item-name\"><%= event.title %></span>
-            <% if (event.time) {  %>
-                <span class=\"event-item-time\"><%= event.time %></span>
-            <% } %>
-            <% if (event.desc) {  %>
-                <span class=\"event-item-desc\"><%= event.desc %></span>
-            <% } %>
-        <% if (event.url) {  %></a><% } else {  %></div><% }  %>
-    <% }); %>
-</div>', instance_options='
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][\"element\"];
-    thisCLNDR.find(\".day\").each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(\"alternate-bg\"); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(\".event-item\").length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(\".event-listing\").append(
-            \"<div style=\'text-align:center;\' class=\'event-item\'>No events found</div>\"
-        );
-    }
-},
-weekOffset: 1'</p>
+<p>CREATE TRIGGER `wp_emkp_orders_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_orders_queue`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW();</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_clndr_instances` SET `instance_name` = 'Mini calendar' , `instance_slug` = 'mini-calendar' , `instance_template` = '
-&lt;div class=&quot;clndr-controls&quot;&gt;
-    &lt;div class=&quot;current-month&quot;&gt;&lt;%= month %&gt; &lt;%= year %&gt;&lt;/div&gt;
-    &lt;div class=&quot;clndr-nav clndr-clearfix&quot;&gt;
-        &lt;div class=&quot;clndr-previous-button&quot;&gt;‹&lt;/div&gt;
-        &lt;div class=&quot;clndr-next-button&quot;&gt;›&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;clndr-grid&quot;&gt;
-    &lt;div class=&quot;days-of-the-week clndr-clearfix&quot;&gt;
-        &lt;% _.each(daysOfTheWeek, function(day) { %&gt;
-        &lt;div class=&quot;header-day&quot;&gt;&lt;%= day %&gt;&lt;/div&gt;
-        &lt;% }); %&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;days clndr-clearfix&quot;&gt;
-        &lt;% _.each(days, function(day) { %&gt;
-        &lt;div class=&quot;&lt;%= day.classes %&gt;&quot; id=&quot;&lt;%= day.id %&gt;&quot;&gt;&lt;span class=&quot;day-number&quot;&gt;&lt;%= day.day %&gt;&lt;/span&gt;&lt;/div&gt;
-        &lt;% }); %&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;event-listing&quot;&gt;
-    &lt;div class=&quot;event-listing-title&quot;&gt;Events&lt;/div&gt;
-    &lt;% _.each(eventsThisMonth, function(event) { %&gt;
-        &lt;% if (event.url) {  %&gt;&lt;a target=&quot;&lt;%= event.url_target %&gt;&quot; href=&quot;&lt;%= event.url %&gt;&quot; &lt;% } else {  %&gt;&lt;div &lt;% }  %&gt; class=&quot;event-item clndr-clearfix&quot;&gt;
-            &lt;span class=&quot;event-item-date&quot;&gt;
-                &lt;% if (event.end != event.start) {
-                    startMY = moment(event.start).format(&quot;MM YY&quot;);
-                    endMY = moment(event.end).format(&quot;MM YY&quot;);
-                    if (startMY === endMY) { %&gt;
-                        &lt;%= moment(event.start).format(&quot;D&quot;) %&gt;–&lt;%= moment(event.end).format(&quot;D MMMM&quot;) %&gt;
-                    &lt;% } else { %&gt;
-                        &lt;%= moment(event.start).format(&quot;D MMMM&quot;) %&gt; – &lt;%= moment(event.end).format(&quot;D MMMM&quot;) %&gt;
-                    &lt;% }
-                } else {  %&gt;
-                    &lt;%= moment(event.start).format(&quot;D MMMM&quot;) %&gt;
-                &lt;% } %&gt;
-            &lt;/span&gt;
-            &lt;span class=&quot;event-item-name&quot;&gt;&lt;%= event.title %&gt;&lt;/span&gt;
-            &lt;% if (event.time) {  %&gt;
-                &lt;span class=&quot;event-item-time&quot;&gt;&lt;%= event.time %&gt;&lt;/span&gt;
-            &lt;% } %&gt;
-            &lt;% if (event.desc) {  %&gt;
-                &lt;span class=&quot;event-item-desc&quot;&gt;&lt;%= event.desc %&gt;&lt;/span&gt;
-            &lt;% } %&gt;
-        &lt;% if (event.url) {  %&gt;&lt;/a&gt;&lt;% } else {  %&gt;&lt;/div&gt;&lt;% }  %&gt;
-    &lt;% }); %&gt;
-&lt;/div&gt;' , `instance_options` = '
-doneRendering: function() {
-    var day=1, week=1, thisCLNDR = $(this)[0][&quot;element&quot;];
-    thisCLNDR.find(&quot;.day&quot;).each(function() {
-        if (day == 8) { day = 1; week++; }
-        if (week % 2 === 0) { $(this).addClass(&quot;alternate-bg&quot;); }
-        day++;
-    });
-
-    var thisMonthEvents = thisCLNDR.find(&quot;.event-item&quot;).length;
-    if (thisMonthEvents == 0) {
-        thisCLNDR.find(&quot;.event-listing&quot;).append(
-            &quot;&lt;div style=''text-align:center;'' class=''event-item''&gt;No events found&lt;/div&gt;&quot;
-        );
-    }
-},
-weekOffset: 1' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
-#3 /wordpress/wp-content/plugins/event-clndr/clndr.php(173): WP_SQLite_DB->query('INSERT INTO wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): CLDNR_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO wp_clndr_instances SET instance_name='Mini calendar', instance_slug='mini-calendar', instance_template='
-<div class=\"clndr-controls\">
-    <div class=\"current-month\"><%= month %> <%= year %></div>
-    <div class=\"clndr-nav clndr-clearfix\">
-        <div class=\"clndr-previous-button\">‹</div>
-        <div class=\"clndr-next-button\">›</div>
-    </div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TRIGGER ...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TRIGGER ...')
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-001.php(52): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_001->run()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#12 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#13 {main}</pre>
+ for query CREATE TRIGGER `wp_emkp_orders_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_orders_queue`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW(); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_001->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Jun-2025 20:52:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TRIGGER `wp_emkp_localities_before`
+  BEFORE UPDATE
+  ON `wp_emkp_localities`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW();</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
 </div>
-<div class=\"clndr-grid\">
-    <div class=\"
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TRIGGER ...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TRIGGER ...')
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-002.php(35): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_002->run()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#12 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#13 {main}</pre>
+ for query CREATE TRIGGER `wp_emkp_localities_before`
+  BEFORE UPDATE
+  ON `wp_emkp_localities`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW(); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_002->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Jun-2025 20:52:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_emkp_categories ADD ean_is_mandatory tinyint(1) DEFAULT 0 NOT NULL;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_emkp_categories</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_emkp_categories</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_emkp_categories</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_emkp_categories</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_emkp_categories, ean_is_mandatory, 1, 0, NO, tinyint, , , 3, 0, , , , tinyint(1), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_emkp_categories</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'wp_emkp_categories' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table 'wp_emkp_...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, 'wp_emkp_categor...', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1380): WP_SQLite_Driver->recreate_table_from_information_schema(false, 'wp_emkp_categor...', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(896): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-003.php(6): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_003->run()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#10 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#11 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#12 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#15 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#16 {main}</pre>
+ for query ALTER TABLE wp_emkp_categories ADD ean_is_mandatory tinyint(1) DEFAULT 0 NOT NULL; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_003->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Jun-2025 20:52:17 UTC] PHP Warning:  The magic method Zitec\MkpApiWrapper\Client::__wakeup() must have public visibility in /wordpress/wp-content/plugins/emag-marketplace-connector/vendor/emag-marketplace-integrator/apiwrapper/src/Client.php on line 71
+[07-Jun-2025 20:52:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TRIGGER `wp_emkp_products_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_products_queue`
+  FOR EACH ROW
+  SET NEW.updated_at = NOW();</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TRIGGER ...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TRIGGER ...')
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-001.php(52): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_001->run()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#12 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#13 {main}</pre>
+ for query CREATE TRIGGER `wp_emkp_products_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_products_queue`
+  FOR EACH ROW
+  SET NEW.updated_at = NOW(); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_001->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Jun-2025 20:52:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TRIGGER `wp_emkp_orders_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_orders_queue`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW();</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TRIGGER ...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TRIGGER ...')
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-001.php(52): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_001->run()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#12 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#13 {main}</pre>
+ for query CREATE TRIGGER `wp_emkp_orders_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_orders_queue`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW(); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_001->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Jun-2025 20:52:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TRIGGER `wp_emkp_localities_before`
+  BEFORE UPDATE
+  ON `wp_emkp_localities`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW();</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TRIGGER ...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TRIGGER ...')
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-002.php(35): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_002->run()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#12 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#13 {main}</pre>
+ for query CREATE TRIGGER `wp_emkp_localities_before`
+  BEFORE UPDATE
+  ON `wp_emkp_localities`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW(); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_002->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Jun-2025 20:52:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_emkp_categories ADD ean_is_mandatory tinyint(1) DEFAULT 0 NOT NULL;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_emkp_categories</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_emkp_categories</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_emkp_categories</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_emkp_categories</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_emkp_categories, ean_is_mandatory, 1, 0, NO, tinyint, , , 3, 0, , , , tinyint(1), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_emkp_categories</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'wp_emkp_categories' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table 'wp_emkp_...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, 'wp_emkp_categor...', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1380): WP_SQLite_Driver->recreate_table_from_information_schema(false, 'wp_emkp_categor...', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(896): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-003.php(6): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_003->run()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#10 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#11 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#12 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#15 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#16 {main}</pre>
+ for query ALTER TABLE wp_emkp_categories ADD ean_is_mandatory tinyint(1) DEFAULT 0 NOT NULL; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_003->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Jun-2025 20:52:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/email-list-majaon/email-list-majaon.php:61
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): email_list_majaon_set_options(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_email-...', false)
+#4 /internal/eval.php(20): activate_plugin('email-list-maja...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/email-list-majaon/email-list-majaon.php on line 61
+[07-Jun-2025 20:53:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/email-list-majaon/email-list-majaon.php:61
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): email_list_majaon_set_options(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_email-...', false)
+#4 /internal/eval.php(20): activate_plugin('email-list-maja...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/email-list-majaon/email-list-majaon.php on line 61
+[07-Jun-2025 20:53:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/email-list-majaon/email-list-majaon.php:61
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): email_list_majaon_set_options(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_email-...', false)
+#4 /internal/eval.php(20): activate_plugin('email-list-maja...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/email-list-majaon/email-list-majaon.php on line 61
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:325:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async re (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:149:10) {
+  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"email-list-majaon"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12093:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ys (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12196:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:315:48)
+      at async re (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:149:10) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:1034:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:34:39)
+        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:631:42)
+        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12161:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12090:23)
+        at async ys (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12196:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:315:48)
+        at async re (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:149:10) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
