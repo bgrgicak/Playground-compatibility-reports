@@ -116,27 +116,9 @@
 | Unknown query type: DESC. | ast-sqlite-boot | expando-button | [View logs](/logs/plugins/e/expando-button/error.json) |
 | Unknown query type: DESC. | asyncify-boot | expando-button | [View logs](/logs/plugins/e/expando-button/error.json) |
 | Unknown query type: DESC. | jspi-boot | expando-button | [View logs](/logs/plugins/e/expando-button/error.json) |
-| Data type expected in MySQL query, unknown token received: image_id. | ast-sqlite-boot | image-background-remover | [View logs](/logs/plugins/i/image-background-remover/error.json) |
-| Data type expected in MySQL query, unknown token received: image_id. | asyncify-boot | image-background-remover | [View logs](/logs/plugins/i/image-background-remover/error.json) |
-| Data type expected in MySQL query, unknown token received: image_id. | jspi-boot | image-background-remover | [View logs](/logs/plugins/i/image-background-remover/error.json) |
-| Unknown operation: MODIFY. | ast-sqlite-boot | image-background-remover | [View logs](/logs/plugins/i/image-background-remover/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | image-background-remover | [View logs](/logs/plugins/i/image-background-remover/error.json) |
-| Unknown operation: MODIFY. | jspi-boot | image-background-remover | [View logs](/logs/plugins/i/image-background-remover/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_affiliate_link_cloaker has no column named external_api_key. | ast-sqlite-boot | ig-pagebuilder | [View logs](/logs/plugins/i/ig-pagebuilder/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_affiliate_link_cloaker has no column named external_api_key. | asyncify-boot | ig-pagebuilder | [View logs](/logs/plugins/i/ig-pagebuilder/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_affiliate_link_cloaker has no column named external_api_key. | jspi-boot | ig-pagebuilder | [View logs](/logs/plugins/i/ig-pagebuilder/error.json) |
-| SQLSTATE[HY000]: General error: 1 error in index wp_lpagery_process_post__process_post_lpagery_post_id after drop column: no such column: lpagery_post_id. | ast-sqlite-boot | image-code-generator | [View logs](/logs/plugins/i/image-code-generator/error.json) |
-| SQLSTATE[HY000]: General error: 1 error in index wp_lpagery_process_post__process_post_lpagery_post_id after drop column: no such column: lpagery_post_id. | asyncify-boot | image-code-generator | [View logs](/logs/plugins/i/image-code-generator/error.json) |
-| SQLSTATE[HY000]: General error: 1 error in index wp_lpagery_process_post__process_post_lpagery_post_id after drop column: no such column: lpagery_post_id. | jspi-boot | image-code-generator | [View logs](/logs/plugins/i/image-code-generator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: enable_store_pickup. | ast-sqlite-boot | image-code-generator | [View logs](/logs/plugins/i/image-code-generator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: enable_store_pickup. | asyncify-boot | image-code-generator | [View logs](/logs/plugins/i/image-code-generator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: enable_store_pickup. | jspi-boot | image-code-generator | [View logs](/logs/plugins/i/image-code-generator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: liftgate_fee. | ast-sqlite-boot | image-code-generator | [View logs](/logs/plugins/i/image-code-generator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: liftgate_fee. | asyncify-boot | image-code-generator | [View logs](/logs/plugins/i/image-code-generator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: liftgate_fee. | jspi-boot | image-code-generator | [View logs](/logs/plugins/i/image-code-generator/error.json) |
-| Unknown create type: table. | ast-sqlite-boot | image-code-generator | [View logs](/logs/plugins/i/image-code-generator/error.json) |
-| Unknown create type: table. | asyncify-boot | image-code-generator | [View logs](/logs/plugins/i/image-code-generator/error.json) |
-| Unknown create type: table. | jspi-boot | image-code-generator | [View logs](/logs/plugins/i/image-code-generator/error.json) |
 
  | ast-sqlite-boot | iglobal-woocommerce-extension | [View logs](/logs/plugins/i/iglobal-woocommerce-extension/error.json) |
  | asyncify-boot | iglobal-woocommerce-extension | [View logs](/logs/plugins/i/iglobal-woocommerce-extension/error.json) |
