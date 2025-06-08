@@ -2,127 +2,210 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [07-Jun-2025 11:49:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [08-Jun-2025 19:23:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php on line 201
+[08-Jun-2025 19:23:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php on line 205
+[08-Jun-2025 19:23:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>DELETE FROM wp_chained_completed WHERE not_empty=0 AND datetime < '2025-06-07 11:49:15' - INTERVAL 24 HOUR</p>
+<p>INSERT INTO wp_cptn_po_mailserver SET id=0, shortname = 'SpeedMail', server_type = 'spmail', address = '', ip = '', connectable = 1, processes = 1, status = 1, dnsbl = 0, created = NOW(), updated = NOW()</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: DELETE FROM `wp_chained_completed` WHERE `not_empty` = 0 AND `datetime` &lt; '2025-06-07 11:49:15' - INTERVAL 24 HOUR | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_cptn_po_mailserver` SET `id` = 0 , `shortname` = 'SpeedMail' , `server_type` = 'spmail' , `address` = '' , `ip` = '' , `connectable` = 1 , `processes` = 1 , `status` = 1 , `dnsbl` = 0 , `created` = CURRENT_TIMESTAMP , `updated` = CURRENT_TIMESTAMP | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "24": syntax error
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELETE FROM wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELETE FROM wp_...')
-#3 /wordpress/wp-content/plugins/chained-quiz/models/basic.php(259): WP_SQLite_DB->query('DELETE FROM wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ChainedQuiz::init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query DELETE FROM wp_chained_completed WHERE not_empty=0 AND datetime < '2025-06-07 11:49:15' - INTERVAL 24 HOUR made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ChainedQuiz::init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:49:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/backend/assets/includes/cptn-po-database.php(33): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(242): cptn_po_db_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#9 /internal/eval.php(20): activate_plugin('campation-posto...')
+#10 {main}</pre>
+ for query INSERT INTO wp_cptn_po_mailserver SET id=0, shortname = 'SpeedMail', server_type = 'spmail', address = '', ip = '', connectable = 1, processes = 1, status = 1, dnsbl = 0, created = NOW(), updated = NOW() made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, cptn_po_db_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>DELETE FROM wp_chained_completed WHERE not_empty=0 AND datetime < '2025-06-07 11:49:26' - INTERVAL 24 HOUR</p>
+<p>INSERT INTO wp_cptn_po_sender_domain 
+	                    SET status = 1,
+            			    domain = '127.0.0.1', 
+							domain_status = 'OK',
+							envelope_address = 'postoffice@127.0.0.1',
+							unsubscribe_address = 'unsubscribe@127.0.0.1',
+							from_address = 'info@127.0.0.1',
+							replyto_address = 'reply@127.0.0.1',
+							dmarc_address = 'dmarc@127.0.0.1',
+							dmarc_policy = 'none',
+							dmarc_percent = '0',
+							dmarc_aspf = 'r',
+							dmarc_adkim = 'r',
+							created = NOW(),
+							updated = NOW()
+						</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: DELETE FROM `wp_chained_completed` WHERE `not_empty` = 0 AND `datetime` &lt; '2025-06-07 11:49:26' - INTERVAL 24 HOUR | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_cptn_po_sender_domain` SET `status` = 1 , `domain` = '127.0.0.1' , `domain_status` = 'OK' , `envelope_address` = 'postoffice@127.0.0.1' , `unsubscribe_address` = 'unsubscribe@127.0.0.1' , `from_address` = 'info@127.0.0.1' , `replyto_address` = 'reply@127.0.0.1' , `dmarc_address` = 'dmarc@127.0.0.1' , `dmarc_policy` = 'none' , `dmarc_percent` = '0' , `dmarc_aspf` = 'r' , `dmarc_adkim` = 'r' , `created` = CURRENT_TIMESTAMP , `updated` = CURRENT_TIMESTAMP | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "24": syntax error
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELETE FROM wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELETE FROM wp_...')
-#3 /wordpress/wp-content/plugins/chained-quiz/models/basic.php(259): WP_SQLite_DB->query('DELETE FROM wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ChainedQuiz::init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query DELETE FROM wp_chained_completed WHERE not_empty=0 AND datetime < '2025-06-07 11:49:26' - INTERVAL 24 HOUR made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ChainedQuiz::init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:49:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/backend/assets/includes/cptn-po-database.php(89): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(242): cptn_po_db_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#9 /internal/eval.php(20): activate_plugin('campation-posto...')
+#10 {main}</pre>
+ for query INSERT INTO wp_cptn_po_sender_domain 
+	                    SET status = 1,
+            			    domain = '127.0.0.1', 
+							domain_status = 'OK',
+							envelope_address = 'postoffice@127.0.0.1',
+							unsubscribe_address = 'unsubscribe@127.0.0.1',
+							from_address = 'info@127.0.0.1',
+							replyto_address = 'reply@127.0.0.1',
+							dmarc_address = 'dmarc@127.0.0.1',
+							dmarc_policy = 'none',
+							dmarc_percent = '0',
+							dmarc_aspf = 'r',
+							dmarc_adkim = 'r',
+							created = NOW(),
+							updated = NOW()
+						 made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, cptn_po_db_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>DELETE FROM wp_chained_completed WHERE not_empty=0 AND datetime < '2025-06-07 11:49:36' - INTERVAL 24 HOUR</p>
+<p>INSERT INTO wp_cptn_po_sender_domain_mailserver 
+	                    SET status = 1,
+            			    domain_id = 1,
+							mailserver_id = 0, 
+							dkim_selector = 'po',
+							server_status = 'OK'
+						</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: DELETE FROM `wp_chained_completed` WHERE `not_empty` = 0 AND `datetime` &lt; '2025-06-07 11:49:36' - INTERVAL 24 HOUR | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_cptn_po_sender_domain_mailserver` SET `status` = 1 , `domain_id` = 1 , `mailserver_id` = 0 , `dkim_selector` = 'po' , `server_status` = 'OK' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "24": syntax error
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELETE FROM wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELETE FROM wp_...')
-#3 /wordpress/wp-content/plugins/chained-quiz/models/basic.php(259): WP_SQLite_DB->query('DELETE FROM wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ChainedQuiz::init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query DELETE FROM wp_chained_completed WHERE not_empty=0 AND datetime < '2025-06-07 11:49:36' - INTERVAL 24 HOUR made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ChainedQuiz::init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:51:37 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cm-answers</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-Jun-2025 11:51:38 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/cm-answers/lib/helpers/storage.php on line 14
-[07-Jun-2025 11:51:38 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/cm-answers/lib/helpers/storage.php on line 14
-[07-Jun-2025 11:51:48 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cm-answers</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-Jun-2025 11:51:48 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/cm-answers/lib/helpers/storage.php on line 14
-[07-Jun-2025 11:51:48 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/cm-answers/lib/helpers/storage.php on line 14
-[07-Jun-2025 11:51:59 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cm-answers</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-Jun-2025 11:51:59 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/cm-answers/lib/helpers/storage.php on line 14
-[07-Jun-2025 11:51:59 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/cm-answers/lib/helpers/storage.php on line 14
-[07-Jun-2025 11:54:04 UTC] PHP Deprecated:  Required parameter $val1 follows optional parameter $mode in /wordpress/wp-content/plugins/conditional-custom-fields-shortcode/conditional-custom-fields-functions.php on line 36
-[07-Jun-2025 11:54:04 UTC] PHP Deprecated:  Required parameter $val2 follows optional parameter $mode in /wordpress/wp-content/plugins/conditional-custom-fields-shortcode/conditional-custom-fields-functions.php on line 36
-[07-Jun-2025 11:54:05 UTC] PHP Deprecated:  Required parameter $val1 follows optional parameter $mode in /wordpress/wp-content/plugins/conditional-custom-fields-shortcode/conditional-custom-fields-functions.php on line 36
-[07-Jun-2025 11:54:05 UTC] PHP Deprecated:  Required parameter $val2 follows optional parameter $mode in /wordpress/wp-content/plugins/conditional-custom-fields-shortcode/conditional-custom-fields-functions.php on line 36
-[07-Jun-2025 11:54:14 UTC] PHP Deprecated:  Required parameter $val1 follows optional parameter $mode in /wordpress/wp-content/plugins/conditional-custom-fields-shortcode/conditional-custom-fields-functions.php on line 36
-[07-Jun-2025 11:54:14 UTC] PHP Deprecated:  Required parameter $val2 follows optional parameter $mode in /wordpress/wp-content/plugins/conditional-custom-fields-shortcode/conditional-custom-fields-functions.php on line 36
-[07-Jun-2025 11:54:14 UTC] PHP Deprecated:  Required parameter $val1 follows optional parameter $mode in /wordpress/wp-content/plugins/conditional-custom-fields-shortcode/conditional-custom-fields-functions.php on line 36
-[07-Jun-2025 11:54:14 UTC] PHP Deprecated:  Required parameter $val2 follows optional parameter $mode in /wordpress/wp-content/plugins/conditional-custom-fields-shortcode/conditional-custom-fields-functions.php on line 36
-[07-Jun-2025 11:54:23 UTC] PHP Deprecated:  Required parameter $val1 follows optional parameter $mode in /wordpress/wp-content/plugins/conditional-custom-fields-shortcode/conditional-custom-fields-functions.php on line 36
-[07-Jun-2025 11:54:23 UTC] PHP Deprecated:  Required parameter $val2 follows optional parameter $mode in /wordpress/wp-content/plugins/conditional-custom-fields-shortcode/conditional-custom-fields-functions.php on line 36
-[07-Jun-2025 11:54:24 UTC] PHP Deprecated:  Required parameter $val1 follows optional parameter $mode in /wordpress/wp-content/plugins/conditional-custom-fields-shortcode/conditional-custom-fields-functions.php on line 36
-[07-Jun-2025 11:54:24 UTC] PHP Deprecated:  Required parameter $val2 follows optional parameter $mode in /wordpress/wp-content/plugins/conditional-custom-fields-shortcode/conditional-custom-fields-functions.php on line 36
-[07-Jun-2025 11:56:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/backend/assets/includes/cptn-po-database.php(103): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(242): cptn_po_db_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#9 /internal/eval.php(20): activate_plugin('campation-posto...')
+#10 {main}</pre>
+ for query INSERT INTO wp_cptn_po_sender_domain_mailserver 
+	                    SET status = 1,
+            			    domain_id = 1,
+							mailserver_id = 0, 
+							dkim_selector = 'po',
+							server_status = 'OK'
+						 made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, cptn_po_db_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>REPLACE INTO wp_couponapi_config (name,value) VALUES ('last_cron',1749297391.083)</p>
+<p>INSERT INTO wp_cptn_po_option
+   		           SET option_name = 'cptn_po_opt_email_blocked',
+				   	   option_value = '0'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_config</li>
+<li>Executing: INSERT INTO `wp_cptn_po_option` SET `option_name` = 'cptn_po_opt_email_blocked' , `option_value` = '0' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/includes/cptn-po-functions.php(90): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/includes/cptn-po-upgraders.php(6): cptn_po_update_option('cptn_po_opt_ema...', '0')
+#5 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(243): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#10 /internal/eval.php(20): activate_plugin('campation-posto...')
+#11 {main}</pre>
+ for query INSERT INTO wp_cptn_po_option
+   		           SET option_name = 'cptn_po_opt_email_blocked',
+				   	   option_value = '0' made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, include_once('/plugins/campation-postoffice/includes/cptn-po-upgraders.php'), cptn_po_update_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_cptn_po_mailserver_copy LIKE wp_cptn_po_mailserver</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: CREATE TABLE ... [AS] SELECT is currently not supported
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1270): WP_SQLite_Driver->new_not_supported_exception('CREATE TABLE .....')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(878): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
+#5 /wordpress/wp-content/plugins/campation-postoffice/includes/cptn-po-upgraders.php(57): WP_SQLite_DB->query('CREATE TABLE wp...')
+#6 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(243): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#11 /internal/eval.php(20): activate_plugin('campation-posto...')
+#12 {main}</pre>
+ for query CREATE TABLE wp_cptn_po_mailserver_copy LIKE wp_cptn_po_mailserver made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, include_once('/plugins/campation-postoffice/includes/cptn-po-upgraders.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_cptn_po_mailserver_copy
+	      SELECT * FROM wp_cptn_po_mailserver WHERE server_type='smtp'
+		  GROUP BY address</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cptn_po_mailserver_copy</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_couponapi_config</li>
-<li>Executing: REPLACE INTO `wp_couponapi_config` () SELECT  FROM (VALUES ( 'last_cron' , 1749297391.083 )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_cptn_po_mailserver_copy</li>
+<li>Executing: SELECT * FROM (SELECT * FROM `wp_cptn_po_mailserver` WHERE `server_type` = 'smtp' GROUP BY `address`) LIMIT 1 | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_cptn_po_mailserver_copy` () SELECT  FROM (SELECT * FROM `wp_cptn_po_mailserver` WHERE `server_type` = 'smtp' GROUP BY `address`) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -131,421 +214,421 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('REPLACE INTO wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('REPLACE INTO wp...')
-#3 /wordpress/wp-content/plugins/couponapi/couponapi.php(472): WP_SQLite_DB->query('REPLACE INTO wp...')
-#4 /wordpress/wp-content/plugins/couponapi/couponapi.php(596): couponapi_check_wpcron()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('couponapi/coupo...')
-#7 /internal/eval.php(20): activate_plugin('couponapi/coupo...')
-#8 {main}</pre>
- for query REPLACE INTO wp_couponapi_config (name,value) VALUES ('last_cron',1749297391.083) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/couponapi/couponapi.php'), couponapi_check_wpcron, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:56:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='merchant_home_page'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `Field` = 'merchant_home_page' ORDER BY ordinal_position | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Field
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW COLUMNS FR...')
-#4 /wordpress/wp-content/plugins/couponapi/activate.php(68): wpdb->get_results('SHOW COLUMNS FR...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): couponapi_update_to_3_point_2_point_1('')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/includes/cptn-po-upgraders.php(59): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(243): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='merchant_home_page' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, couponapi_update_to_3_point_2_point_1, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:56:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#9 /internal/eval.php(20): activate_plugin('campation-posto...')
+#10 {main}</pre>
+ for query INSERT INTO wp_cptn_po_mailserver_copy
+	      SELECT * FROM wp_cptn_po_mailserver WHERE server_type='smtp'
+		  GROUP BY address made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, include_once('/plugins/campation-postoffice/includes/cptn-po-upgraders.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_couponapi_upload ADD COLUMN merchant_home_page TEXT NOT NULL AFTER store</p>
+<p>INSERT INTO wp_cptn_po_mailserver
+	      SELECT * FROM wp_cptn_po_mailserver_copy</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_couponapi_upload, merchant_home_page, 22, , NO, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_couponapi_upload_684428f05f370` (
-  `offer_id` INTEGER NOT NULL,
-  `title` TEXT COLLATE NOCASE NOT NULL,
-  `description` TEXT COLLATE NOCASE NOT NULL,
-  `label` TEXT COLLATE NOCASE NOT NULL,
-  `code` TEXT COLLATE NOCASE NOT NULL,
-  `featured` TEXT COLLATE NOCASE NOT NULL,
-  `source` TEXT COLLATE NOCASE NOT NULL,
-  `url` TEXT COLLATE NOCASE NOT NULL,
-  `deeplink` TEXT COLLATE NOCASE NOT NULL,
-  `affiliate_link` TEXT COLLATE NOCASE NOT NULL,
-  `cashback_link` TEXT COLLATE NOCASE NOT NULL,
-  `image_url` TEXT COLLATE NOCASE NOT NULL,
-  `type` TEXT COLLATE NOCASE NOT NULL,
-  `store` TEXT COLLATE NOCASE NOT NULL,
-  `merchant_home_page` TEXT COLLATE NOCASE NOT NULL,
-  `categories` TEXT COLLATE NOCASE NOT NULL,
-  `locations` TEXT COLLATE NOCASE NOT NULL,
-  `start_date` TEXT COLLATE NOCASE,
-  `end_date` TEXT COLLATE NOCASE,
-  `status` TEXT COLLATE NOCASE NOT NULL,
-  `upload_date` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `merchant_home_page` TEXT COLLATE NOCASE NOT NULL
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: merchant_home_page
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/couponapi/activate.php(71): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): couponapi_update_to_3_point_2_point_1('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_couponapi_upload ADD COLUMN merchant_home_page TEXT NOT NULL AFTER store made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, couponapi_update_to_3_point_2_point_1, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:56:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='brand_logo'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `Field` = 'brand_logo' ORDER BY ordinal_position | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Field
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW COLUMNS FR...')
-#4 /wordpress/wp-content/plugins/couponapi/activate.php(79): wpdb->get_results('SHOW COLUMNS FR...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): couponapi_update_to_3_point_4_point_3('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='brand_logo' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, couponapi_update_to_3_point_4_point_3, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:56:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='label'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `Field` = 'label' ORDER BY ordinal_position | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Field
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW COLUMNS FR...')
-#4 /wordpress/wp-content/plugins/couponapi/activate.php(100): wpdb->get_results('SHOW COLUMNS FR...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): couponapi_update_to_4_point_1('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='label' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, couponapi_update_to_4_point_1, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:56:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_couponapi_upload ADD COLUMN label varchar(255) NOT NULL AFTER description</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_couponapi_upload, label, 23, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_couponapi_upload_684428f072fd8` (
-  `offer_id` INTEGER NOT NULL,
-  `title` TEXT COLLATE NOCASE NOT NULL,
-  `description` TEXT COLLATE NOCASE NOT NULL,
-  `label` TEXT COLLATE NOCASE NOT NULL,
-  `code` TEXT COLLATE NOCASE NOT NULL,
-  `featured` TEXT COLLATE NOCASE NOT NULL,
-  `source` TEXT COLLATE NOCASE NOT NULL,
-  `url` TEXT COLLATE NOCASE NOT NULL,
-  `deeplink` TEXT COLLATE NOCASE NOT NULL,
-  `affiliate_link` TEXT COLLATE NOCASE NOT NULL,
-  `cashback_link` TEXT COLLATE NOCASE NOT NULL,
-  `image_url` TEXT COLLATE NOCASE NOT NULL,
-  `type` TEXT COLLATE NOCASE NOT NULL,
-  `store` TEXT COLLATE NOCASE NOT NULL,
-  `merchant_home_page` TEXT COLLATE NOCASE NOT NULL,
-  `categories` TEXT COLLATE NOCASE NOT NULL,
-  `locations` TEXT COLLATE NOCASE NOT NULL,
-  `start_date` TEXT COLLATE NOCASE,
-  `end_date` TEXT COLLATE NOCASE,
-  `status` TEXT COLLATE NOCASE NOT NULL,
-  `upload_date` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `brand_logo` TEXT COLLATE NOCASE,
-  `label` TEXT COLLATE NOCASE NOT NULL
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: label
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/couponapi/activate.php(103): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): couponapi_update_to_4_point_1('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_couponapi_upload ADD COLUMN label varchar(255) NOT NULL AFTER description made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, couponapi_update_to_4_point_1, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:56:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='locations'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `Field` = 'locations' ORDER BY ordinal_position | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Field
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW COLUMNS FR...')
-#4 /wordpress/wp-content/plugins/couponapi/activate.php(110): wpdb->get_results('SHOW COLUMNS FR...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): couponapi_update_to_4_point_2('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='locations' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, couponapi_update_to_4_point_2, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:56:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_couponapi_upload ADD COLUMN locations TEXT NULL AFTER categories</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_couponapi_upload, locations, 23, , YES, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_couponapi_upload_684428f079568` (
-  `offer_id` INTEGER NOT NULL,
-  `title` TEXT COLLATE NOCASE NOT NULL,
-  `description` TEXT COLLATE NOCASE NOT NULL,
-  `label` TEXT COLLATE NOCASE NOT NULL,
-  `code` TEXT COLLATE NOCASE NOT NULL,
-  `featured` TEXT COLLATE NOCASE NOT NULL,
-  `source` TEXT COLLATE NOCASE NOT NULL,
-  `url` TEXT COLLATE NOCASE NOT NULL,
-  `deeplink` TEXT COLLATE NOCASE NOT NULL,
-  `affiliate_link` TEXT COLLATE NOCASE NOT NULL,
-  `cashback_link` TEXT COLLATE NOCASE NOT NULL,
-  `image_url` TEXT COLLATE NOCASE NOT NULL,
-  `type` TEXT COLLATE NOCASE NOT NULL,
-  `store` TEXT COLLATE NOCASE NOT NULL,
-  `merchant_home_page` TEXT COLLATE NOCASE NOT NULL,
-  `categories` TEXT COLLATE NOCASE NOT NULL,
-  `locations` TEXT COLLATE NOCASE NOT NULL,
-  `start_date` TEXT COLLATE NOCASE,
-  `end_date` TEXT COLLATE NOCASE,
-  `status` TEXT COLLATE NOCASE NOT NULL,
-  `upload_date` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `brand_logo` TEXT COLLATE NOCASE,
-  `locations` TEXT COLLATE NOCASE
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: locations
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/couponapi/activate.php(111): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): couponapi_update_to_4_point_2('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query ALTER TABLE wp_couponapi_upload ADD COLUMN locations TEXT NULL AFTER categories made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, couponapi_update_to_4_point_2, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:56:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>REPLACE INTO wp_couponapi_config (name,value) VALUES ('last_cron',1749297401.382)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_config</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cptn_po_mailserver</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_couponapi_config</li>
-<li>Executing: REPLACE INTO `wp_couponapi_config` () SELECT  FROM (VALUES ( 'last_cron' , 1749297401.382 )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_cptn_po_mailserver</li>
+<li>Executing: SELECT * FROM (SELECT * FROM `wp_cptn_po_mailserver_copy`) LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_cptn_po_mailserver_copy
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/includes/cptn-po-upgraders.php(63): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(243): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#9 /internal/eval.php(20): activate_plugin('campation-posto...')
+#10 {main}</pre>
+ for query INSERT INTO wp_cptn_po_mailserver
+	      SELECT * FROM wp_cptn_po_mailserver_copy made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, include_once('/plugins/campation-postoffice/includes/cptn-po-upgraders.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP TABLE wp_cptn_po_mailserver_copy</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cptn_po_mailserver_copy</li>
+<li>Executing: DELETE FROM `_wp_sqlite_mysql_information_schema_tables` WHERE `table_schema` = ? AND `table_name` = ? | parameters: database_name_here, wp_cptn_po_mailserver_copy</li>
+<li>Executing: DELETE FROM `_wp_sqlite_mysql_information_schema_columns` WHERE `table_schema` = ? AND `table_name` = ? | parameters: database_name_here, wp_cptn_po_mailserver_copy</li>
+<li>Executing: DELETE FROM `_wp_sqlite_mysql_information_schema_statistics` WHERE `table_schema` = ? AND `table_name` = ? | parameters: database_name_here, wp_cptn_po_mailserver_copy</li>
+<li>Executing: DELETE FROM `_wp_sqlite_mysql_information_schema_table_constraints` WHERE `table_schema` = ? AND `table_name` = ? | parameters: database_name_here, wp_cptn_po_mailserver_copy</li>
+<li>Executing: DROP TABLE `wp_cptn_po_mailserver_copy` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_cptn_po_mailserver_copy
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DROP TABLE wp_c...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DROP TABLE wp_c...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/includes/cptn-po-upgraders.php(65): WP_SQLite_DB->query('DROP TABLE wp_c...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(243): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#9 /internal/eval.php(20): activate_plugin('campation-posto...')
+#10 {main}</pre>
+ for query DROP TABLE wp_cptn_po_mailserver_copy made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, include_once('/plugins/campation-postoffice/includes/cptn-po-upgraders.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_cptn_po_option
+   		           SET option_name = 'cptn_po_cron_running',
+				   	   option_value = '1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_cptn_po_option` SET `option_name` = 'cptn_po_cron_running' , `option_value` = '1' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/includes/cptn-po-functions.php(90): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/cron/cptn-po-cron.php(88): cptn_po_update_option('cptn_po_cron_ru...', '1')
+#5 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(244): cptn_po_cron_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#10 /internal/eval.php(20): activate_plugin('campation-posto...')
+#11 {main}</pre>
+ for query INSERT INTO wp_cptn_po_option
+   		           SET option_name = 'cptn_po_cron_running',
+				   	   option_value = '1' made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, cptn_po_cron_activate, cptn_po_update_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:13 UTC] PHP Warning:  Undefined array key "cpq`.`slave" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3146
+[08-Jun-2025 19:23:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3147
+[08-Jun-2025 19:23:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3148
+[08-Jun-2025 19:23:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3149
+[08-Jun-2025 19:23:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_cptn_po_queue cpq
+	           LEFT JOIN wp_cptn_po_slave cps ON cps.id = cpq.slave 
+	  		    SET cpq.slave = NULL
+			  WHERE (cps.created <= DATE_SUB(NOW(), INTERVAL 5 minute)
+				    OR cps.created IS NULL)
+			    AND cpq.executed IS NULL
+				AND cpq.slave IS NOT NULL
+				   </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cptn_po_queue` `cpq` LEFT JOIN `wp_cptn_po_slave` `cps` ON `cps`.`id` = `cpq`.`slave</li>
+<li>Executing: 
+				SELECT LOWER(column_name) AS COLUMN_NAME, is_nullable, data_type, column_default
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_cptn_po_queue` `cpq` LEFT JOIN `wp_cptn_po_slave` `cps` ON `cps`.`id` = `cpq`.`slave</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+WP_SQLite_Driver::cast_value_in_non_strict_mode(): Argument #1 ($mysql_data_type) must be of type string, null given, called in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3160
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('WP_SQLite_Drive...', 0, Object(TypeError))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE wp_cptn_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('UPDATE wp_cptn_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/cron/cptn-po-cron.php(149): WP_SQLite_DB->query('UPDATE wp_cptn_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/cron/cptn-po-cron.php(90): cptn_po_message_tasks()
+#5 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(244): cptn_po_cron_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#10 /internal/eval.php(20): activate_plugin('campation-posto...')
+#11 {main}</pre>
+ for query UPDATE wp_cptn_po_queue cpq
+	           LEFT JOIN wp_cptn_po_slave cps ON cps.id = cpq.slave 
+	  		    SET cpq.slave = NULL
+			  WHERE (cps.created <= DATE_SUB(NOW(), INTERVAL 5 minute)
+				    OR cps.created IS NULL)
+			    AND cpq.executed IS NULL
+				AND cpq.slave IS NOT NULL
+				    made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, cptn_po_cron_activate, cptn_po_message_tasks, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:13 UTC] <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_cptn_po_queue cpq
+	           LEFT JOIN wp_cptn_po_slave cps ON cps.id = cpq.slave 
+	  		    SET cpq.slave = NULL
+			  WHERE (cps.created <= DATE_SUB(NOW(), INTERVAL 5 minute)
+				    OR cps.created IS NULL)
+			    AND cpq.executed IS NULL
+				AND cpq.slave IS NOT NULL
+				   </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cptn_po_queue` `cpq` LEFT JOIN `wp_cptn_po_slave` `cps` ON `cps`.`id` = `cpq`.`slave</li>
+<li>Executing: 
+				SELECT LOWER(column_name) AS COLUMN_NAME, is_nullable, data_type, column_default
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_cptn_po_queue` `cpq` LEFT JOIN `wp_cptn_po_slave` `cps` ON `cps`.`id` = `cpq`.`slave</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+WP_SQLite_Driver::cast_value_in_non_strict_mode(): Argument #1 ($mysql_data_type) must be of type string, null given, called in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3160
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('WP_SQLite_Drive...', 0, Object(TypeError))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE wp_cptn_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('UPDATE wp_cptn_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/cron/cptn-po-cron.php(149): WP_SQLite_DB->query('UPDATE wp_cptn_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/cron/cptn-po-cron.php(90): cptn_po_message_tasks()
+#5 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(244): cptn_po_cron_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#10 /internal/eval.php(20): activate_plugin('campation-posto...')
+#11 {main}</pre>
+
+[08-Jun-2025 19:23:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/campation-postoffice/cron/cptn-po-cron-developer-report.php on line 53
+[08-Jun-2025 19:23:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/campation-postoffice/cron/cptn-po-cron-developer-report.php on line 57
+[08-Jun-2025 19:23:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/campation-postoffice/cron/cptn-po-cron-developer-report.php on line 108
+[08-Jun-2025 19:23:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/campation-postoffice/cron/cptn-po-cron-developer-report.php on line 113
+[08-Jun-2025 19:23:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php on line 201
+[08-Jun-2025 19:23:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php on line 205
+[08-Jun-2025 19:23:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_cptn_po_mailserver SET id=0, shortname = 'SpeedMail', server_type = 'spmail', address = '', ip = '', connectable = 1, processes = 1, status = 1, dnsbl = 0, created = NOW(), updated = NOW()</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_cptn_po_mailserver` SET `id` = 0 , `shortname` = 'SpeedMail' , `server_type` = 'spmail' , `address` = '' , `ip` = '' , `connectable` = 1 , `processes` = 1 , `status` = 1 , `dnsbl` = 0 , `created` = CURRENT_TIMESTAMP , `updated` = CURRENT_TIMESTAMP | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/backend/assets/includes/cptn-po-database.php(33): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(242): cptn_po_db_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#9 /internal/eval.php(20): activate_plugin('campation-posto...')
+#10 {main}</pre>
+ for query INSERT INTO wp_cptn_po_mailserver SET id=0, shortname = 'SpeedMail', server_type = 'spmail', address = '', ip = '', connectable = 1, processes = 1, status = 1, dnsbl = 0, created = NOW(), updated = NOW() made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, cptn_po_db_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_cptn_po_sender_domain 
+	                    SET status = 1,
+            			    domain = '127.0.0.1', 
+							domain_status = 'OK',
+							envelope_address = 'postoffice@127.0.0.1',
+							unsubscribe_address = 'unsubscribe@127.0.0.1',
+							from_address = 'info@127.0.0.1',
+							replyto_address = 'reply@127.0.0.1',
+							dmarc_address = 'dmarc@127.0.0.1',
+							dmarc_policy = 'none',
+							dmarc_percent = '0',
+							dmarc_aspf = 'r',
+							dmarc_adkim = 'r',
+							created = NOW(),
+							updated = NOW()
+						</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_cptn_po_sender_domain` SET `status` = 1 , `domain` = '127.0.0.1' , `domain_status` = 'OK' , `envelope_address` = 'postoffice@127.0.0.1' , `unsubscribe_address` = 'unsubscribe@127.0.0.1' , `from_address` = 'info@127.0.0.1' , `replyto_address` = 'reply@127.0.0.1' , `dmarc_address` = 'dmarc@127.0.0.1' , `dmarc_policy` = 'none' , `dmarc_percent` = '0' , `dmarc_aspf` = 'r' , `dmarc_adkim` = 'r' , `created` = CURRENT_TIMESTAMP , `updated` = CURRENT_TIMESTAMP | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/backend/assets/includes/cptn-po-database.php(89): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(242): cptn_po_db_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#9 /internal/eval.php(20): activate_plugin('campation-posto...')
+#10 {main}</pre>
+ for query INSERT INTO wp_cptn_po_sender_domain 
+	                    SET status = 1,
+            			    domain = '127.0.0.1', 
+							domain_status = 'OK',
+							envelope_address = 'postoffice@127.0.0.1',
+							unsubscribe_address = 'unsubscribe@127.0.0.1',
+							from_address = 'info@127.0.0.1',
+							replyto_address = 'reply@127.0.0.1',
+							dmarc_address = 'dmarc@127.0.0.1',
+							dmarc_policy = 'none',
+							dmarc_percent = '0',
+							dmarc_aspf = 'r',
+							dmarc_adkim = 'r',
+							created = NOW(),
+							updated = NOW()
+						 made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, cptn_po_db_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_cptn_po_sender_domain_mailserver 
+	                    SET status = 1,
+            			    domain_id = 1,
+							mailserver_id = 0, 
+							dkim_selector = 'po',
+							server_status = 'OK'
+						</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_cptn_po_sender_domain_mailserver` SET `status` = 1 , `domain_id` = 1 , `mailserver_id` = 0 , `dkim_selector` = 'po' , `server_status` = 'OK' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/backend/assets/includes/cptn-po-database.php(103): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(242): cptn_po_db_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#9 /internal/eval.php(20): activate_plugin('campation-posto...')
+#10 {main}</pre>
+ for query INSERT INTO wp_cptn_po_sender_domain_mailserver 
+	                    SET status = 1,
+            			    domain_id = 1,
+							mailserver_id = 0, 
+							dkim_selector = 'po',
+							server_status = 'OK'
+						 made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, cptn_po_db_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_cptn_po_option
+   		           SET option_name = 'cptn_po_opt_email_blocked',
+				   	   option_value = '0'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_cptn_po_option` SET `option_name` = 'cptn_po_opt_email_blocked' , `option_value` = '0' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/includes/cptn-po-functions.php(90): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/includes/cptn-po-upgraders.php(6): cptn_po_update_option('cptn_po_opt_ema...', '0')
+#5 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(243): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#10 /internal/eval.php(20): activate_plugin('campation-posto...')
+#11 {main}</pre>
+ for query INSERT INTO wp_cptn_po_option
+   		           SET option_name = 'cptn_po_opt_email_blocked',
+				   	   option_value = '0' made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, include_once('/plugins/campation-postoffice/includes/cptn-po-upgraders.php'), cptn_po_update_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_cptn_po_mailserver_copy LIKE wp_cptn_po_mailserver</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: CREATE TABLE ... [AS] SELECT is currently not supported
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1270): WP_SQLite_Driver->new_not_supported_exception('CREATE TABLE .....')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(878): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
+#5 /wordpress/wp-content/plugins/campation-postoffice/includes/cptn-po-upgraders.php(57): WP_SQLite_DB->query('CREATE TABLE wp...')
+#6 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(243): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#11 /internal/eval.php(20): activate_plugin('campation-posto...')
+#12 {main}</pre>
+ for query CREATE TABLE wp_cptn_po_mailserver_copy LIKE wp_cptn_po_mailserver made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, include_once('/plugins/campation-postoffice/includes/cptn-po-upgraders.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_cptn_po_mailserver_copy
+	      SELECT * FROM wp_cptn_po_mailserver WHERE server_type='smtp'
+		  GROUP BY address</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cptn_po_mailserver_copy</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_cptn_po_mailserver_copy</li>
+<li>Executing: SELECT * FROM (SELECT * FROM `wp_cptn_po_mailserver` WHERE `server_type` = 'smtp' GROUP BY `address`) LIMIT 1 | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_cptn_po_mailserver_copy` () SELECT  FROM (SELECT * FROM `wp_cptn_po_mailserver` WHERE `server_type` = 'smtp' GROUP BY `address`) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -554,247 +637,200 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('REPLACE INTO wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('REPLACE INTO wp...')
-#3 /wordpress/wp-content/plugins/couponapi/couponapi.php(472): WP_SQLite_DB->query('REPLACE INTO wp...')
-#4 /wordpress/wp-content/plugins/couponapi/couponapi.php(596): couponapi_check_wpcron()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('couponapi/coupo...')
-#7 /internal/eval.php(20): activate_plugin('couponapi/coupo...')
-#8 {main}</pre>
- for query REPLACE INTO wp_couponapi_config (name,value) VALUES ('last_cron',1749297401.382) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/couponapi/couponapi.php'), couponapi_check_wpcron, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:56:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='merchant_home_page'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `Field` = 'merchant_home_page' ORDER BY ordinal_position | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Field
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW COLUMNS FR...')
-#4 /wordpress/wp-content/plugins/couponapi/activate.php(68): wpdb->get_results('SHOW COLUMNS FR...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): couponapi_update_to_3_point_2_point_1('')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/includes/cptn-po-upgraders.php(59): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(243): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='merchant_home_page' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, couponapi_update_to_3_point_2_point_1, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:56:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#9 /internal/eval.php(20): activate_plugin('campation-posto...')
+#10 {main}</pre>
+ for query INSERT INTO wp_cptn_po_mailserver_copy
+	      SELECT * FROM wp_cptn_po_mailserver WHERE server_type='smtp'
+		  GROUP BY address made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, include_once('/plugins/campation-postoffice/includes/cptn-po-upgraders.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_couponapi_upload ADD COLUMN merchant_home_page TEXT NOT NULL AFTER store</p>
+<p>INSERT INTO wp_cptn_po_mailserver
+	      SELECT * FROM wp_cptn_po_mailserver_copy</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cptn_po_mailserver</li>
 <li>Executing: 
-				SELECT MAX(ordinal_position)
+				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_couponapi_upload, merchant_home_page, 22, , NO, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_cptn_po_mailserver</li>
+<li>Executing: SELECT * FROM (SELECT * FROM `wp_cptn_po_mailserver_copy`) LIMIT 1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'merchant_home_page'
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3885): WP_SQLite_Driver->new_driver_exception('SQLSTATE[42S21]...', '42S21')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(681): WP_SQLite_Driver->convert_information_schema_exception(Object(WP_SQLite_Information_Schema_Exception))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/couponapi/activate.php(71): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): couponapi_update_to_3_point_2_point_1('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query ALTER TABLE wp_couponapi_upload ADD COLUMN merchant_home_page TEXT NOT NULL AFTER store made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, couponapi_update_to_3_point_2_point_1, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:56:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='brand_logo'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `Field` = 'brand_logo' ORDER BY ordinal_position | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Field
+SQLSTATE[HY000]: General error: 1 no such table: wp_cptn_po_mailserver_copy
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW COLUMNS FR...')
-#4 /wordpress/wp-content/plugins/couponapi/activate.php(79): wpdb->get_results('SHOW COLUMNS FR...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): couponapi_update_to_3_point_4_point_3('')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/includes/cptn-po-upgraders.php(63): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(243): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='brand_logo' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, couponapi_update_to_3_point_4_point_3, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:56:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#9 /internal/eval.php(20): activate_plugin('campation-posto...')
+#10 {main}</pre>
+ for query INSERT INTO wp_cptn_po_mailserver
+	      SELECT * FROM wp_cptn_po_mailserver_copy made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, include_once('/plugins/campation-postoffice/includes/cptn-po-upgraders.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='label'</p>
+<p>DROP TABLE wp_cptn_po_mailserver_copy</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `Field` = 'label' ORDER BY ordinal_position | parameters: database_name_here, wp_couponapi_upload</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cptn_po_mailserver_copy</li>
+<li>Executing: DELETE FROM `_wp_sqlite_mysql_information_schema_tables` WHERE `table_schema` = ? AND `table_name` = ? | parameters: database_name_here, wp_cptn_po_mailserver_copy</li>
+<li>Executing: DELETE FROM `_wp_sqlite_mysql_information_schema_columns` WHERE `table_schema` = ? AND `table_name` = ? | parameters: database_name_here, wp_cptn_po_mailserver_copy</li>
+<li>Executing: DELETE FROM `_wp_sqlite_mysql_information_schema_statistics` WHERE `table_schema` = ? AND `table_name` = ? | parameters: database_name_here, wp_cptn_po_mailserver_copy</li>
+<li>Executing: DELETE FROM `_wp_sqlite_mysql_information_schema_table_constraints` WHERE `table_schema` = ? AND `table_name` = ? | parameters: database_name_here, wp_cptn_po_mailserver_copy</li>
+<li>Executing: DROP TABLE `wp_cptn_po_mailserver_copy` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Field
+SQLSTATE[HY000]: General error: 1 no such table: wp_cptn_po_mailserver_copy
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW COLUMNS FR...')
-#4 /wordpress/wp-content/plugins/couponapi/activate.php(100): wpdb->get_results('SHOW COLUMNS FR...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): couponapi_update_to_4_point_1('')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DROP TABLE wp_c...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DROP TABLE wp_c...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/includes/cptn-po-upgraders.php(65): WP_SQLite_DB->query('DROP TABLE wp_c...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(243): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='label' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, couponapi_update_to_4_point_1, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:56:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#9 /internal/eval.php(20): activate_plugin('campation-posto...')
+#10 {main}</pre>
+ for query DROP TABLE wp_cptn_po_mailserver_copy made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, include_once('/plugins/campation-postoffice/includes/cptn-po-upgraders.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_couponapi_upload ADD COLUMN label varchar(255) NOT NULL AFTER description</p>
+<p>INSERT INTO wp_cptn_po_option
+   		           SET option_name = 'cptn_po_cron_running',
+				   	   option_value = '1'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
+<li>Executing: INSERT INTO `wp_cptn_po_option` SET `option_name` = 'cptn_po_cron_running' , `option_value` = '1' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/includes/cptn-po-functions.php(90): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/cron/cptn-po-cron.php(88): cptn_po_update_option('cptn_po_cron_ru...', '1')
+#5 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(244): cptn_po_cron_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#10 /internal/eval.php(20): activate_plugin('campation-posto...')
+#11 {main}</pre>
+ for query INSERT INTO wp_cptn_po_option
+   		           SET option_name = 'cptn_po_cron_running',
+				   	   option_value = '1' made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, cptn_po_cron_activate, cptn_po_update_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:30 UTC] PHP Warning:  Undefined array key "cpq`.`slave" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3146
+[08-Jun-2025 19:23:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3147
+[08-Jun-2025 19:23:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3148
+[08-Jun-2025 19:23:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3149
+[08-Jun-2025 19:23:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_cptn_po_queue cpq
+	           LEFT JOIN wp_cptn_po_slave cps ON cps.id = cpq.slave 
+	  		    SET cpq.slave = NULL
+			  WHERE (cps.created <= DATE_SUB(NOW(), INTERVAL 5 minute)
+				    OR cps.created IS NULL)
+			    AND cpq.executed IS NULL
+				AND cpq.slave IS NOT NULL
+				   </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cptn_po_queue` `cpq` LEFT JOIN `wp_cptn_po_slave` `cps` ON `cps`.`id` = `cpq`.`slave</li>
 <li>Executing: 
-				SELECT MAX(ordinal_position)
+				SELECT LOWER(column_name) AS COLUMN_NAME, is_nullable, data_type, column_default
 				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_couponapi_upload, label, 23, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+			 | parameters: database_name_here, wp_cptn_po_queue` `cpq` LEFT JOIN `wp_cptn_po_slave` `cps` ON `cps`.`id` = `cpq`.`slave</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'label'
+WP_SQLite_Driver::cast_value_in_non_strict_mode(): Argument #1 ($mysql_data_type) must be of type string, null given, called in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3160
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3885): WP_SQLite_Driver->new_driver_exception('SQLSTATE[42S21]...', '42S21')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(681): WP_SQLite_Driver->convert_information_schema_exception(Object(WP_SQLite_Information_Schema_Exception))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/couponapi/activate.php(103): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): couponapi_update_to_4_point_1('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query ALTER TABLE wp_couponapi_upload ADD COLUMN label varchar(255) NOT NULL AFTER description made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, couponapi_update_to_4_point_1, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:56:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('WP_SQLite_Drive...', 0, Object(TypeError))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE wp_cptn_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('UPDATE wp_cptn_...')
+#3 /wordpress/wp-content/plugins/campation-postoffice/cron/cptn-po-cron.php(149): WP_SQLite_DB->query('UPDATE wp_cptn_...')
+#4 /wordpress/wp-content/plugins/campation-postoffice/cron/cptn-po-cron.php(90): cptn_po_message_tasks()
+#5 /wordpress/wp-content/plugins/campation-postoffice/campation-postoffice.php(244): cptn_po_cron_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): cptn_po_activation_requirements(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campat...', false)
+#10 /internal/eval.php(20): activate_plugin('campation-posto...')
+#11 {main}</pre>
+ for query UPDATE wp_cptn_po_queue cpq
+	           LEFT JOIN wp_cptn_po_slave cps ON cps.id = cpq.slave 
+	  		    SET cpq.slave = NULL
+			  WHERE (cps.created <= DATE_SUB(NOW(), INTERVAL 5 minute)
+				    OR cps.created IS NULL)
+			    AND cpq.executed IS NULL
+				AND cpq.slave IS NOT NULL
+				    made by activate_plugin, do_action('activate_campation-postoffice/campation-postoffice.php'), WP_Hook->do_action, WP_Hook->apply_filters, cptn_po_activation_requirements, cptn_po_cron_activate, cptn_po_message_tasks, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Jun-2025 19:23:30 UTC] <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='locations'</p>
+<p>UPDATE wp_cptn_po_queue cpq
+	           LEFT JOIN wp_cptn_po_slave cps ON cps.id = cpq.slave 
+	  		    SET cpq.slave = NULL
+			  WHERE (cps.created <= DATE_SUB(NOW(), INTERVAL 5 minute)
+				    OR cps.created IS NULL)
+			    AND cpq.executed IS NULL
+				AND cpq.slave IS NOT NULL
+				   </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `Field` = 'locations' ORDER BY ordinal_position | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Field
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW COLUMNS FR...')
-#4 /wordpress/wp-content/plugins/couponapi/activate.php(110): wpdb->get_results('SHOW COLUMNS FR...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): couponapi_update_to_4_point_2('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SHOW COLUMNS FROM wp_couponapi_upload WHERE Field='locations' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, couponapi_update_to_4_point_2, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jun-2025 11:56:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_couponapi_upload ADD COLUMN locations TEXT NULL AFTER categories</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_couponapi_upload</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cptn_po_queue` `cpq` LEFT JOIN `wp_cptn_po_slave` `cps` ON `cps`.`id` = `cpq`.`slave</li>
 <li>Executing: 
-				SELECT MAX(ordinal_position)
+				SELECT LOWER(column_name) AS COLUMN_NAME, is_nullable, data_type, column_default
 				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_couponapi_upload</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_couponapi_upload, locations, 23, , YES, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+			 | parameters: database_name_here, wp_cptn_po_queue` `cpq` LEFT JOIN `wp_cptn_po_slave` `cps` ON `cps`.`id` = `cpq`.`slave</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'locations'
+WP_SQLite_Driver::cast_value_in_non_strict_mode(): Argument #1 ($mysql_data_type) must be of type string, null given, called in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3160
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3885): WP_SQLite_Driver->new_driver_exception('SQLSTATE[42S21]...', '42S21')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(681): WP_SQLite_Driver->convert_i
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('WP_SQLite_Drive...', 0, Object(TypeError))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE wp_cptn_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db
