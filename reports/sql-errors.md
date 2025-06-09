@@ -50,12 +50,6 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | exchange-rate-table | [View logs](/logs/plugins/e/exchange-rate-table/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | exchange-rate-table | [View logs](/logs/plugins/e/exchange-rate-table/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | exchange-rate-table | [View logs](/logs/plugins/e/exchange-rate-table/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | ast-sqlite-boot | exposureroom-videos | [View logs](/logs/plugins/e/exposureroom-videos/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | asyncify-boot | exposureroom-videos | [View logs](/logs/plugins/e/exposureroom-videos/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | exposureroom-videos | [View logs](/logs/plugins/e/exposureroom-videos/error.json) |
-| Unknown operation: MODIFY. | ast-sqlite-boot | exposureroom-videos | [View logs](/logs/plugins/e/exposureroom-videos/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | exposureroom-videos | [View logs](/logs/plugins/e/exposureroom-videos/error.json) |
-| Unknown operation: MODIFY. | jspi-boot | exposureroom-videos | [View logs](/logs/plugins/e/exposureroom-videos/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_eva__categorie_danger. | ast-sqlite-boot | exchange-addon-product-importer | [View logs](/logs/plugins/e/exchange-addon-product-importer/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_eva__categorie_danger. | asyncify-boot | exchange-addon-product-importer | [View logs](/logs/plugins/e/exchange-addon-product-importer/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_eva__categorie_danger. | jspi-boot | exchange-addon-product-importer | [View logs](/logs/plugins/e/exchange-addon-product-importer/error.json) |
