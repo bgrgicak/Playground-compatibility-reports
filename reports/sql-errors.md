@@ -115,38 +115,12 @@ Backt
 | Unknown create type: INDEX. | ast-sqlite-boot | iglobal-woocommerce-extension | [View logs](/logs/plugins/i/iglobal-woocommerce-extension/error.json) |
 | Unknown create type: INDEX. | asyncify-boot | iglobal-woocommerce-extension | [View logs](/logs/plugins/i/iglobal-woocommerce-extension/error.json) |
 | Unknown create type: INDEX. | jspi-boot | iglobal-woocommerce-extension | [View logs](/logs/plugins/i/iglobal-woocommerce-extension/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | oganro-payment-gateway-for-seylan-bank | [View logs](/logs/plugins/o/oganro-payment-gateway-for-seylan-bank/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | oganro-payment-gateway-for-seylan-bank | [View logs](/logs/plugins/o/oganro-payment-gateway-for-seylan-bank/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | jspi-boot | oganro-payment-gateway-for-seylan-bank | [View logs](/logs/plugins/o/oganro-payment-gateway-for-seylan-bank/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | og-survey | [View logs](/logs/plugins/o/og-survey/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | og-survey | [View logs](/logs/plugins/o/og-survey/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: ap_generated. | ast-sqlite-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: ap_generated. | asyncify-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge. | ast-sqlite-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge. | asyncify-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge_method. | ast-sqlite-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge_method. | asyncify-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | ast-sqlite-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | asyncify-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | jspi-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| Unknown create type: table. | ast-sqlite-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| Unknown create type: table. | asyncify-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| Unknown create type: table. | jspi-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| Unknown operation: MODIFY. | ast-sqlite-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| Unknown operation: MODIFY. | jspi-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| Unknown show type: KEYS FROM. | ast-sqlite-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| Unknown show type: KEYS FROM. | asyncify-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
-| Unknown show type: KEYS FROM. | jspi-boot | offsite-content-storage-via-smartfile | [View logs](/logs/plugins/o/offsite-content-storage-via-smartfile/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_odudedate_group. | ast-sqlite-boot | official-add-to-homescreen | [View logs](/logs/plugins/o/official-add-to-homescreen/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_odudedate_group. | asyncify-boot | official-add-to-homescreen | [View logs](/logs/plugins/o/official-add-to-homescreen/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_odudedate_group. | jspi-boot | official-add-to-homescreen | [View logs](/logs/plugins/o/official-add-to-homescreen/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_odudedate_group. | ast-sqlite-boot | official-treehouse-badges-widgets-and-shortcodes | [View logs](/logs/plugins/o/official-treehouse-badges-widgets-and-shortcodes/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_odudedate_group. | asyncify-boot | official-treehouse-badges-widgets-and-shortcodes | [View logs](/logs/plugins/o/official-treehouse-badges-widgets-and-shortcodes/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_odudedate_group. | jspi-boot | official-treehouse-badges-widgets-and-shortcodes | [View logs](/logs/plugins/o/official-treehouse-badges-widgets-and-shortcodes/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | og-checkout | [View logs](/logs/plugins/o/og-checkout/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | og-checkout | [View logs](/logs/plugins/o/og-checkout/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | jspi-boot | og-checkout | [View logs](/logs/plugins/o/og-checkout/error.json) |
     [code] => 0
     [message] => Ending quote ' was expected.
     [position] => 44
@@ -159,9 +133,6 @@ Backt
 | MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | offers-for-woocommerce | [View logs](/logs/plugins/o/offers-for-woocommerce/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | offers-for-woocommerce | [View logs](/logs/plugins/o/offers-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ochregeo_geocoder_cache. | ast-sqlite-boot | offers-for-woocommerce | [View logs](/logs/plugins/o/offers-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_odudedate_group. | ast-sqlite-boot | offlinemode | [View logs](/logs/plugins/o/offlinemode/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_odudedate_group. | asyncify-boot | offlinemode | [View logs](/logs/plugins/o/offlinemode/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_odudedate_group. | jspi-boot | offlinemode | [View logs](/logs/plugins/o/offlinemode/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | ast-sqlite-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | asyncify-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | jspi-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
