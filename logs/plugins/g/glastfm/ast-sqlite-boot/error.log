@@ -2,703 +2,118 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [09-Jun-2025 20:51:34 UTC] PHP Notice:  Undefined index: subscription`.`payment_mode in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3146
-[09-Jun-2025 20:51:34 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3147
-[09-Jun-2025 20:51:34 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3148
-[09-Jun-2025 20:51:34 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3149
-[09-Jun-2025 20:51:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                UPDATE
-                    wp_give_subscriptions subscription
-                    LEFT JOIN wp_give_donationmeta donationMeta ON subscription.parent_payment_id = donationMeta.donation_id
-                SET
-                    subscription.payment_mode = donationMeta.meta_value
-                WHERE
-                    donationMeta.meta_key = '_give_payment_mode'
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_give_subscriptions` `subscription` LEFT JOIN `wp_give_donationmeta` `donationMeta` ON `subscription`.`parent_payment_id` = `donationMeta`.`donation_id</li>
-<li>Executing: 
-				SELECT LOWER(column_name) AS COLUMN_NAME, is_nullable, data_type, column_default
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_give_subscriptions` `subscription` LEFT JOIN `wp_give_donationmeta` `donationMeta` ON `subscription`.`parent_payment_id` = `donationMeta`.`donation_id</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Argument 1 passed to WP_SQLite_Driver::cast_value_in_non_strict_mode() must be of the type string, null given, called in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3160
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('Argument 1 pass...', 0, Object(TypeError))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 [internal function]: WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/give/src/Framework/Database/DB.php(94): call_user_func_array(Array, Array)
-#5 /wordpress/wp-content/plugins/give/src/Framework/Database/DB.php(238): Give\Framework\Database\DB::Give\Framework\Database\{closure}()
-#6 /wordpress/wp-content/plugins/give/src/Framework/Database/DB.php(95): Give\Framework\Database\DB::runQueryWithErrorChecking(Object(Closure))
-#7 /wordpress/wp-content/plugins/give/src/Subscriptions/Migrations/AddPaymentModeToSubscriptionTable.php(105): Give\Framework\Database\DB::__callStatic('query', Array)
-#8 /wordpress/wp-content/plugins/give/src/Subscriptions/Migrations/AddPaymentModeToSubscriptionTable.php(56): Give\Subscriptions\Migrations\AddPaymentModeToSubscriptionTable->processPaymentModeForExistingSubscriptions()
-#9 /wordpress/wp-content/plugins/give/src/Framework/Migrations/MigrationsRunner.php(149): Give\Subscriptions\Migrations\AddPaymentModeToSubscriptionTable->run()
-#10 [internal function]: Give\Framework\Migrations\MigrationsRunner->run('')
-#11 /wordpress/wp-content/plugins/give/src/Helpers/Hooks.php(43): call_user_func_array(Array, Array)
-#12 /wordpress/wp-includes/class-wp-hook.php(324): Give\Helpers\Hooks::Give\Helpers\{closure}('')
-#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#15 /wordpress/wp-content/plugins/give/includes/install.php(109): do_action('give_upgrades')
-#16 /wordpress/wp-content/plugins/give/includes/install.php(49): give_run_install()
-#17 /wordpress/wp-content/plugins/give/give.php(525): give_install(false)
-#18 /wordpress/wp-includes/class-wp-hook.php(324): Give->install(false)
-#19 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#20 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#21 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_give/g...', false)
-#22 /internal/eval.php(20): activate_plugin('give/give.php')
-#23 {main}</pre>
- for query 
-                UPDATE
-                    wp_give_subscriptions subscription
-                    LEFT JOIN wp_give_donationmeta donationMeta ON subscription.parent_payment_id = donationMeta.donation_id
-                SET
-                    subscription.payment_mode = donationMeta.meta_value
-                WHERE
-                    donationMeta.meta_key = '_give_payment_mode'
-             made by activate_plugin, do_action('activate_give/give.php'), WP_Hook->do_action, WP_Hook->apply_filters, Give->install, give_install, give_run_install, do_action('give_upgrades'), WP_Hook->do_action, WP_Hook->apply_filters, Give\Helpers\Hooks::Give\Helpers\{closure}, call_user_func_array, Give\Framework\Migrations\MigrationsRunner->run, Give\Subscriptions\Migrations\AddPaymentModeToSubscriptionTable->run, Give\Subscriptions\Migrations\AddPaymentModeToSubscriptionTable->processPaymentModeForExistingSubscriptions, Give\Framework\Database\DB::__callStatic, Give\Framework\Database\DB::runQueryWithErrorChecking, Give\Framework\Database\DB::Give\Framework\Database\{closure}, call_user_func_array, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:52:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-					SELECT constraints.CONSTRAINT_NAME
-					FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS as constraints
-					JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE as column_usage
-						ON constraints.CONSTRAINT_NAME = column_usage.CONSTRAINT_NAME
-					WHERE constraints.CONSTRAINT_TYPE = 'FOREIGN KEY'
-						AND constraints.TABLE_NAME = 'wp_give_revenue'
-						AND column_usage.COLUMN_NAME = 'form_id'
-				</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT `constraints`.`CONSTRAINT_NAME` FROM _wp_sqlite_mysql_information_schema_TABLE_CONSTRAINTS as `constraints` JOIN _wp_sqlite_mysql_information_schema_KEY_COLUMN_USAGE as `column_usage` ON `constraints`.`CONSTRAINT_NAME` = `column_usage`.`CONSTRAINT_NAME` WHERE `constraints`.`CONSTRAINT_TYPE` = 'FOREIGN KEY' AND `constraints`.`TABLE_NAME` = 'wp_give_revenue' AND `column_usage`.`COLUMN_NAME` = 'form_id' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: _wp_sqlite_mysql_information_schema_KEY_COLUMN_USAGE
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n\t\t\t\t\tSELECT co...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n\t\t\t\t\tSELECT co...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('\n\t\t\t\t\tSELECT co...')
-#4 [internal function]: wpdb->get_var('\n\t\t\t\t\tSELECT co...')
-#5 /wordpress/wp-content/plugins/give/src/Framework/Database/DB.php(94): call_user_func_array(Array, Array)
-#6 /wordpress/wp-content/plugins/give/src/Framework/Database/DB.php(238): Give\Framework\Database\DB::Give\Framework\Database\{closure}()
-#7 /wordpress/wp-content/plugins/give/src/Framework/Database/DB.php(95): Give\Framework\Database\DB::runQueryWithErrorChecking(Object(Closure))
-#8 /wordpress/wp-content/plugins/give/src/Revenue/Migrations/RemoveRevenueForeignKeys.php(55): Give\Framework\Database\DB::__callStatic('get_var', Array)
-#9 /wordpress/wp-content/plugins/give/src/Revenue/Migrations/RemoveRevenueForeignKeys.php(31): Give\Revenue\Migrations\RemoveRevenueForeignKeys->dropColumnForeignKeyConstraint('wp_give_revenue', 'form_id')
-#10 /wordpress/wp-content/plugins/give/src/Framework/Migrations/MigrationsRunner.php(149): Give\Revenue\Migrations\RemoveRevenueForeignKeys->run()
-#11 [internal function]: Give\Framework\Migrations\MigrationsRunner->run('')
-#12 /wordpress/wp-content/plugins/give/src/Helpers/Hooks.php(43): call_user_func_array(Array, Array)
-#13 /wordpress/wp-includes/class-wp-hook.php(324): Give\Helpers\Hooks::Give\Helpers\{closure}('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-content/plugins/give/includes/install.php(109): do_action('give_upgrades')
-#17 /wordpress/wp-content/plugins/give/includes/install.php(49): give_run_install()
-#18 /wordpress/wp-content/plugins/give/give.php(525): give_install(false)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): Give->install(false)
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_give/g...', false)
-#23 /internal/eval.php(20): activate_plugin('give/give.php')
-#24 {main}</pre>
- for query 
-					SELECT constraints.CONSTRAINT_NAME
-					FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS as constraints
-					JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE as column_usage
-						ON constraints.CONSTRAINT_NAME = column_usage.CONSTRAINT_NAME
-					WHERE constraints.CONSTRAINT_TYPE = 'FOREIGN KEY'
-						AND constraints.TABLE_NAME = 'wp_give_revenue'
-						AND column_usage.COLUMN_NAME = 'form_id'
-				 made by activate_plugin, do_action('activate_give/give.php'), WP_Hook->do_action, WP_Hook->apply_filters, Give->install, give_install, give_run_install, do_action('give_upgrades'), WP_Hook->do_action, WP_Hook->apply_filters, Give\Helpers\Hooks::Give\Helpers\{closure}, call_user_func_array, Give\Framework\Migrations\MigrationsRunner->run, Give\Revenue\Migrations\RemoveRevenueForeignKeys->run, Give\Revenue\Migrations\RemoveRevenueForeignKeys->dropColumnForeignKeyConstraint, Give\Framework\Database\DB::__callStatic, Give\Framework\Database\DB::runQueryWithErrorChecking, Give\Framework\Database\DB::Give\Framework\Database\{closure}, call_user_func_array, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:52:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-					SELECT constraints.CONSTRAINT_NAME
-					FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS as constraints
-					JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE as column_usage
-						ON constraints.CONSTRAINT_NAME = column_usage.CONSTRAINT_NAME
-					WHERE constraints.CONSTRAINT_TYPE = 'FOREIGN KEY'
-						AND constraints.TABLE_NAME = 'wp_give_revenue'
-						AND column_usage.COLUMN_NAME = 'form_id'
-				</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT `constraints`.`CONSTRAINT_NAME` FROM _wp_sqlite_mysql_information_schema_TABLE_CONSTRAINTS as `constraints` JOIN _wp_sqlite_mysql_information_schema_KEY_COLUMN_USAGE as `column_usage` ON `constraints`.`CONSTRAINT_NAME` = `column_usage`.`CONSTRAINT_NAME` WHERE `constraints`.`CONSTRAINT_TYPE` = 'FOREIGN KEY' AND `constraints`.`TABLE_NAME` = 'wp_give_revenue' AND `column_usage`.`COLUMN_NAME` = 'form_id' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: _wp_sqlite_mysql_information_schema_KEY_COLUMN_USAGE
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n\t\t\t\t\tSELECT co...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n\t\t\t\t\tSELECT co...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('\n\t\t\t\t\tSELECT co...')
-#4 [internal function]: wpdb->get_var('\n\t\t\t\t\tSELECT co...')
-#5 /wordpress/wp-content/plugins/give/src/Framework/Database/DB.php(94): call_user_func_array(Array, Array)
-#6 /wordpress/wp-content/plugins/give/src/Framework/Database/DB.php(238): Give\Framework\Database\DB::Give\Framework\Database\{closure}()
-#7 /wordpress/wp-content/plugins/give/src/Framework/Database/DB.php(95): Give\Framework\Database\DB::runQueryWithErrorChecking(Object(Closure))
-#8 /wordpress/wp-content/plugins/give/src/Revenue/Migrations/RemoveRevenueForeignKeys.php(55): Give\Framework\Database\DB::__callStatic('get_var', Array)
-#9 /wordpress/wp-content/plugins/give/src/Revenue/Migrations/RemoveRevenueForeignKeys.php(31): Give\Revenue\Migrations\RemoveRevenueForeignKeys->dropColumnForeignKeyConstraint('wp_give_revenue', 'form_id')
-#10 /wordpress/wp-content/plugins/give/src/Framework/Migrations/MigrationsRunner.php(149): Give\Revenue\Migrations\RemoveRevenueForeignKeys->run()
-#11 [internal function]: Give\Framework\Migrations\MigrationsRunner->run('')
-#12 /wordpress/wp-content/plugins/give/src/Helpers/Hooks.php(43): call_user_func_array(Array, Array)
-#13 /wordpress/wp-includes/class-wp-hook.php(324): Give\Helpers\Hooks::Give\Helpers\{closure}('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-content/plugins/give/includes/install.php(109): do_action('give_upgrades')
-#17 /wordpress/wp-content/plugins/give/includes/install.php(49): give_run_install()
-#18 /wordpress/wp-content/plugins/give/give.php(525): give_install(false)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): Give->install(false)
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_give/g...', false)
-#23 /internal/eval.php(20): activate_plugin('give/give.php')
-#24 {main}</pre>
- for query 
-					SELECT constraints.CONSTRAINT_NAME
-					FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS as constraints
-					JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE as column_usage
-						ON constraints.CONSTRAINT_NAME = column_usage.CONSTRAINT_NAME
-					WHERE constraints.CONSTRAINT_TYPE = 'FOREIGN KEY'
-						AND constraints.TABLE_NAME = 'wp_give_revenue'
-						AND column_usage.COLUMN_NAME = 'form_id'
-				 made by activate_plugin, do_action('activate_give/give.php'), WP_Hook->do_action, WP_Hook->apply_filters, Give->install, give_install, give_run_install, do_action('give_upgrades'), WP_Hook->do_action, WP_Hook->apply_filters, Give\Helpers\Hooks::Give\Helpers\{closure}, call_user_func_array, Give\Framework\Migrations\MigrationsRunner->run, Give\Revenue\Migrations\RemoveRevenueForeignKeys->run, Give\Revenue\Migrations\RemoveRevenueForeignKeys->dropColumnForeignKeyConstraint, Give\Framework\Database\DB::__callStatic, Give\Framework\Database\DB::runQueryWithErrorChecking, Give\Framework\Database\DB::Give\Framework\Database\{closure}, call_user_func_array, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:55:40 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[09-Jun-2025 20:55:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated billing cb postmeta', '2025-06-09 22:55:46')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_f24_installation_log</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_f24_installation_log</li>
-<li>Executing: INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, IIF(`column4` IS NULL, NULL, COALESCE(DATETIME(`column4`), '0000-00-00 00:00:00')) AS `column4` FROM (VALUES ( '' , '8.0.24' , 'updated billing cb postmeta' , '2025-06-09 22:55:46' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_f24_installation_log.id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_f24_installa...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/fattura24/src/behaviour.php(303): wpdb->insert('wp_f24_installa...', Array)
-#6 /wordpress/wp-content/plugins/fattura24/src/uty.php(96): Fattura24\fatt_24_insert_installation_log('updated billing...')
-#7 /wordpress/wp-content/plugins/fattura24/fattura24.php(315): Fattura24\fatt_24_update_actions()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Fattura24\{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fattur...', false)
-#12 /internal/eval.php(20): activate_plugin('fattura24/fattu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated billing cb postmeta', '2025-06-09 22:55:46') made by activate_plugin, do_action('activate_fattura24/fattura24.php'), WP_Hook->do_action, WP_Hook->apply_filters, Fattura24\{closure}, Fattura24\fatt_24_update_actions, Fattura24\fatt_24_insert_installation_log, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:55:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated old wc orders postmeta', '2025-06-09 22:55:46')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_f24_installation_log</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_f24_installation_log</li>
-<li>Executing: INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, IIF(`column4` IS NULL, NULL, COALESCE(DATETIME(`column4`), '0000-00-00 00:00:00')) AS `column4` FROM (VALUES ( '' , '8.0.24' , 'updated old wc orders postmeta' , '2025-06-09 22:55:46' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_f24_installation_log.id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_f24_installa...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/fattura24/src/behaviour.php(303): wpdb->insert('wp_f24_installa...', Array)
-#6 /wordpress/wp-content/plugins/fattura24/src/uty.php(96): Fattura24\fatt_24_insert_installation_log('updated old wc ...')
-#7 /wordpress/wp-content/plugins/fattura24/fattura24.php(315): Fattura24\fatt_24_update_actions()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Fattura24\{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fattur...', false)
-#12 /internal/eval.php(20): activate_plugin('fattura24/fattu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated old wc orders postmeta', '2025-06-09 22:55:46') made by activate_plugin, do_action('activate_fattura24/fattura24.php'), WP_Hook->do_action, WP_Hook->apply_filters, Fattura24\{closure}, Fattura24\fatt_24_update_actions, Fattura24\fatt_24_insert_installation_log, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:55:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated order creation options', '2025-06-09 22:55:46')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_f24_installation_log</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_f24_installation_log</li>
-<li>Executing: INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, IIF(`column4` IS NULL, NULL, COALESCE(DATETIME(`column4`), '0000-00-00 00:00:00')) AS `column4` FROM (VALUES ( '' , '8.0.24' , 'updated order creation options' , '2025-06-09 22:55:46' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_f24_installation_log.id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_f24_installa...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/fattura24/src/behaviour.php(303): wpdb->insert('wp_f24_installa...', Array)
-#6 /wordpress/wp-content/plugins/fattura24/src/uty.php(96): Fattura24\fatt_24_insert_installation_log('updated order c...')
-#7 /wordpress/wp-content/plugins/fattura24/fattura24.php(315): Fattura24\fatt_24_update_actions()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Fattura24\{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fattur...', false)
-#12 /internal/eval.php(20): activate_plugin('fattura24/fattu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated order creation options', '2025-06-09 22:55:46') made by activate_plugin, do_action('activate_fattura24/fattura24.php'), WP_Hook->do_action, WP_Hook->apply_filters, Fattura24\{closure}, Fattura24\fatt_24_update_actions, Fattura24\fatt_24_insert_installation_log, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:55:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated fattura24 tax settings', '2025-06-09 22:55:46')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_f24_installation_log</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_f24_installation_log</li>
-<li>Executing: INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, IIF(`column4` IS NULL, NULL, COALESCE(DATETIME(`column4`), '0000-00-00 00:00:00')) AS `column4` FROM (VALUES ( '' , '8.0.24' , 'updated fattura24 tax settings' , '2025-06-09 22:55:46' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_f24_installation_log.id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_f24_installa...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/fattura24/src/behaviour.php(303): wpdb->insert('wp_f24_installa...', Array)
-#6 /wordpress/wp-content/plugins/fattura24/src/uty.php(96): Fattura24\fatt_24_insert_installation_log('updated fattura...')
-#7 /wordpress/wp-content/plugins/fattura24/fattura24.php(315): Fattura24\fatt_24_update_actions()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Fattura24\{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fattur...', false)
-#12 /internal/eval.php(20): activate_plugin('fattura24/fattu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated fattura24 tax settings', '2025-06-09 22:55:46') made by activate_plugin, do_action('activate_fattura24/fattura24.php'), WP_Hook->do_action, WP_Hook->apply_filters, Fattura24\{closure}, Fattura24\fatt_24_update_actions, Fattura24\fatt_24_insert_installation_log, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:55:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated fattura24 tax table', '2025-06-09 22:55:46')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_f24_installation_log</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_f24_installation_log</li>
-<li>Executing: INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, IIF(`column4` IS NULL, NULL, COALESCE(DATETIME(`column4`), '0000-00-00 00:00:00')) AS `column4` FROM (VALUES ( '' , '8.0.24' , 'updated fattura24 tax table' , '2025-06-09 22:55:46' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_f24_installation_log.id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_f24_installa...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/fattura24/src/behaviour.php(303): wpdb->insert('wp_f24_installa...', Array)
-#6 /wordpress/wp-content/plugins/fattura24/src/uty.php(96): Fattura24\fatt_24_insert_installation_log('updated fattura...')
-#7 /wordpress/wp-content/plugins/fattura24/fattura24.php(315): Fattura24\fatt_24_update_actions()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Fattura24\{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fattur...', false)
-#12 /internal/eval.php(20): activate_plugin('fattura24/fattu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated fattura24 tax table', '2025-06-09 22:55:46') made by activate_plugin, do_action('activate_fattura24/fattura24.php'), WP_Hook->do_action, WP_Hook->apply_filters, Fattura24\{closure}, Fattura24\fatt_24_update_actions, Fattura24\fatt_24_insert_installation_log, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:55:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated invoice creation options', '2025-06-09 22:55:46')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_f24_installation_log</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_f24_installation_log</li>
-<li>Executing: INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, IIF(`column4` IS NULL, NULL, COALESCE(DATETIME(`column4`), '0000-00-00 00:00:00')) AS `column4` FROM (VALUES ( '' , '8.0.24' , 'updated invoice creation options' , '2025-06-09 22:55:46' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_f24_installation_log.id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_f24_installa...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/fattura24/src/behaviour.php(303): wpdb->insert('wp_f24_installa...', Array)
-#6 /wordpress/wp-content/plugins/fattura24/src/uty.php(96): Fattura24\fatt_24_insert_installation_log('updated invoice...')
-#7 /wordpress/wp-content/plugins/fattura24/fattura24.php(315): Fattura24\fatt_24_update_actions()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Fattura24\{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fattur...', false)
-#12 /internal/eval.php(20): activate_plugin('fattura24/fattu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated invoice creation options', '2025-06-09 22:55:46') made by activate_plugin, do_action('activate_fattura24/fattura24.php'), WP_Hook->do_action, WP_Hook->apply_filters, Fattura24\{closure}, Fattura24\fatt_24_update_actions, Fattura24\fatt_24_insert_installation_log, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:55:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated fe issue number default option', '2025-06-09 22:55:47')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_f24_installation_log</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_f24_installation_log</li>
-<li>Executing: INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, IIF(`column4` IS NULL, NULL, COALESCE(DATETIME(`column4`), '0000-00-00 00:00:00')) AS `column4` FROM (VALUES ( '' , '8.0.24' , 'updated fe issue number default option' , '2025-06-09 22:55:47' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_f24_installation_log.id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_f24_installa...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/fattura24/src/behaviour.php(303): wpdb->insert('wp_f24_installa...', Array)
-#6 /wordpress/wp-content/plugins/fattura24/src/uty.php(96): Fattura24\fatt_24_insert_installation_log('updated fe issu...')
-#7 /wordpress/wp-content/plugins/fattura24/fattura24.php(315): Fattura24\fatt_24_update_actions()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Fattura24\{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fattur...', false)
-#12 /internal/eval.php(20): activate_plugin('fattura24/fattu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated fe issue number default option', '2025-06-09 22:55:47') made by activate_plugin, do_action('activate_fattura24/fattura24.php'), WP_Hook->do_action, WP_Hook->apply_filters, Fattura24\{closure}, Fattura24\fatt_24_update_actions, Fattura24\fatt_24_insert_installation_log, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:56:24 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[09-Jun-2025 20:56:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated billing cb postmeta', '2025-06-09 22:56:29')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_f24_installation_log</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_f24_installation_log</li>
-<li>Executing: INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, IIF(`column4` IS NULL, NULL, COALESCE(DATETIME(`column4`), '0000-00-00 00:00:00')) AS `column4` FROM (VALUES ( '' , '8.0.24' , 'updated billing cb postmeta' , '2025-06-09 22:56:29' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_f24_installation_log.id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_f24_installa...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/fattura24/src/behaviour.php(303): wpdb->insert('wp_f24_installa...', Array)
-#6 /wordpress/wp-content/plugins/fattura24/src/uty.php(96): Fattura24\fatt_24_insert_installation_log('updated billing...')
-#7 /wordpress/wp-content/plugins/fattura24/fattura24.php(315): Fattura24\fatt_24_update_actions()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Fattura24\{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fattur...', false)
-#12 /internal/eval.php(20): activate_plugin('fattura24/fattu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated billing cb postmeta', '2025-06-09 22:56:29') made by activate_plugin, do_action('activate_fattura24/fattura24.php'), WP_Hook->do_action, WP_Hook->apply_filters, Fattura24\{closure}, Fattura24\fatt_24_update_actions, Fattura24\fatt_24_insert_installation_log, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:56:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated old wc orders postmeta', '2025-06-09 22:56:29')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_f24_installation_log</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_f24_installation_log</li>
-<li>Executing: INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, IIF(`column4` IS NULL, NULL, COALESCE(DATETIME(`column4`), '0000-00-00 00:00:00')) AS `column4` FROM (VALUES ( '' , '8.0.24' , 'updated old wc orders postmeta' , '2025-06-09 22:56:29' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_f24_installation_log.id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_f24_installa...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/fattura24/src/behaviour.php(303): wpdb->insert('wp_f24_installa...', Array)
-#6 /wordpress/wp-content/plugins/fattura24/src/uty.php(96): Fattura24\fatt_24_insert_installation_log('updated old wc ...')
-#7 /wordpress/wp-content/plugins/fattura24/fattura24.php(315): Fattura24\fatt_24_update_actions()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Fattura24\{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fattur...', false)
-#12 /internal/eval.php(20): activate_plugin('fattura24/fattu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated old wc orders postmeta', '2025-06-09 22:56:29') made by activate_plugin, do_action('activate_fattura24/fattura24.php'), WP_Hook->do_action, WP_Hook->apply_filters, Fattura24\{closure}, Fattura24\fatt_24_update_actions, Fattura24\fatt_24_insert_installation_log, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:56:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated order creation options', '2025-06-09 22:56:29')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_f24_installation_log</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_f24_installation_log</li>
-<li>Executing: INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, IIF(`column4` IS NULL, NULL, COALESCE(DATETIME(`column4`), '0000-00-00 00:00:00')) AS `column4` FROM (VALUES ( '' , '8.0.24' , 'updated order creation options' , '2025-06-09 22:56:29' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_f24_installation_log.id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_f24_installa...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/fattura24/src/behaviour.php(303): wpdb->insert('wp_f24_installa...', Array)
-#6 /wordpress/wp-content/plugins/fattura24/src/uty.php(96): Fattura24\fatt_24_insert_installation_log('updated order c...')
-#7 /wordpress/wp-content/plugins/fattura24/fattura24.php(315): Fattura24\fatt_24_update_actions()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Fattura24\{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fattur...', false)
-#12 /internal/eval.php(20): activate_plugin('fattura24/fattu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated order creation options', '2025-06-09 22:56:29') made by activate_plugin, do_action('activate_fattura24/fattura24.php'), WP_Hook->do_action, WP_Hook->apply_filters, Fattura24\{closure}, Fattura24\fatt_24_update_actions, Fattura24\fatt_24_insert_installation_log, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:56:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated fattura24 tax settings', '2025-06-09 22:56:29')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_f24_installation_log</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_f24_installation_log</li>
-<li>Executing: INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, IIF(`column4` IS NULL, NULL, COALESCE(DATETIME(`column4`), '0000-00-00 00:00:00')) AS `column4` FROM (VALUES ( '' , '8.0.24' , 'updated fattura24 tax settings' , '2025-06-09 22:56:29' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_f24_installation_log.id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_f24_installa...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/fattura24/src/behaviour.php(303): wpdb->insert('wp_f24_installa...', Array)
-#6 /wordpress/wp-content/plugins/fattura24/src/uty.php(96): Fattura24\fatt_24_insert_installation_log('updated fattura...')
-#7 /wordpress/wp-content/plugins/fattura24/fattura24.php(315): Fattura24\fatt_24_update_actions()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Fattura24\{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fattur...', false)
-#12 /internal/eval.php(20): activate_plugin('fattura24/fattu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated fattura24 tax settings', '2025-06-09 22:56:29') made by activate_plugin, do_action('activate_fattura24/fattura24.php'), WP_Hook->do_action, WP_Hook->apply_filters, Fattura24\{closure}, Fattura24\fatt_24_update_actions, Fattura24\fatt_24_insert_installation_log, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:56:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated fattura24 tax table', '2025-06-09 22:56:29')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_f24_installation_log</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_f24_installation_log</li>
-<li>Executing: INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, IIF(`column4` IS NULL, NULL, COALESCE(DATETIME(`column4`), '0000-00-00 00:00:00')) AS `column4` FROM (VALUES ( '' , '8.0.24' , 'updated fattura24 tax table' , '2025-06-09 22:56:29' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_f24_installation_log.id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_f24_installa...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/fattura24/src/behaviour.php(303): wpdb->insert('wp_f24_installa...', Array)
-#6 /wordpress/wp-content/plugins/fattura24/src/uty.php(96): Fattura24\fatt_24_insert_installation_log('updated fattura...')
-#7 /wordpress/wp-content/plugins/fattura24/fattura24.php(315): Fattura24\fatt_24_update_actions()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Fattura24\{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fattur...', false)
-#12 /internal/eval.php(20): activate_plugin('fattura24/fattu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated fattura24 tax table', '2025-06-09 22:56:29') made by activate_plugin, do_action('activate_fattura24/fattura24.php'), WP_Hook->do_action, WP_Hook->apply_filters, Fattura24\{closure}, Fattura24\fatt_24_update_actions, Fattura24\fatt_24_insert_installation_log, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:56:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated invoice creation options', '2025-06-09 22:56:29')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_f24_installation_log</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_f24_installation_log</li>
-<li>Executing: INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, IIF(`column4` IS NULL, NULL, COALESCE(DATETIME(`column4`), '0000-00-00 00:00:00')) AS `column4` FROM (VALUES ( '' , '8.0.24' , 'updated invoice creation options' , '2025-06-09 22:56:29' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_f24_installation_log.id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_f24_installa...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/fattura24/src/behaviour.php(303): wpdb->insert('wp_f24_installa...', Array)
-#6 /wordpress/wp-content/plugins/fattura24/src/uty.php(96): Fattura24\fatt_24_insert_installation_log('updated invoice...')
-#7 /wordpress/wp-content/plugins/fattura24/fattura24.php(315): Fattura24\fatt_24_update_actions()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Fattura24\{closure}(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fattur...', false)
-#12 /internal/eval.php(20): activate_plugin('fattura24/fattu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated invoice creation options', '2025-06-09 22:56:29') made by activate_plugin, do_action('activate_fattura24/fattura24.php'), WP_Hook->do_action, WP_Hook->apply_filters, Fattura24\{closure}, Fattura24\fatt_24_update_actions, Fattura24\fatt_24_insert_installation_log, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Jun-2025 20:56:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) VALUES ('', '8.0.24', 'updated fe issue number default option', '2025-06-09 22:56:30')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_f24_installation_log</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_f24_installation_log</li>
-<li>Executing: INSERT INTO `wp_f24_installation_log` (`id`, `vers`, `event_type`, `event_date`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, IIF(`column4` IS NULL, NULL, COALESCE(DATETIME(`column4`), '0000-00-00 00:00:00')) AS `column4` FROM (VALUES ( '' , '8.0.24' , 'updated fe issue number default option' , '2025-06-09 22:56:30' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_f24_installation_log.id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Obje
+Error: [11-Jun-2025 12:55:57 UTC] PHP Parse error:  syntax error, unexpected identifier "is" in /wordpress/wp-content/plugins/facts-about-wordpress/facts-about-wordpress.php on line 33
+[11-Jun-2025 12:56:05 UTC] PHP Parse error:  syntax error, unexpected identifier "is" in /wordpress/wp-content/plugins/facts-about-wordpress/facts-about-wordpress.php on line 33
+[11-Jun-2025 12:56:14 UTC] PHP Parse error:  syntax error, unexpected identifier "is" in /wordpress/wp-content/plugins/facts-about-wordpress/facts-about-wordpress.php on line 33
+[11-Jun-2025 12:56:45 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 12:56:45 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/fanfou-tools/JSON.php on line 155
+[11-Jun-2025 12:56:53 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 12:56:53 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/fanfou-tools/JSON.php on line 155
+[11-Jun-2025 12:57:01 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 12:57:01 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/fanfou-tools/JSON.php on line 155
+[11-Jun-2025 12:57:10 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/favicon-switcher/core/utils.class.php on line 102
+[11-Jun-2025 12:57:18 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/favicon-switcher/core/utils.class.php on line 102
+[11-Jun-2025 12:57:26 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/favicon-switcher/core/utils.class.php on line 102
+[11-Jun-2025 12:57:57 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/featured-image-toolkit/freemius/includes/class-fs-logger.php on line 145
+[11-Jun-2025 12:57:59 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/featured-image-toolkit/freemius/includes/class-fs-logger.php on line 145
+[11-Jun-2025 12:58:09 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/featured-image-toolkit/freemius/includes/class-fs-logger.php on line 145
+[11-Jun-2025 12:58:11 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/featured-image-toolkit/freemius/includes/class-fs-logger.php on line 145
+[11-Jun-2025 12:58:20 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/featured-image-toolkit/freemius/includes/class-fs-logger.php on line 145
+[11-Jun-2025 12:58:22 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/featured-image-toolkit/freemius/includes/class-fs-logger.php on line 145
+[11-Jun-2025 12:58:31 UTC] PHP Deprecated:  Required parameter $exportType follows optional parameter $dependencies in /wordpress/wp-content/plugins/give-a-beer-one/give-a-beer-one.php on line 30
+[11-Jun-2025 12:58:31 UTC] PHP Deprecated:  Required parameter $exportType follows optional parameter $dependencies in /wordpress/wp-content/plugins/give-a-beer-one/abExport.php on line 122
+[11-Jun-2025 12:58:32 UTC] PHP Deprecated:  Required parameter $exportType follows optional parameter $dependencies in /wordpress/wp-content/plugins/give-a-beer-one/give-a-beer-one.php on line 30
+[11-Jun-2025 12:58:32 UTC] PHP Deprecated:  Required parameter $exportType follows optional parameter $dependencies in /wordpress/wp-content/plugins/give-a-beer-one/abExport.php on line 122
+[11-Jun-2025 12:58:40 UTC] PHP Deprecated:  Required parameter $exportType follows optional parameter $dependencies in /wordpress/wp-content/plugins/give-a-beer-one/give-a-beer-one.php on line 30
+[11-Jun-2025 12:58:40 UTC] PHP Deprecated:  Required parameter $exportType follows optional parameter $dependencies in /wordpress/wp-content/plugins/give-a-beer-one/abExport.php on line 122
+[11-Jun-2025 12:58:41 UTC] PHP Deprecated:  Required parameter $exportType follows optional parameter $dependencies in /wordpress/wp-content/plugins/give-a-beer-one/give-a-beer-one.php on line 30
+[11-Jun-2025 12:58:41 UTC] PHP Deprecated:  Required parameter $exportType follows optional parameter $dependencies in /wordpress/wp-content/plugins/give-a-beer-one/abExport.php on line 122
+[11-Jun-2025 12:58:49 UTC] PHP Deprecated:  Required parameter $exportType follows optional parameter $dependencies in /wordpress/wp-content/plugins/give-a-beer-one/give-a-beer-one.php on line 30
+[11-Jun-2025 12:58:49 UTC] PHP Deprecated:  Required parameter $exportType follows optional parameter $dependencies in /wordpress/wp-content/plugins/give-a-beer-one/abExport.php on line 122
+[11-Jun-2025 12:58:50 UTC] PHP Deprecated:  Required parameter $exportType follows optional parameter $dependencies in /wordpress/wp-content/plugins/give-a-beer-one/give-a-beer-one.php on line 30
+[11-Jun-2025 12:58:50 UTC] PHP Deprecated:  Required parameter $exportType follows optional parameter $dependencies in /wordpress/wp-content/plugins/give-a-beer-one/abExport.php on line 122
+[11-Jun-2025 13:01:24 UTC] PHP Deprecated:  Required parameter $config_settings follows optional parameter $view_type in /wordpress/wp-content/plugins/gou-manage-related-posts-similar-posts/includes/grp-custom-templates.php on line 187
+[11-Jun-2025 13:01:24 UTC] PHP Deprecated:  Required parameter $post_type follows optional parameter $view_type in /wordpress/wp-content/plugins/gou-manage-related-posts-similar-posts/includes/grp-custom-templates.php on line 187
+[11-Jun-2025 13:01:25 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>gou-related-posts</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 13:01:25 UTC] PHP Deprecated:  Required parameter $config_settings follows optional parameter $view_type in /wordpress/wp-content/plugins/gou-manage-related-posts-similar-posts/includes/grp-custom-templates.php on line 187
+[11-Jun-2025 13:01:25 UTC] PHP Deprecated:  Required parameter $post_type follows optional parameter $view_type in /wordpress/wp-content/plugins/gou-manage-related-posts-similar-posts/includes/grp-custom-templates.php on line 187
+[11-Jun-2025 13:01:34 UTC] PHP Deprecated:  Required parameter $config_settings follows optional parameter $view_type in /wordpress/wp-content/plugins/gou-manage-related-posts-similar-posts/includes/grp-custom-templates.php on line 187
+[11-Jun-2025 13:01:34 UTC] PHP Deprecated:  Required parameter $post_type follows optional parameter $view_type in /wordpress/wp-content/plugins/gou-manage-related-posts-similar-posts/includes/grp-custom-templates.php on line 187
+[11-Jun-2025 13:01:35 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>gou-related-posts</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 13:01:35 UTC] PHP Deprecated:  Required parameter $config_settings follows optional parameter $view_type in /wordpress/wp-content/plugins/gou-manage-related-posts-similar-posts/includes/grp-custom-templates.php on line 187
+[11-Jun-2025 13:01:35 UTC] PHP Deprecated:  Required parameter $post_type follows optional parameter $view_type in /wordpress/wp-content/plugins/gou-manage-related-posts-similar-posts/includes/grp-custom-templates.php on line 187
+[11-Jun-2025 13:01:44 UTC] PHP Deprecated:  Required parameter $config_settings follows optional parameter $view_type in /wordpress/wp-content/plugins/gou-manage-related-posts-similar-posts/includes/grp-custom-templates.php on line 187
+[11-Jun-2025 13:01:44 UTC] PHP Deprecated:  Required parameter $post_type follows optional parameter $view_type in /wordpress/wp-content/plugins/gou-manage-related-posts-similar-posts/includes/grp-custom-templates.php on line 187
+[11-Jun-2025 13:01:45 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>gou-related-posts</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 13:01:45 UTC] PHP Deprecated:  Required parameter $config_settings follows optional parameter $view_type in /wordpress/wp-content/plugins/gou-manage-related-posts-similar-posts/includes/grp-custom-templates.php on line 187
+[11-Jun-2025 13:01:45 UTC] PHP Deprecated:  Required parameter $post_type follows optional parameter $view_type in /wordpress/wp-content/plugins/gou-manage-related-posts-similar-posts/includes/grp-custom-templates.php on line 187
+[11-Jun-2025 13:02:51 UTC] PHP Deprecated:  Function get_theme_data is <strong>deprecated</strong> since version 3.4.0! Use wp_get_theme() instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 13:03:01 UTC] PHP Deprecated:  Function get_theme_data is <strong>deprecated</strong> since version 3.4.0! Use wp_get_theme() instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 13:03:10 UTC] PHP Deprecated:  Function get_theme_data is <strong>deprecated</strong> since version 3.4.0! Use wp_get_theme() instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 13:03:21 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('gLastFM_Widget')
+#2 /wordpress/wp-content/plugins/glastfm/glastfm.php(33): register_widget('gLastFM_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): glastfm_load_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:325:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async re (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:149:10) {
+  [cause]: Error: Error when executing the blueprint step #5 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"glastfm"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12093:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ys (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12196:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:315:48)
+      at async re (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:149:10) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:1034:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:74:13)
+        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:631:42)
+        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12161:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12090:23)
+        at async ys (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12196:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:315:48)
+        at async re (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:149:10) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ],
+          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
+          'cache-control': [ 'no-cache, must-revalidate, max-age=0, no-store, private' ]
+        },
+        bytes: Uint8Array(2653) [
+           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
+          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
+          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
+           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
+           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
+           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
+          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
+           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
+           99, 104,  97, 114,
+          ... 2553 more items
+        ],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
