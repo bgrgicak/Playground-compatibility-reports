@@ -180,72 +180,12 @@ Backt
 | Unknown show type: KEYS FROM. | ast-sqlite-boot | officepress | [View logs](/logs/plugins/o/officepress/error.json) |
 | Unknown show type: KEYS FROM. | asyncify-boot | officepress | [View logs](/logs/plugins/o/officepress/error.json) |
 | Unknown show type: KEYS FROM. | jspi-boot | officepress | [View logs](/logs/plugins/o/officepress/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_odudedate_group. | ast-sqlite-boot | official-add-to-homescreen | [View logs](/logs/plugins/o/official-add-to-homescreen/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_odudedate_group. | asyncify-boot | official-add-to-homescreen | [View logs](/logs/plugins/o/official-add-to-homescreen/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_odudedate_group. | jspi-boot | official-add-to-homescreen | [View logs](/logs/plugins/o/official-add-to-homescreen/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | ast-sqlite-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | asyncify-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | jspi-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
 | Unknown create type: table. | ast-sqlite-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
 | Unknown create type: table. | asyncify-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
 | Unknown create type: table. | jspi-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_odudedate_group. | ast-sqlite-boot | official-treehouse-badges-widgets-and-shortcodes | [View logs](/logs/plugins/o/official-treehouse-badges-widgets-and-shortcodes/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_odudedate_group. | asyncify-boot | official-treehouse-badges-widgets-and-shortcodes | [View logs](/logs/plugins/o/official-treehouse-badges-widgets-and-shortcodes/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_odudedate_group. | jspi-boot | official-treehouse-badges-widgets-and-shortcodes | [View logs](/logs/plugins/o/official-treehouse-badges-widgets-and-shortcodes/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | official-easyvideoplayer-plugin | [View logs](/logs/plugins/o/official-easyvideoplayer-plugin/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | official-google-site-verification-plugin | [View logs](/logs/plugins/o/official-google-site-verification-plugin/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | official-google-site-verification-plugin | [View logs](/logs/plugins/o/official-google-site-verification-plugin/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | official-google-site-verification-plugin | [View logs](/logs/plugins/o/official-google-site-verification-plugin/error.json) |
-    [code] => 0
-    [message] => Ending quote ' was expected.
-    [position] => 44
-    [query] => SHOW TABLES LIKE 'wp_ochregeo_geocoder_cache
-    [str] => 
-(
-)
-. | ast-sqlite-boot | official-twinfield-wordpress-plugin | [View logs](/logs/plugins/o/official-twinfield-wordpress-plugin/error.json) |
-. | asyncify-boot | official-twinfield-wordpress-plugin | [View logs](/logs/plugins/o/official-twinfield-wordpress-plugin/error.json) |
-. | jspi-boot | official-twinfield-wordpress-plugin | [View logs](/logs/plugins/o/official-twinfield-wordpress-plugin/error.json) |
-| Array
-| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | official-twinfield-wordpress-plugin | [View logs](/logs/plugins/o/official-twinfield-wordpress-plugin/error.json) |
-| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | official-twinfield-wordpress-plugin | [View logs](/logs/plugins/o/official-twinfield-wordpress-plugin/error.json) |
-| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | official-twinfield-wordpress-plugin | [View logs](/logs/plugins/o/official-twinfield-wordpress-plugin/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | official-twinfield-wordpress-plugin | [View logs](/logs/plugins/o/official-twinfield-wordpress-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ochregeo_geocoder_cache. | ast-sqlite-boot | official-twinfield-wordpress-plugin | [View logs](/logs/plugins/o/official-twinfield-wordpress-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ochregeo_geocoder_cache. | asyncify-boot | official-twinfield-wordpress-plugin | [View logs](/logs/plugins/o/official-twinfield-wordpress-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ochregeo_geocoder_cache. | jspi-boot | official-twinfield-wordpress-plugin | [View logs](/logs/plugins/o/official-twinfield-wordpress-plugin/error.json) |
-    [code] => 0
-    [message] => Ending quote ' was expected.
-    [position] => 44
-    [query] => SHOW TABLES LIKE 'wp_ochregeo_geocoder_cache
-    [str] => 
-(
-)
-. | ast-sqlite-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-. | asyncify-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-. | jspi-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| Array
-| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: ap_generated. | ast-sqlite-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: ap_generated. | asyncify-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: ap_generated. | jspi-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge. | ast-sqlite-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge. | asyncify-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge. | jspi-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge_method. | ast-sqlite-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge_method. | asyncify-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge_method. | jspi-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ochregeo_geocoder_cache. | ast-sqlite-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ochregeo_geocoder_cache. | asyncify-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ochregeo_geocoder_cache. | jspi-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| Unknown operation: MODIFY. | ast-sqlite-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| Unknown operation: MODIFY. | jspi-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| Unknown show type: KEYS FROM. | ast-sqlite-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| Unknown show type: KEYS FROM. | asyncify-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
-| Unknown show type: KEYS FROM. | jspi-boot | official-cpaleadcom-wordpress-plugin | [View logs](/logs/plugins/o/official-cpaleadcom-wordpress-plugin/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | pretty-shortlinks | [View logs](/logs/plugins/p/pretty-shortlinks/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | pretty-shortlinks | [View logs](/logs/plugins/p/pretty-shortlinks/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | pretty-shortlinks | [View logs](/logs/plugins/p/pretty-shortlinks/error.json) |
