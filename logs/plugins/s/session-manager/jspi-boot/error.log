@@ -2,14 +2,100 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [09-Jun-2025 13:42:10 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>spa</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[09-Jun-2025 13:42:20 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>spa</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[09-Jun-2025 13:42:29 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>spa</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[09-Jun-2025 13:43:03 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[09-Jun-2025 13:43:12 UTC] PHP Warning:  chown(): parameter 2 should be string or int, bool given in /wordpress/wp-admin/includes/class-wp-filesystem-direct.php on line 204
-[09-Jun-2025 13:43:53 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[09-Jun-2025 13:44:44 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[09-Jun-2025 13:46:25 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "pluginprefix_function_to_run" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+Error: [11-Jun-2025 07:02:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>show full columns from wp_users where field = "user_login"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_users</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_users</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `field` = 'user_login' ORDER BY ordinal_position | parameters: database_name_here, wp_users</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('show full colum...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('show full colum...')
+#3 /wordpress/wp-content/plugins/salon-booking/salon.php(1135): WP_SQLite_DB->query('show full colum...')
+#4 /wordpress/wp-content/plugins/salon-booking/salon.php(1184): Salon_Booking->_get_collation()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Salon_Booking->salon_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_salon-...', false)
+#9 /internal/eval.php(20): activate_plugin('salon-booking/s...')
+#10 {main}</pre>
+ for query show full columns from wp_users where field = "user_login" made by activate_plugin, do_action('activate_salon-booking/salon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Salon_Booking->salon_install, Salon_Booking->_get_collation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Jun-2025 07:03:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>show full columns from wp_users where field = "user_login"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_users</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_users</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `field` = 'user_login' ORDER BY ordinal_position | parameters: database_name_here, wp_users</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('show full colum...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('show full colum...')
+#3 /wordpress/wp-content/plugins/salon-booking/salon.php(1135): WP_SQLite_DB->query('show full colum...')
+#4 /wordpress/wp-content/plugins/salon-booking/salon.php(1184): Salon_Booking->_get_collation()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Salon_Booking->salon_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_salon-...', false)
+#9 /internal/eval.php(20): activate_plugin('salon-booking/s...')
+#10 {main}</pre>
+ for query show full columns from wp_users where field = "user_login" made by activate_plugin, do_action('activate_salon-booking/salon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Salon_Booking->salon_install, Salon_Booking->_get_collation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Jun-2025 07:03:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>show full columns from wp_users where field = "user_login"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_users</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_users</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `field` = 'user_login' ORDER BY ordinal_position | parameters: database_name_here, wp_users</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('show full colum...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('show full colum...')
+#3 /wordpress/wp-content/plugins/salon-booking/salon.php(1135): WP_SQLite_DB->query('show full colum...')
+#4 /wordpress/wp-content/plugins/salon-booking/salon.php(1184): Salon_Booking->_get_collation()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Salon_Booking->salon_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_salon-...', false)
+#9 /internal/eval.php(20): activate_plugin('salon-booking/s...')
+#10 {main}</pre>
+ for query show full columns from wp_users where field = "user_login" made by activate_plugin, do_action('activate_salon-booking/salon.php'), WP_Hook->do_action, WP_Hook->apply_filters, Salon_Booking->salon_install, Salon_Booking->_get_collation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Jun-2025 07:03:56 UTC] PHP Deprecated:  Function get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>home</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 07:03:58 UTC] PHP Deprecated:  Function get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>home</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 07:04:05 UTC] PHP Deprecated:  Function get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>home</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 07:04:06 UTC] PHP Deprecated:  Function get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>home</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 07:04:14 UTC] PHP Deprecated:  Function get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>home</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 07:04:15 UTC] PHP Deprecated:  Function get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>home</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 07:05:54 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "pluginprefix_function_to_run" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
@@ -17,7 +103,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('site-hitz/SiteH...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Jun-2025 13:46:33 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "pluginprefix_function_to_run" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+[11-Jun-2025 07:06:02 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "pluginprefix_function_to_run" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
@@ -25,7 +111,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('site-hitz/SiteH...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Jun-2025 13:46:41 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "pluginprefix_function_to_run" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+[11-Jun-2025 07:06:10 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "pluginprefix_function_to_run" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
@@ -33,67 +119,16 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('site-hitz/SiteH...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Jun-2025 13:47:25 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Bc_Sports_Ranki...')
-#2 /wordpress/wp-content/plugins/sports-ranking-widget/sports_ranking_widget.php(33): register_widget('Bc_Sports_Ranki...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): bc_sports_rankings_widget('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Jun-2025 13:47:34 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Bc_Sports_Ranki...')
-#2 /wordpress/wp-content/plugins/sports-ranking-widget/sports_ranking_widget.php(33): register_widget('Bc_Sports_Ranki...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): bc_sports_rankings_widget('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Jun-2025 13:47:44 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Bc_Sports_Ranki...')
-#2 /wordpress/wp-content/plugins/sports-ranking-widget/sports_ranking_widget.php(33): register_widget('Bc_Sports_Ranki...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): bc_sports_rankings_widget('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Jun-2025 13:49:00 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/session-manager/session_manager.php on line 27
-[09-Jun-2025 13:49:00 UTC] PHP Deprecated:  Required parameter $strip_tags follows optional parameter $default in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php on line 15
-[09-Jun-2025 13:49:01 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/session-manager/session_manager.php on line 27
-[09-Jun-2025 13:49:01 UTC] PHP Deprecated:  Required parameter $strip_tags follows optional parameter $default in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php on line 15
-[09-Jun-2025 13:49:01 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-Jun-2025 13:49:01 UTC] PHP Deprecated:  Function WP_User-&gt;id was called with an argument that is <strong>deprecated</strong> since version 2.1.0! Use <code>WP_User-&gt;ID</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-Jun-2025 13:49:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php:517
+[11-Jun-2025 07:07:20 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/sotmarket-affiliate-plugin/sotmarket.php on line 80
+[11-Jun-2025 07:07:28 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/sotmarket-affiliate-plugin/sotmarket.php on line 80
+[11-Jun-2025 07:07:37 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/sotmarket-affiliate-plugin/sotmarket.php on line 80
+[11-Jun-2025 07:10:01 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/session-manager/session_manager.php on line 27
+[11-Jun-2025 07:10:01 UTC] PHP Deprecated:  Required parameter $strip_tags follows optional parameter $default in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php on line 15
+[11-Jun-2025 07:10:02 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/session-manager/session_manager.php on line 27
+[11-Jun-2025 07:10:02 UTC] PHP Deprecated:  Required parameter $strip_tags follows optional parameter $default in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php on line 15
+[11-Jun-2025 07:10:03 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 07:10:03 UTC] PHP Deprecated:  Function WP_User-&gt;id was called with an argument that is <strong>deprecated</strong> since version 2.1.0! Use <code>WP_User-&gt;ID</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 07:10:03 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php:517
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): sm_store_session_data('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
@@ -104,13 +139,13 @@ Stack trace:
 #6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #7 {main}
   thrown in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php on line 517
-[09-Jun-2025 13:49:09 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/session-manager/session_manager.php on line 27
-[09-Jun-2025 13:49:09 UTC] PHP Deprecated:  Required parameter $strip_tags follows optional parameter $default in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php on line 15
-[09-Jun-2025 13:49:11 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/session-manager/session_manager.php on line 27
-[09-Jun-2025 13:49:11 UTC] PHP Deprecated:  Required parameter $strip_tags follows optional parameter $default in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php on line 15
-[09-Jun-2025 13:49:11 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-Jun-2025 13:49:11 UTC] PHP Deprecated:  Function WP_User-&gt;id was called with an argument that is <strong>deprecated</strong> since version 2.1.0! Use <code>WP_User-&gt;ID</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-Jun-2025 13:49:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php:517
+[11-Jun-2025 07:10:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/session-manager/session_manager.php on line 27
+[11-Jun-2025 07:10:12 UTC] PHP Deprecated:  Required parameter $strip_tags follows optional parameter $default in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php on line 15
+[11-Jun-2025 07:10:13 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/session-manager/session_manager.php on line 27
+[11-Jun-2025 07:10:13 UTC] PHP Deprecated:  Required parameter $strip_tags follows optional parameter $default in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php on line 15
+[11-Jun-2025 07:10:13 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 07:10:13 UTC] PHP Deprecated:  Function WP_User-&gt;id was called with an argument that is <strong>deprecated</strong> since version 2.1.0! Use <code>WP_User-&gt;ID</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 07:10:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php:517
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): sm_store_session_data('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
@@ -121,13 +156,13 @@ Stack trace:
 #6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #7 {main}
   thrown in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php on line 517
-[09-Jun-2025 13:49:20 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/session-manager/session_manager.php on line 27
-[09-Jun-2025 13:49:20 UTC] PHP Deprecated:  Required parameter $strip_tags follows optional parameter $default in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php on line 15
-[09-Jun-2025 13:49:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/session-manager/session_manager.php on line 27
-[09-Jun-2025 13:49:21 UTC] PHP Deprecated:  Required parameter $strip_tags follows optional parameter $default in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php on line 15
-[09-Jun-2025 13:49:21 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-Jun-2025 13:49:21 UTC] PHP Deprecated:  Function WP_User-&gt;id was called with an argument that is <strong>deprecated</strong> since version 2.1.0! Use <code>WP_User-&gt;ID</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[09-Jun-2025 13:49:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php:517
+[11-Jun-2025 07:10:22 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/session-manager/session_manager.php on line 27
+[11-Jun-2025 07:10:22 UTC] PHP Deprecated:  Required parameter $strip_tags follows optional parameter $default in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php on line 15
+[11-Jun-2025 07:10:23 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/session-manager/session_manager.php on line 27
+[11-Jun-2025 07:10:23 UTC] PHP Deprecated:  Required parameter $strip_tags follows optional parameter $default in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php on line 15
+[11-Jun-2025 07:10:23 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 07:10:23 UTC] PHP Deprecated:  Function WP_User-&gt;id was called with an argument that is <strong>deprecated</strong> since version 2.1.0! Use <code>WP_User-&gt;ID</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[11-Jun-2025 07:10:23 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/session-manager/includes/sm_functions.include.php:517
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): sm_store_session_data('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
@@ -162,7 +197,7 @@ Stack trace:
         httpStatusCode: 500,
         headers: {
           'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'set-cookie': [ 'PHPSESSID=d6c1796bc7d16a26d00e22873699093a; path=/' ],
+          'set-cookie': [ 'PHPSESSID=2d170a823aee8c9a8a077c8297e9e26e; path=/' ],
           pragma: [ 'no-cache' ],
           'content-type': [ 'text/html; charset=UTF-8' ],
           expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
