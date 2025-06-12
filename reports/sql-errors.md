@@ -196,51 +196,15 @@ Backt
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | rax-email-subscription-and-social-media-links-after-posts | [View logs](/logs/plugins/r/rax-email-subscription-and-social-media-links-after-posts/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | rax-email-subscription-and-social-media-links-after-posts | [View logs](/logs/plugins/r/rax-email-subscription-and-social-media-links-after-posts/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | rax-email-subscription-and-social-media-links-after-posts | [View logs](/logs/plugins/r/rax-email-subscription-and-social-media-links-after-posts/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wc-category-discount | [View logs](/logs/plugins/w/wc-category-discount/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wc-category-discount | [View logs](/logs/plugins/w/wc-category-discount/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wc-category-discount | [View logs](/logs/plugins/w/wc-category-discount/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | wc-category-discount | [View logs](/logs/plugins/w/wc-category-discount/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | asyncify-boot | wc-category-discount | [View logs](/logs/plugins/w/wc-category-discount/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | jspi-boot | wc-category-discount | [View logs](/logs/plugins/w/wc-category-discount/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wc-category-discount | [View logs](/logs/plugins/w/wc-category-discount/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | wc-category-discount | [View logs](/logs/plugins/w/wc-category-discount/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | wc-category-discount | [View logs](/logs/plugins/w/wc-category-discount/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | woocommerce-credit-card-payment-gateway-by-gs | [View logs](/logs/plugins/w/woocommerce-credit-card-payment-gateway-by-gs/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | woocommerce-credit-card-payment-gateway-by-gs | [View logs](/logs/plugins/w/woocommerce-credit-card-payment-gateway-by-gs/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | woocommerce-credit-card-payment-gateway-by-gs | [View logs](/logs/plugins/w/woocommerce-credit-card-payment-gateway-by-gs/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | woocommerce-credit-card-payment-gateway-by-gs | [View logs](/logs/plugins/w/woocommerce-credit-card-payment-gateway-by-gs/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | asyncify-boot | woocommerce-credit-card-payment-gateway-by-gs | [View logs](/logs/plugins/w/woocommerce-credit-card-payment-gateway-by-gs/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | jspi-boot | woocommerce-credit-card-payment-gateway-by-gs | [View logs](/logs/plugins/w/woocommerce-credit-card-payment-gateway-by-gs/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | woocommerce-credit-card-payment-gateway-by-gs | [View logs](/logs/plugins/w/woocommerce-credit-card-payment-gateway-by-gs/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | woocommerce-credit-card-payment-gateway-by-gs | [View logs](/logs/plugins/w/woocommerce-credit-card-payment-gateway-by-gs/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | woocommerce-credit-card-payment-gateway-by-gs | [View logs](/logs/plugins/w/woocommerce-credit-card-payment-gateway-by-gs/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | woocommerce-paycoin-gateway | [View logs](/logs/plugins/w/woocommerce-paycoin-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | woocommerce-paycoin-gateway | [View logs](/logs/plugins/w/woocommerce-paycoin-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | woocommerce-paycoin-gateway | [View logs](/logs/plugins/w/woocommerce-paycoin-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | woocommerce-paycoin-gateway | [View logs](/logs/plugins/w/woocommerce-paycoin-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | asyncify-boot | woocommerce-paycoin-gateway | [View logs](/logs/plugins/w/woocommerce-paycoin-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | jspi-boot | woocommerce-paycoin-gateway | [View logs](/logs/plugins/w/woocommerce-paycoin-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | woocommerce-paycoin-gateway | [View logs](/logs/plugins/w/woocommerce-paycoin-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | woocommerce-paycoin-gateway | [View logs](/logs/plugins/w/woocommerce-paycoin-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | woocommerce-paycoin-gateway | [View logs](/logs/plugins/w/woocommerce-paycoin-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | asyncify-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | jspi-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-job-portal | [View logs](/logs/plugins/w/wp-job-portal/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | wp-job-portal | [View logs](/logs/plugins/w/wp-job-portal/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wp-job-portal | [View logs](/logs/plugins/w/wp-job-portal/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-matrix-gallery | [View logs](/logs/plugins/w/wp-matrix-gallery/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-matrix-gallery | [View logs](/logs/plugins/w/wp-matrix-gallery/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-matrix-gallery | [View logs](/logs/plugins/w/wp-matrix-gallery/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | wp-matrix-gallery | [View logs](/logs/plugins/w/wp-matrix-gallery/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | asyncify-boot | wp-matrix-gallery | [View logs](/logs/plugins/w/wp-matrix-gallery/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | jspi-boot | wp-matrix-gallery | [View logs](/logs/plugins/w/wp-matrix-gallery/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wp-matrix-gallery | [View logs](/logs/plugins/w/wp-matrix-gallery/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | wp-matrix-gallery | [View logs](/logs/plugins/w/wp-matrix-gallery/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | wp-matrix-gallery | [View logs](/logs/plugins/w/wp-matrix-gallery/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wpnotificationbar | [View logs](/logs/plugins/w/wpnotificationbar/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wpnotificationbar | [View logs](/logs/plugins/w/wpnotificationbar/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wpnotificationbar | [View logs](/logs/plugins/w/wpnotificationbar/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | wpnotificationbar | [View logs](/logs/plugins/w/wpnotificationbar/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | asyncify-boot | wpnotificationbar | [View logs](/logs/plugins/w/wpnotificationbar/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | jspi-boot | wpnotificationbar | [View logs](/logs/plugins/w/wpnotificationbar/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wpnotificationbar | [View logs](/logs/plugins/w/wpnotificationbar/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | wpnotificationbar | [View logs](/logs/plugins/w/wpnotificationbar/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | wpnotificationbar | [View logs](/logs/plugins/w/wpnotificationbar/error.json) |
