@@ -62,6 +62,87 @@
 | advanced-custom-fields-coordinates | Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/admin-notices-for-team/freemius/includes/class-fs-logger.php on line 145 | [View logs](/logs/plugins/a/advanced-custom-fields-coordinates/error.json) |
 | advanced-custom-fields-coordinates | Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/admin-notices-for-team/freemius/includes/class-fs-logger.php on line 145 | [View logs](/logs/plugins/a/advanced-custom-fields-coordinates/error.json) |
 | advanced-custom-fields-coordinates | Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/admin-notices-for-team/freemius/includes/class-fs-logger.php on line 145 | [View logs](/logs/plugins/a/advanced-custom-fields-coordinates/error.json) |
+| bbhide | Uncaught TypeError: mysqli_multi_query(): Argument #1 ($mysql) must be of type mysqli, WP_SQLite_Driver given in /wordpress/wp-content/plugins/backup-snippets/backup-snippets.php:82 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uncaught TypeError: mysqli_multi_query(): Argument #1 ($mysql) must be of type mysqli, WP_SQLite_Driver given in /wordpress/wp-content/plugins/backup-snippets/backup-snippets.php:82 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uncaught TypeError: mysqli_multi_query(): Argument #1 ($mysql) must be of type mysqli, WP_SQLite_Driver given in /wordpress/wp-content/plugins/backup-snippets/backup-snippets.php:82 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/ban-user-by-ip/main.php on line 134 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/ban-user-by-ip/main.php on line 134 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/ban-user-by-ip/main.php on line 134 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined array key 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 49 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 0 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uninitialized string offset 1 in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 74 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Undefined variable $output in /wordpress/wp-content/plugins/bangla-nice-slug/bangla-nice-slug.php on line 78 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/basic-calculator/basic-math-calculator.php:220 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/basic-calculator/basic-math-calculator.php:220 | [View logs](/logs/plugins/b/bbhide/error.json) |
+| bbhide | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/basic-calculator/basic-math-calculator.php:220 | [View logs](/logs/plugins/b/bbhide/error.json) |
 | bookings-engine | Undefined variable $default_ba_style_css in /wordpress/wp-content/plugins/buoy-conditions/buoyalerts_wp_buoy.php on line 69 | [View logs](/logs/plugins/b/bookings-engine/error.json) |
 | bookings-engine | Undefined variable $default_ba_style_css in /wordpress/wp-content/plugins/buoy-conditions/buoyalerts_wp_buoy.php on line 69 | [View logs](/logs/plugins/b/bookings-engine/error.json) |
 | bookings-engine | Undefined variable $default_ba_style_css in /wordpress/wp-content/plugins/buoy-conditions/buoyalerts_wp_buoy.php on line 69 | [View logs](/logs/plugins/b/bookings-engine/error.json) |
@@ -181,6 +262,15 @@
 | boom-fest | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/1g-music-fav/1g-music-fav.php:45 | [View logs](/logs/plugins/b/boom-fest/error.json) |
 | boom-fest | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/1g-music-fav/1g-music-fav.php:45 | [View logs](/logs/plugins/b/boom-fest/error.json) |
 | boom-fest | Uncaught Error: Class 'WpOrg\Requests\Exception' not found in /wordpress/wp-includes/Requests/src/Transport/Curl.php:490 | [View logs](/logs/plugins/b/boom-fest/error.json) |
+| banner-cycler | Declaration of money_Widget::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/before-its-news-money/bin-money.php on line 34 | [View logs](/logs/plugins/b/banner-cycler/error.json) |
+| banner-cycler | Declaration of money_Widget::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/before-its-news-money/bin-money.php on line 34 | [View logs](/logs/plugins/b/banner-cycler/error.json) |
+| banner-cycler | Declaration of money_Widget::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/before-its-news-money/bin-money.php on line 34 | [View logs](/logs/plugins/b/banner-cycler/error.json) |
+| banner-cycler | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Bl_business_directory::spawn() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | [View logs](/logs/plugins/b/banner-cycler/error.json) |
+| banner-cycler | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Bl_business_directory::spawn() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | [View logs](/logs/plugins/b/banner-cycler/error.json) |
+| banner-cycler | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Bl_business_directory::spawn() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | [View logs](/logs/plugins/b/banner-cycler/error.json) |
+| banner-cycler | Uncaught Error: Undefined constant "baftapromo_load_widgets" in /wordpress/wp-content/plugins/bafta-guru-widget/bafta-guru.php:216 | [View logs](/logs/plugins/b/banner-cycler/error.json) |
+| banner-cycler | Uncaught Error: Undefined constant "baftapromo_load_widgets" in /wordpress/wp-content/plugins/bafta-guru-widget/bafta-guru.php:216 | [View logs](/logs/plugins/b/banner-cycler/error.json) |
+| banner-cycler | Uncaught Error: Undefined constant "baftapromo_load_widgets" in /wordpress/wp-content/plugins/bafta-guru-widget/bafta-guru.php:216 | [View logs](/logs/plugins/b/banner-cycler/error.json) |
 | contact-form-7-get-and-show-parameter-from-url | Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/c/contact-form-7-get-and-show-parameter-from-url/error.json) |
 | contact-form-7-get-and-show-parameter-from-url | Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/c/contact-form-7-get-and-show-parameter-from-url/error.json) |
 | contact-form-7-get-and-show-parameter-from-url | Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/c/contact-form-7-get-and-show-parameter-from-url/error.json) |
