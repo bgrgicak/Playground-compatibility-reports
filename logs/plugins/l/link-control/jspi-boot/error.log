@@ -2,781 +2,724 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [11-Jun-2025 22:26:53 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [13-Jun-2025 13:56:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_events_modified ON wp_lets_wipe_events (event_modified_by ASC)</p>
+<p>SELECT 1
+                               FROM wp_insertify
+                               LIMIT 1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_insertify` LIMIT 1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+SQLSTATE[HY000]: General error: 1 no such table: wp_insertify
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(68): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT 1\n      ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT 1\n      ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT 1\n      ...')
+#4 /wordpress/wp-content/plugins/insertify/create_db.php(10): wpdb->get_results('SELECT 1\n      ...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): icp_table_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_insert...', false)
+#9 /internal/eval.php(20): activate_plugin('insertify/inser...')
+#10 {main}</pre>
+ for query SELECT 1
+                               FROM wp_insertify
+                               LIMIT 1 made by activate_plugin, do_action('activate_insertify/insertify.php'), WP_Hook->do_action, WP_Hook->apply_filters, icp_table_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Jun-2025 13:56:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1
+                               FROM wp_insertify
+                               LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_insertify` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_insertify
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT 1\n      ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT 1\n      ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT 1\n      ...')
+#4 /wordpress/wp-content/plugins/insertify/create_db.php(10): wpdb->get_results('SELECT 1\n      ...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): icp_table_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_insert...', false)
+#9 /internal/eval.php(20): activate_plugin('insertify/inser...')
+#10 {main}</pre>
+ for query SELECT 1
+                               FROM wp_insertify
+                               LIMIT 1 made by activate_plugin, do_action('activate_insertify/insertify.php'), WP_Hook->do_action, WP_Hook->apply_filters, icp_table_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Jun-2025 13:56:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1
+                               FROM wp_insertify
+                               LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_insertify` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_insertify
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT 1\n      ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT 1\n      ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT 1\n      ...')
+#4 /wordpress/wp-content/plugins/insertify/create_db.php(10): wpdb->get_results('SELECT 1\n      ...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): icp_table_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_insert...', false)
+#9 /internal/eval.php(20): activate_plugin('insertify/inser...')
+#10 {main}</pre>
+ for query SELECT 1
+                               FROM wp_insertify
+                               LIMIT 1 made by activate_plugin, do_action('activate_insertify/insertify.php'), WP_Hook->do_action, WP_Hook->apply_filters, icp_table_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Jun-2025 13:57:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_sbi_feeds</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_sbi_feeds` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_sbi_feeds
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(166): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(83): InstagramFeed\Admin\SBI_Callout::feeds_number('sbi_feeds')
+#6 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(28): InstagramFeed\Admin\SBI_Callout::get_callout_plugins_list()
+#7 /wordpress/wp-content/plugins/instagram-feed/instagram-feed.php(253): InstagramFeed\Admin\SBI_Callout->__construct()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): sb_instagram_feed_init('')
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-settings.php(727): do_action('init')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_sbi_feeds made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, sb_instagram_feed_init, InstagramFeed\Admin\SBI_Callout->__construct, InstagramFeed\Admin\SBI_Callout::get_callout_plugins_list, InstagramFeed\Admin\SBI_Callout::feeds_number, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Jun-2025 13:57:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_sbi_feeds</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_sbi_feeds` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_sbi_feeds
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(166): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(83): InstagramFeed\Admin\SBI_Callout::feeds_number('sbi_feeds')
+#6 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(176): InstagramFeed\Admin\SBI_Callout::get_callout_plugins_list()
+#7 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(29): InstagramFeed\Admin\SBI_Callout::should_show_callout()
+#8 /wordpress/wp-content/plugins/instagram-feed/instagram-feed.php(253): InstagramFeed\Admin\SBI_Callout->__construct()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): sb_instagram_feed_init('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_sbi_feeds made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, sb_instagram_feed_init, InstagramFeed\Admin\SBI_Callout->__construct, InstagramFeed\Admin\SBI_Callout::should_show_callout, InstagramFeed\Admin\SBI_Callout::get_callout_plugins_list, InstagramFeed\Admin\SBI_Callout::feeds_number, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Jun-2025 13:57:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_sbi_instagram_posts ADD COLUMN mime_type VARCHAR(100) DEFAULT '' NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_sbi_instagram_posts</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_sbi_instagram_posts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_sbi_instagram_posts</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_sbi_instagram_posts</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_sbi_instagram_posts, mime_type, 13, , NO, varchar, 100, 400, , , , utf8mb4, utf8mb4_general_ci, varchar(100), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_sbi_instagram_posts</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_sbi_instagram_posts</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_sbi_instagram_posts</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_sbi_instagram_posts_684c2e355e7b8` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `created_on` TEXT COLLATE NOCASE,
+  `instagram_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `time_stamp` TEXT COLLATE NOCASE,
+  `top_time_stamp` TEXT COLLATE NOCASE,
+  `json_data` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `media_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `sizes` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `aspect_ratio` REAL NOT NULL DEFAULT '0',
+  `images_done` INTEGER NOT NULL DEFAULT '0',
+  `last_requested` TEXT COLLATE NOCASE,
+  `mime_type` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `mime_type` TEXT COLLATE NOCASE NOT NULL DEFAULT ''
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: mime_type
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/instagram-feed/instagram-feed.php(888): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): sbi_check_for_db_updates('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(749): do_action('wp_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_events_modified ON wp_lets_wipe_events (event_modified_by ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_sbi_instagram_posts ADD COLUMN mime_type VARCHAR(100) DEFAULT '' NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('wp_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, sbi_check_for_db_updates, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Jun-2025 13:57:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_events_created ON wp_lets_wipe_events (event_created_by ASC)</p>
+<p>ALTER TABLE wp_sbi_sources ADD COLUMN connect_type VARCHAR(100) DEFAULT '' NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_sbi_sources</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_sbi_sources</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_sbi_sources</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_sbi_sources</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_sbi_sources, connect_type, 13, , NO, varchar, 100, 400, , , , utf8mb4, utf8mb4_general_ci, varchar(100), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_sbi_sources</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_sbi_sources</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_sbi_sources</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_sbi_sources_684c2e3566c88` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `account_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `account_type` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `privilege` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `access_token` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `username` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `info` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `error` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `expires` TEXT COLLATE NOCASE NOT NULL,
+  `last_updated` TEXT COLLATE NOCASE NOT NULL,
+  `author` INTEGER NOT NULL DEFAULT '1',
+  `connect_type` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `connect_type` TEXT COLLATE NOCASE NOT NULL DEFAULT ''
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+SQLSTATE[HY000]: General error: 1 duplicate column name: connect_type
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(69): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/instagram-feed/instagram-feed.php(910): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): sbi_check_for_db_updates('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(749): do_action('wp_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_events_created ON wp_lets_wipe_events (event_created_by ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_sbi_sources ADD COLUMN connect_type VARCHAR(100) DEFAULT '' NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('wp_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, sbi_check_for_db_updates, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Jun-2025 13:57:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_chars_users ON wp_lets_wipe_chars (user_id ASC)</p>
+<p>SELECT COUNT(*) FROM wp_sbi_feeds</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_sbi_feeds` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+SQLSTATE[HY000]: General error: 1 no such table: wp_sbi_feeds
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(89): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_chars_users ON wp_lets_wipe_chars (user_id ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(166): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(83): InstagramFeed\Admin\SBI_Callout::feeds_number('sbi_feeds')
+#6 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(28): InstagramFeed\Admin\SBI_Callout::get_callout_plugins_list()
+#7 /wordpress/wp-content/plugins/instagram-feed/instagram-feed.php(253): InstagramFeed\Admin\SBI_Callout->__construct()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): sb_instagram_feed_init('')
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-settings.php(727): do_action('init')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_sbi_feeds made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, sb_instagram_feed_init, InstagramFeed\Admin\SBI_Callout->__construct, InstagramFeed\Admin\SBI_Callout::get_callout_plugins_list, InstagramFeed\Admin\SBI_Callout::feeds_number, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Jun-2025 13:57:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_chars_created ON wp_lets_wipe_chars (char_created_by ASC)</p>
+<p>SELECT COUNT(*) FROM wp_sbi_feeds</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_sbi_feeds` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+SQLSTATE[HY000]: General error: 1 no such table: wp_sbi_feeds
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(90): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_chars_created ON wp_lets_wipe_chars (char_created_by ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(166): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(83): InstagramFeed\Admin\SBI_Callout::feeds_number('sbi_feeds')
+#6 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(176): InstagramFeed\Admin\SBI_Callout::get_callout_plugins_list()
+#7 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(29): InstagramFeed\Admin\SBI_Callout::should_show_callout()
+#8 /wordpress/wp-content/plugins/instagram-feed/instagram-feed.php(253): InstagramFeed\Admin\SBI_Callout->__construct()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): sb_instagram_feed_init('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_sbi_feeds made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, sb_instagram_feed_init, InstagramFeed\Admin\SBI_Callout->__construct, InstagramFeed\Admin\SBI_Callout::should_show_callout, InstagramFeed\Admin\SBI_Callout::get_callout_plugins_list, InstagramFeed\Admin\SBI_Callout::feeds_number, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Jun-2025 13:57:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_chars_modified ON wp_lets_wipe_chars (char_modified_by ASC)</p>
+<p>ALTER TABLE wp_sbi_instagram_posts ADD COLUMN mime_type VARCHAR(100) DEFAULT '' NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_sbi_instagram_posts</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_sbi_instagram_posts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_sbi_instagram_posts</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_sbi_instagram_posts</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_sbi_instagram_posts, mime_type, 13, , NO, varchar, 100, 400, , , , utf8mb4, utf8mb4_general_ci, varchar(100), , , select,insert,update,references, , , </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'mime_type'
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(91): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_chars_modified ON wp_lets_wipe_chars (char_modified_by ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3885): WP_SQLite_Driver->new_driver_exception('SQLSTATE[42S21]...', '42S21')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(681): WP_SQLite_Driver->convert_information_schema_exception(Object(WP_SQLite_Information_Schema_Exception))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/instagram-feed/instagram-feed.php(888): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): sbi_check_for_db_updates('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(749): do_action('wp_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_sbi_instagram_posts ADD COLUMN mime_type VARCHAR(100) DEFAULT '' NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('wp_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, sbi_check_for_db_updates, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Jun-2025 13:57:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_raids_events ON wp_lets_wipe_raids (event_id ASC)</p>
+<p>ALTER TABLE wp_sbi_sources ADD COLUMN connect_type VARCHAR(100) DEFAULT '' NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_sbi_sources</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_sbi_sources</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_sbi_sources</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_sbi_sources</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_sbi_sources, connect_type, 13, , NO, varchar, 100, 400, , , , utf8mb4, utf8mb4_general_ci, varchar(100), , , select,insert,update,references, , , </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'connect_type'
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(112): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_raids_events ON wp_lets_wipe_raids (event_id ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3885): WP_SQLite_Driver->new_driver_exception('SQLSTATE[42S21]...', '42S21')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(681): WP_SQLite_Driver->convert_information_schema_exception(Object(WP_SQLite_Information_Schema_Exception))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/instagram-feed/instagram-feed.php(910): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): sbi_check_for_db_updates('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(749): do_action('wp_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_sbi_sources ADD COLUMN connect_type VARCHAR(100) DEFAULT '' NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('wp_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, sbi_check_for_db_updates, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Jun-2025 13:57:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_raids_chars ON wp_lets_wipe_raids (raid_leader ASC)</p>
+<p>SELECT COUNT(*) FROM wp_sbi_feeds</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_sbi_feeds` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+SQLSTATE[HY000]: General error: 1 no such table: wp_sbi_feeds
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(113): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_raids_chars ON wp_lets_wipe_raids (raid_leader ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(166): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(83): InstagramFeed\Admin\SBI_Callout::feeds_number('sbi_feeds')
+#6 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(28): InstagramFeed\Admin\SBI_Callout::get_callout_plugins_list()
+#7 /wordpress/wp-content/plugins/instagram-feed/instagram-feed.php(253): InstagramFeed\Admin\SBI_Callout->__construct()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): sb_instagram_feed_init('')
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-settings.php(727): do_action('init')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_sbi_feeds made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, sb_instagram_feed_init, InstagramFeed\Admin\SBI_Callout->__construct, InstagramFeed\Admin\SBI_Callout::get_callout_plugins_list, InstagramFeed\Admin\SBI_Callout::feeds_number, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Jun-2025 13:57:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_raids_modified ON wp_lets_wipe_raids (raid_modified_by ASC)</p>
+<p>SELECT COUNT(*) FROM wp_sbi_feeds</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_sbi_feeds` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+SQLSTATE[HY000]: General error: 1 no such table: wp_sbi_feeds
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(114): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_raids_modified ON wp_lets_wipe_raids (raid_modified_by ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(166): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(83): InstagramFeed\Admin\SBI_Callout::feeds_number('sbi_feeds')
+#6 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(176): InstagramFeed\Admin\SBI_Callout::get_callout_plugins_list()
+#7 /wordpress/wp-content/plugins/instagram-feed/admin/SBI_Callout.php(29): InstagramFeed\Admin\SBI_Callout::should_show_callout()
+#8 /wordpress/wp-content/plugins/instagram-feed/instagram-feed.php(253): InstagramFeed\Admin\SBI_Callout->__construct()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): sb_instagram_feed_init('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_sbi_feeds made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, sb_instagram_feed_init, InstagramFeed\Admin\SBI_Callout->__construct, InstagramFeed\Admin\SBI_Callout::should_show_callout, InstagramFeed\Admin\SBI_Callout::get_callout_plugins_list, InstagramFeed\Admin\SBI_Callout::feeds_number, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Jun-2025 13:57:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_raids_created ON wp_lets_wipe_raids (raid_created_by ASC)</p>
+<p>ALTER TABLE wp_sbi_instagram_posts ADD COLUMN mime_type VARCHAR(100) DEFAULT '' NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_sbi_instagram_posts</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_sbi_instagram_posts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_sbi_instagram_posts</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_sbi_instagram_posts</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_sbi_instagram_posts, mime_type, 13, , NO, varchar, 100, 400, , , , utf8mb4, utf8mb4_general_ci, varchar(100), , , select,insert,update,references, , , </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'mime_type'
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(115): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_raids_created ON wp_lets_wipe_raids (raid_created_by ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3885): WP_SQLite_Driver->new_driver_exception('SQLSTATE[42S21]...', '42S21')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(681): WP_SQLite_Driver->convert_information_schema_exception(Object(WP_SQLite_Information_Schema_Exception))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/instagram-feed/instagram-feed.php(888): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): sbi_check_for_db_updates('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(749): do_action('wp_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_sbi_instagram_posts ADD COLUMN mime_type VARCHAR(100) DEFAULT '' NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('wp_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, sbi_check_for_db_updates, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Jun-2025 13:57:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_char2raid_chars ON wp_lets_wipe_char2raid (char_id ASC)</p>
+<p>ALTER TABLE wp_sbi_sources ADD COLUMN connect_type VARCHAR(100) DEFAULT '' NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_sbi_sources</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_sbi_sources</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_sbi_sources</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_sbi_sources</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_sbi_sources, connect_type, 13, , NO, varchar, 100, 400, , , , utf8mb4, utf8mb4_general_ci, varchar(100), , , select,insert,update,references, , , </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'connect_type'
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(132): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_char2raid_chars ON wp_lets_wipe_char2raid (char_id ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_char2raid_raids ON wp_lets_wipe_char2raid (raid_id ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(133): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_char2raid_raids ON wp_lets_wipe_char2raid (raid_id ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_char2raid_modified ON wp_lets_wipe_char2raid (char_raid_modified_by ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(134): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_char2raid_modified ON wp_lets_wipe_char2raid (char_raid_modified_by ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_char2raid_created ON wp_lets_wipe_char2raid (char_raid_created_by ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(135): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_char2raid_created ON wp_lets_wipe_char2raid (char_raid_created_by ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_item2raid_items ON wp_lets_wipe_item2raid (item_id ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(158): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_item2raid_items ON wp_lets_wipe_item2raid (item_id ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_item2raid_raids ON wp_lets_wipe_item2raid (raid_id ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(159): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_item2raid_raids ON wp_lets_wipe_item2raid (raid_id ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_item2raid_chars ON wp_lets_wipe_item2raid (char_id ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(160): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_item2raid_chars ON wp_lets_wipe_item2raid (char_id ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_boss2raid_boss ON wp_lets_wipe_boss2raid (boss_id ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(185): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_boss2raid_boss ON wp_lets_wipe_boss2raid (boss_id ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_boss2raid_raids ON wp_lets_wipe_boss2raid (raid_id ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(186): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_boss2raid_raids ON wp_lets_wipe_boss2raid (raid_id ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:26:55 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[11-Jun-2025 22:27:03 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[11-Jun-2025 22:27:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_events_modified ON wp_lets_wipe_events (event_modified_by ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(68): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_events_modified ON wp_lets_wipe_events (event_modified_by ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:27:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_events_created ON wp_lets_wipe_events (event_created_by ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(69): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_events_created ON wp_lets_wipe_events (event_created_by ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:27:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_chars_users ON wp_lets_wipe_chars (user_id ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(89): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_chars_users ON wp_lets_wipe_chars (user_id ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:27:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_chars_created ON wp_lets_wipe_chars (char_created_by ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(90): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_chars_created ON wp_lets_wipe_chars (char_created_by ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:27:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_chars_modified ON wp_lets_wipe_chars (char_modified_by ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(91): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_chars_modified ON wp_lets_wipe_chars (char_modified_by ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:27:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_raids_events ON wp_lets_wipe_raids (event_id ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(112): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_raids_events ON wp_lets_wipe_raids (event_id ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:27:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_raids_chars ON wp_lets_wipe_raids (raid_leader ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(113): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_raids_chars ON wp_lets_wipe_raids (raid_leader ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:27:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_raids_modified ON wp_lets_wipe_raids (raid_modified_by ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(114): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_raids_modified ON wp_lets_wipe_raids (raid_modified_by ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:27:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_raids_created ON wp_lets_wipe_raids (raid_created_by ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(115): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_raids_created ON wp_lets_wipe_raids (raid_created_by ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:27:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_char2raid_chars ON wp_lets_wipe_char2raid (char_id ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(132): WP_SQLite_DB->query('CREATE INDEX fk...')
-#5 /wordpress/wp-content/plugins/lets-wipe/lets-wipe.php(86): ScreenLetsWipeDbm->install()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ScreenLetsWipe->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lets-w...', false)
-#10 /internal/eval.php(20): activate_plugin('lets-wipe/lets-...')
-#11 {main}</pre>
- for query CREATE INDEX fk_wp_lets_wipe_char2raid_chars ON wp_lets_wipe_char2raid (char_id ASC) made by activate_plugin, do_action('activate_lets-wipe/lets-wipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScreenLetsWipe->activation, ScreenLetsWipeDbm->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jun-2025 22:27:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE INDEX fk_wp_lets_wipe_char2raid_raids ON wp_lets_wipe_char2raid (raid_id ASC)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE INDEX fk...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE INDEX fk...')
-#4 /wordpress/wp-content/plugins/lets-wipe/lib/dbm.php(133): WP_SQLite_DB->query('C
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3885): WP_SQLite_Driver->new_driver_exception('SQLSTATE[42S21]...', '42S21')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(681): WP_SQLite_Driver->convert_information_schema_exception(Object(WP_SQLite_Information_Schema_Exception))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/instagram-feed/instagram-feed.php(910): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): sbi_check_for_db_updates('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(749): do_action('wp_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_sbi_sources ADD COLUMN connect_type VARCHAR(100) DEFAULT '' NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('wp_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, sbi_check_for_db_updates, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Jun-2025 13:57:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/lb-tube-video/widget.php:252
+Stack trace:
+#0 /wordpress/wp-content/plugins/lb-tube-video/lb-tube-video.php(12): require_once()
+#1 /wordpress/wp-content/plugins/lb-tube-video/lb-tube-video.php(227): TubeVideo->__construct()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('lb-tube-video/l...')
+#4 /internal/eval.php(20): activate_plugin('lb-tube-video/l...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/lb-tube-video/widget.php on line 252
+[13-Jun-2025 13:57:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/lb-tube-video/widget.php:252
+Stack trace:
+#0 /wordpress/wp-content/plugins/lb-tube-video/lb-tube-video.php(12): require_once()
+#1 /wordpress/wp-content/plugins/lb-tube-video/lb-tube-video.php(227): TubeVideo->__construct()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('lb-tube-video/l...')
+#4 /internal/eval.php(20): activate_plugin('lb-tube-video/l...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/lb-tube-video/widget.php on line 252
+[13-Jun-2025 13:58:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/lb-tube-video/widget.php:252
+Stack trace:
+#0 /wordpress/wp-content/plugins/lb-tube-video/lb-tube-video.php(12): require_once()
+#1 /wordpress/wp-content/plugins/lb-tube-video/lb-tube-video.php(227): TubeVideo->__construct()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('lb-tube-video/l...')
+#4 /internal/eval.php(20): activate_plugin('lb-tube-video/l...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/lb-tube-video/widget.php on line 252
+[13-Jun-2025 14:00:20 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[13-Jun-2025 14:00:20 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[13-Jun-2025 14:00:31 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[13-Jun-2025 14:00:31 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[13-Jun-2025 14:00:40 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[13-Jun-2025 14:00:40 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[13-Jun-2025 14:02:38 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>mootools</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[13-Jun-2025 14:02:38 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>swfobject</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[13-Jun-2025 14:02:38 UTC] PHP Warning:  Undefined variable $lightboxpluginpath in /wordpress/wp-content/plugins/lightbox-m/lightbox.php on line 22
+[13-Jun-2025 14:02:38 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[13-Jun-2025 14:02:48 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>mootools</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[13-Jun-2025 14:02:48 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>swfobject</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[13-Jun-2025 14:02:48 UTC] PHP Warning:  Undefined variable $lightboxpluginpath in /wordpress/wp-content/plugins/lightbox-m/lightbox.php on line 22
+[13-Jun-2025 14:02:48 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[13-Jun-2025 14:02:57 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>mootools</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[13-Jun-2025 14:02:57 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>swfobject</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[13-Jun-2025 14:02:57 UTC] PHP Warning:  Undefined variable $lightboxpluginpath in /wordpress/wp-content/plugins/lightbox-m/lightbox.php on line 22
+[13-Jun-2025 14:02:57 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:325:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async re (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:149:10) {
+  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"link-control"},"options":{"activate":true}}) : Could not download "https://downloads.wordpress.org/plugin/link-control.latest-stable.zip".
+  				Check if the URL is correct and the server is reachable.
+  				If it is reachable, the server might be blocking the request.
+  				Check the browser console and network tabs for more information.
+  
+  				## Does the console show the error "No 'Access-Control-Allow-Origin' header"?
+  
+  				This means the server that hosts your file does not allow requests from other sites
+  				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
+  				cross-origin file downloads. Learn more about CORS at
+  				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
+  
+  				If your file is on GitHub, load it from "raw.githubusercontent.com".
+  				Here's how to do that:
+  
+  				1. Start with the original GitHub URL of the file. For example:
+  				https://github.com/username/repository/blob/branch/filename.
+  				2. Replace "github.com" with "raw.githubusercontent.com".
+  				3. Remove the "/blob/" part of the URL.
+  
+  				The resulting URL should look like this:
+  				https://raw.githubusercontent.com/username/repository/branch/filename
+  
+  				Error:
+  				Error: Could not download "https://downloads.wordpress.org/plugin/link-control.latest-stable.zip"
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12093:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ys (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12196:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:315:48)
+      at async re (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:149:10) {
+    [cause]: Error: Could not download "https://downloads.wordpress.org/plugin/link-control.latest-stable.zip".
+    				Check if the URL is correct and the server is reachable.
+    				If it is reachable, the server might be blocking the request.
+    				Check the browser console and network tabs for more information.
+    
+    				## Does the console show the error "No 'Access-Control-Allow-Origin' header"?
+    
+    				This means the server that hosts your file does not allow requests from other sites
+    				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
+    				cross-origin file downloads. Learn more about CORS at
+    				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
+    
+    				If your file is on GitHub, load it from "raw.githubusercontent.com".
+    				Here's how to do that:
+    
+    				1. Start with the original GitHub URL of the file. For example:
+    				https://github.com/username/repository/blob/branch/filename.
+    				2. Replace "github.com" with "raw.githubusercontent.com".
+    				3. Remove the "/blob/" part of the URL.
+    
+    				The resulting URL should look like this:
+    				https://raw.githubusercontent.com/username/repository/branch/filename
+    
+    				Error:
+    				Error: Could not download "https://downloads.wordpress.org/plugin/link-control.latest-stable.zip"
+        at Ct.resolve (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1129:13)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async _.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/util/index.js:45:14)
+  }
+}
+
+Node.js v23.11.0
