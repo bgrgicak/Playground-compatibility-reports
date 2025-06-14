@@ -38,66 +38,6 @@
 | Unknown drop type: table. | ast-sqlite-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
 | Unknown drop type: table. | asyncify-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
 | Unknown drop type: table. | jspi-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_dbem_events. | ast-sqlite-boot | exopin-blogging-for-money | [View logs](/logs/plugins/e/exopin-blogging-for-money/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_dbem_events. | asyncify-boot | exopin-blogging-for-money | [View logs](/logs/plugins/e/exopin-blogging-for-money/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_dbem_events. | jspi-boot | exopin-blogging-for-money | [View logs](/logs/plugins/e/exopin-blogging-for-money/error.json) |
-| Unexpected token in MySQL query: booking_approved. | ast-sqlite-boot | exopin-blogging-for-money | [View logs](/logs/plugins/e/exopin-blogging-for-money/error.json) |
-| Unexpected token in MySQL query: booking_approved. | asyncify-boot | exopin-blogging-for-money | [View logs](/logs/plugins/e/exopin-blogging-for-money/error.json) |
-| Unexpected token in MySQL query: booking_approved. | jspi-boot | exopin-blogging-for-money | [View logs](/logs/plugins/e/exopin-blogging-for-money/error.json) |
-| Unexpected token in MySQL query: event_rsvp. | ast-sqlite-boot | exopin-blogging-for-money | [View logs](/logs/plugins/e/exopin-blogging-for-money/error.json) |
-| Unexpected token in MySQL query: event_rsvp. | asyncify-boot | exopin-blogging-for-money | [View logs](/logs/plugins/e/exopin-blogging-for-money/error.json) |
-| Unexpected token in MySQL query: event_rsvp. | jspi-boot | exopin-blogging-for-money | [View logs](/logs/plugins/e/exopin-blogging-for-money/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: ticket_id. | ast-sqlite-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: ticket_id. | asyncify-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: ticket_id. | jspi-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_dbem_events. | ast-sqlite-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_dbem_events. | asyncify-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_dbem_events. | jspi-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eway_cf7_fields. | ast-sqlite-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eway_cf7_fields. | asyncify-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eway_cf7_fields. | jspi-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| Unexpected token in MySQL query: booking_approved. | ast-sqlite-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| Unexpected token in MySQL query: booking_approved. | asyncify-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| Unexpected token in MySQL query: booking_approved. | jspi-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| Unexpected token in MySQL query: event_rsvp. | ast-sqlite-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| Unexpected token in MySQL query: event_rsvp. | asyncify-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| Unexpected token in MySQL query: event_rsvp. | jspi-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| Unexpected token in MySQL query: field_key. | ast-sqlite-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| Unexpected token in MySQL query: field_key. | asyncify-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| Unexpected token in MySQL query: field_key. | jspi-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| Unexpected token in MySQL query: url. | ast-sqlite-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| Unexpected token in MySQL query: url. | asyncify-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| Unexpected token in MySQL query: url. | jspi-boot | exif-remove-at-upload | [View logs](/logs/plugins/e/exif-remove-at-upload/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__categorie_danger. | ast-sqlite-boot | exit-overlay | [View logs](/logs/plugins/e/exit-overlay/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__categorie_danger. | asyncify-boot | exit-overlay | [View logs](/logs/plugins/e/exit-overlay/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__categorie_danger. | jspi-boot | exit-overlay | [View logs](/logs/plugins/e/exit-overlay/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__ged_documents. | ast-sqlite-boot | exit-overlay | [View logs](/logs/plugins/e/exit-overlay/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__ged_documents. | asyncify-boot | exit-overlay | [View logs](/logs/plugins/e/exit-overlay/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__ged_documents. | jspi-boot | exit-overlay | [View logs](/logs/plugins/e/exit-overlay/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | exchange-rate-table | [View logs](/logs/plugins/e/exchange-rate-table/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | exchange-rate-table | [View logs](/logs/plugins/e/exchange-rate-table/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | exchange-rate-table | [View logs](/logs/plugins/e/exchange-rate-table/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__categorie_danger. | ast-sqlite-boot | exchange-addon-product-importer | [View logs](/logs/plugins/e/exchange-addon-product-importer/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__categorie_danger. | asyncify-boot | exchange-addon-product-importer | [View logs](/logs/plugins/e/exchange-addon-product-importer/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__categorie_danger. | jspi-boot | exchange-addon-product-importer | [View logs](/logs/plugins/e/exchange-addon-product-importer/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__ged_documents. | ast-sqlite-boot | exchange-addon-product-importer | [View logs](/logs/plugins/e/exchange-addon-product-importer/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__ged_documents. | asyncify-boot | exchange-addon-product-importer | [View logs](/logs/plugins/e/exchange-addon-product-importer/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__ged_documents. | jspi-boot | exchange-addon-product-importer | [View logs](/logs/plugins/e/exchange-addon-product-importer/error.json) |
-| Data type expected in MySQL query, unknown token received: everid. | ast-sqlite-boot | exattosoft-wp-site-protector | [View logs](/logs/plugins/e/exattosoft-wp-site-protector/error.json) |
-| Data type expected in MySQL query, unknown token received: everid. | asyncify-boot | exattosoft-wp-site-protector | [View logs](/logs/plugins/e/exattosoft-wp-site-protector/error.json) |
-| Data type expected in MySQL query, unknown token received: everid. | jspi-boot | exattosoft-wp-site-protector | [View logs](/logs/plugins/e/exattosoft-wp-site-protector/error.json) |
-| Data type expected in MySQL query, unknown token received: ipid. | ast-sqlite-boot | exattosoft-wp-site-protector | [View logs](/logs/plugins/e/exattosoft-wp-site-protector/error.json) |
-| Data type expected in MySQL query, unknown token received: ipid. | asyncify-boot | exattosoft-wp-site-protector | [View logs](/logs/plugins/e/exattosoft-wp-site-protector/error.json) |
-| Data type expected in MySQL query, unknown token received: ipid. | jspi-boot | exattosoft-wp-site-protector | [View logs](/logs/plugins/e/exattosoft-wp-site-protector/error.json) |
-| Data type expected in MySQL query, unknown token received: refid. | ast-sqlite-boot | exattosoft-wp-site-protector | [View logs](/logs/plugins/e/exattosoft-wp-site-protector/error.json) |
-| Data type expected in MySQL query, unknown token received: refid. | asyncify-boot | exattosoft-wp-site-protector | [View logs](/logs/plugins/e/exattosoft-wp-site-protector/error.json) |
-| Data type expected in MySQL query, unknown token received: refid. | jspi-boot | exattosoft-wp-site-protector | [View logs](/logs/plugins/e/exattosoft-wp-site-protector/error.json) |
-| Data type expected in MySQL query, unknown token received: refid2. | ast-sqlite-boot | exattosoft-wp-site-protector | [View logs](/logs/plugins/e/exattosoft-wp-site-protector/error.json) |
-| Data type expected in MySQL query, unknown token received: refid2. | asyncify-boot | exattosoft-wp-site-protector | [View logs](/logs/plugins/e/exattosoft-wp-site-protector/error.json) |
-| Data type expected in MySQL query, unknown token received: refid2. | jspi-boot | exattosoft-wp-site-protector | [View logs](/logs/plugins/e/exattosoft-wp-site-protector/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_evercookie_iplist. | ast-sqlite-boot | exattosoft-wp-site-protector | [View logs](/logs/plugins/e/exattosoft-wp-site-protector/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_evercookie_iplist. | asyncify-boot | exattosoft-wp-site-protector | [View logs](/logs/plugins/e/exattosoft-wp-site-protector/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_evercookie_iplist. | jspi-boot | exattosoft-wp-site-protector | [View logs](/logs/plugins/e/exattosoft-wp-site-protector/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | expando-button | [View logs](/logs/plugins/e/expando-button/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | asyncify-boot | expando-button | [View logs](/logs/plugins/e/expando-button/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | jspi-boot | expando-button | [View logs](/logs/plugins/e/expando-button/error.json) |
