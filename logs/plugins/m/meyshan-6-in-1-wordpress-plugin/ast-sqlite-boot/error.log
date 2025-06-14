@@ -2,135 +2,153 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [12-Jun-2025 11:00:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [14-Jun-2025 03:20:29 UTC] huhu
+[14-Jun-2025 03:20:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT id FROM wp_MB8WP_CONFIG</p>
+<p>SELECT key_id, user_id, description, permissions, consumer_key, consumer_secret, last_access FROM wp_woocommerce_api_keys WHERE user_id = 1 AND description = 'chatchamp api user'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT `id` FROM `wp_MB8WP_CONFIG` | (no parameters)</li>
+<li>Executing: SELECT `key_id` , `user_id` , `description` , `permissions` , `consumer_key` , `consumer_secret` , `last_access` FROM `wp_woocommerce_api_keys` WHERE `user_id` = 1 AND `description` = 'chatchamp api user' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_MB8WP_CONFIG
+SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_api_keys
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT id FROM ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT id FROM ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT id FROM ...')
-#4 /wordpress/wp-content/plugins/mb8wp/mb8wp.php(373): wpdb->get_results('SELECT id FROM ...')
-#5 /wordpress/wp-content/plugins/mb8wp/mb8wp.php(30): mb8wp_isConfig()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mb8wp/mb8wp.php')
-#8 /internal/eval.php(20): activate_plugin('mb8wp/mb8wp.php')
-#9 {main}</pre>
- for query SELECT id FROM wp_MB8WP_CONFIG made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mb8wp/mb8wp.php'), mb8wp_isConfig, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[12-Jun-2025 11:00:59 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6121
-[12-Jun-2025 11:01:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT key_id, ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT key_id, ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT key_id, ...')
+#4 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php(23): wpdb->get_row('SELECT key_id, ...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php(89): Chatchamp_API->get_api_key()
+#6 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/messenger-marketing-for-woocommerce.php(42): Chatchamp_API->save()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Messenger_Marketing_For_Woocommerce->activate_plugin(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_messen...', false)
+#11 /internal/eval.php(20): activate_plugin('messenger-marke...')
+#12 {main}</pre>
+ for query SELECT key_id, user_id, description, permissions, consumer_key, consumer_secret, last_access FROM wp_woocommerce_api_keys WHERE user_id = 1 AND description = 'chatchamp api user' made by activate_plugin, do_action('activate_messenger-marketing-for-woocommerce/messenger-marketing-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, Messenger_Marketing_For_Woocommerce->activate_plugin, Chatchamp_API->save, Chatchamp_API->get_api_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Jun-2025 03:20:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wc_rand_hash() in /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php:28
+Stack trace:
+#0 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php(37): Chatchamp_API->generate_consumer_key()
+#1 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php(92): Chatchamp_API->create_api_key()
+#2 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/messenger-marketing-for-woocommerce.php(42): Chatchamp_API->save()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): Messenger_Marketing_For_Woocommerce->activate_plugin(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_messen...', false)
+#7 /internal/eval.php(20): activate_plugin('messenger-marke...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php on line 28
+[14-Jun-2025 03:20:37 UTC] huhu
+[14-Jun-2025 03:20:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT id FROM wp_MB8WP_CONFIG</p>
+<p>SELECT key_id, user_id, description, permissions, consumer_key, consumer_secret, last_access FROM wp_woocommerce_api_keys WHERE user_id = 1 AND description = 'chatchamp api user'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT `id` FROM `wp_MB8WP_CONFIG` | (no parameters)</li>
+<li>Executing: SELECT `key_id` , `user_id` , `description` , `permissions` , `consumer_key` , `consumer_secret` , `last_access` FROM `wp_woocommerce_api_keys` WHERE `user_id` = 1 AND `description` = 'chatchamp api user' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_MB8WP_CONFIG
+SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_api_keys
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT id FROM ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT id FROM ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT id FROM ...')
-#4 /wordpress/wp-content/plugins/mb8wp/mb8wp.php(373): wpdb->get_results('SELECT id FROM ...')
-#5 /wordpress/wp-content/plugins/mb8wp/mb8wp.php(30): mb8wp_isConfig()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mb8wp/mb8wp.php')
-#8 /internal/eval.php(20): activate_plugin('mb8wp/mb8wp.php')
-#9 {main}</pre>
- for query SELECT id FROM wp_MB8WP_CONFIG made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mb8wp/mb8wp.php'), mb8wp_isConfig, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[12-Jun-2025 11:01:08 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6121
-[12-Jun-2025 11:01:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT key_id, ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT key_id, ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT key_id, ...')
+#4 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php(23): wpdb->get_row('SELECT key_id, ...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php(89): Chatchamp_API->get_api_key()
+#6 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/messenger-marketing-for-woocommerce.php(42): Chatchamp_API->save()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Messenger_Marketing_For_Woocommerce->activate_plugin(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_messen...', false)
+#11 /internal/eval.php(20): activate_plugin('messenger-marke...')
+#12 {main}</pre>
+ for query SELECT key_id, user_id, description, permissions, consumer_key, consumer_secret, last_access FROM wp_woocommerce_api_keys WHERE user_id = 1 AND description = 'chatchamp api user' made by activate_plugin, do_action('activate_messenger-marketing-for-woocommerce/messenger-marketing-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, Messenger_Marketing_For_Woocommerce->activate_plugin, Chatchamp_API->save, Chatchamp_API->get_api_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Jun-2025 03:20:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wc_rand_hash() in /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php:28
+Stack trace:
+#0 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php(37): Chatchamp_API->generate_consumer_key()
+#1 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php(92): Chatchamp_API->create_api_key()
+#2 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/messenger-marketing-for-woocommerce.php(42): Chatchamp_API->save()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): Messenger_Marketing_For_Woocommerce->activate_plugin(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_messen...', false)
+#7 /internal/eval.php(20): activate_plugin('messenger-marke...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php on line 28
+[14-Jun-2025 03:20:46 UTC] huhu
+[14-Jun-2025 03:20:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT id FROM wp_MB8WP_CONFIG</p>
+<p>SELECT key_id, user_id, description, permissions, consumer_key, consumer_secret, last_access FROM wp_woocommerce_api_keys WHERE user_id = 1 AND description = 'chatchamp api user'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT `id` FROM `wp_MB8WP_CONFIG` | (no parameters)</li>
+<li>Executing: SELECT `key_id` , `user_id` , `description` , `permissions` , `consumer_key` , `consumer_secret` , `last_access` FROM `wp_woocommerce_api_keys` WHERE `user_id` = 1 AND `description` = 'chatchamp api user' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_MB8WP_CONFIG
+SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_api_keys
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT id FROM ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT id FROM ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT id FROM ...')
-#4 /wordpress/wp-content/plugins/mb8wp/mb8wp.php(373): wpdb->get_results('SELECT id FROM ...')
-#5 /wordpress/wp-content/plugins/mb8wp/mb8wp.php(30): mb8wp_isConfig()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mb8wp/mb8wp.php')
-#8 /internal/eval.php(20): activate_plugin('mb8wp/mb8wp.php')
-#9 {main}</pre>
- for query SELECT id FROM wp_MB8WP_CONFIG made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mb8wp/mb8wp.php'), mb8wp_isConfig, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[12-Jun-2025 11:01:17 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6121
-[12-Jun-2025 11:03:24 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/merch-systems-storefront/../merch-systems/includes/Merchsys_Settings.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/merch-systems-storefront/includes/Merchsys_Store.php on line 2
-[12-Jun-2025 11:03:24 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/merch-systems-storefront/../merch-systems/includes/Merchsys_Settings.php' (include_path='.:') in /wordpress/wp-content/plugins/merch-systems-storefront/includes/Merchsys_Store.php:2
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT key_id, ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT key_id, ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT key_id, ...')
+#4 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php(23): wpdb->get_row('SELECT key_id, ...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php(89): Chatchamp_API->get_api_key()
+#6 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/messenger-marketing-for-woocommerce.php(42): Chatchamp_API->save()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Messenger_Marketing_For_Woocommerce->activate_plugin(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_messen...', false)
+#11 /internal/eval.php(20): activate_plugin('messenger-marke...')
+#12 {main}</pre>
+ for query SELECT key_id, user_id, description, permissions, consumer_key, consumer_secret, last_access FROM wp_woocommerce_api_keys WHERE user_id = 1 AND description = 'chatchamp api user' made by activate_plugin, do_action('activate_messenger-marketing-for-woocommerce/messenger-marketing-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, Messenger_Marketing_For_Woocommerce->activate_plugin, Chatchamp_API->save, Chatchamp_API->get_api_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Jun-2025 03:20:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wc_rand_hash() in /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php:28
 Stack trace:
-#0 /wordpress/wp-content/plugins/merch-systems-storefront/merchsys-store.php(47): require()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('merch-systems-s...')
-#3 /internal/eval.php(20): activate_plugin('merch-systems-s...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/merch-systems-storefront/includes/Merchsys_Store.php on line 2
-[12-Jun-2025 11:03:33 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/merch-systems-storefront/../merch-systems/includes/Merchsys_Settings.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/merch-systems-storefront/includes/Merchsys_Store.php on line 2
-[12-Jun-2025 11:03:33 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/merch-systems-storefront/../merch-systems/includes/Merchsys_Settings.php' (include_path='.:') in /wordpress/wp-content/plugins/merch-systems-storefront/includes/Merchsys_Store.php:2
-Stack trace:
-#0 /wordpress/wp-content/plugins/merch-systems-storefront/merchsys-store.php(47): require()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('merch-systems-s...')
-#3 /internal/eval.php(20): activate_plugin('merch-systems-s...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/merch-systems-storefront/includes/Merchsys_Store.php on line 2
-[12-Jun-2025 11:03:41 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/merch-systems-storefront/../merch-systems/includes/Merchsys_Settings.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/merch-systems-storefront/includes/Merchsys_Store.php on line 2
-[12-Jun-2025 11:03:41 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/merch-systems-storefront/../merch-systems/includes/Merchsys_Settings.php' (include_path='.:') in /wordpress/wp-content/plugins/merch-systems-storefront/includes/Merchsys_Store.php:2
-Stack trace:
-#0 /wordpress/wp-content/plugins/merch-systems-storefront/merchsys-store.php(47): require()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('merch-systems-s...')
-#3 /internal/eval.php(20): activate_plugin('merch-systems-s...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/merch-systems-storefront/includes/Merchsys_Store.php on line 2
-[12-Jun-2025 11:04:42 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 539
-[12-Jun-2025 11:04:42 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 569
-[12-Jun-2025 11:04:42 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 601
-[12-Jun-2025 11:04:42 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 635
-[12-Jun-2025 11:04:42 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 670
-[12-Jun-2025 11:04:42 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 729
-[12-Jun-2025 11:04:42 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 769
-[12-Jun-2025 11:04:52 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 539
-[12-Jun-2025 11:04:52 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 569
-[12-Jun-2025 11:04:52 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 601
-[12-Jun-2025 11:04:52 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 635
-[12-Jun-2025 11:04:52 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 670
-[12-Jun-2025 11:04:52 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 729
-[12-Jun-2025 11:04:52 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 769
-[12-Jun-2025 11:05:02 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 539
-[12-Jun-2025 11:05:02 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 569
-[12-Jun-2025 11:05:02 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 601
-[12-Jun-2025 11:05:02 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 635
-[12-Jun-2025 11:05:02 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 670
-[12-Jun-2025 11:05:02 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 729
-[12-Jun-2025 11:05:02 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 769
+#0 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php(37): Chatchamp_API->generate_consumer_key()
+#1 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php(92): Chatchamp_API->create_api_key()
+#2 /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/messenger-marketing-for-woocommerce.php(42): Chatchamp_API->save()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): Messenger_Marketing_For_Woocommerce->activate_plugin(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_messen...', false)
+#7 /internal/eval.php(20): activate_plugin('messenger-marke...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/messenger-marketing-for-woocommerce/includes/class-chatchamp-api.php on line 28
+[14-Jun-2025 03:21:55 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 539
+[14-Jun-2025 03:21:55 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 569
+[14-Jun-2025 03:21:55 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 601
+[14-Jun-2025 03:21:55 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 635
+[14-Jun-2025 03:21:55 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 670
+[14-Jun-2025 03:21:55 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 729
+[14-Jun-2025 03:21:55 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 769
+[14-Jun-2025 03:22:06 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 539
+[14-Jun-2025 03:22:06 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 569
+[14-Jun-2025 03:22:06 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 601
+[14-Jun-2025 03:22:06 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 635
+[14-Jun-2025 03:22:06 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 670
+[14-Jun-2025 03:22:06 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 729
+[14-Jun-2025 03:22:06 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 769
+[14-Jun-2025 03:22:16 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 539
+[14-Jun-2025 03:22:16 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 569
+[14-Jun-2025 03:22:16 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 601
+[14-Jun-2025 03:22:16 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 635
+[14-Jun-2025 03:22:16 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 670
+[14-Jun-2025 03:22:16 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 729
+[14-Jun-2025 03:22:16 UTC] PHP Deprecated:  Required parameter $metric follows optional parameter $filter in /wordpress/wp-content/plugins/metrics-query/tools/gapi.php on line 769
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:325:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
