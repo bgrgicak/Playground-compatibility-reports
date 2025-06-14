@@ -960,39 +960,15 @@
 | i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
 | i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
 | i-recommend-this | Trying to access array | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
-| javascript-optimization | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jj-nextgen-jquery-carousel/includes/application.php:6 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jj-nextgen-jquery-carousel/includes/application.php:6 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jj-nextgen-jquery-carousel/includes/application.php:6 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [12-Jun-2025 20:52:48 UTC] | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | -------------------------------------- | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | REQUEST: | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [12-Jun-2025 20:52:49 UTC] | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | -------------------------------------- | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | REQUEST: | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [12-Jun-2025 20:52:58 UTC] | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | -------------------------------------- | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | REQUEST: | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [12-Jun-2025 20:52:59 UTC] | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | -------------------------------------- | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | REQUEST: | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [12-Jun-2025 20:53:08 UTC] | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | -------------------------------------- | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | REQUEST: | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | [12-Jun-2025 20:53:09 UTC] | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | -------------------------------------- | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization | REQUEST: | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
-| javascript-optimization |  | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $lang follows optional parameter $content in /wordpress/wp-content/plugins/my-syntax-highlighter/inc/php/functional.php on line 59 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $lang follows optional parameter $content in /wordpress/wp-content/plugins/my-syntax-highlighter/inc/php/functional.php on line 59 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $lang follows optional parameter $content in /wordpress/wp-content/plugins/my-syntax-highlighter/inc/php/functional.php on line 59 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $lang follows optional parameter $content in /wordpress/wp-content/plugins/my-syntax-highlighter/inc/php/functional.php on line 59 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $lang follows optional parameter $content in /wordpress/wp-content/plugins/my-syntax-highlighter/inc/php/functional.php on line 59 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Required parameter $lang follows optional parameter $content in /wordpress/wp-content/plugins/my-syntax-highlighter/inc/php/functional.php on line 59 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>jipink-for-woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>jipink-for-woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
+| javascript-optimization | Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>jipink-for-woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | Private methods cannot be final as they are never overridden by other classes in /wordpress/wp-content/plugins/javascript-optimization/core/controllers/module.php on line 304 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | Private methods cannot be final as they are never overridden by other classes in /wordpress/wp-content/plugins/javascript-optimization/core/controllers/module.php on line 309 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | The magic method O10n\Module::__wakeup() must have public visibility in /wordpress/wp-content/plugins/javascript-optimization/core/controllers/module.php on line 309 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
