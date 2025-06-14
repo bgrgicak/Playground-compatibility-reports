@@ -62,39 +62,6 @@ Backt
     [str] => 
 (
 )
-. | ast-sqlite-boot | offers-for-woocommerce | [View logs](/logs/plugins/o/offers-for-woocommerce/error.json) |
-| Array
-| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | offers-for-woocommerce | [View logs](/logs/plugins/o/offers-for-woocommerce/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | offers-for-woocommerce | [View logs](/logs/plugins/o/offers-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ochregeo_geocoder_cache. | ast-sqlite-boot | offers-for-woocommerce | [View logs](/logs/plugins/o/offers-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | ast-sqlite-boot | offermative-discount-pricing-related-products-upsell-funnels-for-woocommerce | [View logs](/logs/plugins/o/offermative-discount-pricing-related-products-upsell-funnels-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | asyncify-boot | offermative-discount-pricing-related-products-upsell-funnels-for-woocommerce | [View logs](/logs/plugins/o/offermative-discount-pricing-related-products-upsell-funnels-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | jspi-boot | offermative-discount-pricing-related-products-upsell-funnels-for-woocommerce | [View logs](/logs/plugins/o/offermative-discount-pricing-related-products-upsell-funnels-for-woocommerce/error.json) |
-| Unknown create type: table. | ast-sqlite-boot | offermative-discount-pricing-related-products-upsell-funnels-for-woocommerce | [View logs](/logs/plugins/o/offermative-discount-pricing-related-products-upsell-funnels-for-woocommerce/error.json) |
-| Unknown create type: table. | asyncify-boot | offermative-discount-pricing-related-products-upsell-funnels-for-woocommerce | [View logs](/logs/plugins/o/offermative-discount-pricing-related-products-upsell-funnels-for-woocommerce/error.json) |
-| Unknown create type: table. | jspi-boot | offermative-discount-pricing-related-products-upsell-funnels-for-woocommerce | [View logs](/logs/plugins/o/offermative-discount-pricing-related-products-upsell-funnels-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: ap_generated. | ast-sqlite-boot | oer-curriculum | [View logs](/logs/plugins/o/oer-curriculum/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: ap_generated. | asyncify-boot | oer-curriculum | [View logs](/logs/plugins/o/oer-curriculum/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: ap_generated. | jspi-boot | oer-curriculum | [View logs](/logs/plugins/o/oer-curriculum/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge. | ast-sqlite-boot | oer-curriculum | [View logs](/logs/plugins/o/oer-curriculum/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge. | asyncify-boot | oer-curriculum | [View logs](/logs/plugins/o/oer-curriculum/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge. | jspi-boot | oer-curriculum | [View logs](/logs/plugins/o/oer-curriculum/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge_method. | ast-sqlite-boot | oer-curriculum | [View logs](/logs/plugins/o/oer-curriculum/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge_method. | asyncify-boot | oer-curriculum | [View logs](/logs/plugins/o/oer-curriculum/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: code_challenge_method. | jspi-boot | oer-curriculum | [View logs](/logs/plugins/o/oer-curriculum/error.json) |
-| Unknown operation: MODIFY. | ast-sqlite-boot | oer-curriculum | [View logs](/logs/plugins/o/oer-curriculum/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | oer-curriculum | [View logs](/logs/plugins/o/oer-curriculum/error.json) |
-| Unknown operation: MODIFY. | jspi-boot | oer-curriculum | [View logs](/logs/plugins/o/oer-curriculum/error.json) |
-| Unknown show type: KEYS FROM. | ast-sqlite-boot | oer-curriculum | [View logs](/logs/plugins/o/oer-curriculum/error.json) |
-| Unknown show type: KEYS FROM. | asyncify-boot | oer-curriculum | [View logs](/logs/plugins/o/oer-curriculum/error.json) |
-| Unknown show type: KEYS FROM. | jspi-boot | oer-curriculum | [View logs](/logs/plugins/o/oer-curriculum/error.json) |
-    [code] => 0
-    [message] => Ending quote ' was expected.
-    [position] => 44
-    [query] => SHOW TABLES LIKE 'wp_ochregeo_geocoder_cache
-    [str] => 
-(
-)
 . | ast-sqlite-boot | officepress | [View logs](/logs/plugins/o/officepress/error.json) |
 . | asyncify-boot | officepress | [View logs](/logs/plugins/o/officepress/error.json) |
 . | jspi-boot | officepress | [View logs](/logs/plugins/o/officepress/error.json) |
