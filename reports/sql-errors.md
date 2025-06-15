@@ -92,15 +92,6 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | rax-email-subscription-and-social-media-links-after-posts | [View logs](/logs/plugins/r/rax-email-subscription-and-social-media-links-after-posts/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | rax-email-subscription-and-social-media-links-after-posts | [View logs](/logs/plugins/r/rax-email-subscription-and-social-media-links-after-posts/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | rax-email-subscription-and-social-media-links-after-posts | [View logs](/logs/plugins/r/rax-email-subscription-and-social-media-links-after-posts/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | asyncify-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | jspi-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wordpress-helpdesk | [View logs](/logs/plugins/w/wordpress-helpdesk/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wordpress-helpdesk | [View logs](/logs/plugins/w/wordpress-helpdesk/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wordpress-helpdesk | [View logs](/logs/plugins/w/wordpress-helpdesk/error.json) |
