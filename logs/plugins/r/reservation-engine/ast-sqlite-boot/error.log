@@ -2,158 +2,30 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [15-Jun-2025 10:33:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_ReportedLinks
- CHANGE COLUMN `id` id INT NOT NULL AUTO_INCREMENT PRIMARY KEY</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ReportedLinks</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ReportedLinks</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ReportedLinks</li>
-<li>Executing: UPDATE `_wp_sqlite_mysql_information_schema_columns` SET `table_schema` = ?, `table_name` = ?, `column_name` = ?, `column_default` = ?, `is_nullable` = ?, `data_type` = ?, `character_maximum_length` = ?, `character_octet_length` = ?, `numeric_precision` = ?, `numeric_scale` = ?, `datetime_precision` = ?, `character_set_name` = ?, `collation_name` = ?, `column_type` = ?, `column_key` = ?, `extra` = ?, `privileges` = ?, `column_comment` = ?, `generation_expression` = ?, `srs_id` = ? WHERE `table_schema` = ? AND `table_name` = ? AND `column_name` = ? | parameters: database_name_here, wp_ReportedLinks, id, , NO, int, , , 10, 0, , , , int, PRI, auto_increment, select,insert,update,references, , , , database_name_here, wp_ReportedLinks, id</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_ReportedLinks, 0, database_name_here, PRIMARY, 1, id, A, 0, , , , BTREE, , , YES, </li>
-<li>Executing: 
-				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
-				SET (column_key, is_nullable) = (
-					SELECT
-						CASE
-							WHEN MAX(s.index_name = 'PRIMARY') THEN 'PRI'
-							WHEN MAX(s.non_unique = 0 AND s.seq_in_index = 1) THEN 'UNI'
-							WHEN MAX(s.seq_in_index = 1) THEN 'MUL'
-							ELSE ''
-						END,
-						CASE
-							WHEN MAX(s.index_name = 'PRIMARY') THEN 'NO'
-							ELSE c.is_nullable
-						END
-					FROM `_wp_sqlite_mysql_information_schema_statistics` AS s
-					WHERE s.table_schema = c.table_schema
-					AND s.table_name = c.table_name
-					AND s.column_name = c.column_name
-				)
-			    WHERE c.table_schema = ?
-			    AND c.table_name = ?
-			 | parameters: database_name_here, wp_ReportedLinks</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_table_constraints` (`table_schema`, `table_name`, `constraint_schema`, `constraint_name`, `constraint_type`) VALUES (?, ?, ?, ?, ?) | parameters: database_name_here, wp_ReportedLinks, database_name_here, PRIMARY, PRIMARY KEY</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: _wp_sqlite_mysql_information_schema_table_constraints.CONSTRAINT_SCHEMA, _wp_sqlite_mysql_information_schema_table_constraints.TABLE_NAME, _wp_sqlite_mysql_information_schema_table_constraints.CONSTRAINT_TYPE, _wp_sqlite_mysql_information_schema_table_constraints.CONSTRAINT_NAME
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/report-broken-links/ReportBrokenLinks-Core.php(92): dbDelta(Array)
-#5 /wordpress/wp-content/plugins/report-broken-links/ReportBrokenLinks-Core.php(72): RBL_Install(true)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): check_dbv('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query ALTER TABLE wp_ReportedLinks
- CHANGE COLUMN `id` id INT NOT NULL AUTO_INCREMENT PRIMARY KEY made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, check_dbv, RBL_Install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-Jun-2025 10:34:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_ReportedLinks
- CHANGE COLUMN `id` id INT NOT NULL AUTO_INCREMENT PRIMARY KEY</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ReportedLinks</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ReportedLinks</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ReportedLinks</li>
-<li>Executing: UPDATE `_wp_sqlite_mysql_information_schema_columns` SET `table_schema` = ?, `table_name` = ?, `column_name` = ?, `column_default` = ?, `is_nullable` = ?, `data_type` = ?, `character_maximum_length` = ?, `character_octet_length` = ?, `numeric_precision` = ?, `numeric_scale` = ?, `datetime_precision` = ?, `character_set_name` = ?, `collation_name` = ?, `column_type` = ?, `column_key` = ?, `extra` = ?, `privileges` = ?, `column_comment` = ?, `generation_expression` = ?, `srs_id` = ? WHERE `table_schema` = ? AND `table_name` = ? AND `column_name` = ? | parameters: database_name_here, wp_ReportedLinks, id, , NO, int, , , 10, 0, , , , int, PRI, auto_increment, select,insert,update,references, , , , database_name_here, wp_ReportedLinks, id</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_ReportedLinks, 0, database_name_here, PRIMARY, 1, id, A, 0, , , , BTREE, , , YES, </li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: _wp_sqlite_mysql_information_schema_statistics.INDEX_SCHEMA, _wp_sqlite_mysql_information_schema_statistics.TABLE_NAME, _wp_sqlite_mysql_information_schema_statistics.INDEX_NAME, _wp_sqlite_mysql_information_schema_statistics.SEQ_IN_INDEX
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/report-broken-links/ReportBrokenLinks-Core.php(92): dbDelta(Array)
-#5 /wordpress/wp-content/plugins/report-broken-links/ReportBrokenLinks-Core.php(72): RBL_Install(true)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): check_dbv('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query ALTER TABLE wp_ReportedLinks
- CHANGE COLUMN `id` id INT NOT NULL AUTO_INCREMENT PRIMARY KEY made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, check_dbv, RBL_Install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-Jun-2025 10:34:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_ReportedLinks
- CHANGE COLUMN `id` id INT NOT NULL AUTO_INCREMENT PRIMARY KEY</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ReportedLinks</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ReportedLinks</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ReportedLinks</li>
-<li>Executing: UPDATE `_wp_sqlite_mysql_information_schema_columns` SET `table_schema` = ?, `table_name` = ?, `column_name` = ?, `column_default` = ?, `is_nullable` = ?, `data_type` = ?, `character_maximum_length` = ?, `character_octet_length` = ?, `numeric_precision` = ?, `numeric_scale` = ?, `datetime_precision` = ?, `character_set_name` = ?, `collation_name` = ?, `column_type` = ?, `column_key` = ?, `extra` = ?, `privileges` = ?, `column_comment` = ?, `generation_expression` = ?, `srs_id` = ? WHERE `table_schema` = ? AND `table_name` = ? AND `column_name` = ? | parameters: database_name_here, wp_ReportedLinks, id, , NO, int, , , 10, 0, , , , int, PRI, auto_increment, select,insert,update,references, , , , database_name_here, wp_ReportedLinks, id</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_ReportedLinks, 0, database_name_here, PRIMARY, 1, id, A, 0, , , , BTREE, , , YES, </li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: _wp_sqlite_mysql_information_schema_statistics.INDEX_SCHEMA, _wp_sqlite_mysql_information_schema_statistics.TABLE_NAME, _wp_sqlite_mysql_information_schema_statistics.INDEX_NAME, _wp_sqlite_mysql_information_schema_statistics.SEQ_IN_INDEX
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/report-broken-links/ReportBrokenLinks-Core.php(92): dbDelta(Array)
-#5 /wordpress/wp-content/plugins/report-broken-links/ReportBrokenLinks-Core.php(72): RBL_Install(true)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): check_dbv('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query ALTER TABLE wp_ReportedLinks
- CHANGE COLUMN `id` id INT NOT NULL AUTO_INCREMENT PRIMARY KEY made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, check_dbv, RBL_Install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-Jun-2025 10:34:29 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 809
-[15-Jun-2025 10:34:29 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 864
-[15-Jun-2025 10:34:29 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 809
-[15-Jun-2025 10:34:29 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 864
-[15-Jun-2025 10:34:29 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 809
-[15-Jun-2025 10:34:29 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 864
-[15-Jun-2025 10:34:29 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 809
-[15-Jun-2025 10:34:29 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 864
-[15-Jun-2025 10:34:29 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 809
-[15-Jun-2025 10:34:29 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 864
-[15-Jun-2025 10:34:29 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 809
-[15-Jun-2025 10:34:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/reservation-engine/vendor/getherbert/framework/bootstrap/autoload.php:72
+Error: [15-Jun-2025 10:31:11 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 10:31:20 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 10:31:30 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 10:32:03 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 10:32:41 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 10:33:21 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 10:36:34 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/related-posts/lib/stemmer.php on line 388
+[15-Jun-2025 10:36:43 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/related-posts/lib/stemmer.php on line 388
+[15-Jun-2025 10:36:51 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/related-posts/lib/stemmer.php on line 388
+[15-Jun-2025 10:37:02 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>remove_dashboard_access</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 10:37:12 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>remove_dashboard_access</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 10:37:22 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>remove_dashboard_access</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 10:39:01 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 809
+[15-Jun-2025 10:39:02 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 864
+[15-Jun-2025 10:39:02 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 809
+[15-Jun-2025 10:39:02 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 864
+[15-Jun-2025 10:39:02 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 809
+[15-Jun-2025 10:39:02 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 864
+[15-Jun-2025 10:39:02 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 809
+[15-Jun-2025 10:39:02 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 864
+[15-Jun-2025 10:39:02 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 809
+[15-Jun-2025 10:39:02 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 864
+[15-Jun-2025 10:39:02 UTC] PHP Deprecated:  Method ReflectionParameter::getClass() is deprecated in /wordpress/wp-content/plugins/reservation-engine/vendor/illuminate/container/Container.php on line 809
+[15-Jun-2025 10:39:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/reservation-engine/vendor/getherbert/framework/bootstrap/autoload.php:72
 Stack trace:
 #0 /wordpress/wp-content/plugins/reservation-engine/plugin.php(16): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -185,7 +57,7 @@ Stack trace:
         httpStatusCode: 500,
         headers: {
           'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'set-cookie': [ 'PHPSESSID=c0edb895d4470e8d24f04716d93653ec; path=/' ],
+          'set-cookie': [ 'PHPSESSID=b3ac167c3c48abb0af8c2957f0ae7d87; path=/' ],
           'content-type': [ 'text/html; charset=UTF-8' ]
         },
         bytes: Uint8Array(0) [],
