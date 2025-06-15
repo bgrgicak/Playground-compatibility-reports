@@ -2,31 +2,178 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [13-Jun-2025 17:33:55 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method RequestAccess::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_reques...', false)
-#3 /internal/eval.php(20): activate_plugin('request-access/...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[13-Jun-2025 17:34:02 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method RequestAccess::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_reques...', false)
-#3 /internal/eval.php(20): activate_plugin('request-access/...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[13-Jun-2025 17:34:11 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method RequestAccess::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_reques...', false)
-#3 /internal/eval.php(20): activate_plugin('request-access/...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[13-Jun-2025 17:35:14 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Error: [15-Jun-2025 10:53:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELIMITER $$\r\nD...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELIMITER $$\r\nD...')
+#3 /wordpress/wp-content/plugins/quizlord/quizlord.php(128): WP_SQLite_DB->query('DELIMITER $$\r\nD...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ql_create_database(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quizlo...', false)
+#8 /internal/eval.php(20): activate_plugin('quizlord/quizlo...')
+#9 {main}</pre>
+ for query DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ; made by activate_plugin, do_action('activate_quizlord/quizlord.php'), WP_Hook->do_action, WP_Hook->apply_filters, ql_create_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[15-Jun-2025 10:53:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELIMITER $$\r\nD...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELIMITER $$\r\nD...')
+#3 /wordpress/wp-content/plugins/quizlord/quizlord.php(128): WP_SQLite_DB->query('DELIMITER $$\r\nD...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ql_create_database(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quizlo...', false)
+#8 /internal/eval.php(20): activate_plugin('quizlord/quizlo...')
+#9 {main}</pre>
+ for query DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ; made by activate_plugin, do_action('activate_quizlord/quizlord.php'), WP_Hook->do_action, WP_Hook->apply_filters, ql_create_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[15-Jun-2025 10:54:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELIMITER $$\r\nD...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELIMITER $$\r\nD...')
+#3 /wordpress/wp-content/plugins/quizlord/quizlord.php(128): WP_SQLite_DB->query('DELIMITER $$\r\nD...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ql_create_database(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quizlo...', false)
+#8 /internal/eval.php(20): activate_plugin('quizlord/quizlo...')
+#9 {main}</pre>
+ for query DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ; made by activate_plugin, do_action('activate_quizlord/quizlord.php'), WP_Hook->do_action, WP_Hook->apply_filters, ql_create_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[15-Jun-2025 10:54:13 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('pcfct_Widget')
@@ -44,7 +191,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[13-Jun-2025 17:35:23 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[15-Jun-2025 10:54:21 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('pcfct_Widget')

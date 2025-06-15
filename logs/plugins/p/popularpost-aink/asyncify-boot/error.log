@@ -2,48 +2,183 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [13-Jun-2025 17:51:14 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/rsb-payment/rsb-payment.php:84
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): russtandartbankpayment_gateway_class('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/rsb-payment/rsb-payment.php on line 84
-[13-Jun-2025 17:51:24 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/rsb-payment/rsb-payment.php:84
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): russtandartbankpayment_gateway_class('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/rsb-payment/rsb-payment.php on line 84
-[13-Jun-2025 17:51:33 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/rsb-payment/rsb-payment.php:84
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): russtandartbankpayment_gateway_class('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/rsb-payment/rsb-payment.php on line 84
-[13-Jun-2025 17:52:30 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>rps-image-gallery</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[13-Jun-2025 17:52:39 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>rps-image-gallery</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[13-Jun-2025 17:52:49 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>rps-image-gallery</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[13-Jun-2025 17:53:00 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Error: [15-Jun-2025 10:53:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELIMITER $$\r\nD...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELIMITER $$\r\nD...')
+#3 /wordpress/wp-content/plugins/quizlord/quizlord.php(128): WP_SQLite_DB->query('DELIMITER $$\r\nD...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ql_create_database(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quizlo...', false)
+#8 /internal/eval.php(20): activate_plugin('quizlord/quizlo...')
+#9 {main}</pre>
+ for query DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ; made by activate_plugin, do_action('activate_quizlord/quizlord.php'), WP_Hook->do_action, WP_Hook->apply_filters, ql_create_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[15-Jun-2025 10:53:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELIMITER $$\r\nD...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELIMITER $$\r\nD...')
+#3 /wordpress/wp-content/plugins/quizlord/quizlord.php(128): WP_SQLite_DB->query('DELIMITER $$\r\nD...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ql_create_database(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quizlo...', false)
+#8 /internal/eval.php(20): activate_plugin('quizlord/quizlo...')
+#9 {main}</pre>
+ for query DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ; made by activate_plugin, do_action('activate_quizlord/quizlord.php'), WP_Hook->do_action, WP_Hook->apply_filters, ql_create_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[15-Jun-2025 10:54:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DELIMITER $$\r\nD...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DELIMITER $$\r\nD...')
+#3 /wordpress/wp-content/plugins/quizlord/quizlord.php(128): WP_SQLite_DB->query('DELIMITER $$\r\nD...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ql_create_database(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quizlo...', false)
+#8 /internal/eval.php(20): activate_plugin('quizlord/quizlo...')
+#9 {main}</pre>
+ for query DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ; made by activate_plugin, do_action('activate_quizlord/quizlord.php'), WP_Hook->do_action, WP_Hook->apply_filters, ql_create_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[15-Jun-2025 10:54:13 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('RSSPhotoWidget')
-#2 /wordpress/wp-content/plugins/rssphoto/rssphoto.php(45): register_widget('RSSPhotoWidget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): RSSPhotoWidgetInit('')
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('pcfct_Widget')
+#2 /wordpress/wp-content/plugins/pcf-thanksgiving-countdown/core/pcfct-widget.php(3): register_widget('pcfct_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): pcfct_register_widgets('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
@@ -56,12 +191,12 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[13-Jun-2025 17:53:09 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[15-Jun-2025 10:54:21 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('RSSPhotoWidget')
-#2 /wordpress/wp-content/plugins/rssphoto/rssphoto.php(45): register_widget('RSSPhotoWidget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): RSSPhotoWidgetInit('')
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('pcfct_Widget')
+#2 /wordpress/wp-content/plugins/pcf-thanksgiving-countdown/core/pcfct-widget.php(3): register_widget('pcfct_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): pcfct_register_widgets('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
@@ -74,12 +209,12 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[13-Jun-2025 17:53:18 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[15-Jun-2025 10:54:30 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('RSSPhotoWidget')
-#2 /wordpress/wp-content/plugins/rssphoto/rssphoto.php(45): register_widget('RSSPhotoWidget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): RSSPhotoWidgetInit('')
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('pcfct_Widget')
+#2 /wordpress/wp-content/plugins/pcf-thanksgiving-countdown/core/pcfct-widget.php(3): register_widget('pcfct_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): pcfct_register_widgets('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
@@ -92,19 +227,76 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[13-Jun-2025 17:53:28 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/perfect-lazy-loading/lib/apf/factory/admin_page/AdminPageFramework.php on line 374
-[13-Jun-2025 17:53:29 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/perfect-lazy-loading/frontend/class-pll-frontend.php on line 14
-[13-Jun-2025 17:53:38 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/perfect-lazy-loading/lib/apf/factory/admin_page/AdminPageFramework.php on line 374
-[13-Jun-2025 17:53:39 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/perfect-lazy-loading/frontend/class-pll-frontend.php on line 14
-[13-Jun-2025 17:53:48 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/perfect-lazy-loading/lib/apf/factory/admin_page/AdminPageFramework.php on line 374
-[13-Jun-2025 17:53:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/perfect-lazy-loading/frontend/class-pll-frontend.php on line 14
-[13-Jun-2025 17:57:10 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[13-Jun-2025 17:57:11 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[13-Jun-2025 17:57:18 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[13-Jun-2025 17:57:19 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[13-Jun-2025 17:57:28 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[13-Jun-2025 17:57:29 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[13-Jun-2025 17:58:07 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "privacy_policy_activate" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+[15-Jun-2025 10:56:03 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/rsb-payment/rsb-payment.php:84
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): russtandartbankpayment_gateway_class('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/rsb-payment/rsb-payment.php on line 84
+[15-Jun-2025 10:56:13 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/rsb-payment/rsb-payment.php:84
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): russtandartbankpayment_gateway_class('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/rsb-payment/rsb-payment.php on line 84
+[15-Jun-2025 10:56:22 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/rsb-payment/rsb-payment.php:84
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): russtandartbankpayment_gateway_class('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/rsb-payment/rsb-payment.php on line 84
+[15-Jun-2025 10:57:00 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/perfect-lazy-loading/lib/apf/factory/admin_page/AdminPageFramework.php on line 374
+[15-Jun-2025 10:57:01 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/perfect-lazy-loading/frontend/class-pll-frontend.php on line 14
+[15-Jun-2025 10:57:09 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/perfect-lazy-loading/lib/apf/factory/admin_page/AdminPageFramework.php on line 374
+[15-Jun-2025 10:57:11 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/perfect-lazy-loading/frontend/class-pll-frontend.php on line 14
+[15-Jun-2025 10:57:18 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/perfect-lazy-loading/lib/apf/factory/admin_page/AdminPageFramework.php on line 374
+[15-Jun-2025 10:57:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/perfect-lazy-loading/frontend/class-pll-frontend.php on line 14
+[15-Jun-2025 10:57:58 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 10:58:07 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 10:58:16 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 11:00:20 UTC] PHP Warning:  Undefined array key "pg_post_action" in /wordpress/wp-content/plugins/plugins-genius/plugins-genius.php on line 82
+[15-Jun-2025 11:00:20 UTC] PHP Fatal error:  Uncaught Error: Non-static method PluginsGenius::wp_get_active_and_valid_genius_plugins() cannot be called statically in /wordpress/wp-content/plugins/plugins-genius/plugins-genius.php:92
+Stack trace:
+#0 /wordpress/wp-content/plugins/plugins-genius/plugins-genius.php(34): PluginsGenius::active_plugins(true)
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('plugins-genius/...')
+#3 /internal/eval.php(20): activate_plugin('plugins-genius/...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/plugins-genius/plugins-genius.php on line 92
+[15-Jun-2025 11:00:28 UTC] PHP Warning:  Undefined array key "pg_post_action" in /wordpress/wp-content/plugins/plugins-genius/plugins-genius.php on line 82
+[15-Jun-2025 11:00:28 UTC] PHP Fatal error:  Uncaught Error: Non-static method PluginsGenius::wp_get_active_and_valid_genius_plugins() cannot be called statically in /wordpress/wp-content/plugins/plugins-genius/plugins-genius.php:92
+Stack trace:
+#0 /wordpress/wp-content/plugins/plugins-genius/plugins-genius.php(34): PluginsGenius::active_plugins(true)
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('plugins-genius/...')
+#3 /internal/eval.php(20): activate_plugin('plugins-genius/...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/plugins-genius/plugins-genius.php on line 92
+[15-Jun-2025 11:00:37 UTC] PHP Warning:  Undefined array key "pg_post_action" in /wordpress/wp-content/plugins/plugins-genius/plugins-genius.php on line 82
+[15-Jun-2025 11:00:37 UTC] PHP Fatal error:  Uncaught Error: Non-static method PluginsGenius::wp_get_active_and_valid_genius_plugins() cannot be called statically in /wordpress/wp-content/plugins/plugins-genius/plugins-genius.php:92
+Stack trace:
+#0 /wordpress/wp-content/plugins/plugins-genius/plugins-genius.php(34): PluginsGenius::active_plugins(true)
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('plugins-genius/...')
+#3 /internal/eval.php(20): activate_plugin('plugins-genius/...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/plugins-genius/plugins-genius.php on line 92
+[15-Jun-2025 11:01:46 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "privacy_policy_activate" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
@@ -112,7 +304,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('policy-genius/p...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[13-Jun-2025 17:58:15 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "privacy_policy_activate" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+[15-Jun-2025 11:01:55 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "privacy_policy_activate" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
@@ -120,7 +312,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('policy-genius/p...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[13-Jun-2025 17:58:24 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "privacy_policy_activate" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+[15-Jun-2025 11:02:03 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "privacy_policy_activate" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
@@ -128,7 +320,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('policy-genius/p...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[13-Jun-2025 17:58:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[15-Jun-2025 11:02:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>CREATE TABLE IF NOT EXISTS wp_popbot_analytics (
@@ -165,7 +357,7 @@ Failed to parse the MySQL query.
             post_id bigint(20) NOT NULL,
             PRIMARY KEY  (id)
         ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_popbot/popbot.php'), WP_Hook->do_action, WP_Hook->apply_filters, popbot\Popbot_Plugin::activate, popbot\Popbot_Analytics::create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[13-Jun-2025 17:58:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[15-Jun-2025 11:02:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>CREATE TABLE IF NOT EXISTS wp_popbot_analytics (
@@ -202,7 +394,7 @@ Failed to parse the MySQL query.
             post_id bigint(20) NOT NULL,
             PRIMARY KEY  (id)
         ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_popbot/popbot.php'), WP_Hook->do_action, WP_Hook->apply_filters, popbot\Popbot_Plugin::activate, popbot\Popbot_Analytics::create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[13-Jun-2025 17:58:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[15-Jun-2025 11:02:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>CREATE TABLE IF NOT EXISTS wp_popbot_analytics (
@@ -239,9 +431,9 @@ Failed to parse the MySQL query.
             post_id bigint(20) NOT NULL,
             PRIMARY KEY  (id)
         ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_popbot/popbot.php'), WP_Hook->do_action, WP_Hook->apply_filters, popbot\Popbot_Plugin::activate, popbot\Popbot_Analytics::create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[13-Jun-2025 17:59:05 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[13-Jun-2025 17:59:07 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[13-Jun-2025 17:59:07 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[15-Jun-2025 11:02:43 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 11:02:44 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 11:02:44 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('PopularPostAink')
@@ -255,9 +447,9 @@ Stack trace:
 #9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #10 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[13-Jun-2025 17:59:15 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[13-Jun-2025 17:59:16 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[13-Jun-2025 17:59:16 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[15-Jun-2025 11:02:52 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 11:02:53 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
+[15-Jun-2025 11:02:53 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('PopularPostAink')
