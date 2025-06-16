@@ -2,13 +2,7 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [15-Jun-2025 13:50:22 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/buzz-roll/buzzroll.php on line 44
-[15-Jun-2025 13:50:23 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/buzz-roll/buzzroll.php on line 44
-[15-Jun-2025 13:50:31 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/buzz-roll/buzzroll.php on line 44
-[15-Jun-2025 13:50:32 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/buzz-roll/buzzroll.php on line 44
-[15-Jun-2025 13:50:41 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/buzz-roll/buzzroll.php on line 44
-[15-Jun-2025 13:50:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/buzz-roll/buzzroll.php on line 44
-[15-Jun-2025 13:51:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [16-Jun-2025 23:30:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>CREATE TABLE IF NOT EXISTS`wp_acym_mail` (
@@ -234,7 +228,7 @@ FOREIGN KEY and CHECK constraints are not supported yet.
 )
 	ENGINE = InnoDB
 	/*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci*/; made by activate_plugin, do_action('activate_acymailing/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, acymailingLoader->activation, AcyMailing\WpInit\Activation->install, AcyMailing\WpInit\Activation->_sampledata, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-Jun-2025 13:51:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[16-Jun-2025 23:30:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>CREATE TABLE IF NOT EXISTS`wp_acym_list` (
@@ -446,7 +440,7 @@ FOREIGN KEY and CHECK constraints are not supported yet.
 )
 	ENGINE = InnoDB
 	/*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci*/; made by activate_plugin, do_action('activate_acymailing/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, acymailingLoader->activation, AcyMailing\WpInit\Activation->install, AcyMailing\WpInit\Activation->_sampledata, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-Jun-2025 13:51:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[16-Jun-2025 23:30:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>CREATE TABLE IF NOT EXISTS`wp_acym_campaign` (
@@ -521,4 +515,17 @@ FOREIGN KEY and CHECK constraints are not supported yet.
 			    AND c.table_name = ?
 			 | parameters: database_name_here, wp_acym_campaign</li>
 <li>Executing: 
-					SELECT column_name, data_type, is_nullab
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_acym_campaign, mail_id</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_acym_campaign, 1, database_name_here, wp_index_acym_campaign_has_mail1, 1, mail_id, A, 0, , , YES, BTREE, , , YES, </li>
+<li>Executing: 
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET (column_key, is_nullable) = (
+					SELECT
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'PRI'
+		
