@@ -89,9 +89,6 @@
 | SQLSTATE[HY000]: General error: 1 no such column: SECOND. | jspi-boot | presstrends | [View logs](/logs/plugins/p/presstrends/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: DAYNAME. | asyncify-boot | presstrends | [View logs](/logs/plugins/p/presstrends/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: DAYNAME. | jspi-boot | presstrends | [View logs](/logs/plugins/p/presstrends/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | rax-email-subscription-and-social-media-links-after-posts | [View logs](/logs/plugins/r/rax-email-subscription-and-social-media-links-after-posts/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | rax-email-subscription-and-social-media-links-after-posts | [View logs](/logs/plugins/r/rax-email-subscription-and-social-media-links-after-posts/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | rax-email-subscription-and-social-media-links-after-posts | [View logs](/logs/plugins/r/rax-email-subscription-and-social-media-links-after-posts/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wc-payflexi-savings | [View logs](/logs/plugins/w/wc-payflexi-savings/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wc-payflexi-savings | [View logs](/logs/plugins/w/wc-payflexi-savings/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wc-payflexi-savings | [View logs](/logs/plugins/w/wc-payflexi-savings/error.json) |
