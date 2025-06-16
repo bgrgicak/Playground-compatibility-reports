@@ -2,30 +2,282 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [14-Jun-2025 19:48:41 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[14-Jun-2025 19:48:50 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[14-Jun-2025 19:48:59 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[14-Jun-2025 19:49:09 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wiredrive-player/player.php:91
+Error: [16-Jun-2025 13:19:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_wpgmza` (map_id,address,description,pic,link,icon,lat,lng,anim,title,infoopen,category,approved,retina,type,did,sticky,other_data,latlng,layergroup) VALUES (1,'California','','','','','36.778261','-119.4179323999','','','','',1,0,0,'',0,'',GeomFromText('POINT(36.778261 -119.4179323999)'),0)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpgmza</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wpgmza</li>
+<li>Executing: INSERT INTO `wp_wpgmza` (`map_id`, `address`, `description`, `pic`, `link`, `icon`, `lat`, `lng`, `anim`, `title`, `infoopen`, `category`, `approved`, `retina`, `type`, `did`, `sticky`, `other_data`, `latlng`, `layergroup`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, CAST(`column4` AS TEXT) AS `column4`, CAST(`column5` AS TEXT) AS `column5`, CAST(`column6` AS TEXT) AS `column6`, CAST(`column7` AS TEXT) AS `column7`, CAST(`column8` AS TEXT) AS `column8`, CAST(`column9` AS TEXT) AS `column9`, CAST(`column10` AS TEXT) AS `column10`, CAST(`column11` AS TEXT) AS `column11`, CAST(`column12` AS TEXT) AS `column12`, CAST(`column13` AS INTEGER) AS `column13`, CAST(`column14` AS INTEGER) AS `column14`, CAST(`column15` AS INTEGER) AS `column15`, CAST(`column16` AS TEXT) AS `column16`, CAST(`column17` AS INTEGER) AS `column17`, CAST(`column18` AS TEXT) AS `column18`, CAST(`column19` AS TEXT) AS `column19`, CAST(`column20` AS INTEGER) AS `column20` FROM (VALUES ( 1 , 'California' , '' , '' , '' , '' , '36.778261' , '-119.4179323999' , '' , '' , '' , '' , 1 , 0 , 0 , '' , 0 , '' , `GeomFromText` ( 'POINT(36.778261 -119.4179323999)' ) , 0 )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such function: GeomFromText
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-content/plugins/wp-google-maps/includes/class.crud.php(386): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/wp-google-maps/includes/class.crud.php(81): WPGMZA\Crud->create()
+#5 /wordpress/wp-content/plugins/wp-google-maps/includes/class.marker.php(29): WPGMZA\Crud->__construct('wp_wpgmza', Array, 'single-read')
+#6 [internal function]: WPGMZA\Marker->__construct(Array)
+#7 /wordpress/wp-content/plugins/wp-google-maps/includes/class.factory.php(58): ReflectionClass->newInstanceArgs(Array)
+#8 /wordpress/wp-content/plugins/wp-google-maps/includes/class.database.php(327): WPGMZA\Factory::createInstance(Array)
+#9 /wordpress/wp-content/plugins/wp-google-maps/includes/class.plugin.php(335): WPGMZA\Database->onFirstRun()
+#10 /wordpress/wp-content/plugins/wp-google-maps/includes/class.plugin.php(276): WPGMZA\Plugin->onFirstRun()
+#11 /wordpress/wp-content/plugins/wp-google-maps/includes/class.plugin.php(1247): WPGMZA\Plugin->onActivated()
+#12 /wordpress/wp-includes/class-wp-hook.php(324): WPGMZA\{closure}(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-goo...', false)
+#16 /internal/eval.php(20): activate_plugin('wp-google-maps/...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_wpgmza` (map_id,address,description,pic,link,icon,lat,lng,anim,title,infoopen,category,approved,retina,type,did,sticky,other_data,latlng,layergroup) VALUES (1,'California','','','','','36.778261','-119.4179323999','','','','',1,0,0,'',0,'',GeomFromText('POINT(36.778261 -119.4179323999)'),0) made by activate_plugin, do_action('activate_wp-google-maps/wpGoogleMaps.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPGMZA\{closure}, WPGMZA\Plugin->onActivated, WPGMZA\Plugin->onFirstRun, WPGMZA\Database->onFirstRun, WPGMZA\Factory::createInstance, ReflectionClass->newInstanceArgs, WPGMZA\Marker->__construct, WPGMZA\Crud->__construct, WPGMZA\Crud->create, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 13:19:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_wpgmza` (map_id,address,description,pic,link,icon,lat,lng,anim,title,infoopen,category,approved,retina,type,did,sticky,other_data,latlng,layergroup) VALUES (1,'California','','','','','36.778261','-119.4179323999','','','','',1,0,0,'',0,'',GeomFromText('POINT(36.778261 -119.4179323999)'),0)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpgmza</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wpgmza</li>
+<li>Executing: INSERT INTO `wp_wpgmza` (`map_id`, `address`, `description`, `pic`, `link`, `icon`, `lat`, `lng`, `anim`, `title`, `infoopen`, `category`, `approved`, `retina`, `type`, `did`, `sticky`, `other_data`, `latlng`, `layergroup`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, CAST(`column4` AS TEXT) AS `column4`, CAST(`column5` AS TEXT) AS `column5`, CAST(`column6` AS TEXT) AS `column6`, CAST(`column7` AS TEXT) AS `column7`, CAST(`column8` AS TEXT) AS `column8`, CAST(`column9` AS TEXT) AS `column9`, CAST(`column10` AS TEXT) AS `column10`, CAST(`column11` AS TEXT) AS `column11`, CAST(`column12` AS TEXT) AS `column12`, CAST(`column13` AS INTEGER) AS `column13`, CAST(`column14` AS INTEGER) AS `column14`, CAST(`column15` AS INTEGER) AS `column15`, CAST(`column16` AS TEXT) AS `column16`, CAST(`column17` AS INTEGER) AS `column17`, CAST(`column18` AS TEXT) AS `column18`, CAST(`column19` AS TEXT) AS `column19`, CAST(`column20` AS INTEGER) AS `column20` FROM (VALUES ( 1 , 'California' , '' , '' , '' , '' , '36.778261' , '-119.4179323999' , '' , '' , '' , '' , 1 , 0 , 0 , '' , 0 , '' , `GeomFromText` ( 'POINT(36.778261 -119.4179323999)' ) , 0 )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such function: GeomFromText
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-content/plugins/wp-google-maps/includes/class.crud.php(386): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/wp-google-maps/includes/class.crud.php(81): WPGMZA\Crud->create()
+#5 /wordpress/wp-content/plugins/wp-google-maps/includes/class.marker.php(29): WPGMZA\Crud->__construct('wp_wpgmza', Array, 'single-read')
+#6 [internal function]: WPGMZA\Marker->__construct(Array)
+#7 /wordpress/wp-content/plugins/wp-google-maps/includes/class.factory.php(58): ReflectionClass->newInstanceArgs(Array)
+#8 /wordpress/wp-content/plugins/wp-google-maps/includes/class.database.php(327): WPGMZA\Factory::createInstance(Array)
+#9 /wordpress/wp-content/plugins/wp-google-maps/includes/class.plugin.php(335): WPGMZA\Database->onFirstRun()
+#10 /wordpress/wp-content/plugins/wp-google-maps/includes/class.plugin.php(276): WPGMZA\Plugin->onFirstRun()
+#11 /wordpress/wp-content/plugins/wp-google-maps/includes/class.plugin.php(1247): WPGMZA\Plugin->onActivated()
+#12 /wordpress/wp-includes/class-wp-hook.php(324): WPGMZA\{closure}(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-goo...', false)
+#16 /internal/eval.php(20): activate_plugin('wp-google-maps/...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_wpgmza` (map_id,address,description,pic,link,icon,lat,lng,anim,title,infoopen,category,approved,retina,type,did,sticky,other_data,latlng,layergroup) VALUES (1,'California','','','','','36.778261','-119.4179323999','','','','',1,0,0,'',0,'',GeomFromText('POINT(36.778261 -119.4179323999)'),0) made by activate_plugin, do_action('activate_wp-google-maps/wpGoogleMaps.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPGMZA\{closure}, WPGMZA\Plugin->onActivated, WPGMZA\Plugin->onFirstRun, WPGMZA\Database->onFirstRun, WPGMZA\Factory::createInstance, ReflectionClass->newInstanceArgs, WPGMZA\Marker->__construct, WPGMZA\Crud->__construct, WPGMZA\Crud->create, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 13:19:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_wpgmza` (map_id,address,description,pic,link,icon,lat,lng,anim,title,infoopen,category,approved,retina,type,did,sticky,other_data,latlng,layergroup) VALUES (1,'California','','','','','36.778261','-119.4179323999','','','','',1,0,0,'',0,'',GeomFromText('POINT(36.778261 -119.4179323999)'),0)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpgmza</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wpgmza</li>
+<li>Executing: INSERT INTO `wp_wpgmza` (`map_id`, `address`, `description`, `pic`, `link`, `icon`, `lat`, `lng`, `anim`, `title`, `infoopen`, `category`, `approved`, `retina`, `type`, `did`, `sticky`, `other_data`, `latlng`, `layergroup`) SELECT CAST(`column1` AS INTEGER) AS `column1`, CAST(`column2` AS TEXT) AS `column2`, CAST(`column3` AS TEXT) AS `column3`, CAST(`column4` AS TEXT) AS `column4`, CAST(`column5` AS TEXT) AS `column5`, CAST(`column6` AS TEXT) AS `column6`, CAST(`column7` AS TEXT) AS `column7`, CAST(`column8` AS TEXT) AS `column8`, CAST(`column9` AS TEXT) AS `column9`, CAST(`column10` AS TEXT) AS `column10`, CAST(`column11` AS TEXT) AS `column11`, CAST(`column12` AS TEXT) AS `column12`, CAST(`column13` AS INTEGER) AS `column13`, CAST(`column14` AS INTEGER) AS `column14`, CAST(`column15` AS INTEGER) AS `column15`, CAST(`column16` AS TEXT) AS `column16`, CAST(`column17` AS INTEGER) AS `column17`, CAST(`column18` AS TEXT) AS `column18`, CAST(`column19` AS TEXT) AS `column19`, CAST(`column20` AS INTEGER) AS `column20` FROM (VALUES ( 1 , 'California' , '' , '' , '' , '' , '36.778261' , '-119.4179323999' , '' , '' , '' , '' , 1 , 0 , 0 , '' , 0 , '' , `GeomFromText` ( 'POINT(36.778261 -119.4179323999)' ) , 0 )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such function: GeomFromText
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-content/plugins/wp-google-maps/includes/class.crud.php(386): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/wp-google-maps/includes/class.crud.php(81): WPGMZA\Crud->create()
+#5 /wordpress/wp-content/plugins/wp-google-maps/includes/class.marker.php(29): WPGMZA\Crud->__construct('wp_wpgmza', Array, 'single-read')
+#6 [internal function]: WPGMZA\Marker->__construct(Array)
+#7 /wordpress/wp-content/plugins/wp-google-maps/includes/class.factory.php(58): ReflectionClass->newInstanceArgs(Array)
+#8 /wordpress/wp-content/plugins/wp-google-maps/includes/class.database.php(327): WPGMZA\Factory::createInstance(Array)
+#9 /wordpress/wp-content/plugins/wp-google-maps/includes/class.plugin.php(335): WPGMZA\Database->onFirstRun()
+#10 /wordpress/wp-content/plugins/wp-google-maps/includes/class.plugin.php(276): WPGMZA\Plugin->onFirstRun()
+#11 /wordpress/wp-content/plugins/wp-google-maps/includes/class.plugin.php(1247): WPGMZA\Plugin->onActivated()
+#12 /wordpress/wp-includes/class-wp-hook.php(324): WPGMZA\{closure}(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-goo...', false)
+#16 /internal/eval.php(20): activate_plugin('wp-google-maps/...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_wpgmza` (map_id,address,description,pic,link,icon,lat,lng,anim,title,infoopen,category,approved,retina,type,did,sticky,other_data,latlng,layergroup) VALUES (1,'California','','','','','36.778261','-119.4179323999','','','','',1,0,0,'',0,'',GeomFromText('POINT(36.778261 -119.4179323999)'),0) made by activate_plugin, do_action('activate_wp-google-maps/wpGoogleMaps.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPGMZA\{closure}, WPGMZA\Plugin->onActivated, WPGMZA\Plugin->onFirstRun, WPGMZA\Database->onFirstRun, WPGMZA\Factory::createInstance, ReflectionClass->newInstanceArgs, WPGMZA\Marker->__construct, WPGMZA\Crud->__construct, WPGMZA\Crud->create, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 13:21:25 UTC] PHP Notice:  Accessing static property WP_Malscart::$sections as non static in /wordpress/wp-content/plugins/wp-mals-cart/classes/WP_Malscart.php on line 84
+[16-Jun-2025 13:21:25 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/wp-mals-cart/classes/MasterWidget.php on line 186
+[16-Jun-2025 13:21:33 UTC] PHP Notice:  Accessing static property WP_Malscart::$sections as non static in /wordpress/wp-content/plugins/wp-mals-cart/classes/WP_Malscart.php on line 84
+[16-Jun-2025 13:21:33 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/wp-mals-cart/classes/MasterWidget.php on line 186
+[16-Jun-2025 13:21:41 UTC] PHP Notice:  Accessing static property WP_Malscart::$sections as non static in /wordpress/wp-content/plugins/wp-mals-cart/classes/WP_Malscart.php on line 84
+[16-Jun-2025 13:21:41 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/wp-mals-cart/classes/MasterWidget.php on line 186
+[16-Jun-2025 13:22:17 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "wp_nano_ads_create_db" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wiredrive-playe...')
-#2 /internal/eval.php(20): activate_plugin('wiredrive-playe...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wiredrive-player/player.php on line 91
-[14-Jun-2025 19:49:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wiredrive-player/player.php:91
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-nan...', false)
+#3 /internal/eval.php(20): activate_plugin('wp-nano-ad/wp_n...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[16-Jun-2025 13:22:26 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "wp_nano_ads_create_db" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wiredrive-playe...')
-#2 /internal/eval.php(20): activate_plugin('wiredrive-playe...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wiredrive-player/player.php on line 91
-[14-Jun-2025 19:49:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wiredrive-player/player.php:91
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-nan...', false)
+#3 /internal/eval.php(20): activate_plugin('wp-nano-ad/wp_n...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[16-Jun-2025 13:22:35 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "wp_nano_ads_create_db" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wiredrive-playe...')
-#2 /internal/eval.php(20): activate_plugin('wiredrive-playe...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wiredrive-player/player.php on line 91
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-nan...', false)
+#3 /internal/eval.php(20): activate_plugin('wp-nano-ad/wp_n...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[16-Jun-2025 13:23:16 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Jun-2025 13:23:26 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Jun-2025 13:23:36 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Jun-2025 13:23:44 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Jun-2025 13:23:54 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Jun-2025 13:24:04 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Jun-2025 13:24:15 UTC] PHP Warning:  Undefined array key "add_custompi" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1053
+[16-Jun-2025 13:24:15 UTC] PHP Warning:  Undefined array key "remove_custompi" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1057
+[16-Jun-2025 13:24:15 UTC] PHP Warning:  Undefined array key "export" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1061
+[16-Jun-2025 13:24:15 UTC] PHP Warning:  Undefined array key "mode" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1092
+[16-Jun-2025 13:24:15 UTC] PHP Warning:  Undefined array key 2 in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 427
+[16-Jun-2025 13:24:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_custompi ORDER BY wp_custompi.name ASC</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_custompi` ORDER BY `wp_custompi`.`name` ASC | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_custompi
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php(440): wpdb->get_results('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php(27): QuickDeployment->read_plugin_file()
+#6 /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.php(49): QuickDeployment->__construct()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-quick-deploy...')
+#9 /internal/eval.php(20): activate_plugin('wp-quick-deploy...')
+#10 {main}</pre>
+ for query SELECT * FROM wp_custompi ORDER BY wp_custompi.name ASC made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.php'), QuickDeployment->__construct, QuickDeployment->read_plugin_file, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 13:24:17 UTC] PHP Warning:  Undefined array key "add_custompi" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1053
+[16-Jun-2025 13:24:17 UTC] PHP Warning:  Undefined array key "remove_custompi" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1057
+[16-Jun-2025 13:24:17 UTC] PHP Warning:  Undefined array key "export" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1061
+[16-Jun-2025 13:24:17 UTC] PHP Warning:  Undefined array key "mode" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1092
+[16-Jun-2025 13:24:17 UTC] PHP Warning:  Undefined array key 2 in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 427
+[16-Jun-2025 13:24:26 UTC] PHP Warning:  Undefined array key "add_custompi" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1053
+[16-Jun-2025 13:24:26 UTC] PHP Warning:  Undefined array key "remove_custompi" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1057
+[16-Jun-2025 13:24:26 UTC] PHP Warning:  Undefined array key "export" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1061
+[16-Jun-2025 13:24:26 UTC] PHP Warning:  Undefined array key "mode" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1092
+[16-Jun-2025 13:24:26 UTC] PHP Warning:  Undefined array key 2 in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 427
+[16-Jun-2025 13:24:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_custompi ORDER BY wp_custompi.name ASC</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_custompi` ORDER BY `wp_custompi`.`name` ASC | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_custompi
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php(440): wpdb->get_results('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php(27): QuickDeployment->read_plugin_file()
+#6 /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.php(49): QuickDeployment->__construct()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-quick-deploy...')
+#9 /internal/eval.php(20): activate_plugin('wp-quick-deploy...')
+#10 {main}</pre>
+ for query SELECT * FROM wp_custompi ORDER BY wp_custompi.name ASC made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.php'), QuickDeployment->__construct, QuickDeployment->read_plugin_file, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 13:24:27 UTC] PHP Warning:  Undefined array key "add_custompi" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1053
+[16-Jun-2025 13:24:27 UTC] PHP Warning:  Undefined array key "remove_custompi" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1057
+[16-Jun-2025 13:24:27 UTC] PHP Warning:  Undefined array key "export" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1061
+[16-Jun-2025 13:24:27 UTC] PHP Warning:  Undefined array key "mode" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1092
+[16-Jun-2025 13:24:27 UTC] PHP Warning:  Undefined array key 2 in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 427
+[16-Jun-2025 13:24:35 UTC] PHP Warning:  Undefined array key "add_custompi" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1053
+[16-Jun-2025 13:24:35 UTC] PHP Warning:  Undefined array key "remove_custompi" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1057
+[16-Jun-2025 13:24:35 UTC] PHP Warning:  Undefined array key "export" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1061
+[16-Jun-2025 13:24:35 UTC] PHP Warning:  Undefined array key "mode" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1092
+[16-Jun-2025 13:24:35 UTC] PHP Warning:  Undefined array key 2 in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 427
+[16-Jun-2025 13:24:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_custompi ORDER BY wp_custompi.name ASC</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_custompi` ORDER BY `wp_custompi`.`name` ASC | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_custompi
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php(440): wpdb->get_results('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php(27): QuickDeployment->read_plugin_file()
+#6 /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.php(49): QuickDeployment->__construct()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-quick-deploy...')
+#9 /internal/eval.php(20): activate_plugin('wp-quick-deploy...')
+#10 {main}</pre>
+ for query SELECT * FROM wp_custompi ORDER BY wp_custompi.name ASC made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.php'), QuickDeployment->__construct, QuickDeployment->read_plugin_file, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 13:24:36 UTC] PHP Warning:  Undefined array key "add_custompi" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1053
+[16-Jun-2025 13:24:36 UTC] PHP Warning:  Undefined array key "remove_custompi" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1057
+[16-Jun-2025 13:24:36 UTC] PHP Warning:  Undefined array key "export" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1061
+[16-Jun-2025 13:24:36 UTC] PHP Warning:  Undefined array key "mode" in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 1092
+[16-Jun-2025 13:24:36 UTC] PHP Warning:  Undefined array key 2 in /wordpress/wp-content/plugins/wp-quick-deploy-revisited/wp-quick-deploy-revisited.class.php on line 427
+[16-Jun-2025 13:27:15 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[16-Jun-2025 13:28:02 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[16-Jun-2025 13:28:49 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:325:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
