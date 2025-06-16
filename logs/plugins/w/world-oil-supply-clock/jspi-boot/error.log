@@ -2,324 +2,258 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [14-Jun-2025 20:31:44 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wp_flag_widget" in /wordpress/wp-content/plugins/wave-ya-flag/wave-ya-flag.php:262
+Error: [16-Jun-2025 13:59:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_spectrom_sync_log`
+				ADD COLUMN `type` VARCHAR(4) NOT NULL DEFAULT 'recv' AFTER `target_user`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_spectrom_sync_log</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_spectrom_sync_log</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_spectrom_sync_log</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_spectrom_sync_log</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_spectrom_sync_log, type, 11, recv, NO, varchar, 4, 16, , , , utf8mb4, utf8mb4_general_ci, varchar(4), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_spectrom_sync_log</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_spectrom_sync_log</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_spectrom_sync_log</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_spectrom_sync_log_6850234eb17d8` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `post_id` INTEGER NOT NULL,
+  `post_title` TEXT COLLATE NOCASE NOT NULL,
+  `push_date` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `operation` TEXT COLLATE NOCASE NOT NULL,
+  `source_user` INTEGER NOT NULL,
+  `source_site` TEXT COLLATE NOCASE NOT NULL,
+  `source_site_key` TEXT COLLATE NOCASE NOT NULL,
+  `target_user` INTEGER NOT NULL,
+  `type` TEXT COLLATE NOCASE NOT NULL DEFAULT 'recv',
+  `type` TEXT COLLATE NOCASE NOT NULL DEFAULT 'recv'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: type
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/wpsitesynccontent/install/activate.php(297): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/wpsitesynccontent/install/activate.php(107): SyncActivate->create_database_tables()
+#5 /wordpress/wp-content/plugins/wpsitesynccontent/install/activate.php(46): SyncActivate->_site_activation()
+#6 /wordpress/wp-content/plugins/wpsitesynccontent/wpsitesynccontent.php(128): SyncActivate->plugin_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): WPSiteSyncContent->activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpsite...', false)
+#11 /internal/eval.php(20): activate_plugin('wpsitesyncconte...')
+#12 {main}</pre>
+ for query ALTER TABLE `wp_spectrom_sync_log`
+				ADD COLUMN `type` VARCHAR(4) NOT NULL DEFAULT 'recv' AFTER `target_user` made by activate_plugin, do_action('activate_wpsitesynccontent/wpsitesynccontent.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSiteSyncContent->activate, SyncActivate->plugin_activation, SyncActivate->_site_activation, SyncActivate->create_database_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 13:59:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_spectrom_sync_log`
+				ADD COLUMN `type` VARCHAR(4) NOT NULL DEFAULT 'recv' AFTER `target_user`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_spectrom_sync_log</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_spectrom_sync_log</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_spectrom_sync_log</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_spectrom_sync_log</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_spectrom_sync_log, type, 11, recv, NO, varchar, 4, 16, , , , utf8mb4, utf8mb4_general_ci, varchar(4), , , select,insert,update,references, , , </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'type'
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3885): WP_SQLite_Driver->new_driver_exception('SQLSTATE[42S21]...', '42S21')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(681): WP_SQLite_Driver->convert_information_schema_exception(Object(WP_SQLite_Information_Schema_Exception))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/wpsitesynccontent/install/activate.php(297): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#5 /wordpress/wp-content/plugins/wpsitesynccontent/install/activate.php(107): SyncActivate->create_database_tables()
+#6 /wordpress/wp-content/plugins/wpsitesynccontent/install/activate.php(46): SyncActivate->_site_activation()
+#7 /wordpress/wp-content/plugins/wpsitesynccontent/wpsitesynccontent.php(128): SyncActivate->plugin_activation(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(324): WPSiteSyncContent->activate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpsite...', false)
+#12 /internal/eval.php(20): activate_plugin('wpsitesyncconte...')
+#13 {main}</pre>
+ for query ALTER TABLE `wp_spectrom_sync_log`
+				ADD COLUMN `type` VARCHAR(4) NOT NULL DEFAULT 'recv' AFTER `target_user` made by activate_plugin, do_action('activate_wpsitesynccontent/wpsitesynccontent.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSiteSyncContent->activate, SyncActivate->plugin_activation, SyncActivate->_site_activation, SyncActivate->create_database_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 14:00:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_spectrom_sync_log`
+				ADD COLUMN `type` VARCHAR(4) NOT NULL DEFAULT 'recv' AFTER `target_user`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_spectrom_sync_log</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_spectrom_sync_log</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_spectrom_sync_log</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_spectrom_sync_log</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_spectrom_sync_log, type, 11, recv, NO, varchar, 4, 16, , , , utf8mb4, utf8mb4_general_ci, varchar(4), , , select,insert,update,references, , , </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'type'
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3885): WP_SQLite_Driver->new_driver_exception('SQLSTATE[42S21]...', '42S21')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(681): WP_SQLite_Driver->convert_information_schema_exception(Object(WP_SQLite_Information_Schema_Exception))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/wpsitesynccontent/install/activate.php(297): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#5 /wordpress/wp-content/plugins/wpsitesynccontent/install/activate.php(107): SyncActivate->create_database_tables()
+#6 /wordpress/wp-content/plugins/wpsitesynccontent/install/activate.php(46): SyncActivate->_site_activation()
+#7 /wordpress/wp-content/plugins/wpsitesynccontent/wpsitesynccontent.php(128): SyncActivate->plugin_activation(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(324): WPSiteSyncContent->activate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpsite...', false)
+#12 /internal/eval.php(20): activate_plugin('wpsitesyncconte...')
+#13 {main}</pre>
+ for query ALTER TABLE `wp_spectrom_sync_log`
+				ADD COLUMN `type` VARCHAR(4) NOT NULL DEFAULT 'recv' AFTER `target_user` made by activate_plugin, do_action('activate_wpsitesynccontent/wpsitesynccontent.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSiteSyncContent->activate, SyncActivate->plugin_activation, SyncActivate->_site_activation, SyncActivate->create_database_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 14:00:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wpum_get_option() in /wordpress/wp-content/plugins/wpum-personal-data/includes/actions.php:95
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): widget_init_wp_flag_widget('')
+#0 /wordpress/wp-includes/class-wp-hook.php(324): wpum_validate_user_requests_on_frontend('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}
-  thrown in /wordpress/wp-content/plugins/wave-ya-flag/wave-ya-flag.php on line 262
-[14-Jun-2025 20:31:52 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wp_flag_widget" in /wordpress/wp-content/plugins/wave-ya-flag/wave-ya-flag.php:262
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/wpum-personal-data/includes/actions.php on line 95
+[16-Jun-2025 14:00:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wpum_get_option() in /wordpress/wp-content/plugins/wpum-personal-data/includes/actions.php:95
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): widget_init_wp_flag_widget('')
+#0 /wordpress/wp-includes/class-wp-hook.php(324): wpum_validate_user_requests_on_frontend('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}
-  thrown in /wordpress/wp-content/plugins/wave-ya-flag/wave-ya-flag.php on line 262
-[14-Jun-2025 20:32:02 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wp_flag_widget" in /wordpress/wp-content/plugins/wave-ya-flag/wave-ya-flag.php:262
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/wpum-personal-data/includes/actions.php on line 95
+[16-Jun-2025 14:00:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wpum_get_option() in /wordpress/wp-content/plugins/wpum-personal-data/includes/actions.php:95
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): widget_init_wp_flag_widget('')
+#0 /wordpress/wp-includes/class-wp-hook.php(324): wpum_validate_user_requests_on_frontend('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}
-  thrown in /wordpress/wp-content/plugins/wave-ya-flag/wave-ya-flag.php on line 262
-[14-Jun-2025 20:33:27 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[14-Jun-2025 20:34:06 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[14-Jun-2025 20:34:44 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[14-Jun-2025 20:34:59 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 52
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 777
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 778
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 779
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 780
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 52
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 777
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 778
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 779
-[14-Jun-2025 20:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 780
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 52
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 777
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 778
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 779
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 780
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 52
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 777
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 778
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 779
-[14-Jun-2025 20:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 780
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 52
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 777
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 778
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 779
-[14-Jun-2025 20:35:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 780
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 52
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Undefined variable $wpsi_modo_php in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 81
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 777
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 778
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 779
-[14-Jun-2025 20:35:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-smart-image-ii/wpsi.php on line 780
-[14-Jun-2025 20:37:51 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wc-product-subtitle</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[14-Jun-2025 20:38:03 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wc-product-subtitle</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[14-Jun-2025 20:38:15 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wc-product-subtitle</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[14-Jun-2025 20:39:23 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 44
-[14-Jun-2025 20:39:23 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 78
-[14-Jun-2025 20:39:23 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 82
-[14-Jun-2025 20:39:23 UTC] PHP Warning:  Undefined array key "HTTP_ACCEPT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 86
-[14-Jun-2025 20:39:23 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 89
-[14-Jun-2025 20:39:23 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 105
-[14-Jun-2025 20:39:33 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 44
-[14-Jun-2025 20:39:33 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 78
-[14-Jun-2025 20:39:33 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 82
-[14-Jun-2025 20:39:33 UTC] PHP Warning:  Undefined array key "HTTP_ACCEPT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 86
-[14-Jun-2025 20:39:33 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 89
-[14-Jun-2025 20:39:33 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 105
-[14-Jun-2025 20:39:42 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 44
-[14-Jun-2025 20:39:42 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 78
-[14-Jun-2025 20:39:42 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 82
-[14-Jun-2025 20:39:42 UTC] PHP Warning:  Undefined array key "HTTP_ACCEPT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 86
-[14-Jun-2025 20:39:42 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 89
-[14-Jun-2025 20:39:42 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/website-analytics/helper/utility.php on line 105
-[14-Jun-2025 20:40:19 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ODL_PLUGIN" in /wordpress/wp-content/plugins/world-oil-supply-clock/oil-depletion-clock.php:25
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/wpum-personal-data/includes/actions.php on line 95
+[16-Jun-2025 14:02:36 UTC] PHP Deprecated:  Required parameter $assign_id follows optional parameter $object_data in /wordpress/wp-content/plugins/web-portal-lite-client-portal-secure-file-sharing-private-messaging/includes/class.common.php on line 1710
+[16-Jun-2025 14:02:36 UTC] PHP Deprecated:  Required parameter $assign_id follows optional parameter $assign_type in /wordpress/wp-content/plugins/web-portal-lite-client-portal-secure-file-sharing-private-messaging/includes/class.common.php on line 1762
+[16-Jun-2025 14:02:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/web-portal-lite-client-portal-secure-file-sharing-private-messaging/includes/widget.php:248
+Stack trace:
+#0 /wordpress/wp-content/plugins/web-portal-lite-client-portal-secure-file-sharing-private-messaging/web-portal-lite-client-portal-secure-file-sharing-private-messaging.php(43): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('web-portal-lite...')
+#3 /internal/eval.php(20): activate_plugin('web-portal-lite...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/web-portal-lite-client-portal-secure-file-sharing-private-messaging/includes/widget.php on line 248
+[16-Jun-2025 14:02:46 UTC] PHP Deprecated:  Required parameter $assign_id follows optional parameter $object_data in /wordpress/wp-content/plugins/web-portal-lite-client-portal-secure-file-sharing-private-messaging/includes/class.common.php on line 1710
+[16-Jun-2025 14:02:46 UTC] PHP Deprecated:  Required parameter $assign_id follows optional parameter $assign_type in /wordpress/wp-content/plugins/web-portal-lite-client-portal-secure-file-sharing-private-messaging/includes/class.common.php on line 1762
+[16-Jun-2025 14:02:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/web-portal-lite-client-portal-secure-file-sharing-private-messaging/includes/widget.php:248
+Stack trace:
+#0 /wordpress/wp-content/plugins/web-portal-lite-client-portal-secure-file-sharing-private-messaging/web-portal-lite-client-portal-secure-file-sharing-private-messaging.php(43): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('web-portal-lite...')
+#3 /internal/eval.php(20): activate_plugin('web-portal-lite...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/web-portal-lite-client-portal-secure-file-sharing-private-messaging/includes/widget.php on line 248
+[16-Jun-2025 14:02:56 UTC] PHP Deprecated:  Required parameter $assign_id follows optional parameter $object_data in /wordpress/wp-content/plugins/web-portal-lite-client-portal-secure-file-sharing-private-messaging/includes/class.common.php on line 1710
+[16-Jun-2025 14:02:56 UTC] PHP Deprecated:  Required parameter $assign_id follows optional parameter $assign_type in /wordpress/wp-content/plugins/web-portal-lite-client-portal-secure-file-sharing-private-messaging/includes/class.common.php on line 1762
+[16-Jun-2025 14:02:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/web-portal-lite-client-portal-secure-file-sharing-private-messaging/includes/widget.php:248
+Stack trace:
+#0 /wordpress/wp-content/plugins/web-portal-lite-client-portal-secure-file-sharing-private-messaging/web-portal-lite-client-portal-secure-file-sharing-private-messaging.php(43): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('web-portal-lite...')
+#3 /internal/eval.php(20): activate_plugin('web-portal-lite...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/web-portal-lite-client-portal-secure-file-sharing-private-messaging/includes/widget.php on line 248
+[16-Jun-2025 14:03:06 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/webico-timline-flatsome-addons/shortcodes/wbc-timeline.php on line 3
+[16-Jun-2025 14:03:07 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/webico-timline-flatsome-addons/shortcodes/wbc-timeline.php on line 3
+[16-Jun-2025 14:03:15 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/webico-timline-flatsome-addons/shortcodes/wbc-timeline.php on line 3
+[16-Jun-2025 14:03:16 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/webico-timline-flatsome-addons/shortcodes/wbc-timeline.php on line 3
+[16-Jun-2025 14:03:25 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/webico-timline-flatsome-addons/shortcodes/wbc-timeline.php on line 3
+[16-Jun-2025 14:03:27 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/webico-timline-flatsome-addons/shortcodes/wbc-timeline.php on line 3
+[16-Jun-2025 14:04:12 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ODL_PLUGIN" in /wordpress/wp-content/plugins/world-oil-supply-clock/oil-depletion-clock.php:25
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('world-oil-suppl...')
 #2 /internal/eval.php(20): activate_plugin('world-oil-suppl...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/world-oil-supply-clock/oil-depletion-clock.php on line 25
-[14-Jun-2025 20:40:28 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ODL_PLUGIN" in /wordpress/wp-content/plugins/world-oil-supply-clock/oil-depletion-clock.php:25
+[16-Jun-2025 14:04:20 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ODL_PLUGIN" in /wordpress/wp-content/plugins/world-oil-supply-clock/oil-depletion-clock.php:25
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('world-oil-suppl...')
 #2 /internal/eval.php(20): activate_plugin('world-oil-suppl...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/world-oil-supply-clock/oil-depletion-clock.php on line 25
-[14-Jun-2025 20:40:37 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ODL_PLUGIN" in /wordpress/wp-content/plugins/world-oil-supply-clock/oil-depletion-clock.php:25
+[16-Jun-2025 14:04:29 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ODL_PLUGIN" in /wordpress/wp-content/plugins/world-oil-supply-clock/oil-depletion-clock.php:25
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('world-oil-suppl...')
