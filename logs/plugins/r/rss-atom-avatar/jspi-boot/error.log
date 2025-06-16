@@ -2,114 +2,489 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [15-Jun-2025 04:39:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/royal-recent-posts-widget-by-category/royal-recent-posts-widget-by-category.php:253
+Error: [16-Jun-2025 19:49:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE  `wp_users` ADD  `uni_hash` VARCHAR( 80 ) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_users</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_users</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_users</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_users</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_users, uni_hash, 11, , NO, varchar, 80, 320, , , , utf8mb4, utf8mb4_general_ci, varchar(80), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_users</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_users</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_users</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_users_6850753a23e38` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `user_login` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_pass` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_nicename` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_email` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_url` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_registered` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `user_activation_key` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_status` INTEGER NOT NULL DEFAULT '0',
+  `display_name` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `uni_hash` TEXT COLLATE NOCASE NOT NULL
+) STRICT | (no parameters)</li>
+<li>Executing: INSERT INTO `_wp_sqlite_tmp_wp_users_6850753a23e38` (`rowid`, `ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) SELECT `rowid`, `id`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name` FROM `wp_users` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _wp_sqlite_tmp_wp_users_6850753a23e38.uni_hash
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE  `w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE  `w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE  `w...')
+#4 /wordpress/wp-content/plugins/single-user-login/single-user-login.php(21): wpdb->get_results('ALTER TABLE  `w...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): single_user_login_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_single...', false)
+#9 /internal/eval.php(20): activate_plugin('single-user-log...')
+#10 {main}</pre>
+ for query ALTER TABLE  `wp_users` ADD  `uni_hash` VARCHAR( 80 ) NOT NULL made by activate_plugin, do_action('activate_single-user-login/single-user-login.php'), WP_Hook->do_action, WP_Hook->apply_filters, single_user_login_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 19:49:15 UTC] PHP Warning:  Undefined array key "user_uni_uid" in /wordpress/wp-content/plugins/single-user-login/single-user-login.php on line 43
+[16-Jun-2025 19:49:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT  uni_hash FROM  `wp_users`  WHERE uni_hash=''</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `uni_hash` FROM `wp_users` WHERE `uni_hash` = '' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: uni_hash
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT  uni_has...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT  uni_has...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT  uni_has...')
+#4 /wordpress/wp-content/plugins/single-user-login/single-user-login.php(45): wpdb->get_results('SELECT  uni_has...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): single_user_login_uid_check('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query SELECT  uni_hash FROM  `wp_users`  WHERE uni_hash='' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, single_user_login_uid_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 19:49:15 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/single-user-login/single-user-login.php on line 47
+[16-Jun-2025 19:49:15 UTC] PHP Warning:  Attempt to read property "uni_hash" on null in /wordpress/wp-content/plugins/single-user-login/single-user-login.php on line 47
+[16-Jun-2025 19:49:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE  `wp_users` ADD  `uni_hash` VARCHAR( 80 ) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_users</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_users</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_users</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_users</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_users, uni_hash, 11, , NO, varchar, 80, 320, , , , utf8mb4, utf8mb4_general_ci, varchar(80), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_users</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_users</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_users</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_users_6850754373b90` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `user_login` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_pass` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_nicename` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_email` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_url` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_registered` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `user_activation_key` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_status` INTEGER NOT NULL DEFAULT '0',
+  `display_name` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `uni_hash` TEXT COLLATE NOCASE NOT NULL
+) STRICT | (no parameters)</li>
+<li>Executing: INSERT INTO `_wp_sqlite_tmp_wp_users_6850754373b90` (`rowid`, `display_name`, `ID`, `user_activation_key`, `user_email`, `user_login`, `user_nicename`, `user_pass`, `user_registered`, `user_status`, `user_url`) SELECT `rowid`, `display_name`, `id`, `user_activation_key`, `user_email`, `user_login`, `user_nicename`, `user_pass`, `user_registered`, `user_status`, `user_url` FROM `wp_users` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _wp_sqlite_tmp_wp_users_6850754373b90.uni_hash
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE  `w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE  `w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE  `w...')
+#4 /wordpress/wp-content/plugins/single-user-login/single-user-login.php(21): wpdb->get_results('ALTER TABLE  `w...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): single_user_login_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_single...', false)
+#9 /internal/eval.php(20): activate_plugin('single-user-log...')
+#10 {main}</pre>
+ for query ALTER TABLE  `wp_users` ADD  `uni_hash` VARCHAR( 80 ) NOT NULL made by activate_plugin, do_action('activate_single-user-login/single-user-login.php'), WP_Hook->do_action, WP_Hook->apply_filters, single_user_login_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 19:49:24 UTC] PHP Warning:  Undefined array key "user_uni_uid" in /wordpress/wp-content/plugins/single-user-login/single-user-login.php on line 43
+[16-Jun-2025 19:49:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT  uni_hash FROM  `wp_users`  WHERE uni_hash=''</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `uni_hash` FROM `wp_users` WHERE `uni_hash` = '' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: uni_hash
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT  uni_has...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT  uni_has...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT  uni_has...')
+#4 /wordpress/wp-content/plugins/single-user-login/single-user-login.php(45): wpdb->get_results('SELECT  uni_has...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): single_user_login_uid_check('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query SELECT  uni_hash FROM  `wp_users`  WHERE uni_hash='' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, single_user_login_uid_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 19:49:24 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/single-user-login/single-user-login.php on line 47
+[16-Jun-2025 19:49:24 UTC] PHP Warning:  Attempt to read property "uni_hash" on null in /wordpress/wp-content/plugins/single-user-login/single-user-login.php on line 47
+[16-Jun-2025 19:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE  `wp_users` ADD  `uni_hash` VARCHAR( 80 ) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_users</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_users</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_users</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_users</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_users, uni_hash, 11, , NO, varchar, 80, 320, , , , utf8mb4, utf8mb4_general_ci, varchar(80), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_users</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_users</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_users</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_users_6850754d4af38` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `user_login` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_pass` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_nicename` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_email` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_url` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_registered` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `user_activation_key` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `user_status` INTEGER NOT NULL DEFAULT '0',
+  `display_name` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `uni_hash` TEXT COLLATE NOCASE NOT NULL
+) STRICT | (no parameters)</li>
+<li>Executing: INSERT INTO `_wp_sqlite_tmp_wp_users_6850754d4af38` (`rowid`, `display_name`, `ID`, `user_activation_key`, `user_email`, `user_login`, `user_nicename`, `user_pass`, `user_registered`, `user_status`, `user_url`) SELECT `rowid`, `display_name`, `id`, `user_activation_key`, `user_email`, `user_login`, `user_nicename`, `user_pass`, `user_registered`, `user_status`, `user_url` FROM `wp_users` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _wp_sqlite_tmp_wp_users_6850754d4af38.uni_hash
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE  `w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE  `w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE  `w...')
+#4 /wordpress/wp-content/plugins/single-user-login/single-user-login.php(21): wpdb->get_results('ALTER TABLE  `w...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): single_user_login_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_single...', false)
+#9 /internal/eval.php(20): activate_plugin('single-user-log...')
+#10 {main}</pre>
+ for query ALTER TABLE  `wp_users` ADD  `uni_hash` VARCHAR( 80 ) NOT NULL made by activate_plugin, do_action('activate_single-user-login/single-user-login.php'), WP_Hook->do_action, WP_Hook->apply_filters, single_user_login_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 19:49:34 UTC] PHP Warning:  Undefined array key "user_uni_uid" in /wordpress/wp-content/plugins/single-user-login/single-user-login.php on line 43
+[16-Jun-2025 19:49:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT  uni_hash FROM  `wp_users`  WHERE uni_hash=''</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `uni_hash` FROM `wp_users` WHERE `uni_hash` = '' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: uni_hash
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT  uni_has...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT  uni_has...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT  uni_has...')
+#4 /wordpress/wp-content/plugins/single-user-login/single-user-login.php(45): wpdb->get_results('SELECT  uni_has...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): single_user_login_uid_check('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query SELECT  uni_hash FROM  `wp_users`  WHERE uni_hash='' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, single_user_login_uid_check, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 19:49:34 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/single-user-login/single-user-login.php on line 47
+[16-Jun-2025 19:49:34 UTC] PHP Warning:  Attempt to read property "uni_hash" on null in /wordpress/wp-content/plugins/single-user-login/single-user-login.php on line 47
+[16-Jun-2025 19:49:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/sitepackage-newsletter-opt-in/sitepackage-newsletter-opt-in.php:19
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('royal-recent-po...')
-#2 /internal/eval.php(20): activate_plugin('royal-recent-po...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sitepackage-new...')
+#2 /internal/eval.php(20): activate_plugin('sitepackage-new...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/royal-recent-posts-widget-by-category/royal-recent-posts-widget-by-category.php on line 253
-[15-Jun-2025 04:39:23 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/royal-recent-posts-widget-by-category/royal-recent-posts-widget-by-category.php:253
+  thrown in /wordpress/wp-content/plugins/sitepackage-newsletter-opt-in/sitepackage-newsletter-opt-in.php on line 19
+[16-Jun-2025 19:49:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/sitepackage-newsletter-opt-in/sitepackage-newsletter-opt-in.php:19
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('royal-recent-po...')
-#2 /internal/eval.php(20): activate_plugin('royal-recent-po...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sitepackage-new...')
+#2 /internal/eval.php(20): activate_plugin('sitepackage-new...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/royal-recent-posts-widget-by-category/royal-recent-posts-widget-by-category.php on line 253
-[15-Jun-2025 04:39:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/royal-recent-posts-widget-by-category/royal-recent-posts-widget-by-category.php:253
+  thrown in /wordpress/wp-content/plugins/sitepackage-newsletter-opt-in/sitepackage-newsletter-opt-in.php on line 19
+[16-Jun-2025 19:50:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/sitepackage-newsletter-opt-in/sitepackage-newsletter-opt-in.php:19
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('royal-recent-po...')
-#2 /internal/eval.php(20): activate_plugin('royal-recent-po...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sitepackage-new...')
+#2 /internal/eval.php(20): activate_plugin('sitepackage-new...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/royal-recent-posts-widget-by-category/royal-recent-posts-widget-by-category.php on line 253
-[15-Jun-2025 04:41:12 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/starterblocks/core/freemius/includes/class-fs-logger.php on line 145
-[15-Jun-2025 04:41:14 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/starterblocks/core/freemius/includes/class-fs-logger.php on line 145
-[15-Jun-2025 04:41:24 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/starterblocks/core/freemius/includes/class-fs-logger.php on line 145
-[15-Jun-2025 04:41:27 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/starterblocks/core/freemius/includes/class-fs-logger.php on line 145
-[15-Jun-2025 04:41:36 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/starterblocks/core/freemius/includes/class-fs-logger.php on line 145
-[15-Jun-2025 04:41:38 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/starterblocks/core/freemius/includes/class-fs-logger.php on line 145
-[15-Jun-2025 04:42:40 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/sticky-action-buttons-call-chat-navigate-and-more/combar-sab.php on line 68
-[15-Jun-2025 04:42:41 UTC] PHP Warning:  Undefined array key "sab-preview" in /wordpress/wp-content/plugins/sticky-action-buttons-call-chat-navigate-and-more/inc/functions.php on line 27
-[15-Jun-2025 04:42:41 UTC] PHP Warning:  Undefined array key "sab-preview" in /wordpress/wp-content/plugins/sticky-action-buttons-call-chat-navigate-and-more/inc/functions.php on line 31
-[15-Jun-2025 04:42:51 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/sticky-action-buttons-call-chat-navigate-and-more/combar-sab.php on line 68
-[15-Jun-2025 04:42:51 UTC] PHP Warning:  Undefined array key "sab-preview" in /wordpress/wp-content/plugins/sticky-action-buttons-call-chat-navigate-and-more/inc/functions.php on line 27
-[15-Jun-2025 04:42:51 UTC] PHP Warning:  Undefined array key "sab-preview" in /wordpress/wp-content/plugins/sticky-action-buttons-call-chat-navigate-and-more/inc/functions.php on line 31
-[15-Jun-2025 04:43:00 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/sticky-action-buttons-call-chat-navigate-and-more/combar-sab.php on line 68
-[15-Jun-2025 04:43:01 UTC] PHP Warning:  Undefined array key "sab-preview" in /wordpress/wp-content/plugins/sticky-action-buttons-call-chat-navigate-and-more/inc/functions.php on line 27
-[15-Jun-2025 04:43:01 UTC] PHP Warning:  Undefined array key "sab-preview" in /wordpress/wp-content/plugins/sticky-action-buttons-call-chat-navigate-and-more/inc/functions.php on line 31
-[15-Jun-2025 04:44:58 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+  thrown in /wordpress/wp-content/plugins/sitepackage-newsletter-opt-in/sitepackage-newsletter-opt-in.php on line 19
+[16-Jun-2025 19:50:09 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[16-Jun-2025 19:50:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/slideshow-press/SlideShowPress.php on line 784
+[16-Jun-2025 19:50:10 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[16-Jun-2025 19:50:19 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[16-Jun-2025 19:50:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/slideshow-press/SlideShowPress.php on line 784
+[16-Jun-2025 19:50:20 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[16-Jun-2025 19:50:28 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[16-Jun-2025 19:50:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/slideshow-press/SlideShowPress.php on line 784
+[16-Jun-2025 19:50:29 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[16-Jun-2025 19:51:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/st-breadcrumbs/widget.php:50
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('RLW_Widget')
-#2 /wordpress/wp-content/plugins/readlistenwatch/read-listen-watch.php(46): register_widget('RLW_Widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): load_rlw_widget('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[15-Jun-2025 04:45:07 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-content/plugins/st-breadcrumbs/st-breadcrumb.php(336): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('st-breadcrumbs/...')
+#3 /internal/eval.php(20): activate_plugin('st-breadcrumbs/...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/st-breadcrumbs/widget.php on line 50
+[16-Jun-2025 19:51:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/st-breadcrumbs/widget.php:50
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('RLW_Widget')
-#2 /wordpress/wp-content/plugins/readlistenwatch/read-listen-watch.php(46): register_widget('RLW_Widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): load_rlw_widget('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[15-Jun-2025 04:45:15 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-content/plugins/st-breadcrumbs/st-breadcrumb.php(336): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('st-breadcrumbs/...')
+#3 /internal/eval.php(20): activate_plugin('st-breadcrumbs/...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/st-breadcrumbs/widget.php on line 50
+[16-Jun-2025 19:51:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/st-breadcrumbs/widget.php:50
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('RLW_Widget')
-#2 /wordpress/wp-content/plugins/readlistenwatch/read-listen-watch.php(46): register_widget('RLW_Widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): load_rlw_widget('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
+#0 /wordpress/wp-content/plugins/st-breadcrumbs/st-breadcrumb.php(336): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('st-breadcrumbs/...')
+#3 /internal/eval.php(20): activate_plugin('st-breadcrumbs/...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/st-breadcrumbs/widget.php on line 50
+[16-Jun-2025 19:51:34 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-content/plugins/staff-list-widget-proper-url/staff_list_plugin.php on line 237 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-content/plugins/staff-list-widget-proper-url/staff_list_plugin.php(237): WP_Widget->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('staff-list-widg...')
+#3 /internal/eval.php(20): activate_plugin('staff-list-widg...')
+#4 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[15-Jun-2025 04:47:01 UTC] PHP Fatal error:  Declaration of roots_nav_walker::start_el(&$output, $item, $depth, $args) must be compatible with Walker_Nav_Menu::start_el(&$output, $data_object, $depth = 0, $args = null, $current_object_id = 0) in /wordpress/wp-content/plugins/roots-hide-wp/roots-hide-wp.php on line 130
-[15-Jun-2025 04:47:09 UTC] PHP Fatal error:  Declaration of roots_nav_walker::start_el(&$output, $item, $depth, $args) must be compatible with Walker_Nav_Menu::start_el(&$output, $data_object, $depth = 0, $args = null, $current_object_id = 0) in /wordpress/wp-content/plugins/roots-hide-wp/roots-hide-wp.php on line 130
-[15-Jun-2025 04:47:17 UTC] PHP Fatal error:  Declaration of roots_nav_walker::start_el(&$output, $item, $depth, $args) must be compatible with Walker_Nav_Menu::start_el(&$output, $data_object, $depth = 0, $args = null, $current_object_id = 0) in /wordpress/wp-content/plugins/roots-hide-wp/roots-hide-wp.php on line 130
-[15-Jun-2025 04:47:26 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "RSSATOMAVATAR_VERSION" in /wordpress/wp-content/plugins/rss-atom-avatar/rss-atom-avatar.php:5
+[16-Jun-2025 19:51:43 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-content/plugins/staff-list-widget-proper-url/staff_list_plugin.php on line 237 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-content/plugins/staff-list-widget-proper-url/staff_list_plugin.php(237): WP_Widget->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('staff-list-widg...')
+#3 /internal/eval.php(20): activate_plugin('staff-list-widg...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[16-Jun-2025 19:51:51 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-content/plugins/staff-list-widget-proper-url/staff_list_plugin.php on line 237 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-content/plugins/staff-list-widget-proper-url/staff_list_plugin.php(237): WP_Widget->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('staff-list-widg...')
+#3 /internal/eval.php(20): activate_plugin('staff-list-widg...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[16-Jun-2025 19:52:30 UTC] PHP Warning:  Undefined variable $sb in /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code on line 590
+[16-Jun-2025 19:52:30 UTC] PHP Fatal error:  Uncaught TypeError: Unsupported operand types: null & social_bookmarks in /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code:590
+Stack trace:
+#0 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#1 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#2 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#3 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#4 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#5 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#6 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#7 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#8 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#9 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#10 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1): eval()
+#11 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1): eval()
+#12 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28): eval()
+#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('romania-bookmar...')
+#15 /internal/eval.php(20): activate_plugin('romania-bookmar...')
+#16 {main}
+  thrown in /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code on line 590
+[16-Jun-2025 19:52:39 UTC] PHP Warning:  Undefined variable $sb in /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code on line 590
+[16-Jun-2025 19:52:39 UTC] PHP Fatal error:  Uncaught TypeError: Unsupported operand types: null & social_bookmarks in /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code:590
+Stack trace:
+#0 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#1 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#2 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#3 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#4 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#5 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#6 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#7 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#8 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#9 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#10 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1): eval()
+#11 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1): eval()
+#12 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28): eval()
+#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('romania-bookmar...')
+#15 /internal/eval.php(20): activate_plugin('romania-bookmar...')
+#16 {main}
+  thrown in /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code on line 590
+[16-Jun-2025 19:52:48 UTC] PHP Warning:  Undefined variable $sb in /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code on line 590
+[16-Jun-2025 19:52:48 UTC] PHP Fatal error:  Uncaught TypeError: Unsupported operand types: null & social_bookmarks in /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code:590
+Stack trace:
+#0 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#1 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#2 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#3 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#4 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#5 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#6 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#7 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#8 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#9 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1): eval()
+#10 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1): eval()
+#11 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1): eval()
+#12 /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28): eval()
+#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('romania-bookmar...')
+#15 /internal/eval.php(20): activate_plugin('romania-bookmar...')
+#16 {main}
+  thrown in /wordpress/wp-content/plugins/romania-bookmark/bookmark_now.php(28) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code on line 590
+[16-Jun-2025 19:59:04 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "RSSATOMAVATAR_VERSION" in /wordpress/wp-content/plugins/rss-atom-avatar/rss-atom-avatar.php:5
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rss-atom-avatar...')
 #2 /internal/eval.php(20): activate_plugin('rss-atom-avatar...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/rss-atom-avatar/rss-atom-avatar.php on line 5
-[15-Jun-2025 04:47:35 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "RSSATOMAVATAR_VERSION" in /wordpress/wp-content/plugins/rss-atom-avatar/rss-atom-avatar.php:5
+[16-Jun-2025 19:59:11 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "RSSATOMAVATAR_VERSION" in /wordpress/wp-content/plugins/rss-atom-avatar/rss-atom-avatar.php:5
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rss-atom-avatar...')
 #2 /internal/eval.php(20): activate_plugin('rss-atom-avatar...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/rss-atom-avatar/rss-atom-avatar.php on line 5
-[15-Jun-2025 04:47:44 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "RSSATOMAVATAR_VERSION" in /wordpress/wp-content/plugins/rss-atom-avatar/rss-atom-avatar.php:5
+[16-Jun-2025 19:59:17 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "RSSATOMAVATAR_VERSION" in /wordpress/wp-content/plugins/rss-atom-avatar/rss-atom-avatar.php:5
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rss-atom-avatar...')
