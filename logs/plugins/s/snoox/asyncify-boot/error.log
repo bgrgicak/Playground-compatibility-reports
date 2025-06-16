@@ -2,107 +2,532 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [14-Jun-2025 23:30:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [16-Jun-2025 17:29:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_wpbiker_tool (
-  id mediumint(9) NOT NULL AUTO_INCREMENT,
-  title VARCHAR(200) NOT NULL,  
-  tool TEXT,
-  param TEXT,  
-  UNIQUE KEY id (id)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE </p>
+<p>
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`;</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpl_properties2</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wpl_properties2</li>
+<li>Executing: SELECT * FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) LIMIT 1 | (no parameters)</li>
+<li>Executing: INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT CAST(`id` AS INTEGER) AS `id`, CAST(`att_numb` AS INTEGER) AS `att_numb`, CAST(`sent_numb` AS INTEGER) AS `sent_numb`, CAST(`contact_numb` AS INTEGER) AS `contact_numb`, CAST(`inc_in_listings_numb` AS INTEGER) AS `inc_in_listings_numb`, CAST(`visit_time` AS INTEGER) AS `visit_time`, IIF(`visit_date` IS NULL, NULL, COALESCE(DATETIME(`visit_date`), '0000-00-00 00:00:00')) AS `visit_date`, CAST(`vids_numb` AS INTEGER) AS `vids_numb` FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 near "`wp_wpl_properties2`": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#4 /wordpress/wp-content/plugins/subscription-creator/include/activator.php(15): dbDelta(Array)
-#5 /wordpress/wp-content/plugins/subscription-creator/subscription-creator.php(26): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): activate_plugin_subscriber_creator(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_subscr...', false)
-#10 /internal/eval.php(20): activate_plugin('subscription-cr...')
-#11 {main}</pre>
- for query CREATE TABLE wp_wpbiker_tool (
-  id mediumint(9) NOT NULL AUTO_INCREMENT,
-  title VARCHAR(200) NOT NULL,  
-  tool TEXT,
-  param TEXT,  
-  UNIQUE KEY id (id)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE  made by activate_plugin, do_action('activate_subscription-creator/subscription-creator.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_plugin_subscriber_creator, require_once('/plugins/subscription-creator/include/activator.php'), dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[14-Jun-2025 23:30:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\r\nINSERT `wp_wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\r\nINSERT `wp_wp...')
+#3 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/libraries/db.php(61): WP_SQLite_DB->query('\r\nINSERT `wp_wp...')
+#4 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(399): wpl_db::q('\r\nINSERT `wp_wp...')
+#5 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(439): wpl_extensions->runQuery('\r\nINSERT `#__wp...')
+#6 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(474): wpl_extensions->runQueries('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(491): wpl_extensions->migrate('/wordpress/wp-c...', 'wpl_basic_migra...')
+#8 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(528): wpl_extensions->migration()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): wpl_extensions->activate_wpl(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_real-e...', false)
+#13 /internal/eval.php(20): activate_plugin('real-estate-lis...')
+#14 {main}</pre>
+ for query 
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`; made by activate_plugin, do_action('activate_real-estate-listing-realtyna-wpl/WPL.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpl_extensions->activate_wpl, wpl_extensions->migration, wpl_extensions->migrate, wpl_extensions->runQueries, wpl_extensions->runQuery, wpl_db::q, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 17:29:18 UTC] <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_wpbiker_users (
-  id mediumint(9) NOT NULL AUTO_INCREMENT,   
-  name TEXT,
-  email TEXT, 
-  form_name TEXT,
-  param TEXT,  
-  UNIQUE KEY id (id)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE </p>
+<p>
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`;</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpl_properties2</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wpl_properties2</li>
+<li>Executing: SELECT * FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) LIMIT 1 | (no parameters)</li>
+<li>Executing: INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT CAST(`id` AS INTEGER) AS `id`, CAST(`att_numb` AS INTEGER) AS `att_numb`, CAST(`sent_numb` AS INTEGER) AS `sent_numb`, CAST(`contact_numb` AS INTEGER) AS `contact_numb`, CAST(`inc_in_listings_numb` AS INTEGER) AS `inc_in_listings_numb`, CAST(`visit_time` AS INTEGER) AS `visit_time`, IIF(`visit_date` IS NULL, NULL, COALESCE(DATETIME(`visit_date`), '0000-00-00 00:00:00')) AS `visit_date`, CAST(`vids_numb` AS INTEGER) AS `vids_numb` FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 near "`wp_wpl_properties2`": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#4 /wordpress/wp-content/plugins/subscription-creator/include/activator.php(25): dbDelta(Array)
-#5 /wordpress/wp-content/plugins/subscription-creator/subscription-creator.php(26): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): activate_plugin_subscriber_creator(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_subscr...', false)
-#10 /internal/eval.php(20): activate_plugin('subscription-cr...')
-#11 {main}</pre>
- for query CREATE TABLE wp_wpbiker_users (
-  id mediumint(9) NOT NULL AUTO_INCREMENT,   
-  name TEXT,
-  email TEXT, 
-  form_name TEXT,
-  param TEXT,  
-  UNIQUE KEY id (id)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE  made by activate_plugin, do_action('activate_subscription-creator/subscription-creator.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_plugin_subscriber_creator, require_once('/plugins/subscription-creator/include/activator.php'), dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[14-Jun-2025 23:31:34 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>smart-facebook-page-like-overlay</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[14-Jun-2025 23:31:43 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>smart-facebook-page-like-overlay</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[14-Jun-2025 23:31:51 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>smart-facebook-page-like-overlay</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[14-Jun-2025 23:33:49 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[14-Jun-2025 23:34:35 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[14-Jun-2025 23:35:19 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[14-Jun-2025 23:39:00 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 54
-[14-Jun-2025 23:39:00 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 166
-[14-Jun-2025 23:39:00 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 76
-[14-Jun-2025 23:39:01 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 54
-[14-Jun-2025 23:39:01 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 166
-[14-Jun-2025 23:39:01 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 76
-[14-Jun-2025 23:39:11 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 54
-[14-Jun-2025 23:39:11 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 166
-[14-Jun-2025 23:39:11 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 76
-[14-Jun-2025 23:39:12 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 54
-[14-Jun-2025 23:39:12 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 166
-[14-Jun-2025 23:39:12 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 76
-[14-Jun-2025 23:39:22 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 54
-[14-Jun-2025 23:39:22 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 166
-[14-Jun-2025 23:39:22 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 76
-[14-Jun-2025 23:39:23 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 54
-[14-Jun-2025 23:39:23 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 166
-[14-Jun-2025 23:39:23 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 76
-[14-Jun-2025 23:39:33 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\r\nINSERT `wp_wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\r\nINSERT `wp_wp...')
+#3 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/libraries/db.php(61): WP_SQLite_DB->query('\r\nINSERT `wp_wp...')
+#4 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(399): wpl_db::q('\r\nINSERT `wp_wp...')
+#5 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(439): wpl_extensions->runQuery('\r\nINSERT `#__wp...')
+#6 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(474): wpl_extensions->runQueries('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(491): wpl_extensions->migrate('/wordpress/wp-c...', 'wpl_basic_migra...')
+#8 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(528): wpl_extensions->migration()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): wpl_extensions->activate_wpl(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_real-e...', false)
+#13 /internal/eval.php(20): activate_plugin('real-estate-lis...')
+#14 {main}</pre>
+
+[16-Jun-2025 17:29:18 UTC] PHP Notice:  Undefined index: id in /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/libraries/users.php on line 1341
+[16-Jun-2025 17:29:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpl_properties2</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wpl_properties2</li>
+<li>Executing: SELECT * FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) LIMIT 1 | (no parameters)</li>
+<li>Executing: INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT CAST(`id` AS INTEGER) AS `id`, CAST(`att_numb` AS INTEGER) AS `att_numb`, CAST(`sent_numb` AS INTEGER) AS `sent_numb`, CAST(`contact_numb` AS INTEGER) AS `contact_numb`, CAST(`inc_in_listings_numb` AS INTEGER) AS `inc_in_listings_numb`, CAST(`visit_time` AS INTEGER) AS `visit_time`, IIF(`visit_date` IS NULL, NULL, COALESCE(DATETIME(`visit_date`), '0000-00-00 00:00:00')) AS `visit_date`, CAST(`vids_numb` AS INTEGER) AS `vids_numb` FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "`wp_wpl_properties2`": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\r\nINSERT `wp_wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\r\nINSERT `wp_wp...')
+#3 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/libraries/db.php(61): WP_SQLite_DB->query('\r\nINSERT `wp_wp...')
+#4 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(399): wpl_db::q('\r\nINSERT `wp_wp...')
+#5 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(439): wpl_extensions->runQuery('\r\nINSERT `#__wp...')
+#6 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(474): wpl_extensions->runQueries('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(491): wpl_extensions->migrate('/wordpress/wp-c...', 'wpl_basic_migra...')
+#8 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(589): wpl_extensions->migration()
+#9 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(564): wpl_extensions->upgrade_wpl()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): wpl_extensions->activate_wpl(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_real-e...', false)
+#14 /internal/eval.php(20): activate_plugin('real-estate-lis...')
+#15 {main}</pre>
+ for query 
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`; made by activate_plugin, do_action('activate_real-estate-listing-realtyna-wpl/WPL.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpl_extensions->activate_wpl, wpl_extensions->upgrade_wpl, wpl_extensions->migration, wpl_extensions->migrate, wpl_extensions->runQueries, wpl_extensions->runQuery, wpl_db::q, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 17:29:19 UTC] <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpl_properties2</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wpl_properties2</li>
+<li>Executing: SELECT * FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) LIMIT 1 | (no parameters)</li>
+<li>Executing: INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT CAST(`id` AS INTEGER) AS `id`, CAST(`att_numb` AS INTEGER) AS `att_numb`, CAST(`sent_numb` AS INTEGER) AS `sent_numb`, CAST(`contact_numb` AS INTEGER) AS `contact_numb`, CAST(`inc_in_listings_numb` AS INTEGER) AS `inc_in_listings_numb`, CAST(`visit_time` AS INTEGER) AS `visit_time`, IIF(`visit_date` IS NULL, NULL, COALESCE(DATETIME(`visit_date`), '0000-00-00 00:00:00')) AS `visit_date`, CAST(`vids_numb` AS INTEGER) AS `vids_numb` FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "`wp_wpl_properties2`": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\r\nINSERT `wp_wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\r\nINSERT `wp_wp...')
+#3 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/libraries/db.php(61): WP_SQLite_DB->query('\r\nINSERT `wp_wp...')
+#4 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(399): wpl_db::q('\r\nINSERT `wp_wp...')
+#5 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(439): wpl_extensions->runQuery('\r\nINSERT `#__wp...')
+#6 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(474): wpl_extensions->runQueries('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(491): wpl_extensions->migrate('/wordpress/wp-c...', 'wpl_basic_migra...')
+#8 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(589): wpl_extensions->migration()
+#9 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(564): wpl_extensions->upgrade_wpl()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): wpl_extensions->activate_wpl(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_real-e...', false)
+#14 /internal/eval.php(20): activate_plugin('real-estate-lis...')
+#15 {main}</pre>
+
+[16-Jun-2025 17:29:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpl_properties2</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wpl_properties2</li>
+<li>Executing: SELECT * FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) LIMIT 1 | (no parameters)</li>
+<li>Executing: INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT CAST(`id` AS INTEGER) AS `id`, CAST(`att_numb` AS INTEGER) AS `att_numb`, CAST(`sent_numb` AS INTEGER) AS `sent_numb`, CAST(`contact_numb` AS INTEGER) AS `contact_numb`, CAST(`inc_in_listings_numb` AS INTEGER) AS `inc_in_listings_numb`, CAST(`visit_time` AS INTEGER) AS `visit_time`, IIF(`visit_date` IS NULL, NULL, COALESCE(DATETIME(`visit_date`), '0000-00-00 00:00:00')) AS `visit_date`, CAST(`vids_numb` AS INTEGER) AS `vids_numb` FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "`wp_wpl_properties2`": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\r\nINSERT `wp_wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\r\nINSERT `wp_wp...')
+#3 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/libraries/db.php(61): WP_SQLite_DB->query('\r\nINSERT `wp_wp...')
+#4 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(399): wpl_db::q('\r\nINSERT `wp_wp...')
+#5 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(439): wpl_extensions->runQuery('\r\nINSERT `#__wp...')
+#6 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(474): wpl_extensions->runQueries('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(491): wpl_extensions->migrate('/wordpress/wp-c...', 'wpl_basic_migra...')
+#8 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(528): wpl_extensions->migration()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): wpl_extensions->activate_wpl(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_real-e...', false)
+#13 /internal/eval.php(20): activate_plugin('real-estate-lis...')
+#14 {main}</pre>
+ for query 
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`; made by activate_plugin, do_action('activate_real-estate-listing-realtyna-wpl/WPL.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpl_extensions->activate_wpl, wpl_extensions->migration, wpl_extensions->migrate, wpl_extensions->runQueries, wpl_extensions->runQuery, wpl_db::q, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 17:29:56 UTC] <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpl_properties2</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wpl_properties2</li>
+<li>Executing: SELECT * FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) LIMIT 1 | (no parameters)</li>
+<li>Executing: INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT CAST(`id` AS INTEGER) AS `id`, CAST(`att_numb` AS INTEGER) AS `att_numb`, CAST(`sent_numb` AS INTEGER) AS `sent_numb`, CAST(`contact_numb` AS INTEGER) AS `contact_numb`, CAST(`inc_in_listings_numb` AS INTEGER) AS `inc_in_listings_numb`, CAST(`visit_time` AS INTEGER) AS `visit_time`, IIF(`visit_date` IS NULL, NULL, COALESCE(DATETIME(`visit_date`), '0000-00-00 00:00:00')) AS `visit_date`, CAST(`vids_numb` AS INTEGER) AS `vids_numb` FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "`wp_wpl_properties2`": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\r\nINSERT `wp_wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\r\nINSERT `wp_wp...')
+#3 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/libraries/db.php(61): WP_SQLite_DB->query('\r\nINSERT `wp_wp...')
+#4 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(399): wpl_db::q('\r\nINSERT `wp_wp...')
+#5 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(439): wpl_extensions->runQuery('\r\nINSERT `#__wp...')
+#6 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(474): wpl_extensions->runQueries('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(491): wpl_extensions->migrate('/wordpress/wp-c...', 'wpl_basic_migra...')
+#8 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(528): wpl_extensions->migration()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): wpl_extensions->activate_wpl(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_real-e...', false)
+#13 /internal/eval.php(20): activate_plugin('real-estate-lis...')
+#14 {main}</pre>
+
+[16-Jun-2025 17:29:57 UTC] PHP Notice:  Undefined index: id in /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/libraries/users.php on line 1341
+[16-Jun-2025 17:29:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpl_properties2</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wpl_properties2</li>
+<li>Executing: SELECT * FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) LIMIT 1 | (no parameters)</li>
+<li>Executing: INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT CAST(`id` AS INTEGER) AS `id`, CAST(`att_numb` AS INTEGER) AS `att_numb`, CAST(`sent_numb` AS INTEGER) AS `sent_numb`, CAST(`contact_numb` AS INTEGER) AS `contact_numb`, CAST(`inc_in_listings_numb` AS INTEGER) AS `inc_in_listings_numb`, CAST(`visit_time` AS INTEGER) AS `visit_time`, IIF(`visit_date` IS NULL, NULL, COALESCE(DATETIME(`visit_date`), '0000-00-00 00:00:00')) AS `visit_date`, CAST(`vids_numb` AS INTEGER) AS `vids_numb` FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "`wp_wpl_properties2`": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\r\nINSERT `wp_wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\r\nINSERT `wp_wp...')
+#3 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/libraries/db.php(61): WP_SQLite_DB->query('\r\nINSERT `wp_wp...')
+#4 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(399): wpl_db::q('\r\nINSERT `wp_wp...')
+#5 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(439): wpl_extensions->runQuery('\r\nINSERT `#__wp...')
+#6 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(474): wpl_extensions->runQueries('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(491): wpl_extensions->migrate('/wordpress/wp-c...', 'wpl_basic_migra...')
+#8 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(589): wpl_extensions->migration()
+#9 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(564): wpl_extensions->upgrade_wpl()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): wpl_extensions->activate_wpl(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_real-e...', false)
+#14 /internal/eval.php(20): activate_plugin('real-estate-lis...')
+#15 {main}</pre>
+ for query 
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`; made by activate_plugin, do_action('activate_real-estate-listing-realtyna-wpl/WPL.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpl_extensions->activate_wpl, wpl_extensions->upgrade_wpl, wpl_extensions->migration, wpl_extensions->migrate, wpl_extensions->runQueries, wpl_extensions->runQuery, wpl_db::q, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 17:29:58 UTC] <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpl_properties2</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wpl_properties2</li>
+<li>Executing: SELECT * FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) LIMIT 1 | (no parameters)</li>
+<li>Executing: INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT CAST(`id` AS INTEGER) AS `id`, CAST(`att_numb` AS INTEGER) AS `att_numb`, CAST(`sent_numb` AS INTEGER) AS `sent_numb`, CAST(`contact_numb` AS INTEGER) AS `contact_numb`, CAST(`inc_in_listings_numb` AS INTEGER) AS `inc_in_listings_numb`, CAST(`visit_time` AS INTEGER) AS `visit_time`, IIF(`visit_date` IS NULL, NULL, COALESCE(DATETIME(`visit_date`), '0000-00-00 00:00:00')) AS `visit_date`, CAST(`vids_numb` AS INTEGER) AS `vids_numb` FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "`wp_wpl_properties2`": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\r\nINSERT `wp_wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\r\nINSERT `wp_wp...')
+#3 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/libraries/db.php(61): WP_SQLite_DB->query('\r\nINSERT `wp_wp...')
+#4 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(399): wpl_db::q('\r\nINSERT `wp_wp...')
+#5 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(439): wpl_extensions->runQuery('\r\nINSERT `#__wp...')
+#6 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(474): wpl_extensions->runQueries('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(491): wpl_extensions->migrate('/wordpress/wp-c...', 'wpl_basic_migra...')
+#8 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(589): wpl_extensions->migration()
+#9 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(564): wpl_extensions->upgrade_wpl()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): wpl_extensions->activate_wpl(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_real-e...', false)
+#14 /internal/eval.php(20): activate_plugin('real-estate-lis...')
+#15 {main}</pre>
+
+[16-Jun-2025 17:30:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpl_properties2</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wpl_properties2</li>
+<li>Executing: SELECT * FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) LIMIT 1 | (no parameters)</li>
+<li>Executing: INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT CAST(`id` AS INTEGER) AS `id`, CAST(`att_numb` AS INTEGER) AS `att_numb`, CAST(`sent_numb` AS INTEGER) AS `sent_numb`, CAST(`contact_numb` AS INTEGER) AS `contact_numb`, CAST(`inc_in_listings_numb` AS INTEGER) AS `inc_in_listings_numb`, CAST(`visit_time` AS INTEGER) AS `visit_time`, IIF(`visit_date` IS NULL, NULL, COALESCE(DATETIME(`visit_date`), '0000-00-00 00:00:00')) AS `visit_date`, CAST(`vids_numb` AS INTEGER) AS `vids_numb` FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "`wp_wpl_properties2`": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\r\nINSERT `wp_wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\r\nINSERT `wp_wp...')
+#3 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/libraries/db.php(61): WP_SQLite_DB->query('\r\nINSERT `wp_wp...')
+#4 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(399): wpl_db::q('\r\nINSERT `wp_wp...')
+#5 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(439): wpl_extensions->runQuery('\r\nINSERT `#__wp...')
+#6 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(474): wpl_extensions->runQueries('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(491): wpl_extensions->migrate('/wordpress/wp-c...', 'wpl_basic_migra...')
+#8 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(528): wpl_extensions->migration()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): wpl_extensions->activate_wpl(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_real-e...', false)
+#13 /internal/eval.php(20): activate_plugin('real-estate-lis...')
+#14 {main}</pre>
+ for query 
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`; made by activate_plugin, do_action('activate_real-estate-listing-realtyna-wpl/WPL.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpl_extensions->activate_wpl, wpl_extensions->migration, wpl_extensions->migrate, wpl_extensions->runQueries, wpl_extensions->runQuery, wpl_db::q, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 17:30:35 UTC] <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpl_properties2</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wpl_properties2</li>
+<li>Executing: SELECT * FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) LIMIT 1 | (no parameters)</li>
+<li>Executing: INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT CAST(`id` AS INTEGER) AS `id`, CAST(`att_numb` AS INTEGER) AS `att_numb`, CAST(`sent_numb` AS INTEGER) AS `sent_numb`, CAST(`contact_numb` AS INTEGER) AS `contact_numb`, CAST(`inc_in_listings_numb` AS INTEGER) AS `inc_in_listings_numb`, CAST(`visit_time` AS INTEGER) AS `visit_time`, IIF(`visit_date` IS NULL, NULL, COALESCE(DATETIME(`visit_date`), '0000-00-00 00:00:00')) AS `visit_date`, CAST(`vids_numb` AS INTEGER) AS `vids_numb` FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "`wp_wpl_properties2`": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\r\nINSERT `wp_wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\r\nINSERT `wp_wp...')
+#3 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/libraries/db.php(61): WP_SQLite_DB->query('\r\nINSERT `wp_wp...')
+#4 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(399): wpl_db::q('\r\nINSERT `wp_wp...')
+#5 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(439): wpl_extensions->runQuery('\r\nINSERT `#__wp...')
+#6 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(474): wpl_extensions->runQueries('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(491): wpl_extensions->migrate('/wordpress/wp-c...', 'wpl_basic_migra...')
+#8 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(528): wpl_extensions->migration()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): wpl_extensions->activate_wpl(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_real-e...', false)
+#13 /internal/eval.php(20): activate_plugin('real-estate-lis...')
+#14 {main}</pre>
+
+[16-Jun-2025 17:30:36 UTC] PHP Notice:  Undefined index: id in /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/libraries/users.php on line 1341
+[16-Jun-2025 17:30:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpl_properties2</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wpl_properties2</li>
+<li>Executing: SELECT * FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) LIMIT 1 | (no parameters)</li>
+<li>Executing: INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT CAST(`id` AS INTEGER) AS `id`, CAST(`att_numb` AS INTEGER) AS `att_numb`, CAST(`sent_numb` AS INTEGER) AS `sent_numb`, CAST(`contact_numb` AS INTEGER) AS `contact_numb`, CAST(`inc_in_listings_numb` AS INTEGER) AS `inc_in_listings_numb`, CAST(`visit_time` AS INTEGER) AS `visit_time`, IIF(`visit_date` IS NULL, NULL, COALESCE(DATETIME(`visit_date`), '0000-00-00 00:00:00')) AS `visit_date`, CAST(`vids_numb` AS INTEGER) AS `vids_numb` FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "`wp_wpl_properties2`": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\r\nINSERT `wp_wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\r\nINSERT `wp_wp...')
+#3 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/libraries/db.php(61): WP_SQLite_DB->query('\r\nINSERT `wp_wp...')
+#4 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(399): wpl_db::q('\r\nINSERT `wp_wp...')
+#5 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(439): wpl_extensions->runQuery('\r\nINSERT `#__wp...')
+#6 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(474): wpl_extensions->runQueries('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(491): wpl_extensions->migrate('/wordpress/wp-c...', 'wpl_basic_migra...')
+#8 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(589): wpl_extensions->migration()
+#9 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(564): wpl_extensions->upgrade_wpl()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): wpl_extensions->activate_wpl(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_real-e...', false)
+#14 /internal/eval.php(20): activate_plugin('real-estate-lis...')
+#15 {main}</pre>
+ for query 
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`; made by activate_plugin, do_action('activate_real-estate-listing-realtyna-wpl/WPL.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpl_extensions->activate_wpl, wpl_extensions->upgrade_wpl, wpl_extensions->migration, wpl_extensions->migrate, wpl_extensions->runQueries, wpl_extensions->runQuery, wpl_db::q, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[16-Jun-2025 17:30:36 UTC] <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT `id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb` FROM `wp_wpl_properties`;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpl_properties2</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wpl_properties2</li>
+<li>Executing: SELECT * FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) LIMIT 1 | (no parameters)</li>
+<li>Executing: INSERT `wp_wpl_properties2` (`id`, `att_numb`, `sent_numb`, `contact_numb`, `inc_in_listings_numb`, `visit_time`, `visit_date`, `vids_numb`) SELECT CAST(`id` AS INTEGER) AS `id`, CAST(`att_numb` AS INTEGER) AS `att_numb`, CAST(`sent_numb` AS INTEGER) AS `sent_numb`, CAST(`contact_numb` AS INTEGER) AS `contact_numb`, CAST(`inc_in_listings_numb` AS INTEGER) AS `inc_in_listings_numb`, CAST(`visit_time` AS INTEGER) AS `visit_time`, IIF(`visit_date` IS NULL, NULL, COALESCE(DATETIME(`visit_date`), '0000-00-00 00:00:00')) AS `visit_date`, CAST(`vids_numb` AS INTEGER) AS `vids_numb` FROM (SELECT `id` , `att_numb` , `sent_numb` , `contact_numb` , `inc_in_listings_numb` , `visit_time` , `visit_date` , `vids_numb` FROM `wp_wpl_properties`) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "`wp_wpl_properties2`": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\r\nINSERT `wp_wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\r\nINSERT `wp_wp...')
+#3 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/libraries/db.php(61): WP_SQLite_DB->query('\r\nINSERT `wp_wp...')
+#4 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(399): wpl_db::q('\r\nINSERT `wp_wp...')
+#5 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(439): wpl_extensions->runQuery('\r\nINSERT `#__wp...')
+#6 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(474): wpl_extensions->runQueries('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(491): wpl_extensions->migrate('/wordpress/wp-c...', 'wpl_basic_migra...')
+#8 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(589): wpl_extensions->migration()
+#9 /wordpress/wp-content/plugins/real-estate-listing-realtyna-wpl/extensions.php(564): wpl_extensions->upgrade_wpl()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): wpl_extensions->activate_wpl(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_real-e...', false)
+#14 /internal/eval.php(20): activate_plugin('real-estate-lis...')
+#15 {main}</pre>
+
+[16-Jun-2025 17:32:19 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 54
+[16-Jun-2025 17:32:20 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 166
+[16-Jun-2025 17:32:20 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 76
+[16-Jun-2025 17:32:21 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 54
+[16-Jun-2025 17:32:21 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 166
+[16-Jun-2025 17:32:21 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 76
+[16-Jun-2025 17:32:31 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 54
+[16-Jun-2025 17:32:31 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 166
+[16-Jun-2025 17:32:31 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 76
+[16-Jun-2025 17:32:32 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 54
+[16-Jun-2025 17:32:32 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 166
+[16-Jun-2025 17:32:32 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 76
+[16-Jun-2025 17:32:43 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 54
+[16-Jun-2025 17:32:43 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 166
+[16-Jun-2025 17:32:43 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 76
+[16-Jun-2025 17:32:44 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 54
+[16-Jun-2025 17:32:44 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/acf-value-functions.php on line 166
+[16-Jun-2025 17:32:44 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/snappy-list-builder/lib/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 76
+[16-Jun-2025 17:32:54 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('MyNewWidget')
@@ -120,7 +545,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[14-Jun-2025 23:39:42 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[16-Jun-2025 17:33:04 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('MyNewWidget')
