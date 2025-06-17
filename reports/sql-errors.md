@@ -89,60 +89,6 @@
 | SQLSTATE[HY000]: General error: 1 no such column: SECOND. | jspi-boot | presstrends | [View logs](/logs/plugins/p/presstrends/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: DAYNAME. | asyncify-boot | presstrends | [View logs](/logs/plugins/p/presstrends/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: DAYNAME. | jspi-boot | presstrends | [View logs](/logs/plugins/p/presstrends/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wc-payflexi-savings | [View logs](/logs/plugins/w/wc-payflexi-savings/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wc-payflexi-savings | [View logs](/logs/plugins/w/wc-payflexi-savings/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wc-payflexi-savings | [View logs](/logs/plugins/w/wc-payflexi-savings/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | wc-payflexi-savings | [View logs](/logs/plugins/w/wc-payflexi-savings/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | asyncify-boot | wc-payflexi-savings | [View logs](/logs/plugins/w/wc-payflexi-savings/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | jspi-boot | wc-payflexi-savings | [View logs](/logs/plugins/w/wc-payflexi-savings/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wc-payflexi-savings | [View logs](/logs/plugins/w/wc-payflexi-savings/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | wc-payflexi-savings | [View logs](/logs/plugins/w/wc-payflexi-savings/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | wc-payflexi-savings | [View logs](/logs/plugins/w/wc-payflexi-savings/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-auto-backup | [View logs](/logs/plugins/w/wp-auto-backup/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-auto-backup | [View logs](/logs/plugins/w/wp-auto-backup/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-auto-backup | [View logs](/logs/plugins/w/wp-auto-backup/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | wp-auto-backup | [View logs](/logs/plugins/w/wp-auto-backup/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | asyncify-boot | wp-auto-backup | [View logs](/logs/plugins/w/wp-auto-backup/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | jspi-boot | wp-auto-backup | [View logs](/logs/plugins/w/wp-auto-backup/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wp-auto-backup | [View logs](/logs/plugins/w/wp-auto-backup/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | wp-auto-backup | [View logs](/logs/plugins/w/wp-auto-backup/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | wp-auto-backup | [View logs](/logs/plugins/w/wp-auto-backup/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-job-portal | [View logs](/logs/plugins/w/wp-job-portal/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | wp-job-portal | [View logs](/logs/plugins/w/wp-job-portal/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wp-job-portal | [View logs](/logs/plugins/w/wp-job-portal/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-nav-item-background | [View logs](/logs/plugins/w/wp-nav-item-background/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-nav-item-background | [View logs](/logs/plugins/w/wp-nav-item-background/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-nav-item-background | [View logs](/logs/plugins/w/wp-nav-item-background/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | wp-nav-item-background | [View logs](/logs/plugins/w/wp-nav-item-background/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | asyncify-boot | wp-nav-item-background | [View logs](/logs/plugins/w/wp-nav-item-background/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | jspi-boot | wp-nav-item-background | [View logs](/logs/plugins/w/wp-nav-item-background/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wp-nav-item-background | [View logs](/logs/plugins/w/wp-nav-item-background/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | wp-nav-item-background | [View logs](/logs/plugins/w/wp-nav-item-background/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | wp-nav-item-background | [View logs](/logs/plugins/w/wp-nav-item-background/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-twitter-sidebar-widget | [View logs](/logs/plugins/w/wp-twitter-sidebar-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-twitter-sidebar-widget | [View logs](/logs/plugins/w/wp-twitter-sidebar-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-twitter-sidebar-widget | [View logs](/logs/plugins/w/wp-twitter-sidebar-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | wp-twitter-sidebar-widget | [View logs](/logs/plugins/w/wp-twitter-sidebar-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | asyncify-boot | wp-twitter-sidebar-widget | [View logs](/logs/plugins/w/wp-twitter-sidebar-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | jspi-boot | wp-twitter-sidebar-widget | [View logs](/logs/plugins/w/wp-twitter-sidebar-widget/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wp-twitter-sidebar-widget | [View logs](/logs/plugins/w/wp-twitter-sidebar-widget/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | wp-twitter-sidebar-widget | [View logs](/logs/plugins/w/wp-twitter-sidebar-widget/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | wp-twitter-sidebar-widget | [View logs](/logs/plugins/w/wp-twitter-sidebar-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wpdatatables-forminator | [View logs](/logs/plugins/w/wpdatatables-forminator/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wpdatatables-forminator | [View logs](/logs/plugins/w/wpdatatables-forminator/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wpdatatables-forminator | [View logs](/logs/plugins/w/wpdatatables-forminator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | wpdatatables-forminator | [View logs](/logs/plugins/w/wpdatatables-forminator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | asyncify-boot | wpdatatables-forminator | [View logs](/logs/plugins/w/wpdatatables-forminator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | jspi-boot | wpdatatables-forminator | [View logs](/logs/plugins/w/wpdatatables-forminator/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wpdatatables-forminator | [View logs](/logs/plugins/w/wpdatatables-forminator/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | wpdatatables-forminator | [View logs](/logs/plugins/w/wpdatatables-forminator/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | wpdatatables-forminator | [View logs](/logs/plugins/w/wpdatatables-forminator/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wpec-goodrelations | [View logs](/logs/plugins/w/wpec-goodrelations/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wpec-goodrelations | [View logs](/logs/plugins/w/wpec-goodrelations/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wpec-goodrelations | [View logs](/logs/plugins/w/wpec-goodrelations/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | wpec-goodrelations | [View logs](/logs/plugins/w/wpec-goodrelations/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | asyncify-boot | wpec-goodrelations | [View logs](/logs/plugins/w/wpec-goodrelations/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | jspi-boot | wpec-goodrelations | [View logs](/logs/plugins/w/wpec-goodrelations/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wpec-goodrelations | [View logs](/logs/plugins/w/wpec-goodrelations/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | wpec-goodrelations | [View logs](/logs/plugins/w/wpec-goodrelations/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | wpec-goodrelations | [View logs](/logs/plugins/w/wpec-goodrelations/error.json) |
