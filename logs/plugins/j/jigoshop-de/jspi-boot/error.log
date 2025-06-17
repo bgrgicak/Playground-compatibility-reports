@@ -2,13 +2,331 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [15-Jun-2025 23:47:41 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[15-Jun-2025 23:47:41 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[15-Jun-2025 23:47:51 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[15-Jun-2025 23:47:51 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[15-Jun-2025 23:47:59 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[15-Jun-2025 23:47:59 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[15-Jun-2025 23:48:10 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php:232
+Error: [17-Jun-2025 13:58:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_vendors_carts ADD security_id VARCHAR(255) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vendors_carts</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_vendors_carts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vendors_carts</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_vendors_carts</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_vendors_carts, security_id, 11, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_vendors_carts</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_vendors_carts</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_vendors_carts</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_vendors_carts_6851749ac1d90` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `security_id` TEXT COLLATE NOCASE NOT NULL,
+  `post_id` INTEGER NOT NULL,
+  `vendor` INTEGER NOT NULL,
+  `user_id` INTEGER NOT NULL,
+  `cart_items` TEXT COLLATE NOCASE NOT NULL,
+  `address` TEXT COLLATE NOCASE NOT NULL,
+  `order_status` TEXT COLLATE NOCASE NOT NULL,
+  `last_remind` TEXT COLLATE NOCASE NOT NULL,
+  `timestamp` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `security_id` TEXT COLLATE NOCASE NOT NULL
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: security_id
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/multiple-carts-for-woo-free-by-wp-masters/wpm-multicart.php(551): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): WPM_MultiCart_WooCommerce->add_new_column_for_tables('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_vendors_carts ADD security_id VARCHAR(255) NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WPM_MultiCart_WooCommerce->add_new_column_for_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Jun-2025 13:59:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_vendors_carts ADD security_id VARCHAR(255) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vendors_carts</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_vendors_carts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vendors_carts</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_vendors_carts</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_vendors_carts, security_id, 11, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'security_id'
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3885): WP_SQLite_Driver->new_driver_exception('SQLSTATE[42S21]...', '42S21')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(681): WP_SQLite_Driver->convert_information_schema_exception(Object(WP_SQLite_Information_Schema_Exception))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/multiple-carts-for-woo-free-by-wp-masters/wpm-multicart.php(551): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): WPM_MultiCart_WooCommerce->add_new_column_for_tables('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_vendors_carts ADD security_id VARCHAR(255) NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WPM_MultiCart_WooCommerce->add_new_column_for_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Jun-2025 13:59:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_vendors_carts ADD security_id VARCHAR(255) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vendors_carts</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_vendors_carts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vendors_carts</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_vendors_carts</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_vendors_carts, security_id, 11, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'security_id'
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3885): WP_SQLite_Driver->new_driver_exception('SQLSTATE[42S21]...', '42S21')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(681): WP_SQLite_Driver->convert_information_schema_exception(Object(WP_SQLite_Information_Schema_Exception))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/multiple-carts-for-woo-free-by-wp-masters/wpm-multicart.php(551): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): WPM_MultiCart_WooCommerce->add_new_column_for_tables('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_vendors_carts ADD security_id VARCHAR(255) NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WPM_MultiCart_WooCommerce->add_new_column_for_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Jun-2025 14:01:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `ID` FROM wp_users WHERE MD5(TRIM(TRAILING '/' FROM `user_url`)) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR MD5(TRIM(TRAILING '/' FROM `user_url`)) = 'd6a959f37b73ddda6d85c7fbbe7780a2'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `ID` FROM `wp_users` WHERE `MD5` ( TRIM ( TRAILING '/' FROM `user_url` ) ) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR `MD5` ( TRIM ( TRAILING '/' FROM `user_url` ) ) = 'd6a959f37b73ddda6d85c7fbbe7780a2' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "'/'": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT `ID` FRO...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT `ID` FRO...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `ID` FRO...')
+#4 /wordpress/wp-content/plugins/multistore-multivendor/index.php(124): wpdb->get_var('SELECT `ID` FRO...')
+#5 /wordpress/wp-content/plugins/multistore-multivendor/index.php(48): cm__mswoo_idx->getAid('example.com:443')
+#6 /wordpress/wp-content/plugins/multistore-multivendor/index.php(26): cm__mswoo_idx->initMe()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('multistore-mult...')
+#9 /internal/eval.php(20): activate_plugin('multistore-mult...')
+#10 {main}</pre>
+ for query SELECT `ID` FROM wp_users WHERE MD5(TRIM(TRAILING '/' FROM `user_url`)) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR MD5(TRIM(TRAILING '/' FROM `user_url`)) = 'd6a959f37b73ddda6d85c7fbbe7780a2' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/multistore-multivendor/index.php'), cm__mswoo_idx->initMe, cm__mswoo_idx->getAid, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Jun-2025 14:01:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `ID` FROM wp_users WHERE MD5(TRIM(TRAILING '/' FROM `user_url`)) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR MD5(TRIM(TRAILING '/' FROM `user_url`)) = 'd6a959f37b73ddda6d85c7fbbe7780a2'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `ID` FROM `wp_users` WHERE `MD5` ( TRIM ( TRAILING '/' FROM `user_url` ) ) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR `MD5` ( TRIM ( TRAILING '/' FROM `user_url` ) ) = 'd6a959f37b73ddda6d85c7fbbe7780a2' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "'/'": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT `ID` FRO...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT `ID` FRO...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `ID` FRO...')
+#4 /wordpress/wp-content/plugins/multistore-multivendor/index.php(124): wpdb->get_var('SELECT `ID` FRO...')
+#5 /wordpress/wp-content/plugins/multistore-multivendor/index.php(48): cm__mswoo_idx->getAid('example.com:443')
+#6 /wordpress/wp-content/plugins/multistore-multivendor/index.php(26): cm__mswoo_idx->initMe()
+#7 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query SELECT `ID` FROM wp_users WHERE MD5(TRIM(TRAILING '/' FROM `user_url`)) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR MD5(TRIM(TRAILING '/' FROM `user_url`)) = 'd6a959f37b73ddda6d85c7fbbe7780a2' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/multistore-multivendor/index.php'), cm__mswoo_idx->initMe, cm__mswoo_idx->getAid, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Jun-2025 14:01:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `ID` FROM wp_users WHERE MD5(TRIM(TRAILING '/' FROM `user_url`)) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR MD5(TRIM(TRAILING '/' FROM `user_url`)) = 'd6a959f37b73ddda6d85c7fbbe7780a2'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `ID` FROM `wp_users` WHERE `MD5` ( TRIM ( TRAILING '/' FROM `user_url` ) ) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR `MD5` ( TRIM ( TRAILING '/' FROM `user_url` ) ) = 'd6a959f37b73ddda6d85c7fbbe7780a2' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "'/'": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT `ID` FRO...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT `ID` FRO...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `ID` FRO...')
+#4 /wordpress/wp-content/plugins/multistore-multivendor/index.php(124): wpdb->get_var('SELECT `ID` FRO...')
+#5 /wordpress/wp-content/plugins/multistore-multivendor/index.php(48): cm__mswoo_idx->getAid('example.com:443')
+#6 /wordpress/wp-content/plugins/multistore-multivendor/index.php(26): cm__mswoo_idx->initMe()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('multistore-mult...')
+#9 /internal/eval.php(20): activate_plugin('multistore-mult...')
+#10 {main}</pre>
+ for query SELECT `ID` FROM wp_users WHERE MD5(TRIM(TRAILING '/' FROM `user_url`)) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR MD5(TRIM(TRAILING '/' FROM `user_url`)) = 'd6a959f37b73ddda6d85c7fbbe7780a2' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/multistore-multivendor/index.php'), cm__mswoo_idx->initMe, cm__mswoo_idx->getAid, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Jun-2025 14:01:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `ID` FROM wp_users WHERE MD5(TRIM(TRAILING '/' FROM `user_url`)) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR MD5(TRIM(TRAILING '/' FROM `user_url`)) = 'd6a959f37b73ddda6d85c7fbbe7780a2'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `ID` FROM `wp_users` WHERE `MD5` ( TRIM ( TRAILING '/' FROM `user_url` ) ) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR `MD5` ( TRIM ( TRAILING '/' FROM `user_url` ) ) = 'd6a959f37b73ddda6d85c7fbbe7780a2' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "'/'": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT `ID` FRO...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT `ID` FRO...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `ID` FRO...')
+#4 /wordpress/wp-content/plugins/multistore-multivendor/index.php(124): wpdb->get_var('SELECT `ID` FRO...')
+#5 /wordpress/wp-content/plugins/multistore-multivendor/index.php(48): cm__mswoo_idx->getAid('example.com:443')
+#6 /wordpress/wp-content/plugins/multistore-multivendor/index.php(26): cm__mswoo_idx->initMe()
+#7 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query SELECT `ID` FROM wp_users WHERE MD5(TRIM(TRAILING '/' FROM `user_url`)) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR MD5(TRIM(TRAILING '/' FROM `user_url`)) = 'd6a959f37b73ddda6d85c7fbbe7780a2' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/multistore-multivendor/index.php'), cm__mswoo_idx->initMe, cm__mswoo_idx->getAid, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Jun-2025 14:02:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `ID` FROM wp_users WHERE MD5(TRIM(TRAILING '/' FROM `user_url`)) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR MD5(TRIM(TRAILING '/' FROM `user_url`)) = 'd6a959f37b73ddda6d85c7fbbe7780a2'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `ID` FROM `wp_users` WHERE `MD5` ( TRIM ( TRAILING '/' FROM `user_url` ) ) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR `MD5` ( TRIM ( TRAILING '/' FROM `user_url` ) ) = 'd6a959f37b73ddda6d85c7fbbe7780a2' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "'/'": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT `ID` FRO...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT `ID` FRO...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `ID` FRO...')
+#4 /wordpress/wp-content/plugins/multistore-multivendor/index.php(124): wpdb->get_var('SELECT `ID` FRO...')
+#5 /wordpress/wp-content/plugins/multistore-multivendor/index.php(48): cm__mswoo_idx->getAid('example.com:443')
+#6 /wordpress/wp-content/plugins/multistore-multivendor/index.php(26): cm__mswoo_idx->initMe()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('multistore-mult...')
+#9 /internal/eval.php(20): activate_plugin('multistore-mult...')
+#10 {main}</pre>
+ for query SELECT `ID` FROM wp_users WHERE MD5(TRIM(TRAILING '/' FROM `user_url`)) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR MD5(TRIM(TRAILING '/' FROM `user_url`)) = 'd6a959f37b73ddda6d85c7fbbe7780a2' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/multistore-multivendor/index.php'), cm__mswoo_idx->initMe, cm__mswoo_idx->getAid, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Jun-2025 14:02:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `ID` FROM wp_users WHERE MD5(TRIM(TRAILING '/' FROM `user_url`)) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR MD5(TRIM(TRAILING '/' FROM `user_url`)) = 'd6a959f37b73ddda6d85c7fbbe7780a2'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `ID` FROM `wp_users` WHERE `MD5` ( TRIM ( TRAILING '/' FROM `user_url` ) ) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR `MD5` ( TRIM ( TRAILING '/' FROM `user_url` ) ) = 'd6a959f37b73ddda6d85c7fbbe7780a2' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "'/'": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT `ID` FRO...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT `ID` FRO...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `ID` FRO...')
+#4 /wordpress/wp-content/plugins/multistore-multivendor/index.php(124): wpdb->get_var('SELECT `ID` FRO...')
+#5 /wordpress/wp-content/plugins/multistore-multivendor/index.php(48): cm__mswoo_idx->getAid('example.com:443')
+#6 /wordpress/wp-content/plugins/multistore-multivendor/index.php(26): cm__mswoo_idx->initMe()
+#7 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query SELECT `ID` FROM wp_users WHERE MD5(TRIM(TRAILING '/' FROM `user_url`)) = '096fa4e0e2fe15fb7eed3ee5ac364542' OR MD5(TRIM(TRAILING '/' FROM `user_url`)) = 'd6a959f37b73ddda6d85c7fbbe7780a2' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/multistore-multivendor/index.php'), cm__mswoo_idx->initMe, cm__mswoo_idx->getAid, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Jun-2025 14:02:50 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php:232
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): Jigoshop_de_DE::load_mo_file('/wordpress/wp-c...', 'default')
 #1 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters('/wordpress/wp-c...', Array)
@@ -20,7 +338,7 @@ Stack trace:
 #7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #8 {main}
   thrown in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php on line 232
-[15-Jun-2025 23:48:10 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php:232
+[17-Jun-2025 14:02:50 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php:232
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): Jigoshop_de_DE::load_mo_file('/wordpress/wp-c...', 'default')
 #1 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters('/wordpress/wp-c...', Array)
@@ -30,7 +348,7 @@ Stack trace:
 #5 [internal function]: WP_Fatal_Error_Handler->handle()
 #6 {main}
   thrown in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php on line 232
-[15-Jun-2025 23:48:20 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php:232
+[17-Jun-2025 14:03:02 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php:232
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): Jigoshop_de_DE::load_mo_file('/wordpress/wp-c...', 'default')
 #1 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters('/wordpress/wp-c...', Array)
@@ -42,7 +360,7 @@ Stack trace:
 #7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #8 {main}
   thrown in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php on line 232
-[15-Jun-2025 23:48:20 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php:232
+[17-Jun-2025 14:03:02 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php:232
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): Jigoshop_de_DE::load_mo_file('/wordpress/wp-c...', 'default')
 #1 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters('/wordpress/wp-c...', Array)
@@ -52,7 +370,7 @@ Stack trace:
 #5 [internal function]: WP_Fatal_Error_Handler->handle()
 #6 {main}
   thrown in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php on line 232
-[15-Jun-2025 23:48:31 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php:232
+[17-Jun-2025 14:03:13 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php:232
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): Jigoshop_de_DE::load_mo_file('/wordpress/wp-c...', 'default')
 #1 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters('/wordpress/wp-c...', Array)
@@ -64,7 +382,7 @@ Stack trace:
 #7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #8 {main}
   thrown in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php on line 232
-[15-Jun-2025 23:48:31 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php:232
+[17-Jun-2025 14:03:13 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/jigoshop-de/jigoshop-de.php:232
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): Jigoshop_de_DE::load_mo_file('/wordpress/wp-c...', 'default')
 #1 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters('/wordpress/wp-c...', Array)
