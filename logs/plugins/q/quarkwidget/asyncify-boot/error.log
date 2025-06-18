@@ -2,146 +2,113 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [16-Jun-2025 19:23:37 UTC] PHP Deprecated:  Required parameter $term_id follows optional parameter $key in /wordpress/wp-content/plugins/qtranslate-slug/includes/termmeta-core.php on line 218
-[16-Jun-2025 19:23:37 UTC] PHP Warning:  Undefined variable $max_index_length in /wordpress/wp-content/plugins/qtranslate-slug/includes/termmeta-core.php on line 23
-[16-Jun-2025 19:23:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [18-Jun-2025 12:54:41 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/qtranslate-x/admin/qtx_import_export.php on line 62
+[18-Jun-2025 12:54:42 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/qtranslate-x/qtranslate_frontend.php on line 497
+[18-Jun-2025 12:54:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_termmeta (
-		`meta_id` 				bigint(20) NOT NULL AUTO_INCREMENT,
-	  	`term_id` 				bigint(20) NOT NULL DEFAULT '0',
-	  	`meta_key` 				varchar(255) NULL,
-	  	`meta_value` 			longtext NULL,
-	  	PRIMARY KEY id (`meta_id`),
-      KEY term_id (term_id),
-      KEY meta_key (meta_key())
-      ) ;</p>
+<p>SELECT option_name FROM wp_options WHERE autoload='yes' AND (option_value LIKE '%![:__!]%' ESCAPE '!' OR option_value LIKE '%{:__}%' OR option_value LIKE '%<!--:__-->%')</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `option_name` FROM `wp_options` WHERE `autoload` = 'yes' AND ( `option_value` LIKE '%![:__!]%' ESCAPE '!' ESCAPE '\' OR `option_value` LIKE '%{:__}%' ESCAPE '\' OR `option_value` LIKE '%&lt;!--:__--&gt;%' ESCAPE '\' ) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 near "ESCAPE": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
-#3 /wordpress/wp-content/plugins/qtranslate-slug/includes/termmeta-core.php(25): WP_SQLite_DB->query('CREATE TABLE IF...')
-#4 /wordpress/wp-content/plugins/qtranslate-slug/includes/class-qtranslate-slug.php(308): install_term_meta_table()
-#5 /wordpress/wp-content/plugins/qtranslate-slug/includes/class-qtranslate-slug.php(286): QtranslateSlug->activate()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): QtranslateSlug->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_qtrans...', false)
-#10 /internal/eval.php(20): activate_plugin('qtranslate-slug...')
-#11 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_termmeta (
-		`meta_id` 				bigint(20) NOT NULL AUTO_INCREMENT,
-	  	`term_id` 				bigint(20) NOT NULL DEFAULT '0',
-	  	`meta_key` 				varchar(255) NULL,
-	  	`meta_value` 			longtext NULL,
-	  	PRIMARY KEY id (`meta_id`),
-      KEY term_id (term_id),
-      KEY meta_key (meta_key())
-      ) ; made by activate_plugin, do_action('activate_qtranslate-slug/qtranslate-slug.php'), WP_Hook->do_action, WP_Hook->apply_filters, QtranslateSlug->install, QtranslateSlug->activate, install_term_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Jun-2025 19:23:38 UTC] PHP Deprecated:  Required parameter $term_id follows optional parameter $key in /wordpress/wp-content/plugins/qtranslate-slug/includes/termmeta-core.php on line 218
-[16-Jun-2025 19:23:47 UTC] PHP Deprecated:  Required parameter $term_id follows optional parameter $key in /wordpress/wp-content/plugins/qtranslate-slug/includes/termmeta-core.php on line 218
-[16-Jun-2025 19:23:47 UTC] PHP Warning:  Undefined variable $max_index_length in /wordpress/wp-content/plugins/qtranslate-slug/includes/termmeta-core.php on line 23
-[16-Jun-2025 19:23:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT option_n...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT option_n...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT option_n...')
+#4 /wordpress/wp-content/plugins/qtranslate-x/qtranslate_frontend.php(454): wpdb->get_results('SELECT option_n...')
+#5 /wordpress/wp-content/plugins/qtranslate-x/qtranslate_frontend.php(468): qtranxf_filter_options()
+#6 /wordpress/wp-content/plugins/qtranslate-x/qtranslate_core.php(119): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): qtranxf_init_language('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query SELECT option_name FROM wp_options WHERE autoload='yes' AND (option_value LIKE '%![:__!]%' ESCAPE '!' OR option_value LIKE '%{:__}%' OR option_value LIKE '%<!--:__-->%') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, qtranxf_init_language, require_once('/plugins/qtranslate-x/qtranslate_frontend.php'), qtranxf_filter_options, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jun-2025 12:54:53 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/qtranslate-x/admin/qtx_import_export.php on line 62
+[18-Jun-2025 12:54:55 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/qtranslate-x/qtranslate_frontend.php on line 497
+[18-Jun-2025 12:54:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_termmeta (
-		`meta_id` 				bigint(20) NOT NULL AUTO_INCREMENT,
-	  	`term_id` 				bigint(20) NOT NULL DEFAULT '0',
-	  	`meta_key` 				varchar(255) NULL,
-	  	`meta_value` 			longtext NULL,
-	  	PRIMARY KEY id (`meta_id`),
-      KEY term_id (term_id),
-      KEY meta_key (meta_key())
-      ) ;</p>
+<p>SELECT option_name FROM wp_options WHERE autoload='yes' AND (option_value LIKE '%![:__!]%' ESCAPE '!' OR option_value LIKE '%{:__}%' OR option_value LIKE '%<!--:__-->%')</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `option_name` FROM `wp_options` WHERE `autoload` = 'yes' AND ( `option_value` LIKE '%![:__!]%' ESCAPE '!' ESCAPE '\' OR `option_value` LIKE '%{:__}%' ESCAPE '\' OR `option_value` LIKE '%&lt;!--:__--&gt;%' ESCAPE '\' ) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 near "ESCAPE": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
-#3 /wordpress/wp-content/plugins/qtranslate-slug/includes/termmeta-core.php(25): WP_SQLite_DB->query('CREATE TABLE IF...')
-#4 /wordpress/wp-content/plugins/qtranslate-slug/includes/class-qtranslate-slug.php(308): install_term_meta_table()
-#5 /wordpress/wp-content/plugins/qtranslate-slug/includes/class-qtranslate-slug.php(286): QtranslateSlug->activate()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): QtranslateSlug->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_qtrans...', false)
-#10 /internal/eval.php(20): activate_plugin('qtranslate-slug...')
-#11 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_termmeta (
-		`meta_id` 				bigint(20) NOT NULL AUTO_INCREMENT,
-	  	`term_id` 				bigint(20) NOT NULL DEFAULT '0',
-	  	`meta_key` 				varchar(255) NULL,
-	  	`meta_value` 			longtext NULL,
-	  	PRIMARY KEY id (`meta_id`),
-      KEY term_id (term_id),
-      KEY meta_key (meta_key())
-      ) ; made by activate_plugin, do_action('activate_qtranslate-slug/qtranslate-slug.php'), WP_Hook->do_action, WP_Hook->apply_filters, QtranslateSlug->install, QtranslateSlug->activate, install_term_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Jun-2025 19:23:48 UTC] PHP Deprecated:  Required parameter $term_id follows optional parameter $key in /wordpress/wp-content/plugins/qtranslate-slug/includes/termmeta-core.php on line 218
-[16-Jun-2025 19:23:57 UTC] PHP Deprecated:  Required parameter $term_id follows optional parameter $key in /wordpress/wp-content/plugins/qtranslate-slug/includes/termmeta-core.php on line 218
-[16-Jun-2025 19:23:57 UTC] PHP Warning:  Undefined variable $max_index_length in /wordpress/wp-content/plugins/qtranslate-slug/includes/termmeta-core.php on line 23
-[16-Jun-2025 19:23:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT option_n...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT option_n...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT option_n...')
+#4 /wordpress/wp-content/plugins/qtranslate-x/qtranslate_frontend.php(454): wpdb->get_results('SELECT option_n...')
+#5 /wordpress/wp-content/plugins/qtranslate-x/qtranslate_frontend.php(468): qtranxf_filter_options()
+#6 /wordpress/wp-content/plugins/qtranslate-x/qtranslate_core.php(119): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): qtranxf_init_language('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query SELECT option_name FROM wp_options WHERE autoload='yes' AND (option_value LIKE '%![:__!]%' ESCAPE '!' OR option_value LIKE '%{:__}%' OR option_value LIKE '%<!--:__-->%') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, qtranxf_init_language, require_once('/plugins/qtranslate-x/qtranslate_frontend.php'), qtranxf_filter_options, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jun-2025 12:55:05 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/qtranslate-x/admin/qtx_import_export.php on line 62
+[18-Jun-2025 12:55:06 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/qtranslate-x/qtranslate_frontend.php on line 497
+[18-Jun-2025 12:55:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_termmeta (
-		`meta_id` 				bigint(20) NOT NULL AUTO_INCREMENT,
-	  	`term_id` 				bigint(20) NOT NULL DEFAULT '0',
-	  	`meta_key` 				varchar(255) NULL,
-	  	`meta_value` 			longtext NULL,
-	  	PRIMARY KEY id (`meta_id`),
-      KEY term_id (term_id),
-      KEY meta_key (meta_key())
-      ) ;</p>
+<p>SELECT option_name FROM wp_options WHERE autoload='yes' AND (option_value LIKE '%![:__!]%' ESCAPE '!' OR option_value LIKE '%{:__}%' OR option_value LIKE '%<!--:__-->%')</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `option_name` FROM `wp_options` WHERE `autoload` = 'yes' AND ( `option_value` LIKE '%![:__!]%' ESCAPE '!' ESCAPE '\' OR `option_value` LIKE '%{:__}%' ESCAPE '\' OR `option_value` LIKE '%&lt;!--:__--&gt;%' ESCAPE '\' ) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 near "ESCAPE": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
-#3 /wordpress/wp-content/plugins/qtranslate-slug/includes/termmeta-core.php(25): WP_SQLite_DB->query('CREATE TABLE IF...')
-#4 /wordpress/wp-content/plugins/qtranslate-slug/includes/class-qtranslate-slug.php(308): install_term_meta_table()
-#5 /wordpress/wp-content/plugins/qtranslate-slug/includes/class-qtranslate-slug.php(286): QtranslateSlug->activate()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): QtranslateSlug->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_qtrans...', false)
-#10 /internal/eval.php(20): activate_plugin('qtranslate-slug...')
-#11 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_termmeta (
-		`meta_id` 				bigint(20) NOT NULL AUTO_INCREMENT,
-	  	`term_id` 				bigint(20) NOT NULL DEFAULT '0',
-	  	`meta_key` 				varchar(255) NULL,
-	  	`meta_value` 			longtext NULL,
-	  	PRIMARY KEY id (`meta_id`),
-      KEY term_id (term_id),
-      KEY meta_key (meta_key())
-      ) ; made by activate_plugin, do_action('activate_qtranslate-slug/qtranslate-slug.php'), WP_Hook->do_action, WP_Hook->apply_filters, QtranslateSlug->install, QtranslateSlug->activate, install_term_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Jun-2025 19:23:58 UTC] PHP Deprecated:  Required parameter $term_id follows optional parameter $key in /wordpress/wp-content/plugins/qtranslate-slug/includes/termmeta-core.php on line 218
-[16-Jun-2025 19:26:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/quarkwidget/qrkdonation.php:64
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT option_n...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT option_n...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT option_n...')
+#4 /wordpress/wp-content/plugins/qtranslate-x/qtranslate_frontend.php(454): wpdb->get_results('SELECT option_n...')
+#5 /wordpress/wp-content/plugins/qtranslate-x/qtranslate_frontend.php(468): qtranxf_filter_options()
+#6 /wordpress/wp-content/plugins/qtranslate-x/qtranslate_core.php(119): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): qtranxf_init_language('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query SELECT option_name FROM wp_options WHERE autoload='yes' AND (option_value LIKE '%![:__!]%' ESCAPE '!' OR option_value LIKE '%{:__}%' OR option_value LIKE '%<!--:__-->%') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, qtranxf_init_language, require_once('/plugins/qtranslate-x/qtranslate_frontend.php'), qtranxf_filter_options, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jun-2025 12:57:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/quarkwidget/qrkdonation.php:64
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('quarkwidget/qrk...')
 #2 /internal/eval.php(20): activate_plugin('quarkwidget/qrk...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/quarkwidget/qrkdonation.php on line 64
-[16-Jun-2025 19:26:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/quarkwidget/qrkdonation.php:64
+[18-Jun-2025 12:57:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/quarkwidget/qrkdonation.php:64
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('quarkwidget/qrk...')
