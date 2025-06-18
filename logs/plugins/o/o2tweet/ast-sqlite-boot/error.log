@@ -2,18 +2,249 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [16-Jun-2025 13:17:14 UTC] PHP Deprecated:  Required parameter $source_array follows optional parameter $prefix in /wordpress/wp-content/plugins/numly-numbers/numly_functions.php on line 78
-[16-Jun-2025 13:17:15 UTC] PHP Deprecated:  Required parameter $source_array follows optional parameter $prefix in /wordpress/wp-content/plugins/numly-numbers/numly_functions.php on line 78
-[16-Jun-2025 13:17:23 UTC] PHP Deprecated:  Required parameter $source_array follows optional parameter $prefix in /wordpress/wp-content/plugins/numly-numbers/numly_functions.php on line 78
-[16-Jun-2025 13:17:24 UTC] PHP Deprecated:  Required parameter $source_array follows optional parameter $prefix in /wordpress/wp-content/plugins/numly-numbers/numly_functions.php on line 78
-[16-Jun-2025 13:17:33 UTC] PHP Deprecated:  Required parameter $source_array follows optional parameter $prefix in /wordpress/wp-content/plugins/numly-numbers/numly_functions.php on line 78
-[16-Jun-2025 13:17:34 UTC] PHP Deprecated:  Required parameter $source_array follows optional parameter $prefix in /wordpress/wp-content/plugins/numly-numbers/numly_functions.php on line 78
-[16-Jun-2025 13:21:40 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[16-Jun-2025 13:21:40 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/o2tweet/functions.php on line 4
-[16-Jun-2025 13:21:40 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/o2tweet/functions.php on line 4
-[16-Jun-2025 13:21:40 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/o2tweet/o2tweet.php on line 12
-[16-Jun-2025 13:21:40 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/o2tweet/o2tweet.php on line 12
-[16-Jun-2025 13:21:40 UTC] PHP Fatal error:  Uncaught Error: Attempt to assign property "o2t" on null in /wordpress/wp-content/plugins/o2tweet/o2tweet.php:12
+Error: [18-Jun-2025 05:53:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+                                    SELECT comments.comment_ID
+                                    FROM wp_comments AS comments
+                                        LEFT JOIN wp_commentmeta AS commentmeta ON (comments.comment_ID = commentmeta.comment_id)
+                                        LEFT JOIN wp_posts AS post ON (posts.ID=comments.comment_post_ID)
+                                    WHERE comments.comment_approved = 1 AND comments.comment_type != 'pingback'
+                                        AND (commentmeta.meta_key !=  'nnx' OR commentmeta.meta_id IS NULL)
+                                        AND posts.post_status = 'publish'
+                                    ORDER BY comments.comment_ID DESC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `comments`.`comment_ID` FROM `wp_comments` AS `comments` LEFT JOIN `wp_commentmeta` AS `commentmeta` ON ( `comments`.`comment_ID` = `commentmeta`.`comment_id` ) LEFT JOIN `wp_posts` AS `post` ON ( `posts`.`ID` = `comments`.`comment_post_ID` ) WHERE `comments`.`comment_approved` = 1 AND `comments`.`comment_type` != 'pingback' AND ( `commentmeta`.`meta_key` != 'nnx' OR `commentmeta`.`meta_id` IS NULL ) AND `posts`.`post_status` = 'publish' ORDER BY `comments`.`comment_ID` DESC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: posts.post_status
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('\n              ...')
+#4 /wordpress/wp-content/plugins/nuffnangx-conversation/conversation.php(42): wpdb->get_var('\n              ...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): nnx_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nuffna...', false)
+#9 /internal/eval.php(20): activate_plugin('nuffnangx-conve...')
+#10 {main}</pre>
+ for query 
+                                    SELECT comments.comment_ID
+                                    FROM wp_comments AS comments
+                                        LEFT JOIN wp_commentmeta AS commentmeta ON (comments.comment_ID = commentmeta.comment_id)
+                                        LEFT JOIN wp_posts AS post ON (posts.ID=comments.comment_post_ID)
+                                    WHERE comments.comment_approved = 1 AND comments.comment_type != 'pingback'
+                                        AND (commentmeta.meta_key !=  'nnx' OR commentmeta.meta_id IS NULL)
+                                        AND posts.post_status = 'publish'
+                                    ORDER BY comments.comment_ID DESC LIMIT 1 made by activate_plugin, do_action('activate_nuffnangx-conversation/conversation.php'), WP_Hook->do_action, WP_Hook->apply_filters, nnx_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jun-2025 05:54:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+                                    SELECT comments.comment_ID
+                                    FROM wp_comments AS comments
+                                        LEFT JOIN wp_commentmeta AS commentmeta ON (comments.comment_ID = commentmeta.comment_id)
+                                        LEFT JOIN wp_posts AS post ON (posts.ID=comments.comment_post_ID)
+                                    WHERE comments.comment_approved = 1 AND comments.comment_type != 'pingback'
+                                        AND (commentmeta.meta_key !=  'nnx' OR commentmeta.meta_id IS NULL)
+                                        AND posts.post_status = 'publish'
+                                    ORDER BY comments.comment_ID DESC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `comments`.`comment_ID` FROM `wp_comments` AS `comments` LEFT JOIN `wp_commentmeta` AS `commentmeta` ON ( `comments`.`comment_ID` = `commentmeta`.`comment_id` ) LEFT JOIN `wp_posts` AS `post` ON ( `posts`.`ID` = `comments`.`comment_post_ID` ) WHERE `comments`.`comment_approved` = 1 AND `comments`.`comment_type` != 'pingback' AND ( `commentmeta`.`meta_key` != 'nnx' OR `commentmeta`.`meta_id` IS NULL ) AND `posts`.`post_status` = 'publish' ORDER BY `comments`.`comment_ID` DESC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: posts.post_status
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('\n              ...')
+#4 /wordpress/wp-content/plugins/nuffnangx-conversation/conversation.php(42): wpdb->get_var('\n              ...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): nnx_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nuffna...', false)
+#9 /internal/eval.php(20): activate_plugin('nuffnangx-conve...')
+#10 {main}</pre>
+ for query 
+                                    SELECT comments.comment_ID
+                                    FROM wp_comments AS comments
+                                        LEFT JOIN wp_commentmeta AS commentmeta ON (comments.comment_ID = commentmeta.comment_id)
+                                        LEFT JOIN wp_posts AS post ON (posts.ID=comments.comment_post_ID)
+                                    WHERE comments.comment_approved = 1 AND comments.comment_type != 'pingback'
+                                        AND (commentmeta.meta_key !=  'nnx' OR commentmeta.meta_id IS NULL)
+                                        AND posts.post_status = 'publish'
+                                    ORDER BY comments.comment_ID DESC LIMIT 1 made by activate_plugin, do_action('activate_nuffnangx-conversation/conversation.php'), WP_Hook->do_action, WP_Hook->apply_filters, nnx_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jun-2025 05:54:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+                                    SELECT comments.comment_ID
+                                    FROM wp_comments AS comments
+                                        LEFT JOIN wp_commentmeta AS commentmeta ON (comments.comment_ID = commentmeta.comment_id)
+                                        LEFT JOIN wp_posts AS post ON (posts.ID=comments.comment_post_ID)
+                                    WHERE comments.comment_approved = 1 AND comments.comment_type != 'pingback'
+                                        AND (commentmeta.meta_key !=  'nnx' OR commentmeta.meta_id IS NULL)
+                                        AND posts.post_status = 'publish'
+                                    ORDER BY comments.comment_ID DESC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `comments`.`comment_ID` FROM `wp_comments` AS `comments` LEFT JOIN `wp_commentmeta` AS `commentmeta` ON ( `comments`.`comment_ID` = `commentmeta`.`comment_id` ) LEFT JOIN `wp_posts` AS `post` ON ( `posts`.`ID` = `comments`.`comment_post_ID` ) WHERE `comments`.`comment_approved` = 1 AND `comments`.`comment_type` != 'pingback' AND ( `commentmeta`.`meta_key` != 'nnx' OR `commentmeta`.`meta_id` IS NULL ) AND `posts`.`post_status` = 'publish' ORDER BY `comments`.`comment_ID` DESC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: posts.post_status
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('\n              ...')
+#4 /wordpress/wp-content/plugins/nuffnangx-conversation/conversation.php(42): wpdb->get_var('\n              ...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): nnx_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nuffna...', false)
+#9 /internal/eval.php(20): activate_plugin('nuffnangx-conve...')
+#10 {main}</pre>
+ for query 
+                                    SELECT comments.comment_ID
+                                    FROM wp_comments AS comments
+                                        LEFT JOIN wp_commentmeta AS commentmeta ON (comments.comment_ID = commentmeta.comment_id)
+                                        LEFT JOIN wp_posts AS post ON (posts.ID=comments.comment_post_ID)
+                                    WHERE comments.comment_approved = 1 AND comments.comment_type != 'pingback'
+                                        AND (commentmeta.meta_key !=  'nnx' OR commentmeta.meta_id IS NULL)
+                                        AND posts.post_status = 'publish'
+                                    ORDER BY comments.comment_ID DESC LIMIT 1 made by activate_plugin, do_action('activate_nuffnangx-conversation/conversation.php'), WP_Hook->do_action, WP_Hook->apply_filters, nnx_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jun-2025 05:56:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT plugin_status FROM wp_nuropedia_status where id=1 </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `plugin_status` FROM `wp_nuropedia_status` where `id` = 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_nuropedia_status
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT plugin_s...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT plugin_s...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT plugin_s...')
+#4 /wordpress/wp-content/plugins/nuropedia/Nuropedia.php(26): wpdb->get_var('SELECT plugin_s...')
+#5 /wordpress/wp-content/plugins/nuropedia/Nuropedia.php(40): Nuro_Status()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nuropedia/Nurop...')
+#8 /internal/eval.php(20): activate_plugin('nuropedia/Nurop...')
+#9 {main}</pre>
+ for query SELECT plugin_status FROM wp_nuropedia_status where id=1  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nuropedia/Nuropedia.php'), Nuro_Status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jun-2025 05:56:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT plugin_status FROM wp_nuropedia_status where id=1 </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `plugin_status` FROM `wp_nuropedia_status` where `id` = 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_nuropedia_status
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT plugin_s...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT plugin_s...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT plugin_s...')
+#4 /wordpress/wp-content/plugins/nuropedia/Nuropedia.php(26): wpdb->get_var('SELECT plugin_s...')
+#5 /wordpress/wp-content/plugins/nuropedia/Nuropedia.php(40): Nuro_Status()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nuropedia/Nurop...')
+#8 /internal/eval.php(20): activate_plugin('nuropedia/Nurop...')
+#9 {main}</pre>
+ for query SELECT plugin_status FROM wp_nuropedia_status where id=1  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nuropedia/Nuropedia.php'), Nuro_Status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jun-2025 05:57:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT plugin_status FROM wp_nuropedia_status where id=1 </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `plugin_status` FROM `wp_nuropedia_status` where `id` = 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_nuropedia_status
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT plugin_s...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT plugin_s...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT plugin_s...')
+#4 /wordpress/wp-content/plugins/nuropedia/Nuropedia.php(26): wpdb->get_var('SELECT plugin_s...')
+#5 /wordpress/wp-content/plugins/nuropedia/Nuropedia.php(40): Nuro_Status()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nuropedia/Nurop...')
+#8 /internal/eval.php(20): activate_plugin('nuropedia/Nurop...')
+#9 {main}</pre>
+ for query SELECT plugin_status FROM wp_nuropedia_status where id=1  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nuropedia/Nuropedia.php'), Nuro_Status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jun-2025 05:58:37 UTC] PHP Fatal error:  Uncaught Error: Non-static method NW_Company_Profile::activation_common() cannot be called statically in /wordpress/wp-content/plugins/nw-company-profile/nw-company-profile.php:403
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): NW_Company_Profile::myplugin_activation(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nw-com...', false)
+#4 /internal/eval.php(20): activate_plugin('nw-company-prof...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/nw-company-profile/nw-company-profile.php on line 403
+[18-Jun-2025 05:58:45 UTC] PHP Fatal error:  Uncaught Error: Non-static method NW_Company_Profile::activation_common() cannot be called statically in /wordpress/wp-content/plugins/nw-company-profile/nw-company-profile.php:403
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): NW_Company_Profile::myplugin_activation(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nw-com...', false)
+#4 /internal/eval.php(20): activate_plugin('nw-company-prof...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/nw-company-profile/nw-company-profile.php on line 403
+[18-Jun-2025 05:58:54 UTC] PHP Fatal error:  Uncaught Error: Non-static method NW_Company_Profile::activation_common() cannot be called statically in /wordpress/wp-content/plugins/nw-company-profile/nw-company-profile.php:403
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): NW_Company_Profile::myplugin_activation(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nw-com...', false)
+#4 /internal/eval.php(20): activate_plugin('nw-company-prof...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/nw-company-profile/nw-company-profile.php on line 403
+[18-Jun-2025 05:59:03 UTC] PHP Fatal error:  Cannot re-assign auto-global variable _POST in /wordpress/wp-content/plugins/nwp-slideshow/funcs-backend.php on line 32
+[18-Jun-2025 05:59:11 UTC] PHP Fatal error:  Cannot re-assign auto-global variable _POST in /wordpress/wp-content/plugins/nwp-slideshow/funcs-backend.php on line 32
+[18-Jun-2025 05:59:20 UTC] PHP Fatal error:  Cannot re-assign auto-global variable _POST in /wordpress/wp-content/plugins/nwp-slideshow/funcs-backend.php on line 32
+[18-Jun-2025 06:00:25 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[18-Jun-2025 06:00:25 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/o2tweet/functions.php on line 4
+[18-Jun-2025 06:00:25 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/o2tweet/functions.php on line 4
+[18-Jun-2025 06:00:25 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/o2tweet/o2tweet.php on line 12
+[18-Jun-2025 06:00:25 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/o2tweet/o2tweet.php on line 12
+[18-Jun-2025 06:00:25 UTC] PHP Fatal error:  Uncaught Error: Attempt to assign property "o2t" on null in /wordpress/wp-content/plugins/o2tweet/o2tweet.php:12
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('o2tweet/o2tweet...')
