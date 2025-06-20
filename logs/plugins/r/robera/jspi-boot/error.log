@@ -2,193 +2,22 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [18-Jun-2025 18:59:53 UTC] PHP Warning:  Undefined array key "showup" in /wordpress/wp-content/plugins/sourcecode-tag-adder/addsrc-options.php on line 3
-[18-Jun-2025 18:59:54 UTC] PHP Warning:  Undefined array key "showup" in /wordpress/wp-content/plugins/sourcecode-tag-adder/addsrc-options.php on line 3
-[18-Jun-2025 19:00:03 UTC] PHP Warning:  Undefined array key "showup" in /wordpress/wp-content/plugins/sourcecode-tag-adder/addsrc-options.php on line 3
-[18-Jun-2025 19:00:04 UTC] PHP Warning:  Undefined array key "showup" in /wordpress/wp-content/plugins/sourcecode-tag-adder/addsrc-options.php on line 3
-[18-Jun-2025 19:00:12 UTC] PHP Warning:  Undefined array key "showup" in /wordpress/wp-content/plugins/sourcecode-tag-adder/addsrc-options.php on line 3
-[18-Jun-2025 19:00:13 UTC] PHP Warning:  Undefined array key "showup" in /wordpress/wp-content/plugins/sourcecode-tag-adder/addsrc-options.php on line 3
-[18-Jun-2025 19:00:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT `wp_posts`.`ID` , `wp_posts`.`post_title` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock' LIMIT 1 ) as `_stock` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock_status' LIMIT 1 ) as `_stock_status` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_regular_price' LIMIT 1 ) as `_regular_price` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_sale_price' LIMIT 1 ) as `_sale_price` , ( SELECT GROUP_CONCAT ( `CONCAT_WS` ( ':' , `t`.`term_id` , `t`.`name` ) ) FROM `wp_term_relationships` `tr` INNER JOIN `wp_term_taxonomy` `tt` ON `tr`.`term_taxonomy_id` = `tt`.`term_taxonomy_id` INNER JOIN `wp_terms` `t` ON `t`.`term_id` = `tt`.`term_id` WHERE `tr`.`object_id` = `wp_posts`.`ID` AND `tt`.`taxonomy` = 'product_type' LIMIT 1 ) as `product_type` From `wp_posts` WHERE `wp_posts`.`post_type` IN ( 'product' , 'product_variation' ) AND `wp_posts`.`post_status` IN ( 'publish' ) GROUP BY `wp_posts`.`ID` ORDER BY `wp_posts`.`post_date` ASC LIMIT 100 OFFSET 0 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: CONCAT_WS
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT wp_posts...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT wp_posts...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT wp_posts...')
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(310): wpdb->get_results('SELECT wp_posts...')
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(342): StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data(NULL, 0, 0, Array, true)
-#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(727): do_action('init')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced, StockSyncWithGoogleSheetForWooCommerce\Product->sync_all, StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products, StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data, StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[18-Jun-2025 19:00:55 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php:344
-Stack trace:
-#0 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(344): count('<div style="cle...')
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}
-  thrown in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php on line 344
-[18-Jun-2025 19:01:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT `wp_posts`.`ID` , `wp_posts`.`post_title` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock' LIMIT 1 ) as `_stock` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock_status' LIMIT 1 ) as `_stock_status` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_regular_price' LIMIT 1 ) as `_regular_price` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_sale_price' LIMIT 1 ) as `_sale_price` , ( SELECT GROUP_CONCAT ( `CONCAT_WS` ( ':' , `t`.`term_id` , `t`.`name` ) ) FROM `wp_term_relationships` `tr` INNER JOIN `wp_term_taxonomy` `tt` ON `tr`.`term_taxonomy_id` = `tt`.`term_taxonomy_id` INNER JOIN `wp_terms` `t` ON `t`.`term_id` = `tt`.`term_id` WHERE `tr`.`object_id` = `wp_posts`.`ID` AND `tt`.`taxonomy` = 'product_type' LIMIT 1 ) as `product_type` From `wp_posts` WHERE `wp_posts`.`post_type` IN ( 'product' , 'product_variation' ) AND `wp_posts`.`post_status` IN ( 'publish' ) GROUP BY `wp_posts`.`ID` ORDER BY `wp_posts`.`post_date` ASC LIMIT 100 OFFSET 0 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: CONCAT_WS
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT wp_posts...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT wp_posts...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT wp_posts...')
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(310): wpdb->get_results('SELECT wp_posts...')
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(342): StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data(NULL, 0, 0, Array, true)
-#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(727): do_action('init')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced, StockSyncWithGoogleSheetForWooCommerce\Product->sync_all, StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products, StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data, StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[18-Jun-2025 19:01:06 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php:344
-Stack trace:
-#0 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(344): count('<div style="cle...')
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}
-  thrown in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php on line 344
-[18-Jun-2025 19:01:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT `wp_posts`.`ID` , `wp_posts`.`post_title` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock' LIMIT 1 ) as `_stock` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock_status' LIMIT 1 ) as `_stock_status` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_regular_price' LIMIT 1 ) as `_regular_price` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_sale_price' LIMIT 1 ) as `_sale_price` , ( SELECT GROUP_CONCAT ( `CONCAT_WS` ( ':' , `t`.`term_id` , `t`.`name` ) ) FROM `wp_term_relationships` `tr` INNER JOIN `wp_term_taxonomy` `tt` ON `tr`.`term_taxonomy_id` = `tt`.`term_taxonomy_id` INNER JOIN `wp_terms` `t` ON `t`.`term_id` = `tt`.`term_id` WHERE `tr`.`object_id` = `wp_posts`.`ID` AND `tt`.`taxonomy` = 'product_type' LIMIT 1 ) as `product_type` From `wp_posts` WHERE `wp_posts`.`post_type` IN ( 'product' , 'product_variation' ) AND `wp_posts`.`post_status` IN ( 'publish' ) GROUP BY `wp_posts`.`ID` ORDER BY `wp_posts`.`post_date` ASC LIMIT 100 OFFSET 0 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: CONCAT_WS
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT wp_posts...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT wp_posts...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT wp_posts...')
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(310): wpdb->get_results('SELECT wp_posts...')
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(342): StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data(NULL, 0, 0, Array, true)
-#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(727): do_action('init')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced, StockSyncWithGoogleSheetForWooCommerce\Product->sync_all, StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products, StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data, StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[18-Jun-2025 19:01:18 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php:344
-Stack trace:
-#0 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(344): count('<div style="cle...')
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}
-  thrown in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php on line 344
-[18-Jun-2025 19:02:25 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method RequestAccess::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_reques...', false)
-#3 /internal/eval.php(20): activate_plugin('request-access/...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[18-Jun-2025 19:02:33 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method RequestAccess::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_reques...', false)
-#3 /internal/eval.php(20): activate_plugin('request-access/...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[18-Jun-2025 19:02:42 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method RequestAccess::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_reques...', false)
-#3 /internal/eval.php(20): activate_plugin('request-access/...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[18-Jun-2025 19:04:19 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/retina-post/request.php on line 28
-[18-Jun-2025 19:04:27 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/retina-post/request.php on line 28
-[18-Jun-2025 19:04:36 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/retina-post/request.php on line 28
-[18-Jun-2025 19:08:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
-[18-Jun-2025 19:08:28 UTC] [RECOMMENDER] --- Sending client secret.
-[18-Jun-2025 19:08:28 UTC] [RECOMMENDER] --- 
-[18-Jun-2025 19:08:28 UTC] true
-[18-Jun-2025 19:08:28 UTC] activate with secret token: BD.|_UAFywNsdhPU*OqdDW~^*G.D0BRDW!_3&$2IbeBiKI)M*XD!U[836Yi0aRX.AdAmiy@h8v_RtP2Xug{CD:K4aVQ:*;H3$n}kd[JT}rY&PGs=CecJ.cxh^3zE]LrzG`N{hqKf:Gbiaqk)Wy};~`)J0lU[.Lj*K]Mom6;Z!NH2ot{e7vLqE2ky:DG0E~bKz$uO1JX)hz3mFdlY7;idb;EiaWGxO)@x{nSd4`$UwC^/A`bY%q:sYXnM^~eCUj^a
-[18-Jun-2025 19:08:31 UTC] [RECOMMENDER] --- Trying to send client secret.
-[18-Jun-2025 19:08:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
-[18-Jun-2025 19:08:41 UTC] [RECOMMENDER] --- Sending client secret.
-[18-Jun-2025 19:08:41 UTC] [RECOMMENDER] --- 
-[18-Jun-2025 19:08:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Recommender\wc_get_products() in /wordpress/wp-content/plugins/robera/core/recommender-admin.php:114
+Error: [20-Jun-2025 11:27:01 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[20-Jun-2025 11:27:01 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[20-Jun-2025 11:27:10 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[20-Jun-2025 11:27:10 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[20-Jun-2025 11:27:20 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[20-Jun-2025 11:27:20 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[20-Jun-2025 11:28:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
+[20-Jun-2025 11:28:40 UTC] [RECOMMENDER] --- Sending client secret.
+[20-Jun-2025 11:28:40 UTC] [RECOMMENDER] --- 
+[20-Jun-2025 11:28:40 UTC] true
+[20-Jun-2025 11:28:40 UTC] activate with secret token: LCwj%H9wnbTy7~fIDYk^o=5vH]0KsI!6s0Z;D!6YAWXWbf=FMu6pCx7}Yi1_=r&T.yT7|LV%A%XcMPSpB(h@$Be5!`x&{`JK%9YCrhaC2g)RM&6ZTmYyb=C;z)J}4aFcFw~PKuXx~x*Ccd*7E~QP&!!1Mxaeq]YBmT=.b173xwMbMj$Dkuu_K=^MR9aSvY){%0S!=zHdE(C^d6|`=*OkCLD7`5EX9p[C*.s3{{/WLijwZs`|/l=YxeS9qZQpFvn{
+[20-Jun-2025 11:28:42 UTC] [RECOMMENDER] --- Trying to send client secret.
+[20-Jun-2025 11:28:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
+[20-Jun-2025 11:28:52 UTC] [RECOMMENDER] --- Sending client secret.
+[20-Jun-2025 11:28:52 UTC] [RECOMMENDER] --- 
+[20-Jun-2025 11:28:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Recommender\wc_get_products() in /wordpress/wp-content/plugins/robera/core/recommender-admin.php:114
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): Recommender\RecommenderAdmin->registerUserRecommendationsBlock('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
@@ -199,16 +28,16 @@ Stack trace:
 #6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #7 {main}
   thrown in /wordpress/wp-content/plugins/robera/core/recommender-admin.php on line 114
-[18-Jun-2025 19:09:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
-[18-Jun-2025 19:09:04 UTC] [RECOMMENDER] --- Sending client secret.
-[18-Jun-2025 19:09:04 UTC] [RECOMMENDER] --- 
-[18-Jun-2025 19:09:04 UTC] true
-[18-Jun-2025 19:09:04 UTC] activate with secret token: HX`%Bz:@!2|33r_is!Q_N|%LM:osq9X}d*/aYrUK!H^zHCqx)%4bn2[7q&n|)Dkld36reFpKH0%KC@3i4Kt6G&M4YBYezzZyJq/0|/PeAlmi2T;x/g0TCFruv53M)`&*~Dvx@$w=D@WZjVP|Knv1!mQHcSF0am.1j[~{ezei:[YzcY}DVM|M~g9Tr)cASe[5l[6Cs9)cm}(^[4YB4=GhMAW]4tIM0$q]_&]Er3[jNVXmTO%kR/kMw77j&*ZdfbKC
-[18-Jun-2025 19:09:06 UTC] [RECOMMENDER] --- Trying to send client secret.
-[18-Jun-2025 19:09:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
-[18-Jun-2025 19:09:16 UTC] [RECOMMENDER] --- Sending client secret.
-[18-Jun-2025 19:09:16 UTC] [RECOMMENDER] --- 
-[18-Jun-2025 19:09:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Recommender\wc_get_products() in /wordpress/wp-content/plugins/robera/core/recommender-admin.php:114
+[20-Jun-2025 11:29:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
+[20-Jun-2025 11:29:15 UTC] [RECOMMENDER] --- Sending client secret.
+[20-Jun-2025 11:29:15 UTC] [RECOMMENDER] --- 
+[20-Jun-2025 11:29:15 UTC] true
+[20-Jun-2025 11:29:15 UTC] activate with secret token: Nx`%D7!U2@OZYn*7Onxa@Y7_C;&.|Tu{aeSUS`2Y}/z05082VO(R.8A)vL.@NE8fWWDFkg0HKD;iT78[j*Xx!Mt[CMkedNG$XHJs=FqgngL]=kOwaGdk@D)Y(CD$h3rSEN~IR1%H/fF7oj0FjZ@2%azBH0%4ooaI0CU9Eh(0wz~/nc59akqTP`.$.V0d/e~5_0G!Ka*Y[7[Qxb!)LgE6NQ^Lik(ndYOFf[;|an}NVN_Y%rjjuFfoU(BC/7!F|)S8
+[20-Jun-2025 11:29:17 UTC] [RECOMMENDER] --- Trying to send client secret.
+[20-Jun-2025 11:29:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
+[20-Jun-2025 11:29:27 UTC] [RECOMMENDER] --- Sending client secret.
+[20-Jun-2025 11:29:27 UTC] [RECOMMENDER] --- 
+[20-Jun-2025 11:29:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Recommender\wc_get_products() in /wordpress/wp-content/plugins/robera/core/recommender-admin.php:114
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): Recommender\RecommenderAdmin->registerUserRecommendationsBlock('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
@@ -219,16 +48,16 @@ Stack trace:
 #6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #7 {main}
   thrown in /wordpress/wp-content/plugins/robera/core/recommender-admin.php on line 114
-[18-Jun-2025 19:09:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
-[18-Jun-2025 19:09:38 UTC] [RECOMMENDER] --- Sending client secret.
-[18-Jun-2025 19:09:38 UTC] [RECOMMENDER] --- 
-[18-Jun-2025 19:09:38 UTC] true
-[18-Jun-2025 19:09:38 UTC] activate with secret token: %776a`k)p]^OEpey]j2*QF1H}/|0SWw(RRFZSp950qkILCDk}=B4V9Z:i5G5U(i~GMjlo44kt8w1IM[^W*1kc*V`M$E;6)WBxA%Wn^JS;6Mdad_[7LMXfgjsP8b2Mzz_RUK1F=Nu$GN]y8sf~reVe:8}sANQ$Hm4SvvnTDcimGsie&CtGZ5@(@:Zr9nE*&sCaY]m}9[RtNBU]1r0:P{[!B0.9fggfHc{E68Y]_OAnFpqY~DCo=1MZzWZsKA5AUx7
-[18-Jun-2025 19:09:40 UTC] [RECOMMENDER] --- Trying to send client secret.
-[18-Jun-2025 19:09:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
-[18-Jun-2025 19:09:50 UTC] [RECOMMENDER] --- Sending client secret.
-[18-Jun-2025 19:09:50 UTC] [RECOMMENDER] --- 
-[18-Jun-2025 19:09:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Recommender\wc_get_products() in /wordpress/wp-content/plugins/robera/core/recommender-admin.php:114
+[20-Jun-2025 11:29:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
+[20-Jun-2025 11:29:48 UTC] [RECOMMENDER] --- Sending client secret.
+[20-Jun-2025 11:29:48 UTC] [RECOMMENDER] --- 
+[20-Jun-2025 11:29:48 UTC] true
+[20-Jun-2025 11:29:48 UTC] activate with secret token: 3dlTMJPGtEZQ*U]y&%ozoT9vKy:8[tBq!Vvr|MMaJ=S*G^~EVGOcy5l!0)ALXm5Q]32@kmIYS^~yw!D968P*Soq@gU1X11[/Rky8IU~_f8H;lg0uoBK1LC7ghBbWQB!jXjbi@Lc%pIv3hyAvzdz/^ItZF[z!v!yt5b*a3!7e]{tfdl}7``2J.)VLr*mq5xSF`azclg)jU40Z4:h7=t{]:@/bZ~`p!&!ix7F6GNN@wwSLbF}$5heT{eB*Kpx`}xU]
+[20-Jun-2025 11:29:50 UTC] [RECOMMENDER] --- Trying to send client secret.
+[20-Jun-2025 11:30:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/robera/core/recommender-client.php on line 381
+[20-Jun-2025 11:30:00 UTC] [RECOMMENDER] --- Sending client secret.
+[20-Jun-2025 11:30:00 UTC] [RECOMMENDER] --- 
+[20-Jun-2025 11:30:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Recommender\wc_get_products() in /wordpress/wp-content/plugins/robera/core/recommender-admin.php:114
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): Recommender\RecommenderAdmin->registerUserRecommendationsBlock('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
