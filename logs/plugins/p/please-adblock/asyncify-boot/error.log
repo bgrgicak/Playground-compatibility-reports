@@ -2,25 +2,247 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [19-Jun-2025 13:43:00 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[19-Jun-2025 13:43:00 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[19-Jun-2025 13:43:09 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[19-Jun-2025 13:43:09 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[19-Jun-2025 13:43:18 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[19-Jun-2025 13:43:18 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[19-Jun-2025 13:43:27 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[19-Jun-2025 13:43:27 UTC] PHP Warning:  Undefined variable $ads_id_1 in /wordpress/wp-content/plugins/nascar-power-rankings-lite/nascar-power-rankings-lite.php on line 59
-[19-Jun-2025 13:43:27 UTC] PHP Warning:  mail(): Could not execute mail delivery program '/usr/sbin/sendmail -t -i' in /wordpress/wp-content/plugins/nascar-power-rankings-lite/nascar-power-rankings-lite.php on line 61
-[19-Jun-2025 13:43:29 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[19-Jun-2025 13:43:38 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[19-Jun-2025 13:43:38 UTC] PHP Warning:  Undefined variable $ads_id_1 in /wordpress/wp-content/plugins/nascar-power-rankings-lite/nascar-power-rankings-lite.php on line 59
-[19-Jun-2025 13:43:38 UTC] PHP Warning:  mail(): Could not execute mail delivery program '/usr/sbin/sendmail -t -i' in /wordpress/wp-content/plugins/nascar-power-rankings-lite/nascar-power-rankings-lite.php on line 61
-[19-Jun-2025 13:43:39 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[19-Jun-2025 13:43:47 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[19-Jun-2025 13:43:48 UTC] PHP Warning:  Undefined variable $ads_id_1 in /wordpress/wp-content/plugins/nascar-power-rankings-lite/nascar-power-rankings-lite.php on line 59
-[19-Jun-2025 13:43:48 UTC] PHP Warning:  mail(): Could not execute mail delivery program '/usr/sbin/sendmail -t -i' in /wordpress/wp-content/plugins/nascar-power-rankings-lite/nascar-power-rankings-lite.php on line 61
-[19-Jun-2025 13:43:49 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[19-Jun-2025 13:43:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pigi-easy-wordpress-pay-per-write/settings/usersettings.php:79
+Error: [21-Jun-2025 05:27:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT p.*, m.meta_value as options,
+
+      (SELECT GROUP_CONCAT(t.name ORDER BY t.name ASC SEPARATOR ', ')
+      FROM wp_term_relationships tr,
+           wp_term_taxonomy tt,
+           wp_terms t
+      WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+      AND tt.term_id = t.term_id
+      AND tr.object_id = p.ID
+      AND tt.taxonomy = 'post_tag') as tags
+
+      FROM wp_posts p
+
+      LEFT JOIN wp_postmeta m
+      ON m.meta_key = 'gns_option'
+      AND m.post_id = p.ID
+
+      WHERE p.post_status = 'publish'
+      AND p.post_type = 'post'
+      AND p.post_date >= (NOW() - INTERVAL 2 DAY)
+
+      ORDER BY p.ID DESC
+
+      LIMIT 0,1000</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `p`.* , `m`.`meta_value` as `options` , ( SELECT GROUP_CONCAT ( `t`.`name` ORDER BY `t`.`name` ASC SEPARATOR ', ' ) FROM `wp_term_relationships` `tr` , `wp_term_taxonomy` `tt` , `wp_terms` `t` WHERE `tr`.`term_taxonomy_id` = `tt`.`term_taxonomy_id` AND `tt`.`term_id` = `t`.`term_id` AND `tr`.`object_id` = `p`.`ID` AND `tt`.`taxonomy` = 'post_tag' ) as `tags` FROM `wp_posts` `p` LEFT JOIN `wp_postmeta` `m` ON `m`.`meta_key` = 'gns_option' AND `m`.`post_id` = `p`.`ID` WHERE `p`.`post_status` = 'publish' AND `p`.`post_type` = 'post' AND `p`.`post_date` &gt;= ( CURRENT_TIMESTAMP - INTERVAL 2 DAY ) ORDER BY `p`.`ID` DESC LIMIT 0 , 1000 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT p.*, m.m...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT p.*, m.m...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT p.*, m.m...')
+#4 /wordpress/wp-content/plugins/propeople-google-news-sitemap/classes/sitemap.class.php(350): wpdb->get_results('SELECT p.*, m.m...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/propeople-google-news-sitemap/index.php(103): Plugin->getPosts()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Propeople\GoogleNewsSitemap\{closure}(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_propeo...', false)
+#10 /internal/eval.php(20): activate_plugin('propeople-googl...')
+#11 {main}</pre>
+ for query SELECT p.*, m.meta_value as options,
+
+      (SELECT GROUP_CONCAT(t.name ORDER BY t.name ASC SEPARATOR ', ')
+      FROM wp_term_relationships tr,
+           wp_term_taxonomy tt,
+           wp_terms t
+      WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+      AND tt.term_id = t.term_id
+      AND tr.object_id = p.ID
+      AND tt.taxonomy = 'post_tag') as tags
+
+      FROM wp_posts p
+
+      LEFT JOIN wp_postmeta m
+      ON m.meta_key = 'gns_option'
+      AND m.post_id = p.ID
+
+      WHERE p.post_status = 'publish'
+      AND p.post_type = 'post'
+      AND p.post_date >= (NOW() - INTERVAL 2 DAY)
+
+      ORDER BY p.ID DESC
+
+      LIMIT 0,1000 made by activate_plugin, do_action('activate_propeople-google-news-sitemap/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, Propeople\GoogleNewsSitemap\{closure}, Plugin->getPosts, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-Jun-2025 05:27:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT p.*, m.meta_value as options,
+
+      (SELECT GROUP_CONCAT(t.name ORDER BY t.name ASC SEPARATOR ', ')
+      FROM wp_term_relationships tr,
+           wp_term_taxonomy tt,
+           wp_terms t
+      WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+      AND tt.term_id = t.term_id
+      AND tr.object_id = p.ID
+      AND tt.taxonomy = 'post_tag') as tags
+
+      FROM wp_posts p
+
+      LEFT JOIN wp_postmeta m
+      ON m.meta_key = 'gns_option'
+      AND m.post_id = p.ID
+
+      WHERE p.post_status = 'publish'
+      AND p.post_type = 'post'
+      AND p.post_date >= (NOW() - INTERVAL 2 DAY)
+
+      ORDER BY p.ID DESC
+
+      LIMIT 0,1000</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `p`.* , `m`.`meta_value` as `options` , ( SELECT GROUP_CONCAT ( `t`.`name` ORDER BY `t`.`name` ASC SEPARATOR ', ' ) FROM `wp_term_relationships` `tr` , `wp_term_taxonomy` `tt` , `wp_terms` `t` WHERE `tr`.`term_taxonomy_id` = `tt`.`term_taxonomy_id` AND `tt`.`term_id` = `t`.`term_id` AND `tr`.`object_id` = `p`.`ID` AND `tt`.`taxonomy` = 'post_tag' ) as `tags` FROM `wp_posts` `p` LEFT JOIN `wp_postmeta` `m` ON `m`.`meta_key` = 'gns_option' AND `m`.`post_id` = `p`.`ID` WHERE `p`.`post_status` = 'publish' AND `p`.`post_type` = 'post' AND `p`.`post_date` &gt;= ( CURRENT_TIMESTAMP - INTERVAL 2 DAY ) ORDER BY `p`.`ID` DESC LIMIT 0 , 1000 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT p.*, m.m...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT p.*, m.m...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT p.*, m.m...')
+#4 /wordpress/wp-content/plugins/propeople-google-news-sitemap/classes/sitemap.class.php(350): wpdb->get_results('SELECT p.*, m.m...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/propeople-google-news-sitemap/index.php(103): Plugin->getPosts()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Propeople\GoogleNewsSitemap\{closure}(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_propeo...', false)
+#10 /internal/eval.php(20): activate_plugin('propeople-googl...')
+#11 {main}</pre>
+ for query SELECT p.*, m.meta_value as options,
+
+      (SELECT GROUP_CONCAT(t.name ORDER BY t.name ASC SEPARATOR ', ')
+      FROM wp_term_relationships tr,
+           wp_term_taxonomy tt,
+           wp_terms t
+      WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+      AND tt.term_id = t.term_id
+      AND tr.object_id = p.ID
+      AND tt.taxonomy = 'post_tag') as tags
+
+      FROM wp_posts p
+
+      LEFT JOIN wp_postmeta m
+      ON m.meta_key = 'gns_option'
+      AND m.post_id = p.ID
+
+      WHERE p.post_status = 'publish'
+      AND p.post_type = 'post'
+      AND p.post_date >= (NOW() - INTERVAL 2 DAY)
+
+      ORDER BY p.ID DESC
+
+      LIMIT 0,1000 made by activate_plugin, do_action('activate_propeople-google-news-sitemap/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, Propeople\GoogleNewsSitemap\{closure}, Plugin->getPosts, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-Jun-2025 05:27:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT p.*, m.meta_value as options,
+
+      (SELECT GROUP_CONCAT(t.name ORDER BY t.name ASC SEPARATOR ', ')
+      FROM wp_term_relationships tr,
+           wp_term_taxonomy tt,
+           wp_terms t
+      WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+      AND tt.term_id = t.term_id
+      AND tr.object_id = p.ID
+      AND tt.taxonomy = 'post_tag') as tags
+
+      FROM wp_posts p
+
+      LEFT JOIN wp_postmeta m
+      ON m.meta_key = 'gns_option'
+      AND m.post_id = p.ID
+
+      WHERE p.post_status = 'publish'
+      AND p.post_type = 'post'
+      AND p.post_date >= (NOW() - INTERVAL 2 DAY)
+
+      ORDER BY p.ID DESC
+
+      LIMIT 0,1000</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `p`.* , `m`.`meta_value` as `options` , ( SELECT GROUP_CONCAT ( `t`.`name` ORDER BY `t`.`name` ASC SEPARATOR ', ' ) FROM `wp_term_relationships` `tr` , `wp_term_taxonomy` `tt` , `wp_terms` `t` WHERE `tr`.`term_taxonomy_id` = `tt`.`term_taxonomy_id` AND `tt`.`term_id` = `t`.`term_id` AND `tr`.`object_id` = `p`.`ID` AND `tt`.`taxonomy` = 'post_tag' ) as `tags` FROM `wp_posts` `p` LEFT JOIN `wp_postmeta` `m` ON `m`.`meta_key` = 'gns_option' AND `m`.`post_id` = `p`.`ID` WHERE `p`.`post_status` = 'publish' AND `p`.`post_type` = 'post' AND `p`.`post_date` &gt;= ( CURRENT_TIMESTAMP - INTERVAL 2 DAY ) ORDER BY `p`.`ID` DESC LIMIT 0 , 1000 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT p.*, m.m...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT p.*, m.m...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT p.*, m.m...')
+#4 /wordpress/wp-content/plugins/propeople-google-news-sitemap/classes/sitemap.class.php(350): wpdb->get_results('SELECT p.*, m.m...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/propeople-google-news-sitemap/index.php(103): Plugin->getPosts()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Propeople\GoogleNewsSitemap\{closure}(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_propeo...', false)
+#10 /internal/eval.php(20): activate_plugin('propeople-googl...')
+#11 {main}</pre>
+ for query SELECT p.*, m.meta_value as options,
+
+      (SELECT GROUP_CONCAT(t.name ORDER BY t.name ASC SEPARATOR ', ')
+      FROM wp_term_relationships tr,
+           wp_term_taxonomy tt,
+           wp_terms t
+      WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+      AND tt.term_id = t.term_id
+      AND tr.object_id = p.ID
+      AND tt.taxonomy = 'post_tag') as tags
+
+      FROM wp_posts p
+
+      LEFT JOIN wp_postmeta m
+      ON m.meta_key = 'gns_option'
+      AND m.post_id = p.ID
+
+      WHERE p.post_status = 'publish'
+      AND p.post_type = 'post'
+      AND p.post_date >= (NOW() - INTERVAL 2 DAY)
+
+      ORDER BY p.ID DESC
+
+      LIMIT 0,1000 made by activate_plugin, do_action('activate_propeople-google-news-sitemap/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, Propeople\GoogleNewsSitemap\{closure}, Plugin->getPosts, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-Jun-2025 05:28:21 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 14
+[21-Jun-2025 05:28:21 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 16
+[21-Jun-2025 05:28:22 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 14
+[21-Jun-2025 05:28:22 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 16
+[21-Jun-2025 05:28:30 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 14
+[21-Jun-2025 05:28:30 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 16
+[21-Jun-2025 05:28:32 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 14
+[21-Jun-2025 05:28:32 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 16
+[21-Jun-2025 05:28:39 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 14
+[21-Jun-2025 05:28:39 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 16
+[21-Jun-2025 05:28:40 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 14
+[21-Jun-2025 05:28:40 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 16
+[21-Jun-2025 05:32:07 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/php-snippets/loader.php on line 22
+[21-Jun-2025 05:32:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/php-snippets/loader.php on line 22
+[21-Jun-2025 05:32:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/php-snippets/loader.php on line 22
+[21-Jun-2025 05:32:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/php-snippets/loader.php on line 22
+[21-Jun-2025 05:32:26 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/php-snippets/loader.php on line 22
+[21-Jun-2025 05:32:27 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/php-snippets/loader.php on line 22
+[21-Jun-2025 05:32:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pigi-easy-wordpress-pay-per-write/settings/usersettings.php:79
 Stack trace:
 #0 /wordpress/wp-content/plugins/pigi-easy-wordpress-pay-per-write/wp-pigi-payperwrite.php(29): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -28,7 +250,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('pigi-easy-wordp...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/pigi-easy-wordpress-pay-per-write/settings/usersettings.php on line 79
-[19-Jun-2025 13:44:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pigi-easy-wordpress-pay-per-write/settings/usersettings.php:79
+[21-Jun-2025 05:32:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pigi-easy-wordpress-pay-per-write/settings/usersettings.php:79
 Stack trace:
 #0 /wordpress/wp-content/plugins/pigi-easy-wordpress-pay-per-write/wp-pigi-payperwrite.php(29): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -36,7 +258,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('pigi-easy-wordp...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/pigi-easy-wordpress-pay-per-write/settings/usersettings.php on line 79
-[19-Jun-2025 13:44:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pigi-easy-wordpress-pay-per-write/settings/usersettings.php:79
+[21-Jun-2025 05:32:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pigi-easy-wordpress-pay-per-write/settings/usersettings.php:79
 Stack trace:
 #0 /wordpress/wp-content/plugins/pigi-easy-wordpress-pay-per-write/wp-pigi-payperwrite.php(29): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -44,35 +266,29 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('pigi-easy-wordp...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/pigi-easy-wordpress-pay-per-write/settings/usersettings.php on line 79
-[19-Jun-2025 13:44:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pjw-query-child-of/pjw_query_child_of.php:70
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pjw-query-child...')
-#2 /internal/eval.php(20): activate_plugin('pjw-query-child...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/pjw-query-child-of/pjw_query_child_of.php on line 70
-[19-Jun-2025 13:45:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pjw-query-child-of/pjw_query_child_of.php:70
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pjw-query-child...')
-#2 /internal/eval.php(20): activate_plugin('pjw-query-child...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/pjw-query-child-of/pjw_query_child_of.php on line 70
-[19-Jun-2025 13:45:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pjw-query-child-of/pjw_query_child_of.php:70
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pjw-query-child...')
-#2 /internal/eval.php(20): activate_plugin('pjw-query-child...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/pjw-query-child-of/pjw_query_child_of.php on line 70
-[19-Jun-2025 13:45:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/please-adblock/please-adblock.php:47
+[21-Jun-2025 05:33:35 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>pixelpin-social-login</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[21-Jun-2025 05:33:45 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>pixelpin-social-login</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[21-Jun-2025 05:33:55 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>pixelpin-social-login</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[21-Jun-2025 05:34:32 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 14
+[21-Jun-2025 05:34:32 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 16
+[21-Jun-2025 05:34:34 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 14
+[21-Jun-2025 05:34:34 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 16
+[21-Jun-2025 05:34:41 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 14
+[21-Jun-2025 05:34:41 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 16
+[21-Jun-2025 05:34:42 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 14
+[21-Jun-2025 05:34:42 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 16
+[21-Jun-2025 05:34:50 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 14
+[21-Jun-2025 05:34:50 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 16
+[21-Jun-2025 05:34:51 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 14
+[21-Jun-2025 05:34:51 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/reading-time-estimate/estimated-reading-time.php on line 16
+[21-Jun-2025 05:34:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/please-adblock/please-adblock.php:47
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('please-adblock/...')
 #2 /internal/eval.php(20): activate_plugin('please-adblock/...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/please-adblock/please-adblock.php on line 47
-[19-Jun-2025 13:46:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/please-adblock/please-adblock.php:47
+[21-Jun-2025 05:35:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/please-adblock/please-adblock.php:47
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('please-adblock/...')
