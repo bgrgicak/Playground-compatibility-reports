@@ -2,33 +2,6 @@
 ## Stats
 | Message | Test | Item | Logs |
 |---------|------|------|------|
-| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_dhx_sheet.sheetid. | ast-sqlite-boot | donately-donation-form | [View logs](/logs/plugins/d/donately-donation-form/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_dhx_sheet.sheetid. | asyncify-boot | donately-donation-form | [View logs](/logs/plugins/d/donately-donation-form/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_dhx_sheet.sheetid. | jspi-boot | donately-donation-form | [View logs](/logs/plugins/d/donately-donation-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_data. | ast-sqlite-boot | donately-donation-form | [View logs](/logs/plugins/d/donately-donation-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_data. | asyncify-boot | donately-donation-form | [View logs](/logs/plugins/d/donately-donation-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_data. | jspi-boot | donately-donation-form | [View logs](/logs/plugins/d/donately-donation-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_dhx_data. | ast-sqlite-boot | donately-donation-form | [View logs](/logs/plugins/d/donately-donation-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_dhx_data. | asyncify-boot | donately-donation-form | [View logs](/logs/plugins/d/donately-donation-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_dhx_data. | jspi-boot | donately-donation-form | [View logs](/logs/plugins/d/donately-donation-form/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_dhx_sheet.sheetid. | ast-sqlite-boot | doviz-kurlari | [View logs](/logs/plugins/d/doviz-kurlari/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_dhx_sheet.sheetid. | asyncify-boot | doviz-kurlari | [View logs](/logs/plugins/d/doviz-kurlari/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_dhx_sheet.sheetid. | jspi-boot | doviz-kurlari | [View logs](/logs/plugins/d/doviz-kurlari/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_data. | ast-sqlite-boot | doviz-kurlari | [View logs](/logs/plugins/d/doviz-kurlari/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_data. | asyncify-boot | doviz-kurlari | [View logs](/logs/plugins/d/doviz-kurlari/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_data. | jspi-boot | doviz-kurlari | [View logs](/logs/plugins/d/doviz-kurlari/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_dhx_data. | ast-sqlite-boot | doviz-kurlari | [View logs](/logs/plugins/d/doviz-kurlari/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_dhx_data. | asyncify-boot | doviz-kurlari | [View logs](/logs/plugins/d/doviz-kurlari/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_dhx_data. | jspi-boot | doviz-kurlari | [View logs](/logs/plugins/d/doviz-kurlari/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | ast-sqlite-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | asyncify-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | jspi-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
-| Unknown drop type: table. | ast-sqlite-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
-| Unknown drop type: table. | asyncify-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
-| Unknown drop type: table. | jspi-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | expando-button | [View logs](/logs/plugins/e/expando-button/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | asyncify-boot | expando-button | [View logs](/logs/plugins/e/expando-button/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | jspi-boot | expando-button | [View logs](/logs/plugins/e/expando-button/error.json) |
