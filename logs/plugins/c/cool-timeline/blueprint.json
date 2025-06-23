@@ -1,7 +1,14 @@
 {
+  "landingPage": "/wp-admin/admin.php?page=cool_timeline_settings#tab=get-started",
   "preferredVersions": {
-    "php": "8.0",
+    "php": "8.2",
     "wp": "latest"
+  },
+  "phpExtensionBundles": [
+    "kitchen-sink"
+  ],
+  "features": {
+    "networking": true
   },
   "steps": [
     {
@@ -12,8 +19,39 @@
       }
     },
     {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
       "step": "installPlugin",
       "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "cool-timeline"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "importWxr",
+      "file": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/CoolPluginsTeam/wp-playground-repo/main/cooltimeline-preview.xml"
+      }
+    },
+    {
+      "step": "writeFile",
+      "path": "/wordpress/wp-content/mu-plugins/cool-timeline-notice.php",
+      "data": "<?php\nadd_action('admin_notices', function () {\n     $demo_page = get_page_by_title('Cool Timeline Demos');\n    $demo_edit_url = $demo_page ? admin_url('post.php?post=' . $demo_page->ID . '&action=edit') : admin_url('edit.php?post_type=page');\n\n    echo '<div class=\"notice notice-info is-dismissible\" style=\"padding: 25px; font-family: sans-serif; margin-top: 25px; border-left: 5px solid #00a0d2;\">\n        <h2 style=\"margin-top: 0; display: flex; align-items: center; gap: 10px;\">\n              Build Stunning Timelines With <strong>Cool Timeline</strong>\n        </h2>\n        <p style=\"margin-bottom: 15px; font-size: 15px;\">\n            Showcase your story or company history in a precise and elegant way using a powerful and advanced Cool Timeline.\n        </p>\n        <div style=\"display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px;\">\n            <a href=\"https://cooltimeline.com/demo/cool-timeline-free/?utm_source=ctl_plugin&utm_medium=readme&utm_campaign=demo&utm_content=wp_playground_notice\" class=\"button button-primary\" target=\"_blank\" style=\"padding: 10px 24px; font-size: 14px;\">🔍 View Demo</a>\n            <a href=\"' . esc_url($demo_edit_url) . '\" class=\"button button-secondary\" style=\"padding: 10px 24px; font-size: 14px;\">🛠 Create Timeline</a>\n            <a href=\"' . admin_url('edit.php?post_type=cool_timeline') . '\" class=\"button\" style=\"padding: 10px 24px; font-size: 14px; border: 1px solid #0073aa; color: #0073aa;\">📚 All Stories</a>\n            <a href=\"https://cooltimeline.com/plugin/cool-timeline-pro/?utm_source=ctl_plugin&utm_medium=readme&utm_campaign=demo&utm_content=wp_playground_notice#pricing\" target=\"_blank\" class=\"button\" style=\"padding: 10px 24px; font-size: 14px; background: linear-gradient(90deg, #d54e21, #ff851b); color: white; border: none;\">⭐ Get PRO — Unlock All Features</a>\n        </div>\n        <p style=\"font-size: 13px; margin-top: 15px; color: #555;\">🧩 Pro is an advanced version of our popular timeline plugin that offers even more design options and functionalities to help you create stunning timelines.</p>\n    </div>';\n});"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php\nob_start();\nrequire_once '/wordpress/wp-load.php';\nob_end_clean();\n\n// === Step 1: Insert custom Cool Timeline stories ===\n$posts = [\n  [\n    'post_title' => 'The Apple I',\n    'post_content' => \"Steve and Woz start assembling Apple I computers in the Jobs' garage.\",\n    'post_date' => '2016-07-04 14:14:51',\n    'ctl_story_year' => '1976',\n    'ctl_story_date' => '1976-04-01',\n    'story_icon' => 'laptop',\n    'story_color' => '#FF0000'\n  ],\n  [\n    'post_title' => 'Apple Goes Public',\n    'post_content' => \"Apple goes public, increasing Steve Jobs' net worth to over $200 million.\",\n    'post_date' => '2016-07-04 14:19:44',\n    'ctl_story_year' => '1976',\n    'ctl_story_date' => '1976-12-12',\n    'story_icon' => 'chart-line',\n    'story_color' => '#00AAFF'\n  ],\n [\n    'post_title' => 'Apple Opens iTunes Music Store',\n    'post_content' => 'Apple opens the online iTunes Music Store in the US.',\n    'post_date' => '2016-07-04 14:45:26',\n    'ctl_story_year' => '2003',\n    'ctl_story_date' => '2003-04-28',\n    'story_icon' => 'music',\n    'story_color' => '#0000FF'\n  ]\n];\n\nforeach ($posts as $post) {\n  $timestamp = strtotime($post['ctl_story_date']);\n  $story_type = [ 'ctl_story_date' => $post['ctl_story_date'] ];\n  $story_icon_serialized = [ 'fa_field_icon' => 'fa fa-' . $post['story_icon'] ];\n\n  $post_data = [\n    'post_title'    => $post['post_title'],\n    'post_content'  => $post['post_content'],\n    'post_status'   => 'publish',\n    'post_type'     => 'cool_timeline',\n    'post_date'     => $post['post_date'],\n    'post_name'     => sanitize_title($post['post_title']),\n    'post_author'   => 1,\n    'ping_status'   => 'closed',\n    'comment_status'=> 'closed'\n  ];\n\n  $post_id = wp_insert_post($post_data);\n\n  if (!is_wp_error($post_id)) {\n    update_post_meta($post_id, 'ctl_story_year', $post['ctl_story_year']);\n    update_post_meta($post_id, 'ctl_story_date', $post['ctl_story_date']);\n    update_post_meta($post_id, 'ctl_story_timestamp', $timestamp);\n    update_post_meta($post_id, 'story_date', $post['ctl_story_date']);\n    update_post_meta($post_id, 'story_type', $story_type);\n    update_post_meta($post_id, 'story_icon', $story_icon_serialized);\n    update_post_meta($post_id, 'story_color', $post['story_color']);\n    update_post_meta($post_id, '_ctl_visible', 'yes');\n\n    echo \"<strong>Inserted:</strong> {$post['post_title']}<br>ID: $post_id<hr>\";\n  } else {\n    echo \"Error inserting: \" . $post['post_title'] . \"<br>\";\n  }\n}\n\n// === Step 2: Set 'Cool Timeline Demos' page as homepage ===\n$page = get_page_by_title('Cool Timeline Demos');\nif ($page) {\n  update_option('show_on_front', 'page');\n  update_option('page_on_front', $page->ID);\n  echo \"✅ 'Cool Timeline Demos' page set as homepage.<br>\";\n} else {\n  echo \"❌ 'Cool Timeline Demos' page not found.<br>\";\n}"
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
         "resource": "wordpress.org/plugins",
         "slug": "cool-timeline"
       },
