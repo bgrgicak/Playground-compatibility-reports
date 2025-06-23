@@ -2,31 +2,307 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [22-Jun-2025 05:00:29 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>rc-flight-manager</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-Jun-2025 05:00:39 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>rc-flight-manager</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-Jun-2025 05:00:49 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>rc-flight-manager</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-Jun-2025 05:00:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/read-later-buttons/read-later-buttons.php:369
+Error: [23-Jun-2025 19:48:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: DROP FUNCTION IF EXISTS `fnStripTags` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "FUNCTION": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DROP FUNCTION I...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DROP FUNCTION I...')
+#3 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#8 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#9 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Jun-2025 19:48:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createFunction"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE FUNCTION...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE FUNCTION...')
+#4 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#9 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#10 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Jun-2025 19:48:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: DROP FUNCTION IF EXISTS `fnStripTags` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "FUNCTION": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DROP FUNCTION I...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DROP FUNCTION I...')
+#3 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#8 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#9 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Jun-2025 19:48:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createFunction"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE FUNCTION...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE FUNCTION...')
+#4 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#9 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#10 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Jun-2025 19:48:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: DROP FUNCTION IF EXISTS `fnStripTags` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "FUNCTION": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('DROP FUNCTION I...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('DROP FUNCTION I...')
+#3 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#8 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#9 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Jun-2025 19:48:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createFunction"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE FUNCTION...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE FUNCTION...')
+#4 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#9 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#10 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Jun-2025 19:49:39 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ts_sbp</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[23-Jun-2025 19:49:39 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/super-blog-pack/inc/class-ts-post-statistics.php on line 124
+[23-Jun-2025 19:49:48 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ts_sbp</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[23-Jun-2025 19:49:49 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/super-blog-pack/inc/class-ts-post-statistics.php on line 124
+[23-Jun-2025 19:49:59 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ts_sbp</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[23-Jun-2025 19:49:59 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/super-blog-pack/inc/class-ts-post-statistics.php on line 124
+[23-Jun-2025 19:51:07 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/swiftypress/SwiftyPress_Plugin.php:40
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('read-later-butt...')
-#2 /internal/eval.php(20): activate_plugin('read-later-butt...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/read-later-buttons/read-later-buttons.php on line 369
-[22-Jun-2025 05:01:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/read-later-buttons/read-later-buttons.php:369
+#0 /wordpress/wp-content/plugins/swiftypress/SwiftyPress_LifeCycle.php(29): SwiftyPress_Plugin->initOptions()
+#1 /wordpress/wp-content/plugins/swiftypress/swiftypress_init.php(34): SwiftyPress_LifeCycle->install()
+#2 /wordpress/wp-content/plugins/swiftypress/swiftypress.php(85): SwiftyPress_init('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('swiftypress/swi...')
+#5 /internal/eval.php(20): activate_plugin('swiftypress/swi...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/swiftypress/SwiftyPress_Plugin.php on line 40
+[23-Jun-2025 19:51:15 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/swiftypress/SwiftyPress_Plugin.php:40
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('read-later-butt...')
-#2 /internal/eval.php(20): activate_plugin('read-later-butt...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/read-later-buttons/read-later-buttons.php on line 369
-[22-Jun-2025 05:01:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/read-later-buttons/read-later-buttons.php:369
+#0 /wordpress/wp-content/plugins/swiftypress/SwiftyPress_LifeCycle.php(29): SwiftyPress_Plugin->initOptions()
+#1 /wordpress/wp-content/plugins/swiftypress/swiftypress_init.php(34): SwiftyPress_LifeCycle->install()
+#2 /wordpress/wp-content/plugins/swiftypress/swiftypress.php(85): SwiftyPress_init('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('swiftypress/swi...')
+#5 /internal/eval.php(20): activate_plugin('swiftypress/swi...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/swiftypress/SwiftyPress_Plugin.php on line 40
+[23-Jun-2025 19:51:24 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/swiftypress/SwiftyPress_Plugin.php:40
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('read-later-butt...')
-#2 /internal/eval.php(20): activate_plugin('read-later-butt...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/read-later-buttons/read-later-buttons.php on line 369
-[22-Jun-2025 05:02:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recommend-a-friend/inc/class-raf-widget.php:63
+#0 /wordpress/wp-content/plugins/swiftypress/SwiftyPress_LifeCycle.php(29): SwiftyPress_Plugin->initOptions()
+#1 /wordpress/wp-content/plugins/swiftypress/swiftypress_init.php(34): SwiftyPress_LifeCycle->install()
+#2 /wordpress/wp-content/plugins/swiftypress/swiftypress.php(85): SwiftyPress_init('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('swiftypress/swi...')
+#5 /internal/eval.php(20): activate_plugin('swiftypress/swi...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/swiftypress/SwiftyPress_Plugin.php on line 40
+[23-Jun-2025 19:51:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/randimage/randimage.php on line 226
+[23-Jun-2025 19:51:43 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/randimage/randimage.php on line 226
+[23-Jun-2025 19:51:52 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/randimage/randimage.php on line 226
+[23-Jun-2025 19:52:56 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>rc-flight-manager</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[23-Jun-2025 19:53:07 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>rc-flight-manager</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[23-Jun-2025 19:53:17 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>rc-flight-manager</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[23-Jun-2025 19:54:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recommend-a-friend/inc/class-raf-widget.php:63
 Stack trace:
 #0 /wordpress/wp-content/plugins/recommend-a-friend/recommend-to-a-friend.php(38): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
