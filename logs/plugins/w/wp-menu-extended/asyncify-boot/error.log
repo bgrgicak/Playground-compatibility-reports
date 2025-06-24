@@ -2,333 +2,255 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [22-Jun-2025 13:11:53 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wesay-cbd-product-reviews-ugc/includes/wesay-plugin-front-ui.php on line 37
-[22-Jun-2025 13:11:54 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wesay-cbd-product-reviews-ugc/includes/wesay-plugin-front-ui.php on line 37
-[22-Jun-2025 13:12:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wesay-cbd-product-reviews-ugc/includes/wesay-plugin-front-ui.php on line 37
-[22-Jun-2025 13:12:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wesay-cbd-product-reviews-ugc/includes/wesay-plugin-front-ui.php on line 37
-[22-Jun-2025 13:12:12 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wesay-cbd-product-reviews-ugc/includes/wesay-plugin-front-ui.php on line 37
-[22-Jun-2025 13:12:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wesay-cbd-product-reviews-ugc/includes/wesay-plugin-front-ui.php on line 37
-[22-Jun-2025 13:14:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [24-Jun-2025 06:39:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT hitcounter, imagename, flag FROM wp_imagecounter</p>
+<p>ALTER TABLE wp_term_relationships ADD time_stamp TIMESTAMP NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT `hitcounter` , `imagename` , `flag` FROM `wp_imagecounter` | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_term_relationships</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_term_relationships</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_term_relationships</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_term_relationships</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_term_relationships, time_stamp, 4, , NO, timestamp, , , , , 0, , , timestamp, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_term_relationships</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_term_relationships</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_term_relationships</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_term_relationships_685a483c45d30` (
+  `object_id` INTEGER NOT NULL DEFAULT '0',
+  `term_taxonomy_id` INTEGER NOT NULL DEFAULT '0',
+  `term_order` INTEGER NOT NULL DEFAULT '0',
+  `time_stamp` TEXT COLLATE NOCASE NOT NULL,
+  PRIMARY KEY (`object_id`, `term_taxonomy_id`)
+) STRICT | (no parameters)</li>
+<li>Executing: INSERT INTO `_wp_sqlite_tmp_wp_term_relationships_685a483c45d30` (`rowid`, `object_id`, `term_taxonomy_id`, `term_order`) SELECT `rowid`, `object_id`, `term_taxonomy_id`, `term_order` FROM `wp_term_relationships` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter
+SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _wp_sqlite_tmp_wp_term_relationships_685a483c45d30.time_stamp
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT hitcount...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT hitcount...')
-#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT hitcount...')
-#4 /wordpress/wp-content/plugins/wp-hit-counter/image.php(102): wpdb->get_row('SELECT hitcount...')
-#5 /wordpress/wp-content/plugins/wp-hit-counter/image.php(27): perform_install()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-hit-counter/...')
-#8 /internal/eval.php(20): activate_plugin('wp-hit-counter/...')
-#9 {main}</pre>
- for query SELECT hitcounter, imagename, flag FROM wp_imagecounter made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-hit-counter/image.php'), perform_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Jun-2025 13:14:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-hit-counter/image.php:183
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wp-hashtagger/inc/class-wp-hashtagger.php(190): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): WP_Hashtagger->create_taxonomy_timestamp('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_term_relationships ADD time_stamp TIMESTAMP NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Hashtagger->create_taxonomy_timestamp, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[24-Jun-2025 06:40:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_term_relationships ADD time_stamp TIMESTAMP NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_term_relationships</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_term_relationships</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_term_relationships</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_term_relationships</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_term_relationships, time_stamp, 4, , NO, timestamp, , , , , 0, , , timestamp, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_term_relationships</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_term_relationships</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_term_relationships</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_term_relationships_685a4845255a8` (
+  `object_id` INTEGER NOT NULL DEFAULT '0',
+  `term_taxonomy_id` INTEGER NOT NULL DEFAULT '0',
+  `term_order` INTEGER NOT NULL DEFAULT '0',
+  `time_stamp` TEXT COLLATE NOCASE NOT NULL,
+  PRIMARY KEY (`object_id`, `term_taxonomy_id`)
+) STRICT | (no parameters)</li>
+<li>Executing: INSERT INTO `_wp_sqlite_tmp_wp_term_relationships_685a4845255a8` (`rowid`, `object_id`, `term_order`, `term_taxonomy_id`) SELECT `rowid`, `object_id`, `term_order`, `term_taxonomy_id` FROM `wp_term_relationships` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _wp_sqlite_tmp_wp_term_relationships_685a4845255a8.time_stamp
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wp-hashtagger/inc/class-wp-hashtagger.php(190): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): WP_Hashtagger->create_taxonomy_timestamp('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_term_relationships ADD time_stamp TIMESTAMP NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Hashtagger->create_taxonomy_timestamp, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[24-Jun-2025 06:40:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_term_relationships ADD time_stamp TIMESTAMP NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_term_relationships</li>
+<li>Executing: SELECT
+					COLUMN_NAME,
+					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_term_relationships</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_term_relationships</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_term_relationships</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_term_relationships, time_stamp, 4, , NO, timestamp, , , , , 0, , , timestamp, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_term_relationships</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_term_relationships</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_term_relationships</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_term_relationships_685a484e71098` (
+  `object_id` INTEGER NOT NULL DEFAULT '0',
+  `term_taxonomy_id` INTEGER NOT NULL DEFAULT '0',
+  `term_order` INTEGER NOT NULL DEFAULT '0',
+  `time_stamp` TEXT COLLATE NOCASE NOT NULL,
+  PRIMARY KEY (`object_id`, `term_taxonomy_id`)
+) STRICT | (no parameters)</li>
+<li>Executing: INSERT INTO `_wp_sqlite_tmp_wp_term_relationships_685a484e71098` (`rowid`, `object_id`, `term_order`, `term_taxonomy_id`) SELECT `rowid`, `object_id`, `term_order`, `term_taxonomy_id` FROM `wp_term_relationships` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _wp_sqlite_tmp_wp_term_relationships_685a484e71098.time_stamp
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wp-hashtagger/inc/class-wp-hashtagger.php(190): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): WP_Hashtagger->create_taxonomy_timestamp('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_term_relationships ADD time_stamp TIMESTAMP NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Hashtagger->create_taxonomy_timestamp, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[24-Jun-2025 06:40:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-image-hover-lite/core/functions.display.php:18
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-hit-counter/...')
-#2 /internal/eval.php(20): activate_plugin('wp-hit-counter/...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-hit-counter/image.php on line 183
-[22-Jun-2025 13:14:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT hitcounter, imagename, flag FROM wp_imagecounter</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT `hitcounter` , `imagename` , `flag` FROM `wp_imagecounter` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT hitcount...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT hitcount...')
-#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT hitcount...')
-#4 /wordpress/wp-content/plugins/wp-hit-counter/image.php(102): wpdb->get_row('SELECT hitcount...')
-#5 /wordpress/wp-content/plugins/wp-hit-counter/image.php(27): perform_install()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-hit-counter/...')
-#8 /internal/eval.php(20): activate_plugin('wp-hit-counter/...')
-#9 {main}</pre>
- for query SELECT hitcounter, imagename, flag FROM wp_imagecounter made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-hit-counter/image.php'), perform_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Jun-2025 13:14:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-hit-counter/image.php:183
+#0 /wordpress/wp-content/plugins/wp-image-hover-lite/core/functions.display.php(196): wpimagehover_display->__construct()
+#1 /wordpress/wp-content/plugins/wp-image-hover-lite/wp-image-hover-showcase.php(33): require_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-image-hover-...')
+#4 /internal/eval.php(20): activate_plugin('wp-image-hover-...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-image-hover-lite/core/functions.display.php on line 18
+[24-Jun-2025 06:40:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-image-hover-lite/core/functions.display.php:18
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-hit-counter/...')
-#2 /internal/eval.php(20): activate_plugin('wp-hit-counter/...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-hit-counter/image.php on line 183
-[22-Jun-2025 13:14:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT hitcounter, imagename, flag FROM wp_imagecounter</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT `hitcounter` , `imagename` , `flag` FROM `wp_imagecounter` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT hitcount...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT hitcount...')
-#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT hitcount...')
-#4 /wordpress/wp-content/plugins/wp-hit-counter/image.php(102): wpdb->get_row('SELECT hitcount...')
-#5 /wordpress/wp-content/plugins/wp-hit-counter/image.php(27): perform_install()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-hit-counter/...')
-#8 /internal/eval.php(20): activate_plugin('wp-hit-counter/...')
-#9 {main}</pre>
- for query SELECT hitcounter, imagename, flag FROM wp_imagecounter made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-hit-counter/image.php'), perform_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Jun-2025 13:14:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-hit-counter/image.php:183
+#0 /wordpress/wp-content/plugins/wp-image-hover-lite/core/functions.display.php(196): wpimagehover_display->__construct()
+#1 /wordpress/wp-content/plugins/wp-image-hover-lite/wp-image-hover-showcase.php(33): require_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-image-hover-...')
+#4 /internal/eval.php(20): activate_plugin('wp-image-hover-...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-image-hover-lite/core/functions.display.php on line 18
+[24-Jun-2025 06:41:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-image-hover-lite/core/functions.display.php:18
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-hit-counter/...')
-#2 /internal/eval.php(20): activate_plugin('wp-hit-counter/...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-hit-counter/image.php on line 183
-[22-Jun-2025 13:15:14 UTC] PHP Warning:  Undefined variable $query in /wordpress/wp-content/plugins/wp-img-slider/wp-imgslider-plugin.php on line 56
-[22-Jun-2025 13:15:24 UTC] PHP Warning:  Undefined variable $query in /wordpress/wp-content/plugins/wp-img-slider/wp-imgslider-plugin.php on line 56
-[22-Jun-2025 13:15:33 UTC] PHP Warning:  Undefined variable $query in /wordpress/wp-content/plugins/wp-img-slider/wp-imgslider-plugin.php on line 56
-[22-Jun-2025 13:16:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>HELP miscellaneous_functions</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "utilityStatement" > "helpCommand"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(945): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('HELP miscellane...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('HELP miscellane...')
-#4 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('HELP miscellane...')
-#5 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/vendor/fernleafsystems/wordpress-services/src/Core/Db.php(176): wpdb->get_results('HELP miscellane...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Checks/Requirements.php(26): FernleafSystems\Wordpress\Services\Core\Db->selectCustom('HELP miscellane...')
-#7 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Controller.php(294): FernleafSystems\Wordpress\Plugin\Shield\Controller\Checks\Requirements->isMysqlVersionSupported('5.6')
-#8 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Controller.php(347): FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->checkMinimumRequirements()
-#9 /wordpress/wp-content/plugins/wp-simple-firewall/plugin_init.php(37): FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->boot()
-#10 /wordpress/wp-content/plugins/wp-simple-firewall/plugin_init.php(63): ICWP_WPSF_Shield_Security->start()
-#11 /wordpress/wp-content/plugins/wp-simple-firewall/icwp-wpsf.php(49): require_once('/wordpress/wp-c...')
-#12 /wordpress/wp-content/plugins/wp-simple-firewall/icwp-wpsf.php(54): icwp_wpsf_init()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): icwp_wpsf_onactivate(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sim...', false)
-#17 /internal/eval.php(20): activate_plugin('wp-simple-firew...')
-#18 {main}</pre>
- for query HELP miscellaneous_functions made by activate_plugin, do_action('activate_wp-simple-firewall/icwp-wpsf.php'), WP_Hook->do_action, WP_Hook->apply_filters, icwp_wpsf_onactivate, icwp_wpsf_init, require_once('/plugins/wp-simple-firewall/plugin_init.php'), ICWP_WPSF_Shield_Security->start, FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->boot, FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->checkMinimumRequirements, FernleafSystems\Wordpress\Plugin\Shield\Controller\Checks\Requirements->isMysqlVersionSupported, FernleafSystems\Wordpress\Services\Core\Db->selectCustom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Jun-2025 13:16:45 UTC] Perhaps due to a failed upgrade, the Shield plugin failed to load certain component(s) - you should remove the plugin and reinstall.
-[22-Jun-2025 13:16:45 UTC] Plugin does not meet minimum requirements
-[22-Jun-2025 13:16:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>HELP miscellaneous_functions</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "utilityStatement" > "helpCommand"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(945): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('HELP miscellane...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('HELP miscellane...')
-#4 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('HELP miscellane...')
-#5 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/vendor/fernleafsystems/wordpress-services/src/Core/Db.php(176): wpdb->get_results('HELP miscellane...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Checks/Requirements.php(26): FernleafSystems\Wordpress\Services\Core\Db->selectCustom('HELP miscellane...')
-#7 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Controller.php(294): FernleafSystems\Wordpress\Plugin\Shield\Controller\Checks\Requirements->isMysqlVersionSupported('5.6')
-#8 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Controller.php(347): FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->checkMinimumRequirements()
-#9 /wordpress/wp-content/plugins/wp-simple-firewall/plugin_init.php(37): FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->boot()
-#10 /wordpress/wp-content/plugins/wp-simple-firewall/plugin_init.php(63): ICWP_WPSF_Shield_Security->start()
-#11 /wordpress/wp-content/plugins/wp-simple-firewall/icwp-wpsf.php(49): require_once('/wordpress/wp-c...')
-#12 /wordpress/wp-includes/class-wp-hook.php(324): icwp_wpsf_init('')
-#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#15 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#16 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#17 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#18 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#19 {main}</pre>
- for query HELP miscellaneous_functions made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, icwp_wpsf_init, require_once('/plugins/wp-simple-firewall/plugin_init.php'), ICWP_WPSF_Shield_Security->start, FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->boot, FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->checkMinimumRequirements, FernleafSystems\Wordpress\Plugin\Shield\Controller\Checks\Requirements->isMysqlVersionSupported, FernleafSystems\Wordpress\Services\Core\Db->selectCustom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Jun-2025 13:16:47 UTC] Perhaps due to a failed upgrade, the Shield plugin failed to load certain component(s) - you should remove the plugin and reinstall.
-[22-Jun-2025 13:16:47 UTC] Plugin does not meet minimum requirements
-[22-Jun-2025 13:17:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>HELP miscellaneous_functions</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "utilityStatement" > "helpCommand"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(945): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('HELP miscellane...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('HELP miscellane...')
-#4 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('HELP miscellane...')
-#5 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/vendor/fernleafsystems/wordpress-services/src/Core/Db.php(176): wpdb->get_results('HELP miscellane...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Checks/Requirements.php(26): FernleafSystems\Wordpress\Services\Core\Db->selectCustom('HELP miscellane...')
-#7 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Controller.php(294): FernleafSystems\Wordpress\Plugin\Shield\Controller\Checks\Requirements->isMysqlVersionSupported('5.6')
-#8 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Controller.php(347): FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->checkMinimumRequirements()
-#9 /wordpress/wp-content/plugins/wp-simple-firewall/plugin_init.php(37): FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->boot()
-#10 /wordpress/wp-content/plugins/wp-simple-firewall/plugin_init.php(63): ICWP_WPSF_Shield_Security->start()
-#11 /wordpress/wp-content/plugins/wp-simple-firewall/icwp-wpsf.php(49): require_once('/wordpress/wp-c...')
-#12 /wordpress/wp-content/plugins/wp-simple-firewall/icwp-wpsf.php(54): icwp_wpsf_init()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): icwp_wpsf_onactivate(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sim...', false)
-#17 /internal/eval.php(20): activate_plugin('wp-simple-firew...')
-#18 {main}</pre>
- for query HELP miscellaneous_functions made by activate_plugin, do_action('activate_wp-simple-firewall/icwp-wpsf.php'), WP_Hook->do_action, WP_Hook->apply_filters, icwp_wpsf_onactivate, icwp_wpsf_init, require_once('/plugins/wp-simple-firewall/plugin_init.php'), ICWP_WPSF_Shield_Security->start, FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->boot, FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->checkMinimumRequirements, FernleafSystems\Wordpress\Plugin\Shield\Controller\Checks\Requirements->isMysqlVersionSupported, FernleafSystems\Wordpress\Services\Core\Db->selectCustom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Jun-2025 13:17:07 UTC] Perhaps due to a failed upgrade, the Shield plugin failed to load certain component(s) - you should remove the plugin and reinstall.
-[22-Jun-2025 13:17:07 UTC] Plugin does not meet minimum requirements
-[22-Jun-2025 13:17:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>HELP miscellaneous_functions</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "utilityStatement" > "helpCommand"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(945): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('HELP miscellane...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('HELP miscellane...')
-#4 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('HELP miscellane...')
-#5 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/vendor/fernleafsystems/wordpress-services/src/Core/Db.php(176): wpdb->get_results('HELP miscellane...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Checks/Requirements.php(26): FernleafSystems\Wordpress\Services\Core\Db->selectCustom('HELP miscellane...')
-#7 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Controller.php(294): FernleafSystems\Wordpress\Plugin\Shield\Controller\Checks\Requirements->isMysqlVersionSupported('5.6')
-#8 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Controller.php(347): FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->checkMinimumRequirements()
-#9 /wordpress/wp-content/plugins/wp-simple-firewall/plugin_init.php(37): FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->boot()
-#10 /wordpress/wp-content/plugins/wp-simple-firewall/plugin_init.php(63): ICWP_WPSF_Shield_Security->start()
-#11 /wordpress/wp-content/plugins/wp-simple-firewall/icwp-wpsf.php(49): require_once('/wordpress/wp-c...')
-#12 /wordpress/wp-includes/class-wp-hook.php(324): icwp_wpsf_init('')
-#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#15 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#16 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#17 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#18 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#19 {main}</pre>
- for query HELP miscellaneous_functions made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, icwp_wpsf_init, require_once('/plugins/wp-simple-firewall/plugin_init.php'), ICWP_WPSF_Shield_Security->start, FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->boot, FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->checkMinimumRequirements, FernleafSystems\Wordpress\Plugin\Shield\Controller\Checks\Requirements->isMysqlVersionSupported, FernleafSystems\Wordpress\Services\Core\Db->selectCustom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Jun-2025 13:17:09 UTC] Perhaps due to a failed upgrade, the Shield plugin failed to load certain component(s) - you should remove the plugin and reinstall.
-[22-Jun-2025 13:17:09 UTC] Plugin does not meet minimum requirements
-[22-Jun-2025 13:17:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>HELP miscellaneous_functions</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "utilityStatement" > "helpCommand"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(945): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('HELP miscellane...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('HELP miscellane...')
-#4 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('HELP miscellane...')
-#5 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/vendor/fernleafsystems/wordpress-services/src/Core/Db.php(176): wpdb->get_results('HELP miscellane...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Checks/Requirements.php(26): FernleafSystems\Wordpress\Services\Core\Db->selectCustom('HELP miscellane...')
-#7 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Controller.php(294): FernleafSystems\Wordpress\Plugin\Shield\Controller\Checks\Requirements->isMysqlVersionSupported('5.6')
-#8 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Controller.php(347): FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->checkMinimumRequirements()
-#9 /wordpress/wp-content/plugins/wp-simple-firewall/plugin_init.php(37): FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->boot()
-#10 /wordpress/wp-content/plugins/wp-simple-firewall/plugin_init.php(63): ICWP_WPSF_Shield_Security->start()
-#11 /wordpress/wp-content/plugins/wp-simple-firewall/icwp-wpsf.php(49): require_once('/wordpress/wp-c...')
-#12 /wordpress/wp-content/plugins/wp-simple-firewall/icwp-wpsf.php(54): icwp_wpsf_init()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): icwp_wpsf_onactivate(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sim...', false)
-#17 /internal/eval.php(20): activate_plugin('wp-simple-firew...')
-#18 {main}</pre>
- for query HELP miscellaneous_functions made by activate_plugin, do_action('activate_wp-simple-firewall/icwp-wpsf.php'), WP_Hook->do_action, WP_Hook->apply_filters, icwp_wpsf_onactivate, icwp_wpsf_init, require_once('/plugins/wp-simple-firewall/plugin_init.php'), ICWP_WPSF_Shield_Security->start, FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->boot, FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->checkMinimumRequirements, FernleafSystems\Wordpress\Plugin\Shield\Controller\Checks\Requirements->isMysqlVersionSupported, FernleafSystems\Wordpress\Services\Core\Db->selectCustom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Jun-2025 13:17:29 UTC] Perhaps due to a failed upgrade, the Shield plugin failed to load certain component(s) - you should remove the plugin and reinstall.
-[22-Jun-2025 13:17:29 UTC] Plugin does not meet minimum requirements
-[22-Jun-2025 13:17:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>HELP miscellaneous_functions</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "utilityStatement" > "helpCommand"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(945): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('HELP miscellane...')
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('HELP miscellane...')
-#4 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('HELP miscellane...')
-#5 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/vendor/fernleafsystems/wordpress-services/src/Core/Db.php(176): wpdb->get_results('HELP miscellane...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Checks/Requirements.php(26): FernleafSystems\Wordpress\Services\Core\Db->selectCustom('HELP miscellane...')
-#7 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Controller.php(294): FernleafSystems\Wordpress\Plugin\Shield\Controller\Checks\Requirements->isMysqlVersionSupported('5.6')
-#8 /wordpress/wp-content/plugins/wp-simple-firewall/src/lib/src/Controller/Controller.php(347): FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->checkMinimumRequirements()
-#9 /wordpress/wp-content/plugins/wp-simple-firewall/plugin_init.php(37): FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->boot()
-#10 /wordpress/wp-content/plugins/wp-simple-firewall/plugin_init.php(63): ICWP_WPSF_Shield_Security->start()
-#11 /wordpress/wp-content/plugins/wp-simple-firewall/icwp-wpsf.php(49): require_once('/wordpress/wp-c...')
-#12 /wordpress/wp-includes/class-wp-hook.php(324): icwp_wpsf_init('')
-#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#15 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#16 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#17 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#18 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#19 {main}</pre>
- for query HELP miscellaneous_functions made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, icwp_wpsf_init, require_once('/plugins/wp-simple-firewall/plugin_init.php'), ICWP_WPSF_Shield_Security->start, FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->boot, FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller->checkMinimumRequirements, FernleafSystems\Wordpress\Plugin\Shield\Controller\Checks\Requirements->isMysqlVersionSupported, FernleafSystems\Wordpress\Services\Core\Db->selectCustom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Jun-2025 13:17:30 UTC] Perhaps due to a failed upgrade, the Shield plugin failed to load certain component(s) - you should remove the plugin and reinstall.
-[22-Jun-2025 13:17:30 UTC] Plugin does not meet minimum requirements
+#0 /wordpress/wp-content/plugins/wp-image-hover-lite/core/functions.display.php(196): wpimagehover_display->__construct()
+#1 /wordpress/wp-content/plugins/wp-image-hover-lite/wp-image-hover-showcase.php(33): require_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-image-hover-...')
+#4 /internal/eval.php(20): activate_plugin('wp-image-hover-...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-image-hover-lite/core/functions.display.php on line 18
+[24-Jun-2025 06:41:17 UTC] PHP Deprecated:  Required parameter $rows follows optional parameter $filename in /wordpress/wp-content/plugins/wp-job-pro/include/ic-job-function.php on line 416
+[24-Jun-2025 06:41:17 UTC] PHP Deprecated:  Required parameter $columns follows optional parameter $filename in /wordpress/wp-content/plugins/wp-job-pro/include/ic-job-function.php on line 416
+[24-Jun-2025 06:41:27 UTC] PHP Deprecated:  Required parameter $rows follows optional parameter $filename in /wordpress/wp-content/plugins/wp-job-pro/include/ic-job-function.php on line 416
+[24-Jun-2025 06:41:27 UTC] PHP Deprecated:  Required parameter $columns follows optional parameter $filename in /wordpress/wp-content/plugins/wp-job-pro/include/ic-job-function.php on line 416
+[24-Jun-2025 06:41:37 UTC] PHP Deprecated:  Required parameter $rows follows optional parameter $filename in /wordpress/wp-content/plugins/wp-job-pro/include/ic-job-function.php on line 416
+[24-Jun-2025 06:41:37 UTC] PHP Deprecated:  Required parameter $columns follows optional parameter $filename in /wordpress/wp-content/plugins/wp-job-pro/include/ic-job-function.php on line 416
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:325:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
