@@ -2,248 +2,95 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [23-Jun-2025 20:51:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [25-Jun-2025 14:00:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_service_orders (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `manager` varchar(255) NOT NULL,
-  `id_label` varchar(255) NOT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp(),
-  `model` varchar(255) NOT NULL,
-  `serial` varchar(255) NOT NULL,
-  `malfunction` varchar(255) NOT NULL,
-  `work` varchar(255) NOT NULL,
-  `client` varchar(255) NOT NULL,
-  `number` varchar(20) NOT NULL,
-  `cost_spare` int(11) NOT NULL,
-  `cost_total` int(11) NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `date_issue` datetime DEFAULT NULL,
-  `sms_id` varchar(255) NOT NULL,
-  `sms_status` int(11) NOT NULL,
-  `manager_notes` varchar(255) NOT NULL, 
-  `serviceman` varchar(255) NOT NULL,
-  UNIQUE KEY id (id)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE </p>
+<p>Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url )</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: Select * FROM `wp_ab_experiment` `AB_EXE` INNER JOIN `wp_ab_variations` `AB_VARI` ON `AB_EXE`.`experiment_id` = `AB_VARI`.`experiment_id` WHERE `AB_EXE`.`experiment_status` = 1 AND `FIND_IN_SET` ( 'example.com:443' , `AB_EXE`.`target_url` ) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#4 /wordpress/wp-content/plugins/service/service.php(114): dbDelta(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): {closure}(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('Select * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('Select * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('Select * FROM w...')
+#4 /wordpress/wp-content/plugins/simple-ab-testing/public/class-wordpress-ab-testing-public.php(116): wpdb->get_results('Select * FROM w...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Wordpress_Ab_Testing_Public->ab_testing_cookie('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_servic...', false)
-#9 /internal/eval.php(20): activate_plugin('service/service...')
-#10 {main}</pre>
- for query CREATE TABLE wp_service_orders (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `manager` varchar(255) NOT NULL,
-  `id_label` varchar(255) NOT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp(),
-  `model` varchar(255) NOT NULL,
-  `serial` varchar(255) NOT NULL,
-  `malfunction` varchar(255) NOT NULL,
-  `work` varchar(255) NOT NULL,
-  `client` varchar(255) NOT NULL,
-  `number` varchar(20) NOT NULL,
-  `cost_spare` int(11) NOT NULL,
-  `cost_total` int(11) NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `date_issue` datetime DEFAULT NULL,
-  `sms_id` varchar(255) NOT NULL,
-  `sms_status` int(11) NOT NULL,
-  `manager_notes` varchar(255) NOT NULL, 
-  `serviceman` varchar(255) NOT NULL,
-  UNIQUE KEY id (id)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE  made by activate_plugin, do_action('activate_service/service.php'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[23-Jun-2025 20:52:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Wordpress_Ab_Testing_Public->ab_testing_cookie, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[25-Jun-2025 14:00:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_service_orders (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `manager` varchar(255) NOT NULL,
-  `id_label` varchar(255) NOT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp(),
-  `model` varchar(255) NOT NULL,
-  `serial` varchar(255) NOT NULL,
-  `malfunction` varchar(255) NOT NULL,
-  `work` varchar(255) NOT NULL,
-  `client` varchar(255) NOT NULL,
-  `number` varchar(20) NOT NULL,
-  `cost_spare` int(11) NOT NULL,
-  `cost_total` int(11) NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `date_issue` datetime DEFAULT NULL,
-  `sms_id` varchar(255) NOT NULL,
-  `sms_status` int(11) NOT NULL,
-  `manager_notes` varchar(255) NOT NULL, 
-  `serviceman` varchar(255) NOT NULL,
-  UNIQUE KEY id (id)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE </p>
+<p>Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url )</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: Select * FROM `wp_ab_experiment` `AB_EXE` INNER JOIN `wp_ab_variations` `AB_VARI` ON `AB_EXE`.`experiment_id` = `AB_VARI`.`experiment_id` WHERE `AB_EXE`.`experiment_status` = 1 AND `FIND_IN_SET` ( 'example.com:443' , `AB_EXE`.`target_url` ) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#4 /wordpress/wp-content/plugins/service/service.php(114): dbDelta(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): {closure}(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('Select * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('Select * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('Select * FROM w...')
+#4 /wordpress/wp-content/plugins/simple-ab-testing/public/class-wordpress-ab-testing-public.php(116): wpdb->get_results('Select * FROM w...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Wordpress_Ab_Testing_Public->ab_testing_cookie('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_servic...', false)
-#9 /internal/eval.php(20): activate_plugin('service/service...')
-#10 {main}</pre>
- for query CREATE TABLE wp_service_orders (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `manager` varchar(255) NOT NULL,
-  `id_label` varchar(255) NOT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp(),
-  `model` varchar(255) NOT NULL,
-  `serial` varchar(255) NOT NULL,
-  `malfunction` varchar(255) NOT NULL,
-  `work` varchar(255) NOT NULL,
-  `client` varchar(255) NOT NULL,
-  `number` varchar(20) NOT NULL,
-  `cost_spare` int(11) NOT NULL,
-  `cost_total` int(11) NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `date_issue` datetime DEFAULT NULL,
-  `sms_id` varchar(255) NOT NULL,
-  `sms_status` int(11) NOT NULL,
-  `manager_notes` varchar(255) NOT NULL, 
-  `serviceman` varchar(255) NOT NULL,
-  UNIQUE KEY id (id)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE  made by activate_plugin, do_action('activate_service/service.php'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[23-Jun-2025 20:52:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Wordpress_Ab_Testing_Public->ab_testing_cookie, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[25-Jun-2025 14:00:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_service_orders (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `manager` varchar(255) NOT NULL,
-  `id_label` varchar(255) NOT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp(),
-  `model` varchar(255) NOT NULL,
-  `serial` varchar(255) NOT NULL,
-  `malfunction` varchar(255) NOT NULL,
-  `work` varchar(255) NOT NULL,
-  `client` varchar(255) NOT NULL,
-  `number` varchar(20) NOT NULL,
-  `cost_spare` int(11) NOT NULL,
-  `cost_total` int(11) NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `date_issue` datetime DEFAULT NULL,
-  `sms_id` varchar(255) NOT NULL,
-  `sms_status` int(11) NOT NULL,
-  `manager_notes` varchar(255) NOT NULL, 
-  `serviceman` varchar(255) NOT NULL,
-  UNIQUE KEY id (id)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE </p>
+<p>Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url )</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: Select * FROM `wp_ab_experiment` `AB_EXE` INNER JOIN `wp_ab_variations` `AB_VARI` ON `AB_EXE`.`experiment_id` = `AB_VARI`.`experiment_id` WHERE `AB_EXE`.`experiment_status` = 1 AND `FIND_IN_SET` ( 'example.com:443' , `AB_EXE`.`target_url` ) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#4 /wordpress/wp-content/plugins/service/service.php(114): dbDelta(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): {closure}(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('Select * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('Select * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('Select * FROM w...')
+#4 /wordpress/wp-content/plugins/simple-ab-testing/public/class-wordpress-ab-testing-public.php(116): wpdb->get_results('Select * FROM w...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Wordpress_Ab_Testing_Public->ab_testing_cookie('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_servic...', false)
-#9 /internal/eval.php(20): activate_plugin('service/service...')
-#10 {main}</pre>
- for query CREATE TABLE wp_service_orders (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `manager` varchar(255) NOT NULL,
-  `id_label` varchar(255) NOT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp(),
-  `model` varchar(255) NOT NULL,
-  `serial` varchar(255) NOT NULL,
-  `malfunction` varchar(255) NOT NULL,
-  `work` varchar(255) NOT NULL,
-  `client` varchar(255) NOT NULL,
-  `number` varchar(20) NOT NULL,
-  `cost_spare` int(11) NOT NULL,
-  `cost_total` int(11) NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `date_issue` datetime DEFAULT NULL,
-  `sms_id` varchar(255) NOT NULL,
-  `sms_status` int(11) NOT NULL,
-  `manager_notes` varchar(255) NOT NULL, 
-  `serviceman` varchar(255) NOT NULL,
-  UNIQUE KEY id (id)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE  made by activate_plugin, do_action('activate_service/service.php'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[23-Jun-2025 20:55:35 UTC] PHP Deprecated:  Required parameter $column_name follows optional parameter $out in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php on line 1490
-[23-Jun-2025 20:55:35 UTC] PHP Deprecated:  Required parameter $user_id follows optional parameter $out in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php on line 1490
-[23-Jun-2025 20:55:35 UTC] PHP Deprecated:  Required parameter $column_name follows optional parameter $out in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php on line 1490
-[23-Jun-2025 20:55:35 UTC] PHP Deprecated:  Required parameter $user_id follows optional parameter $out in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php on line 1490
-[23-Jun-2025 20:55:36 UTC] PHP Fatal error:  Uncaught ArgumentCountError: parse_str() expects exactly 2 arguments, 1 given in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php:1221
-Stack trace:
-#0 /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php(1221): parse_str(NULL)
-#1 /wordpress/wp-includes/class-wp-hook.php(324): simplr_register_redirect('')
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-settings.php(727): do_action('init')
-#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php on line 1221
-[23-Jun-2025 20:55:44 UTC] PHP Deprecated:  Required parameter $column_name follows optional parameter $out in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php on line 1490
-[23-Jun-2025 20:55:44 UTC] PHP Deprecated:  Required parameter $user_id follows optional parameter $out in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php on line 1490
-[23-Jun-2025 20:55:45 UTC] PHP Deprecated:  Required parameter $column_name follows optional parameter $out in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php on line 1490
-[23-Jun-2025 20:55:45 UTC] PHP Deprecated:  Required parameter $user_id follows optional parameter $out in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php on line 1490
-[23-Jun-2025 20:55:45 UTC] PHP Fatal error:  Uncaught ArgumentCountError: parse_str() expects exactly 2 arguments, 1 given in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php:1221
-Stack trace:
-#0 /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php(1221): parse_str(NULL)
-#1 /wordpress/wp-includes/class-wp-hook.php(324): simplr_register_redirect('')
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-settings.php(727): do_action('init')
-#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php on line 1221
-[23-Jun-2025 20:55:54 UTC] PHP Deprecated:  Required parameter $column_name follows optional parameter $out in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php on line 1490
-[23-Jun-2025 20:55:54 UTC] PHP Deprecated:  Required parameter $user_id follows optional parameter $out in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php on line 1490
-[23-Jun-2025 20:55:55 UTC] PHP Deprecated:  Required parameter $column_name follows optional parameter $out in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php on line 1490
-[23-Jun-2025 20:55:55 UTC] PHP Deprecated:  Required parameter $user_id follows optional parameter $out in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php on line 1490
-[23-Jun-2025 20:55:55 UTC] PHP Fatal error:  Uncaught ArgumentCountError: parse_str() expects exactly 2 arguments, 1 given in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php:1221
-Stack trace:
-#0 /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php(1221): parse_str(NULL)
-#1 /wordpress/wp-includes/class-wp-hook.php(324): simplr_register_redirect('')
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-settings.php(727): do_action('init')
-#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/simplr-registration-form/simplr_form_functions.php on line 1221
-[23-Jun-2025 20:56:53 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/supra-open-form/classes/Form.class.php on line 97
-[23-Jun-2025 20:57:01 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/supra-open-form/classes/Form.class.php on line 97
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Wordpress_Ab_Testing_Public->ab_testing_cookie, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[25-Jun-2025 14:03:18 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/supra-open-form/classes/Form.class.php on line 97
+[25-Jun-2025 14:03:26 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/supra-open-form/classes/Form.class.php on line 97
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:325:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
@@ -268,7 +115,7 @@ Stack trace:
         httpStatusCode: 500,
         headers: {
           'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'set-cookie': [ 'PHPSESSID=1c3c1347dc6d85340d674fa7c6536f75; path=/' ],
+          'set-cookie': [ 'PHPSESSID=b91d271aaef8ebad53529c8384361c94; path=/' ],
           expires: [ 'Thu, 19 Nov 1981 08:52:00 GMT' ],
           'cache-control': [ 'no-store, no-cache, must-revalidate' ],
           pragma: [ 'no-cache' ],
