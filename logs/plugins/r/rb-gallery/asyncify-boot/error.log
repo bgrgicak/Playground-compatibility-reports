@@ -2,76 +2,334 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [23-Jun-2025 19:47:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/poros-slider/includes/porosadmin.php:926
+Error: [25-Jun-2025 12:58:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `wp_posts`.`ID` , `wp_posts`.`post_title` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock' LIMIT 1 ) as `_stock` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock_status' LIMIT 1 ) as `_stock_status` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_regular_price' LIMIT 1 ) as `_regular_price` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_sale_price' LIMIT 1 ) as `_sale_price` , ( SELECT GROUP_CONCAT ( `CONCAT_WS` ( ':' , `t`.`term_id` , `t`.`name` ) ) FROM `wp_term_relationships` `tr` INNER JOIN `wp_term_taxonomy` `tt` ON `tr`.`term_taxonomy_id` = `tt`.`term_taxonomy_id` INNER JOIN `wp_terms` `t` ON `t`.`term_id` = `tt`.`term_id` WHERE `tr`.`object_id` = `wp_posts`.`ID` AND `tt`.`taxonomy` = 'product_type' LIMIT 1 ) as `product_type` From `wp_posts` WHERE `wp_posts`.`post_type` IN ( 'product' , 'product_variation' ) AND `wp_posts`.`post_status` IN ( 'publish' ) GROUP BY `wp_posts`.`ID` ORDER BY `wp_posts`.`post_date` ASC LIMIT 100 OFFSET 0 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such function: CONCAT_WS
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT wp_posts...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT wp_posts...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT wp_posts...')
+#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(310): wpdb->get_results('SELECT wp_posts...')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(342): StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data(NULL, 0, 0, Array, true)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced, StockSyncWithGoogleSheetForWooCommerce\Product->sync_all, StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products, StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data, StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[25-Jun-2025 12:58:13 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php:344
 Stack trace:
-#0 /wordpress/wp-content/plugins/poros-slider/poroslider.php(39): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('poros-slider/po...')
-#3 /internal/eval.php(20): activate_plugin('poros-slider/po...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/poros-slider/includes/porosadmin.php on line 926
-[23-Jun-2025 19:47:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/poros-slider/includes/porosadmin.php:926
+#0 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(344): count('<div style="cle...')
+#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
+#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
+#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php on line 344
+[25-Jun-2025 12:58:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `wp_posts`.`ID` , `wp_posts`.`post_title` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock' LIMIT 1 ) as `_stock` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock_status' LIMIT 1 ) as `_stock_status` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_regular_price' LIMIT 1 ) as `_regular_price` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_sale_price' LIMIT 1 ) as `_sale_price` , ( SELECT GROUP_CONCAT ( `CONCAT_WS` ( ':' , `t`.`term_id` , `t`.`name` ) ) FROM `wp_term_relationships` `tr` INNER JOIN `wp_term_taxonomy` `tt` ON `tr`.`term_taxonomy_id` = `tt`.`term_taxonomy_id` INNER JOIN `wp_terms` `t` ON `t`.`term_id` = `tt`.`term_id` WHERE `tr`.`object_id` = `wp_posts`.`ID` AND `tt`.`taxonomy` = 'product_type' LIMIT 1 ) as `product_type` From `wp_posts` WHERE `wp_posts`.`post_type` IN ( 'product' , 'product_variation' ) AND `wp_posts`.`post_status` IN ( 'publish' ) GROUP BY `wp_posts`.`ID` ORDER BY `wp_posts`.`post_date` ASC LIMIT 100 OFFSET 0 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such function: CONCAT_WS
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT wp_posts...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT wp_posts...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT wp_posts...')
+#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(310): wpdb->get_results('SELECT wp_posts...')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(342): StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data(NULL, 0, 0, Array, true)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced, StockSyncWithGoogleSheetForWooCommerce\Product->sync_all, StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products, StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data, StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[25-Jun-2025 12:58:24 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php:344
 Stack trace:
-#0 /wordpress/wp-content/plugins/poros-slider/poroslider.php(39): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('poros-slider/po...')
-#3 /internal/eval.php(20): activate_plugin('poros-slider/po...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/poros-slider/includes/porosadmin.php on line 926
-[23-Jun-2025 19:47:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/poros-slider/includes/porosadmin.php:926
+#0 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(344): count('<div style="cle...')
+#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
+#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
+#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php on line 344
+[25-Jun-2025 12:58:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `wp_posts`.`ID` , `wp_posts`.`post_title` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock' LIMIT 1 ) as `_stock` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock_status' LIMIT 1 ) as `_stock_status` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_regular_price' LIMIT 1 ) as `_regular_price` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_sale_price' LIMIT 1 ) as `_sale_price` , ( SELECT GROUP_CONCAT ( `CONCAT_WS` ( ':' , `t`.`term_id` , `t`.`name` ) ) FROM `wp_term_relationships` `tr` INNER JOIN `wp_term_taxonomy` `tt` ON `tr`.`term_taxonomy_id` = `tt`.`term_taxonomy_id` INNER JOIN `wp_terms` `t` ON `t`.`term_id` = `tt`.`term_id` WHERE `tr`.`object_id` = `wp_posts`.`ID` AND `tt`.`taxonomy` = 'product_type' LIMIT 1 ) as `product_type` From `wp_posts` WHERE `wp_posts`.`post_type` IN ( 'product' , 'product_variation' ) AND `wp_posts`.`post_status` IN ( 'publish' ) GROUP BY `wp_posts`.`ID` ORDER BY `wp_posts`.`post_date` ASC LIMIT 100 OFFSET 0 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such function: CONCAT_WS
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT wp_posts...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT wp_posts...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT wp_posts...')
+#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(310): wpdb->get_results('SELECT wp_posts...')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(342): StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data(NULL, 0, 0, Array, true)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced, StockSyncWithGoogleSheetForWooCommerce\Product->sync_all, StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products, StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data, StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[25-Jun-2025 12:58:36 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php:344
 Stack trace:
-#0 /wordpress/wp-content/plugins/poros-slider/poroslider.php(39): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('poros-slider/po...')
-#3 /internal/eval.php(20): activate_plugin('poros-slider/po...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/poros-slider/includes/porosadmin.php on line 926
-[23-Jun-2025 19:49:00 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6121
-[23-Jun-2025 19:49:10 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6121
-[23-Jun-2025 19:49:20 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6121
-[23-Jun-2025 19:49:56 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[23-Jun-2025 19:50:02 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>pw-woocommerce-affiliates</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[23-Jun-2025 19:50:39 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[23-Jun-2025 19:50:45 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>pw-woocommerce-affiliates</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[23-Jun-2025 19:51:20 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[23-Jun-2025 19:51:26 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>pw-woocommerce-affiliates</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[23-Jun-2025 19:51:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recent-photos-widget/recent_photos_widget.php:140
+#0 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(344): count('<div style="cle...')
+#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
+#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
+#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php on line 344
+[25-Jun-2025 12:59:08 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>reaction_buttons</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[25-Jun-2025 12:59:18 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>reaction_buttons</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[25-Jun-2025 12:59:28 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>reaction_buttons</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[25-Jun-2025 13:01:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p> CREATE TABLE IF NOT EXISTS`wp_rndbg_images` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `season` varchar(16) NOT NULL,
+  `daytime` varchar(16) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `signature` varchar(255) NOT NULL,
+  `copyright` varchar(255) NOT NULL,
+  `width` int(2) unsigned NOT NULL,
+  `height` int(2) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `season` (`season`,`daytime`),
+  KEY `width` (`width`,`height`),
+) ENGINE=MyISAM AUTO_INCREMENT=47  DEFAULT CHARACTER SET utf8mb4 ; </p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query(' CREATE TABLE I...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query(' CREATE TABLE I...')
+#3 /wordpress/wp-content/plugins/random-site-background/rand-background.php(129): WP_SQLite_DB->query(' CREATE TABLE I...')
+#4 /wordpress/wp-content/plugins/random-site-background/rand-background.php(138): rndbg_create_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): rndbg_install_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
+#9 /internal/eval.php(20): activate_plugin('random-site-bac...')
+#10 {main}</pre>
+ for query  CREATE TABLE IF NOT EXISTS`wp_rndbg_images` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `season` varchar(16) NOT NULL,
+  `daytime` varchar(16) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `signature` varchar(255) NOT NULL,
+  `copyright` varchar(255) NOT NULL,
+  `width` int(2) unsigned NOT NULL,
+  `height` int(2) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `season` (`season`,`daytime`),
+  KEY `width` (`width`,`height`),
+) ENGINE=MyISAM AUTO_INCREMENT=47  DEFAULT CHARACTER SET utf8mb4 ;  made by activate_plugin, do_action('activate_random-site-background/rand-background.php'), WP_Hook->do_action, WP_Hook->apply_filters, rndbg_install_plugin, rndbg_create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[25-Jun-2025 13:01:41 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/random-site-background/rand-background.php on line 169
+[25-Jun-2025 13:01:41 UTC] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /wordpress/wp-content/plugins/random-site-background/rand-background.php:169
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recent-photos-w...')
-#2 /internal/eval.php(20): activate_plugin('recent-photos-w...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/recent-photos-widget/recent_photos_widget.php on line 140
-[23-Jun-2025 19:51:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recent-photos-widget/recent_photos_widget.php:140
+#0 /wordpress/wp-includes/class-wp-hook.php(324): rndbg_install_plugin(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
+#4 /internal/eval.php(20): activate_plugin('random-site-bac...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/random-site-background/rand-background.php on line 169
+[25-Jun-2025 13:01:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p> CREATE TABLE IF NOT EXISTS`wp_rndbg_images` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `season` varchar(16) NOT NULL,
+  `daytime` varchar(16) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `signature` varchar(255) NOT NULL,
+  `copyright` varchar(255) NOT NULL,
+  `width` int(2) unsigned NOT NULL,
+  `height` int(2) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `season` (`season`,`daytime`),
+  KEY `width` (`width`,`height`),
+) ENGINE=MyISAM AUTO_INCREMENT=47  DEFAULT CHARACTER SET utf8mb4 ; </p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query(' CREATE TABLE I...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query(' CREATE TABLE I...')
+#3 /wordpress/wp-content/plugins/random-site-background/rand-background.php(129): WP_SQLite_DB->query(' CREATE TABLE I...')
+#4 /wordpress/wp-content/plugins/random-site-background/rand-background.php(138): rndbg_create_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): rndbg_install_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
+#9 /internal/eval.php(20): activate_plugin('random-site-bac...')
+#10 {main}</pre>
+ for query  CREATE TABLE IF NOT EXISTS`wp_rndbg_images` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `season` varchar(16) NOT NULL,
+  `daytime` varchar(16) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `signature` varchar(255) NOT NULL,
+  `copyright` varchar(255) NOT NULL,
+  `width` int(2) unsigned NOT NULL,
+  `height` int(2) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `season` (`season`,`daytime`),
+  KEY `width` (`width`,`height`),
+) ENGINE=MyISAM AUTO_INCREMENT=47  DEFAULT CHARACTER SET utf8mb4 ;  made by activate_plugin, do_action('activate_random-site-background/rand-background.php'), WP_Hook->do_action, WP_Hook->apply_filters, rndbg_install_plugin, rndbg_create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[25-Jun-2025 13:01:49 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/random-site-background/rand-background.php on line 169
+[25-Jun-2025 13:01:49 UTC] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /wordpress/wp-content/plugins/random-site-background/rand-background.php:169
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recent-photos-w...')
-#2 /internal/eval.php(20): activate_plugin('recent-photos-w...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/recent-photos-widget/recent_photos_widget.php on line 140
-[23-Jun-2025 19:51:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recent-photos-widget/recent_photos_widget.php:140
+#0 /wordpress/wp-includes/class-wp-hook.php(324): rndbg_install_plugin(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
+#4 /internal/eval.php(20): activate_plugin('random-site-bac...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/random-site-background/rand-background.php on line 169
+[25-Jun-2025 13:01:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p> CREATE TABLE IF NOT EXISTS`wp_rndbg_images` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `season` varchar(16) NOT NULL,
+  `daytime` varchar(16) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `signature` varchar(255) NOT NULL,
+  `copyright` varchar(255) NOT NULL,
+  `width` int(2) unsigned NOT NULL,
+  `height` int(2) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `season` (`season`,`daytime`),
+  KEY `width` (`width`,`height`),
+) ENGINE=MyISAM AUTO_INCREMENT=47  DEFAULT CHARACTER SET utf8mb4 ; </p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query(' CREATE TABLE I...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query(' CREATE TABLE I...')
+#3 /wordpress/wp-content/plugins/random-site-background/rand-background.php(129): WP_SQLite_DB->query(' CREATE TABLE I...')
+#4 /wordpress/wp-content/plugins/random-site-background/rand-background.php(138): rndbg_create_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): rndbg_install_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
+#9 /internal/eval.php(20): activate_plugin('random-site-bac...')
+#10 {main}</pre>
+ for query  CREATE TABLE IF NOT EXISTS`wp_rndbg_images` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `season` varchar(16) NOT NULL,
+  `daytime` varchar(16) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `signature` varchar(255) NOT NULL,
+  `copyright` varchar(255) NOT NULL,
+  `width` int(2) unsigned NOT NULL,
+  `height` int(2) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `season` (`season`,`daytime`),
+  KEY `width` (`width`,`height`),
+) ENGINE=MyISAM AUTO_INCREMENT=47  DEFAULT CHARACTER SET utf8mb4 ;  made by activate_plugin, do_action('activate_random-site-background/rand-background.php'), WP_Hook->do_action, WP_Hook->apply_filters, rndbg_install_plugin, rndbg_create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[25-Jun-2025 13:01:58 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/random-site-background/rand-background.php on line 169
+[25-Jun-2025 13:01:58 UTC] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /wordpress/wp-content/plugins/random-site-background/rand-background.php:169
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recent-photos-w...')
-#2 /internal/eval.php(20): activate_plugin('recent-photos-w...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/recent-photos-widget/recent_photos_widget.php on line 140
-[23-Jun-2025 19:54:58 UTC] PHP Deprecated:  Required parameter $sections follows optional parameter $plugin_slug in /wordpress/wp-content/plugins/product-brands-for-woocommerce/vsp-framework/functions/settings-functions.php on line 38
-[23-Jun-2025 19:54:58 UTC] PHP Deprecated:  Required parameter $meta_value follows optional parameter $meta_key in /wordpress/wp-content/plugins/product-brands-for-woocommerce/vsp-framework/libs/wpsf/functions/fallback.php on line 34
-[23-Jun-2025 19:55:08 UTC] PHP Deprecated:  Required parameter $sections follows optional parameter $plugin_slug in /wordpress/wp-content/plugins/product-brands-for-woocommerce/vsp-framework/functions/settings-functions.php on line 38
-[23-Jun-2025 19:55:08 UTC] PHP Deprecated:  Required parameter $meta_value follows optional parameter $meta_key in /wordpress/wp-content/plugins/product-brands-for-woocommerce/vsp-framework/libs/wpsf/functions/fallback.php on line 34
-[23-Jun-2025 19:55:19 UTC] PHP Deprecated:  Required parameter $sections follows optional parameter $plugin_slug in /wordpress/wp-content/plugins/product-brands-for-woocommerce/vsp-framework/functions/settings-functions.php on line 38
-[23-Jun-2025 19:55:20 UTC] PHP Deprecated:  Required parameter $meta_value follows optional parameter $meta_key in /wordpress/wp-content/plugins/product-brands-for-woocommerce/vsp-framework/libs/wpsf/functions/fallback.php on line 34
-[23-Jun-2025 19:56:00 UTC] PHP Warning:  The magic method Product_Review_AJAX::__wakeup() must have public visibility in /wordpress/wp-content/plugins/product-review/includes/class-product-review-ajax.php on line 137
-[23-Jun-2025 19:56:00 UTC] PHP Warning:  The magic method Product_Review_Add_Ons::__wakeup() must have public visibility in /wordpress/wp-content/plugins/product-review/includes/class-product-review-add-ons.php on line 145
-[23-Jun-2025 19:56:01 UTC] PHP Warning:  The magic method Product_Review_AJAX::__wakeup() must have public visibility in /wordpress/wp-content/plugins/product-review/includes/class-product-review-ajax.php on line 137
-[23-Jun-2025 19:56:09 UTC] PHP Warning:  The magic method Product_Review_AJAX::__wakeup() must have public visibility in /wordpress/wp-content/plugins/product-review/includes/class-product-review-ajax.php on line 137
-[23-Jun-2025 19:56:10 UTC] PHP Warning:  The magic method Product_Review_Add_Ons::__wakeup() must have public visibility in /wordpress/wp-content/plugins/product-review/includes/class-product-review-add-ons.php on line 145
-[23-Jun-2025 19:56:10 UTC] PHP Warning:  The magic method Product_Review_AJAX::__wakeup() must have public visibility in /wordpress/wp-content/plugins/product-review/includes/class-product-review-ajax.php on line 137
-[23-Jun-2025 19:56:19 UTC] PHP Warning:  The magic method Product_Review_AJAX::__wakeup() must have public visibility in /wordpress/wp-content/plugins/product-review/includes/class-product-review-ajax.php on line 137
-[23-Jun-2025 19:56:19 UTC] PHP Warning:  The magic method Product_Review_Add_Ons::__wakeup() must have public visibility in /wordpress/wp-content/plugins/product-review/includes/class-product-review-add-ons.php on line 145
-[23-Jun-2025 19:56:20 UTC] PHP Warning:  The magic method Product_Review_AJAX::__wakeup() must have public visibility in /wordpress/wp-content/plugins/product-review/includes/class-product-review-ajax.php on line 137
-[23-Jun-2025 19:57:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/rb-gallery/includes/rb-gallery-activator.php:24
+#0 /wordpress/wp-includes/class-wp-hook.php(324): rndbg_install_plugin(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
+#4 /internal/eval.php(20): activate_plugin('random-site-bac...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/random-site-background/rand-background.php on line 169
+[25-Jun-2025 13:02:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/rb-gallery/includes/rb-gallery-activator.php:24
 Stack trace:
 #0 /wordpress/wp-content/plugins/rb-gallery/rb-gallery.php(28): Rb_gallery_activator::activate()
 #1 /wordpress/wp-includes/class-wp-hook.php(324): activate_rb_gallery(false)
@@ -81,7 +339,7 @@ Stack trace:
 #5 /internal/eval.php(20): activate_plugin('rb-gallery/rb-g...')
 #6 {main}
   thrown in /wordpress/wp-content/plugins/rb-gallery/includes/rb-gallery-activator.php on line 24
-[23-Jun-2025 19:57:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/rb-gallery/includes/rb-gallery-activator.php:24
+[25-Jun-2025 13:02:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/rb-gallery/includes/rb-gallery-activator.php:24
 Stack trace:
 #0 /wordpress/wp-content/plugins/rb-gallery/rb-gallery.php(28): Rb_gallery_activator::activate()
 #1 /wordpress/wp-includes/class-wp-hook.php(324): activate_rb_gallery(false)
