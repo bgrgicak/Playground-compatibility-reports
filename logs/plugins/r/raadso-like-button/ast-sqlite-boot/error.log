@@ -2,382 +2,205 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [25-Jun-2025 07:29:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [26-Jun-2025 21:48:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_delete_posts LIKE wp_posts</p>
+<p>INSERT INTO `wp_ss1_sync_queue` (`post_id`, `index_uuid`, `action`) VALUES (0, '0', '3')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ss1_sync_queue</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_ss1_sync_queue</li>
+<li>Executing: INSERT INTO `wp_ss1_sync_queue` () SELECT  FROM (VALUES ( 0 , '0' , '3' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: CREATE TABLE ... [AS] SELECT is currently not supported
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1270): WP_SQLite_Driver->new_not_supported_exception('CREATE TABLE .....')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(878): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#5 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#6 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(54): dbDelta(Array)
-#7 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(30): RP_DPO_DPA_Engine->rp_dpo_dpa_activate()
-#8 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(25): RP_DPO_DPA_Engine->__construct()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('restore-permane...')
-#11 /internal/eval.php(20): activate_plugin('restore-permane...')
-#12 {main}</pre>
- for query CREATE TABLE wp_delete_posts LIKE wp_posts made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php'), RP_DPO_DPA_Engine->__construct, RP_DPO_DPA_Engine->rp_dpo_dpa_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Jun-2025 07:29:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_ss1_sync_que...', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/site-search-one/admin/class-site-search-one-queue-manager.php(127): wpdb->insert('wp_ss1_sync_que...', Array)
+#6 /wordpress/wp-content/plugins/site-search-one/site-search-one.php(2396): Site_Search_One_Queue_Manager->enqueue_cache_spec()
+#7 /wordpress/wp-content/plugins/site-search-one/site-search-one.php(63): ss1_db_install_indexes()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('site-search-one...')
+#10 /internal/eval.php(20): activate_plugin('site-search-one...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_ss1_sync_queue` (`post_id`, `index_uuid`, `action`) VALUES (0, '0', '3') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/site-search-one/site-search-one.php'), ss1_db_install_indexes, Site_Search_One_Queue_Manager->enqueue_cache_spec, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Jun-2025 21:48:12 UTC] SS1-INFO Activating SS1 =======================================================================================
+[26-Jun-2025 21:48:12 UTC] SS1-INFO Site Search ONE Premium not installed
+[26-Jun-2025 21:48:12 UTC] WP_Error Object
+(
+    [errors] => Array
+        (
+            [plugin_not_installed] => Array
+                (
+                    [0] => Site Search ONE Premium does not appear to be installed
+                )
+
+        )
+
+    [error_data] => Array
+        (
+        )
+
+    [additional_data:protected] => Array
+        (
+        )
+
+)
+
+[26-Jun-2025 21:48:12 UTC] SS1-DEBUG Table Size Info:
+[26-Jun-2025 21:48:12 UTC] stdClass Object
+(
+    [Database] => database_name_here
+    [Size (MB)] => 0
+)
+
+[26-Jun-2025 21:48:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_delete_postmeta LIKE wp_postmeta</p>
+<p>INSERT INTO `wp_ss1_sync_queue` (`post_id`, `index_uuid`, `action`) VALUES (0, '0', '3')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ss1_sync_queue</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_ss1_sync_queue</li>
+<li>Executing: INSERT INTO `wp_ss1_sync_queue` () SELECT  FROM (VALUES ( 0 , '0' , '3' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: CREATE TABLE ... [AS] SELECT is currently not supported
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1270): WP_SQLite_Driver->new_not_supported_exception('CREATE TABLE .....')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(878): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#5 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#6 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(72): dbDelta(Array)
-#7 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(30): RP_DPO_DPA_Engine->rp_dpo_dpa_activate()
-#8 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(25): RP_DPO_DPA_Engine->__construct()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('restore-permane...')
-#11 /internal/eval.php(20): activate_plugin('restore-permane...')
-#12 {main}</pre>
- for query CREATE TABLE wp_delete_postmeta LIKE wp_postmeta made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php'), RP_DPO_DPA_Engine->__construct, RP_DPO_DPA_Engine->rp_dpo_dpa_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Jun-2025 07:29:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_ss1_sync_que...', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/site-search-one/admin/class-site-search-one-queue-manager.php(127): wpdb->insert('wp_ss1_sync_que...', Array)
+#6 /wordpress/wp-content/plugins/site-search-one/site-search-one.php(2396): Site_Search_One_Queue_Manager->enqueue_cache_spec()
+#7 /wordpress/wp-content/plugins/site-search-one/site-search-one.php(63): ss1_db_install_indexes()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('site-search-one...')
+#10 /internal/eval.php(20): activate_plugin('site-search-one...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_ss1_sync_queue` (`post_id`, `index_uuid`, `action`) VALUES (0, '0', '3') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/site-search-one/site-search-one.php'), ss1_db_install_indexes, Site_Search_One_Queue_Manager->enqueue_cache_spec, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Jun-2025 21:48:27 UTC] SS1-INFO Activating SS1 =======================================================================================
+[26-Jun-2025 21:48:27 UTC] SS1-INFO Site Search ONE Premium not installed
+[26-Jun-2025 21:48:27 UTC] WP_Error Object
+(
+    [errors] => Array
+        (
+            [plugin_not_installed] => Array
+                (
+                    [0] => Site Search ONE Premium does not appear to be installed
+                )
+
+        )
+
+    [error_data] => Array
+        (
+        )
+
+    [additional_data:protected] => Array
+        (
+        )
+
+)
+
+[26-Jun-2025 21:48:27 UTC] SS1-DEBUG Table Size Info:
+[26-Jun-2025 21:48:27 UTC] stdClass Object
+(
+    [Database] => database_name_here
+    [Size (MB)] => 0
+)
+
+[26-Jun-2025 21:48:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_delete_posts LIKE wp_posts</p>
+<p>INSERT INTO `wp_ss1_sync_queue` (`post_id`, `index_uuid`, `action`) VALUES (0, '0', '3')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ss1_sync_queue</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_ss1_sync_queue</li>
+<li>Executing: INSERT INTO `wp_ss1_sync_queue` () SELECT  FROM (VALUES ( 0 , '0' , '3' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: CREATE TABLE ... [AS] SELECT is currently not supported
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1270): WP_SQLite_Driver->new_not_supported_exception('CREATE TABLE .....')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(878): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#5 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#6 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(54): dbDelta(Array)
-#7 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(30): RP_DPO_DPA_Engine->rp_dpo_dpa_activate()
-#8 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(25): RP_DPO_DPA_Engine->__construct()
-#9 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query CREATE TABLE wp_delete_posts LIKE wp_posts made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php'), RP_DPO_DPA_Engine->__construct, RP_DPO_DPA_Engine->rp_dpo_dpa_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Jun-2025 07:29:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_delete_postmeta LIKE wp_postmeta</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: CREATE TABLE ... [AS] SELECT is currently not supported
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1270): WP_SQLite_Driver->new_not_supported_exception('CREATE TABLE .....')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(878): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#5 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#6 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(72): dbDelta(Array)
-#7 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(30): RP_DPO_DPA_Engine->rp_dpo_dpa_activate()
-#8 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(25): RP_DPO_DPA_Engine->__construct()
-#9 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query CREATE TABLE wp_delete_postmeta LIKE wp_postmeta made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php'), RP_DPO_DPA_Engine->__construct, RP_DPO_DPA_Engine->rp_dpo_dpa_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Jun-2025 07:29:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_delete_posts LIKE wp_posts</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: CREATE TABLE ... [AS] SELECT is currently not supported
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1270): WP_SQLite_Driver->new_not_supported_exception('CREATE TABLE .....')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(878): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#5 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#6 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(54): dbDelta(Array)
-#7 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(30): RP_DPO_DPA_Engine->rp_dpo_dpa_activate()
-#8 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(25): RP_DPO_DPA_Engine->__construct()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('restore-permane...')
-#11 /internal/eval.php(20): activate_plugin('restore-permane...')
-#12 {main}</pre>
- for query CREATE TABLE wp_delete_posts LIKE wp_posts made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php'), RP_DPO_DPA_Engine->__construct, RP_DPO_DPA_Engine->rp_dpo_dpa_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Jun-2025 07:29:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_delete_postmeta LIKE wp_postmeta</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: CREATE TABLE ... [AS] SELECT is currently not supported
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1270): WP_SQLite_Driver->new_not_supported_exception('CREATE TABLE .....')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(878): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#5 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#6 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(72): dbDelta(Array)
-#7 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(30): RP_DPO_DPA_Engine->rp_dpo_dpa_activate()
-#8 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(25): RP_DPO_DPA_Engine->__construct()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('restore-permane...')
-#11 /internal/eval.php(20): activate_plugin('restore-permane...')
-#12 {main}</pre>
- for query CREATE TABLE wp_delete_postmeta LIKE wp_postmeta made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php'), RP_DPO_DPA_Engine->__construct, RP_DPO_DPA_Engine->rp_dpo_dpa_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Jun-2025 07:29:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_delete_posts LIKE wp_posts</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: CREATE TABLE ... [AS] SELECT is currently not supported
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1270): WP_SQLite_Driver->new_not_supported_exception('CREATE TABLE .....')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(878): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#5 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#6 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(54): dbDelta(Array)
-#7 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(30): RP_DPO_DPA_Engine->rp_dpo_dpa_activate()
-#8 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(25): RP_DPO_DPA_Engine->__construct()
-#9 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query CREATE TABLE wp_delete_posts LIKE wp_posts made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php'), RP_DPO_DPA_Engine->__construct, RP_DPO_DPA_Engine->rp_dpo_dpa_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Jun-2025 07:29:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_delete_postmeta LIKE wp_postmeta</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: CREATE TABLE ... [AS] SELECT is currently not supported
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1270): WP_SQLite_Driver->new_not_supported_exception('CREATE TABLE .....')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(878): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#5 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#6 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(72): dbDelta(Array)
-#7 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(30): RP_DPO_DPA_Engine->rp_dpo_dpa_activate()
-#8 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(25): RP_DPO_DPA_Engine->__construct()
-#9 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query CREATE TABLE wp_delete_postmeta LIKE wp_postmeta made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php'), RP_DPO_DPA_Engine->__construct, RP_DPO_DPA_Engine->rp_dpo_dpa_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Jun-2025 07:29:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_delete_posts LIKE wp_posts</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: CREATE TABLE ... [AS] SELECT is currently not supported
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1270): WP_SQLite_Driver->new_not_supported_exception('CREATE TABLE .....')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(878): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#5 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#6 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(54): dbDelta(Array)
-#7 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(30): RP_DPO_DPA_Engine->rp_dpo_dpa_activate()
-#8 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(25): RP_DPO_DPA_Engine->__construct()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('restore-permane...')
-#11 /internal/eval.php(20): activate_plugin('restore-permane...')
-#12 {main}</pre>
- for query CREATE TABLE wp_delete_posts LIKE wp_posts made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php'), RP_DPO_DPA_Engine->__construct, RP_DPO_DPA_Engine->rp_dpo_dpa_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Jun-2025 07:29:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_delete_postmeta LIKE wp_postmeta</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: CREATE TABLE ... [AS] SELECT is currently not supported
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1270): WP_SQLite_Driver->new_not_supported_exception('CREATE TABLE .....')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(878): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#5 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#6 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(72): dbDelta(Array)
-#7 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(30): RP_DPO_DPA_Engine->rp_dpo_dpa_activate()
-#8 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(25): RP_DPO_DPA_Engine->__construct()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('restore-permane...')
-#11 /internal/eval.php(20): activate_plugin('restore-permane...')
-#12 {main}</pre>
- for query CREATE TABLE wp_delete_postmeta LIKE wp_postmeta made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php'), RP_DPO_DPA_Engine->__construct, RP_DPO_DPA_Engine->rp_dpo_dpa_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Jun-2025 07:29:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_delete_posts LIKE wp_posts</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: CREATE TABLE ... [AS] SELECT is currently not supported
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1270): WP_SQLite_Driver->new_not_supported_exception('CREATE TABLE .....')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(878): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#5 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#6 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(54): dbDelta(Array)
-#7 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(30): RP_DPO_DPA_Engine->rp_dpo_dpa_activate()
-#8 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(25): RP_DPO_DPA_Engine->__construct()
-#9 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query CREATE TABLE wp_delete_posts LIKE wp_posts made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php'), RP_DPO_DPA_Engine->__construct, RP_DPO_DPA_Engine->rp_dpo_dpa_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Jun-2025 07:29:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_delete_postmeta LIKE wp_postmeta</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: CREATE TABLE ... [AS] SELECT is currently not supported
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1270): WP_SQLite_Driver->new_not_supported_exception('CREATE TABLE .....')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(878): WP_SQLite_Driver->execute_create_table_statement(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#5 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#6 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(72): dbDelta(Array)
-#7 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(30): RP_DPO_DPA_Engine->rp_dpo_dpa_activate()
-#8 /wordpress/wp-content/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php(25): RP_DPO_DPA_Engine->__construct()
-#9 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query CREATE TABLE wp_delete_postmeta LIKE wp_postmeta made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/restore-permanently-delete-post-or-page-data/delete-store-file.php'), RP_DPO_DPA_Engine->__construct, RP_DPO_DPA_Engine->rp_dpo_dpa_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Jun-2025 07:32:00 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ELEMENTOR_VERSION" in /wordpress/wp-content/plugins/restaurant-cafe-addon-for-elementor/elementor/em-setup.php:158
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): Restaurant_Elementor_Addon_Core_Elementor_init->init('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/restaurant-cafe-addon-for-elementor/elementor/em-setup.php on line 158
-[25-Jun-2025 07:32:11 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ELEMENTOR_VERSION" in /wordpress/wp-content/plugins/restaurant-cafe-addon-for-elementor/elementor/em-setup.php:158
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): Restaurant_Elementor_Addon_Core_Elementor_init->init('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/restaurant-cafe-addon-for-elementor/elementor/em-setup.php on line 158
-[25-Jun-2025 07:32:22 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ELEMENTOR_VERSION" in /wordpress/wp-content/plugins/restaurant-cafe-addon-for-elementor/elementor/em-setup.php:158
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): Restaurant_Elementor_Addon_Core_Elementor_init->init('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/restaurant-cafe-addon-for-elementor/elementor/em-setup.php on line 158
-[25-Jun-2025 07:33:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/raadso-like-button/raadso-like-button.php:79
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_ss1_sync_que...', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/site-search-one/admin/class-site-search-one-queue-manager.php(127): wpdb->insert('wp_ss1_sync_que...', Array)
+#6 /wordpress/wp-content/plugins/site-search-one/site-search-one.php(2396): Site_Search_One_Queue_Manager->enqueue_cache_spec()
+#7 /wordpress/wp-content/plugins/site-search-one/site-search-one.php(63): ss1_db_install_indexes()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('site-search-one...')
+#10 /internal/eval.php(20): activate_plugin('site-search-one...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_ss1_sync_queue` (`post_id`, `index_uuid`, `action`) VALUES (0, '0', '3') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/site-search-one/site-search-one.php'), ss1_db_install_indexes, Site_Search_One_Queue_Manager->enqueue_cache_spec, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Jun-2025 21:48:42 UTC] SS1-INFO Activating SS1 =======================================================================================
+[26-Jun-2025 21:48:42 UTC] SS1-INFO Site Search ONE Premium not installed
+[26-Jun-2025 21:48:42 UTC] WP_Error Object
+(
+    [errors] => Array
+        (
+            [plugin_not_installed] => Array
+                (
+                    [0] => Site Search ONE Premium does not appear to be installed
+                )
+
+        )
+
+    [error_data] => Array
+        (
+        )
+
+    [additional_data:protected] => Array
+        (
+        )
+
+)
+
+[26-Jun-2025 21:48:42 UTC] SS1-DEBUG Table Size Info:
+[26-Jun-2025 21:48:42 UTC] stdClass Object
+(
+    [Database] => database_name_here
+    [Size (MB)] => 0
+)
+
+[26-Jun-2025 21:52:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/raadso-like-button/raadso-like-button.php:79
 Stack trace:
 #0 /wordpress/wp-content/plugins/raadso-like-button/raadso-like-button.php(555): rd_like_init()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
