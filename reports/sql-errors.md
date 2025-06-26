@@ -8,12 +8,6 @@
 | Unknown query type: DESC. | ast-sqlite-boot | expando-button | [View logs](/logs/plugins/e/expando-button/error.json) |
 | Unknown query type: DESC. | asyncify-boot | expando-button | [View logs](/logs/plugins/e/expando-button/error.json) |
 | Unknown query type: DESC. | jspi-boot | expando-button | [View logs](/logs/plugins/e/expando-button/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | ast-sqlite-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | asyncify-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | jspi-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
-| Unknown create type: table. | ast-sqlite-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
-| Unknown create type: table. | asyncify-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
-| Unknown create type: table. | jspi-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
     [code] => 0
     [message] => Ending quote ' was expected.
     [position] => 44
@@ -46,13 +40,19 @@
 | Unknown show type: KEYS FROM. | ast-sqlite-boot | officepress | [View logs](/logs/plugins/o/officepress/error.json) |
 | Unknown show type: KEYS FROM. | asyncify-boot | officepress | [View logs](/logs/plugins/o/officepress/error.json) |
 | Unknown show type: KEYS FROM. | jspi-boot | officepress | [View logs](/logs/plugins/o/officepress/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | ast-sqlite-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | asyncify-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_users. | jspi-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
+| Unknown create type: table. | ast-sqlite-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
+| Unknown create type: table. | asyncify-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
+| Unknown create type: table. | jspi-boot | officeparty-connect | [View logs](/logs/plugins/o/officeparty-connect/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | pretty-shortlinks | [View logs](/logs/plugins/p/pretty-shortlinks/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | pretty-shortlinks | [View logs](/logs/plugins/p/pretty-shortlinks/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | jspi-boot | pretty-shortlinks | [View logs](/logs/plugins/p/pretty-shortlinks/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: SECOND. | asyncify-boot | presstrends | [View logs](/logs/plugins/p/presstrends/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: SECOND. | jspi-boot | presstrends | [View logs](/logs/plugins/p/presstrends/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: DAYNAME. | asyncify-boot | presstrends | [View logs](/logs/plugins/p/presstrends/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: DAYNAME. | jspi-boot | presstrends | [View logs](/logs/plugins/p/presstrends/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | pretty-shortlinks | [View logs](/logs/plugins/p/pretty-shortlinks/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | pretty-shortlinks | [View logs](/logs/plugins/p/pretty-shortlinks/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | jspi-boot | pretty-shortlinks | [View logs](/logs/plugins/p/pretty-shortlinks/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-job-portal | [View logs](/logs/plugins/w/wp-job-portal/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | wp-job-portal | [View logs](/logs/plugins/w/wp-job-portal/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wp-job-portal | [View logs](/logs/plugins/w/wp-job-portal/error.json) |
