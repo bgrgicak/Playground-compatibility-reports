@@ -2,102 +2,108 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [25-Jun-2025 23:50:32 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wc-sales-notification</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[25-Jun-2025 23:50:41 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wc-sales-notification</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[25-Jun-2025 23:50:50 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wc-sales-notification</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[25-Jun-2025 23:53:20 UTC] WPLP-> called: wplp_activate
-[25-Jun-2025 23:53:20 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[25-Jun-2025 23:53:20 UTC] WPLP-> called: wplp_migrate_db
-[25-Jun-2025 23:53:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [27-Jun-2025 16:55:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT database()</p>
+<p>SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE table_name = wp_paytm_donation AND column_name = 'pan_no'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT database ( ) | (no parameters)</li>
+<li>Executing: SELECT `COLUMN_NAME` FROM _wp_sqlite_mysql_information_schema_COLUMNS WHERE `table_name` = `wp_paytm_donation` AND `column_name` = 'pan_no' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: database
+SQLSTATE[HY000]: General error: 1 no such column: wp_paytm_donation
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT database...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT database...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT database...')
-#4 /wordpress/wp-content/plugins/wp-low-profiler/wp-low-profiler.php(96): wpdb->get_var('SELECT database...')
-#5 /wordpress/wp-content/plugins/wp-low-profiler/wp-low-profiler.php(143): wplp_migrate_db()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wplp_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT COLUMN_N...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT COLUMN_N...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COLUMN_N...')
+#4 /wordpress/wp-content/plugins/wp-paytm-pay/wp-paytm-pay.php(42): wpdb->get_results('SELECT COLUMN_N...')
+#5 /wordpress/wp-content/plugins/wp-paytm-pay/wp-paytm-pay.php(32): paytm_update()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): paytm_update_db_check('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-low...', false)
-#10 /internal/eval.php(20): activate_plugin('wp-low-profiler...')
-#11 {main}</pre>
- for query SELECT database() made by activate_plugin, do_action('activate_wp-low-profiler/wp-low-profiler.php'), WP_Hook->do_action, WP_Hook->apply_filters, wplp_activate, wplp_migrate_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Jun-2025 23:53:29 UTC] WPLP-> called: wplp_activate
-[25-Jun-2025 23:53:29 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[25-Jun-2025 23:53:29 UTC] WPLP-> called: wplp_migrate_db
-[25-Jun-2025 23:53:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#9 /wordpress/wp-settings.php(727): do_action('init')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE table_name = wp_paytm_donation AND column_name = 'pan_no' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, paytm_update_db_check, paytm_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-Jun-2025 16:55:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT database()</p>
+<p>SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE table_name = wp_paytm_donation AND column_name = 'pan_no'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT database ( ) | (no parameters)</li>
+<li>Executing: SELECT `COLUMN_NAME` FROM _wp_sqlite_mysql_information_schema_COLUMNS WHERE `table_name` = `wp_paytm_donation` AND `column_name` = 'pan_no' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: database
+SQLSTATE[HY000]: General error: 1 no such column: wp_paytm_donation
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT database...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT database...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT database...')
-#4 /wordpress/wp-content/plugins/wp-low-profiler/wp-low-profiler.php(96): wpdb->get_var('SELECT database...')
-#5 /wordpress/wp-content/plugins/wp-low-profiler/wp-low-profiler.php(143): wplp_migrate_db()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wplp_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT COLUMN_N...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT COLUMN_N...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COLUMN_N...')
+#4 /wordpress/wp-content/plugins/wp-paytm-pay/wp-paytm-pay.php(42): wpdb->get_results('SELECT COLUMN_N...')
+#5 /wordpress/wp-content/plugins/wp-paytm-pay/wp-paytm-pay.php(32): paytm_update()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): paytm_update_db_check('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-low...', false)
-#10 /internal/eval.php(20): activate_plugin('wp-low-profiler...')
-#11 {main}</pre>
- for query SELECT database() made by activate_plugin, do_action('activate_wp-low-profiler/wp-low-profiler.php'), WP_Hook->do_action, WP_Hook->apply_filters, wplp_activate, wplp_migrate_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Jun-2025 23:53:38 UTC] WPLP-> called: wplp_activate
-[25-Jun-2025 23:53:38 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[25-Jun-2025 23:53:38 UTC] WPLP-> called: wplp_migrate_db
-[25-Jun-2025 23:53:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#9 /wordpress/wp-settings.php(727): do_action('init')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE table_name = wp_paytm_donation AND column_name = 'pan_no' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, paytm_update_db_check, paytm_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-Jun-2025 16:55:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT database()</p>
+<p>SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE table_name = wp_paytm_donation AND column_name = 'pan_no'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT database ( ) | (no parameters)</li>
+<li>Executing: SELECT `COLUMN_NAME` FROM _wp_sqlite_mysql_information_schema_COLUMNS WHERE `table_name` = `wp_paytm_donation` AND `column_name` = 'pan_no' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: database
+SQLSTATE[HY000]: General error: 1 no such column: wp_paytm_donation
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT database...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT database...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT database...')
-#4 /wordpress/wp-content/plugins/wp-low-profiler/wp-low-profiler.php(96): wpdb->get_var('SELECT database...')
-#5 /wordpress/wp-content/plugins/wp-low-profiler/wp-low-profiler.php(143): wplp_migrate_db()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wplp_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT COLUMN_N...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT COLUMN_N...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COLUMN_N...')
+#4 /wordpress/wp-content/plugins/wp-paytm-pay/wp-paytm-pay.php(42): wpdb->get_results('SELECT COLUMN_N...')
+#5 /wordpress/wp-content/plugins/wp-paytm-pay/wp-paytm-pay.php(32): paytm_update()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): paytm_update_db_check('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-low...', false)
-#10 /internal/eval.php(20): activate_plugin('wp-low-profiler...')
-#11 {main}</pre>
- for query SELECT database() made by activate_plugin, do_action('activate_wp-low-profiler/wp-low-profiler.php'), WP_Hook->do_action, WP_Hook->apply_filters, wplp_activate, wplp_migrate_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+#9 /wordpress/wp-settings.php(727): do_action('init')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE table_name = wp_paytm_donation AND column_name = 'pan_no' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, paytm_update_db_check, paytm_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-Jun-2025 16:57:07 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce-admin</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-Jun-2025 16:57:17 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce-admin</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-Jun-2025 16:57:28 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce-admin</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-Jun-2025 17:00:25 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woostify-sites-library</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-Jun-2025 17:00:39 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woostify-sites-library</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[27-Jun-2025 17:00:55 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woostify-sites-library</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:325:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
