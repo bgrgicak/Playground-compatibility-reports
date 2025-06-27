@@ -2,70 +2,394 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [26-Jun-2025 03:45:25 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>grp</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[26-Jun-2025 03:45:33 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>grp</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[26-Jun-2025 03:45:42 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>grp</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[26-Jun-2025 03:46:55 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>fake-admin</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[26-Jun-2025 03:47:04 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>fake-admin</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[26-Jun-2025 03:47:13 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>fake-admin</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[26-Jun-2025 03:48:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/featured-today/featured-today.php:11
+Error: [27-Jun-2025 17:28:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wc_f4_settings ORDER BY id DESC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_wc_f4_settings` ORDER BY `id` DESC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_settings
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/factureaza/admin/class-f4-admin-query.php(153): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
+#5 /wordpress/wp-content/plugins/factureaza/includes/class-f4.php(154): F4_Admin_Query::f4_wc_stripe_integration_workflow()
+#6 /wordpress/wp-content/plugins/factureaza/includes/class-f4.php(78): F4->define_admin_hooks()
+#7 /wordpress/wp-content/plugins/factureaza/f4.php(216): F4->__construct()
+#8 /wordpress/wp-content/plugins/factureaza/f4.php(225): fac_woo_f4_run_f4()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('factureaza/f4.p...')
+#11 /internal/eval.php(20): activate_plugin('factureaza/f4.p...')
+#12 {main}</pre>
+ for query SELECT * FROM wp_wc_f4_settings ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/factureaza/f4.php'), fac_woo_f4_run_f4, F4->__construct, F4->define_admin_hooks, F4_Admin_Query::f4_wc_stripe_integration_workflow, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-Jun-2025 17:28:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wc_f4_api_key ORDER BY id DESC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_wc_f4_api_key` ORDER BY `id` DESC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_api_key
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/factureaza/admin/class-f4-admin-authentication.php(134): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
+#5 /wordpress/wp-content/plugins/factureaza/includes/class-f4.php(158): F4_Admin_Authentication::global_api_key()
+#6 /wordpress/wp-content/plugins/factureaza/includes/class-f4.php(78): F4->define_admin_hooks()
+#7 /wordpress/wp-content/plugins/factureaza/f4.php(216): F4->__construct()
+#8 /wordpress/wp-content/plugins/factureaza/f4.php(225): fac_woo_f4_run_f4()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('factureaza/f4.p...')
+#11 /internal/eval.php(20): activate_plugin('factureaza/f4.p...')
+#12 {main}</pre>
+ for query SELECT * FROM wp_wc_f4_api_key ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/factureaza/f4.php'), fac_woo_f4_run_f4, F4->__construct, F4->define_admin_hooks, F4_Admin_Authentication::global_api_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-Jun-2025 17:28:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` ORDER BY `id` ASC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM R...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM R...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM R...')
+#4 /wordpress/wp-content/plugins/factureaza/f4.php(91): wpdb->get_results('SELECT * FROM R...', 'OBJECT')
+#5 /wordpress/wp-content/plugins/factureaza/f4.php(219): fac_woo_f4_db_secret()
+#6 /wordpress/wp-content/plugins/factureaza/f4.php(225): fac_woo_f4_run_f4()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('factureaza/f4.p...')
+#9 /internal/eval.php(20): activate_plugin('factureaza/f4.p...')
+#10 {main}</pre>
+ for query SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/factureaza/f4.php'), fac_woo_f4_run_f4, fac_woo_f4_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-Jun-2025 17:28:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('7c2a702fdee15a3a68429ca50d81b6cd', '1d52c650cd7cdf68a97a02aaee1b3248')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW</li>
+<li>Executing: INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` () SELECT  FROM (VALUES ( '7c2a702fdee15a3a68429ca50d81b6cd' , '1d52c650cd7cdf68a97a02aaee1b3248' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `RE...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `RE...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `RE...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('REWSAKSDNSFFQYU...', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/factureaza/f4.php(100): wpdb->insert('REWSAKSDNSFFQYU...', Array)
+#6 /wordpress/wp-content/plugins/factureaza/f4.php(219): fac_woo_f4_db_secret()
+#7 /wordpress/wp-content/plugins/factureaza/f4.php(225): fac_woo_f4_run_f4()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('factureaza/f4.p...')
+#10 /internal/eval.php(20): activate_plugin('factureaza/f4.p...')
+#11 {main}</pre>
+ for query INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('7c2a702fdee15a3a68429ca50d81b6cd', '1d52c650cd7cdf68a97a02aaee1b3248') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/factureaza/f4.php'), fac_woo_f4_run_f4, fac_woo_f4_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-Jun-2025 17:28:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wc_f4_settings ORDER BY id DESC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_wc_f4_settings` ORDER BY `id` DESC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_settings
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/factureaza/admin/class-f4-admin-query.php(153): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
+#5 /wordpress/wp-content/plugins/factureaza/includes/class-f4.php(154): F4_Admin_Query::f4_wc_stripe_integration_workflow()
+#6 /wordpress/wp-content/plugins/factureaza/includes/class-f4.php(78): F4->define_admin_hooks()
+#7 /wordpress/wp-content/plugins/factureaza/f4.php(216): F4->__construct()
+#8 /wordpress/wp-content/plugins/factureaza/f4.php(225): fac_woo_f4_run_f4()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('factureaza/f4.p...')
+#11 /internal/eval.php(20): activate_plugin('factureaza/f4.p...')
+#12 {main}</pre>
+ for query SELECT * FROM wp_wc_f4_settings ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/factureaza/f4.php'), fac_woo_f4_run_f4, F4->__construct, F4->define_admin_hooks, F4_Admin_Query::f4_wc_stripe_integration_workflow, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-Jun-2025 17:28:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wc_f4_api_key ORDER BY id DESC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_wc_f4_api_key` ORDER BY `id` DESC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_api_key
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/factureaza/admin/class-f4-admin-authentication.php(134): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
+#5 /wordpress/wp-content/plugins/factureaza/includes/class-f4.php(158): F4_Admin_Authentication::global_api_key()
+#6 /wordpress/wp-content/plugins/factureaza/includes/class-f4.php(78): F4->define_admin_hooks()
+#7 /wordpress/wp-content/plugins/factureaza/f4.php(216): F4->__construct()
+#8 /wordpress/wp-content/plugins/factureaza/f4.php(225): fac_woo_f4_run_f4()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('factureaza/f4.p...')
+#11 /internal/eval.php(20): activate_plugin('factureaza/f4.p...')
+#12 {main}</pre>
+ for query SELECT * FROM wp_wc_f4_api_key ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/factureaza/f4.php'), fac_woo_f4_run_f4, F4->__construct, F4->define_admin_hooks, F4_Admin_Authentication::global_api_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-Jun-2025 17:28:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` ORDER BY `id` ASC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM R...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM R...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM R...')
+#4 /wordpress/wp-content/plugins/factureaza/f4.php(91): wpdb->get_results('SELECT * FROM R...', 'OBJECT')
+#5 /wordpress/wp-content/plugins/factureaza/f4.php(219): fac_woo_f4_db_secret()
+#6 /wordpress/wp-content/plugins/factureaza/f4.php(225): fac_woo_f4_run_f4()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('factureaza/f4.p...')
+#9 /internal/eval.php(20): activate_plugin('factureaza/f4.p...')
+#10 {main}</pre>
+ for query SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/factureaza/f4.php'), fac_woo_f4_run_f4, fac_woo_f4_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-Jun-2025 17:28:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('efeb6c6dea0cd3eedd7d51438a58c34f', '8eed4da633cf58f06d43ee17dac5cbde')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW</li>
+<li>Executing: INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` () SELECT  FROM (VALUES ( 'efeb6c6dea0cd3eedd7d51438a58c34f' , '8eed4da633cf58f06d43ee17dac5cbde' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `RE...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `RE...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `RE...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('REWSAKSDNSFFQYU...', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/factureaza/f4.php(100): wpdb->insert('REWSAKSDNSFFQYU...', Array)
+#6 /wordpress/wp-content/plugins/factureaza/f4.php(219): fac_woo_f4_db_secret()
+#7 /wordpress/wp-content/plugins/factureaza/f4.php(225): fac_woo_f4_run_f4()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('factureaza/f4.p...')
+#10 /internal/eval.php(20): activate_plugin('factureaza/f4.p...')
+#11 {main}</pre>
+ for query INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('efeb6c6dea0cd3eedd7d51438a58c34f', '8eed4da633cf58f06d43ee17dac5cbde') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/factureaza/f4.php'), fac_woo_f4_run_f4, fac_woo_f4_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-Jun-2025 17:28:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wc_f4_settings ORDER BY id DESC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_wc_f4_settings` ORDER BY `id` DESC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_settings
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/factureaza/admin/class-f4-admin-query.php(153): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
+#5 /wordpress/wp-content/plugins/factureaza/includes/class-f4.php(154): F4_Admin_Query::f4_wc_stripe_integration_workflow()
+#6 /wordpress/wp-content/plugins/factureaza/includes/class-f4.php(78): F4->define_admin_hooks()
+#7 /wordpress/wp-content/plugins/factureaza/f4.php(216): F4->__construct()
+#8 /wordpress/wp-content/plugins/factureaza/f4.php(225): fac_woo_f4_run_f4()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('factureaza/f4.p...')
+#11 /internal/eval.php(20): activate_plugin('factureaza/f4.p...')
+#12 {main}</pre>
+ for query SELECT * FROM wp_wc_f4_settings ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/factureaza/f4.php'), fac_woo_f4_run_f4, F4->__construct, F4->define_admin_hooks, F4_Admin_Query::f4_wc_stripe_integration_workflow, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-Jun-2025 17:28:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wc_f4_api_key ORDER BY id DESC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_wc_f4_api_key` ORDER BY `id` DESC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_api_key
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/factureaza/admin/class-f4-admin-authentication.php(134): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
+#5 /wordpress/wp-content/plugins/factureaza/includes/class-f4.php(158): F4_Admin_Authentication::global_api_key()
+#6 /wordpress/wp-content/plugins/factureaza/includes/class-f4.php(78): F4->define_admin_hooks()
+#7 /wordpress/wp-content/plugins/factureaza/f4.php(216): F4->__construct()
+#8 /wordpress/wp-content/plugins/factureaza/f4.php(225): fac_woo_f4_run_f4()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('factureaza/f4.p...')
+#11 /internal/eval.php(20): activate_plugin('factureaza/f4.p...')
+#12 {main}</pre>
+ for query SELECT * FROM wp_wc_f4_api_key ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/factureaza/f4.php'), fac_woo_f4_run_f4, F4->__construct, F4->define_admin_hooks, F4_Admin_Authentication::global_api_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-Jun-2025 17:28:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` ORDER BY `id` ASC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM R...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM R...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM R...')
+#4 /wordpress/wp-content/plugins/factureaza/f4.php(91): wpdb->get_results('SELECT * FROM R...', 'OBJECT')
+#5 /wordpress/wp-content/plugins/factureaza/f4.php(219): fac_woo_f4_db_secret()
+#6 /wordpress/wp-content/plugins/factureaza/f4.php(225): fac_woo_f4_run_f4()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('factureaza/f4.p...')
+#9 /internal/eval.php(20): activate_plugin('factureaza/f4.p...')
+#10 {main}</pre>
+ for query SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/factureaza/f4.php'), fac_woo_f4_run_f4, fac_woo_f4_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-Jun-2025 17:28:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('fbcc8adb7a6610f0466b52bf29edddd0', '052b60fb1cd6abdd4debcda6f67f2980')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW</li>
+<li>Executing: INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` () SELECT  FROM (VALUES ( 'fbcc8adb7a6610f0466b52bf29edddd0' , '052b60fb1cd6abdd4debcda6f67f2980' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `RE...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `RE...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `RE...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('REWSAKSDNSFFQYU...', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/factureaza/f4.php(100): wpdb->insert('REWSAKSDNSFFQYU...', Array)
+#6 /wordpress/wp-content/plugins/factureaza/f4.php(219): fac_woo_f4_db_secret()
+#7 /wordpress/wp-content/plugins/factureaza/f4.php(225): fac_woo_f4_run_f4()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('factureaza/f4.p...')
+#10 /internal/eval.php(20): activate_plugin('factureaza/f4.p...')
+#11 {main}</pre>
+ for query INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('fbcc8adb7a6610f0466b52bf29edddd0', '052b60fb1cd6abdd4debcda6f67f2980') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/factureaza/f4.php'), fac_woo_f4_run_f4, fac_woo_f4_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[27-Jun-2025 17:30:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/featured-today/featured-today.php:11
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('featured-today/...')
 #2 /internal/eval.php(20): activate_plugin('featured-today/...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/featured-today/featured-today.php on line 11
-[26-Jun-2025 03:48:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/featured-today/featured-today.php:11
+[27-Jun-2025 17:30:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/featured-today/featured-today.php:11
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('featured-today/...')
 #2 /internal/eval.php(20): activate_plugin('featured-today/...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/featured-today/featured-today.php on line 11
-[26-Jun-2025 03:49:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/featured-today/featured-today.php:11
+[27-Jun-2025 17:30:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/featured-today/featured-today.php:11
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('featured-today/...')
 #2 /internal/eval.php(20): activate_plugin('featured-today/...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/featured-today/featured-today.php on line 11
-[26-Jun-2025 03:49:16 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-Jun-2025 03:49:16 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "fss_widgetOption" in /wordpress/wp-content/plugins/feed-subscriber-stats/feedsubstats.php:164
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): fss_register('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(727): do_action('init')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/feed-subscriber-stats/feedsubstats.php on line 164
-[26-Jun-2025 03:49:26 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-Jun-2025 03:49:26 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "fss_widgetOption" in /wordpress/wp-content/plugins/feed-subscriber-stats/feedsubstats.php:164
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): fss_register('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(727): do_action('init')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/feed-subscriber-stats/feedsubstats.php on line 164
-[26-Jun-2025 03:49:35 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[26-Jun-2025 03:49:35 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "fss_widgetOption" in /wordpress/wp-content/plugins/feed-subscriber-stats/feedsubstats.php:164
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): fss_register('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(727): do_action('init')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/feed-subscriber-stats/feedsubstats.php on line 164
-[26-Jun-2025 03:51:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-map-lightbox-popup/admin/fwgm-widget.php:63
+[27-Jun-2025 17:30:33 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/feed-styler/includes/htmlparser.inc.php on line 225
+[27-Jun-2025 17:30:42 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/feed-styler/includes/htmlparser.inc.php on line 225
+[27-Jun-2025 17:30:49 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/feed-styler/includes/htmlparser.inc.php on line 225
+[27-Jun-2025 17:32:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-map-lightbox-popup/admin/fwgm-widget.php:63
 Stack trace:
 #0 /wordpress/wp-content/plugins/google-map-lightbox-popup/admin/fwgm-shrt-code.php(2): include_once()
 #1 /wordpress/wp-content/plugins/google-map-lightbox-popup/admin/admin.php(3): include_once('/wordpress/wp-c...')
@@ -75,7 +399,7 @@ Stack trace:
 #5 /internal/eval.php(20): activate_plugin('google-map-ligh...')
 #6 {main}
   thrown in /wordpress/wp-content/plugins/google-map-lightbox-popup/admin/fwgm-widget.php on line 63
-[26-Jun-2025 03:51:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-map-lightbox-popup/admin/fwgm-widget.php:63
+[27-Jun-2025 17:32:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-map-lightbox-popup/admin/fwgm-widget.php:63
 Stack trace:
 #0 /wordpress/wp-content/plugins/google-map-lightbox-popup/admin/fwgm-shrt-code.php(2): include_once()
 #1 /wordpress/wp-content/plugins/google-map-lightbox-popup/admin/admin.php(3): include_once('/wordpress/wp-c...')
