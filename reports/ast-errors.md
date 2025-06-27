@@ -145,24 +145,48 @@
 | batch-cat | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/breadcrumbs-by-sliknet/breadcrumbs_sliknet.php on line 68 | [View logs](/logs/plugins/b/batch-cat/error.json) |
 | batch-cat | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/breadcrumbs-by-sliknet/breadcrumbs_sliknet.php on line 69 | [View logs](/logs/plugins/b/batch-cat/error.json) |
 | batch-cat | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/breadcrumbs-by-sliknet/breadcrumbs_sliknet.php on line 70 | [View logs](/logs/plugins/b/batch-cat/error.json) |
-| css-optimization | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Anderson_Makiyama_Captcha_On_Login::activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Anderson_Makiyama_Captcha_On_Login::activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Anderson_Makiyama_Captcha_On_Login::activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/category-posts-sidebar-widget/category-posts-sidebar-widget.php:302 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/category-posts-sidebar-widget/category-posts-sidebar-widget.php:302 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/category-posts-sidebar-widget/category-posts-sidebar-widget.php:302 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | Required parameter $type follows optional parameter $endpoint in /wordpress/wp-content/plugins/cf7-salesmate-integration/class-cf7-salesmate.php on line 83 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | Required parameter $type follows optional parameter $endpoint in /wordpress/wp-content/plugins/cf7-salesmate-integration/class-cf7-salesmate.php on line 83 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | Required parameter $type follows optional parameter $endpoint in /wordpress/wp-content/plugins/cf7-salesmate-integration/class-cf7-salesmate.php on line 83 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/code-to-widget/code-to-widget.php:232 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/code-to-widget/code-to-widget.php:232 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/code-to-widget/code-to-widget.php:232 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | The magic method JWP\CCF\Plugin::__wakeup() must have public visibility in /wordpress/wp-content/plugins/content-copy-finder/includes/classes/class-plugin.php on line 37 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | The magic method JWP\CCF\DH\Core::__wakeup() must have public visibility in /wordpress/wp-content/plugins/content-copy-finder/libs/jwp-dh-core/includes/classes/class-core.php on line 87 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | The magic method JWP\CCF\Plugin::__wakeup() must have public visibility in /wordpress/wp-content/plugins/content-copy-finder/includes/classes/class-plugin.php on line 37 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | The magic method JWP\CCF\DH\Core::__wakeup() must have public visibility in /wordpress/wp-content/plugins/content-copy-finder/libs/jwp-dh-core/includes/classes/class-core.php on line 87 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | The magic method JWP\CCF\Plugin::__wakeup() must have public visibility in /wordpress/wp-content/plugins/content-copy-finder/includes/classes/class-plugin.php on line 37 | [View logs](/logs/plugins/c/css-optimization/error.json) |
-| css-optimization | The magic method JWP\CCF\DH\Core::__wakeup() must have public visibility in /wordpress/wp-content/plugins/content-copy-finder/libs/jwp-dh-core/includes/classes/class-core.php on line 87 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>dynamicsws</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/extensions/customizer/extension_customizer.php on line 314 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/extensions/customizer/extension_customizer.php on line 328 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/extensions/customizer/extension_customizer.php on line 354 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/extensions/customizer/extension_customizer.php on line 366 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/extensions/customizer/extension_customizer.php on line 385 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/inc/tracking.php on line 66 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Undefined array key "posts_types" in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/dynamic-widgets-sidebars.php on line 131 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>dynamicsws</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/extensions/customizer/extension_customizer.php on line 314 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/extensions/customizer/extension_customizer.php on line 328 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/extensions/customizer/extension_customizer.php on line 354 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/extensions/customizer/extension_customizer.php on line 366 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/extensions/customizer/extension_customizer.php on line 385 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/inc/tracking.php on line 66 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Undefined array key "posts_types" in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/dynamic-widgets-sidebars.php on line 131 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>dynamicsws</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/extensions/customizer/extension_customizer.php on line 314 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/extensions/customizer/extension_customizer.php on line 328 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/extensions/customizer/extension_customizer.php on line 354 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/extensions/customizer/extension_customizer.php on line 366 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/extensions/customizer/extension_customizer.php on line 385 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/admin/redux-framework/ReduxCore/inc/tracking.php on line 66 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Undefined array key "posts_types" in /wordpress/wp-content/plugins/dynamic-widgets-sidebar/dynamic-widgets-sidebars.php on line 131 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | spl_autoload_register(): Argument #2 ($do_throw) has been ignored, spl_autoload_register() will always throw in /wordpress/wp-content/plugins/cart2cart-virtuemart-to-woocommerce-migration/class/AutoLoad.php on line 11 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | spl_autoload_register(): Argument #2 ($do_throw) has been ignored, spl_autoload_register() will always throw in /wordpress/wp-content/plugins/cart2cart-virtuemart-to-woocommerce-migration/class/AutoLoad.php on line 11 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | spl_autoload_register(): Argument #2 ($do_throw) has been ignored, spl_autoload_register() will always throw in /wordpress/wp-content/plugins/cart2cart-virtuemart-to-woocommerce-migration/class/AutoLoad.php on line 11 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | spl_autoload_register(): Argument #2 ($do_throw) has been ignored, spl_autoload_register() will always throw in /wordpress/wp-content/plugins/cart2cart-virtuemart-to-woocommerce-migration/class/AutoLoad.php on line 11 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | spl_autoload_register(): Argument #2 ($do_throw) has been ignored, spl_autoload_register() will always throw in /wordpress/wp-content/plugins/cart2cart-virtuemart-to-woocommerce-migration/class/AutoLoad.php on line 11 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | spl_autoload_register(): Argument #2 ($do_throw) has been ignored, spl_autoload_register() will always throw in /wordpress/wp-content/plugins/cart2cart-virtuemart-to-woocommerce-migration/class/AutoLoad.php on line 11 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cherry-sidebars</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Required parameter $module_path follows optional parameter $file_path in /wordpress/wp-content/plugins/cherry-sidebars/cherry-framework/cherry-core.php on line 380 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Required parameter $core follows optional parameter $class_name in /wordpress/wp-content/plugins/cherry-sidebars/cherry-framework/modules/cherry-toolkit/cherry-toolkit.php on line 82 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Required parameter $args follows optional parameter $class_name in /wordpress/wp-content/plugins/cherry-sidebars/cherry-framework/modules/cherry-toolkit/cherry-toolkit.php on line 82 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cherry-sidebars</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Required parameter $module_path follows optional parameter $file_path in /wordpress/wp-content/plugins/cherry-sidebars/cherry-framework/cherry-core.php on line 380 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Required parameter $core follows optional parameter $class_name in /wordpress/wp-content/plugins/cherry-sidebars/cherry-framework/modules/cherry-toolkit/cherry-toolkit.php on line 82 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Required parameter $args follows optional parameter $class_name in /wordpress/wp-content/plugins/cherry-sidebars/cherry-framework/modules/cherry-toolkit/cherry-toolkit.php on line 82 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cherry-sidebars</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Required parameter $module_path follows optional parameter $file_path in /wordpress/wp-content/plugins/cherry-sidebars/cherry-framework/cherry-core.php on line 380 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Required parameter $core follows optional parameter $class_name in /wordpress/wp-content/plugins/cherry-sidebars/cherry-framework/modules/cherry-toolkit/cherry-toolkit.php on line 82 | [View logs](/logs/plugins/c/css-optimization/error.json) |
+| css-optimization | Required parameter $args follows optional parameter $class_name in /wordpress/wp-content/plugins/cherry-sidebars/cherry-framework/modules/cherry-toolkit/cherry-toolkit.php on line 82 | [View logs](/logs/plugins/c/css-optimization/error.json) |
 | css-optimization | Private methods cannot be final as they are never overridden by other classes in /wordpress/wp-content/plugins/css-optimization/core/controllers/module.php on line 304 | [View logs](/logs/plugins/c/css-optimization/error.json) |
 | css-optimization | Private methods cannot be final as they are never overridden by other classes in /wordpress/wp-content/plugins/css-optimization/core/controllers/module.php on line 309 | [View logs](/logs/plugins/c/css-optimization/error.json) |
 | css-optimization | The magic method O10n\Module::__wakeup() must have public visibility in /wordpress/wp-content/plugins/css-optimization/core/controllers/module.php on line 309 | [View logs](/logs/plugins/c/css-optimization/error.json) |
@@ -214,44 +238,9 @@
 | cbfunnelpro | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cudazi-latest-tweets/plugin.php:204 | [View logs](/logs/plugins/c/cbfunnelpro/error.json) |
 | cbfunnelpro | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cudazi-latest-tweets/plugin.php:204 | [View logs](/logs/plugins/c/cbfunnelpro/error.json) |
 | cbfunnelpro | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cudazi-latest-tweets/plugin.php:204 | [View logs](/logs/plugins/c/cbfunnelpro/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 279 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 279 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1041 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1041 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1189 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1189 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 279 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 279 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1041 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1041 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1189 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1189 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 279 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 279 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1041 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1041 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1189 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1189 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 279 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 279 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1041 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1041 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1189 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1189 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 279 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 279 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1041 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1041 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1189 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1189 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 279 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 279 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1041 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1041 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $token follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1189 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Required parameter $code follows optional parameter $limit in /wordpress/wp-content/plugins/channel-solution-for-twitch/includes/libraries/twitch/kraken/class.twitch-api-calls.php on line 1189 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Undefined variable $wpdb in /wordpress/wp-content/plugins/cheeko-slider/cheeko-slider.php on line 154 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
-| cheeko-slider | Uncaught Error: Call to a member function get_var() on null in /wordpress/wp-content/plugins/cheeko-slider/cheeko-slider.php:154 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
+| cheeko-slider | Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>dyslexiefont</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
+| cheeko-slider | Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>dyslexiefont</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
+| cheeko-slider | Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>dyslexiefont</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/c/cheeko-slider/error.json) |
 | easy-store-customizer | Uncaught Error: Call to undefined function Create_Function() in /wordpress/wp-content/plugins/hierarchical-navigation-widget/wp-widget-sub-post-navigation.php:206 | [View logs](/logs/plugins/e/easy-store-customizer/error.json) |
 | easy-store-customizer | Uncaught Error: Call to undefined function Create_Function() in /wordpress/wp-content/plugins/hierarchical-navigation-widget/wp-widget-sub-post-navigation.php:206 | [View logs](/logs/plugins/e/easy-store-customizer/error.json) |
 | easy-store-customizer | Uncaught Error: Call to undefined function Create_Function() in /wordpress/wp-content/plugins/hierarchical-navigation-widget/wp-widget-sub-post-navigation.php:206 | [View logs](/logs/plugins/e/easy-store-customizer/error.json) |
@@ -497,6 +486,501 @@
 | grand-job | The magic method Gallery_Img::__wakeup() must have public visibility in /wordpress/wp-content/plugins/gallery-images/gallery-images.php on line 97 | [View logs](/logs/plugins/g/grand-job/error.json) |
 | grand-job | Undefined array key 0 in /wordpress/wp-content/plugins/gallery-images/includes/class-gallery-img-install.php on line 109 | [View logs](/logs/plugins/g/grand-job/error.json) |
 | grand-job | Attempt to read property "Value" on null in /wordpress/wp-content/plugins/gallery-images/includes/class-gallery-img-install.php on line 109 | [View logs](/logs/plugins/g/grand-job/error.json) |
+| i-recommend-this | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/lh-email-registration/lh-email-registration.php on line 228 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/lh-email-registration/lh-email-registration.php on line 228 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/lh-email-registration/lh-email-registration.php on line 228 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/lh-instant-articles/lh-instant-articles.php on line 340 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/lh-instant-articles/lh-instant-articles.php on line 340 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/lh-instant-articles/lh-instant-articles.php on line 340 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/lh-instant-articles/lh-instant-articles.php on line 340 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/lh-instant-articles/lh-instant-articles.php on line 340 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/lh-instant-articles/lh-instant-articles.php on line 340 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Declaration of My_Custom_Walker::start_el(&$output, $page, $depth, $args, $current_page) must be compatible with Walker_Page::start_el(&$output, $data_object, $depth = 0, $args = [], $current_object_id = 0) in /wordpress/wp-content/plugins/lingenio-translation-service/pg_public/navigation.php on line 9 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Declaration of My_Custom_Walker::start_el(&$output, $page, $depth, $args, $current_page) must be compatible with Walker_Page::start_el(&$output, $data_object, $depth = 0, $args = [], $current_object_id = 0) in /wordpress/wp-content/plugins/lingenio-translation-service/pg_public/navigation.php on line 9 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Declaration of My_Custom_Walker::start_el(&$output, $page, $depth, $args, $current_page) must be compatible with Walker_Page::start_el(&$output, $data_object, $depth = 0, $args = [], $current_object_id = 0) in /wordpress/wp-content/plugins/lingenio-translation-service/pg_public/navigation.php on line 9 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable: term in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Trying to access array offset on value of type null in /internal/eval.php on line 22 | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
+| i-recommend-this | Undefined variable | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
 | javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/my-social-widgets-with-shortcode/my-social-widgets.php on line 267 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/my-social-widgets-with-shortcode/my-social-widgets.php on line 268 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
 | javascript-optimization | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/my-social-widgets-with-shortcode/my-social-widgets.php on line 269 | [View logs](/logs/plugins/j/javascript-optimization/error.json) |
@@ -1341,6 +1825,33 @@
 | readmore-readless | Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/rocketr-payment-gateway-for-woocommerce/includes/class-wc-gateway-rocketr.php:6 | [View logs](/logs/plugins/r/readmore-readless/error.json) |
 | readmore-readless | Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/rocketr-payment-gateway-for-woocommerce/includes/class-wc-gateway-rocketr.php:6 | [View logs](/logs/plugins/r/readmore-readless/error.json) |
 | readmore-readless | Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/rocketr-payment-gateway-for-woocommerce/includes/class-wc-gateway-rocketr.php:6 | [View logs](/logs/plugins/r/readmore-readless/error.json) |
+| salert | syntax error, unexpected 'string' (T_STRING), expecting function (T_FUNCTION) or const (T_CONST) in /wordpress/wp-content/plugins/spoki/spoki.php on line 55 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | syntax error, unexpected 'string' (T_STRING), expecting function (T_FUNCTION) or const (T_CONST) in /wordpress/wp-content/plugins/spoki/spoki.php on line 55 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | syntax error, unexpected 'string' (T_STRING), expecting function (T_FUNCTION) or const (T_CONST) in /wordpress/wp-content/plugins/spoki/spoki.php on line 55 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Undefined variable $defaults in /wordpress/wp-content/plugins/stay-home-stay-safe-notice/stayhome-plugin.php on line 289 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Trying to access array offset on value of type null in /wordpress/wp-content/plugins/stay-home-stay-safe-notice/stayhome-plugin.php on line 290 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Undefined variable $defaults in /wordpress/wp-content/plugins/stay-home-stay-safe-notice/stayhome-plugin.php on line 289 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Trying to access array offset on value of type null in /wordpress/wp-content/plugins/stay-home-stay-safe-notice/stayhome-plugin.php on line 290 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Undefined variable $defaults in /wordpress/wp-content/plugins/stay-home-stay-safe-notice/stayhome-plugin.php on line 289 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Trying to access array offset on value of type null in /wordpress/wp-content/plugins/stay-home-stay-safe-notice/stayhome-plugin.php on line 290 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Undefined variable $defaults in /wordpress/wp-content/plugins/stay-home-stay-safe-notice/stayhome-plugin.php on line 289 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Trying to access array offset on value of type null in /wordpress/wp-content/plugins/stay-home-stay-safe-notice/stayhome-plugin.php on line 290 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Undefined variable $defaults in /wordpress/wp-content/plugins/stay-home-stay-safe-notice/stayhome-plugin.php on line 289 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Trying to access array offset on value of type null in /wordpress/wp-content/plugins/stay-home-stay-safe-notice/stayhome-plugin.php on line 290 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Undefined variable $defaults in /wordpress/wp-content/plugins/stay-home-stay-safe-notice/stayhome-plugin.php on line 289 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Trying to access array offset on value of type null in /wordpress/wp-content/plugins/stay-home-stay-safe-notice/stayhome-plugin.php on line 290 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | [27-Jun-2025 07:03:01 UTC] Simple Contact Bar: Loading text domain for locale en_US | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | [27-Jun-2025 07:03:01 UTC] Simple Contact Bar: Text domain loaded: no | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | [27-Jun-2025 07:03:10 UTC] Simple Contact Bar: Loading text domain for locale en_US | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | [27-Jun-2025 07:03:10 UTC] Simple Contact Bar: Text domain loaded: no | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | [27-Jun-2025 07:03:19 UTC] Simple Contact Bar: Loading text domain for locale en_US | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | [27-Jun-2025 07:03:19 UTC] Simple Contact Bar: Text domain loaded: no | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method SimpleRegisterUsersForm::my_plugin_create_db() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method SimpleRegisterUsersForm::my_plugin_create_db() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method SimpleRegisterUsersForm::my_plugin_create_db() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Uncaught Error: Class "WC_Shipping_Zone" not found in /wordpress/wp-content/plugins/restrict-payment-methods-for-woocommerce/includes/GMWRPM_Admin.php:358 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Uncaught Error: Class "WC_Shipping_Zone" not found in /wordpress/wp-content/plugins/restrict-payment-methods-for-woocommerce/includes/GMWRPM_Admin.php:358 | [View logs](/logs/plugins/s/salert/error.json) |
+| salert | Uncaught Error: Class "WC_Shipping_Zone" not found in /wordpress/wp-content/plugins/restrict-payment-methods-for-woocommerce/includes/GMWRPM_Admin.php:358 | [View logs](/logs/plugins/s/salert/error.json) |
 | schedule-builder-online | Required parameter $type follows optional parameter $attrs in /wordpress/wp-content/plugins/salesgoals-contact-form/controller/component/class-sgcf-shortcodes-component.php on line 161 | [View logs](/logs/plugins/s/schedule-builder-online/error.json) |
 | schedule-builder-online | Required parameter $tpl follows optional parameter $attrs in /wordpress/wp-content/plugins/salesgoals-contact-form/controller/component/class-sgcf-shortcodes-component.php on line 161 | [View logs](/logs/plugins/s/schedule-builder-online/error.json) |
 | schedule-post-into-zoninator-zone | Required parameter $type follows optional parameter $attrs in /wordpress/wp-content/plugins/salesgoals-contact-form/controller/component/class-sgcf-shortcodes-component.php on line 161 | [View logs](/logs/plugins/s/schedule-post-into-zoninator-zone/error.json) |
