@@ -2,273 +2,150 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [26-Jun-2025 11:28:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [28-Jun-2025 04:07:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select id,setting,setting_value from wp_whereivebeen_settings where user_id=1</p>
+<p>UPDATE wp_wpp_predict_entries SET predictActive = 0 WHERE predictEndDatetime < 1751083666</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: select `id` , `setting` , `setting_value` from `wp_whereivebeen_settings` where `user_id` = 1 | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpp_predict_entries</li>
+<li>Executing: 
+				SELECT LOWER(column_name) AS COLUMN_NAME, is_nullable, data_type, column_default
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpp_predict_entries</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_settings
+WP_SQLite_Driver::cast_value_in_non_strict_mode(): Argument #1 ($mysql_data_type) must be of type string, null given, called in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3160
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select id,setti...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select id,setti...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select id,setti...')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select id,setti...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(40): DbController->select('select id,setti...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(29): WhereIveBeenModel->load_settings()
-#7 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#8 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#11 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#12 {main}</pre>
- for query select id,setting,setting_value from wp_whereivebeen_settings where user_id=1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_settings, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[26-Jun-2025 11:28:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('WP_SQLite_Drive...', 0, Object(TypeError))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE wp_wpp_p...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('UPDATE wp_wpp_p...')
+#3 /wordpress/wp-content/plugins/wp-predict/wp-predict.php(55): WP_SQLite_DB->query('UPDATE wp_wpp_p...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-predict/wp-p...')
+#6 /internal/eval.php(20): activate_plugin('wp-predict/wp-p...')
+#7 {main}</pre>
+ for query UPDATE wp_wpp_predict_entries SET predictActive = 0 WHERE predictEndDatetime < 1751083666 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-predict/wp-predict.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Jun-2025 04:07:47 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_Widget_Predi...')
+#2 /wordpress/wp-content/plugins/wp-predict/wp-predict.php(9404): register_widget('WP_Widget_Predi...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): rw('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[28-Jun-2025 04:07:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select wp_whereivebeen_user_countries.id,wp_whereivebeen_user_countries.country_id,wp_whereivebeen_countries.title,wp_whereivebeen_user_countries.status_id,wp_whereivebeen_user_countries.url,wp_whereivebeen_user_countries.new_window from wp_whereivebeen_user_countries inner join wp_whereivebeen_countries on wp_whereivebeen_user_countries.country_id=wp_whereivebeen_countries.id where wp_whereivebeen_user_countries.user_id=1 ORDER BY wp_whereivebeen_countries.title</p>
+<p>UPDATE wp_wpp_predict_entries SET predictActive = 0 WHERE predictEndDatetime < 1751083675</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: select `wp_whereivebeen_user_countries`.`id` , `wp_whereivebeen_user_countries`.`country_id` , `wp_whereivebeen_countries`.`title` , `wp_whereivebeen_user_countries`.`status_id` , `wp_whereivebeen_user_countries`.`url` , `wp_whereivebeen_user_countries`.`new_window` from `wp_whereivebeen_user_countries` inner join `wp_whereivebeen_countries` on `wp_whereivebeen_user_countries`.`country_id` = `wp_whereivebeen_countries`.`id` where `wp_whereivebeen_user_countries`.`user_id` = 1 ORDER BY `wp_whereivebeen_countries`.`title` | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpp_predict_entries</li>
+<li>Executing: 
+				SELECT LOWER(column_name) AS COLUMN_NAME, is_nullable, data_type, column_default
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpp_predict_entries</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_user_countries
+WP_SQLite_Driver::cast_value_in_non_strict_mode(): Argument #1 ($mysql_data_type) must be of type string, null given, called in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3160
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select wp_where...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select wp_where...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select wp_where...')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select wp_where...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(81): DbController->select('select wp_where...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(30): WhereIveBeenModel->load_user_countries()
-#7 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#8 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#11 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#12 {main}</pre>
- for query select wp_whereivebeen_user_countries.id,wp_whereivebeen_user_countries.country_id,wp_whereivebeen_countries.title,wp_whereivebeen_user_countries.status_id,wp_whereivebeen_user_countries.url,wp_whereivebeen_user_countries.new_window from wp_whereivebeen_user_countries inner join wp_whereivebeen_countries on wp_whereivebeen_user_countries.country_id=wp_whereivebeen_countries.id where wp_whereivebeen_user_countries.user_id=1 ORDER BY wp_whereivebeen_countries.title made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_user_countries, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[26-Jun-2025 11:28:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('WP_SQLite_Drive...', 0, Object(TypeError))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE wp_wpp_p...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('UPDATE wp_wpp_p...')
+#3 /wordpress/wp-content/plugins/wp-predict/wp-predict.php(55): WP_SQLite_DB->query('UPDATE wp_wpp_p...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-predict/wp-p...')
+#6 /internal/eval.php(20): activate_plugin('wp-predict/wp-p...')
+#7 {main}</pre>
+ for query UPDATE wp_wpp_predict_entries SET predictActive = 0 WHERE predictEndDatetime < 1751083675 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-predict/wp-predict.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Jun-2025 04:07:56 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_Widget_Predi...')
+#2 /wordpress/wp-content/plugins/wp-predict/wp-predict.php(9404): register_widget('WP_Widget_Predi...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): rw('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[28-Jun-2025 04:08:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select id,title from wp_whereivebeen_countries where id NOT IN (select country_id from wp_whereivebeen_user_countries where user_id=1)</p>
+<p>UPDATE wp_wpp_predict_entries SET predictActive = 0 WHERE predictEndDatetime < 1751083683</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: select `id` , `title` from `wp_whereivebeen_countries` where `id` NOT IN ( select `country_id` from `wp_whereivebeen_user_countries` where `user_id` = 1 ) | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpp_predict_entries</li>
+<li>Executing: 
+				SELECT LOWER(column_name) AS COLUMN_NAME, is_nullable, data_type, column_default
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpp_predict_entries</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_countries
+WP_SQLite_Driver::cast_value_in_non_strict_mode(): Argument #1 ($mysql_data_type) must be of type string, null given, called in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3160
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select id,title...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select id,title...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select id,title...')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select id,title...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(53): DbController->select('select id,title...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(31): WhereIveBeenModel->load_countries()
-#7 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#8 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#11 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#12 {main}</pre>
- for query select id,title from wp_whereivebeen_countries where id NOT IN (select country_id from wp_whereivebeen_user_countries where user_id=1) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_countries, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[26-Jun-2025 11:28:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>select id,setting,setting_value from wp_whereivebeen_settings where user_id=1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: select `id` , `setting` , `setting_value` from `wp_whereivebeen_settings` where `user_id` = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_settings
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select id,setti...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select id,setti...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select id,setti...')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select id,setti...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(40): DbController->select('select id,setti...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(29): WhereIveBeenModel->load_settings()
-#7 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#8 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#11 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#12 {main}</pre>
- for query select id,setting,setting_value from wp_whereivebeen_settings where user_id=1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_settings, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[26-Jun-2025 11:28:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>select wp_whereivebeen_user_countries.id,wp_whereivebeen_user_countries.country_id,wp_whereivebeen_countries.title,wp_whereivebeen_user_countries.status_id,wp_whereivebeen_user_countries.url,wp_whereivebeen_user_countries.new_window from wp_whereivebeen_user_countries inner join wp_whereivebeen_countries on wp_whereivebeen_user_countries.country_id=wp_whereivebeen_countries.id where wp_whereivebeen_user_countries.user_id=1 ORDER BY wp_whereivebeen_countries.title</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: select `wp_whereivebeen_user_countries`.`id` , `wp_whereivebeen_user_countries`.`country_id` , `wp_whereivebeen_countries`.`title` , `wp_whereivebeen_user_countries`.`status_id` , `wp_whereivebeen_user_countries`.`url` , `wp_whereivebeen_user_countries`.`new_window` from `wp_whereivebeen_user_countries` inner join `wp_whereivebeen_countries` on `wp_whereivebeen_user_countries`.`country_id` = `wp_whereivebeen_countries`.`id` where `wp_whereivebeen_user_countries`.`user_id` = 1 ORDER BY `wp_whereivebeen_countries`.`title` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_user_countries
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select wp_where...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select wp_where...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select wp_where...')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select wp_where...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(81): DbController->select('select wp_where...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(30): WhereIveBeenModel->load_user_countries()
-#7 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#8 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#11 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#12 {main}</pre>
- for query select wp_whereivebeen_user_countries.id,wp_whereivebeen_user_countries.country_id,wp_whereivebeen_countries.title,wp_whereivebeen_user_countries.status_id,wp_whereivebeen_user_countries.url,wp_whereivebeen_user_countries.new_window from wp_whereivebeen_user_countries inner join wp_whereivebeen_countries on wp_whereivebeen_user_countries.country_id=wp_whereivebeen_countries.id where wp_whereivebeen_user_countries.user_id=1 ORDER BY wp_whereivebeen_countries.title made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_user_countries, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[26-Jun-2025 11:28:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>select id,title from wp_whereivebeen_countries where id NOT IN (select country_id from wp_whereivebeen_user_countries where user_id=1)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: select `id` , `title` from `wp_whereivebeen_countries` where `id` NOT IN ( select `country_id` from `wp_whereivebeen_user_countries` where `user_id` = 1 ) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_countries
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select id,title...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select id,title...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select id,title...')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select id,title...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(53): DbController->select('select id,title...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(31): WhereIveBeenModel->load_countries()
-#7 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#8 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#11 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#12 {main}</pre>
- for query select id,title from wp_whereivebeen_countries where id NOT IN (select country_id from wp_whereivebeen_user_countries where user_id=1) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_countries, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[26-Jun-2025 11:28:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>select id,setting,setting_value from wp_whereivebeen_settings where user_id=1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: select `id` , `setting` , `setting_value` from `wp_whereivebeen_settings` where `user_id` = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_settings
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select id,setti...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select id,setti...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select id,setti...')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select id,setti...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(40): DbController->select('select id,setti...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(29): WhereIveBeenModel->load_settings()
-#7 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#8 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#11 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#12 {main}</pre>
- for query select id,setting,setting_value from wp_whereivebeen_settings where user_id=1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_settings, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[26-Jun-2025 11:28:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>select wp_whereivebeen_user_countries.id,wp_whereivebeen_user_countries.country_id,wp_whereivebeen_countries.title,wp_whereivebeen_user_countries.status_id,wp_whereivebeen_user_countries.url,wp_whereivebeen_user_countries.new_window from wp_whereivebeen_user_countries inner join wp_whereivebeen_countries on wp_whereivebeen_user_countries.country_id=wp_whereivebeen_countries.id where wp_whereivebeen_user_countries.user_id=1 ORDER BY wp_whereivebeen_countries.title</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: select `wp_whereivebeen_user_countries`.`id` , `wp_whereivebeen_user_countries`.`country_id` , `wp_whereivebeen_countries`.`title` , `wp_whereivebeen_user_countries`.`status_id` , `wp_whereivebeen_user_countries`.`url` , `wp_whereivebeen_user_countries`.`new_window` from `wp_whereivebeen_user_countries` inner join `wp_whereivebeen_countries` on `wp_whereivebeen_user_countries`.`country_id` = `wp_whereivebeen_countries`.`id` where `wp_whereivebeen_user_countries`.`user_id` = 1 ORDER BY `wp_whereivebeen_countries`.`title` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_user_countries
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select wp_where...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select wp_where...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select wp_where...')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select wp_where...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(81): DbController->select('select wp_where...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(30): WhereIveBeenModel->load_user_countries()
-#7 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#8 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#11 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#12 {main}</pre>
- for query select wp_whereivebeen_user_countries.id,wp_whereivebeen_user_countries.country_id,wp_whereivebeen_countries.title,wp_whereivebeen_user_countries.status_id,wp_whereivebeen_user_countries.url,wp_whereivebeen_user_countries.new_window from wp_whereivebeen_user_countries inner join wp_whereivebeen_countries on wp_whereivebeen_user_countries.country_id=wp_whereivebeen_countries.id where wp_whereivebeen_user_countries.user_id=1 ORDER BY wp_whereivebeen_countries.title made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_user_countries, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[26-Jun-2025 11:28:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>select id,title from wp_whereivebeen_countries where id NOT IN (select country_id from wp_whereivebeen_user_countries where user_id=1)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: select `id` , `title` from `wp_whereivebeen_countries` where `id` NOT IN ( select `country_id` from `wp_whereivebeen_user_countries` where `user_id` = 1 ) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_countries
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('select id,title...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('select id,title...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('select id,title...')
-#4 /wordpress/wp-content/plugins/where-ive-been-map/dbcontroller.class.php(29): wpdb->get_results('select id,title...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(53): DbController->select('select id,title...', 'ARRAY_A')
-#6 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeenmodel.class.php(31): WhereIveBeenModel->load_countries()
-#7 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeencontroller.class.php(14): WhereIveBeenModel->__construct(1)
-#8 /wordpress/wp-content/plugins/where-ive-been-map/whereivebeen.php(40): WhereIveBeenController->__construct(1, 'admin_panel')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('where-ive-been-...')
-#11 /internal/eval.php(20): activate_plugin('where-ive-been-...')
-#12 {main}</pre>
- for query select id,title from wp_whereivebeen_countries where id NOT IN (select country_id from wp_whereivebeen_user_countries where user_id=1) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/where-ive-been-map/whereivebeen.php'), WhereIveBeenController->__construct, WhereIveBeenModel->__construct, WhereIveBeenModel->load_countries, DbController->select, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[26-Jun-2025 11:31:22 UTC] PHP Warning:  Constant HMBKP_REQUIRED_WP_VERSION already defined in /wordpress/wp-content/plugins/wp-wb-optimizer/wp-database-optimizer-tools.php on line 37
-[26-Jun-2025 11:31:23 UTC] PHP Warning:  Constant HMBKP_REQUIRED_WP_VERSION already defined in /wordpress/wp-content/plugins/wp-wb-optimizer/wp-database-optimizer-tools.php on line 37
-[26-Jun-2025 11:31:31 UTC] PHP Warning:  Constant HMBKP_REQUIRED_WP_VERSION already defined in /wordpress/wp-content/plugins/wp-wb-optimizer/wp-database-optimizer-tools.php on line 37
-[26-Jun-2025 11:31:32 UTC] PHP Warning:  Constant HMBKP_REQUIRED_WP_VERSION already defined in /wordpress/wp-content/plugins/wp-wb-optimizer/wp-database-optimizer-tools.php on line 37
-[26-Jun-2025 11:31:41 UTC] PHP Warning:  Constant HMBKP_REQUIRED_WP_VERSION already defined in /wordpress/wp-content/plugins/wp-wb-optimizer/wp-database-optimizer-tools.php on line 37
-[26-Jun-2025 11:31:41 UTC] PHP Warning:  Constant HMBKP_REQUIRED_WP_VERSION already defined in /wordpress/wp-content/plugins/wp-wb-optimizer/wp-database-optimizer-tools.php on line 37
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('WP_SQLite_Drive...', 0, Object(TypeError))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE wp_wpp_p...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('UPDATE wp_wpp_p...')
+#3 /wordpress/wp-content/plugins/wp-predict/wp-predict.php(55): WP_SQLite_DB->query('UPDATE wp_wpp_p...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-predict/wp-p...')
+#6 /internal/eval.php(20): activate_plugin('wp-predict/wp-p...')
+#7 {main}</pre>
+ for query UPDATE wp_wpp_predict_entries SET predictActive = 0 WHERE predictEndDatetime < 1751083683 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-predict/wp-predict.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Jun-2025 04:08:04 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_Widget_Predi...')
+#2 /wordpress/wp-content/plugins/wp-predict/wp-predict.php(9404): register_widget('WP_Widget_Predi...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): rw('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:325:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
