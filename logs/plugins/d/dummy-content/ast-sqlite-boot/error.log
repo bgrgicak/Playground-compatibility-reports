@@ -2,424 +2,741 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [28-Jun-2025 15:48:44 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[28-Jun-2025 15:48:54 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[28-Jun-2025 15:49:04 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[28-Jun-2025 15:49:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [29-Jun-2025 23:26:28 UTC] PHP Deprecated:  Required parameter $where follows optional parameter $tablename in /wordpress/wp-content/plugins/dynamic-donations/includes/db/funcs-dydo-db.php on line 30
+[29-Jun-2025 23:26:28 UTC] PHP Deprecated:  Required parameter $user_id follows optional parameter $confirmed in /wordpress/wp-content/plugins/dynamic-donations/includes/funcs-dydo-helpers.php on line 174
+[29-Jun-2025 23:26:28 UTC] PHP Deprecated:  Required parameter $user_id follows optional parameter $confirmed in /wordpress/wp-content/plugins/dynamic-donations/includes/funcs-dydo-helpers.php on line 211
+[29-Jun-2025 23:26:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
---  Upgrading to Cart66 1.0.1
-
-alter table `wp_cart66_accounts` add column `notes` text not null</p>
+<p>CREATE TABLE IF NOT EXISTS `dydo_onetime_donations` (
+			`id` int(11) NOT NULL AUTO_INCREMENT,
+			`user_id` int(11) NOT NULL,
+			`customer_id` varchar(255) NOT NULL,
+			`transaction_id` varchar(255) NOT NULL,
+			`amount` float NOT NULL,
+			`currency` varchar(5) NOT NULL,
+			`created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`confirmed` TINYINT NOT NULL DEFAULT '0',
+			`dydo_gateways_id` int(11) NOT NULL,
+			PRIMARY KEY  (`id`,`dydo_gateways_id`),
+			UNIQUE KEY `id` (`id`),
+			KEY `dydo_donations_transaction_id_uindex` (`transaction_id`),
+			KEY `fk_dydo_onetime_donations_dydo_gateways1_idx` (`dydo_gateways_id`),
+			CONSTRAINT `fk_dydo_onetime_donations_dydo_gateways1` FOREIGN KEY (`dydo_gateways_id`) REFERENCES `dydo_gateways` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION )
+			DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_accounts</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cart66_accounts</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_accounts</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, dydo_onetime_donations</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_tables` (`table_schema`, `table_name`, `table_type`, `engine`, `row_format`, `table_collation`, `table_comment`) VALUES (?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, id, 1, , NO, int, , , 10, 0, , , , int(11), , auto_increment, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, user_id, 2, , NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, customer_id, 3, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, transaction_id, 4, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, amount, 5, , NO, float, , , 12, , , , , float, , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, currency, 6, , NO, varchar, 5, 20, , , , utf8mb4, utf8mb4_general_ci, varchar(5), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, created_at, 7, CURRENT_TIMESTAMP, NO, datetime, , , , , 0, , , datetime, , DEFAULT_GENERATED, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, updated_at, 8, CURRENT_TIMESTAMP, NO, datetime, , , , , 0, , , datetime, , DEFAULT_GENERATED, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, confirmed, 9, 0, NO, tinyint, , , 3, 0, , , , tinyint, , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, dydo_gateways_id, 10, , NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
 <li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_accounts</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cart66_accounts, notes, 10, , NO, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_accounts</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_cart66_accounts</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
 					WHERE table_schema = ?
 					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_cart66_accounts</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_cart66_accounts_68600f1974360` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `first_name` TEXT COLLATE NOCASE NOT NULL,
-  `last_name` TEXT COLLATE NOCASE NOT NULL,
-  `email` TEXT COLLATE NOCASE NOT NULL,
-  `username` TEXT COLLATE NOCASE NOT NULL,
-  `password` TEXT COLLATE NOCASE NOT NULL,
-  `notes` TEXT COLLATE NOCASE NOT NULL,
-  `created_at` TEXT COLLATE NOCASE NOT NULL,
-  `updated_at` TEXT COLLATE NOCASE NOT NULL,
-  `notes` TEXT COLLATE NOCASE NOT NULL
-) STRICT | (no parameters)</li>
+					AND column_name IN (?,?)
+				 | parameters: database_name_here, dydo_onetime_donations, id, dydo_gateways_id</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, 0, database_name_here, PRIMARY, 1, id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, 0, database_name_here, PRIMARY, 2, dydo_gateways_id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_table_constraints` (`table_schema`, `table_name`, `constraint_schema`, `constraint_name`, `constraint_type`) VALUES (?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, database_name_here, PRIMARY, PRIMARY KEY</li>
+<li>Executing: 
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET (column_key, is_nullable) = (
+					SELECT
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(s.non_unique = 0 AND s.seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(s.seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END,
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'NO'
+							ELSE c.is_nullable
+						END
+					FROM `_wp_sqlite_mysql_information_schema_statistics` AS s
+					WHERE s.table_schema = c.table_schema
+					AND s.table_name = c.table_name
+					AND s.column_name = c.column_name
+				)
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+			 | parameters: database_name_here, dydo_onetime_donations</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, dydo_onetime_donations, id</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, 0, database_name_here, id, 1, id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_table_constraints` (`table_schema`, `table_name`, `constraint_schema`, `constraint_name`, `constraint_type`) VALUES (?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, database_name_here, id, UNIQUE</li>
+<li>Executing: 
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET (column_key, is_nullable) = (
+					SELECT
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(s.non_unique = 0 AND s.seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(s.seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END,
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'NO'
+							ELSE c.is_nullable
+						END
+					FROM `_wp_sqlite_mysql_information_schema_statistics` AS s
+					WHERE s.table_schema = c.table_schema
+					AND s.table_name = c.table_name
+					AND s.column_name = c.column_name
+				)
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+			 | parameters: database_name_here, dydo_onetime_donations</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, dydo_onetime_donations, transaction_id</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, 1, database_name_here, dydo_donations_transaction_id_uindex, 1, transaction_id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET (column_key, is_nullable) = (
+					SELECT
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(s.non_unique = 0 AND s.seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(s.seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END,
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'NO'
+							ELSE c.is_nullable
+						END
+					FROM `_wp_sqlite_mysql_information_schema_statistics` AS s
+					WHERE s.table_schema = c.table_schema
+					AND s.table_name = c.table_name
+					AND s.column_name = c.column_name
+				)
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+			 | parameters: database_name_here, dydo_onetime_donations</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, dydo_onetime_donations, dydo_gateways_id</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_onetime_donations, 1, database_name_here, fk_dydo_onetime_donations_dydo_gateways1_idx, 1, dydo_gateways_id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET (column_key, is_nullable) = (
+					SELECT
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(s.non_unique = 0 AND s.seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(s.seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END,
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'NO'
+							ELSE c.is_nullable
+						END
+					FROM `_wp_sqlite_mysql_information_schema_statistics` AS s
+					WHERE s.table_schema = c.table_schema
+					AND s.table_name = c.table_name
+					AND s.column_name = c.column_name
+				)
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+			 | parameters: database_name_here, dydo_onetime_donations</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: notes
+FOREIGN KEY and CHECK constraints are not supported yet.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n--  Upgrading ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n--  Upgrading ...')
-#3 /wordpress/wp-content/plugins/cart66-lite/models/Cart66.php(13): WP_SQLite_DB->query('\n--  Upgrading ...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart66->install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart66...', false)
-#8 /internal/eval.php(20): activate_plugin('cart66-lite/car...')
-#9 {main}</pre>
- for query 
---  Upgrading to Cart66 1.0.1
-
-alter table `wp_cart66_accounts` add column `notes` text not null made by activate_plugin, do_action('activate_cart66-lite/cart66.php'), WP_Hook->do_action, WP_Hook->apply_filters, Cart66->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[28-Jun-2025 15:49:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/dynamic-donations/includes/db/class-dydo-db.php(78): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/dynamic-donations/includes/db/class-dydo-db.php(8): DyDo_DB::create_table()
+#6 /wordpress/wp-content/plugins/dynamic-donations/includes/class-dydo-activator.php(9): DyDo_DB::create_tables()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): DyDo_Activator::activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dynami...', false)
+#11 /internal/eval.php(20): activate_plugin('dynamic-donatio...')
+#12 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `dydo_onetime_donations` (
+			`id` int(11) NOT NULL AUTO_INCREMENT,
+			`user_id` int(11) NOT NULL,
+			`customer_id` varchar(255) NOT NULL,
+			`transaction_id` varchar(255) NOT NULL,
+			`amount` float NOT NULL,
+			`currency` varchar(5) NOT NULL,
+			`created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`confirmed` TINYINT NOT NULL DEFAULT '0',
+			`dydo_gateways_id` int(11) NOT NULL,
+			PRIMARY KEY  (`id`,`dydo_gateways_id`),
+			UNIQUE KEY `id` (`id`),
+			KEY `dydo_donations_transaction_id_uindex` (`transaction_id`),
+			KEY `fk_dydo_onetime_donations_dydo_gateways1_idx` (`dydo_gateways_id`),
+			CONSTRAINT `fk_dydo_onetime_donations_dydo_gateways1` FOREIGN KEY (`dydo_gateways_id`) REFERENCES `dydo_gateways` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION )
+			DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_dynamic-donations/dydo.php'), WP_Hook->do_action, WP_Hook->apply_filters, DyDo_Activator::activate, DyDo_DB::create_tables, DyDo_DB::create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-Jun-2025 23:26:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
---  Upgrading to Cart66 1.0.3
-
-alter table `wp_cart66_products` add column `start_recurring_number` int(10) unsigned not null default 1</p>
+<p>CREATE TABLE IF NOT EXISTS `dydo_subscriptions` (
+			`id` int(11) NOT NULL AUTO_INCREMENT,
+			`user_id` int(11) NOT NULL,
+			`subscription_id` varchar(45) NOT NULL,
+			`customer_id` varchar(255) NOT NULL,
+			`active` tinyint(4) NOT NULL DEFAULT '0',
+			`created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+			`amount` float NOT NULL,
+			`next_payment_attempt` int(20) NOT NULL,
+			`dydo_gateways_id` int(11) NOT NULL,
+			PRIMARY KEY (`id`,`dydo_gateways_id`),
+			UNIQUE KEY `id_UNIQUE` (`id`),
+			KEY `subscription_id_UNIQUE` (`subscription_id`),
+			KEY `fk_dydo_subscriptions_dydo_gateways_idx` (`dydo_gateways_id`),
+			CONSTRAINT `fk_dydo_subscriptions_dydo_gateways` FOREIGN KEY (`dydo_gateways_id`) REFERENCES `dydo_gateways` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+			DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_products</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_products</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, dydo_subscriptions</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_tables` (`table_schema`, `table_name`, `table_type`, `engine`, `row_format`, `table_collation`, `table_comment`) VALUES (?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, id, 1, , NO, int, , , 10, 0, , , , int(11), , auto_increment, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, user_id, 2, , NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, subscription_id, 3, , NO, varchar, 45, 180, , , , utf8mb4, utf8mb4_general_ci, varchar(45), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, customer_id, 4, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, active, 5, 0, NO, tinyint, , , 3, 0, , , , tinyint(4), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, created_at, 6, CURRENT_TIMESTAMP, NO, datetime, , , , , 0, , , datetime, , DEFAULT_GENERATED, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, updated_at, 7, CURRENT_TIMESTAMP, YES, datetime, , , , , 0, , , datetime, , DEFAULT_GENERATED, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, amount, 8, , NO, float, , , 12, , , , , float, , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, next_payment_attempt, 9, , NO, int, , , 10, 0, , , , int(20), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, dydo_gateways_id, 10, , NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
 <li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cart66_products, start_recurring_number, 38, 1, NO, int, , , 10, 0, , , , int(10) unsigned, , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
 					WHERE table_schema = ?
 					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_cart66_products_68600f1976688` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `name` TEXT COLLATE NOCASE NOT NULL,
-  `item_number` TEXT COLLATE NOCASE NOT NULL,
-  `price` REAL NOT NULL,
-  `options_1` TEXT COLLATE NOCASE NOT NULL,
-  `options_2` TEXT COLLATE NOCASE NOT NULL,
-  `custom` TEXT COLLATE NOCASE NOT NULL DEFAULT 'none',
-  `custom_desc` TEXT COLLATE NOCASE NOT NULL,
-  `taxable` INTEGER NOT NULL,
-  `shipped` INTEGER NOT NULL,
-  `weight` REAL NOT NULL DEFAULT '0',
-  `download_path` TEXT COLLATE NOCASE,
-  `s3_bucket` TEXT COLLATE NOCASE NOT NULL,
-  `s3_file` TEXT COLLATE NOCASE NOT NULL,
-  `download_limit` INTEGER DEFAULT '0',
-  `spreedly_subscription_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
-  `allow_cancel` INTEGER DEFAULT '1',
-  `is_paypal_subscription` INTEGER DEFAULT '0',
-  `max_quantity` INTEGER NOT NULL DEFAULT '0',
-  `gravity_form_id` INTEGER NOT NULL DEFAULT '0',
-  `gravity_form_qty_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '0',
-  `gravity_form_pricing` INTEGER NOT NULL DEFAULT '0',
-  `feature_level` TEXT COLLATE NOCASE NOT NULL,
-  `setup_fee` REAL NOT NULL,
-  `billing_interval` INTEGER NOT NULL,
-  `billing_interval_unit` TEXT COLLATE NOCASE NOT NULL,
-  `billing_cycles` INTEGER NOT NULL,
-  `offer_trial` INTEGER NOT NULL DEFAULT '0',
-  `trial_period` INTEGER NOT NULL,
-  `trial_period_unit` TEXT COLLATE NOCASE NOT NULL,
-  `trial_price` REAL NOT NULL,
-  `trial_cycles` INTEGER NOT NULL DEFAULT '0',
-  `start_recurring_number` INTEGER NOT NULL DEFAULT '1',
-  `start_recurring_unit` TEXT COLLATE NOCASE NOT NULL,
-  `price_description` TEXT COLLATE NOCASE NOT NULL,
-  `is_membership_product` INTEGER NOT NULL DEFAULT '0',
-  `lifetime_membership` INTEGER NOT NULL DEFAULT '0',
-  `start_recurring_number` INTEGER NOT NULL DEFAULT '1'
-) STRICT | (no parameters)</li>
+					AND column_name IN (?,?)
+				 | parameters: database_name_here, dydo_subscriptions, id, dydo_gateways_id</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, 0, database_name_here, PRIMARY, 1, id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, 0, database_name_here, PRIMARY, 2, dydo_gateways_id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_table_constraints` (`table_schema`, `table_name`, `constraint_schema`, `constraint_name`, `constraint_type`) VALUES (?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, database_name_here, PRIMARY, PRIMARY KEY</li>
+<li>Executing: 
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET (column_key, is_nullable) = (
+					SELECT
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(s.non_unique = 0 AND s.seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(s.seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END,
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'NO'
+							ELSE c.is_nullable
+						END
+					FROM `_wp_sqlite_mysql_information_schema_statistics` AS s
+					WHERE s.table_schema = c.table_schema
+					AND s.table_name = c.table_name
+					AND s.column_name = c.column_name
+				)
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+			 | parameters: database_name_here, dydo_subscriptions</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, dydo_subscriptions, id</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, 0, database_name_here, id_UNIQUE, 1, id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_table_constraints` (`table_schema`, `table_name`, `constraint_schema`, `constraint_name`, `constraint_type`) VALUES (?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, database_name_here, id_UNIQUE, UNIQUE</li>
+<li>Executing: 
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET (column_key, is_nullable) = (
+					SELECT
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(s.non_unique = 0 AND s.seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(s.seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END,
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'NO'
+							ELSE c.is_nullable
+						END
+					FROM `_wp_sqlite_mysql_information_schema_statistics` AS s
+					WHERE s.table_schema = c.table_schema
+					AND s.table_name = c.table_name
+					AND s.column_name = c.column_name
+				)
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+			 | parameters: database_name_here, dydo_subscriptions</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, dydo_subscriptions, subscription_id</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, 1, database_name_here, subscription_id_UNIQUE, 1, subscription_id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET (column_key, is_nullable) = (
+					SELECT
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(s.non_unique = 0 AND s.seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(s.seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END,
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'NO'
+							ELSE c.is_nullable
+						END
+					FROM `_wp_sqlite_mysql_information_schema_statistics` AS s
+					WHERE s.table_schema = c.table_schema
+					AND s.table_name = c.table_name
+					AND s.column_name = c.column_name
+				)
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+			 | parameters: database_name_here, dydo_subscriptions</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, dydo_subscriptions, dydo_gateways_id</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, 1, database_name_here, fk_dydo_subscriptions_dydo_gateways_idx, 1, dydo_gateways_id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET (column_key, is_nullable) = (
+					SELECT
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(s.non_unique = 0 AND s.seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(s.seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END,
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'NO'
+							ELSE c.is_nullable
+						END
+					FROM `_wp_sqlite_mysql_information_schema_statistics` AS s
+					WHERE s.table_schema = c.table_schema
+					AND s.table_name = c.table_name
+					AND s.column_name = c.column_name
+				)
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+			 | parameters: database_name_here, dydo_subscriptions</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: start_recurring_number
+FOREIGN KEY and CHECK constraints are not supported yet.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n--  Upgrading ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n--  Upgrading ...')
-#3 /wordpress/wp-content/plugins/cart66-lite/models/Cart66.php(13): WP_SQLite_DB->query('\n--  Upgrading ...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart66->install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart66...', false)
-#8 /internal/eval.php(20): activate_plugin('cart66-lite/car...')
-#9 {main}</pre>
- for query 
---  Upgrading to Cart66 1.0.3
-
-alter table `wp_cart66_products` add column `start_recurring_number` int(10) unsigned not null default 1 made by activate_plugin, do_action('activate_cart66-lite/cart66.php'), WP_Hook->do_action, WP_Hook->apply_filters, Cart66->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[28-Jun-2025 15:49:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/dynamic-donations/includes/db/class-dydo-db.php(98): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/dynamic-donations/includes/db/class-dydo-db.php(8): DyDo_DB::create_table()
+#6 /wordpress/wp-content/plugins/dynamic-donations/includes/class-dydo-activator.php(9): DyDo_DB::create_tables()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): DyDo_Activator::activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dynami...', false)
+#11 /internal/eval.php(20): activate_plugin('dynamic-donatio...')
+#12 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `dydo_subscriptions` (
+			`id` int(11) NOT NULL AUTO_INCREMENT,
+			`user_id` int(11) NOT NULL,
+			`subscription_id` varchar(45) NOT NULL,
+			`customer_id` varchar(255) NOT NULL,
+			`active` tinyint(4) NOT NULL DEFAULT '0',
+			`created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+			`amount` float NOT NULL,
+			`next_payment_attempt` int(20) NOT NULL,
+			`dydo_gateways_id` int(11) NOT NULL,
+			PRIMARY KEY (`id`,`dydo_gateways_id`),
+			UNIQUE KEY `id_UNIQUE` (`id`),
+			KEY `subscription_id_UNIQUE` (`subscription_id`),
+			KEY `fk_dydo_subscriptions_dydo_gateways_idx` (`dydo_gateways_id`),
+			CONSTRAINT `fk_dydo_subscriptions_dydo_gateways` FOREIGN KEY (`dydo_gateways_id`) REFERENCES `dydo_gateways` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+			DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_dynamic-donations/dydo.php'), WP_Hook->do_action, WP_Hook->apply_filters, DyDo_Activator::activate, DyDo_DB::create_tables, DyDo_DB::create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-Jun-2025 23:26:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>alter table `wp_cart66_products` add column `start_recurring_unit` varchar(50) not null</p>
+<p>CREATE TABLE IF NOT EXISTS `dydo_subscription_donations` (
+			`id` int(11) NOT NULL AUTO_INCREMENT,
+			`transaction_id` varchar(255) NOT NULL,
+			`amount` float NOT NULL,
+			`currency` varchar(5) NOT NULL,
+			`created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`confirmed` TINYINT NOT NULL DEFAULT '1',
+			`dydo_subscriptions_id` int(11) NOT NULL,
+			PRIMARY KEY (`id`,`dydo_subscriptions_id`),
+			UNIQUE KEY `id` (`id`),
+			UNIQUE KEY `dydo_donations_transaction_id_uindex` (`transaction_id`),
+			KEY `fk_dydo_donations_dydo_subscriptions1_idx` (`dydo_subscriptions_id`),
+			CONSTRAINT `fk_dydo_donations_dydo_subscriptions1` FOREIGN KEY (`dydo_subscriptions_id`) REFERENCES `dydo_subscriptions` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+			DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_products</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_products</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, dydo_subscription_donations</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_tables` (`table_schema`, `table_name`, `table_type`, `engine`, `row_format`, `table_collation`, `table_comment`) VALUES (?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, id, 1, , NO, int, , , 10, 0, , , , int(11), , auto_increment, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, transaction_id, 2, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, amount, 3, , NO, float, , , 12, , , , , float, , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, currency, 4, , NO, varchar, 5, 20, , , , utf8mb4, utf8mb4_general_ci, varchar(5), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, created_at, 5, CURRENT_TIMESTAMP, NO, datetime, , , , , 0, , , datetime, , DEFAULT_GENERATED, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, updated_at, 6, CURRENT_TIMESTAMP, NO, datetime, , , , , 0, , , datetime, , DEFAULT_GENERATED, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, confirmed, 7, 1, NO, tinyint, , , 3, 0, , , , tinyint, , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, dydo_subscriptions_id, 8, , NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
 <li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cart66_products, start_recurring_unit, 38, , NO, varchar, 50, 200, , , , utf8mb4, utf8mb4_general_ci, varchar(50), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
 					WHERE table_schema = ?
 					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_cart66_products_68600f197b0c0` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `name` TEXT COLLATE NOCASE NOT NULL,
-  `item_number` TEXT COLLATE NOCASE NOT NULL,
-  `price` REAL NOT NULL,
-  `options_1` TEXT COLLATE NOCASE NOT NULL,
-  `options_2` TEXT COLLATE NOCASE NOT NULL,
-  `custom` TEXT COLLATE NOCASE NOT NULL DEFAULT 'none',
-  `custom_desc` TEXT COLLATE NOCASE NOT NULL,
-  `taxable` INTEGER NOT NULL,
-  `shipped` INTEGER NOT NULL,
-  `weight` REAL NOT NULL DEFAULT '0',
-  `download_path` TEXT COLLATE NOCASE,
-  `s3_bucket` TEXT COLLATE NOCASE NOT NULL,
-  `s3_file` TEXT COLLATE NOCASE NOT NULL,
-  `download_limit` INTEGER DEFAULT '0',
-  `spreedly_subscription_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
-  `allow_cancel` INTEGER DEFAULT '1',
-  `is_paypal_subscription` INTEGER DEFAULT '0',
-  `max_quantity` INTEGER NOT NULL DEFAULT '0',
-  `gravity_form_id` INTEGER NOT NULL DEFAULT '0',
-  `gravity_form_qty_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '0',
-  `gravity_form_pricing` INTEGER NOT NULL DEFAULT '0',
-  `feature_level` TEXT COLLATE NOCASE NOT NULL,
-  `setup_fee` REAL NOT NULL,
-  `billing_interval` INTEGER NOT NULL,
-  `billing_interval_unit` TEXT COLLATE NOCASE NOT NULL,
-  `billing_cycles` INTEGER NOT NULL,
-  `offer_trial` INTEGER NOT NULL DEFAULT '0',
-  `trial_period` INTEGER NOT NULL,
-  `trial_period_unit` TEXT COLLATE NOCASE NOT NULL,
-  `trial_price` REAL NOT NULL,
-  `trial_cycles` INTEGER NOT NULL DEFAULT '0',
-  `start_recurring_number` INTEGER NOT NULL DEFAULT '1',
-  `start_recurring_unit` TEXT COLLATE NOCASE NOT NULL,
-  `price_description` TEXT COLLATE NOCASE NOT NULL,
-  `is_membership_product` INTEGER NOT NULL DEFAULT '0',
-  `lifetime_membership` INTEGER NOT NULL DEFAULT '0',
-  `start_recurring_unit` TEXT COLLATE NOCASE NOT NULL
-) STRICT | (no parameters)</li>
+					AND column_name IN (?,?)
+				 | parameters: database_name_here, dydo_subscription_donations, id, dydo_subscriptions_id</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, 0, database_name_here, PRIMARY, 1, id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, 0, database_name_here, PRIMARY, 2, dydo_subscriptions_id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_table_constraints` (`table_schema`, `table_name`, `constraint_schema`, `constraint_name`, `constraint_type`) VALUES (?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, database_name_here, PRIMARY, PRIMARY KEY</li>
+<li>Executing: 
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET (column_key, is_nullable) = (
+					SELECT
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(s.non_unique = 0 AND s.seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(s.seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END,
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'NO'
+							ELSE c.is_nullable
+						END
+					FROM `_wp_sqlite_mysql_information_schema_statistics` AS s
+					WHERE s.table_schema = c.table_schema
+					AND s.table_name = c.table_name
+					AND s.column_name = c.column_name
+				)
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+			 | parameters: database_name_here, dydo_subscription_donations</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, dydo_subscription_donations, id</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, 0, database_name_here, id, 1, id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_table_constraints` (`table_schema`, `table_name`, `constraint_schema`, `constraint_name`, `constraint_type`) VALUES (?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, database_name_here, id, UNIQUE</li>
+<li>Executing: 
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET (column_key, is_nullable) = (
+					SELECT
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(s.non_unique = 0 AND s.seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(s.seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END,
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'NO'
+							ELSE c.is_nullable
+						END
+					FROM `_wp_sqlite_mysql_information_schema_statistics` AS s
+					WHERE s.table_schema = c.table_schema
+					AND s.table_name = c.table_name
+					AND s.column_name = c.column_name
+				)
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+			 | parameters: database_name_here, dydo_subscription_donations</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, dydo_subscription_donations, transaction_id</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, 0, database_name_here, dydo_donations_transaction_id_uindex, 1, transaction_id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_table_constraints` (`table_schema`, `table_name`, `constraint_schema`, `constraint_name`, `constraint_type`) VALUES (?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, database_name_here, dydo_donations_transaction_id_uindex, UNIQUE</li>
+<li>Executing: 
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET (column_key, is_nullable) = (
+					SELECT
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(s.non_unique = 0 AND s.seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(s.seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END,
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'NO'
+							ELSE c.is_nullable
+						END
+					FROM `_wp_sqlite_mysql_information_schema_statistics` AS s
+					WHERE s.table_schema = c.table_schema
+					AND s.table_name = c.table_name
+					AND s.column_name = c.column_name
+				)
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+			 | parameters: database_name_here, dydo_subscription_donations</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, dydo_subscription_donations, dydo_subscriptions_id</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscription_donations, 1, database_name_here, fk_dydo_donations_dydo_subscriptions1_idx, 1, dydo_subscriptions_id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET (column_key, is_nullable) = (
+					SELECT
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(s.non_unique = 0 AND s.seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(s.seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END,
+						CASE
+							WHEN MAX(s.index_name = 'PRIMARY') THEN 'NO'
+							ELSE c.is_nullable
+						END
+					FROM `_wp_sqlite_mysql_information_schema_statistics` AS s
+					WHERE s.table_schema = c.table_schema
+					AND s.table_name = c.table_name
+					AND s.column_name = c.column_name
+				)
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+			 | parameters: database_name_here, dydo_subscription_donations</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: start_recurring_unit
+FOREIGN KEY and CHECK constraints are not supported yet.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('alter table `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('alter table `wp...')
-#3 /wordpress/wp-content/plugins/cart66-lite/models/Cart66.php(13): WP_SQLite_DB->query('alter table `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart66->install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart66...', false)
-#8 /internal/eval.php(20): activate_plugin('cart66-lite/car...')
-#9 {main}</pre>
- for query alter table `wp_cart66_products` add column `start_recurring_unit` varchar(50) not null made by activate_plugin, do_action('activate_cart66-lite/cart66.php'), WP_Hook->do_action, WP_Hook->apply_filters, Cart66->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[28-Jun-2025 15:49:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/dynamic-donations/includes/db/class-dydo-db.php(116): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/dynamic-donations/includes/db/class-dydo-db.php(8): DyDo_DB::create_table()
+#6 /wordpress/wp-content/plugins/dynamic-donations/includes/class-dydo-activator.php(9): DyDo_DB::create_tables()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): DyDo_Activator::activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dynami...', false)
+#11 /internal/eval.php(20): activate_plugin('dynamic-donatio...')
+#12 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `dydo_subscription_donations` (
+			`id` int(11) NOT NULL AUTO_INCREMENT,
+			`transaction_id` varchar(255) NOT NULL,
+			`amount` float NOT NULL,
+			`currency` varchar(5) NOT NULL,
+			`created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`confirmed` TINYINT NOT NULL DEFAULT '1',
+			`dydo_subscriptions_id` int(11) NOT NULL,
+			PRIMARY KEY (`id`,`dydo_subscriptions_id`),
+			UNIQUE KEY `id` (`id`),
+			UNIQUE KEY `dydo_donations_transaction_id_uindex` (`transaction_id`),
+			KEY `fk_dydo_donations_dydo_subscriptions1_idx` (`dydo_subscriptions_id`),
+			CONSTRAINT `fk_dydo_donations_dydo_subscriptions1` FOREIGN KEY (`dydo_subscriptions_id`) REFERENCES `dydo_subscriptions` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+			DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_dynamic-donations/dydo.php'), WP_Hook->do_action, WP_Hook->apply_filters, DyDo_Activator::activate, DyDo_DB::create_tables, DyDo_DB::create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-Jun-2025 23:26:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>alter table `wp_cart66_products` add column `price_description` varchar(255) not null</p>
+<p>CREATE VIEW `dydo_donations` AS
+				SELECT 
+					`donations`.`user_id` AS `user_id`,
+					`donations`.`subscription_id` AS `subscription_id`,
+					`donations`.`subscription_base_amount` AS `subscription_base_amount`,
+					`donations`.`next_payment_attempt` AS `next_payment_attempt`,					
+					`donations`.`customer_id` AS `customer_id`,
+					`donations`.`transaction_id` AS `transaction_id`,
+					`donations`.`amount` AS `amount`,
+					`donations`. `currency` AS `currency`,
+					`donations`.`type` AS `type`,
+					`donations`.`created_at` AS `created_at`,
+					`donations`.`updated_at` AS `updated_at`,
+					`donations`.`active` AS `active`,
+					`dg`.`payment_gateway` AS `payment_gateway`
+				FROM
+					(
+						(
+							(SELECT 
+								CONVERT('recurring' USING utf8mb4) AS `type` ,
+								`ds`.`subscription_id` AS `subscription_id`,
+								`ds`.`amount` AS `subscription_base_amount`,
+								`ds`.`next_payment_attempt` AS `next_payment_attempt`,
+								`ds`.`user_id` AS `user_id`,
+								`ds`.`customer_id` AS `customer_id`,
+								`dsd`.`transaction_id` AS `transaction_id`,
+								`dsd`.`created_at` AS `created_at`,
+								`dsd`.`updated_at` AS `updated_at`,
+								`ds`.`active` AS `active`,
+								`ds`.`dydo_gateways_id` AS `dydo_gateways_id`,
+								`dsd`.`amount` AS `amount`,
+					   			`dsd`. `currency` AS `currency`
+							FROM
+							(`dydo_subscriptions` `ds`
+								JOIN `dydo_subscription_donations` `dsd` ON ((`ds`.`id` = `dsd`.`dydo_subscriptions_id`)))) UNION ALL 
+					  		SELECT 
+							  	CONVERT('onetime' USING utf8mb4) AS `type`,
+								'' AS `subscription_id`,
+								0 AS `subscription_base_amount`,
+								''  AS `next_payment_attempt`,
+								`dod`.`user_id` AS `user_id`,
+								`dod`.`customer_id` AS `customer_id`,
+								`dod`.`transaction_id` AS `transaction_id`,
+								`dod`.`created_at` AS `created_at`,
+								`dod`.`updated_at` AS `updated_at`,
+								0 AS `active`,
+								`dod`.`dydo_gateways_id` AS `dydo_gateways_id`,
+								`dod`.`amount` AS `amount`,
+								`dod`. `currency` AS `currency`
+							FROM `dydo_onetime_donations` `dod` WHERE confirmed =1) `donations`
+					JOIN `dydo_gateways` `dg` ON ((`dg`.`id` = `donations`.`dydo_gateways_id`)
+					)
+				)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_products</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_products</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cart66_products, price_description, 38, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_cart66_products_68600f197e770` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `name` TEXT COLLATE NOCASE NOT NULL,
-  `item_number` TEXT COLLATE NOCASE NOT NULL,
-  `price` REAL NOT NULL,
-  `options_1` TEXT COLLATE NOCASE NOT NULL,
-  `options_2` TEXT COLLATE NOCASE NOT NULL,
-  `custom` TEXT COLLATE NOCASE NOT NULL DEFAULT 'none',
-  `custom_desc` TEXT COLLATE NOCASE NOT NULL,
-  `taxable` INTEGER NOT NULL,
-  `shipped` INTEGER NOT NULL,
-  `weight` REAL NOT NULL DEFAULT '0',
-  `download_path` TEXT COLLATE NOCASE,
-  `s3_bucket` TEXT COLLATE NOCASE NOT NULL,
-  `s3_file` TEXT COLLATE NOCASE NOT NULL,
-  `download_limit` INTEGER DEFAULT '0',
-  `spreedly_subscription_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
-  `allow_cancel` INTEGER DEFAULT '1',
-  `is_paypal_subscription` INTEGER DEFAULT '0',
-  `max_quantity` INTEGER NOT NULL DEFAULT '0',
-  `gravity_form_id` INTEGER NOT NULL DEFAULT '0',
-  `gravity_form_qty_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '0',
-  `gravity_form_pricing` INTEGER NOT NULL DEFAULT '0',
-  `feature_level` TEXT COLLATE NOCASE NOT NULL,
-  `setup_fee` REAL NOT NULL,
-  `billing_interval` INTEGER NOT NULL,
-  `billing_interval_unit` TEXT COLLATE NOCASE NOT NULL,
-  `billing_cycles` INTEGER NOT NULL,
-  `offer_trial` INTEGER NOT NULL DEFAULT '0',
-  `trial_period` INTEGER NOT NULL,
-  `trial_period_unit` TEXT COLLATE NOCASE NOT NULL,
-  `trial_price` REAL NOT NULL,
-  `trial_cycles` INTEGER NOT NULL DEFAULT '0',
-  `start_recurring_number` INTEGER NOT NULL DEFAULT '1',
-  `start_recurring_unit` TEXT COLLATE NOCASE NOT NULL,
-  `price_description` TEXT COLLATE NOCASE NOT NULL,
-  `is_membership_product` INTEGER NOT NULL DEFAULT '0',
-  `lifetime_membership` INTEGER NOT NULL DEFAULT '0',
-  `price_description` TEXT COLLATE NOCASE NOT NULL
-) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: price_description
+MySQL query not supported. Cause: statement type: "createStatement" > "createView"
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('alter table `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('alter table `wp...')
-#3 /wordpress/wp-content/plugins/cart66-lite/models/Cart66.php(13): WP_SQLite_DB->query('alter table `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart66->install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart66...', false)
-#8 /internal/eval.php(20): activate_plugin('cart66-lite/car...')
-#9 {main}</pre>
- for query alter table `wp_cart66_products` add column `price_description` varchar(255) not null made by activate_plugin, do_action('activate_cart66-lite/cart66.php'), WP_Hook->do_action, WP_Hook->apply_filters, Cart66->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[28-Jun-2025 15:49:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(887): WP_SQLite_Driver->new_not_supported_exception('statement type:...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE VIEW `dy...')
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE VIEW `dy...')
+#4 /wordpress/wp-content/plugins/dynamic-donations/includes/db/class-dydo-db.php(156): WP_SQLite_DB->query('CREATE VIEW `dy...')
+#5 /wordpress/wp-content/plugins/dynamic-donations/includes/db/class-dydo-db.php(8): DyDo_DB::create_table()
+#6 /wordpress/wp-content/plugins/dynamic-donations/includes/class-dydo-activator.php(9): DyDo_DB::create_tables()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): DyDo_Activator::activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dynami...', false)
+#11 /internal/eval.php(20): activate_plugin('dynamic-donatio...')
+#12 {main}</pre>
+ for query CREATE VIEW `dydo_donations` AS
+				SELECT 
+					`donations`.`user_id` AS `user_id`,
+					`donations`.`subscription_id` AS `subscription_id`,
+					`donations`.`subscription_base_amount` AS `subscription_base_amount`,
+					`donations`.`next_payment_attempt` AS `next_payment_attempt`,					
+					`donations`.`customer_id` AS `customer_id`,
+					`donations`.`transaction_id` AS `transaction_id`,
+					`donations`.`amount` AS `amount`,
+					`donations`. `currency` AS `currency`,
+					`donations`.`type` AS `type`,
+					`donations`.`created_at` AS `created_at`,
+					`donations`.`updated_at` AS `updated_at`,
+					`donations`.`active` AS `active`,
+					`dg`.`payment_gateway` AS `payment_gateway`
+				FROM
+					(
+						(
+							(SELECT 
+								CONVERT('recurring' USING utf8mb4) AS `type` ,
+								`ds`.`subscription_id` AS `subscription_id`,
+								`ds`.`amount` AS `subscription_base_amount`,
+								`ds`.`next_payment_attempt` AS `next_payment_attempt`,
+								`ds`.`user_id` AS `user_id`,
+								`ds`.`customer_id` AS `customer_id`,
+								`dsd`.`transaction_id` AS `transaction_id`,
+								`dsd`.`created_at` AS `created_at`,
+								`dsd`.`updated_at` AS `updated_at`,
+								`ds`.`active` AS `active`,
+								`ds`.`dydo_gateways_id` AS `dydo_gateways_id`,
+								`dsd`.`amount` AS `amount`,
+					   			`dsd`. `currency` AS `currency`
+							FROM
+							(`dydo_subscriptions` `ds`
+								JOIN `dydo_subscription_donations` `dsd` ON ((`ds`.`id` = `dsd`.`dydo_subscriptions_id`)))) UNION ALL 
+					  		SELECT 
+							  	CONVERT('onetime' USING utf8mb4) AS `type`,
+								'' AS `subscription_id`,
+								0 AS `subscription_base_amount`,
+								''  AS `next_payment_attempt`,
+								`dod`.`user_id` AS `user_id`,
+								`dod`.`customer_id` AS `customer_id`,
+								`dod`.`transaction_id` AS `transaction_id`,
+								`dod`.`created_at` AS `created_at`,
+								`dod`.`updated_at` AS `updated_at`,
+								0 AS `active`,
+								`dod`.`dydo_gateways_id` AS `dydo_gateways_id`,
+								`dod`.`amount` AS `amount`,
+								`dod`. `currency` AS `currency`
+							FROM `dydo_onetime_donations` `dod` WHERE confirmed =1) `donations`
+					JOIN `dydo_gateways` `dg` ON ((`dg`.`id` = `donations`.`dydo_gateways_id`)
+					)
+				) made by activate_plugin, do_action('activate_dynamic-donations/dydo.php'), WP_Hook->do_action, WP_Hook->apply_filters, DyDo_Activator::activate, DyDo_DB::create_tables, DyDo_DB::create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-Jun-2025 23:26:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
--- Upgrading to Cart66 1.0.8
-
-alter table `wp_cart66_products` add column `is_membership_product` tinyint(1) not null default 0</p>
+<p>ALTER TABLE dydo_subscriptions ADD COLUMN `start_date` int(20) NOT NULL DEFAULT 0</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_products</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: dydo_subscriptions</li>
 <li>Executing: SELECT
 					COLUMN_NAME,
 					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_products</li>
+				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, dydo_subscriptions</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: dydo_subscriptions</li>
 <li>Executing: 
 				SELECT MAX(ordinal_position)
 				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cart66_products, is_membership_product, 38, 0, NO, tinyint, , , 3, 0, , , , tinyint(1), , , select,insert,update,references, , , </li>
+			 | parameters: database_name_here, dydo_subscriptions</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, dydo_subscriptions, start_date, 1, 0, NO, int, , , 10, 0, , , , int(20), , , select,insert,update,references, , , </li>
 <li>Executing: PRAGMA foreign_keys | (no parameters)</li>
 <li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
 <li>Executing: 
@@ -428,642 +745,14 @@ alter table `wp_cart66_products` add column `is_membership_product` tinyint(1) n
 				WHERE table_type = 'BASE TABLE'
 				AND table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_cart66_products_68600f198be48` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `name` TEXT COLLATE NOCASE NOT NULL,
-  `item_number` TEXT COLLATE NOCASE NOT NULL,
-  `price` REAL NOT NULL,
-  `options_1` TEXT COLLATE NOCASE NOT NULL,
-  `options_2` TEXT COLLATE NOCASE NOT NULL,
-  `custom` TEXT COLLATE NOCASE NOT NULL DEFAULT 'none',
-  `custom_desc` TEXT COLLATE NOCASE NOT NULL,
-  `taxable` INTEGER NOT NULL,
-  `shipped` INTEGER NOT NULL,
-  `weight` REAL NOT NULL DEFAULT '0',
-  `download_path` TEXT COLLATE NOCASE,
-  `s3_bucket` TEXT COLLATE NOCASE NOT NULL,
-  `s3_file` TEXT COLLATE NOCASE NOT NULL,
-  `download_limit` INTEGER DEFAULT '0',
-  `spreedly_subscription_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
-  `allow_cancel` INTEGER DEFAULT '1',
-  `is_paypal_subscription` INTEGER DEFAULT '0',
-  `max_quantity` INTEGER NOT NULL DEFAULT '0',
-  `gravity_form_id` INTEGER NOT NULL DEFAULT '0',
-  `gravity_form_qty_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '0',
-  `gravity_form_pricing` INTEGER NOT NULL DEFAULT '0',
-  `feature_level` TEXT COLLATE NOCASE NOT NULL,
-  `setup_fee` REAL NOT NULL,
-  `billing_interval` INTEGER NOT NULL,
-  `billing_interval_unit` TEXT COLLATE NOCASE NOT NULL,
-  `billing_cycles` INTEGER NOT NULL,
-  `offer_trial` INTEGER NOT NULL DEFAULT '0',
-  `trial_period` INTEGER NOT NULL,
-  `trial_period_unit` TEXT COLLATE NOCASE NOT NULL,
-  `trial_price` REAL NOT NULL,
-  `trial_cycles` INTEGER NOT NULL DEFAULT '0',
-  `start_recurring_number` INTEGER NOT NULL DEFAULT '1',
-  `start_recurring_unit` TEXT COLLATE NOCASE NOT NULL,
-  `price_description` TEXT COLLATE NOCASE NOT NULL,
-  `is_membership_product` INTEGER NOT NULL DEFAULT '0',
-  `lifetime_membership` INTEGER NOT NULL DEFAULT '0',
-  `is_membership_product` INTEGER NOT NULL DEFAULT '0'
-) STRICT | (no parameters)</li>
+			 | parameters: database_name_here, dydo_subscriptions</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: is_membership_product
+Table 'dydo_subscriptions' doesn't exist
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n-- Upgrading t...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n-- Upgrading t...')
-#3 /wordpress/wp-content/plugins/cart66-lite/models/Cart66.php(13): WP_SQLite_DB->query('\n-- Upgrading t...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart66->install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart66...', false)
-#8 /internal/eval.php(20): activate_plugin('cart66-lite/car...')
-#9 {main}</pre>
- for query 
--- Upgrading to Cart66 1.0.8
-
-alter table `wp_cart66_products` add column `is_membership_product` tinyint(1) not null default 0 made by activate_plugin, do_action('activate_cart66-lite/cart66.php'), WP_Hook->do_action, WP_Hook->apply_filters, Cart66->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[28-Jun-2025 15:49:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>alter table `wp_cart66_products` add column `lifetime_membership` tinyint(1) not null default 0</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_products</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_products</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cart66_products, lifetime_membership, 38, 0, NO, tinyint, , , 3, 0, , , , tinyint(1), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_cart66_products_68600f198d9a0` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `name` TEXT COLLATE NOCASE NOT NULL,
-  `item_number` TEXT COLLATE NOCASE NOT NULL,
-  `price` REAL NOT NULL,
-  `options_1` TEXT COLLATE NOCASE NOT NULL,
-  `options_2` TEXT COLLATE NOCASE NOT NULL,
-  `custom` TEXT COLLATE NOCASE NOT NULL DEFAULT 'none',
-  `custom_desc` TEXT COLLATE NOCASE NOT NULL,
-  `taxable` INTEGER NOT NULL,
-  `shipped` INTEGER NOT NULL,
-  `weight` REAL NOT NULL DEFAULT '0',
-  `download_path` TEXT COLLATE NOCASE,
-  `s3_bucket` TEXT COLLATE NOCASE NOT NULL,
-  `s3_file` TEXT COLLATE NOCASE NOT NULL,
-  `download_limit` INTEGER DEFAULT '0',
-  `spreedly_subscription_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
-  `allow_cancel` INTEGER DEFAULT '1',
-  `is_paypal_subscription` INTEGER DEFAULT '0',
-  `max_quantity` INTEGER NOT NULL DEFAULT '0',
-  `gravity_form_id` INTEGER NOT NULL DEFAULT '0',
-  `gravity_form_qty_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '0',
-  `gravity_form_pricing` INTEGER NOT NULL DEFAULT '0',
-  `feature_level` TEXT COLLATE NOCASE NOT NULL,
-  `setup_fee` REAL NOT NULL,
-  `billing_interval` INTEGER NOT NULL,
-  `billing_interval_unit` TEXT COLLATE NOCASE NOT NULL,
-  `billing_cycles` INTEGER NOT NULL,
-  `offer_trial` INTEGER NOT NULL DEFAULT '0',
-  `trial_period` INTEGER NOT NULL,
-  `trial_period_unit` TEXT COLLATE NOCASE NOT NULL,
-  `trial_price` REAL NOT NULL,
-  `trial_cycles` INTEGER NOT NULL DEFAULT '0',
-  `start_recurring_number` INTEGER NOT NULL DEFAULT '1',
-  `start_recurring_unit` TEXT COLLATE NOCASE NOT NULL,
-  `price_description` TEXT COLLATE NOCASE NOT NULL,
-  `is_membership_product` INTEGER NOT NULL DEFAULT '0',
-  `lifetime_membership` INTEGER NOT NULL DEFAULT '0',
-  `lifetime_membership` INTEGER NOT NULL DEFAULT '0'
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: lifetime_membership
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('alter table `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('alter table `wp...')
-#3 /wordpress/wp-content/plugins/cart66-lite/models/Cart66.php(13): WP_SQLite_DB->query('alter table `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart66->install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart66...', false)
-#8 /internal/eval.php(20): activate_plugin('cart66-lite/car...')
-#9 {main}</pre>
- for query alter table `wp_cart66_products` add column `lifetime_membership` tinyint(1) not null default 0 made by activate_plugin, do_action('activate_cart66-lite/cart66.php'), WP_Hook->do_action, WP_Hook->apply_filters, Cart66->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[28-Jun-2025 15:49:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>alter table `wp_cart66_products` add column `s3_bucket` varchar(200) not null</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_products</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_products</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cart66_products, s3_bucket, 38, , NO, varchar, 200, 800, , , , utf8mb4, utf8mb4_general_ci, varchar(200), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_cart66_products_68600f1991ff0` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `name` TEXT COLLATE NOCASE NOT NULL,
-  `item_number` TEXT COLLATE NOCASE NOT NULL,
-  `price` REAL NOT NULL,
-  `options_1` TEXT COLLATE NOCASE NOT NULL,
-  `options_2` TEXT COLLATE NOCASE NOT NULL,
-  `custom` TEXT COLLATE NOCASE NOT NULL DEFAULT 'none',
-  `custom_desc` TEXT COLLATE NOCASE NOT NULL,
-  `taxable` INTEGER NOT NULL,
-  `shipped` INTEGER NOT NULL,
-  `weight` REAL NOT NULL DEFAULT '0',
-  `download_path` TEXT COLLATE NOCASE,
-  `s3_bucket` TEXT COLLATE NOCASE NOT NULL,
-  `s3_file` TEXT COLLATE NOCASE NOT NULL,
-  `download_limit` INTEGER DEFAULT '0',
-  `spreedly_subscription_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
-  `allow_cancel` INTEGER DEFAULT '1',
-  `is_paypal_subscription` INTEGER DEFAULT '0',
-  `max_quantity` INTEGER NOT NULL DEFAULT '0',
-  `gravity_form_id` INTEGER NOT NULL DEFAULT '0',
-  `gravity_form_qty_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '0',
-  `gravity_form_pricing` INTEGER NOT NULL DEFAULT '0',
-  `feature_level` TEXT COLLATE NOCASE NOT NULL,
-  `setup_fee` REAL NOT NULL,
-  `billing_interval` INTEGER NOT NULL,
-  `billing_interval_unit` TEXT COLLATE NOCASE NOT NULL,
-  `billing_cycles` INTEGER NOT NULL,
-  `offer_trial` INTEGER NOT NULL DEFAULT '0',
-  `trial_period` INTEGER NOT NULL,
-  `trial_period_unit` TEXT COLLATE NOCASE NOT NULL,
-  `trial_price` REAL NOT NULL,
-  `trial_cycles` INTEGER NOT NULL DEFAULT '0',
-  `start_recurring_number` INTEGER NOT NULL DEFAULT '1',
-  `start_recurring_unit` TEXT COLLATE NOCASE NOT NULL,
-  `price_description` TEXT COLLATE NOCASE NOT NULL,
-  `is_membership_product` INTEGER NOT NULL DEFAULT '0',
-  `lifetime_membership` INTEGER NOT NULL DEFAULT '0',
-  `s3_bucket` TEXT COLLATE NOCASE NOT NULL
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: s3_bucket
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('alter table `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('alter table `wp...')
-#3 /wordpress/wp-content/plugins/cart66-lite/models/Cart66.php(13): WP_SQLite_DB->query('alter table `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart66->install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart66...', false)
-#8 /internal/eval.php(20): activate_plugin('cart66-lite/car...')
-#9 {main}</pre>
- for query alter table `wp_cart66_products` add column `s3_bucket` varchar(200) not null made by activate_plugin, do_action('activate_cart66-lite/cart66.php'), WP_Hook->do_action, WP_Hook->apply_filters, Cart66->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[28-Jun-2025 15:49:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>alter table `wp_cart66_products` add column `s3_file` varchar(200) not null</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_products</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_products</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cart66_products, s3_file, 38, , NO, varchar, 200, 800, , , , utf8mb4, utf8mb4_general_ci, varchar(200), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_cart66_products</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_cart66_products_68600f1993b48` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `name` TEXT COLLATE NOCASE NOT NULL,
-  `item_number` TEXT COLLATE NOCASE NOT NULL,
-  `price` REAL NOT NULL,
-  `options_1` TEXT COLLATE NOCASE NOT NULL,
-  `options_2` TEXT COLLATE NOCASE NOT NULL,
-  `custom` TEXT COLLATE NOCASE NOT NULL DEFAULT 'none',
-  `custom_desc` TEXT COLLATE NOCASE NOT NULL,
-  `taxable` INTEGER NOT NULL,
-  `shipped` INTEGER NOT NULL,
-  `weight` REAL NOT NULL DEFAULT '0',
-  `download_path` TEXT COLLATE NOCASE,
-  `s3_bucket` TEXT COLLATE NOCASE NOT NULL,
-  `s3_file` TEXT COLLATE NOCASE NOT NULL,
-  `download_limit` INTEGER DEFAULT '0',
-  `spreedly_subscription_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
-  `allow_cancel` INTEGER DEFAULT '1',
-  `is_paypal_subscription` INTEGER DEFAULT '0',
-  `max_quantity` INTEGER NOT NULL DEFAULT '0',
-  `gravity_form_id` INTEGER NOT NULL DEFAULT '0',
-  `gravity_form_qty_id` TEXT COLLATE NOCASE NOT NULL DEFAULT '0',
-  `gravity_form_pricing` INTEGER NOT NULL DEFAULT '0',
-  `feature_level` TEXT COLLATE NOCASE NOT NULL,
-  `setup_fee` REAL NOT NULL,
-  `billing_interval` INTEGER NOT NULL,
-  `billing_interval_unit` TEXT COLLATE NOCASE NOT NULL,
-  `billing_cycles` INTEGER NOT NULL,
-  `offer_trial` INTEGER NOT NULL DEFAULT '0',
-  `trial_period` INTEGER NOT NULL,
-  `trial_period_unit` TEXT COLLATE NOCASE NOT NULL,
-  `trial_price` REAL NOT NULL,
-  `trial_cycles` INTEGER NOT NULL DEFAULT '0',
-  `start_recurring_number` INTEGER NOT NULL DEFAULT '1',
-  `start_recurring_unit` TEXT COLLATE NOCASE NOT NULL,
-  `price_description` TEXT COLLATE NOCASE NOT NULL,
-  `is_membership_product` INTEGER NOT NULL DEFAULT '0',
-  `lifetime_membership` INTEGER NOT NULL DEFAULT '0',
-  `s3_file` TEXT COLLATE NOCASE NOT NULL
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: s3_file
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('alter table `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('alter table `wp...')
-#3 /wordpress/wp-content/plugins/cart66-lite/models/Cart66.php(13): WP_SQLite_DB->query('alter table `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart66->install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart66...', false)
-#8 /internal/eval.php(20): activate_plugin('cart66-lite/car...')
-#9 {main}</pre>
- for query alter table `wp_cart66_products` add column `s3_file` varchar(200) not null made by activate_plugin, do_action('activate_cart66-lite/cart66.php'), WP_Hook->do_action, WP_Hook->apply_filters, Cart66->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[28-Jun-2025 15:49:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>alter table `wp_cart66_account_subscriptions` add column `lifetime` tinyint(1) not null default 0</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_account_subscriptions</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cart66_account_subscriptions</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_account_subscriptions</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_account_subscriptions</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cart66_account_subscriptions, lifetime, 21, 0, NO, tinyint, , , 3, 0, , , , tinyint(1), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_account_subscriptions</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_cart66_account_subscriptions</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_cart66_account_subscriptions</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_cart66_account_subscriptions_68600f19975e0` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `account_id` INTEGER NOT NULL,
-  `billing_first_name` TEXT COLLATE NOCASE,
-  `billing_last_name` TEXT COLLATE NOCASE,
-  `feature_level` TEXT COLLATE NOCASE NOT NULL,
-  `subscription_plan_name` TEXT COLLATE NOCASE NOT NULL,
-  `paypal_billing_profile_id` TEXT COLLATE NOCASE NOT NULL,
-  `status` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
-  `active_until` TEXT COLLATE NOCASE NOT NULL,
-  `lifetime` INTEGER NOT NULL DEFAULT '0',
-  `subscriber_token` TEXT COLLATE NOCASE NOT NULL,
-  `created_at` TEXT COLLATE NOCASE NOT NULL,
-  `updated_at` TEXT COLLATE NOCASE NOT NULL,
-  `grace_until` TEXT COLLATE NOCASE NOT NULL,
-  `ready_to_renew_since` TEXT COLLATE NOCASE NOT NULL,
-  `ready_to_renew` INTEGER NOT NULL DEFAULT '0',
-  `card_expires_before_next_auto_renew` INTEGER NOT NULL DEFAULT '0',
-  `recurring` INTEGER NOT NULL DEFAULT '0',
-  `active` INTEGER NOT NULL DEFAULT '0',
-  `billing_interval` TEXT COLLATE NOCASE NOT NULL,
-  `lifetime` INTEGER NOT NULL DEFAULT '0'
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: lifetime
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('alter table `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('alter table `wp...')
-#3 /wordpress/wp-content/plugins/cart66-lite/models/Cart66.php(13): WP_SQLite_DB->query('alter table `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart66->install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart66...', false)
-#8 /internal/eval.php(20): activate_plugin('cart66-lite/car...')
-#9 {main}</pre>
- for query alter table `wp_cart66_account_subscriptions` add column `lifetime` tinyint(1) not null default 0 made by activate_plugin, do_action('activate_cart66-lite/cart66.php'), WP_Hook->do_action, WP_Hook->apply_filters, Cart66->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[28-Jun-2025 15:49:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-#add viewed column with all current orders getting a 1
-alter table `wp_cart66_orders` add column `viewed` tinyint(1) not null default '1'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_orders</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cart66_orders</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_orders</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_orders</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cart66_orders, viewed, 36, 1, NO, tinyint, , , 3, 0, , , , tinyint(1), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_orders</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_cart66_orders</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_cart66_orders</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_cart66_orders_68600f1a38658` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `bill_first_name` TEXT COLLATE NOCASE NOT NULL,
-  `bill_last_name` TEXT COLLATE NOCASE NOT NULL,
-  `bill_address` TEXT COLLATE NOCASE NOT NULL,
-  `bill_address2` TEXT COLLATE NOCASE NOT NULL,
-  `bill_city` TEXT COLLATE NOCASE NOT NULL,
-  `bill_state` TEXT COLLATE NOCASE NOT NULL,
-  `bill_country` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
-  `bill_zip` TEXT COLLATE NOCASE NOT NULL,
-  `ship_first_name` TEXT COLLATE NOCASE NOT NULL,
-  `ship_last_name` TEXT COLLATE NOCASE NOT NULL,
-  `ship_address` TEXT COLLATE NOCASE NOT NULL,
-  `ship_address2` TEXT COLLATE NOCASE NOT NULL,
-  `ship_city` TEXT COLLATE NOCASE NOT NULL,
-  `ship_state` TEXT COLLATE NOCASE NOT NULL,
-  `ship_country` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
-  `ship_zip` TEXT COLLATE NOCASE NOT NULL,
-  `phone` TEXT COLLATE NOCASE NOT NULL,
-  `email` TEXT COLLATE NOCASE NOT NULL,
-  `coupon` TEXT COLLATE NOCASE,
-  `discount_amount` REAL NOT NULL,
-  `trans_id` TEXT COLLATE NOCASE NOT NULL,
-  `authorization` TEXT COLLATE NOCASE NOT NULL,
-  `shipping` REAL NOT NULL,
-  `subtotal` REAL NOT NULL,
-  `tax` REAL NOT NULL,
-  `total` REAL NOT NULL,
-  `non_subscription_total` REAL NOT NULL,
-  `ordered_on` TEXT COLLATE NOCASE,
-  `status` TEXT COLLATE NOCASE NOT NULL,
-  `ip` TEXT COLLATE NOCASE NOT NULL,
-  `ouid` TEXT COLLATE NOCASE NOT NULL,
-  `shipping_method` TEXT COLLATE NOCASE,
-  `account_id` INTEGER NOT NULL DEFAULT '0',
-  `viewed` INTEGER NOT NULL DEFAULT '0',
-  `viewed` INTEGER NOT NULL DEFAULT '1'
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: viewed
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n#add viewed co...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n#add viewed co...')
-#3 /wordpress/wp-content/plugins/cart66-lite/models/Cart66.php(13): WP_SQLite_DB->query('\n#add viewed co...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart66->install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart66...', false)
-#8 /internal/eval.php(20): activate_plugin('cart66-lite/car...')
-#9 {main}</pre>
- for query 
-#add viewed column with all current orders getting a 1
-alter table `wp_cart66_orders` add column `viewed` tinyint(1) not null default '1' made by activate_plugin, do_action('activate_cart66-lite/cart66.php'), WP_Hook->do_action, WP_Hook->apply_filters, Cart66->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[28-Jun-2025 15:49:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>alter table `wp_cart66_orders` add column `authorization` varchar(50) not null</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_orders</li>
-<li>Executing: SELECT
-					COLUMN_NAME,
-					LOWER(COLUMN_NAME) AS COLUMN_NAME_LOWERCASE
-				FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cart66_orders</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cart66_orders</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM `_wp_sqlite_mysql_information_schema_columns`
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_orders</li>
-<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cart66_orders, authorization, 38, , NO, varchar, 50, 200, , , , utf8mb4, utf8mb4_general_ci, varchar(50), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM `_wp_sqlite_mysql_information_schema_tables`
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_cart66_orders</li>
-<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_cart66_orders</li>
-<li>Executing: 
-					SELECT *
-					FROM `_wp_sqlite_mysql_information_schema_statistics`
-					WHERE table_schema = ?
-					AND table_name = ?
-					ORDER BY
-						INDEX_NAME = 'PRIMARY' DESC,
-						NON_UNIQUE = '0' DESC,
-						INDEX_TYPE = 'SPATIAL' DESC,
-						INDEX_TYPE = 'BTREE' DESC,
-						INDEX_TYPE = 'FULLTEXT' DESC,
-						ROWID,
-						SEQ_IN_INDEX
-				 | parameters: database_name_here, wp_cart66_orders</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_cart66_orders_68600f1b32c80` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `bill_first_name` TEXT COLLATE NOCASE NOT NULL,
-  `bill_last_name` TEXT COLLATE NOCASE NOT NULL,
-  `bill_address` TEXT COLLATE NOCASE NOT NULL,
-  `bill_address2` TEXT COLLATE NOCASE NOT NULL,
-  `bill_city` TEXT COLLATE NOCASE NOT NULL,
-  `bill_state` TEXT COLLATE NOCASE NOT NULL,
-  `bill_country` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
-  `bill_zip` TEXT COLLATE NOCASE NOT NULL,
-  `ship_first_name` TEXT COLLATE NOCASE NOT NULL,
-  `ship_last_name` TEXT COLLATE NOCASE NOT NULL,
-  `ship_address` TEXT COLLATE NOCASE NOT NULL,
-  `ship_address2` TEXT COLLATE NOCASE NOT NULL,
-  `ship_city` TEXT COLLATE NOCASE NOT NULL,
-  `ship_state` TEXT COLLATE NOCASE NOT NULL,
-  `ship_country` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
-  `ship_zip` TEXT COLLATE NOCASE NOT NULL,
-  `phone` TEXT COLLATE NOCASE NOT NULL,
-  `email` TEXT COLLATE NOCASE NOT NULL,
-  `coupon` TEXT COLLATE NOCASE,
-  `discount_amount` REAL NOT NULL,
-  `trans_id` TEXT COLLA
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3276): WP_SQLite_Driver->new_driver_exception('Table 'dydo_sub...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2859): WP_SQLite_Driver->get_sqlite_create_table_statement(false, 
+Node.js v23.11.0
