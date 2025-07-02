@@ -53,15 +53,6 @@
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | pretty-shortlinks | [View logs](/logs/plugins/p/pretty-shortlinks/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | pretty-shortlinks | [View logs](/logs/plugins/p/pretty-shortlinks/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | pretty-shortlinks | [View logs](/logs/plugins/p/pretty-shortlinks/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | w3c-website-validator-automated | [View logs](/logs/plugins/w/w3c-website-validator-automated/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | w3c-website-validator-automated | [View logs](/logs/plugins/w/w3c-website-validator-automated/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | w3c-website-validator-automated | [View logs](/logs/plugins/w/w3c-website-validator-automated/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | w3c-website-validator-automated | [View logs](/logs/plugins/w/w3c-website-validator-automated/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | asyncify-boot | w3c-website-validator-automated | [View logs](/logs/plugins/w/w3c-website-validator-automated/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | jspi-boot | w3c-website-validator-automated | [View logs](/logs/plugins/w/w3c-website-validator-automated/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | w3c-website-validator-automated | [View logs](/logs/plugins/w/w3c-website-validator-automated/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | w3c-website-validator-automated | [View logs](/logs/plugins/w/w3c-website-validator-automated/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | w3c-website-validator-automated | [View logs](/logs/plugins/w/w3c-website-validator-automated/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-job-portal | [View logs](/logs/plugins/w/wp-job-portal/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wj_portal_emailtemplates_config. | ast-sqlite-boot | wp-job-portal | [View logs](/logs/plugins/w/wp-job-portal/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wp-job-portal | [View logs](/logs/plugins/w/wp-job-portal/error.json) |
