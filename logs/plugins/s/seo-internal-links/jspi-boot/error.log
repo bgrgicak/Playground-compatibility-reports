@@ -2,24 +2,162 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [04-Jul-2025 12:53:50 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "activate_b2reader" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+Error: [06-Jul-2025 04:41:30 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>sharing-club</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-Jul-2025 04:41:40 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>sharing-club</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-Jul-2025 04:41:49 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>sharing-club</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-Jul-2025 04:41:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `instance_id` FROM wp_woocommerce_shipping_zone_methods
+			WHERE `method_id` = 'shipping_nova_poshta_for_woocommerce' AND `is_enabled` = 1 LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `instance_id` FROM `wp_woocommerce_shipping_zone_methods` WHERE `method_id` = 'shipping_nova_poshta_for_woocommerce' AND `is_enabled` = 1 LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_shipping_zone_methods
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT `instanc...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT `instanc...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `instanc...')
+#4 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/WooCommerce/Shipping/Shipping.php(114): wpdb->get_var('SELECT `instanc...')
+#5 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/WooCommerce/Shipping/Shipping.php(58): NovaPoshta\WooCommerce\Shipping\Shipping->is_active()
+#6 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/WooCommerce/Shipping/Shipping.php(50): NovaPoshta\WooCommerce\Shipping\Shipping->notices()
+#7 [internal function]: NovaPoshta\WooCommerce\Shipping\Shipping->__construct(Object(NovaPoshta\Notice\Notice), Object(NovaPoshta\Cache\FactoryCache))
+#8 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/vendor_prefixed/Injector.php(309): ReflectionClass->newInstanceArgs(Array)
+#9 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/vendor_prefixed/Injector.php(281): NovaPoshta\Vendor\Auryn\Injector->provisionInstance('NovaPoshta\\WooC...', 'novaposhta\\wooc...', Array)
+#10 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/Main.php(229): NovaPoshta\Vendor\Auryn\Injector->make('NovaPoshta\\WooC...')
+#11 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/Main.php(169): NovaPoshta\Main->make('WooCommerce\\Shi...')
+#12 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/Main.php(107): NovaPoshta\Main->define_hooks_without_api_key()
+#13 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/Main.php(94): NovaPoshta\Main->init()
+#14 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/shipping-nova-poshta-for-woocommerce.php(109): NovaPoshta\Main::get_instance()
+#15 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/shipping-nova-poshta-for-woocommerce.php(119): nova_poshta()
+#16 /wordpress/wp-includes/class-wp-hook.php(324): nova_poshta_activate(false)
+#17 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#18 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#19 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shippi...', false)
+#20 /internal/eval.php(20): activate_plugin('shipping-nova-p...')
+#21 {main}</pre>
+ for query SELECT `instance_id` FROM wp_woocommerce_shipping_zone_methods
+			WHERE `method_id` = 'shipping_nova_poshta_for_woocommerce' AND `is_enabled` = 1 LIMIT 1 made by activate_plugin, do_action('activate_shipping-nova-poshta-for-woocommerce/shipping-nova-poshta-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, nova_poshta_activate, nova_poshta, NovaPoshta\Main::get_instance, NovaPoshta\Main->init, NovaPoshta\Main->define_hooks_without_api_key, NovaPoshta\Main->make, NovaPoshta\Vendor\Auryn\Injector->make, NovaPoshta\Vendor\Auryn\Injector->provisionInstance, ReflectionClass->newInstanceArgs, NovaPoshta\WooCommerce\Shipping\Shipping->__construct, NovaPoshta\WooCommerce\Shipping\Shipping->notices, NovaPoshta\WooCommerce\Shipping\Shipping->is_active, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Jul-2025 04:42:01 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>shipping-nova-poshta-for-woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-Jul-2025 04:42:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `instance_id` FROM wp_woocommerce_shipping_zone_methods
+			WHERE `method_id` = 'shipping_nova_poshta_for_woocommerce' AND `is_enabled` = 1 LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `instance_id` FROM `wp_woocommerce_shipping_zone_methods` WHERE `method_id` = 'shipping_nova_poshta_for_woocommerce' AND `is_enabled` = 1 LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_shipping_zone_methods
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT `instanc...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT `instanc...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `instanc...')
+#4 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/WooCommerce/Shipping/Shipping.php(114): wpdb->get_var('SELECT `instanc...')
+#5 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/WooCommerce/Shipping/Shipping.php(58): NovaPoshta\WooCommerce\Shipping\Shipping->is_active()
+#6 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/WooCommerce/Shipping/Shipping.php(50): NovaPoshta\WooCommerce\Shipping\Shipping->notices()
+#7 [internal function]: NovaPoshta\WooCommerce\Shipping\Shipping->__construct(Object(NovaPoshta\Notice\Notice), Object(NovaPoshta\Cache\FactoryCache))
+#8 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/vendor_prefixed/Injector.php(309): ReflectionClass->newInstanceArgs(Array)
+#9 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/vendor_prefixed/Injector.php(281): NovaPoshta\Vendor\Auryn\Injector->provisionInstance('NovaPoshta\\WooC...', 'novaposhta\\wooc...', Array)
+#10 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/Main.php(229): NovaPoshta\Vendor\Auryn\Injector->make('NovaPoshta\\WooC...')
+#11 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/Main.php(169): NovaPoshta\Main->make('WooCommerce\\Shi...')
+#12 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/Main.php(107): NovaPoshta\Main->define_hooks_without_api_key()
+#13 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/Main.php(94): NovaPoshta\Main->init()
+#14 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/shipping-nova-poshta-for-woocommerce.php(109): NovaPoshta\Main::get_instance()
+#15 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/shipping-nova-poshta-for-woocommerce.php(119): nova_poshta()
+#16 /wordpress/wp-includes/class-wp-hook.php(324): nova_poshta_activate(false)
+#17 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#18 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#19 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shippi...', false)
+#20 /internal/eval.php(20): activate_plugin('shipping-nova-p...')
+#21 {main}</pre>
+ for query SELECT `instance_id` FROM wp_woocommerce_shipping_zone_methods
+			WHERE `method_id` = 'shipping_nova_poshta_for_woocommerce' AND `is_enabled` = 1 LIMIT 1 made by activate_plugin, do_action('activate_shipping-nova-poshta-for-woocommerce/shipping-nova-poshta-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, nova_poshta_activate, nova_poshta, NovaPoshta\Main::get_instance, NovaPoshta\Main->init, NovaPoshta\Main->define_hooks_without_api_key, NovaPoshta\Main->make, NovaPoshta\Vendor\Auryn\Injector->make, NovaPoshta\Vendor\Auryn\Injector->provisionInstance, ReflectionClass->newInstanceArgs, NovaPoshta\WooCommerce\Shipping\Shipping->__construct, NovaPoshta\WooCommerce\Shipping\Shipping->notices, NovaPoshta\WooCommerce\Shipping\Shipping->is_active, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Jul-2025 04:42:12 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>shipping-nova-poshta-for-woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-Jul-2025 04:42:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `instance_id` FROM wp_woocommerce_shipping_zone_methods
+			WHERE `method_id` = 'shipping_nova_poshta_for_woocommerce' AND `is_enabled` = 1 LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT `instance_id` FROM `wp_woocommerce_shipping_zone_methods` WHERE `method_id` = 'shipping_nova_poshta_for_woocommerce' AND `is_enabled` = 1 LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_shipping_zone_methods
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT `instanc...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT `instanc...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `instanc...')
+#4 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/WooCommerce/Shipping/Shipping.php(114): wpdb->get_var('SELECT `instanc...')
+#5 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/WooCommerce/Shipping/Shipping.php(58): NovaPoshta\WooCommerce\Shipping\Shipping->is_active()
+#6 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/WooCommerce/Shipping/Shipping.php(50): NovaPoshta\WooCommerce\Shipping\Shipping->notices()
+#7 [internal function]: NovaPoshta\WooCommerce\Shipping\Shipping->__construct(Object(NovaPoshta\Notice\Notice), Object(NovaPoshta\Cache\FactoryCache))
+#8 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/vendor_prefixed/Injector.php(309): ReflectionClass->newInstanceArgs(Array)
+#9 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/vendor_prefixed/Injector.php(281): NovaPoshta\Vendor\Auryn\Injector->provisionInstance('NovaPoshta\\WooC...', 'novaposhta\\wooc...', Array)
+#10 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/Main.php(229): NovaPoshta\Vendor\Auryn\Injector->make('NovaPoshta\\WooC...')
+#11 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/Main.php(169): NovaPoshta\Main->make('WooCommerce\\Shi...')
+#12 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/Main.php(107): NovaPoshta\Main->define_hooks_without_api_key()
+#13 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/src/Main.php(94): NovaPoshta\Main->init()
+#14 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/shipping-nova-poshta-for-woocommerce.php(109): NovaPoshta\Main::get_instance()
+#15 /wordpress/wp-content/plugins/shipping-nova-poshta-for-woocommerce/shipping-nova-poshta-for-woocommerce.php(119): nova_poshta()
+#16 /wordpress/wp-includes/class-wp-hook.php(324): nova_poshta_activate(false)
+#17 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#18 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#19 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shippi...', false)
+#20 /internal/eval.php(20): activate_plugin('shipping-nova-p...')
+#21 {main}</pre>
+ for query SELECT `instance_id` FROM wp_woocommerce_shipping_zone_methods
+			WHERE `method_id` = 'shipping_nova_poshta_for_woocommerce' AND `is_enabled` = 1 LIMIT 1 made by activate_plugin, do_action('activate_shipping-nova-poshta-for-woocommerce/shipping-nova-poshta-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, nova_poshta_activate, nova_poshta, NovaPoshta\Main::get_instance, NovaPoshta\Main->init, NovaPoshta\Main->define_hooks_without_api_key, NovaPoshta\Main->make, NovaPoshta\Vendor\Auryn\Injector->make, NovaPoshta\Vendor\Auryn\Injector->provisionInstance, ReflectionClass->newInstanceArgs, NovaPoshta\WooCommerce\Shipping\Shipping->__construct, NovaPoshta\WooCommerce\Shipping\Shipping->notices, NovaPoshta\WooCommerce\Shipping\Shipping->is_active, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Jul-2025 04:42:22 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>shipping-nova-poshta-for-woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-Jul-2025 04:46:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/show-hidden-custom-fields/show-hidden-custom-fields.php:23
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_send-2...', false)
-#3 /internal/eval.php(20): activate_plugin('send-2-my-mail/...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[04-Jul-2025 12:53:54 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "activate_b2reader" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('show-hidden-cus...')
+#2 /internal/eval.php(20): activate_plugin('show-hidden-cus...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/show-hidden-custom-fields/show-hidden-custom-fields.php on line 23
+[06-Jul-2025 04:47:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/show-hidden-custom-fields/show-hidden-custom-fields.php:23
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_send-2...', false)
-#3 /internal/eval.php(20): activate_plugin('send-2-my-mail/...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[04-Jul-2025 12:54:35 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/seo-internal-links/seo-links.php on line 650
-[04-Jul-2025 12:54:41 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/seo-internal-links/seo-links.php on line 650
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('show-hidden-cus...')
+#2 /internal/eval.php(20): activate_plugin('show-hidden-cus...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/show-hidden-custom-fields/show-hidden-custom-fields.php on line 23
+[06-Jul-2025 04:47:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/show-hidden-custom-fields/show-hidden-custom-fields.php:23
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('show-hidden-cus...')
+#2 /internal/eval.php(20): activate_plugin('show-hidden-cus...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/show-hidden-custom-fields/show-hidden-custom-fields.php on line 23
+[06-Jul-2025 04:48:17 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[06-Jul-2025 04:48:18 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[06-Jul-2025 04:48:26 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[06-Jul-2025 04:48:27 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[06-Jul-2025 04:48:36 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[06-Jul-2025 04:48:37 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[06-Jul-2025 04:49:14 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/seo-internal-links/seo-links.php on line 650
+[06-Jul-2025 04:49:22 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/seo-internal-links/seo-links.php on line 650
+[06-Jul-2025 04:49:31 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/seo-internal-links/seo-links.php on line 650
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:325:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
