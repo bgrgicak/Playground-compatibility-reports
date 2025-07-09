@@ -2,135 +2,165 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [08-Jul-2025 03:43:58 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>browserid</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:43:58 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:43:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/browserid/lib/browserid-widget.php:28
+Error: [09-Jul-2025 13:42:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_postmeta (post_id,meta_key,meta_value) 
+SELECT post_id,'brizy_enabled',POSITION('"brizy-use-brizy";b:1;' IN meta_value)>0 FROM wp_postmeta where meta_key='brizy'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_postmeta</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_postmeta</li>
+<li>Executing: SELECT * FROM (SELECT `post_id` , 'brizy_enabled' , POSITION ( '&quot;brizy-use-brizy&quot;;b:1;' IN `meta_value` ) &gt; 0 FROM `wp_postmeta` where `meta_key` = 'brizy') LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: meta_value
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/brizy/admin/migrations/use-editor-migration.php(38): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/brizy/admin/migrations.php(161): Brizy_Admin_Migrations_UseEditorMigration->execute()
+#5 /wordpress/wp-content/plugins/brizy/admin/migrations.php(39): Brizy_Admin_Migrations->upgradeTo('2.6.22')
+#6 /wordpress/wp-content/plugins/brizy/editor.php(141): Brizy_Admin_Migrations->runMigrations('2.6.22')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Brizy_Editor->runMigrations('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(Object(Brizy_MaintenanceMode), Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query INSERT INTO wp_postmeta (post_id,meta_key,meta_value) 
+SELECT post_id,'brizy_enabled',POSITION('"brizy-use-brizy";b:1;' IN meta_value)>0 FROM wp_postmeta where meta_key='brizy' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Brizy_Editor->runMigrations, Brizy_Admin_Migrations->runMigrations, Brizy_Admin_Migrations->upgradeTo, Brizy_Admin_Migrations_UseEditorMigration->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 13:42:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_postmeta (post_id,meta_key,meta_value) 
+SELECT post_id,'brizy_enabled',POSITION('"brizy-use-brizy";b:1;' IN meta_value)>0 FROM wp_postmeta where meta_key='brizy'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_postmeta</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_postmeta</li>
+<li>Executing: SELECT * FROM (SELECT `post_id` , 'brizy_enabled' , POSITION ( '&quot;brizy-use-brizy&quot;;b:1;' IN `meta_value` ) &gt; 0 FROM `wp_postmeta` where `meta_key` = 'brizy') LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: meta_value
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/brizy/admin/migrations/use-editor-migration.php(38): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/brizy/admin/migrations.php(161): Brizy_Admin_Migrations_UseEditorMigration->execute()
+#5 /wordpress/wp-content/plugins/brizy/admin/migrations.php(39): Brizy_Admin_Migrations->upgradeTo('2.6.22')
+#6 /wordpress/wp-content/plugins/brizy/editor.php(141): Brizy_Admin_Migrations->runMigrations('2.6.22')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Brizy_Editor->runMigrations('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(Object(Brizy_MaintenanceMode), Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query INSERT INTO wp_postmeta (post_id,meta_key,meta_value) 
+SELECT post_id,'brizy_enabled',POSITION('"brizy-use-brizy";b:1;' IN meta_value)>0 FROM wp_postmeta where meta_key='brizy' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Brizy_Editor->runMigrations, Brizy_Admin_Migrations->runMigrations, Brizy_Admin_Migrations->upgradeTo, Brizy_Admin_Migrations_UseEditorMigration->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 13:43:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_postmeta (post_id,meta_key,meta_value) 
+SELECT post_id,'brizy_enabled',POSITION('"brizy-use-brizy";b:1;' IN meta_value)>0 FROM wp_postmeta where meta_key='brizy'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_postmeta</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_postmeta</li>
+<li>Executing: SELECT * FROM (SELECT `post_id` , 'brizy_enabled' , POSITION ( '&quot;brizy-use-brizy&quot;;b:1;' IN `meta_value` ) &gt; 0 FROM `wp_postmeta` where `meta_key` = 'brizy') LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: meta_value
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/brizy/admin/migrations/use-editor-migration.php(38): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/brizy/admin/migrations.php(161): Brizy_Admin_Migrations_UseEditorMigration->execute()
+#5 /wordpress/wp-content/plugins/brizy/admin/migrations.php(39): Brizy_Admin_Migrations->upgradeTo('2.6.22')
+#6 /wordpress/wp-content/plugins/brizy/editor.php(141): Brizy_Admin_Migrations->runMigrations('2.6.22')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Brizy_Editor->runMigrations('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(Object(Brizy_MaintenanceMode), Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query INSERT INTO wp_postmeta (post_id,meta_key,meta_value) 
+SELECT post_id,'brizy_enabled',POSITION('"brizy-use-brizy";b:1;' IN meta_value)>0 FROM wp_postmeta where meta_key='brizy' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Brizy_Editor->runMigrations, Brizy_Admin_Migrations->runMigrations, Brizy_Admin_Migrations->upgradeTo, Brizy_Admin_Migrations_UseEditorMigration->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 13:45:14 UTC] PHP Warning:  Undefined array key "asm_B4DelPosts_Class" in /wordpress/wp-content/plugins/before-deleting-the-posts/includes/before-deleting-the-posts.php on line 320
+[09-Jul-2025 13:45:15 UTC] PHP Warning:  Undefined array key "asm_B4DelPosts_Class" in /wordpress/wp-content/plugins/before-deleting-the-posts/includes/before-deleting-the-posts.php on line 320
+[09-Jul-2025 13:45:25 UTC] PHP Warning:  Undefined array key "asm_B4DelPosts_Class" in /wordpress/wp-content/plugins/before-deleting-the-posts/includes/before-deleting-the-posts.php on line 320
+[09-Jul-2025 13:45:26 UTC] PHP Warning:  Undefined array key "asm_B4DelPosts_Class" in /wordpress/wp-content/plugins/before-deleting-the-posts/includes/before-deleting-the-posts.php on line 320
+[09-Jul-2025 13:45:35 UTC] PHP Warning:  Undefined array key "asm_B4DelPosts_Class" in /wordpress/wp-content/plugins/before-deleting-the-posts/includes/before-deleting-the-posts.php on line 320
+[09-Jul-2025 13:45:36 UTC] PHP Warning:  Undefined array key "asm_B4DelPosts_Class" in /wordpress/wp-content/plugins/before-deleting-the-posts/includes/before-deleting-the-posts.php on line 320
+[09-Jul-2025 13:45:46 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/better-analytics/library/DigitalPointBetterAnalytics/Base/Admin.php on line 57
+[09-Jul-2025 13:45:56 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/better-analytics/library/DigitalPointBetterAnalytics/Base/Admin.php on line 57
+[09-Jul-2025 13:46:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/better-analytics/library/DigitalPointBetterAnalytics/Base/Admin.php on line 57
+[09-Jul-2025 13:46:19 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>better-website-performance</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[09-Jul-2025 13:46:29 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>better-website-performance</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[09-Jul-2025 13:46:38 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>better-website-performance</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[09-Jul-2025 13:48:00 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "is_admin" in /wordpress/wp-content/plugins/browser-dns-prefetching/browser-dns-prefetching.php:15
 Stack trace:
-#0 /wordpress/wp-content/plugins/browserid/browserid.php(207): MozillaPersonaWidget->Init()
-#1 /wordpress/wp-content/plugins/browserid/browserid.php(112): MozillaPersona->Init_widget()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): MozillaPersona->Init('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-settings.php(727): do_action('init')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}
-  thrown in /wordpress/wp-content/plugins/browserid/lib/browserid-widget.php on line 28
-[08-Jul-2025 03:44:08 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>browserid</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:44:08 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:44:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/browserid/lib/browserid-widget.php:28
+#0 /wordpress/wp-content/plugins/browser-dns-prefetching/browser-dns-prefetching.php(68): Browser_DNS_Prefetching->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('browser-dns-pre...')
+#3 /internal/eval.php(20): activate_plugin('browser-dns-pre...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/browser-dns-prefetching/browser-dns-prefetching.php on line 15
+[09-Jul-2025 13:48:08 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "is_admin" in /wordpress/wp-content/plugins/browser-dns-prefetching/browser-dns-prefetching.php:15
 Stack trace:
-#0 /wordpress/wp-content/plugins/browserid/browserid.php(207): MozillaPersonaWidget->Init()
-#1 /wordpress/wp-content/plugins/browserid/browserid.php(112): MozillaPersona->Init_widget()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): MozillaPersona->Init('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-settings.php(727): do_action('init')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}
-  thrown in /wordpress/wp-content/plugins/browserid/lib/browserid-widget.php on line 28
-[08-Jul-2025 03:44:17 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>browserid</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:44:17 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:44:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/browserid/lib/browserid-widget.php:28
+#0 /wordpress/wp-content/plugins/browser-dns-prefetching/browser-dns-prefetching.php(68): Browser_DNS_Prefetching->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('browser-dns-pre...')
+#3 /internal/eval.php(20): activate_plugin('browser-dns-pre...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/browser-dns-prefetching/browser-dns-prefetching.php on line 15
+[09-Jul-2025 13:48:17 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "is_admin" in /wordpress/wp-content/plugins/browser-dns-prefetching/browser-dns-prefetching.php:15
 Stack trace:
-#0 /wordpress/wp-content/plugins/browserid/browserid.php(207): MozillaPersonaWidget->Init()
-#1 /wordpress/wp-content/plugins/browserid/browserid.php(112): MozillaPersona->Init_widget()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): MozillaPersona->Init('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-settings.php(727): do_action('init')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}
-  thrown in /wordpress/wp-content/plugins/browserid/lib/browserid-widget.php on line 28
-[08-Jul-2025 03:47:26 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "gallery" in /wordpress/wp-content/plugins/better-gallery2/better-gallery.php:28
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('better-gallery2...')
-#2 /internal/eval.php(20): activate_plugin('better-gallery2...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/better-gallery2/better-gallery.php on line 28
-[08-Jul-2025 03:47:34 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "gallery" in /wordpress/wp-content/plugins/better-gallery2/better-gallery.php:28
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('better-gallery2...')
-#2 /internal/eval.php(20): activate_plugin('better-gallery2...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/better-gallery2/better-gallery.php on line 28
-[08-Jul-2025 03:47:43 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "gallery" in /wordpress/wp-content/plugins/better-gallery2/better-gallery.php:28
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('better-gallery2...')
-#2 /internal/eval.php(20): activate_plugin('better-gallery2...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/better-gallery2/better-gallery.php on line 28
-[08-Jul-2025 03:47:54 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>better-website-performance</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:48:03 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>better-website-performance</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:48:14 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>better-website-performance</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:51:14 UTC] PHP Deprecated:  Required parameter $list_view follows optional parameter $list_id in /wordpress/wp-content/plugins/bsk-contact-form-7-blacklist/classes/dashboard/dashboard-list.php on line 16
-[08-Jul-2025 03:51:14 UTC] PHP Deprecated:  Required parameter $page_name follows optional parameter $list_id in /wordpress/wp-content/plugins/bsk-contact-form-7-blacklist/classes/dashboard/dashboard-list.php on line 16
-[08-Jul-2025 03:51:15 UTC] PHP Deprecated:  Required parameter $list_view follows optional parameter $list_id in /wordpress/wp-content/plugins/bsk-contact-form-7-blacklist/classes/dashboard/dashboard-list.php on line 16
-[08-Jul-2025 03:51:15 UTC] PHP Deprecated:  Required parameter $page_name follows optional parameter $list_id in /wordpress/wp-content/plugins/bsk-contact-form-7-blacklist/classes/dashboard/dashboard-list.php on line 16
-[08-Jul-2025 03:51:25 UTC] PHP Deprecated:  Required parameter $list_view follows optional parameter $list_id in /wordpress/wp-content/plugins/bsk-contact-form-7-blacklist/classes/dashboard/dashboard-list.php on line 16
-[08-Jul-2025 03:51:25 UTC] PHP Deprecated:  Required parameter $page_name follows optional parameter $list_id in /wordpress/wp-content/plugins/bsk-contact-form-7-blacklist/classes/dashboard/dashboard-list.php on line 16
-[08-Jul-2025 03:51:26 UTC] PHP Deprecated:  Required parameter $list_view follows optional parameter $list_id in /wordpress/wp-content/plugins/bsk-contact-form-7-blacklist/classes/dashboard/dashboard-list.php on line 16
-[08-Jul-2025 03:51:26 UTC] PHP Deprecated:  Required parameter $page_name follows optional parameter $list_id in /wordpress/wp-content/plugins/bsk-contact-form-7-blacklist/classes/dashboard/dashboard-list.php on line 16
-[08-Jul-2025 03:51:34 UTC] PHP Deprecated:  Required parameter $list_view follows optional parameter $list_id in /wordpress/wp-content/plugins/bsk-contact-form-7-blacklist/classes/dashboard/dashboard-list.php on line 16
-[08-Jul-2025 03:51:34 UTC] PHP Deprecated:  Required parameter $page_name follows optional parameter $list_id in /wordpress/wp-content/plugins/bsk-contact-form-7-blacklist/classes/dashboard/dashboard-list.php on line 16
-[08-Jul-2025 03:51:36 UTC] PHP Deprecated:  Required parameter $list_view follows optional parameter $list_id in /wordpress/wp-content/plugins/bsk-contact-form-7-blacklist/classes/dashboard/dashboard-list.php on line 16
-[08-Jul-2025 03:51:36 UTC] PHP Deprecated:  Required parameter $page_name follows optional parameter $list_id in /wordpress/wp-content/plugins/bsk-contact-form-7-blacklist/classes/dashboard/dashboard-list.php on line 16
-[08-Jul-2025 03:52:14 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:52:15 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:52:24 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:52:24 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:52:32 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:52:33 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:52:43 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:52:53 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:53:03 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:53:14 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:53:14 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:53:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function media_sideload_image() in /wordpress/wp-content/plugins/blossom-recipe-maker/includes/class-blossom-recipe-activator.php:269
-Stack trace:
-#0 /wordpress/wp-content/plugins/blossom-recipe-maker/blossom-recipe-maker.php(49): Blossom_Recipe_Maker_Activator::activate()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): activate_blossom_recipe_maker(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_blosso...', false)
-#5 /internal/eval.php(20): activate_plugin('blossom-recipe-...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/blossom-recipe-maker/includes/class-blossom-recipe-activator.php on line 269
-[08-Jul-2025 03:53:25 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:53:25 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:53:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function media_sideload_image() in /wordpress/wp-content/plugins/blossom-recipe-maker/includes/class-blossom-recipe-activator.php:269
-Stack trace:
-#0 /wordpress/wp-content/plugins/blossom-recipe-maker/blossom-recipe-maker.php(49): Blossom_Recipe_Maker_Activator::activate()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): activate_blossom_recipe_maker(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_blosso...', false)
-#5 /internal/eval.php(20): activate_plugin('blossom-recipe-...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/blossom-recipe-maker/includes/class-blossom-recipe-activator.php on line 269
-[08-Jul-2025 03:53:36 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:53:36 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:53:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function media_sideload_image() in /wordpress/wp-content/plugins/blossom-recipe-maker/includes/class-blossom-recipe-activator.php:269
-Stack trace:
-#0 /wordpress/wp-content/plugins/blossom-recipe-maker/blossom-recipe-maker.php(49): Blossom_Recipe_Maker_Activator::activate()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): activate_blossom_recipe_maker(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_blosso...', false)
-#5 /internal/eval.php(20): activate_plugin('blossom-recipe-...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/blossom-recipe-maker/includes/class-blossom-recipe-activator.php on line 269
-[08-Jul-2025 03:54:12 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:54:22 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 03:54:31 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+#0 /wordpress/wp-content/plugins/browser-dns-prefetching/browser-dns-prefetching.php(68): Browser_DNS_Prefetching->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('browser-dns-pre...')
+#3 /internal/eval.php(20): activate_plugin('browser-dns-pre...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/browser-dns-prefetching/browser-dns-prefetching.php on line 15
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:325:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
