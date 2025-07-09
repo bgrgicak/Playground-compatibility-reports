@@ -2,261 +2,234 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [07-Jul-2025 23:31:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Jul-2025 02:39:13 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[09-Jul-2025 02:39:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SET @virtual_queue_position := 0;</p>
+<p>INSERT INTO `wp_histories` (`type`, `message`, `created_at`) VALUES ('plugin_action', 'Plugin activated: Ultimate Security For WooCommerce', '2025-07-09 02:39:20')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: SET statement: setStatement
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1950): WP_SQLite_Driver->new_not_supported_exception('SET statement: ...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(924): WP_SQLite_Driver->execute_set_statement(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SET @virtual_qu...')
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SET @virtual_qu...')
-#5 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(367): WP_SQLite_DB->query('SET @virtual_qu...')
-#6 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(203): Virtual_Queue_Public::set_queue_position()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query SET @virtual_queue_position := 0; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::set_queue_position, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jul-2025 23:31:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>UPDATE wp_vq_sessions SET estimated_time = ( SELECT @virtual_queue_position := @virtual_queue_position + 1 ) where status=0 ORDER BY id ASC;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vq_sessions</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_histories</li>
 <li>Executing: 
-				SELECT LOWER(column_name) AS COLUMN_NAME, is_nullable, data_type, column_default
+				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_vq_sessions</li>
-<li>Executing: UPDATE `wp_vq_sessions` SET `estimated_time` = CAST(( SELECT @virtual_queue_position := @virtual_queue_position + 1 ) AS INTEGER) WHERE rowid IN ( SELECT rowid FROM `wp_vq_sessions` where `status` = 0 ORDER BY `id` ASC ) | (no parameters)</li>
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_histories</li>
+<li>Executing: INSERT INTO `wp_histories` () SELECT  FROM (VALUES ( 'plugin_action' , 'Plugin activated: Ultimate Security For WooCommerce' , '2025-07-09 02:39:20' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 unrecognized token: ":"
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE wp_vq_se...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('UPDATE wp_vq_se...')
-#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(368): WP_SQLite_DB->query('UPDATE wp_vq_se...')
-#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(203): Virtual_Queue_Public::set_queue_position()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query UPDATE wp_vq_sessions SET estimated_time = ( SELECT @virtual_queue_position := @virtual_queue_position + 1 ) where status=0 ORDER BY id ASC; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::set_queue_position, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jul-2025 23:31:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SET @virtual_queue_position := 0;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: SET statement: setStatement
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1950): WP_SQLite_Driver->new_not_supported_exception('SET statement: ...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(924): WP_SQLite_Driver->execute_set_statement(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SET @virtual_qu...')
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SET @virtual_qu...')
-#5 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(367): WP_SQLite_DB->query('SET @virtual_qu...')
-#6 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(203): Virtual_Queue_Public::set_queue_position()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_histories', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/ultimate-security-for-woocommerce/includes/class-ultimate-security-for-woocommerce-action-logins.php(286): wpdb->insert('wp_histories', Array)
+#6 /wordpress/wp-content/plugins/ultimate-security-for-woocommerce/includes/class-ultimate-security-for-woocommerce-action-logins.php(418): Ultimate_Security_For_Woocommerce_Action_Logins->insert_history('plugin_action', 'Plugin activate...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Ultimate_Security_For_Woocommerce_Action_Logins->track_plugin_action('ultimate-securi...', false)
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query SET @virtual_queue_position := 0; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::set_queue_position, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jul-2025 23:31:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#10 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'ultimate-securi...', false)
+#11 /internal/eval.php(20): activate_plugin('ultimate-securi...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_histories` (`type`, `message`, `created_at`) VALUES ('plugin_action', 'Plugin activated: Ultimate Security For WooCommerce', '2025-07-09 02:39:20') made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, Ultimate_Security_For_Woocommerce_Action_Logins->track_plugin_action, Ultimate_Security_For_Woocommerce_Action_Logins->insert_history, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 02:39:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>UPDATE wp_vq_sessions SET estimated_time = ( SELECT @virtual_queue_position := @virtual_queue_position + 1 ) where status=0 ORDER BY id ASC;</p>
+<p>INSERT INTO `wp_historymeta` (`history_id`, `history_key`, `history_value`) VALUES ('0', 'user_id', '1')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vq_sessions</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_historymeta</li>
 <li>Executing: 
-				SELECT LOWER(column_name) AS COLUMN_NAME, is_nullable, data_type, column_default
+				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_vq_sessions</li>
-<li>Executing: UPDATE `wp_vq_sessions` SET `estimated_time` = CAST(( SELECT @virtual_queue_position := @virtual_queue_position + 1 ) AS INTEGER) WHERE rowid IN ( SELECT rowid FROM `wp_vq_sessions` where `status` = 0 ORDER BY `id` ASC ) | (no parameters)</li>
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_historymeta</li>
+<li>Executing: INSERT INTO `wp_historymeta` () SELECT  FROM (VALUES ( '0' , 'user_id' , '1' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 unrecognized token: ":"
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE wp_vq_se...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('UPDATE wp_vq_se...')
-#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(368): WP_SQLite_DB->query('UPDATE wp_vq_se...')
-#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(203): Virtual_Queue_Public::set_queue_position()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query UPDATE wp_vq_sessions SET estimated_time = ( SELECT @virtual_queue_position := @virtual_queue_position + 1 ) where status=0 ORDER BY id ASC; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::set_queue_position, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jul-2025 23:31:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SET @virtual_queue_position := 0;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: SET statement: setStatement
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1950): WP_SQLite_Driver->new_not_supported_exception('SET statement: ...')
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(924): WP_SQLite_Driver->execute_set_statement(Object(WP_Parser_Node))
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
-#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SET @virtual_qu...')
-#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SET @virtual_qu...')
-#5 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(367): WP_SQLite_DB->query('SET @virtual_qu...')
-#6 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(203): Virtual_Queue_Public::set_queue_position()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_historymeta', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/ultimate-security-for-woocommerce/includes/class-ultimate-security-for-woocommerce-action-logins.php(300): wpdb->insert('wp_historymeta', Array)
+#6 /wordpress/wp-content/plugins/ultimate-security-for-woocommerce/includes/class-ultimate-security-for-woocommerce-action-logins.php(419): Ultimate_Security_For_Woocommerce_Action_Logins->insert_history_meta(0, 'user_id', 1)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Ultimate_Security_For_Woocommerce_Action_Logins->track_plugin_action('ultimate-securi...', false)
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query SET @virtual_queue_position := 0; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::set_queue_position, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jul-2025 23:31:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#10 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'ultimate-securi...', false)
+#11 /internal/eval.php(20): activate_plugin('ultimate-securi...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_historymeta` (`history_id`, `history_key`, `history_value`) VALUES ('0', 'user_id', '1') made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, Ultimate_Security_For_Woocommerce_Action_Logins->track_plugin_action, Ultimate_Security_For_Woocommerce_Action_Logins->insert_history_meta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 02:39:21 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ultimate-security-for-woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[09-Jul-2025 02:40:01 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[09-Jul-2025 02:40:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>UPDATE wp_vq_sessions SET estimated_time = ( SELECT @virtual_queue_position := @virtual_queue_position + 1 ) where status=0 ORDER BY id ASC;</p>
+<p>INSERT INTO `wp_histories` (`type`, `message`, `created_at`) VALUES ('plugin_action', 'Plugin activated: Ultimate Security For WooCommerce', '2025-07-09 02:40:08')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vq_sessions</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_histories</li>
 <li>Executing: 
-				SELECT LOWER(column_name) AS COLUMN_NAME, is_nullable, data_type, column_default
+				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_vq_sessions</li>
-<li>Executing: UPDATE `wp_vq_sessions` SET `estimated_time` = CAST(( SELECT @virtual_queue_position := @virtual_queue_position + 1 ) AS INTEGER) WHERE rowid IN ( SELECT rowid FROM `wp_vq_sessions` where `status` = 0 ORDER BY `id` ASC ) | (no parameters)</li>
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_histories</li>
+<li>Executing: INSERT INTO `wp_histories` () SELECT  FROM (VALUES ( 'plugin_action' , 'Plugin activated: Ultimate Security For WooCommerce' , '2025-07-09 02:40:08' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 unrecognized token: ":"
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('UPDATE wp_vq_se...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('UPDATE wp_vq_se...')
-#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(368): WP_SQLite_DB->query('UPDATE wp_vq_se...')
-#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(203): Virtual_Queue_Public::set_queue_position()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_histories', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/ultimate-security-for-woocommerce/includes/class-ultimate-security-for-woocommerce-action-logins.php(286): wpdb->insert('wp_histories', Array)
+#6 /wordpress/wp-content/plugins/ultimate-security-for-woocommerce/includes/class-ultimate-security-for-woocommerce-action-logins.php(418): Ultimate_Security_For_Woocommerce_Action_Logins->insert_history('plugin_action', 'Plugin activate...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Ultimate_Security_For_Woocommerce_Action_Logins->track_plugin_action('ultimate-securi...', false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'ultimate-securi...', false)
+#11 /internal/eval.php(20): activate_plugin('ultimate-securi...')
 #12 {main}</pre>
- for query UPDATE wp_vq_sessions SET estimated_time = ( SELECT @virtual_queue_position := @virtual_queue_position + 1 ) where status=0 ORDER BY id ASC; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::set_queue_position, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Jul-2025 23:34:28 UTC] PHP Deprecated:  Required parameter $variation_id follows optional parameter $quantity in /wordpress/wp-content/plugins/virtue-for-woocommerce/public/class-virtue-woocommerce-public.php on line 301
-[07-Jul-2025 23:34:29 UTC] PHP Deprecated:  Required parameter $variation_id follows optional parameter $quantity in /wordpress/wp-content/plugins/virtue-for-woocommerce/public/class-virtue-woocommerce-public.php on line 301
-[07-Jul-2025 23:34:37 UTC] PHP Deprecated:  Required parameter $variation_id follows optional parameter $quantity in /wordpress/wp-content/plugins/virtue-for-woocommerce/public/class-virtue-woocommerce-public.php on line 301
-[07-Jul-2025 23:34:39 UTC] PHP Deprecated:  Required parameter $variation_id follows optional parameter $quantity in /wordpress/wp-content/plugins/virtue-for-woocommerce/public/class-virtue-woocommerce-public.php on line 301
-[07-Jul-2025 23:34:47 UTC] PHP Deprecated:  Required parameter $variation_id follows optional parameter $quantity in /wordpress/wp-content/plugins/virtue-for-woocommerce/public/class-virtue-woocommerce-public.php on line 301
-[07-Jul-2025 23:34:48 UTC] PHP Deprecated:  Required parameter $variation_id follows optional parameter $quantity in /wordpress/wp-content/plugins/virtue-for-woocommerce/public/class-virtue-woocommerce-public.php on line 301
-[07-Jul-2025 23:36:32 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('NinetyAjaxLogin')
-#2 /wordpress/wp-content/plugins/visideign-login/visideign-login.php(113): register_widget('NinetyAjaxLogin')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): nd_login_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(727): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[07-Jul-2025 23:36:42 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('NinetyAjaxLogin')
-#2 /wordpress/wp-content/plugins/visideign-login/visideign-login.php(113): register_widget('NinetyAjaxLogin')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): nd_login_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(727): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[07-Jul-2025 23:36:52 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('NinetyAjaxLogin')
-#2 /wordpress/wp-content/plugins/visideign-login/visideign-login.php(113): register_widget('NinetyAjaxLogin')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): nd_login_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(727): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[07-Jul-2025 23:38:16 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $message in /wordpress/wp-content/plugins/ultimate-sms/helpers.php on line 109
-[07-Jul-2025 23:38:17 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $message in /wordpress/wp-content/plugins/ultimate-sms/helpers.php on line 109
-[07-Jul-2025 23:38:32 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $message in /wordpress/wp-content/plugins/ultimate-sms/helpers.php on line 109
-[07-Jul-2025 23:38:34 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $message in /wordpress/wp-content/plugins/ultimate-sms/helpers.php on line 109
-[07-Jul-2025 23:38:49 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $message in /wordpress/wp-content/plugins/ultimate-sms/helpers.php on line 109
-[07-Jul-2025 23:38:50 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $message in /wordpress/wp-content/plugins/ultimate-sms/helpers.php on line 109
-[07-Jul-2025 23:39:01 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ultimate-sticky-popup-and-widgets</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-Jul-2025 23:39:11 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ultimate-sticky-popup-and-widgets</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-Jul-2025 23:39:21 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ultimate-sticky-popup-and-widgets</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+ for query INSERT INTO `wp_histories` (`type`, `message`, `created_at`) VALUES ('plugin_action', 'Plugin activated: Ultimate Security For WooCommerce', '2025-07-09 02:40:08') made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, Ultimate_Security_For_Woocommerce_Action_Logins->track_plugin_action, Ultimate_Security_For_Woocommerce_Action_Logins->insert_history, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 02:40:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_historymeta` (`history_id`, `history_key`, `history_value`) VALUES ('0', 'user_id', '1')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_historymeta</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_historymeta</li>
+<li>Executing: INSERT INTO `wp_historymeta` () SELECT  FROM (VALUES ( '0' , 'user_id' , '1' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_historymeta', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/ultimate-security-for-woocommerce/includes/class-ultimate-security-for-woocommerce-action-logins.php(300): wpdb->insert('wp_historymeta', Array)
+#6 /wordpress/wp-content/plugins/ultimate-security-for-woocommerce/includes/class-ultimate-security-for-woocommerce-action-logins.php(419): Ultimate_Security_For_Woocommerce_Action_Logins->insert_history_meta(0, 'user_id', 1)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Ultimate_Security_For_Woocommerce_Action_Logins->track_plugin_action('ultimate-securi...', false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'ultimate-securi...', false)
+#11 /internal/eval.php(20): activate_plugin('ultimate-securi...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_historymeta` (`history_id`, `history_key`, `history_value`) VALUES ('0', 'user_id', '1') made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, Ultimate_Security_For_Woocommerce_Action_Logins->track_plugin_action, Ultimate_Security_For_Woocommerce_Action_Logins->insert_history_meta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 02:40:09 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ultimate-security-for-woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[09-Jul-2025 02:40:47 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[09-Jul-2025 02:40:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_histories` (`type`, `message`, `created_at`) VALUES ('plugin_action', 'Plugin activated: Ultimate Security For WooCommerce', '2025-07-09 02:40:53')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_histories</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_histories</li>
+<li>Executing: INSERT INTO `wp_histories` () SELECT  FROM (VALUES ( 'plugin_action' , 'Plugin activated: Ultimate Security For WooCommerce' , '2025-07-09 02:40:53' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_histories', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/ultimate-security-for-woocommerce/includes/class-ultimate-security-for-woocommerce-action-logins.php(286): wpdb->insert('wp_histories', Array)
+#6 /wordpress/wp-content/plugins/ultimate-security-for-woocommerce/includes/class-ultimate-security-for-woocommerce-action-logins.php(418): Ultimate_Security_For_Woocommerce_Action_Logins->insert_history('plugin_action', 'Plugin activate...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Ultimate_Security_For_Woocommerce_Action_Logins->track_plugin_action('ultimate-securi...', false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'ultimate-securi...', false)
+#11 /internal/eval.php(20): activate_plugin('ultimate-securi...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_histories` (`type`, `message`, `created_at`) VALUES ('plugin_action', 'Plugin activated: Ultimate Security For WooCommerce', '2025-07-09 02:40:53') made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, Ultimate_Security_For_Woocommerce_Action_Logins->track_plugin_action, Ultimate_Security_For_Woocommerce_Action_Logins->insert_history, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 02:40:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_historymeta` (`history_id`, `history_key`, `history_value`) VALUES ('0', 'user_id', '1')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_historymeta</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_historymeta</li>
+<li>Executing: INSERT INTO `wp_historymeta` () SELECT  FROM (VALUES ( '0' , 'user_id' , '1' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_historymeta', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/ultimate-security-for-woocommerce/includes/class-ultimate-security-for-woocommerce-action-logins.php(300): wpdb->insert('wp_historymeta', Array)
+#6 /wordpress/wp-content/plugins/ultimate-security-for-woocommerce/includes/class-ultimate-security-for-woocommerce-action-logins.php(419): Ultimate_Security_For_Woocommerce_Action_Logins->insert_history_meta(0, 'user_id', 1)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Ultimate_Security_For_Woocommerce_Action_Logins->track_plugin_action('ultimate-securi...', false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'ultimate-securi...', false)
+#11 /internal/eval.php(20): activate_plugin('ultimate-securi...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_historymeta` (`history_id`, `history_key`, `history_value`) VALUES ('0', 'user_id', '1') made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, Ultimate_Security_For_Woocommerce_Action_Logins->track_plugin_action, Ultimate_Security_For_Woocommerce_Action_Logins->insert_history_meta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 02:40:54 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ultimate-security-for-woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/run-cli-j-geJYS3.js:325:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
