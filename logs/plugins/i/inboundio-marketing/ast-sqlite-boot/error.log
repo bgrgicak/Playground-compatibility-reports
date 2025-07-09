@@ -2,13 +2,280 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [08-Jul-2025 10:31:20 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 10:31:27 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>import-from-yml</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 10:32:03 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 10:32:10 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>import-from-yml</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 10:32:44 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 10:32:51 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>import-from-yml</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 10:32:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Jul-2025 22:28:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_imk_apps where active=1 and app_name='IMKService' </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_imk_apps` where `active` = 1 and `app_name` = 'IMKService' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/imk-services/inc/BaseController.php(28): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/imk-services/inc/IMKAPI.php(12): TBC\IMK\BaseController->get_active_user_detail('IMKService')
+#6 /wordpress/wp-content/plugins/imk-services/inc/Frontend.php(12): TBC\IMK\IMKAPI->__construct()
+#7 /wordpress/wp-content/plugins/imk-services/imk-services.php(69): TBC\IMK\Frontend->__construct()
+#8 /wordpress/wp-content/plugins/imk-services/imk-services.php(61): IMKServicePlugin::instantiate('TBC\\IMK\\Fronten...')
+#9 /wordpress/wp-content/plugins/imk-services/imk-services.php(73): IMKServicePlugin::register_services()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('imk-services/im...')
+#12 /internal/eval.php(20): activate_plugin('imk-services/im...')
+#13 {main}</pre>
+ for query SELECT * FROM wp_imk_apps where active=1 and app_name='IMKService'  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/imk-services/imk-services.php'), IMKServicePlugin::register_services, IMKServicePlugin::instantiate, TBC\IMK\Frontend->__construct, TBC\IMK\IMKAPI->__construct, TBC\IMK\BaseController->get_active_user_detail, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 22:28:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_imk_apps where active=1 and app_name='IMKService' </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_imk_apps` where `active` = 1 and `app_name` = 'IMKService' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/imk-services/inc/BaseController.php(28): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/imk-services/inc/IMKAPI.php(12): TBC\IMK\BaseController->get_active_user_detail('IMKService')
+#6 /wordpress/wp-content/plugins/imk-services/inc/REST_API.php(9): TBC\IMK\IMKAPI->__construct()
+#7 /wordpress/wp-content/plugins/imk-services/imk-services.php(69): TBC\IMK\REST_API->__construct()
+#8 /wordpress/wp-content/plugins/imk-services/imk-services.php(61): IMKServicePlugin::instantiate('TBC\\IMK\\REST_AP...')
+#9 /wordpress/wp-content/plugins/imk-services/imk-services.php(73): IMKServicePlugin::register_services()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('imk-services/im...')
+#12 /internal/eval.php(20): activate_plugin('imk-services/im...')
+#13 {main}</pre>
+ for query SELECT * FROM wp_imk_apps where active=1 and app_name='IMKService'  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/imk-services/imk-services.php'), IMKServicePlugin::register_services, IMKServicePlugin::instantiate, TBC\IMK\REST_API->__construct, TBC\IMK\IMKAPI->__construct, TBC\IMK\BaseController->get_active_user_detail, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 22:28:24 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/imk-services/inc/Activate.php:13
+Stack trace:
+#0 /wordpress/wp-content/plugins/imk-services/inc/Activate.php(13): count(NULL)
+#1 /wordpress/wp-content/plugins/imk-services/imk-services.php(26): TBC\IMK\Activate::activate()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): IMK_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imk-se...', false)
+#6 /internal/eval.php(20): activate_plugin('imk-services/im...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/imk-services/inc/Activate.php on line 13
+[09-Jul-2025 22:28:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_imk_apps where active=1 and app_name='IMKService' </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_imk_apps` where `active` = 1 and `app_name` = 'IMKService' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/imk-services/inc/BaseController.php(28): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/imk-services/inc/IMKAPI.php(12): TBC\IMK\BaseController->get_active_user_detail('IMKService')
+#6 /wordpress/wp-content/plugins/imk-services/inc/Frontend.php(12): TBC\IMK\IMKAPI->__construct()
+#7 /wordpress/wp-content/plugins/imk-services/imk-services.php(69): TBC\IMK\Frontend->__construct()
+#8 /wordpress/wp-content/plugins/imk-services/imk-services.php(61): IMKServicePlugin::instantiate('TBC\\IMK\\Fronten...')
+#9 /wordpress/wp-content/plugins/imk-services/imk-services.php(73): IMKServicePlugin::register_services()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('imk-services/im...')
+#12 /internal/eval.php(20): activate_plugin('imk-services/im...')
+#13 {main}</pre>
+ for query SELECT * FROM wp_imk_apps where active=1 and app_name='IMKService'  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/imk-services/imk-services.php'), IMKServicePlugin::register_services, IMKServicePlugin::instantiate, TBC\IMK\Frontend->__construct, TBC\IMK\IMKAPI->__construct, TBC\IMK\BaseController->get_active_user_detail, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 22:28:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_imk_apps where active=1 and app_name='IMKService' </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_imk_apps` where `active` = 1 and `app_name` = 'IMKService' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/imk-services/inc/BaseController.php(28): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/imk-services/inc/IMKAPI.php(12): TBC\IMK\BaseController->get_active_user_detail('IMKService')
+#6 /wordpress/wp-content/plugins/imk-services/inc/REST_API.php(9): TBC\IMK\IMKAPI->__construct()
+#7 /wordpress/wp-content/plugins/imk-services/imk-services.php(69): TBC\IMK\REST_API->__construct()
+#8 /wordpress/wp-content/plugins/imk-services/imk-services.php(61): IMKServicePlugin::instantiate('TBC\\IMK\\REST_AP...')
+#9 /wordpress/wp-content/plugins/imk-services/imk-services.php(73): IMKServicePlugin::register_services()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('imk-services/im...')
+#12 /internal/eval.php(20): activate_plugin('imk-services/im...')
+#13 {main}</pre>
+ for query SELECT * FROM wp_imk_apps where active=1 and app_name='IMKService'  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/imk-services/imk-services.php'), IMKServicePlugin::register_services, IMKServicePlugin::instantiate, TBC\IMK\REST_API->__construct, TBC\IMK\IMKAPI->__construct, TBC\IMK\BaseController->get_active_user_detail, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 22:28:34 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/imk-services/inc/Activate.php:13
+Stack trace:
+#0 /wordpress/wp-content/plugins/imk-services/inc/Activate.php(13): count(NULL)
+#1 /wordpress/wp-content/plugins/imk-services/imk-services.php(26): TBC\IMK\Activate::activate()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): IMK_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imk-se...', false)
+#6 /internal/eval.php(20): activate_plugin('imk-services/im...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/imk-services/inc/Activate.php on line 13
+[09-Jul-2025 22:28:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_imk_apps where active=1 and app_name='IMKService' </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_imk_apps` where `active` = 1 and `app_name` = 'IMKService' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/imk-services/inc/BaseController.php(28): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/imk-services/inc/IMKAPI.php(12): TBC\IMK\BaseController->get_active_user_detail('IMKService')
+#6 /wordpress/wp-content/plugins/imk-services/inc/Frontend.php(12): TBC\IMK\IMKAPI->__construct()
+#7 /wordpress/wp-content/plugins/imk-services/imk-services.php(69): TBC\IMK\Frontend->__construct()
+#8 /wordpress/wp-content/plugins/imk-services/imk-services.php(61): IMKServicePlugin::instantiate('TBC\\IMK\\Fronten...')
+#9 /wordpress/wp-content/plugins/imk-services/imk-services.php(73): IMKServicePlugin::register_services()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('imk-services/im...')
+#12 /internal/eval.php(20): activate_plugin('imk-services/im...')
+#13 {main}</pre>
+ for query SELECT * FROM wp_imk_apps where active=1 and app_name='IMKService'  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/imk-services/imk-services.php'), IMKServicePlugin::register_services, IMKServicePlugin::instantiate, TBC\IMK\Frontend->__construct, TBC\IMK\IMKAPI->__construct, TBC\IMK\BaseController->get_active_user_detail, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 22:28:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_imk_apps where active=1 and app_name='IMKService' </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_imk_apps` where `active` = 1 and `app_name` = 'IMKService' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/imk-services/inc/BaseController.php(28): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/imk-services/inc/IMKAPI.php(12): TBC\IMK\BaseController->get_active_user_detail('IMKService')
+#6 /wordpress/wp-content/plugins/imk-services/inc/REST_API.php(9): TBC\IMK\IMKAPI->__construct()
+#7 /wordpress/wp-content/plugins/imk-services/imk-services.php(69): TBC\IMK\REST_API->__construct()
+#8 /wordpress/wp-content/plugins/imk-services/imk-services.php(61): IMKServicePlugin::instantiate('TBC\\IMK\\REST_AP...')
+#9 /wordpress/wp-content/plugins/imk-services/imk-services.php(73): IMKServicePlugin::register_services()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('imk-services/im...')
+#12 /internal/eval.php(20): activate_plugin('imk-services/im...')
+#13 {main}</pre>
+ for query SELECT * FROM wp_imk_apps where active=1 and app_name='IMKService'  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/imk-services/imk-services.php'), IMKServicePlugin::register_services, IMKServicePlugin::instantiate, TBC\IMK\REST_API->__construct, TBC\IMK\IMKAPI->__construct, TBC\IMK\BaseController->get_active_user_detail, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 22:28:43 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/imk-services/inc/Activate.php:13
+Stack trace:
+#0 /wordpress/wp-content/plugins/imk-services/inc/Activate.php(13): count(NULL)
+#1 /wordpress/wp-content/plugins/imk-services/imk-services.php(26): TBC\IMK\Activate::activate()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): IMK_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imk-se...', false)
+#6 /internal/eval.php(20): activate_plugin('imk-services/im...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/imk-services/inc/Activate.php on line 13
+[09-Jul-2025 22:28:52 UTC] PHP Deprecated:  Required parameter $id_or_email follows optional parameter $avatar in /wordpress/wp-content/plugins/immobilcio-agenzie-immobiliari/index.php on line 1025
+[09-Jul-2025 22:28:53 UTC] PHP Deprecated:  Required parameter $id_or_email follows optional parameter $avatar in /wordpress/wp-content/plugins/immobilcio-agenzie-immobiliari/index.php on line 1025
+[09-Jul-2025 22:28:53 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ciowidget')
+#2 /wordpress/wp-content/plugins/immobilcio-agenzie-immobiliari/index.php(943): register_widget('ciowidget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): my_register_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[09-Jul-2025 22:29:02 UTC] PHP Deprecated:  Required parameter $id_or_email follows optional parameter $avatar in /wordpress/wp-content/plugins/immobilcio-agenzie-immobiliari/index.php on line 1025
+[09-Jul-2025 22:29:04 UTC] PHP Deprecated:  Required parameter $id_or_email follows optional parameter $avatar in /wordpress/wp-content/plugins/immobilcio-agenzie-immobiliari/index.php on line 1025
+[09-Jul-2025 22:29:04 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ciowidget')
+#2 /wordpress/wp-content/plugins/immobilcio-agenzie-immobiliari/index.php(943): register_widget('ciowidget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): my_register_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[09-Jul-2025 22:29:12 UTC] PHP Deprecated:  Required parameter $id_or_email follows optional parameter $avatar in /wordpress/wp-content/plugins/immobilcio-agenzie-immobiliari/index.php on line 1025
+[09-Jul-2025 22:29:13 UTC] PHP Deprecated:  Required parameter $id_or_email follows optional parameter $avatar in /wordpress/wp-content/plugins/immobilcio-agenzie-immobiliari/index.php on line 1025
+[09-Jul-2025 22:29:13 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ciowidget')
+#2 /wordpress/wp-content/plugins/immobilcio-agenzie-immobiliari/index.php(943): register_widget('ciowidget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): my_register_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[09-Jul-2025 22:33:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT options FROM wp_pmxi_imports WHERE id = 0</p>
@@ -33,7 +300,7 @@ SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports
 #7 /internal/eval.php(20): activate_plugin('import-xml-csv-...')
 #8 {main}</pre>
  for query SELECT options FROM wp_pmxi_imports WHERE id = 0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/import-xml-csv-listings-to-inventor-wp/inventorwp-add-on.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Jul-2025 10:33:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[09-Jul-2025 22:33:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT options FROM wp_pmxi_imports WHERE id = 0</p>
@@ -59,7 +326,7 @@ SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports
 #8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #9 {main}</pre>
  for query SELECT options FROM wp_pmxi_imports WHERE id = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/import-xml-csv-listings-to-inventor-wp/inventorwp-add-on.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Jul-2025 10:33:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[09-Jul-2025 22:33:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT options FROM wp_pmxi_imports WHERE id = 0</p>
@@ -84,7 +351,7 @@ SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports
 #7 /internal/eval.php(20): activate_plugin('import-xml-csv-...')
 #8 {main}</pre>
  for query SELECT options FROM wp_pmxi_imports WHERE id = 0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/import-xml-csv-listings-to-inventor-wp/inventorwp-add-on.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Jul-2025 10:33:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[09-Jul-2025 22:33:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT options FROM wp_pmxi_imports WHERE id = 0</p>
@@ -110,7 +377,7 @@ SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports
 #8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #9 {main}</pre>
  for query SELECT options FROM wp_pmxi_imports WHERE id = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/import-xml-csv-listings-to-inventor-wp/inventorwp-add-on.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Jul-2025 10:33:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[09-Jul-2025 22:33:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT options FROM wp_pmxi_imports WHERE id = 0</p>
@@ -135,7 +402,7 @@ SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports
 #7 /internal/eval.php(20): activate_plugin('import-xml-csv-...')
 #8 {main}</pre>
  for query SELECT options FROM wp_pmxi_imports WHERE id = 0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/import-xml-csv-listings-to-inventor-wp/inventorwp-add-on.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Jul-2025 10:33:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[09-Jul-2025 22:33:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT options FROM wp_pmxi_imports WHERE id = 0</p>
@@ -161,304 +428,55 @@ SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports
 #8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #9 {main}</pre>
  for query SELECT options FROM wp_pmxi_imports WHERE id = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/import-xml-csv-listings-to-inventor-wp/inventorwp-add-on.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Jul-2025 10:33:57 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method chz::js() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+[09-Jul-2025 22:33:58 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[09-Jul-2025 22:34:08 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[09-Jul-2025 22:34:17 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[09-Jul-2025 22:34:27 UTC] PHP Fatal error:  Uncaught Error: Non-static method Improved_Simpler_CSS::init() cannot be called statically in /wordpress/wp-content/plugins/imporved-simpler-css/improved-simpler-css.php:384
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-settings.php(727): do_action('init')
-#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#6 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[08-Jul-2025 10:34:07 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method chz::js() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('imporved-simple...')
+#2 /internal/eval.php(20): activate_plugin('imporved-simple...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/imporved-simpler-css/improved-simpler-css.php on line 384
+[09-Jul-2025 22:34:36 UTC] PHP Fatal error:  Uncaught Error: Non-static method Improved_Simpler_CSS::init() cannot be called statically in /wordpress/wp-content/plugins/imporved-simpler-css/improved-simpler-css.php:384
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-settings.php(727): do_action('init')
-#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#6 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[08-Jul-2025 10:34:16 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method chz::js() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('imporved-simple...')
+#2 /internal/eval.php(20): activate_plugin('imporved-simple...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/imporved-simpler-css/improved-simpler-css.php on line 384
+[09-Jul-2025 22:34:46 UTC] PHP Fatal error:  Uncaught Error: Non-static method Improved_Simpler_CSS::init() cannot be called statically in /wordpress/wp-content/plugins/imporved-simpler-css/improved-simpler-css.php:384
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-settings.php(727): do_action('init')
-#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#6 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[08-Jul-2025 10:36:39 UTC] PHP Warning:  The magic method imcplus_taxcat_image::__wakeup() must have public visibility in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-taxcategory.php on line 217
-[08-Jul-2025 10:36:39 UTC] PHP Deprecated:  Required parameter $parent_post_id follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
-[08-Jul-2025 10:36:39 UTC] PHP Deprecated:  Required parameter $issue_title follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
-[08-Jul-2025 10:36:39 UTC] PHP Deprecated:  Required parameter $my_paged follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:39 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:39 UTC] PHP Deprecated:  Required parameter $order follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:39 UTC] PHP Deprecated:  Required parameter $view follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:39 UTC] PHP Deprecated:  Required parameter $status follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:39 UTC] PHP Deprecated:  Required parameter $category follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:39 UTC] PHP Deprecated:  Required parameter $keyword follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:41 UTC] PHP Warning:  The magic method imcplus_taxcat_image::__wakeup() must have public visibility in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-taxcategory.php on line 217
-[08-Jul-2025 10:36:41 UTC] PHP Deprecated:  Required parameter $parent_post_id follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
-[08-Jul-2025 10:36:41 UTC] PHP Deprecated:  Required parameter $issue_title follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
-[08-Jul-2025 10:36:41 UTC] PHP Deprecated:  Required parameter $my_paged follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:41 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:41 UTC] PHP Deprecated:  Required parameter $order follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:41 UTC] PHP Deprecated:  Required parameter $view follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:41 UTC] PHP Deprecated:  Required parameter $status follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:41 UTC] PHP Deprecated:  Required parameter $category follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:41 UTC] PHP Deprecated:  Required parameter $keyword follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-issues.php on line 66
-[08-Jul-2025 10:36:50 UTC] PHP Warning:  The magic method imcplus_taxcat_image::__wakeup() must have public visibility in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-taxcategory.php on line 217
-[08-Jul-2025 10:36:50 UTC] PHP Deprecated:  Required parameter $parent_post_id follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
-[08-Jul-2025 10:36:50 UTC] PHP Deprecated:  Required parameter $issue_title follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
-[08-Jul-2025 10:36:50 UTC] PHP Deprecated:  Required parameter $my_paged follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:50 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:50 UTC] PHP Deprecated:  Required parameter $order follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:50 UTC] PHP Deprecated:  Required parameter $view follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:50 UTC] PHP Deprecated:  Required parameter $status follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:50 UTC] PHP Deprecated:  Required parameter $category follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:50 UTC] PHP Deprecated:  Required parameter $keyword follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:52 UTC] PHP Warning:  The magic method imcplus_taxcat_image::__wakeup() must have public visibility in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-taxcategory.php on line 217
-[08-Jul-2025 10:36:52 UTC] PHP Deprecated:  Required parameter $parent_post_id follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
-[08-Jul-2025 10:36:52 UTC] PHP Deprecated:  Required parameter $issue_title follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
-[08-Jul-2025 10:36:52 UTC] PHP Deprecated:  Required parameter $my_paged follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:52 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:52 UTC] PHP Deprecated:  Required parameter $order follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:52 UTC] PHP Deprecated:  Required parameter $view follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:52 UTC] PHP Deprecated:  Required parameter $status follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:52 UTC] PHP Deprecated:  Required parameter $category follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:52 UTC] PHP Deprecated:  Required parameter $keyword follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:36:53 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-issues.php on line 66
-[08-Jul-2025 10:37:01 UTC] PHP Warning:  The magic method imcplus_taxcat_image::__wakeup() must have public visibility in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-taxcategory.php on line 217
-[08-Jul-2025 10:37:01 UTC] PHP Deprecated:  Required parameter $parent_post_id follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
-[08-Jul-2025 10:37:01 UTC] PHP Deprecated:  Required parameter $issue_title follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
-[08-Jul-2025 10:37:01 UTC] PHP Deprecated:  Required parameter $my_paged follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:37:01 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:37:01 UTC] PHP Deprecated:  Required parameter $order follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:37:01 UTC] PHP Deprecated:  Required parameter $view follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:37:01 UTC] PHP Deprecated:  Required parameter $status follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:37:01 UTC] PHP Deprecated:  Required parameter $category follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:37:01 UTC] PHP Deprecated:  Required parameter $keyword follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:37:03 UTC] PHP Warning:  The magic method imcplus_taxcat_image::__wakeup() must have public visibility in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-taxcategory.php on line 217
-[08-Jul-2025 10:37:03 UTC] PHP Deprecated:  Required parameter $parent_post_id follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
-[08-Jul-2025 10:37:03 UTC] PHP Deprecated:  Required parameter $issue_title follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
-[08-Jul-2025 10:37:03 UTC] PHP Deprecated:  Required parameter $my_paged follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:37:03 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:37:03 UTC] PHP Deprecated:  Required parameter $order follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:37:03 UTC] PHP Deprecated:  Required parameter $view follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:37:03 UTC] PHP Deprecated:  Required parameter $status follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:37:03 UTC] PHP Deprecated:  Required parameter $category follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:37:03 UTC] PHP Deprecated:  Required parameter $keyword follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
-[08-Jul-2025 10:37:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-issues.php on line 66
-[08-Jul-2025 10:38:36 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/in-over-your-archives/in_over_your_archives.php on line 649
-[08-Jul-2025 10:38:45 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/in-over-your-archives/in_over_your_archives.php on line 649
-[08-Jul-2025 10:38:53 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/in-over-your-archives/in_over_your_archives.php on line 649
-[08-Jul-2025 10:39:02 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 10:39:02 UTC] PHP Fatal error:  Uncaught Error: Non-static method InSeriesInternal::compat_hooks() cannot be called statically in /wordpress/wp-content/plugins/in-series/in-series-internal.php:944
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('imporved-simple...')
+#2 /internal/eval.php(20): activate_plugin('imporved-simple...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/imporved-simpler-css/improved-simpler-css.php on line 384
+[09-Jul-2025 22:38:23 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/inazo-advanced-ads-management/inazo.wp.adv.ads.management.php:53
 Stack trace:
-#0 /wordpress/wp-content/plugins/in-series/in-series.php(22): require_once()
+#0 /wordpress/wp-content/plugins/inazo-advanced-ads-management/inazo.wp.adv.ads.management.php(359): inazo_adv_ads_management->__construct()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('in-series/in-se...')
-#3 /internal/eval.php(20): activate_plugin('in-series/in-se...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('inazo-advanced-...')
+#3 /internal/eval.php(20): activate_plugin('inazo-advanced-...')
 #4 {main}
-  thrown in /wordpress/wp-content/plugins/in-series/in-series-internal.php on line 944
-[08-Jul-2025 10:39:11 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 10:39:11 UTC] PHP Fatal error:  Uncaught Error: Non-static method InSeriesInternal::compat_hooks() cannot be called statically in /wordpress/wp-content/plugins/in-series/in-series-internal.php:944
+  thrown in /wordpress/wp-content/plugins/inazo-advanced-ads-management/inazo.wp.adv.ads.management.php on line 53
+[09-Jul-2025 22:38:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/inazo-advanced-ads-management/inazo.wp.adv.ads.management.php:53
 Stack trace:
-#0 /wordpress/wp-content/plugins/in-series/in-series.php(22): require_once()
+#0 /wordpress/wp-content/plugins/inazo-advanced-ads-management/inazo.wp.adv.ads.management.php(359): inazo_adv_ads_management->__construct()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('in-series/in-se...')
-#3 /internal/eval.php(20): activate_plugin('in-series/in-se...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('inazo-advanced-...')
+#3 /internal/eval.php(20): activate_plugin('inazo-advanced-...')
 #4 {main}
-  thrown in /wordpress/wp-content/plugins/in-series/in-series-internal.php on line 944
-[08-Jul-2025 10:39:19 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[08-Jul-2025 10:39:19 UTC] PHP Fatal error:  Uncaught Error: Non-static method InSeriesInternal::compat_hooks() cannot be called statically in /wordpress/wp-content/plugins/in-series/in-series-internal.php:944
+  thrown in /wordpress/wp-content/plugins/inazo-advanced-ads-management/inazo.wp.adv.ads.management.php on line 53
+[09-Jul-2025 22:38:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/inazo-advanced-ads-management/inazo.wp.adv.ads.management.php:53
 Stack trace:
-#0 /wordpress/wp-content/plugins/in-series/in-series.php(22): require_once()
+#0 /wordpress/wp-content/plugins/inazo-advanced-ads-management/inazo.wp.adv.ads.management.php(359): inazo_adv_ads_management->__construct()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('in-series/in-se...')
-#3 /internal/eval.php(20): activate_plugin('in-series/in-se...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('inazo-advanced-...')
+#3 /internal/eval.php(20): activate_plugin('inazo-advanced-...')
 #4 {main}
-  thrown in /wordpress/wp-content/plugins/in-series/in-series-internal.php on line 944
-[08-Jul-2025 10:39:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT @@GLOBAL.sql_mode as global_sql_mode, @@SESSION.sql_mode as session_sql_mode</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_IN_DATE' AS `@@GLOBAL.sql_mode` as `global_sql_mode` , 'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_IN_DATE' AS `@@SESSION.sql_mode` as `session_sql_mode` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "as": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT @@GLOBAL...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT @@GLOBAL...')
-#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT @@GLOBAL...')
-#4 /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php(50): wpdb->get_row('SELECT @@GLOBAL...')
-#5 /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php(77): inax_installer()
-#6 /wordpress/wp-content/plugins/inax-ir/inax-ir.php(72): inax_init()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('inax-ir/inax-ir...')
-#9 /internal/eval.php(20): activate_plugin('inax-ir/inax-ir...')
-#10 {main}</pre>
- for query SELECT @@GLOBAL.sql_mode as global_sql_mode, @@SESSION.sql_mode as session_sql_mode made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/inax-ir/inax-ir.php'), inax_init, inax_installer, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Jul-2025 10:39:58 UTC] PHP Warning:  Attempt to read property "session_sql_mode" on null in /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php on line 51
-[08-Jul-2025 10:39:58 UTC] PHP Warning:  Attempt to read property "global_sql_mode" on null in /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php on line 51
-[08-Jul-2025 10:39:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT @@GLOBAL.sql_mode as global_sql_mode, @@SESSION.sql_mode as session_sql_mode</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_IN_DATE' AS `@@GLOBAL.sql_mode` as `global_sql_mode` , 'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_IN_DATE' AS `@@SESSION.sql_mode` as `session_sql_mode` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "as": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT @@GLOBAL...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT @@GLOBAL...')
-#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT @@GLOBAL...')
-#4 /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php(50): wpdb->get_row('SELECT @@GLOBAL...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): inax_installer(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_inax-i...', false)
-#9 /internal/eval.php(20): activate_plugin('inax-ir/inax-ir...')
-#10 {main}</pre>
- for query SELECT @@GLOBAL.sql_mode as global_sql_mode, @@SESSION.sql_mode as session_sql_mode made by activate_plugin, do_action('activate_inax-ir/inax-ir.php'), WP_Hook->do_action, WP_Hook->apply_filters, inax_installer, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Jul-2025 10:39:58 UTC] PHP Warning:  Attempt to read property "session_sql_mode" on null in /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php on line 51
-[08-Jul-2025 10:39:58 UTC] PHP Warning:  Attempt to read property "global_sql_mode" on null in /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php on line 51
-[08-Jul-2025 10:40:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT @@GLOBAL.sql_mode as global_sql_mode, @@SESSION.sql_mode as session_sql_mode</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_IN_DATE' AS `@@GLOBAL.sql_mode` as `global_sql_mode` , 'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_IN_DATE' AS `@@SESSION.sql_mode` as `session_sql_mode` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "as": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT @@GLOBAL...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT @@GLOBAL...')
-#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT @@GLOBAL...')
-#4 /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php(50): wpdb->get_row('SELECT @@GLOBAL...')
-#5 /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php(77): inax_installer()
-#6 /wordpress/wp-content/plugins/inax-ir/inax-ir.php(72): inax_init()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('inax-ir/inax-ir...')
-#9 /internal/eval.php(20): activate_plugin('inax-ir/inax-ir...')
-#10 {main}</pre>
- for query SELECT @@GLOBAL.sql_mode as global_sql_mode, @@SESSION.sql_mode as session_sql_mode made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/inax-ir/inax-ir.php'), inax_init, inax_installer, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Jul-2025 10:40:10 UTC] PHP Warning:  Attempt to read property "session_sql_mode" on null in /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php on line 51
-[08-Jul-2025 10:40:10 UTC] PHP Warning:  Attempt to read property "global_sql_mode" on null in /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php on line 51
-[08-Jul-2025 10:40:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT @@GLOBAL.sql_mode as global_sql_mode, @@SESSION.sql_mode as session_sql_mode</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_IN_DATE' AS `@@GLOBAL.sql_mode` as `global_sql_mode` , 'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_IN_DATE' AS `@@SESSION.sql_mode` as `session_sql_mode` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "as": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT @@GLOBAL...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT @@GLOBAL...')
-#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT @@GLOBAL...')
-#4 /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php(50): wpdb->get_row('SELECT @@GLOBAL...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): inax_installer(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_inax-i...', false)
-#9 /internal/eval.php(20): activate_plugin('inax-ir/inax-ir...')
-#10 {main}</pre>
- for query SELECT @@GLOBAL.sql_mode as global_sql_mode, @@SESSION.sql_mode as session_sql_mode made by activate_plugin, do_action('activate_inax-ir/inax-ir.php'), WP_Hook->do_action, WP_Hook->apply_filters, inax_installer, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Jul-2025 10:40:10 UTC] PHP Warning:  Attempt to read property "session_sql_mode" on null in /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php on line 51
-[08-Jul-2025 10:40:10 UTC] PHP Warning:  Attempt to read property "global_sql_mode" on null in /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php on line 51
-[08-Jul-2025 10:40:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT @@GLOBAL.sql_mode as global_sql_mode, @@SESSION.sql_mode as session_sql_mode</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_IN_DATE' AS `@@GLOBAL.sql_mode` as `global_sql_mode` , 'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_IN_DATE' AS `@@SESSION.sql_mode` as `session_sql_mode` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "as": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT @@GLOBAL...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT @@GLOBAL...')
-#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT @@GLOBAL...')
-#4 /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php(50): wpdb->get_row('SELECT @@GLOBAL...')
-#5 /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php(77): inax_installer()
-#6 /wordpress/wp-content/plugins/inax-ir/inax-ir.php(72): inax_init()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('inax-ir/inax-ir...')
-#9 /internal/eval.php(20): activate_plugin('inax-ir/inax-ir...')
-#10 {main}</pre>
- for query SELECT @@GLOBAL.sql_mode as global_sql_mode, @@SESSION.sql_mode as session_sql_mode made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/inax-ir/inax-ir.php'), inax_init, inax_installer, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Jul-2025 10:40:22 UTC] PHP Warning:  Attempt to read property "session_sql_mode" on null in /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php on line 51
-[08-Jul-2025 10:40:22 UTC] PHP Warning:  Attempt to read property "global_sql_mode" on null in /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php on line 51
-[08-Jul-2025 10:40:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT @@GLOBAL.sql_mode as global_sql_mode, @@SESSION.sql_mode as session_sql_mode</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
-<li>Executing: SELECT 'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_IN_DATE' AS `@@GLOBAL.sql_mode` as `global_sql_mode` , 'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_IN_DATE' AS `@@SESSION.sql_mode` as `session_sql_mode` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "as": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT @@GLOBAL...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT @@GLOBAL...')
-#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT @@GLOBAL...')
-#4 /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php(50): wpdb->get_row('SELECT @@GLOBAL...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): inax_installer(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_inax-i...', false)
-#9 /internal/eval.php(20): activate_plugin('inax-ir/inax-ir...')
-#10 {main}</pre>
- for query SELECT @@GLOBAL.sql_mode as global_sql_mode, @@SESSION.sql_mode as session_sql_mode made by activate_plugin, do_action('activate_inax-ir/inax-ir.php'), WP_Hook->do_action, WP_Hook->apply_filters, inax_installer, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Jul-2025 10:40:22 UTC] PHP Warning:  Attempt to read property "session_sql_mode" on null in /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php on line 51
-[08-Jul-2025 10:40:22 UTC] PHP Warning:  Attempt to read property "global_sql_mode" on null in /wordpress/wp-content/plugins/inax-ir/inc/inax-functions.php on line 51
-[08-Jul-2025 10:40:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/inboundio-marketing/includes/class-imp-widget.php:259
+  thrown in /wordpress/wp-content/plugins/inazo-advanced-ads-management/inazo.wp.adv.ads.management.php on line 53
+[09-Jul-2025 22:38:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/inboundio-marketing/includes/class-imp-widget.php:259
 Stack trace:
 #0 /wordpress/wp-content/plugins/inboundio-marketing/imp.php(59): require()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
