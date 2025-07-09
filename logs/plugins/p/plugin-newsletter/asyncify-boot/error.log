@@ -2,73 +2,340 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error($, { cause: h });
               ^
 
-Error: [07-Jul-2025 18:59:56 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-Jul-2025 19:00:40 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-Jul-2025 19:01:26 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[07-Jul-2025 19:02:16 UTC] PHP Warning:  Constant HOST_NAME already defined in /wordpress/wp-content/plugins/payment-content/includes/config.php on line 7
-[07-Jul-2025 19:02:16 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/payment-content/includes/http_request/request.php on line 389
-[07-Jul-2025 19:02:25 UTC] PHP Warning:  Constant HOST_NAME already defined in /wordpress/wp-content/plugins/payment-content/includes/config.php on line 7
-[07-Jul-2025 19:02:25 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/payment-content/includes/http_request/request.php on line 389
-[07-Jul-2025 19:02:34 UTC] PHP Warning:  Constant HOST_NAME already defined in /wordpress/wp-content/plugins/payment-content/includes/config.php on line 7
-[07-Jul-2025 19:02:34 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/payment-content/includes/http_request/request.php on line 389
-[07-Jul-2025 19:03:13 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "key" in /wordpress/wp-content/plugins/paywhirl-recurring-payments/includes/database.php:17
+Error: [09-Jul-2025 10:55:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(85): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#14 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#15 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 10:55:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(104): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#15 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#16 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 10:55:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(189): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(160): PGI\Module\PGModule\Services\Handlers\SetupHandler->fire('install', '4.10.2')
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(106): PGI\Module\PGModule\Services\Handlers\SetupHandler->install()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#14 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#17 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#18 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->install, PGI\Module\PGModule\Services\Handlers\SetupHandler->fire, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 10:55:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(85): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#14 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#15 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 10:55:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(104): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#15 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#16 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 10:55:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(189): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(160): PGI\Module\PGModule\Services\Handlers\SetupHandler->fire('install', '4.10.2')
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(106): PGI\Module\PGModule\Services\Handlers\SetupHandler->install()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#14 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#17 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#18 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->install, PGI\Module\PGModule\Services\Handlers\SetupHandler->fire, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 10:56:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(85): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#14 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#15 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 10:56:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(104): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#15 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#16 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 10:56:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN IMMEDIATE | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(189): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(160): PGI\Module\PGModule\Services\Handlers\SetupHandler->fire('install', '4.10.2')
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(106): PGI\Module\PGModule\Services\Handlers\SetupHandler->install()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#14 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#17 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#18 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->install, PGI\Module\PGModule\Services\Handlers\SetupHandler->fire, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Jul-2025 10:56:21 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>stripe_frontend</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[09-Jul-2025 10:56:22 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method pra_paypal::init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-content/plugins/paywhirl-recurring-payments/paywhirl.php(20): include()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paywhirl-recurr...')
-#3 /internal/eval.php(20): activate_plugin('paywhirl-recurr...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/paywhirl-recurring-payments/includes/database.php on line 17
-[07-Jul-2025 19:03:21 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "key" in /wordpress/wp-content/plugins/paywhirl-recurring-payments/includes/database.php:17
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(727): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[09-Jul-2025 10:56:31 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>stripe_frontend</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[09-Jul-2025 10:56:32 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method pra_paypal::init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-content/plugins/paywhirl-recurring-payments/paywhirl.php(20): include()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paywhirl-recurr...')
-#3 /internal/eval.php(20): activate_plugin('paywhirl-recurr...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/paywhirl-recurring-payments/includes/database.php on line 17
-[07-Jul-2025 19:03:30 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "key" in /wordpress/wp-content/plugins/paywhirl-recurring-payments/includes/database.php:17
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(727): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[09-Jul-2025 10:56:41 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>stripe_frontend</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[09-Jul-2025 10:56:41 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method pra_paypal::init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-content/plugins/paywhirl-recurring-payments/paywhirl.php(20): include()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paywhirl-recurr...')
-#3 /internal/eval.php(20): activate_plugin('paywhirl-recurr...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/paywhirl-recurring-payments/includes/database.php on line 17
-[07-Jul-2025 19:03:40 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/plugin-commander/plugin-commander.php:19
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): pc_textdomain('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(727): do_action('init')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/plugin-commander/plugin-commander.php on line 19
-[07-Jul-2025 19:03:50 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/plugin-commander/plugin-commander.php:19
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): pc_textdomain('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(727): do_action('init')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/plugin-commander/plugin-commander.php on line 19
-[07-Jul-2025 19:04:00 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/plugin-commander/plugin-commander.php:19
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): pc_textdomain('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(727): do_action('init')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/plugin-commander/plugin-commander.php on line 19
-[07-Jul-2025 19:04:09 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method plugin_newsletter::install() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(727): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[09-Jul-2025 10:59:48 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method plugin_newsletter::install() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
@@ -76,7 +343,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('plugin-newslett...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[07-Jul-2025 19:04:16 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method plugin_newsletter::install() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+[09-Jul-2025 10:59:56 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method plugin_newsletter::install() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
